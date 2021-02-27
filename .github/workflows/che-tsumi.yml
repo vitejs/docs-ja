@@ -1,0 +1,30 @@
+name: che-tsumi
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  che-tsumi:
+    name: Che Tsumi
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: vuejs-jp/che-tsumi-next
+          ref: main
+      - name: Run che-tsumi
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          USER_NAME: kiaking
+          EMAIL: "kia.king.08@gmail.com"
+          UPSTREAM_REPO: git@github.com:vuejs-jp/vite-docs-ja.git
+          UPSTREAM_REPO_BRANCH: main
+          HEAD_REPO: https://github.com/vitejs/vite
+          HEAD_REPO_BRANCH: main
+          WORKFLOW_NAME: che-tsumi
+          TRACK_FROM: 4ed8b2f83a2f149734f3c5ecb6438309bd85a9e5
+          PATH_STARTS_WITH: docs/
+        run: |
+          yarn install
+          yarn start
