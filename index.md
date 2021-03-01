@@ -16,7 +16,7 @@ features:
     details: TypeScript、JSX、CSSなどがすぐに使えるようにサポートされています。
   - title: 📦 最適化されたビルド
     details: 先読みされるロールアップビルドによってマルチページおよびライブラリモードをサポートします。
-  - title: 🔩 一般的なプラグイン
+  - title: 🔩 ユニバーサルなプラグイン
     details: 開発とビルドの間で共有されるRollupと互換性のあるプラグインを提供します。
   - title: 🔑 完全に型定義がされているAPI
     details: 完全なTypeScriptの型定義を備えた柔軟なプログラミング志向のAPIです。
