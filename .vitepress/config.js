@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vite',
-  description: 'Next Generation Frontend Tooling',
+  description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   themeConfig: {
     repo: 'vitejs/vite',
@@ -21,11 +21,11 @@ module.exports = {
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Config', link: '/config/' },
-      { text: 'Plugins', link: '/plugins/' },
+      { text: 'ガイド', link: '/guide/' },
+      { text: '設定', link: '/config/' },
+      { text: 'プラグイン', link: '/plugins/' },
       {
-        text: 'Links',
+        text: 'リンク',
         items: [
           {
             text: 'Twitter',
@@ -62,7 +62,7 @@ module.exports = {
       // catch-all fallback
       '/': [
         {
-          text: 'Guide',
+          text: 'ガイド',
           children: [
             {
               text: 'Why Vite',
@@ -111,7 +111,7 @@ module.exports = {
           ]
         },
         {
-          text: 'APIs',
+          text: 'API',
           children: [
             {
               text: 'Plugin API',
