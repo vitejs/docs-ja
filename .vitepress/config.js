@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vite',
-  description: '次世代のフロントエンドツール',
+  description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   themeConfig: {
     repo: 'vitejs/vite',
