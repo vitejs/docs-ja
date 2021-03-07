@@ -1,23 +1,23 @@
 # JavaScript API
 
-Vite's JavaScript APIs are fully typed, and it's recommended to use TypeScript or enable JS type checking in VSCode to leverage the intellisense and validation.
+Vite の JavaScript API は完全に型付けされているので、インテリセンスとバリデーションを活用するために VSCode の JS 型チェックを有効にするか、TypeScript を使用することをおすすめします。
 
 ## `createServer`
 
-**Type Signature**
+**型シグネチャ**
 
 ```ts
 async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 ```
 
-**Example Usage**
+**使用例**
 
 ```js
 const { createServer } = require('vite')
 
 ;(async () => {
   const server = await createServer({
-    // any valid user config options, plus `mode` and `configFile`
+    // 有効なユーザ設定オプションに `mode` と `configFile` を追加
     configFile: false,
     root: __dirname,
     server: {
@@ -30,65 +30,65 @@ const { createServer } = require('vite')
 
 ## `InlineConfig`
 
-The `InlineConfig` interface extends `UserConfig` with additional properties:
+`InlineConfig` インターフェースは、追加のプロパティで `UserConfig` を拡張します:
 
-- `configFile`: specify config file to use. If not set, Vite will try to automatically resolve one from project root. Set to `false` to disable auto resolving.
+- `configFile`: 使用する設定ファイルを指定します。設定されていない場合、Vite はプロジェクトルートからファイルを自動的に解決しようとします。自動解決を無効にするには `false` に設定します。
 
 ## `ViteDevServer`
 
 ```ts
 interface ViteDevServer {
   /**
-   * The resolved vite config object
+   * 解決された Vite の設定オブジェクト
    */
   config: ResolvedConfig
   /**
-   * A connect app instance
-   * - Can be used to attach custom middlewares to the dev server.
-   * - Can also be used as the handler function of a custom http server
-   *   or as a middleware in any connect-style Node.js frameworks
+   * 接続アプリのインスタンス
+   * - 開発サーバーにカスタムミドルウェアを追加するために使用できます。
+   * - カスタム HTTP サーバーのハンドラ関数として、もしくは任意の接続スタイルの
+   *   Node.js フレームワークのミドルウェアとして使用することもできます
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
-   * native Node http server instance
-   * will be null in middleware mode
+   * ネイティブの Node HTTP サーバーインスタンス
+   * ミドルウェアモードでは null になります
    */
   httpServer: http.Server | null
   /**
-   * chokidar watcher instance
+   * chokidar watcher のインスタンス
    * https://github.com/paulmillr/chokidar#api
    */
   watcher: FSWatcher
   /**
-   * web socket server with `send(payload)` method
+   * `send(payload)` メソッドを持つ WebSocket サーバー
    */
   ws: WebSocketServer
   /**
-   * Rollup plugin container that can run plugin hooks on a given file
+   * 指定したファイル上でプラグインフックを実行できる Rollup プラグインコンテナ
    */
   pluginContainer: PluginContainer
   /**
-   * Module graph that tracks the import relationships, url to file mapping
-   * and hmr state.
+   * インポートの関係、URL からファイルへのマッピング、HMR の状態を追跡する
+   * モジュールグラフ。
    */
   moduleGraph: ModuleGraph
   /**
-   * Programmatically resolve, load and transform a URL and get the result
-   * without going through the http request pipeline.
+   * プログラムで URL を解決、読込、変換して、HTTP リクエストパイプラインを
+   * 経由せずに結果を取得します。
    */
   transformRequest(
     url: string,
     options?: TransformOptions
   ): Promise<TransformResult | null>
   /**
-   * Apply vite built-in HTML transforms and any plugin HTML transforms.
+   * Vite の組み込み HTML 変換と、プラグイン HTML 変換を適用します。
    */
   transformIndexHtml(url: string, html: string): Promise<string>
   /**
-   * Util for transforming a file with esbuild.
-   * Can be useful for certain plugins.
+   * esbuild でファイルを変換するためのユーティリティ。
+   * 特定のプラグインで役立つ場合があります。
    */
   transformWithEsbuild(
     code: string,
@@ -97,22 +97,22 @@ interface ViteDevServer {
     inMap?: object
   ): Promise<ESBuildTransformResult>
   /**
-   * Load a given URL as an instantiated module for SSR.
+   * 指定された URL を SSR 用にインスタンス化されたモジュールとして読み込みます。
    */
   ssrLoadModule(
     url: string,
     options?: { isolated?: boolean }
   ): Promise<Record<string, any>>
   /**
-   * Fix ssr error stacktrace
+   * SSR のエラースタックトレースを修正
    */
   ssrFixStacktrace(e: Error): void
   /**
-   * Start the server.
+   * サーバーを起動します。
    */
   listen(port?: number, isRestart?: boolean): Promise<ViteDevServer>
   /**
-   * Stop the server.
+   * サーバーを停止します。
    */
   close(): Promise<void>
 }
@@ -120,7 +120,7 @@ interface ViteDevServer {
 
 ## `build`
 
-**Type Signature**
+**型シグネチャ**
 
 ```ts
 async function build(
@@ -128,7 +128,7 @@ async function build(
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
-**Example Usage**
+**使用例**
 
 ```js
 const path = require('path')
@@ -149,7 +149,7 @@ const { build } = require('vite')
 
 ## `resolveConfig`
 
-**Type Signature**
+**型シグネチャ**
 
 ```ts
 async function resolveConfig(
