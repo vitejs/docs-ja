@@ -1,12 +1,12 @@
 # HMR API
 
-:::tip Note
-This is the client HMR API. For handling HMR update in plugins, see [handleHotUpdate](./api-plugin#handlehotupdate).
+:::tip 注意
+これはクライアント HMR の API です。プラグインでの HMR 更新処理については、[handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
 
-The manual HMR API is primarily intended for framework and tooling authors. As an end user, HMR is likely already handled for you in the framework specific starter templates.
+マニュアル HMR は主にフレームワークやツール作成者を対象としています。エンドユーザーには、HMR はフレームワークによっては、スターターテンプレート内ですでに処理されていることがありえるでしょう。
 :::
 
-Vite exposes its manual HMR API via the special `import.meta.hot` object:
+Vite は特別な `import.meta.hot` オブジェクトを介して、マニュアル HMR の API を公開しています:
 
 ```ts
 interface ImportMeta {
@@ -27,19 +27,19 @@ interface ImportMeta {
 }
 ```
 
-## Required Conditional Guard
+## 条件によるガードが必要
 
-First of all, make sure to guard all HMR API usage with a conditional block so that the code can be tree-shaken in production:
+まず、すべての HMR API の使用を条件ブロックでガードして、プロダクション環境でコードが Tree Shaking されるようにしてください:
 
 ```js
 if (import.meta.hot) {
-  // HMR code
+  // HMR のコード
 }
 ```
 
 ## `hot.accept(cb)`
 
-For a module to self-accept, use `import.meta.hot.accept` with a callback which receives the updated module:
+自身を受け入れるモジュールには、`import.meta.hot.accept` と更新されたモジュールを受け取るコールバックを使用します:
 
 ```js
 export const count = 1
@@ -51,15 +51,15 @@ if (import.meta.hot) {
 }
 ```
 
-A module that "accepts" hot updates is considered an **HMR boundary**.
+ホットアップデートを「受け入れる」モジュールは、**HMR 境界**と見なされます。
 
-Note that Vite's HMR does not actually swap the originally imported module: if an HMR boundary module re-exports imports from a dep, then it is responsible for updating those re-exports (and these exports must be using `let`). In addition, importers up the chain from the boundary module will not be notified of the change.
+Vite の HMR は元々インポートされていたモジュールを実際に入れ替えるわけではないことに注意してください: HMR 境界モジュールが依存ファイルからのインポートを再エクスポートする場合、それらの再エクスポートを更新する責任があります（また、これらのエクスポートは `let` を使用しなければなりません）。さらに、境界モジュールよりも依存の上流でインポートしているモジュールには変更が通知されません。
 
-This simplified HMR implementation is sufficient for most dev use cases, while allowing us to skip the expensive work of generating proxy modules.
+この単純化された HMR の実装は、ほとんどの開発のユースケースに充分であり、プロキシモジュールを生成するという重い処理を省くことができます。
 
 ## `hot.accept(deps, cb)`
 
-A module can also accept updates from direct dependencies without reloading itself:
+モジュールは自身をリロードすることなく、直接の依存関係からの更新を受け入れることもできます:
 
 ```js
 import { foo } from './foo.js'
@@ -68,15 +68,15 @@ foo()
 
 if (import.meta.hot) {
   import.meta.hot.accept('./foo.js', (newFoo) => {
-    // the callback receives the updated './foo.js' module
+    // コールバックは更新された './foo.js' モジュールを受け取ります
     newFoo.foo()
   })
 
-  // Can also accept an array of dep modules:
+  // 依存モジュールの配列を受け入れることもできます:
   import.meta.hot.accept(
     ['./foo.js', './bar.js'],
     ([newFooModule, newBarModule]) => {
-      // the callback receives the updated modules in an Array
+      // コールバックは更新されたモジュールを配列で受け取ります
     }
   )
 }
@@ -84,7 +84,7 @@ if (import.meta.hot) {
 
 ## `hot.dispose(cb)`
 
-A self-accepting module or a module that expects to be accepted by others can use `hot.dispose` to clean-up any persistent side effects created by its updated copy:
+自己受け入れモジュールや、他に受け入れられることを期待するモジュールは `hot.dispose` を使うことで、更新されたコピーによって生成された永続的な副作用をクリーンアップできます:
 
 ```js
 function setupSideEffect() {}
@@ -93,23 +93,24 @@ setupSideEffect()
 
 if (import.meta.hot) {
   import.meta.hot.dispose((data) => {
-    // cleanup side effect
+    // 副作用をクリーンアップ
   })
 }
 ```
 
 ## `hot.data`
 
-The `import.meta.hot.data` object is persisted across different instances of the same updated module. It can be used to pass on information from a previous version of the module to the next one.
+`import.meta.hot.data` オブジェクトは、更新された同じモジュールの異なるインスタンス間で永続化されます。これは、モジュールの前のバージョンから次のバージョンに情報を渡すために使用できます。
 
 ## `hot.decline()`
 
-Calling `import.meta.hot.decline()` indicates this module is not hot-updatable, and the browser should perform a full reload if this module is encountered while propagating HMR updates.
+`import.meta.hot.decline()` を呼び出すと、このモジュールはホットアップデート可能でないことが示されます。HMR 更新の伝播中にこのモジュールが検出された場合、ブラウザは完全なリロードを行うべきです。
+
 
 ## `hot.invalidate()`
 
-For now, calling `import.meta.hot.invalidate()` simply reloads the page.
+今のところ、`import.meta.hot.invalidate()` を呼び出すとページがリロードされるだけです。
 
 ## `hot.on(event, cb)`
 
-Listen to a custom HMR event. Custom HMR events can be sent from plugins. See [handleHotUpdate](./api-plugin#handlehotupdate) for more details.
+カスタム HMR イベントをリッスンします。カスタム HMR イベントは、プラグインから送信できます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
