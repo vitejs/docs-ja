@@ -65,6 +65,24 @@ yarn create @vitejs/app my-vue-app --template vue
 
 各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
 
+## Community Templates
+
+@vitejs/create-app is a tool to quickly start a project from a basic template for popular frameworks. Check out Awesome Vite for [community maintained templates](https://github.com/vitejs/awesome-vite#templates) that include other tools or target different frameworks. You can use a tool like [degit](https://github.com/Rich-Harris/degit) to scaffold your project with one of the templates.
+
+```bash
+npx degit user/project my-project
+cd my-project
+
+npm install
+npm run dev
+```
+
+If the project uses `main` as the default branch, suffix the project repo with `#main`
+
+```bash
+npx degit user/project#main my-project
+```
+
 ## `index.html` とプロジェクトルート
 
 お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーであり、`index.html` はアプリケーションのエントリーポイントです。
