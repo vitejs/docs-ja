@@ -65,9 +65,9 @@ yarn create @vitejs/app my-vue-app --template vue
 
 各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
 
-## Community Templates
+## コミュニティのテンプレート
 
-@vitejs/create-app is a tool to quickly start a project from a basic template for popular frameworks. Check out Awesome Vite for [community maintained templates](https://github.com/vitejs/awesome-vite#templates) that include other tools or target different frameworks. You can use a tool like [degit](https://github.com/Rich-Harris/degit) to scaffold your project with one of the templates.
+@vitejs/create-app はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
 
 ```bash
 npx degit user/project my-project
@@ -77,7 +77,7 @@ npm install
 npm run dev
 ```
 
-If the project uses `main` as the default branch, suffix the project repo with `#main`
+テンプレートのプロジェクトがデフォルトブランチとして `main` を使っている場合は、プロジェクトリポジトリの末尾に `#main` をつけてください。
 
 ```bash
 npx degit user/project#main my-project
