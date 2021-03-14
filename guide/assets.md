@@ -1,24 +1,24 @@
-# Static Asset Handling
+# Static Asset の取り扱い
 
-- Related: [Public Base Path](./build#public-base-path)
-- Related: [`assetsInclude` config option](/config/#assetsinclude)
+- 関連: [Public Base Path](./build#public-base-path)
+- 関連: [`assetsInclude` config option](/config/#assetsinclude)
 
 ## Importing Asset as URL
 
-Importing a static asset will return the resolved public URL when it is served:
+static asset をインポートすると、serve された際に解決されたパブリックな URL が返されます:
 
 ```js
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-For example, `imgUrl` will be `/img.png` during development, and become `/assets/img.2d8efhg.png` in the production build.
+例えば、 `imgUrl` は、開発中は `/img.png` となり、本番用ビルドでは `/assets/img.2d8efhg.png` となります。
 
-The behavior is similar to webpack's `file-loader`. The difference is that the import can be either using absolute public paths (based on project root during dev) or relative paths.
+振る舞いは webpack の `file-loader` に似ています。異なるのは、絶対的なパブリックパス（開発中のプロジェクトのルートに基づく）または、相対パスを使用することができるという点です。
 
-- `url()` references in CSS are handled the same way.
+- CSS 内の `url()` の参照も同様に扱われます。
 
-- If using the Vue plugin, asset references in Vue SFC templates are automatically converted into imports.
+- Vue プラグインを使用している場合、 Vue の SFC テンプレートも自動的にインポートに変換されます。
 
 - Common image, media, and font filetypes are detected as assets automatically. You can extend the internal list using the [`assetsInclude` option](/config/#assetsinclude).
 
