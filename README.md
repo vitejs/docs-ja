@@ -3,7 +3,7 @@
 [Vite ドキュメント](https://vitejs.dev)の日本語翻訳レポジトリです。現状、本レポジトリは翻訳作業用のものとして一時的に用意されています。将来的に、本レポジトリは別場所に移動される可能性があります。
 
 ## 貢献ガイド
-[Vite 日本語翻訳ガイド](https://github.com/vuejs/vite-docs-ja/tree/master/CONTRIBUTING.md) を一読お願いします！
+[Vite 日本語翻訳ガイド](https://github.com/vuejs-jp/vite-docs-ja/blob/main/CONTRIBUTING.md) を一読お願いします！
 
 
 ## はじめかた
