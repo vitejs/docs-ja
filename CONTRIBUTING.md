@@ -30,6 +30,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 - [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠します。
 - JTF日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用します。
+  - `yarn test` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
 
 ## 翻訳のゆらぎ & トーン
 
