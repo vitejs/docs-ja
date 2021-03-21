@@ -1,6 +1,6 @@
 {
     "rules": {
-        "textlint-rule-detect-bad-chars": {
+        "detect-bad-chars": {
 
         },
         "preset-jtf-style": {
