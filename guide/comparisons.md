@@ -2,7 +2,7 @@
 
 ## Snowpack
 
-[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバーであり、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係のプリビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2つのプロジェクト間の大きな違いは、以下のような点にあります。
+[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバーであり、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係の先読みビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2つのプロジェクト間の大きな違いは、以下のような点にあります。
 
 **本番ビルド**
 
@@ -19,9 +19,9 @@ Vite では、単一のバンドラー（Rollup）と深く結合することを
 - [自動的な dynamic import の polyfill](./features#dynamic-import-polyfill)
 - 公式の [legacy モードプラグイン](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)。このプラグインは、modern/legacy のデュアルバンドルを生成し、ブラウザの対応状況をもとに正しいバンドルを自動的に配信します。
 
-**より高速な依存関係のプリビルド**
+**より高速な依存関係の先読みビルド**
 
-Vite は、依存関係のプリビルドのために、[esbuild](https://esbuild.github.io/) ではなく Rollup を使用しています。その結果、コールドサーバーの起動と依存関係の無効化に伴う再バンドルに関して、極めて大きな性能向上が得られました。
+Vite は、依存関係の先読みビルドのために、[esbuild](https://esbuild.github.io/) ではなく Rollup を使用しています。その結果、コールドサーバーの起動と依存関係の無効化に伴う再バンドルに関して、極めて大きな性能向上が得られました。
 
 **Monorepo のサポート**
 
