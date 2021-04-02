@@ -24,7 +24,7 @@
 
 ### Tips: より円滑な Pull Request のコメント記載方法
 
-GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります 🙏
+GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
 
 ## 翻訳スタイル
 
