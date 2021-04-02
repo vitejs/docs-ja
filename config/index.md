@@ -52,7 +52,7 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 ### 条件付き設定
 
-コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます。
+コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
 export default ({ command, mode }) => {
@@ -68,15 +68,15 @@ export default ({ command, mode }) => {
 }
 ```
 
-### Async Config
+### 非同期の設定
 
-If the config needs to call async function, it can export a async function instead:
+設定で非同期の関数を呼び出す必要がある場合は、代わりに async 関数をエクスポートできます:
 
 ```js
 export default async ({ command, mode }) => {
   const data = await asyncFunction();
   return {
-    // build specific config
+    // build 固有の設定
   } 
 }
 ```
