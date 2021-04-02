@@ -1,31 +1,31 @@
-# Configuring Vite
+# Vite の設定
 
-## Config File
+## 設定ファイル
 
-### Config File Resolving
+### 設定ファイルの解決
 
-When running `vite` from the command line, Vite will automatically try to resolve a config file named `vite.config.js` inside [project root](/guide/#index-html-and-project-root).
+コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-and-project-root)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします。
 
-The most basic config file looks like this:
+最も基本的な設定ファイルは次のようになります:
 
 ```js
 // vite.config.js
 export default {
-  // config options
+  // 設定オプション
 }
 ```
 
-Note Vite supports using ES modules syntax in the config file even if the project is not using native Node ESM via `type: "module"`. In this case the config file is auto pre-processed before load.
+プロジェクトが `type: "module"` を介してネイティブな Node ESM を使用していない場合でも、Vite は設定ファイルで ES モジュール構文の使用をサポートしています。この場合、設定ファイルはロードの前に自動的に前処理されます。
 
-You can also explicitly specify a config file to use with the `--config` CLI option (resolved relative to `cwd`):
+また、CLI の `--config` オプションで、使用するコンフィグファイルを明示的に指定することもできます（`cwd` からの相対的な解決）:
 
 ```bash
 vite --config my-config.js
 ```
 
-### Config Intellisense
+### 設定の入力補完
 
-Since Vite ships with TypeScript typings, you can leverage your IDE's intellisense with jsdoc type hints:
+Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の入力補完を活用できます:
 
 ```js
 /**
@@ -38,7 +38,7 @@ const config = {
 export default config
 ```
 
-Alternatively you can use the `defineConfig` helper which should provide intellisense without the need for jsdoc annotations:
+あるいは、jsdoc のアノテーションがなくても入力補完を提供する `defineConfig` ヘルパーを使用することもできます:
 
 ```js
 import { defineConfig } from 'vite'
@@ -48,21 +48,21 @@ export default defineConfig({
 })
 ```
 
-Vite also directly supports TS config files. You can use `vite.config.ts` with the `defineConfig` helper as well.
+Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパーと一緒に使うこともできます。
 
-### Conditional Config
+### 条件付き設定
 
-If the config needs to conditional determine options based on the command (`serve` or `build`) or the [mode](/guide/env-and-mode) being used, it can export a function instead:
+コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます。
 
 ```js
 export default ({ command, mode }) => {
   if (command === 'serve') {
     return {
-      // serve specific config
+      // serve 固有の設定
     }
   } else {
     return {
-      // build specific config
+      // build 固有の設定
     }
   }
 }
