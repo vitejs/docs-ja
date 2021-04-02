@@ -39,7 +39,7 @@ Vite は Sass および Less のより洗練されたサポートを提供して
 
 Preact チームが開発した [WMR](https://github.com/preactjs/wmr) にも似たような機能群があり、Vite 2.0 の Rollup プラグインインターフェイスのサポートは、これに影響を受けています。
 
-WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開発されたものであり、プリレンダリングなどのより統合された機能を提供しています。スコープの点では、Preact meta framework に近いものです。Preact を使用しているなら、WMR はより洗練された経験をもたらしてくれるでしょう。しかし、WMR が他のフレームワークのサポートを優先する可能性は低いです。
+WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開発されたものであり、プリレンダリングなどのより統合された機能を提供しています。スコープの点では、Preact meta framework に近いものです。Preact を使用しているなら、WMR はより洗練された経験をもたらしてくれるでしょう。
 
 ## @web/dev-server
 
