@@ -90,6 +90,10 @@ module.exports = {
               link: '/guide/features'
             },
             {
+              text: 'Using Plugins',
+              link: '/guide/using-plugins'
+            },
+            {
               text: 'Dependency Pre-Bundling',
               link: '/guide/dep-pre-bundling'
             },
