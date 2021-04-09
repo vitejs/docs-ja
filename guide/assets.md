@@ -5,7 +5,7 @@
 
 ## Importing Asset as URL
 
-static asset をインポートすると、serve された際に解決されたパブリックな URL が返されます:
+static asset をインポートすると、配信された際に解決されたパブリックな URL が返されます:
 
 ```js
 import imgUrl from './img.png'
@@ -18,34 +18,34 @@ document.getElementById('hero-img').src = imgUrl
 
 - CSS 内の `url()` の参照も同様に扱われます。
 
-- Vue プラグインを使用している場合、 Vue の SFC テンプレートも自動的にインポートに変換されます。
+- Vue プラグインを使用している場合、 Vue の SFC テンプレート内の asset references も自動的にインポートに変換されます。
 
-- Common image, media, and font filetypes are detected as assets automatically. You can extend the internal list using the [`assetsInclude` option](/config/#assetsinclude).
+- 一般的な画像、メディア、フォントなどの拡張子は自動的に assets として検出されます。また、[`assetsInclude` オプション](/config/#assetsinclude) で内部リストを拡張することができます。
 
-- Referenced assets are included as part of the build assets graph, will get hashed file names, and can be processed by plugins for optimization.
+- 参照された assets は build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
 
-- Assets smaller in bytes than the [`assetsInlineLimit` option](/config/#assetsinlinelimit) will be inlined as base64 data URLs.
+- [`assetsInlineLimit` オプション](/config/#assetsinlinelimit) で指定したバイト数よりも小さい assets は base64 データの URL としてインライン化されます
 
-### Explicit URL Imports
+### 明示的な URL のインポート
 
-Assets that are not included in the internal list or in `assetsInclude`, can be explicitly imported as an URL using the `?url` suffix. This is useful, for example, to import [Houdini Paint Worklets](https://houdini.how/usage).
+内部リストや `assetsInclude` に含まれていない assets は URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
 
 ```js
 import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
-### Importing Asset as String
+### Assets を文字列としてインポートする
 
-Assets can be imported as strings using the `?raw` suffix.
+Assets は末尾に `?raw` を付与することで文字列としてインポートすることができます。
 
 ```js
 import shaderString from './shader.glsl?raw'
 ```
 
-### Importing Script as a Worker
+### スクリプトを Worker としてインポートする
 
-Scripts can be imported as web workers with the `?worker` suffix. 
+スクリプトは末尾に `?worker` を付与することで web workers としてインポートすることができます。
 
 ```js
 // Separate chunk in the production build
@@ -58,7 +58,7 @@ const worker = new Worker()
 import InlineWorker from './shader.js?worker&inline'
 ```
 
-Check out the [Web Worker section](./features.md#web-workers) for more details.
+詳細は [Web Worker section](./features.md#web-workers) を参照してください。
 
 ## The `public` Directory
 
