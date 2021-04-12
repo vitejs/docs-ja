@@ -558,38 +558,38 @@ export default async ({ command, mode }) => {
 
   Limit for chunk size warnings (in kbs).
 
-## Dep Optimization Options
+## 依存関係の最適化オプション
 
-- **Related:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
+- **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
 
 ### optimizeDeps.entries
 
-- **Type:** `string | string[]`
+- **型:** `string | string[]`
 
-  By default, Vite will crawl your index.html to detect dependencies that need to be pre-bundled. If build.rollupOptions.input is specified, Vite will crawl those entry points instead.
+  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
 
-  If neither of these fit your needs, you can specify custom entries using this option - the value should be a [fast-glob pattern](https://github.com/mrmlnc/fast-glob#basic-syntax) or array of patterns that are relative from vite project root. This will overwrite default entries inference.
+  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。
 
 ### optimizeDeps.exclude
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  Dependencies to exclude from pre-bundling.
+  事前バンドルから除外する依存関係。
 
 ### optimizeDeps.include
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  By default, linked packages not inside `node_modules` are not pre-bundled. Use this option to force a linked package to be pre-bundled.
+  デフォルトでは、リンクされたパッケージのうち `node_modules` の外にあるものは事前バンドルされません。このオプションを使用してリンクされたパッケージを強制的に事前バンドルします。
 
 ### optimizeDeps.keepNames
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **型:** `boolean`
+- **デフォルト:** `false`
 
-  The bundler sometimes needs to rename symbols to avoid collisions.
-  Set this to `true` to keep the `name` property on functions and classes.
-  See [`keepNames`](https://esbuild.github.io/api/#keep-names).
+  バンドラーは、衝突を避けるためにシンボルの名前を変更する必要がある場合があります。
+  これを `true` に設定すると、関数やクラスの `name` プロパティが維持されます。
+  [`keepNames`](https://esbuild.github.io/api/#keep-names) を参照してください。
 
 ## SSR Options
 
