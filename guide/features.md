@@ -11,6 +11,7 @@ import { someMethod } from 'my-dep'
 ```
 
 上のようなコードはブラウザでエラーになります。Vite は提供される全てのソースファイルでこのような生のモジュールのインポートを検出し以下を実行します:
+
 1. [先読みバンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMDモジュールを ESM に変換します。 先読みバンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間を  JavaScript ベースのバンドラーよりも大幅に高速化します。
 
 2. インポートを `/node_modules/.vite/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
@@ -134,7 +135,6 @@ document.getElementById('foo').className = applyColor
 
 ### CSS プリプロセッサ
 
-
 Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/jonathantneal/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンなCSSを作成することをお勧めします。
 
 とは言うものの、Vite は `.scss`、`.sass`、 `.less`、`.styl`、 `.stylus` ファイルの組み込みサポートを提供します。それら にVite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサ自体をインストールする必要があります。
@@ -192,7 +192,6 @@ import InlineWorker from './worker.js?worker&inline'
 詳しくは [Static Asset Handling](./assets) を見てください。
 
 ## JSON
-
 
 JSON ファイルは直接インポートできます - また、名前付きインポートもサポートされています：:
 
@@ -252,7 +251,7 @@ const modules = {
 注意点:
 
 - これは Vite のみの機能であり、Web または ES の標準ではありません。
-- Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかである必要があります。依存関係からの Glob はサポートされていません。
+- Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかである必要があります。
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
 ## Web Assembly
