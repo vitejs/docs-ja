@@ -129,3 +129,7 @@ yarn link
 ```
 
 その後 vite ベースのプロジェクトに移動し、`yarn link vite` を実行してください。そして開発サーバーを再起動（`yarn dev`）して最先端の技術に乗っていきましょう！
+
+## コミュニティ
+
+質問がある場合やサポートが必要な場合は、[Discord](https://discord.gg/4cmKdMfpU5) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティに連絡してください。
