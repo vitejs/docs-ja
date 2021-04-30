@@ -602,22 +602,22 @@ export default async ({ command, mode }) => {
   Set this to `true` to keep the `name` property on functions and classes.
   See [`keepNames`](https://esbuild.github.io/api/#keep-names).
 
-## SSR Options
+## SSR オプション
 
-:::warning Experimental
-SSR options may be adjusted in minor releases.
+:::warning 実験的な機能
+SSR オプションは、マイナーリリースで調整される可能性があります。
 :::
 
-- **Related:** [SSR Externals](/guide/ssr#ssr-externals)
+- **Related:** [外部 SSR](/guide/ssr#ssr-externals)
 
 ### ssr.external
 
 - **Type:** `string[]`
 
-  Force externalize dependencies for SSR.
+  SSR の依存関係を強制的に外部化します。
 
 ### ssr.noExternal
 
 - **Type:** `string[]`
 
-  Prevent listed dependencies from being externalized for SSR.
+  指定した依存関係が SSR のために外部化されるのを防ぎます。
