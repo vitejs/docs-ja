@@ -2,7 +2,7 @@
 
 ## Snowpack
 
-[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバーであり、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係の先読みビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2つのプロジェクト間の大きな違いは、以下のような点にあります。
+[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバーで、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係の先読みビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2つのプロジェクト間の大きな違いは、以下のような点にあります。
 
 **本番ビルド**
 
@@ -39,7 +39,7 @@ Vite は Sass および Less のより洗練されたサポートを提供して
 
 Preact チームが開発した [WMR](https://github.com/preactjs/wmr) にも似たような機能群があり、Vite 2.0 の Rollup プラグインインターフェイスのサポートは、これに影響を受けています。
 
-WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開発されたものであり、プリレンダリングなどのより統合された機能を提供しています。スコープの点では、Preact meta framework に近いものです。Preact を使用しているなら、WMR はより洗練された経験をもたらしてくれるでしょう。
+WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開発されていて、プリレンダリングなどのより統合された機能を提供しています。スコープの点では、Preact meta framework に近いものです。Preact を使用しているなら、WMR はより洗練された経験をもたらしてくれるでしょう。
 
 ## @web/dev-server
 
