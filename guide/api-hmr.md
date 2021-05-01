@@ -106,7 +106,6 @@ if (import.meta.hot) {
 
 `import.meta.hot.decline()` を呼び出すと、このモジュールはホットアップデート可能でないことが示されます。HMR 更新の伝播中にこのモジュールが検出された場合、ブラウザは完全なリロードを行うべきです。
 
-
 ## `hot.invalidate()`
 
 今のところ、`import.meta.hot.invalidate()` を呼び出すとページがリロードされるだけです。

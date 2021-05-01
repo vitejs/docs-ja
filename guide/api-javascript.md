@@ -33,40 +33,41 @@ const { createServer } = require('vite')
 `InlineConfig` インターフェースは、追加のプロパティで `UserConfig` を拡張します:
 
 - `configFile`: 使用する設定ファイルを指定します。設定されていない場合、Vite はプロジェクトルートからファイルを自動的に解決しようとします。自動解決を無効にするには `false` に設定します。
+- `envFile`: `.env` ファイルを無効にするには `false` に設定します。
 
 ## `ViteDevServer`
 
 ```ts
 interface ViteDevServer {
   /**
-   * 解決された Vite の設定オブジェクト
+   * 解決された Vite の設定オブジェクト。
    */
   config: ResolvedConfig
   /**
    * 接続アプリのインスタンス
    * - 開発サーバーにカスタムミドルウェアを追加するために使用できます。
    * - カスタム HTTP サーバーのハンドラ関数として、もしくは任意の接続スタイルの
-   *   Node.js フレームワークのミドルウェアとして使用することもできます
+   *   Node.js フレームワークのミドルウェアとして使用することもできます。
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
-   * ネイティブの Node HTTP サーバーインスタンス
-   * ミドルウェアモードでは null になります
+   * ネイティブの Node HTTP サーバーインスタンス。
+   * ミドルウェアモードでは null になります。
    */
   httpServer: http.Server | null
   /**
-   * chokidar watcher のインスタンス
+   * chokidar watcher のインスタンス。
    * https://github.com/paulmillr/chokidar#api
    */
   watcher: FSWatcher
   /**
-   * `send(payload)` メソッドを持つ WebSocket サーバー
+   * `send(payload)` メソッドを持つ WebSocket サーバー。
    */
   ws: WebSocketServer
   /**
-   * 指定したファイル上でプラグインフックを実行できる Rollup プラグインコンテナ
+   * 指定したファイル上でプラグインフックを実行できる Rollup プラグインコンテナ。
    */
   pluginContainer: PluginContainer
   /**
@@ -104,7 +105,7 @@ interface ViteDevServer {
     options?: { isolated?: boolean }
   ): Promise<Record<string, any>>
   /**
-   * SSR のエラースタックトレースを修正
+   * SSR のエラースタックトレースを修正します。
    */
   ssrFixStacktrace(e: Error): void
   /**

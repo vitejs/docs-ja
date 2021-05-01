@@ -62,8 +62,28 @@ yarn create @vitejs/app my-vue-app --template vue
 - `preact-ts`
 - `lit-element`
 - `lit-element-ts`
+- `svelte`
+- `svelte-ts`
 
 各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
+
+## コミュニティのテンプレート
+
+@vitejs/create-app はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
+
+```bash
+npx degit user/project my-project
+cd my-project
+
+npm install
+npm run dev
+```
+
+テンプレートのプロジェクトがデフォルトブランチとして `main` を使っている場合は、プロジェクトリポジトリの末尾に `#main` をつけてください。
+
+```bash
+npx degit user/project#main my-project
+```
 
 ## `index.html` とプロジェクトルート
 
@@ -109,3 +129,7 @@ yarn link
 ```
 
 その後 vite ベースのプロジェクトに移動し、`yarn link vite` を実行してください。そして開発サーバーを再起動（`yarn dev`）して最先端の技術に乗っていきましょう！
+
+## コミュニティ
+
+質問がある場合やサポートが必要な場合は、[Discord](https://discord.gg/4cmKdMfpU5) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティに連絡してください。

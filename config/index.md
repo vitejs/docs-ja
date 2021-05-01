@@ -1,31 +1,31 @@
-# Configuring Vite
+# Vite の設定
 
-## Config File
+## 設定ファイル
 
-### Config File Resolving
+### 設定ファイルの解決
 
-When running `vite` from the command line, Vite will automatically try to resolve a config file named `vite.config.js` inside [project root](/guide/#project-root).
+コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-and-project-root)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします。
 
-The most basic config file looks like this:
+最も基本的な設定ファイルは次のようになります:
 
 ```js
 // vite.config.js
 export default {
-  // config options
+  // 設定オプション
 }
 ```
 
-Note Vite supports using ES modules syntax in the config file even if the project is not using native Node ESM via `type: "module"`. In this case the config file is auto pre-processed before load.
+プロジェクトが `type: "module"` を介してネイティブな Node ESM を使用していない場合でも、Vite は設定ファイルで ES モジュール構文の使用をサポートしています。この場合、設定ファイルはロードの前に自動的に前処理されます。
 
-You can also explicitly specify a config file to use with the `--config` CLI option (resolved relative to `cwd`):
+また、CLI の `--config` オプションで、使用するコンフィグファイルを明示的に指定することもできます（`cwd` からの相対的な解決）:
 
 ```bash
 vite --config my-config.js
 ```
 
-### Config Intellisense
+### 設定の入力補完
 
-Since Vite ships with TypeScript typings, you can leverage your IDE's intellisense with jsdoc type hints:
+Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の入力補完を活用できます:
 
 ```js
 /**
@@ -38,7 +38,7 @@ const config = {
 export default config
 ```
 
-Alternatively you can use the `defineConfig` helper which should provide intellisense without the need for jsdoc annotations:
+あるいは、jsdoc のアノテーションがなくても入力補完を提供する `defineConfig` ヘルパーを使用することもできます:
 
 ```js
 import { defineConfig } from 'vite'
@@ -48,23 +48,36 @@ export default defineConfig({
 })
 ```
 
-Vite also directly supports TS config files. You can use `vite.config.ts` with the `defineConfig` helper as well.
+Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパーと一緒に使うこともできます。
 
-### Conditional Config
+### 条件付き設定
 
-If the config needs to conditional determine options based on the command (`serve` or `build`) or the [mode](/guide/env-and-mode) being used, it can export a function instead:
+コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
 export default ({ command, mode }) => {
   if (command === 'serve') {
     return {
-      // serve specific config
+      // serve 固有の設定
     }
   } else {
     return {
-      // build specific config
+      // build 固有の設定
     }
   }
+}
+```
+
+### 非同期の設定
+
+設定で非同期の関数を呼び出す必要がある場合は、代わりに async 関数をエクスポートできます:
+
+```js
+export default async ({ command, mode }) => {
+  const data = await asyncFunction();
+  return {
+    // build 固有の設定
+  } 
 }
 ```
 
@@ -77,7 +90,7 @@ export default ({ command, mode }) => {
 
   Project root directory (where `index.html` is located). Can be an absolute path, or a path relative from the location of the config file itself.
 
-  See [Project Root](/guide/#project-root) for more details.
+  See [Project Root](/guide/#index-html-and-project-root) for more details.
 
 ### base
 
@@ -105,17 +118,21 @@ export default ({ command, mode }) => {
 
 - **Type:** `Record<string, string>`
 
-  Define global variable replacements. Entries will be defined as globals during dev and statically replaced during build.
+  Define global constant replacements. Entries will be defined as globals during dev and statically replaced during build.
 
   - Starting from `2.0.0-beta.70`, string values will be used as raw expressions, so if defining a string constant, it needs to be explicitly quoted (e.g. with `JSON.stringify`).
 
   - Replacements are performed only when the match is surrounded by word boundaries (`\b`).
 
+  Because it's implemented as straightforward text replacements without any syntax analyzation, we recommend using `define` for CONSTANTS only.
+
+  For example, `process.env.FOO` and `__APP_VERSION__` are good fits. But `process` or `global` should not be put into this option. Variables can be shimmed or polyfilled instead.
+
 ### plugins
 
 - **Type:** ` (Plugin | Plugin[])[]`
 
-  Array of plugins to use. See [Plugin API](/guide/api-plugin) for more details on Vite plugins.
+  Array of plugins to use. Falsy plugins are ignored and arrays of plugins are flattened. See [Plugin API](/guide/api-plugin) for more details on Vite plugins.
 
 ### publicDir
 
@@ -125,6 +142,13 @@ export default ({ command, mode }) => {
   Directory to serve as plain static assets. Files in this directory are served at `/` during dev and copied to the root of `outDir` during build, and are always served or copied as-is without transform. The value can be either an absolute file system path or a path relative to project root.
 
   See [The `public` Directory](/guide/assets#the-public-directory) for more details.
+
+### cacheDir
+
+- **Type:** `string`
+- **Default:** `"node_modules/.vite"`
+
+  Directory to save cache files. Files in this directory are pre-bundled deps or some other cache files that generated by vite, which can improve the performance. You can use `--force` flag or manually delete the directory to regenerate the cache files. The value can be either an absolute file system path or a path relative to project root.
 
 ### resolve.alias
 
@@ -170,14 +194,14 @@ export default ({ command, mode }) => {
 ### resolve.mainFields
 
 - **Type:** `string[]`
-- **Default:**: `['module', 'jsnext:main', 'jsnext']`
+- **Default:** `['module', 'jsnext:main', 'jsnext']`
 
   List of fields in `package.json` to try when resolving a package's entry point. Note this takes lower precedence than conditional exports resolved from the `exports` field: if an entry point is successfully resolved from `exports`, the main field will be ignored.
 
 ### resolve.extensions
 
 - **Type:** `string[]`
-- **Default:**: `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
+- **Default:** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
 
   List of file extensions to try for imports that omit extensions. Note it is **NOT** recommended to omit extensions for custom import types (e.g. `.vue`) since it can interfere with IDE and type support.
 
@@ -240,7 +264,7 @@ export default ({ command, mode }) => {
 - **Type:** `boolean`
 - **Default:** `false`
 
-  If set to `true`, imported JSON will be transformed into `export default JSON.parse("...")` which is significantly more performant than Object literals, espeically when the JSON file is large.
+  If set to `true`, imported JSON will be transformed into `export default JSON.parse("...")` which is significantly more performant than Object literals, especially when the JSON file is large.
 
   Enabling this disables named imports.
 
@@ -364,7 +388,7 @@ export default ({ command, mode }) => {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
-        }
+        },
         // with RegEx
         '^/fallback/.*': {
           target: 'http://jsonplaceholder.typicode.com',
@@ -417,7 +441,7 @@ export default ({ command, mode }) => {
 
   The transform is performed with esbuild and the value should be a valid [esbuild target option](https://esbuild.github.io/api/#target). Custom targets can either be a ES version (e.g. `es2015`), a browser with version (e.g. `chrome58`), or an array of multiple target strings.
 
-  Note the build will fail if the code contains features that cannot be safely transpiled by esbuild. See [esbuid docs](https://esbuild.github.io/content-types/#javascript) for more details.
+  Note the build will fail if the code contains features that cannot be safely transpiled by esbuild. See [esbuild docs](https://esbuild.github.io/content-types/#javascript) for more details.
 
 ### build.polyfillDynamicImport
 
@@ -439,7 +463,7 @@ export default ({ command, mode }) => {
 - **Type:** `string`
 - **Default:** `dist`
 
-  Specify the output directory (relative to [project root](/guide/#project-root)).
+  Specify the output directory (relative to [project root](/guide/#index-html-and-project-root)).
 
 ### build.assetsDir
 
@@ -466,7 +490,7 @@ export default ({ command, mode }) => {
 
 ### build.sourcemap
 
-- **Type:** `boolean`
+- **Type:** `boolean | 'inline'`
 - **Default:** `false`
 
   Generate production source maps.
@@ -485,10 +509,10 @@ export default ({ command, mode }) => {
 
 ### build.lib
 
-- **Type:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[] }`
+- **Type:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string }`
 - **Related:** [Library Mode](/guide/build#library-mode)
 
-  Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Default `formats` are `['es', 'umd']`.
+  Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Default `formats` are `['es', 'umd']`. `fileName` is the name of the package file output, default `fileName` is the name option of package.json
 
 ### build.manifest
 
@@ -545,46 +569,62 @@ export default ({ command, mode }) => {
 
   Limit for chunk size warnings (in kbs).
 
-## Dep Optimization Options
+### build.watch
 
-- **Related:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
+- **Type:** [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options)`| null`
+- **Default:** `null`
+
+  Set to `{}` to enable rollup watcher. This is mostly used in cases that involve build-only plugins or integrations processes.
+
+## 依存関係の最適化オプション
+
+- **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
 
 ### optimizeDeps.entries
 
-- **Type:** `string | string[]`
+- **型:** `string | string[]`
 
-  By default, Vite will crawl your index.html to detect dependencies that need to be pre-bundled. If build.rollupOptions.input is specified, Vite will crawl those entry points instead.
+  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
 
-  If neither of these fit your needs, you can specify custom entries using this option - the value should be a [fast-glob pattern](https://github.com/mrmlnc/fast-glob#basic-syntax) or array of patterns that are relative from vite project root. This will overwrite default entries inference.
+  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。
 
 ### optimizeDeps.exclude
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  Dependencies to exclude from pre-bundling.
+  事前バンドルから除外する依存関係。
 
 ### optimizeDeps.include
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  By default, linked packages not inside `node_modules` are not pre-bundled. Use this option to force a linked package to be pre-bundled.
+  デフォルトでは、リンクされたパッケージのうち `node_modules` の外にあるものは事前バンドルされません。このオプションを使用してリンクされたパッケージを強制的に事前バンドルします。
 
-## SSR Options
+### optimizeDeps.keepNames
 
-:::warning Experimental
-SSR options may be adjusted in minor releases.
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+  バンドラーは、衝突を避けるためにシンボルの名前を変更する必要がある場合があります。
+  これを `true` に設定すると、関数やクラスの `name` プロパティが維持されます。
+  [`keepNames`](https://esbuild.github.io/api/#keep-names) を参照してください。
+
+## SSR オプション
+
+:::warning 実験的な機能
+SSR オプションは、マイナーリリースで調整される可能性があります。
 :::
 
-- **Related:** [SSR Externals](/guide/ssr#ssr-externals)
+- **Related:** [外部 SSR](/guide/ssr#ssr-externals)
 
 ### ssr.external
 
 - **Type:** `string[]`
 
-  Force externalize dependencies for SSR.
+  SSR の依存関係を強制的に外部化します。
 
 ### ssr.noExternal
 
 - **Type:** `string[]`
 
-  Prevent listed dependencies from being externalized for SSR.
+  指定した依存関係が SSR のために外部化されるのを防ぎます。

@@ -3,9 +3,18 @@
   "scripts": {
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
-    "serve-docs": "vitepress serve"
+    "serve-docs": "vitepress serve",
+    "test": "npm run lint",
+    "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./blog/**/*.md', './config/**/*.md', './guide/**/*.md', './plugins/**/*.md']).join(' ');if(shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files).code!==0){shell.exit(1)};\"",
+    "lint:single": "textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error"
   },
   "devDependencies": {
+    "shelljs": "^0.8.4",
+    "textlint": "^11.7.6",
+    "textlint-checker-for-vuejs-jp-docs": "git+https://github.com/vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
+    "textlint-rule-detect-bad-chars": "^1.0.2",
+    "textlint-rule-no-mix-dearu-desumasu": "^4.0.1",
+    "textlint-rule-preset-jtf-style": "^2.3.8",
     "vitepress": "^0.12.2"
   }
 }
