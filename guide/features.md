@@ -304,12 +304,6 @@ import MyWorker from './worker?worker&inline'
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に構成する必要はありません。
 
-### dynamic import される Polyfill
-
-Vite は、コード分割ポイントとして ES dynamic import を使用します。生成されたコードは、dynamic import を使用して非同期チャンクもロードします。しかし、ネイティブ ESM dynamic import サポートは、スクリプトタグを介して ESM よりも遅く着陸し、2つの機能の間にブラウザーサポートの不一致があります。Vite は、軽量の[dynamic import される Polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) を自動的に挿入して、その違いを緩和します。
-
-ネイティブの動的インポートをサポートするブラウザのみを対象としていることがわかっている場合は、この機能を明示的に無効にすることができます。詳しくは [`build.polyfillDynamicImport`](/config/#build-polyfilldynamicimport) をご覧ください。
-
 ### CSS のコード分割
 
 Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのための個別のファイルを生成します。CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSS が読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
