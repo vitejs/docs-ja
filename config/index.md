@@ -155,26 +155,25 @@ export default async ({ command, mode }) => {
 - **型:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
-  Will be passed to `@rollup/plugin-alias` as its [entries option](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Can either be an object, or an array of `{ find, replacement }` pairs.
+  [エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement }` ペアの配列か、オブジェクトを指定します。
 
-  When aliasing to file system paths, always use absolute paths. Relative alias values will be used as-is and will not be resolved into file system paths.
+  ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
-  More advanced custom resolution can be achieved through [plugins](/guide/api-plugin).
+  より高度なカスタム解決は[プラグイン](/guide/api-plugin)によって実現できます。
 
 ### resolve.dedupe
 
 - **型:** `string[]`
 
-  If you have duplicated copies of the same dependency in your app (likely due to hoisting or linked packages in monorepos), use this option to force Vite to always resolve listed dependencies to the same copy (from
-  project root).
+  アプリ内で同じ依存関係のコピーが重複している場合（おそらくモノレポのリンクされたパッケージや巻き上げが原因）、このオプションを使用して、リストされた依存関係を（プロジェクトルートから）常に同じコピーに解決するように Vite に強制します。
 
 ### resolve.conditions
 
 - **型:** `string[]`
 
-  Additional allowed conditions when resolving [Conditional Exports](https://nodejs.org/api/packages.html#packages_conditional_exports) from a package.
+  パッケージからの[条件付きエクスポート](https://nodejs.org/api/packages.html#packages_conditional_exports)解決する際に許可される追加の条件。
 
-  A package with conditional exports may have the following `exports` field in its `package.json`:
+  条件付きエクスポートを持つパッケージでは、`package.json` に次の `exports` フィールドが含まれる場合があります:
 
   ```json
   {
@@ -187,23 +186,23 @@ export default async ({ command, mode }) => {
   }
   ```
 
-  Here, `import` and `require` are "conditions". Conditions can be nested and should be specified from most specific to least specific.
+  ここで、`import` と `require` は「条件」です。条件はネストさせることができ、最も具体的なものから最も具体的でないものまで指定する必要があります。
 
-  Vite has a list of "allowed conditions" and will match the first condition that is in the allowed list. The default allowed conditions are: `import`, `module`, `browser`, `default`, and `production/development` based on current mode. The `resolve.conditions` config option allows specifying additional allowed conditions.
+  Vite には「許可された条件」のリストがあり、許可されたリストにある最初の条件と一致します。 デフォルトで許可される条件は、`import`、`module`、`browser`、`default` と、現在のモードに基づく `production/development` です。`resolve.conditions` 設定オプションを使用すると、追加の許可条件を指定できます。
 
 ### resolve.mainFields
 
 - **型:** `string[]`
 - **デフォルト:** `['module', 'jsnext:main', 'jsnext']`
 
-  List of fields in `package.json` to try when resolving a package's entry point. Note this takes lower precedence than conditional exports resolved from the `exports` field: if an entry point is successfully resolved from `exports`, the main field will be ignored.
+  パッケージのエントリーポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください。エントリーポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
 
 ### resolve.extensions
 
 - **型:** `string[]`
 - **デフォルト:** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
 
-  List of file extensions to try for imports that omit extensions. Note it is **NOT** recommended to omit extensions for custom import types (e.g. `.vue`) since it can interfere with IDE and type support.
+  拡張子を省略したインポートに試行するファイル拡張子のリスト。カスタムインポートタイプ（`.vue` など）の拡張子を省略すると、IDE や型のサポートに支障をきたす可能性があるため、推奨され**ません**。
 
 ### css.modules
 
