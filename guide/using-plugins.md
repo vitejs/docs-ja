@@ -30,7 +30,7 @@ export default {
 ## プラグインの検索
 
 :::tip NOTE
-Vite は、一般的な Web 開発パターンをすぐに使えるよう鬼サポートすることを目的としています。Vite や互換性のある Rollup プラグインを探す前に、 [機能ガイド](../guide/features.md) を確認してください。 Rollup プロジェクトでプラグインが必要になる多くのケースは、 Vite ですでにカバーされています。
+Vite は、一般的な Web 開発パターンをすぐに使えるよう鬼サポートすることを目的としています。Vite や互換性のある Rollup プラグインを探す前に、 [特徴ガイド](../guide/features.md) を確認してください。 Rollup プロジェクトでプラグインが必要になる多くのケースは、 Vite ですでにカバーされています。
 :::
 
 公式プラグインの情報は、 [プラグインのセクション](../plugins) をご覧ください。コミュニティのプラグインは [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) に一覧があります。互換性のある Rollup プラグインは、 [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) に互換性のある公式 Rollup プラグインの一覧と使い方があります。または一覧になければ、 [互換性のある Rollup プラグインのセクション](../guide/api-plugin#rollup-plugin-compatibility) を確認してください。
