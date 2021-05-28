@@ -457,8 +457,8 @@ export default async ({ command, mode }) => {
   export default {
     server: {
       fsServe: {
-        // Allow serving files from one level up to the project root 
-        root: '..' 
+        // Allow serving files from one level up to the project root
+        root: '..'
       }
     }
   }
