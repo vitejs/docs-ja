@@ -74,10 +74,10 @@ export default ({ command, mode }) => {
 
 ```js
 export default async ({ command, mode }) => {
-  const data = await asyncFunction();
+  const data = await asyncFunction()
   return {
     // build 固有の設定
-  } 
+  }
 }
 ```
 
