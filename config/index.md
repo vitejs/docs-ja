@@ -81,100 +81,99 @@ export default async ({ command, mode }) => {
 }
 ```
 
-## Shared Options
+## 共通オプション
 
 ### root
 
-- **Type:** `string`
-- **Default:** `process.cwd()`
+- **型:** `string`
+- **デフォルト:** `process.cwd()`
 
-  Project root directory (where `index.html` is located). Can be an absolute path, or a path relative from the location of the config file itself.
+  プロジェクトのルートディレクトリ（`index.html` が置かれている場所）。絶対パス、または設定ファイル自体の場所からの相対パスを指定できます。
 
-  See [Project Root](/guide/#index-html-and-project-root) for more details.
+  詳細は [プロジェクトルート](/guide/#index-html-and-project-root) を参照してください。
 
 ### base
 
-- **Type:** `string`
-- **Default:** `/`
+- **型:** `string`
+- **デフォルト:** `/`
 
-  Base public path when served in development or production. Valid values include:
+  開発環境または本番環境で配信される際のベースとなるパブリックパス。有効な値は次のとおりです:
 
-  - Absolute URL pathname, e.g. `/foo/`
-  - Full URL, e.g. `https://foo.com/`
-  - Empty string or `./` (for embedded deployment)
+  - 絶対 URL パス名。例 `/foo/`
+  - 完全な URL。例 `https://foo.com/`
+  - 空文字列または `./`（埋め込みデプロイ用）
 
-  See [Public Base Path](/guide/build#public-base-path) for more details.
+  詳細は [Public Base Path](/guide/build#public-base-path) を参照してください。
 
 ### mode
 
-- **Type:** `string`
-- **Default:** `'development'` for serve, `'production'` for build
+- **型:** `string`
+- **デフォルト:** serve は `'development'`、build では `'production'`
 
-  Specifying this in config will override the default mode for **both serve and build**. This value can also be overridden via the command line `--mode` option.
+  config でこれを指定すると、**serve と build 両方**のデフォルトモードが上書きされます。この値はコマンドラインの `--mode` オプションでも上書きできます。
 
-  See [Env Variables and Modes](/guide/env-and-mode) for more details.
+  詳細は [環境変数とモード](/guide/env-and-mode) を参照してください。
 
 ### define
 
-- **Type:** `Record<string, string>`
+- **型:** `Record<string, string>`
 
-  Define global constant replacements. Entries will be defined as globals during dev and statically replaced during build.
+  グローバル定数の置換を定義します。エントリーは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
-  - Starting from `2.0.0-beta.70`, string values will be used as raw expressions, so if defining a string constant, it needs to be explicitly quoted (e.g. with `JSON.stringify`).
+  - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
-  - Replacements are performed only when the match is surrounded by word boundaries (`\b`).
+  - マッチした部分が単語の境界（`\b`）で囲まれている場合のみ置換されます。
 
-  Because it's implemented as straightforward text replacements without any syntax analyzation, we recommend using `define` for CONSTANTS only.
+  構文解析なしの単純なテキスト置換として実装されているため、`define` は「定数」にのみ使用することをおすすめします。
 
-  For example, `process.env.FOO` and `__APP_VERSION__` are good fits. But `process` or `global` should not be put into this option. Variables can be shimmed or polyfilled instead.
+  例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
 
 ### plugins
 
-- **Type:** ` (Plugin | Plugin[])[]`
+- **型:** ` (Plugin | Plugin[])[]`
 
-  Array of plugins to use. Falsy plugins are ignored and arrays of plugins are flattened. See [Plugin API](/guide/api-plugin) for more details on Vite plugins.
+  使用するプラグインの配列。falsy なプラグインは無視され、プラグインの配列はフラット化されます。 Vite プラグインの詳細は [プラグイン API](/guide/api-plugin) を参照してください。
 
 ### publicDir
 
-- **Type:** `string`
-- **Default:** `"public"`
+- **型:** `string`
+- **デフォルト:** `"public"`
 
-  Directory to serve as plain static assets. Files in this directory are served at `/` during dev and copied to the root of `outDir` during build, and are always served or copied as-is without transform. The value can be either an absolute file system path or a path relative to project root.
+  加工せずに静的アセットとして配信するディレクトリ。このディレクトリのファイルは、開発時には `/` として配信され、ビルド時には `outDir` のルートにコピーされます。常に変換されることなくそのまま配信またはコピーされます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
 
-  See [The `public` Directory](/guide/assets#the-public-directory) for more details.
+  詳細は [The `public` Directory](/guide/assets#the-public-directory) を参照してください。
 
 ### cacheDir
 
-- **Type:** `string`
-- **Default:** `"node_modules/.vite"`
+- **型:** `string`
+- **デフォルト:** `"node_modules/.vite"`
 
-  Directory to save cache files. Files in this directory are pre-bundled deps or some other cache files that generated by vite, which can improve the performance. You can use `--force` flag or manually delete the directory to regenerate the cache files. The value can be either an absolute file system path or a path relative to project root.
+  キャッシュファイルを保存するディレクトリ。このディレクトリのファイルは、事前バンドルされた依存関係や Vite によって生成されたキャッシュファイルで、パフォーマンスを向上させることができます。`--force` フラグを使用したり、手動でディレクトリを削除するとキャッシュファイルを再生成できます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
 
 ### resolve.alias
 
-- **Type:**
+- **型:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
-  Will be passed to `@rollup/plugin-alias` as its [entries option](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Can either be an object, or an array of `{ find, replacement }` pairs.
+  [エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement }` ペアの配列か、オブジェクトを指定します。
 
-  When aliasing to file system paths, always use absolute paths. Relative alias values will be used as-is and will not be resolved into file system paths.
+  ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
-  More advanced custom resolution can be achieved through [plugins](/guide/api-plugin).
+  より高度なカスタム解決は[プラグイン](/guide/api-plugin)によって実現できます。
 
 ### resolve.dedupe
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  If you have duplicated copies of the same dependency in your app (likely due to hoisting or linked packages in monorepos), use this option to force Vite to always resolve listed dependencies to the same copy (from
-  project root).
+  アプリ内で同じ依存関係のコピーが重複している場合（おそらくモノレポのリンクされたパッケージや巻き上げが原因）、このオプションを使用して、リストされた依存関係を（プロジェクトルートから）常に同じコピーに解決するように Vite に強制します。
 
 ### resolve.conditions
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
-  Additional allowed conditions when resolving [Conditional Exports](https://nodejs.org/api/packages.html#packages_conditional_exports) from a package.
+  パッケージからの[条件付きエクスポート](https://nodejs.org/api/packages.html#packages_conditional_exports)解決する際に許可される追加の条件。
 
-  A package with conditional exports may have the following `exports` field in its `package.json`:
+  条件付きエクスポートを持つパッケージでは、`package.json` に次の `exports` フィールドが含まれる場合があります:
 
   ```json
   {
@@ -187,23 +186,23 @@ export default async ({ command, mode }) => {
   }
   ```
 
-  Here, `import` and `require` are "conditions". Conditions can be nested and should be specified from most specific to least specific.
+  ここで、`import` と `require` は「条件」です。条件はネストさせることができ、最も具体的なものから最も具体的でないものまで指定する必要があります。
 
-  Vite has a list of "allowed conditions" and will match the first condition that is in the allowed list. The default allowed conditions are: `import`, `module`, `browser`, `default`, and `production/development` based on current mode. The `resolve.conditions` config option allows specifying additional allowed conditions.
+  Vite には「許可された条件」のリストがあり、許可されたリストにある最初の条件と一致します。 デフォルトで許可される条件は、`import`、`module`、`browser`、`default` と、現在のモードに基づく `production/development` です。`resolve.conditions` 設定オプションを使用すると、追加の許可条件を指定できます。
 
 ### resolve.mainFields
 
-- **Type:** `string[]`
-- **Default:** `['module', 'jsnext:main', 'jsnext']`
+- **型:** `string[]`
+- **デフォルト:** `['module', 'jsnext:main', 'jsnext']`
 
-  List of fields in `package.json` to try when resolving a package's entry point. Note this takes lower precedence than conditional exports resolved from the `exports` field: if an entry point is successfully resolved from `exports`, the main field will be ignored.
+  パッケージのエントリーポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリーポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
 
 ### resolve.extensions
 
-- **Type:** `string[]`
-- **Default:** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
+- **型:** `string[]`
+- **デフォルト:** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
 
-  List of file extensions to try for imports that omit extensions. Note it is **NOT** recommended to omit extensions for custom import types (e.g. `.vue`) since it can interfere with IDE and type support.
+  拡張子を省略したインポートに試行するファイル拡張子のリスト。カスタムインポートタイプ（`.vue` など）の拡張子を省略すると、IDE や型のサポートに支障をきたす可能性があるため、推奨され**ません**。
 
 ### css.modules
 
@@ -328,8 +327,12 @@ export default async ({ command, mode }) => {
 ### server.host
 
 - **Type:** `string`
+- **Default:** `'127.0.0.1'`
 
-  Specify server hostname.
+  Specify which IP addresses the server should listen on.
+  Set this to `0.0.0.0` to listen on all addresses, including LAN and public addresses.
+
+  This can be set via the CLI using `--host 0.0.0.0` or `--host`.
 
 ### server.port
 
@@ -446,15 +449,17 @@ export default async ({ command, mode }) => {
 ### build.polyfillDynamicImport
 
 - **Type:** `boolean`
-- **Default:** `true` unless `build.target` is `'esnext'`
+- **Default:** `false`
 
   Whether to automatically inject [dynamic import polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
 
-  The polyfill is auto injected into the proxy module of each `index.html` entry. If the build is configured to use a non-html custom entry via `build.rollupOptions.input`, then it is necessary to manually import the polyfill in your custom entry:
+  If set to true, the polyfill is auto injected into the proxy module of each `index.html` entry. If the build is configured to use a non-html custom entry via `build.rollupOptions.input`, then it is necessary to manually import the polyfill in your custom entry:
 
   ```js
   import 'vite/dynamic-import-polyfill'
   ```
+
+  When using [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), the plugin sets this option to `true` automatically.
 
   Note: the polyfill does **not** apply to [Library Mode](/guide/build#library-mode). If you need to support browsers without native dynamic import, you should probably avoid using it in your library.
 
@@ -478,6 +483,10 @@ export default async ({ command, mode }) => {
 - **Default:** `4096` (4kb)
 
   Imported or referenced assets that are smaller than this threshold will be inlined as base64 URLs to avoid extra http requests. Set to `0` to disable inlining altogether.
+
+  ::: tip Note
+  Assets will **always** be inlined, regardless of file size, and `build.assetsInlineLimit` will be ignored if you specify `build.lib`
+  :::
 
 ### build.cssCodeSplit
 
@@ -619,12 +628,19 @@ SSR オプションは、マイナーリリースで調整される可能性が�
 
 ### ssr.external
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
   SSR の依存関係を強制的に外部化します。
 
 ### ssr.noExternal
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
   指定した依存関係が SSR のために外部化されるのを防ぎます。
+
+### ssr.target
+
+- **型:** `'node' | 'webworker'`
+- **デフォルト:** `node`
+
+  SSR サーバーのビルドターゲット。

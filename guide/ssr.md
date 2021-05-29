@@ -1,11 +1,11 @@
 # サーバサイドレンダリング
 
 :::warning 実験的な機能
-SSR のサポートはまだ実験段階であり、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進めてください。
+SSR のサポートはまだ実験段階で、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進めてください。
 :::
 
 :::tip 注意
-SSR は特に、Node.js で同じアプリケーションを実行し、HTML を先読みレンダリングし、最後にクライアントでハイドレートすることをサポートするフロントエンドフレームワーク（ React、Preact、Vue、Svelte など ）を指します。 従来のサーバーサイドフレームワークとの統合をお探しの場合は、代わりに [バックエンド統合ガイド](./backend-integration) を確認してください。
+SSR は特に、Node.js で同じアプリケーションを実行し、HTML を先読みレンダリングし、最後にクライアントでハイドレートすることをサポートするフロントエンドフレームワーク（React、Preact、Vue、Svelte など）を指します。 従来のサーバーサイドフレームワークとの統合をお探しの場合は、代わりに [バックエンド統合ガイド](./backend-integration) を確認してください。
 
 次のガイドは、選択したフレームワークで SSR を使用した経験があることも前提としており、Vite 固有の統合の詳細のみに焦点を当てています。
 :::
@@ -56,7 +56,7 @@ if (import.meta.env.SSR) {
 
 ## 開発サーバのセットアップ
 
-SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。 したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) の例です: 
+SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) の例です:
 
 **server.js**
 
@@ -87,7 +87,7 @@ async function createServer() {
 createServer()
 ```
 
-ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換 の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
+ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
 
 次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラの実装です:
 
@@ -146,7 +146,7 @@ app.use('*', async (req, res) => {
 SSR プロジェクトを本番環境に適用するには次の作業を行う必要があります:
 
 1. 通常通りクライアントビルドします。
-2. SSR ビルドを作成します、これは `require()` を介して直接ロードできるためであり、Vite の `ssrLoadModule` を経由する必要はありません。
+2. SSR ビルドを作成します、これは `require()` を介して直接ロードできるので、Vite の `ssrLoadModule` を経由する必要はありません。
 
 `package.json` は次のようになります:
 
@@ -160,13 +160,13 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 }
 ```
 
-これは SSR ビルドであることを示す `--ssr` フラグであることに注意してください。 また、SSR エントリを指定する必要があります。
+これは SSR ビルドだということを示す `--ssr` フラグに注意してください。 また、SSR エントリを指定する必要があります。
 
 次に `server.js` で `process.env.NODE_ENV` をチェックして本番固有のロジックを追加する必要があります:
 
 - ルートの `index.html` を読み取る代わりに `dist/client/index.html` を使用します。これはクライアントビルドへの正しいアセットリンクが含まれているためです。
 
-- `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `require('./dist/server/entry-server.js')` を使用します (このファイルは SSR ビルドした結果のファイルです)。
+- `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `require('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
 
 - `vite` 開発サーバーの作成とすべての使用を開発専用サーバかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 
@@ -181,11 +181,11 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 + "build:client": "vite build --outDir dist/client --ssrManifest",
 ```
 
-上記のスクリプトはクライアントビルドの際に `dist/client/ssr-manifest.json` を生成します (モジュール ID をクライアントファイルにマップするため、SSRマニフェストはクライアントビルドから生成されます)。マニフェストには、モジュール ID の関連するチャンクおよびアセットファイルへのマッピングが含まれています。
+上記のスクリプトはクライアントビルドの際に `dist/client/ssr-manifest.json` を生成します（モジュール ID をクライアントファイルにマップするため、SSR マニフェストはクライアントビルドから生成されます）。マニフェストには、モジュール ID の関連するチャンクおよびアセットファイルへのマッピングが含まれています。
 
 マニフェストを活用するには、フレームワークはサーバーのレンダリング呼び出し中に使用されたコンポーネントのモジュール ID を収集する方法を提供する必要があります。
 
-`@vitejs/plugin-vue` は自動で使用されたコンポーネントモジュール IDを 関連する VueSSR コンテキストに登録することを標準でサポートしています:
+`@vitejs/plugin-vue` は自動で使用されたコンポーネントモジュール ID を関連する VueSSR コンテキストに登録することを標準でサポートしています:
 
 ```js
 // src/entry-server.js
@@ -194,7 +194,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules はレンダリング中にしようされたモジュール ID をセットします。
 ```
 
-本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます! 詳しくは [demo source](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/src/entry-server.js) をご覧ください。
+本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！　詳しくは [demo source](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/src/entry-server.js) をご覧ください。
 
 ## Pre-Rendering / SSG
 
@@ -202,13 +202,13 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 ## 外部 SSR
 
-多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React を用いて、それから変換してそれを Node.js 互換に戻す代わりに、単純に `require('react')` を使用する方が効率的です。また、SSRバンドルビルドの速度も大幅に向上します。
+多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React を用いて、それから変換してそれを Node.js 互換に戻す代わりに、単純に `require('react')` を使用する方が効率的です。また、SSR バンドルビルドの速度も大幅に向上します。
 
 Vite は、次のヒューリスティックに基づいて自動化された SSR 外部化を実行します:
 
 - 依存関係の解決された ESM エントリポイントとそのデフォルトの Node エントリポイントが異なる場合、そのデフォルトの Node エントリはおそらく外部化できる CommonJS ビルドです。例えば、`vue` は ESM ビルドと CommonJS ビルドの両方を出荷するため、自動的に外部化されます。
 
-- それ以外の場合、Vite はパッケージのエントリポイントに有効な ESM 構文が含まれているかどうかを確認します。含まれていない場合、パッケージは CommonJS である可能性が高く、外部化されます。例として、`react-dom`は、CommonJS 形式の単一のエントリのみを指定するため、自動的に外部化されます。
+- それ以外の場合、Vite はパッケージのエントリポイントに有効な ESM 構文が含まれているかどうかを確認します。含まれていない場合、パッケージは CommonJS の可能性が高く、外部化されます。例として、`react-dom`は、CommonJS 形式の単一のエントリのみを指定するため、自動的に外部化されます。
 
 このヒューリスティックがエラーにつながる場合は、`ssr.external` および `ssr.noExternal` のオプションを使用して SSR の外部化を手動で調整することができます。
 
@@ -240,3 +240,7 @@ export function mySSRPlugin() {
   }
 }
 ```
+
+## SSR ターゲット
+
+SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバーを実行することもできます。パッケージのエントリの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。

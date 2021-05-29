@@ -24,7 +24,7 @@ document.getElementById('hero-img').src = imgUrl
 
 - 参照されたアセットは build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
 
-- [`assetsInlineLimit` オプション](/config/#assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
+- [`assetsInlineLimit` オプション](/config/#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
 ### 明示的な URL のインポート
 
