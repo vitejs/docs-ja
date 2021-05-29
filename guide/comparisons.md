@@ -16,7 +16,6 @@ Vite では、単一のバンドラー（Rollup）と深く結合することを
 - [ライブラリモード](./build#library-mode)
 - [自動的な CSS コードの分割](./features#css-code-splitting)
 - [最適化された非同期のチャンク読み込み](./features#async-chunk-loading-optimization)
-- [自動的な dynamic import の polyfill](./features#dynamic-import-polyfill)
 - 公式の [legacy モードプラグイン](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)。このプラグインは、modern/legacy のデュアルバンドルを生成し、ブラウザの対応状況をもとに正しいバンドルを自動的に配信します。
 
 **より高速な依存関係の先読みビルド**
