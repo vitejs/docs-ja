@@ -6,7 +6,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.MODE`**: {string} アプリが動作している[モード](#modes)。
 
-- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベースURL。これは [`base` config option](/config/#base) によって決まります。
+- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` config option](/config/#base) によって決まります。
 
 - **`import.meta.env.PROD`**: {boolean} アプリがプロダクションで動作しているかどうか。
 
@@ -35,7 +35,7 @@ Vite は、プロジェクトのルートにある以下のファイルから追
 
 読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも公開されます。
 
-環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみがVite で処理されたコードに公開されます。例えば、以下のファイルで:
+環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下のファイルで:
 
 ```
 DB_PASSWORD=foobar
@@ -77,7 +77,7 @@ VITE_APP_TITLE=My App
 
 アプリケーションの中で、`import.meta.env.VITE_APP_TITLE` を利用してタイトルを描画できます。
 
-**モード**は単に development vs. production よりも広い概念であるのを理解することが重要です。典型的な例として、production のような振る舞いを持ちつつ少しだけ production と異なる環境変数を持つ"staging"モードが欲しくなるかもしれません。
+**モード**は単に development vs. production よりも広い概念なのを理解することが重要です。典型的な例として、production のような振る舞いを持ちつつ少しだけ production と異なる環境変数を持つ"staging"モードが欲しくなるかもしれません。
 
 `--mode` オプションフラグを渡すことで、コマンドに対して使われるデフォルトモードを上書きすることができます。例えば、アプリケーションを staging モード（が仮にあるとして）向けにビルドしたい場合は以下のようにし:
 
