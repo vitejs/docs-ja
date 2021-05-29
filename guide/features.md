@@ -64,7 +64,7 @@ Vite は Vue に対して最高のサポートをします:
 
 ## JSX
 
-`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバーですが、ESBuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
+`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバーですが、esbuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
@@ -80,7 +80,7 @@ export default {
 }
 ```
 
-さらに詳しく知りたい場合は [ESBuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
+さらに詳しく知りたい場合は [esbuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
 
 また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
