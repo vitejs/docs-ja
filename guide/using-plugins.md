@@ -61,7 +61,7 @@ export default {
 
 詳しくは [プラグイン API ガイド](./api-plugin.md#plugin-ordering) を参照してください。また、 `enforce` ラベルと人気のプラグインの使い方は [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) の互換性一覧にあります。
 
-## 条件付きアプリケーション
+## 条件付きの適用
 
 デフォルトでは、プラグインは配信とビルドの両方で起動されます。配信時やビルド時のみに条件付きでプラグインを適用する必要がある場合は、 `apply` プロパティを使って `'build'` か `'serve'` の時にだけプラグインを呼び出します:
 
