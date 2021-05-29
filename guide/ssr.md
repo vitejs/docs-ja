@@ -240,3 +240,7 @@ export function mySSRPlugin() {
   }
 }
 ```
+
+## SSR ターゲット
+
+SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバーを実行することもできます。パッケージのエントリの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。

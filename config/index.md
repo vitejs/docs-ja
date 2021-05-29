@@ -623,12 +623,19 @@ SSR オプションは、マイナーリリースで調整される可能性が�
 
 ### ssr.external
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
   SSR の依存関係を強制的に外部化します。
 
 ### ssr.noExternal
 
-- **Type:** `string[]`
+- **型:** `string[]`
 
   指定した依存関係が SSR のために外部化されるのを防ぎます。
+
+### ssr.target
+
+- **型:** `'node' | 'webworker'`
+- **デフォルト:** `node`
+
+  SSR サーバーのビルドターゲット。
