@@ -447,6 +447,7 @@ export default async ({ command, mode }) => {
   Restrict files that could be served via `/@fs/`. When `server.fsServe.strict` is set to `true`, accessing files outside this directory will result in a 403.
 
   Vite will search for the root of the potential workspace and use it as default. A valid workspace met the following conditions, otherwise will fallback to the [project root](/guide/#index-html-and-project-root).
+
   - contains `workspaces` field in `package.json`
   - contains one of the following file
     - `pnpm-workspace.yaml`
