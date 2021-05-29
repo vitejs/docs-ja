@@ -52,6 +52,7 @@ yarn create @vitejs/app my-vue-app --template vue
 サポートされているテンプレートプリセットは以下のとおりです:
 
 - `vanilla`
+- `vanilla-ts`
 - `vue`
 - `vue-ts`
 - `react`
