@@ -1,11 +1,11 @@
-# Static Asset の取り扱い
+# 静的アセットの取り扱い
 
 - 関連: [Public Base Path](./build#public-base-path)
 - 関連: [`assetsInclude` config option](/config/#assetsinclude)
 
 ## Importing Asset as URL
 
-static asset をインポートすると、配信された際に解決されたパブリックな URL が返されます:
+静的アセットをインポートすると、配信された際に解決されたパブリックな URL が返されます:
 
 ```js
 import imgUrl from './img.png'
@@ -20,24 +20,24 @@ document.getElementById('hero-img').src = imgUrl
 
 - Vue プラグインを使用している場合、 Vue の SFC テンプレート内の asset references も自動的にインポートに変換されます。
 
-- 一般的な画像、メディア、フォントなどの拡張子は自動的に asset として検出されます。また、[`assetsInclude` オプション](/config/#assetsinclude) で内部リストを拡張することができます。
+- 一般的な画像、メディア、フォントなどの拡張子は自動的にアセットとして検出されます。また、[`assetsInclude` オプション](/config/#assetsinclude) で内部リストを拡張することができます。
 
-- 参照された asset は build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
+- 参照されたアセットは build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
 
-- [`assetsInlineLimit` オプション](/config/#assetsinlinelimit) で指定したバイト数よりも小さい asset は base64 データの URL としてインライン化されます
+- [`assetsInlineLimit` オプション](/config/#assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
 ### 明示的な URL のインポート
 
-内部リストや `assetsInclude` に含まれていない asset は URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
+内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
 
 ```js
 import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
-### asset を文字列としてインポートする
+### アセットを文字列としてインポートする
 
-asset は末尾に `?raw` を付与することで文字列としてインポートすることができます。
+アセットは末尾に `?raw` を付与することで文字列としてインポートすることができます。
 
 ```js
 import shaderString from './shader.glsl?raw'
@@ -62,17 +62,17 @@ import InlineWorker from './shader.js?worker&inline'
 
 ## `public` ディレクトリ
 
-asset が以下のような場合のとき:
+アセットが以下のような場合のとき:
 
 - ソースコードで参照されない (例： `robots.txt`)
 - 全く同じファイル名であること (ハッシュ化せずに)
-- ...または、asset の URL を取得するために、単純に asset をインポートする必要がないとき
+- ...または、アセットの URL を取得するために、単純にアセットをインポートする必要がないとき
 
-そのとき、プロジェクトのルート配下の特別な `public` ディレクトリに asset を置くことができます。このディレクトリに配置された asset は開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。 
+そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。 
 
 ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` option](/config/#publicdir) で設定することができます。
 
 注意点:
 
-- `public` 内の asset を絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
-- `public` 内の asset は、 JavaScript からはインポートすることができません。
+- `public` 内のアセットを絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
+- `public` 内のアセットは、 JavaScript からはインポートすることができません。
