@@ -1,10 +1,10 @@
-# Using Plugins
+# プラグインの使用
 
-Vite can be extended using plugins, which are based on Rollup's well-designed plugin interface with a few extra Vite-specific options. This means that Vite users can rely on the mature ecosystem of Rollup plugins, while also being able to extend the dev server and SSR functionality as needed.
+Vite はプラグインを使っての拡張が可能で、Rollup の優れた設計のプラグインインターフェイスに基づいて、 Vite 固有のオプションがいくつか追加されています。つまり、 Vite ユーザは Rollup プラグインの成熟したエコシステムを利用しながら、必要に応じて開発サーバや SSR 機能を拡張することができます。
 
-## Adding a Plugin
+## プラグインの追加
 
-To use a plugin, it needs to be added to the `devDependencies` of the project and included in the `plugins` array in the `vite.config.js` config file. For example, to provide support for legacy browsers, the official [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) can be used:
+プラグインを使うには、プロジェクトの `devDependencies` に追加し、 `vite.config.js` 設定ファイルの `plugins` 配列に含める必要があります。例えば、レガシーブラウザのサポートを提供するには、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) が使えます:
 
 ```
 $ npm i -D @vitejs/plugin-legacy
@@ -23,27 +23,27 @@ export default {
 }
 ```
 
-`plugins` also accept presets including several plugins as a single element. This is useful for complex features (like framework integration) that are implemented using several plugins. The array will be flattened internally.
+また `plugins` は、複数のプラグインを含むプリセットを 1 つの要素として受け入れることもできます。これは、複数のプラグインを使って実装した複雑な機能（フレームワークの統合など）に便利です。配列は内部的にフラット化されます。
 
-Falsy plugins will be ignored, which can be used to easily activate or deactivate plugins.
+偽値（falsy な値）のプラグインは無視され、プラグインを簡単にアクティブ化や非アクティブ化するのに使えます。
 
-## Finding Plugins
+## プラグインの検索
 
 :::tip NOTE
-Vite aims to provide out-of-the-box support for common web development patterns. Before searching for a Vite or compatible Rollup plugin, check out the [Features Guide](../guide/features.md). A lot of the cases where a plugin would be needed in a Rollup project are already covered in Vite.
+Vite は、一般的な Web 開発パターンをすぐに使えるようにサポートすることを目的としています。Vite や互換性のある Rollup プラグインを探す前に、 [特徴ガイド](../guide/features.md) を確認してください。 Rollup プロジェクトでプラグインが必要になる多くのケースは、 Vite ですでにカバーされています。
 :::
 
-Check out the [Plugins section](../plugins) for information about official plugins. Community plugins are listed in [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). For compatible Rollup plugins, check out [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) for a list of compatible official Rollup plugins with usage instructions or the [Rollup Plugin Compatibility section](../guide/api-plugin#rollup-plugin-compatibility) in case it is not listed there.
+公式プラグインの情報は、 [プラグインのセクション](../plugins) をご覧ください。コミュニティのプラグインは [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) に一覧があります。互換性のある Rollup プラグインは、 [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) に互換性のある公式 Rollup プラグインの一覧と使い方があります。または一覧になければ、 [互換性のある Rollup プラグインのセクション](../guide/api-plugin#rollup-plugin-compatibility) を確認してください。
 
-You can also find plugins that follow the [recommended conventions](./api-plugin.md#conventions) using a [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) for Vite plugins or a [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) or a [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) for Rollup plugins.
+[推奨される規約](./api-plugin.md#conventions) に従ったプラグインは次の方法でも見つけることができます。 Vite プラグインは [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity)、 Rollup プラグインは [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) または [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) です。
 
-## Enforcing Plugin Ordering
+## プラグインの順番を強制
 
-For compatibility with some Rollup plugins, it may be needed to enforce the order of the plugin or only apply at build time. This should be an implementation detail for Vite plugins. You can enforce the position of a plugin with the `enforce` modifier:
+一部の Rollup プラグインとの互換性のために、プラグインの順序を強制したり、ビルド時にだけ適用したりする必要があるかもしれません。これは Vite プラグインの実装の詳細でなければなりません。プラグインの位置を強制するには、 `enforce` 修飾子を使います:
 
-- `pre`: invoke plugin before Vite core plugins
-- default: invoke plugin after Vite core plugins
-- `post`: invoke plugin after Vite build plugins
+- `pre`: Vite コアプラグインの前にプラグインを起動する
+- default: Vite コアプラグインの後にプラグインを起動する
+- `post`: Vite ビルドプラグインの後にプラグインを起動する
 
 ```js
 // vite.config.js
@@ -59,11 +59,11 @@ export default {
 }
 ```
 
-Check out [Plugins API Guide](./api-plugin.md#plugin-ordering) for detailed information, and look out for the `enforce` label and usage instructions for popular plugins in the [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) compatibility listing.
+詳しくは [プラグイン API ガイド](./api-plugin.md#plugin-ordering) を参照してください。また、 `enforce` ラベルと人気のプラグインの使い方は [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) の互換性一覧にあります。
 
-## Conditional Application
+## 条件付きの適用
 
-By default, plugins are invoked for both serve and build. In cases where a plugin needs to be conditionally applied only during serve or build, use the `apply` property to only invoke them during `'build'` or `'serve'`:
+デフォルトでは、プラグインは配信とビルドの両方で起動されます。配信時やビルド時のみに条件付きでプラグインを適用する必要がある場合は、 `apply` プロパティを使って `'build'` か `'serve'` の時にだけプラグインを呼び出します:
 
 ```js
 // vite.config.js
@@ -79,6 +79,6 @@ export default {
 }
 ```
 
-## Building Plugins
+## プラグインのビルド
 
-Check out the [Plugins API Guide](./api-plugin.md) for documentation about creating plugins.
+プラグインの作成に関するドキュメントは、 [プラグイン API ガイド](./api-plugin.md) をご覧ください。
