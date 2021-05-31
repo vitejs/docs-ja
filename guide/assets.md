@@ -1,51 +1,51 @@
-# Static Asset Handling
+# 静的アセットの取り扱い
 
-- Related: [Public Base Path](./build#public-base-path)
-- Related: [`assetsInclude` config option](/config/#assetsinclude)
+- 関連: [Public Base Path](./build#public-base-path)
+- 関連: [`assetsInclude` config option](/config/#assetsinclude)
 
 ## Importing Asset as URL
 
-Importing a static asset will return the resolved public URL when it is served:
+静的アセットをインポートすると、配信された際に解決されたパブリックな URL が返されます:
 
 ```js
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-For example, `imgUrl` will be `/img.png` during development, and become `/assets/img.2d8efhg.png` in the production build.
+例えば、 `imgUrl` は、開発中は `/img.png` となり、本番用ビルドでは `/assets/img.2d8efhg.png` となります。
 
-The behavior is similar to webpack's `file-loader`. The difference is that the import can be either using absolute public paths (based on project root during dev) or relative paths.
+振る舞いは webpack の `file-loader` に似ています。異なるのは、絶対的なパブリックパス（開発中のプロジェクトのルートに基づく）または、相対パスを使用することができるという点です。
 
-- `url()` references in CSS are handled the same way.
+- CSS 内の `url()` の参照も同様に扱われます。
 
-- If using the Vue plugin, asset references in Vue SFC templates are automatically converted into imports.
+- Vue プラグインを使用している場合、 Vue の SFC テンプレート内の asset references も自動的にインポートに変換されます。
 
-- Common image, media, and font filetypes are detected as assets automatically. You can extend the internal list using the [`assetsInclude` option](/config/#assetsinclude).
+- 一般的な画像、メディア、フォントなどの拡張子は自動的にアセットとして検出されます。また、[`assetsInclude` オプション](/config/#assetsinclude) で内部リストを拡張することができます。
 
-- Referenced assets are included as part of the build assets graph, will get hashed file names, and can be processed by plugins for optimization.
+- 参照されたアセットは build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
 
-- Assets smaller in bytes than the [`assetsInlineLimit` option](/config/#build-assetsinlinelimit) will be inlined as base64 data URLs.
+- [`assetsInlineLimit` オプション](/config/#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
-### Explicit URL Imports
+### 明示的な URL のインポート
 
-Assets that are not included in the internal list or in `assetsInclude`, can be explicitly imported as an URL using the `?url` suffix. This is useful, for example, to import [Houdini Paint Worklets](https://houdini.how/usage).
+内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
 
 ```js
 import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
-### Importing Asset as String
+### アセットを文字列としてインポートする
 
-Assets can be imported as strings using the `?raw` suffix.
+アセットは末尾に `?raw` を付与することで文字列としてインポートすることができます。
 
 ```js
 import shaderString from './shader.glsl?raw'
 ```
 
-### Importing Script as a Worker
+### スクリプトを Worker としてインポートする
 
-Scripts can be imported as web workers with the `?worker` suffix.
+スクリプトは末尾に `?worker` を付与することで web workers としてインポートすることができます。
 
 ```js
 // Separate chunk in the production build
@@ -58,21 +58,21 @@ const worker = new Worker()
 import InlineWorker from './shader.js?worker&inline'
 ```
 
-Check out the [Web Worker section](./features.md#web-workers) for more details.
+詳細は [Web Worker section](./features.md#web-workers) を参照してください。
 
-## The `public` Directory
+## `public` ディレクトリ
 
-If you have assets that are:
+アセットが以下のような場合のとき:
 
-- Never referenced in source code (e.g. `robots.txt`)
-- Must retain the exact same file name (without hashing)
-- ...or you simply don't want to have to import an asset first just to get its URL
+- ソースコードで参照されない (例： `robots.txt`)
+- 全く同じファイル名であること (ハッシュ化せずに)
+- ...または、アセットの URL を取得するために、単純にアセットをインポートする必要がないとき
 
-Then you can place the asset in a special `public` directory under your project root. Assets in this directory will be served at root path `/` during dev, and copied to the root of the dist directory as-is.
+そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。 
 
-The directory defaults to `<root>/public`, but can be configured via the [`publicDir` option](/config/#publicdir).
+ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` option](/config/#publicdir) で設定することができます。
 
-Note that:
+注意点:
 
-- You should always reference `public` assets using root absolute path - for example, `public/icon.png` should be referenced in source code as `/icon.png`.
-- Assets in `public` cannot be imported from JavaScript.
+- `public` 内のアセットを絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
+- `public` 内のアセットは、 JavaScript からはインポートすることができません。
