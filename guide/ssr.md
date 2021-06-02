@@ -10,12 +10,12 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 次のガイドは、選択したフレームワークで SSR を使用した経験があることも前提としており、Vite 固有の統合の詳細のみに焦点を当てています。
 :::
 
-:::warning Low-level API
-This is a low-level API meant for library and framework authors. If your goal is to create an application, make sure to check out the higher-level SSR plugins and tools at [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) first. That said, many applications are successfully built directly on top of Vite's native low-level API.
+:::warning 低レベル API
+これは、ライブラリやフレームワーク製作者のための低レベル API です。アプリケーションを作成することが目的ならば、まず [Awesome Vite の SSR セクション](https://github.com/vitejs/awesome-vite#ssr)にある高レベルの SSR プラグインとツールを確認してください。とはいえ、多くのアプリケーションは、Vite のネイティブの低レベル API 上に直接構築されています。
 :::
 
-:::tip Help
-If you have questions, the community is usually helpful at [Vite Discord's #ssr channel](https://discord.gg/PkbxgzPhJv).
+:::tip ヘルプ
+質問がある場合は、[Vite Discord の #ssr チャンネル](https://discord.gg/PkbxgzPhJv)でコミュニティがいつでも助けてくれます。
 :::
 
 ## プロジェクトの例
