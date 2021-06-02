@@ -38,7 +38,13 @@ Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を
 
 ### クライアントのタイプ
 
-Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `tsconfig` で `compilerOptions.types` に `vite/client`  を追加します:
+Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `d.ts` の定義ファイルを追加します:
+
+```typescript
+/// <reference types="vite/client" />
+```
+
+`tsconfig` の `compilerOptions.types` に `vite/client` を追加することもできます:
 
 ```json
 {
