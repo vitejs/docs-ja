@@ -73,7 +73,7 @@ async function createServer() {
   // ロジックを提供し、親サーバに制御を任せます。
   //
   // Vite 独自の HTML 配信ロジックを使用したい場合（Vite を開発用ミドルウェアとして使用する場合）は、
-  // 代わりに ’html' を使用します。
+  // 代わりに 'html' を使用します。
   const vite = await createViteServer({
     server: { middlewareMode: 'ssr' }
   })
