@@ -45,7 +45,7 @@ import shaderString from './shader.glsl?raw'
 
 ### スクリプトを Worker としてインポートする
 
-スクリプトは末尾に `?worker` を付与することで web workers としてインポートすることができます。
+スクリプトは末尾に `?worker` もしくは `?sharedworker` を付与することで web workers としてインポートすることができます。
 
 ```js
 // Separate chunk in the production build
