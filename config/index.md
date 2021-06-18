@@ -578,7 +578,7 @@ createServer()
 
 ### build.sourcemap
 
-- **Type:** `boolean | 'inline'`
+- **Type:** `boolean | 'inline' | 'hidden'`
 - **Default:** `false`
 
   Generate production source maps.
