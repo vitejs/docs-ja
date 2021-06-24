@@ -85,7 +85,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 ## new URL(url, import.meta.url)
 
-[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) is a native ESM feature that exposes the current module's URL. Combining it with the native [URL constructor](https://developer.mozilla.org/en-US/docs/Web/API/URL), we can obtain the full, resolved URL of a static asset using relative path from a JavaScript module:
+[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクタ](https://developer.mozilla.org/en-US/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
 
 ```js
 const imgUrl = new URL('./img.png', import.meta.url)
@@ -93,9 +93,9 @@ const imgUrl = new URL('./img.png', import.meta.url)
 document.getElementById('hero-img').src = imgUrl
 ```
 
-This works natively in modern browsers - in fact, Vite doesn't need to process this code at all during development!
+これはモダンブラウザでネイティブに動作します。実際、開発中に Vite はこのコードを処理する必要が全くありません！
 
-This pattern also supports dynamic URLs via template literals:
+このパターンはテンプレートリテラルによる動的な URL もサポートします:
 
 ```js
 function getImageUrl(name) {
@@ -103,8 +103,8 @@ function getImageUrl(name) {
 }
 ```
 
-During the production build, Vite will perform necessary transforms so that the URLs still point to the correct location even after bundling and asset hashing.
+本番環境では、バンドル後やアセットハッシュ化の後でも URL が正しい場所を指すように、Vite が必要な変換を行ないます。
 
-::: warning Note: Does not work with SSR
-This pattern does not work if you are using Vite for Server-Side Rendering, because `import.meta.url` have different semantics in browsers vs. Node.js. The server bundle also cannot determine the client host URL ahead of time.
+::: warning 注意: SSR では動作しません
+ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバーサイドレンダリングで使用している場合には動作しません。サーバーバンドルは事前にクライアントホストの URL を決定することもできません。
 :::
