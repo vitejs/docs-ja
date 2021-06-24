@@ -82,3 +82,29 @@ import InlineWorker from './shader.js?worker&inline'
 
 - `public` 内のアセットを絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
 - `public` 内のアセットは、 JavaScript からはインポートすることができません。
+
+## new URL(url, import.meta.url)
+
+[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) is a native ESM feature that exposes the current module's URL. Combining it with the native [URL constructor](https://developer.mozilla.org/en-US/docs/Web/API/URL), we can obtain the full, resolved URL of a static asset using relative path from a JavaScript module:
+
+```js
+const imgUrl = new URL('./img.png', import.meta.url)
+
+document.getElementById('hero-img').src = imgUrl
+```
+
+This works natively in modern browsers - in fact, Vite doesn't need to process this code at all during development!
+
+This pattern also supports dynamic URLs via template literals:
+
+```js
+function getImageUrl(name) {
+  return new URL(`./dir/${name}.png`, import.meta.url).href
+}
+```
+
+During the production build, Vite will perform necessary transforms so that the URLs still point to the correct location even after bundling and asset hashing.
+
+::: warning Note: Does not work with SSR
+This pattern does not work if you are using Vite for Server-Side Rendering, because `import.meta.url` have different semantics in browsers vs. Node.js. The server bundle also cannot determine the client host URL ahead of time.
+:::
