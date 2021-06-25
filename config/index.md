@@ -331,45 +331,45 @@ export default async ({ command, mode }) => {
 
   See [here](/guide/env-and-mode#env-files) for more about environment files.
 
-## Server Options
+## サーバーオプション
 
 ### server.host
 
-- **Type:** `string`
-- **Default:** `'127.0.0.1'`
+- **型:** `string`
+- **デフォルト:** `'127.0.0.1'`
 
-  Specify which IP addresses the server should listen on.
-  Set this to `0.0.0.0` to listen on all addresses, including LAN and public addresses.
+  サーバーがリッスンすべき IP アドレスを指定します。
+  `0.0.0.0` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
 
-  This can be set via the CLI using `--host 0.0.0.0` or `--host`.
+  これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
 ### server.port
 
-- **Type:** `number`
+- **型:** `number`
 
-  Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+  サーバーポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバーが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
 ### server.strictPort
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-  Set to `true` to exit if port is already in use, instead of automatically try the next available port.
+  `true` に設定すると、ポートがすでに使用されている場合に、次に使用可能なポートを自動的に試すことなく終了します。
 
 ### server.https
 
-- **Type:** `boolean | https.ServerOptions`
+- **型:** `boolean | https.ServerOptions`
 
-  Enable TLS + HTTP/2. Note this downgrades to TLS only when the [`server.proxy` option](#server-proxy) is also used.
+  TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-proxy)も使用されている場合にのみ TLS にダウングレードされるので注意してください。
 
-  The value can also be an [options object](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) passed to `https.createServer()`.
+  この値は `https.createServer()` に渡される[オプションオブジェクト](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)でも構いません。
 
 ### server.open
 
-- **Type:** `boolean | string`
+- **型:** `boolean | string`
 
-  Automatically open the app in the browser on server start. When the value is a string, it will be used as the URL's pathname.
+  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。
 
-  **Example:**
+  **例:**
 
   ```js
   export default {
@@ -381,27 +381,27 @@ export default async ({ command, mode }) => {
 
 ### server.proxy
 
-- **Type:** `Record<string, string | ProxyOptions>`
+- **型:** `Record<string, string | ProxyOptions>`
 
-  Configure custom proxy rules for the dev server. Expects an object of `{ key: options }` pairs. If the key starts with `^`, it will be interpreted as a `RegExp`.
+  開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。
 
-  Uses [`http-proxy`](https://github.com/http-party/node-http-proxy). Full options [here](https://github.com/http-party/node-http-proxy#options).
+  [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
-  **Example:**
+  **例:**
 
   ```js
   export default {
     server: {
       proxy: {
-        // string shorthand
+        // 文字列のショートハンド
         '/foo': 'http://localhost:4567/foo',
-        // with options
+        // オプションを使用
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         },
-        // with RegEx
+        // 正規表現を使用
         '^/fallback/.*': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
@@ -414,9 +414,9 @@ export default async ({ command, mode }) => {
 
 ### server.cors
 
-- **Type:** `boolean | CorsOptions`
+- **型:** `boolean | CorsOptions`
 
-  Configure CORS for the dev server. This is enabled by default and allows any origin. Pass an [options object](https://github.com/expressjs/cors) to fine tune the behavior or `false` to disable.
+  開発サーバーの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
 ### server.force
 
