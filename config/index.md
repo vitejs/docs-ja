@@ -206,7 +206,7 @@ export default async ({ command, mode }) => {
 
 ### css.modules
 
-- **Type:**
+- **型:**
 
   ```ts
   interface CSSModulesOptions {
@@ -217,27 +217,27 @@ export default async ({ command, mode }) => {
       | ((name: string, filename: string, css: string) => string)
     hashPrefix?: string
     /**
-     * default: 'camelCaseOnly'
+     * デフォルト: 'camelCaseOnly'
      */
     localsConvention?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly'
   }
   ```
 
-  Configure CSS modules behavior. The options are passed on to [postcss-modules](https://github.com/css-modules/postcss-modules).
+  CSS モジュールの動作を設定します。オプションは [postcss-modules](https://github.com/css-modules/postcss-modules) に渡されます。
 
 ### css.postcss
 
-- **Type:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
+- **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
 
-  Inline PostCSS config (expects the same format as `postcss.config.js`), or a custom path to search PostCSS config from (default is project root). The search is done using [postcss-load-config](https://github.com/postcss/postcss-load-config).
+  インラインの PostCSS 設定（`postcss.config.js` と同じフォーマットを想定）、もしくは PostCSS の設定ファイルを検索するカスタムパス（デフォルトはプロジェクトルート）。検索には [postcss-load-config](https://github.com/postcss/postcss-load-config) が使用されます。
 
-  Note if an inline config is provided, Vite will not search for other PostCSS config sources.
+  インライン設定が提供された場合、Vite は他の PostCSS 設定ソースを検索しないことに注意してください。
 
 ### css.preprocessorOptions
 
-- **Type:** `Record<string, object>`
+- **型:** `Record<string, object>`
 
-  Specify options to pass to CSS pre-processors. Example:
+  CSS プリプロセッサに渡すオプションを指定します。例:
 
   ```js
   export default {
@@ -253,25 +253,25 @@ export default async ({ command, mode }) => {
 
 ### json.namedExports
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **型:** `boolean`
+- **デフォルト:** `true`
 
-  Whether to support named imports from `.json` files.
+  `.json` ファイルからの名前付きインポートをサポートするかどうか。
 
 ### json.stringify
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **型:** `boolean`
+- **デフォルト:** `false`
 
-  If set to `true`, imported JSON will be transformed into `export default JSON.parse("...")` which is significantly more performant than Object literals, especially when the JSON file is large.
+  `true` に設定すると、インポートされた JSON は `export default JSON.parse("...")` に変換されます。これは特に JSON ファイルが大きい場合、オブジェクトリテラルよりも大幅にパフォーマンスが向上します。
 
-  Enabling this disables named imports.
+  有効にすると、名前付きインポートは無効になります。 
 
 ### esbuild
 
-- **Type:** `ESBuildOptions | false`
+- **型:** `ESBuildOptions | false`
 
-  `ESBuildOptions` extends [ESbuild's own transform options](https://esbuild.github.io/api/#transform-api). The most common use case is customizing JSX:
+  `ESBuildOptions` は [ESbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
   ```js
   export default {
@@ -282,9 +282,9 @@ export default async ({ command, mode }) => {
   }
   ```
 
-  By default, ESBuild is applied to `ts`, `jsx` and `tsx` files. You can customize this with `esbuild.include` and `esbuild.exclude`, both of which expects type of `string | RegExp | (string | RegExp)[]`.
+  デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
 
-  In addition, you can also use `esbuild.jsxInject` to automatically inject JSX helper imports for every file transformed by ESBuild:
+  また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
 
   ```js
   export default {
@@ -294,42 +294,42 @@ export default async ({ command, mode }) => {
   }
   ```
 
-  Set to `false` to disable ESbuild transforms.
+  ESbuild の変換を無効にするには `false` を設定します。
 
 ### assetsInclude
 
-- **Type:** `string | RegExp | (string | RegExp)[]`
-- **Related:** [Static Asset Handling](/guide/assets)
+- **型:** `string | RegExp | (string | RegExp)[]`
+- **関連:** [静的アセットの取り扱い](/guide/assets)
 
-  Specify additional file types to be treated as static assets so that:
+  静的アセットとして扱う追加のファイルタイプを指定します。そして:
 
-  - They will be excluded from the plugin transform pipeline when referenced from HTML or directly requested over `fetch` or XHR.
+  - HTML から参照されたり、`fetch` や XHR で直接リクエストされたりすると、プラグインの変換パイプラインから除外されます。
 
-  - Importing them from JS will return their resolved URL string (this can be overwritten if you have a `enforce: 'pre'` plugin to handle the asset type differently).
+  - JS からインポートすると、解決された URL 文字列が返されます（アセットタイプを別の方法で処理するための `enforce: 'pre'` プラグインがある場合は上書きされます）
 
-  The built-in asset type list can be found [here](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
+  組み込みのアセットタイプのリストは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts)をご覧ください。
 
 ### logLevel
 
-- **Type:** `'info' | 'warn' | 'error' | 'silent'`
+- **型:** `'info' | 'warn' | 'error' | 'silent'`
 
-  Adjust console output verbosity. Default is `'info'`.
+  コンソール出力の詳細度を調整します。デフォルトは `'info'` です。
 
 ### clearScreen
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **型:** `boolean`
+- **デフォルト:** `true`
 
-  Set to `false` to prevent Vite from clearing the terminal screen when logging certain messages. Via command line, use `--clearScreen false`.
+  Vite が特定のメッセージをログに出力する際、ターミナル画面をクリアしないようにするには `false` に設定します。コマンドラインからは、`--clearScreen false` を使用してください。
 
 ### envDir
 
-- **Type:** `string`
-- **Default:** `root`
+- **型:** `string`
+- **デフォルト:** `root`
 
-  The directory from which `.env` files are loaded. Can be an absolute path, or a path relative to the project root.
+  `.env` ファイルを読み込むディレクトリ。絶対パス、もしくはプロジェクトルートからの相対パスを指定します。
 
-  See [here](/guide/env-and-mode#env-files) for more about environment files.
+  環境ファイルの詳細については[こちら](/guide/env-and-mode#env-files)をご覧ください。
 
 ## サーバーオプション
 
