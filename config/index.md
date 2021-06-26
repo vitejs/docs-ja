@@ -383,7 +383,7 @@ export default async ({ command, mode }) => {
 
 - **型:** `Record<string, string | ProxyOptions>`
 
-  開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。
+  開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
   [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
@@ -406,6 +406,14 @@ export default async ({ command, mode }) => {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/fallback/, '')
+        },
+        // プロキシインスタンスを使用
+        '/api': {
+          target: 'http://jsonplaceholder.typicode.com',
+          changeOrigin: true,
+          configure: (proxy, options) => {
+            // プロキシは 'http-proxy' のインスタンスになります
+          }),
         }
       }
     }
