@@ -726,7 +726,7 @@ SSR オプションは、マイナーリリースで調整される可能性が�
 
 ### ssr.noExternal
 
-- **型:** `string[]`
+- **型:** `string | RegExp | (string | RegExp)[]`
 
   指定した依存関係が SSR のために外部化されるのを防ぎます。
 
