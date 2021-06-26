@@ -112,12 +112,12 @@ if (import.meta.hot) {
 
 ## `hot.on(event, cb)`
 
-Listen to an HMR event.
+HMR イベントをリッスンします。
 
-The following HMR events are dispatched by Vite automatically:
-- `'vite:beforeUpdate'` when an update is about to be applied (e.g. a module will be replaced)
-- `'vite:beforeFullReload'` when a full reload is about to occur
-- `'vite:beforePrune'` when modules that are no longer needed are about to be pruned
-- `'vite:error'` when an error occurs (e.g. syntax error)
+以下の HMR イベントは Vite によって自動的にディスパッチされます:
+- `'vite:beforeUpdate'` アップデートが適用される直前（例: モジュールが置き換えられるなど）
+- `'vite:beforeFullReload'` フルリロードが発生する直前
+- `'vite:beforePrune'` もう必要なくなったモジュールが取り除かれる直前
+- `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
 
-Custom HMR events can also be sent from plugins. See [handleHotUpdate](./api-plugin#handlehotupdate) for more details.
+カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
