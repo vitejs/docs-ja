@@ -14,7 +14,7 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           username: kiaking
           email: "kia.king.08@gmail.com"
-          upstream-repo: git@github.com:vuejs-jp/vite-docs-ja.git
+          upstream-repo: https://github.com/vuejs-jp/vite-docs-ja.git
           upstream-repo-branch: main
           head-repo: https://github.com/vitejs/vite
           head-repo-branch: main
