@@ -9,7 +9,7 @@ jobs:
     name: Ryu Cho
     runs-on: ubuntu-latest
     steps:
-      - uses: vuejs-jp/che-tsumi-next@v1
+      - uses: vuejs-jp/ryu-cho@v1
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           username: kiaking
