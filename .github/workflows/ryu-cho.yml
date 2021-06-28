@@ -1,0 +1,23 @@
+name: ryu-cho
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  ryu-cho:
+    name: Ryu Cho
+    runs-on: ubuntu-latest
+    steps:
+      - uses: vuejs-jp/che-tsumi-next@v1
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          username: kiaking
+          email: "kia.king.08@gmail.com"
+          upstream-repo: git@github.com:vuejs-jp/vite-docs-ja.git
+          upstream-repo-branch: main
+          head-repo: https://github.com/vitejs/vite
+          head-repo-branch: main
+          track-from: 4ed8b2f83a2f149734f3c5ecb6438309bd85a9e5
+          path-starts-with: docs/
+          workflow-name: ryu-cho
