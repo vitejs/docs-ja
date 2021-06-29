@@ -116,7 +116,7 @@ HMR イベントを購読します。
 
 以下の HMR イベントは Vite によって自動的にディスパッチされます:
 - `'vite:beforeUpdate'` アップデートが適用される直前（例: モジュールが置き換えられるなど）
-- `'vite:beforeFullReload'` フルリロードが発生する直前
+- `'vite:beforeFullReload'` 完全なリロードが発生する直前
 - `'vite:beforePrune'` もう必要なくなったモジュールが取り除かれる直前
 - `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
 
