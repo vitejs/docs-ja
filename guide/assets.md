@@ -82,3 +82,29 @@ import InlineWorker from './shader.js?worker&inline'
 
 - `public` 内のアセットを絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
 - `public` 内のアセットは、 JavaScript からはインポートすることができません。
+
+## new URL(url, import.meta.url)
+
+[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクタ](https://developer.mozilla.org/en-US/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
+
+```js
+const imgUrl = new URL('./img.png', import.meta.url)
+
+document.getElementById('hero-img').src = imgUrl
+```
+
+これはモダンブラウザでネイティブに動作します。実際、開発中に Vite はこのコードを処理する必要が全くありません！
+
+このパターンはテンプレートリテラルによる動的な URL もサポートします:
+
+```js
+function getImageUrl(name) {
+  return new URL(`./dir/${name}.png`, import.meta.url).href
+}
+```
+
+本番環境では、バンドル後やアセットハッシュ化の後でも URL が正しい場所を指すように、Vite が必要な変換を行ないます。
+
+::: warning 注意: SSR では動作しません
+ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバーサイドレンダリングで使用している場合には動作しません。サーバーバンドルは事前にクライアントホストの URL を決定することもできません。
+:::
