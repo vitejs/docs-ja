@@ -112,7 +112,7 @@ if (import.meta.hot) {
 
 ## `hot.on(event, cb)`
 
-HMR イベントをリッスンします。
+HMR イベントを購読します。
 
 以下の HMR イベントは Vite によって自動的にディスパッチされます:
 - `'vite:beforeUpdate'` アップデートが適用される直前（例: モジュールが置き換えられるなど）
