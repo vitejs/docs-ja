@@ -524,82 +524,82 @@ createServer()
   }
   ```
 
-## Build Options
+## ビルドオプション
 
 ### build.target
 
-- **Type:** `string`
-- **Default:** `'modules'`
-- **Related:** [Browser Compatibility](/guide/build#browser-compatibility)
+- **型:** `string`
+- **デフォルト:** `'modules'`
+- **関連:** [Browser Compatibility](/guide/build#browser-compatibility)
 
-  Browser compatibility target for the final bundle. The default value is a Vite special value, `'modules'`, which targets [browsers with native ES module support](https://caniuse.com/es6-module).
+  最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
 
-  Another special value is `'esnext'` - which assumes native dynamic imports support and will transpile as little as possible:
+  もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
-  - If the [`build.minify`](#build-minify) option is `'terser'` (the default), `'esnext'` will be forced down to `'es2019'`.
-  - In other cases, it will perform no transpilation at all.
+  - [`build.minify`](#build-minify) が `'terser'`（デフォルト）の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
+  - それ以外の場合、トランスパイルはまったく行なわれません。
 
-  The transform is performed with esbuild and the value should be a valid [esbuild target option](https://esbuild.github.io/api/#target). Custom targets can either be a ES version (e.g. `es2015`), a browser with version (e.g. `chrome58`), or an array of multiple target strings.
+  変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
-  Note the build will fail if the code contains features that cannot be safely transpiled by esbuild. See [esbuild docs](https://esbuild.github.io/content-types/#javascript) for more details.
+  esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
 
 ### build.polyfillDynamicImport
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **型:** `boolean`
+- **デフォルト:** `false`
 
-  Whether to automatically inject [dynamic import polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+  [動的インポートのポリフィル](https://github.com/GoogleChromeLabs/dynamic-import-polyfill)を自動的に注入するか。
 
-  If set to true, the polyfill is auto injected into the proxy module of each `index.html` entry. If the build is configured to use a non-html custom entry via `build.rollupOptions.input`, then it is necessary to manually import the polyfill in your custom entry:
+  true に設定すると、各 `index.html` エントリーのプロキシモジュールに自動的にポリフィルが注入されます。`build.rollupOptions.input` によって HTML ではないカスタムエントリーを使用するようにビルドが設定されている場合は、カスタムエントリー内でポリフィルを手動でインポートする必要があります:
 
   ```js
   import 'vite/dynamic-import-polyfill'
   ```
 
-  When using [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), the plugin sets this option to `true` automatically.
+  [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う場合、プラグインがこのオプションを自動的に `true` に設定します。
 
-  Note: the polyfill does **not** apply to [Library Mode](/guide/build#library-mode). If you need to support browsers without native dynamic import, you should probably avoid using it in your library.
+  注意: ポリフィルは[ライブラリモード](/guide/build#library-mode)には適用**されません**。ネイティブの動的インポートがないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けたほうが良いでしょう。
 
 ### build.outDir
 
-- **Type:** `string`
-- **Default:** `dist`
+- **型:** `string`
+- **デフォルト:** `dist`
 
-  Specify the output directory (relative to [project root](/guide/#index-html-and-project-root)).
+  出力ディレクトリを指定します（[プロジェクトルート](/guide/#index-html-and-project-root)からの相対パス）。
 
 ### build.assetsDir
 
-- **Type:** `string`
-- **Default:** `assets`
+- **型:** `string`
+- **デフォルト:** `assets`
 
-  Specify the directory to nest generated assets under (relative to `build.outDir`).
+  生成されたアセットをネストするディレクトリを指定します（`build.outDir` からの相対パス）。
 
 ### build.assetsInlineLimit
 
-- **Type:** `number`
-- **Default:** `4096` (4kb)
+- **型:** `number`
+- **デフォルト:** `4096` (4kb)
 
-  Imported or referenced assets that are smaller than this threshold will be inlined as base64 URLs to avoid extra http requests. Set to `0` to disable inlining altogether.
+  インポートもしくは参照されたアセットでこの閾値より小さいものは、余計な HTTP リクエストを避けるために base64 URL としてインライン化されます。`0` に設定するとインライン化は完全に無効になります。
 
-  ::: tip Note
-  If you specify `build.lib`, `build.assetsInlineLimit` will be ignored and assets will always be inlined, regardless of file size.
+  ::: tip 注意
+  `build.lib` を指定すると `build.assetsInlineLimit` は無視され、ファイルサイズに関係なく、アセットは常にインライン化されます。
   :::
 
 ### build.cssCodeSplit
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **型:** `boolean`
+- **デフォルト:** `true`
 
-  Enable/disable CSS code splitting. When enabled, CSS imported in async chunks will be inlined into the async chunk itself and inserted when the chunk is loaded.
+  CSS コード分割を有効/無効にします。有効にすると、非同期のチャンクでインポートされた CSS は非同期チャンク自体の中にインライン化され、チャンクがロードされるときに挿入されます。
 
-  If disabled, all CSS in the entire project will be extracted into a single CSS file.
+  無効にした場合、プロジェクト全体のすべての CSS はひとつの CSS ファイルに抽出されます。
 
 ### build.sourcemap
 
-- **Type:** `boolean | 'inline' | 'hidden'`
-- **Default:** `false`
+- **型:** `boolean | 'inline' | 'hidden'`
+- **デフォルト:** `false`
 
-  Generate production source maps.
+  本番用のソースマップを作成します。
 
 ### build.rollupOptions
 
