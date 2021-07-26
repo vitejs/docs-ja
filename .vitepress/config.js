@@ -60,7 +60,11 @@ module.exports = {
         text: '言語',
         items: [
           {
-            text: '英語',
+            text: '日本語',
+            link: 'https://ja.vitejs.dev'
+          },
+          {
+            text: 'English',
             link: 'https://vitejs.dev'
           },
           {
