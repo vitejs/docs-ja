@@ -9,15 +9,15 @@ jobs:
     name: Ryu Cho
     runs-on: ubuntu-latest
     steps:
-      - uses: vuejs-jp/ryu-cho@v1
+      - uses: vuejs-translations/ryu-cho@v1
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           username: kiaking
           email: "kia.king.08@gmail.com"
-          upstream-repo: https://github.com/vuejs-jp/vite-docs-ja.git
+          upstream-repo: https://github.com/vitejs/docs-ja.git
           upstream-repo-branch: main
           head-repo: https://github.com/vitejs/vite
           head-repo-branch: main
-          track-from: f3643d8e74db07a0c3014987e8c87d4fec31f5a9
+          track-from: 8fa75b5f9ff3730270d0793e860019b9aa4577de
           path-starts-with: docs/
           workflow-name: ryu-cho
