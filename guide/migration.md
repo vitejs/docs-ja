@@ -1,4 +1,4 @@
-# Migration from v1
+# v1 からの移行
 
 ## Config Options Change
 

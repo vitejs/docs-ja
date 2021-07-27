@@ -1,4 +1,4 @@
-# Deploying a Static Site
+# 静的サイトのデプロイ
 
 The following guides are based on some shared assumptions:
 
