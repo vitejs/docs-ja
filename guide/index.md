@@ -25,13 +25,19 @@ Vite は [Node.js](https://nodejs.org/en/) >=12.0.0 のバージョンが必要�
 NPM を使う場合:
 
 ```bash
-$ npm init @vitejs/app
+$ npm init vite@latest
 ```
 
 Yarn を使う場合:
 
 ```bash
-$ yarn create @vitejs/app
+$ yarn create vite
+```
+
+PNPM を使う場合:
+
+```bash
+$ pnpx create-vite
 ```
 
 あとは画面表示に従ってください！
@@ -40,13 +46,13 @@ $ yarn create @vitejs/app
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-vue-app --template vue
+npm init vite@latest my-vue-app --template vue
 
 # npm 7+ は追加で 2 つのダッシュが必要:
-npm init @vitejs/app my-vue-app -- --template vue
+npm init vite@latest my-vue-app -- --template vue
 
 # yarn
-yarn create @vitejs/app my-vue-app --template vue
+yarn create vite my-vue-app --template vue
 ```
 
 サポートされているテンプレートプリセットは以下のとおりです:
