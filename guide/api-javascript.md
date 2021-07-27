@@ -4,13 +4,13 @@ Vite の JavaScript API は完全に型付けされているので、インテ�
 
 ## `createServer`
 
-**型シグネチャ**
+**型シグネチャ:**
 
 ```ts
 async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 ```
 
-**使用例**
+**使用例:**
 
 ```js
 const { createServer } = require('vite')
@@ -121,7 +121,7 @@ interface ViteDevServer {
 
 ## `build`
 
-**型シグネチャ**
+**型シグネチャ:**
 
 ```ts
 async function build(
@@ -129,7 +129,7 @@ async function build(
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
-**使用例**
+**使用例:**
 
 ```js
 const path = require('path')
@@ -150,7 +150,7 @@ const { build } = require('vite')
 
 ## `resolveConfig`
 
-**型シグネチャ**
+**型シグネチャ:**
 
 ```ts
 async function resolveConfig(
