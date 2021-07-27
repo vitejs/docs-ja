@@ -1,33 +1,33 @@
-# Plugin API
+# プラグイン API
 
-Vite plugins extends Rollup's well-designed plugin interface with a few extra Vite-specific options. As a result, you can write a Vite plugin once and have it work for both dev and build.
+Vite プラグインは、Rollup の優れた設計のプラグインインターフェースを Vite 特有のオプションで拡張しています。その結果、Vite プラグインを一度作成すれば、開発とビルドの両方で動作させることができます。
 
-**It is recommended to go through [Rollup's plugin documentation](https://rollupjs.org/guide/en/#plugin-development) first before reading the sections below.**
+**以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/guide/en/#plugin-development)を読むことをお勧めします。**
 
-## Conventions
+## 規約
 
-If the plugin doesn't use Vite specific hooks and can be implemented as a [Compatible Rollup Plugin](#rollup-plugin-compatibility), then it is recommended to use the [Rollup Plugin naming conventions](https://rollupjs.org/guide/en/#conventions)
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
 
-- Rollup Plugins should have a clear name with `rollup-plugin-` prefix.
-- Include `rollup-plugin` and `vite-plugin` keywords in package.json.
+- Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
+- package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
 
-This exposes the plugin to be also used in pure Rollup or WMR based projects
+これにより、プラグインが公開され、純粋な Rollup または WMR ベースのプロジェクトでも使用できるようになります。
 
-For Vite only plugins
+Vite 専用プラグインの場合
 
-- Vite Plugins should have a clear name with `vite-plugin-` prefix.
-- Include `vite-plugin` keyword in package.json.
-- Include a section in the plugin docs detailing why it is a Vite only plugin (for example, it uses Vite specific plugin hooks).
+- Vite プラグインは、`vite-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
+- package.json に `vite-plugin` キーワードを含めます。
+- プラグインのドキュメントに、Vite 専用プラグインになっている理由を詳しく説明するセクションを含める（例えば、Vite 特有のプラグインフックを使用するなど）。
 
-If your plugin is only going to work for a particular framework, its name should be included as part of the prefix
+プラグインが特定のフレームワークでしか動作しない場合は、その名前をプレフィックスの一部として含めるべきです。
 
-- `vite-plugin-vue-` prefix for Vue Plugins
-- `vite-plugin-react-` prefix for React Plugins
-- `vite-plugin-svelte-` prefix for Svelte Plugins
+- Vue プラグインには `vite-plugin-vue-` のプレフィックス
+- React プラグインには `vite-plugin-react-` のプレフィックス
+- Svelte プラグインには `vite-plugin-svelte-` のプレフィックス
 
-## Plugins config
+## プラグインの設定
 
-Users will add plugins to the project `devDependencies` and configure them using the `plugins` array option.
+ユーザーはプロジェクトの `devDependencies` にプラグインを追加し、 `plugins` 配列のオプションを使って設定します。
 
 ```js
 // vite.config.js
@@ -39,9 +39,9 @@ export default {
 }
 ```
 
-Falsy plugins will be ignored, which can be used to easily activate or deactivate plugins.
+falsy なプラグインは無視されます。これにより、プラグインを簡単に有効化・無効化できます。
 
-`plugins` also accept presets including several plugins as a single element. This is useful for complex features (like framework integration) that are implemented using several plugins. The array will be flattened internally.
+`plugins` は複数のプラグインを含むプリセットも単一の要素として受け入れます。これは複数のプラグインを使って実装された複雑な機能（フレームワーク統合など）に便利です。配列は内部的にフラット化されます。
 
 ```js
 // framework-plugin
@@ -62,20 +62,20 @@ export default {
 }
 ```
 
-## Simple Examples
+## シンプルな例
 
 :::tip
-It is common convention to author a Vite/Rollup plugin as a factory function that returns the actual plugin object. The function can accept options which allows users to customize the behavior of the plugin.
+Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリー関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
 :::
 
-### Importing a Virtual File
+### 仮想ファイルのインポート
 
 ```js
 export default function myPlugin() {
   const virtualFileId = '@my-virtual-file'
 
   return {
-    name: 'my-plugin', // required, will show up in warnings and errors
+    name: 'my-plugin', // 必須、警告やエラーで表示されます
     resolveId(id) {
       if (id === virtualFileId) {
         return virtualFileId
@@ -90,7 +90,7 @@ export default function myPlugin() {
 }
 ```
 
-Which allows importing the file in JavaScript:
+これにより、JavaScript でファイルをインポートできます:
 
 ```js
 import { msg } from '@my-virtual-file'
@@ -98,7 +98,7 @@ import { msg } from '@my-virtual-file'
 console.log(msg)
 ```
 
-### Transforming Custom File Types
+### カスタムファイルタイプの変換
 
 ```js
 const fileRegex = /\.(my-file-ext)$/
@@ -111,7 +111,7 @@ export default function myPlugin() {
       if (fileRegex.test(id)) {
         return {
           code: compileFileToJS(src),
-          map: null // provide source map if available
+          map: null // ソースマップがあれば提供する
         }
       }
     }
@@ -119,45 +119,45 @@ export default function myPlugin() {
 }
 ```
 
-## Universal Hooks
+## 共通のフック
 
-During dev, the Vite dev server creates a plugin container that invokes [Rollup Build Hooks](https://rollupjs.org/guide/en/#build-hooks) the same way Rollup does it.
+開発中、Vite 開発サーバーは、Rollup が行なうのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/guide/en/#build-hooks)を呼び出すプラグインコンテナを作成します。
 
-The following hooks are called once on server start:
+以下のフックはサーバー起動時に一度だけ呼び出されます:
 
 - [`options`](https://rollupjs.org/guide/en/#options)
 - [`buildStart`](https://rollupjs.org/guide/en/#buildstart)
 
-The following hooks are called on each incoming module request:
+以下のフックはモジュールのリクエストが来るたびに呼び出されます:
 
 - [`resolveId`](https://rollupjs.org/guide/en/#resolveid)
 - [`load`](https://rollupjs.org/guide/en/#load)
 - [`transform`](https://rollupjs.org/guide/en/#transform)
 
-The following hooks are called when the server is closed:
+以下のフックはサーバーが閉じられる時に呼び出されます:
 
 - [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
 - [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
 
-Note that the [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) hook is **not** called during dev, because Vite avoids full AST parses for better performance.
+Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
 
-[Output Generation Hooks](https://rollupjs.org/guide/en/#output-generation-hooks) (except `closeBundle`) are **not** called during dev. You can think of Vite's dev server as only calling `rollup.rollup()` without calling `bundle.generate()`.
+[出力生成フック](https://rollupjs.org/guide/en/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバーは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
 
-## Vite Specific Hooks
+## Vite 特有のフック
 
-Vite plugins can also provide hooks that serve Vite-specific purposes. These hooks are ignored by Rollup.
+Vite プラグインは Vite 特有の目的を果たすフックを提供することもできます。これらのフックは Rollup には無視されます。
 
 ### `config`
 
-- **Type:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
-- **Kind:** `sync`, `sequential`
+- **型:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
+- **種類:** `sync`, `sequential`
 
-  Modify Vite config before it's resolved. The hook receives the raw user config (CLI options merged with config file) and the current config env which exposes the `mode` and `command` being used. It can return a partial config object that will be deeply merged into existing config, or directly mutate the config (if the default merging cannot achieve the desired result).
+  Vite の設定を解決される前に変更します。このフックは生のユーザー設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
 
-  **Example**
+  **例:**
 
   ```js
-  // return partial config (recommended)
+  // 部分的な設定を返す（推奨）
   const partialConfigPlugin = () => ({
     name: 'return-partial',
     config: () => ({
@@ -167,7 +167,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
     })
   })
 
-  // mutate the config directly (use only when merging doesn't work)
+  // 設定を直接変更する（マージが動作しない場合のみ使用する）
   const mutateConfigPlugin = () => ({
     name: 'mutate-config',
     config(config, { command }) {
@@ -178,18 +178,18 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
   })
   ```
 
-  ::: warning Note
-  User plugins are resolved before running this hook so injecting other plugins inside the `config` hook will have no effect.
+  ::: warning 注意
+  ユーザープラグインはこのフックを実行する前に解決されるので、`config` フックの中に他のプラグインを注入しても効果はありません。
   :::
 
 ### `configResolved`
 
-- **Type:** `(config: ResolvedConfig) => void | Promise<void>`
-- **Kind:** `async`, `parallel`
+- **型:** `(config: ResolvedConfig) => void | Promise<void>`
+- **種類:** `async`, `parallel`
 
-  Called after the Vite config is resolved. Use this hook to read and store the final resolved config. It is also useful when the plugin needs to do something different based the command is being run.
+  Vite プラグインが解決された後に呼び出されます。このフックを使って、最終的に解決された設定を読み取って保存します。このフックはプラグインがコマンドの実行に基づいて何か別のことをする必要がある場合にも便利です。
 
-  **Example:**
+  **例:**
 
   ```js
   const examplePlugin = () => {
@@ -199,16 +199,16 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
       name: 'read-config',
 
       configResolved(resolvedConfig) {
-        // store the resolved config
+        // 解決された設定を保存
         config = resolvedConfig
       },
 
-      // use stored config in other hooks
+      // 保存された設定を他のフックで使用
       transform(code, id) {
         if (config.command === 'serve') {
-          // serve: plugin invoked by dev server
+          // serve: 開発サーバーから呼び出されるプラグイン
         } else {
-          // build: plugin invoked by Rollup
+          // build: Rollup から呼び出されるプラグイン
         }
       }
     }
@@ -217,45 +217,45 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 
 ### `configureServer`
 
-- **Type:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
-- **Kind:** `async`, `sequential`
-- **See also:** [ViteDevServer](./api-javascript#vitedevserver)
+- **型:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
+- **種類:** `async`, `sequential`
+- **参考:** [ViteDevServer](./api-javascript#vitedevserver)
 
-  Hook for configuring the dev server. The most common use case is adding custom middlewares to the internal [connect](https://github.com/senchalabs/connect) app:
+  開発サーバーを設定するためのフック。内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加するのが最も一般的な使用例です:
 
   ```js
   const myPlugin = () => ({
     name: 'configure-server',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        // custom handle request...
+        // カスタムハンドルリクエスト...
       })
     }
   })
   ```
 
-  **Injecting Post Middleware**
+  **ポストミドルウェアの注入**
 
-  The `configureServer` hook is called before internal middlewares are installed, so the custom middlewares will run before internal middlewares by default. If you want to inject a middleware **after** internal middlewares, you can return a function from `configureServer`, which will be called after internal middlewares are installed:
+  `configureServer` フックは内部ミドルウェアがインストールされる前に呼び出されるため、カスタムミドルウェアはデフォルトで内部ミドルウェアより先に実行されます。内部ミドルウェアの**後に**ミドルウェアを注入したい場合は `configureServer` から関数を返すと、内部ミドルウェアのインストール後に呼び出されます:
 
   ```js
   const myPlugin = () => ({
     name: 'configure-server',
     configureServer(server) {
-      // return a post hook that is called after internal middlewares are
-      // installed
+      // 内部ミドルウェアがインストールされた後に呼び出される
+      // ポストフックを返す
       return () => {
         server.middlewares.use((req, res, next) => {
-          // custom handle request...
+          // カスタムハンドルリクエスト...
         })
       }
     }
   })
   ```
 
-  **Storing Server Access**
+  **サーバーアクセスの保存**
 
-  In some cases, other plugin hooks may need access to the dev server instance (e.g. accessing the web socket server, the file system watcher, or the module graph). This hook can also be used to store the server instance for access in other hooks:
+  場合によっては、他のプラグインフックが開発サーバーのインスタンスへのアクセスを必要とすることがあります（たとえば、Web ソケットサーバー、ファイルシステムウォッチャー、モジュールグラフへのアクセス）。このフックは他のフックでアクセスするためにサーバーインスタンスを保存するためにも使用できます:
 
   ```js
   const myPlugin = () => {
@@ -267,29 +267,29 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
       },
       transform(code, id) {
         if (server) {
-          // use server...
+          // サーバーを使用...
         }
       }
     }
   }
   ```
 
-  Note `configureServer` is not called when running the production build so your other hooks need to guard against its absence.
+  `configureServer` は本番ビルドの実行時には呼び出されないため、他のフックはこれがなくても動くようにしておく必要があります。
 
 ### `transformIndexHtml`
 
-- **Type:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post' transform: IndexHtmlTransformHook }`
-- **Kind:** `async`, `sequential`
+- **型:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post' transform: IndexHtmlTransformHook }`
+- **種類:** `async`, `sequential`
 
-  Dedicated hook for transforming `index.html`. The hook receives the current HTML string and a transform context. The context exposes the [`ViteDevServer`](./api-javascript#vitedevserver) instance during dev, and exposes the Rollup output bundle during build.
+  `index.html` を変換するための専用フック。このフックは現在の HTML 文字列と変換コンテキストを受け取ります。コンテキストは開発時には [`ViteDevServer`](./api-javascript#vitedevserver) を公開し、ビルド時には Rollup の出力バンドルを公開します。
 
-  The hook can be async and can return one of the following:
+  このフックは非同期にすることも可能で、次のいずれかを返すことができます:
 
-  - Transformed HTML string
-  - An array of tag descriptor objects (`{ tag, attrs, children }`) to inject to the existing HTML. Each tag can also specify where it should be injected to (default is prepending to `<head>`)
-  - An object containing both as `{ html, tags }`
+  - 変換された HTML 文字列
+  - 既存の HTML に注入するタグ記述子オブジェクト（`{ tag, attrs, children }`）の配列。各タグは注入箇所を指定できます（デフォルトでは `<head>` の前）
+  - 両方を含むオブジェクト `{ html, tags }`
 
-  **Basic Example**
+  **基本的な例:**
 
   ```js
   const htmlPlugin = () => {
@@ -305,7 +305,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
   }
   ```
 
-  **Full Hook Signature:**
+  **フックの完全なシグネチャ:**
 
   ```ts
   type IndexHtmlTransformHook = (
@@ -343,9 +343,9 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 
 ### `handleHotUpdate`
 
-- **Type:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
+- **型:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
 
-  Perform custom HMR update handling. The hook receives a context object with the following signature:
+  カスタム HMR 更新処理を実行します。このフックは以下のシグネチャのコンテキストオブジェクトを受け取ります:
 
   ```ts
   interface HmrContext {
@@ -357,15 +357,15 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
   }
   ```
 
-  - `modules` is an array of modules that are affected by the changed file. It's an array because a single file may map to multiple served modules (e.g. Vue SFCs).
+  - `modules` は変更されたファイルに影響を受けるモジュールの配列です。単一のファイルが複数の提供モジュールに対応している場合があるため（Vue の SFC など）、配列になっています。
 
-  - `read` is an async read function that returns the content of the file. This is provided because on some systems, the file change callback may fire too fast before the editor finishes updating the file and direct `fs.readFile` will return empty content. The read function passed in normalizes this behavior.
+  - `read` はファイルの内容を返す非同期の read 関数です。システムによってはファイル変更コールバックがエディタのファイル更新完了前に発生してしまい、`fs.readFile` が空の内容を返すため、この関数が提供されています。渡される read 関数は、この動作を正規化します。
 
-  The hook can choose to:
+  このフックは以下を選択できます:
 
-  - Filter and narrow down the affected module list so that the HMR is more accurate.
+  - 影響を受けるモジュールをフィルターして絞り込むことで、HMR がより正確になります。
 
-  - Return an empty array and perform complete custom HMR handling by sending custom events to the client:
+  - 空の配列を返し、クライアントにカスタムイベントを送信して、完全なカスタム HMR 処理を実行します:
 
     ```js
     handleHotUpdate({ server }) {
@@ -378,53 +378,53 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
     }
     ```
 
-    Client code should register corresponding handler using the [HMR API](./api-hmr) (this could be injected by the same plugin's `transform` hook):
+    クライアントコードは [HMR API](./api-hmr) を使用して対応するハンドラを登録する必要があります（これは同じプラグインの `transform` フックによって注入される可能性があります）:
 
     ```js
     if (import.meta.hot) {
       import.meta.hot.on('special-update', (data) => {
-        // perform custom update
+        // カスタムアップデートの実行
       })
     }
     ```
 
-## Plugin Ordering
+## プラグインの順序
 
-A Vite plugin can additionally specify an `enforce` property (similar to webpack loaders) to adjust its application order. The value of `enforce` can be either `"pre"` or `"post"`. The resolved plugins will be in the following order:
+Vite プラグインは、さらに（webpack loader と同様の）`enforce` プロパティを指定して、適用の順序を調整できます。`enforce` の値は `"pre"` か `"post"` のいずれかです。解決されたプラグインは、以下の順序になります:
 
-- Alias
-- User plugins with `enforce: 'pre'`
-- Vite core plugins
-- User plugins without enforce value
-- Vite build plugins
-- User plugins with `enforce: 'post'`
-- Vite post build plugins (minify, manifest, reporting)
+- エイリアス
+- `enforce: 'pre'` を指定したユーザープラグイン
+- Vite のコアプラグイン
+- enforce の値がないユーザープラグイン
+- Vite のビルドプラグイン
+- `enforce: 'post'` を指定したユーザープラグイン
+- Vite ポストビルドプラグイン (minify, manifest, reporting)
 
-## Conditional Application
+## 条件付きの適用
 
-By default plugins are invoked for both serve and build. In cases where a plugin needs to be conditionally applied only during serve or build, use the `apply` property to only invoke them during `'build'` or `'serve'`:
+デフォルトではプラグインは配信とビルドの両方で起動されます。配信時やビルド時のみに条件付きでプラグインを適用する必要がある場合は、 `apply` プロパティを使って `'build'` か `'serve'` の時にだけプラグインを呼び出します:
 
 ```js
 function myPlugin() {
   return {
     name: 'build-only',
-    apply: 'build' // or 'serve'
+    apply: 'build' // もしくは 'serve'
   }
 }
 ```
 
-## Rollup Plugin Compatibility
+## Rollup プラグインの互換性
 
-A fair number of Rollup plugins will work directly as a Vite plugin (e.g. `@rollup/plugin-alias` or `@rollup/plugin-json`), but not all of them, since some plugin hooks do not make sense in an unbundled dev server context.
+かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバーのコンテキストでは意味をなさないためです。
 
-In general, as long as a Rollup plugin fits the following criterias then it should just work as a Vite plugin:
+一般的に、Rollup プラグインが以下の基準に適合する限り、Vite プラグインとして動作するでしょう:
 
-- It doesn't use the [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) hook.
-- It doesn't have strong coupling between bundle-phase hooks and output-phase hooks.
+- [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックを使用していない。
+- bundle-phase フックと output-phase フックの間に強い結合がない。
 
-If a Rollup plugin only makes sense for the build phase, then it can be specified under `build.rollupOptions.plugins` instead.
+Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rollupOptions.plugins` で指定できます。
 
-You can also augment an existing Rollup plugin with Vite-only properties:
+Vite のみのプロパティで既存の Rollup プラグインを拡張することもできます:
 
 ```js
 // vite.config.js
@@ -441,13 +441,13 @@ export default {
 }
 ```
 
-Check out [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) for a list of compatible official Rollup plugins with usage instructions.
+[Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) では、互換性のある公式 Rollup プラグインのリストと使用方法を確認できます。
 
-## Path normalization
+## パスの正規化
 
-Vite normalizes paths while resolving ids to use POSIX separators ( / ) while preserving the volume in Windows. On the other hand, Rollup keeps resolved paths untouched by default, so resolved ids have win32 separators ( \\ ) in Windows. However, Rollup plugins use a [`normalizePath` utility function](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath) from `@rollup/pluginutils` internally, which converts separators to POSIX before performing comparisons. This means that when these plugins are used in Vite, the `include` and `exclude` config pattern and other similar paths against resolved ids comparisons work correctly.
+Vite は、Windows ではボリュームを維持しつつ、POSIX セパレータ ( / ) を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレータ ( \\ ) を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティ関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行なう前にセパレータを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
 
-So, for Vite plugins, when comparing paths against resolved ids it is important to first normalize the paths to use POSIX separators. An equivalent `normalizePath` utility function is exported from the `vite` module.
+したがって、Vite プラグインでは、解決された ID に対するパスを比較する際、最初に POSIX セパレータを使用するようにパスを正規化することが重要です。同等の `normalizePath` ユーティリティ関数が `vite` モジュールからエクスポートされます。
 
 ```js
 import { normalizePath } from 'vite'
