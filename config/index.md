@@ -367,7 +367,7 @@ export default async ({ command, mode }) => {
 
 - **型:** `boolean | string`
 
-  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。
+  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER` (e.g. `firefox`) を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
   **例:**
 
