@@ -706,6 +706,10 @@ createServer()
 
   事前バンドルから除外する依存関係。
 
+  :::warning CommonJS
+  CommonJS の依存関係は、最適化から除外すべきではありません。ESM の依存関係にネストした CommonJS の依存関係がある場合、これも除外するべきではありません。
+  :::
+
 ### optimizeDeps.include
 
 - **型:** `string[]`
