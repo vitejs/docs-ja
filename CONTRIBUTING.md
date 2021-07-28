@@ -16,12 +16,6 @@
 9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナの方があなたのブランチをマージします🎉
 
 
-### 未翻訳のページを自分で選択し翻訳を行う
-
-1. [GitHub Issues](https://github.com/vuejs-jp/vite-docs-ja/issues) にないページを翻訳する場合は未翻訳のページを選択し自分で issue を作成しましょう！
-2. issue を作成したら翻訳やります！」のようなコメントで宣言します。
-3. メンテナの方がアサインしますので、アサインされたら上記の `4.` 以降の作業を行ってください！
-
 ### Tips: より円滑な Pull Request のコメント記載方法
 
 GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
