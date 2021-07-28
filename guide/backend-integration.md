@@ -1,36 +1,36 @@
-# Backend Integration
+# バックエンドとの統合
 
-If you want to serve the HTML using a traditional backend (e.g. Rails, Laravel) but use Vite for serving assets, check for existing integrations listed in [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
+従来のバックエンド（例: Rails, Laravel）を使用して HTML を配信し、アセットの配信には Vite を使用したい場合は、[Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends) の一覧を確認してみてください。
 
-Or you can follow these steps to configure it manually:
+もしくは以下の手順で設定することも可能です:
 
-1. In your Vite config, configure the entry and enable build manifest:
+1. Vite の設定ファイルで、エントリの指定とマニフェストのビルドの有効化を行ってください:
 
    ```js
    // vite.config.js
    export default defineConfig({
      build: {
-       // generate manifest.json in outDir
+       // outDir に manifest.json を出力
        manifest: true,
        rollupOptions: {
-         // overwrite default .html entry
+          // デフォルトの .html エントリを上書き
          input: '/path/to/main.js'
        }
      }
    })
    ```
 
-2. For development, inject the following in your server's HTML template (substitute `http://localhost:3000` with the local URL Vite is running at):
+2. 開発環境向けには以下を HTML に含めてください。（`http://localhost:3000` を Vite が動作している URL に変更してください）:
 
    ```html
-   <!-- if development -->
+   <!-- 開発環境 -->
    <script type="module" src="http://localhost:3000/@vite/client"></script>
    <script type="module" src="http://localhost:3000/main.js"></script>
    ```
 
-   Also make sure the server is configured to serve static assets in the Vite working directory, otherwise assets such as images won't be loaded properly.
+   また、サーバが Vite の作業ディレクトリにある静的アセットを配信するように設定されていることを確認してください。そうなっていない場合、画像などのアセットが適切に読み込まれません。
 
-   Note if you are using React with `@vitejs/plugin-react-refresh`, you'll also need to add this before the above scripts, since the plugin is not able to modify the HTML you are serving:
+   React と `@vitejs/plugin-react-refresh` を使用している場合、上記のスクリプトの前に以下のスクリプトを追加する必要があります。
 
    ```html
    <script type="module">
@@ -42,7 +42,7 @@ Or you can follow these steps to configure it manually:
    </script>
    ```
 
-3. For production: after running `vite build`, a `manifest.json` file will be generated alongside other asset files. An example manifest file looks like this:
+3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
 
    ```json
    {
@@ -66,15 +66,15 @@ Or you can follow these steps to configure it manually:
    }
    ```
 
-   - The manifest has a `Record<name, chunk>` structure
-   - For entry or dynamic entry chunks, the key is the relative src path from project root.
-   - For non entry chunks, the key is the base name of the generated file prefixed with `_`.
-   - Chunks will contain information on its static and dynamic imports (both are keys that maps to the corresponding chunk in the manifest), and also its corresponding CSS and asset files (if any).
+   - マニフェストは `Record<name, chunk>` 構造になっています。
+   - エントリまたはダイナミックエントリのチャンクの場合、プロジェクトルートからの相対パスがキーとなります。
+   - エントリ以外のチャンクでは、生成されたファイル名の前に `_` を付けたものがキーとなります。
+   - チャンクには、静的インポートと動的インポートの情報（どちらもマニフェスト内の対応するチャンクをマップするキー）と、それらと対応する CSS とアセットファイルが含まれます（あれば）。
 
-   You can use this file to render links or preload directives with hashed filenames (note: the syntax here is for explanation only, substitute with your server templating language):
+   このファイルを使用してハッシュを付加されたファイル名でリンクや preload directives をレンダリングすることができます（注意: ここでの構文は説明用なので、使用しているサーバのテンプレート言語に替えてください）:
 
    ```html
-   <!-- if production -->
+   <!-- 本番環境 -->
    <link rel="stylesheet" href="/assets/{{ manifest['main.js'].css }}" />
    <script type="module" src="/assets/{{ manifest['main.js'].file }}"></script>
    ```
