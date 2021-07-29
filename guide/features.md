@@ -260,7 +260,7 @@ const modules = {
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
-## Web Assembly
+## WebAssembly
 
 プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
 
