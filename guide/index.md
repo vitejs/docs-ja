@@ -70,11 +70,11 @@ yarn create vite my-vue-app --template vue
 - `svelte`
 - `svelte-ts`
 
-各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
+各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください。
 
 ## コミュニティのテンプレート
 
-@vitejs/create-app はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
+create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
 
 ```bash
 npx degit user/project my-project
