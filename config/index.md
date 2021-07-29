@@ -136,10 +136,12 @@ export default async ({ command, mode }) => {
 
 ### publicDir
 
-- **型:** `string`
+- **型:** `string | false`
 - **デフォルト:** `"public"`
 
   加工せずに静的アセットとして配信するディレクトリ。このディレクトリのファイルは、開発時には `/` として配信され、ビルド時には `outDir` のルートにコピーされます。常に変換されることなくそのまま配信またはコピーされます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
+
+  `publicDir` を `false` に設定すると、この機能は無効になります。
 
   詳細は [The `public` Directory](/guide/assets#the-public-directory) を参照してください。
 
