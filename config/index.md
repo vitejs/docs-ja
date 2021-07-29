@@ -632,14 +632,14 @@ createServer()
 - **Default:** `false`
 - **Related:** [Backend Integration](/guide/backend-integration)
 
-  When set to `true`, the build will also generate a `manifest.json` file that contains mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
+  When set to `true`, the build will also generate a `manifest.json` file that contains a mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
 
 ### build.minify
 
 - **Type:** `boolean | 'terser' | 'esbuild'`
 - **Default:** `'terser'`
 
-  Set to `false` to disable minification, or specify the minifier to use. The default is [Terser](https://github.com/terser/terser) which is slower but produces smaller bundles in most cases. Esbuild minification is significantly faster, but will result in slightly larger bundles.
+  Set to `false` to disable minification, or specify the minifier to use. The default is [Terser](https://github.com/terser/terser) which is slower but produces smaller bundles in most cases. Esbuild minification is significantly faster but will result in slightly larger bundles.
 
 ### build.terserOptions
 
