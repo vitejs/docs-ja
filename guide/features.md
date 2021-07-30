@@ -78,12 +78,12 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 ```js
 // vite.config.js
-export default {
+export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   }
-}
+})
 ```
 
 さらに詳しく知りたい場合は [esbuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
@@ -92,11 +92,11 @@ export default {
 
 ```js
 // vite.config.js
-export default {
+export default defineConfig({
   esbuild: {
     jsxInject: `import React from 'react'`
   }
-}
+})
 ```
 
 ## CSS

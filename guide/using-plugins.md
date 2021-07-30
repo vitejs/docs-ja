@@ -13,14 +13,15 @@ $ npm i -D @vitejs/plugin-legacy
 ```js
 // vite.config.js
 import legacy from '@vitejs/plugin-legacy'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [
     legacy({
       targets: ['defaults', 'not IE 11']
     })
   ]
-}
+})
 ```
 
 また `plugins` は、複数のプラグインを含むプリセットを 1 つの要素として受け入れることもできます。これは、複数のプラグインを使って実装した複雑な機能（フレームワークの統合など）に便利です。配列は内部的にフラット化されます。
@@ -48,15 +49,16 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 ```js
 // vite.config.js
 import image from '@rollup/plugin-image'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [
     {
       ...image(),
       enforce: 'pre'
     }
   ]
-}
+})
 ```
 
 詳しくは [プラグイン API ガイド](./api-plugin.md#plugin-ordering) を参照してください。また、 `enforce` ラベルと人気のプラグインの使い方は [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) の互換性一覧にあります。
@@ -68,15 +70,16 @@ export default {
 ```js
 // vite.config.js
 import typescript2 from 'rollup-plugin-typescript2'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [
     {
       ...typescript2(),
       apply: 'build'
     }
   ]
-}
+})
 ```
 
 ## プラグインのビルド

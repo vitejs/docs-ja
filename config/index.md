@@ -55,7 +55,7 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
-export default ({ command, mode }) => {
+export default defineConfig(({ command, mode }) => {
   if (command === 'serve') {
     return {
       // serve 固有の設定
@@ -65,7 +65,7 @@ export default ({ command, mode }) => {
       // build 固有の設定
     }
   }
-}
+})
 ```
 
 ### 非同期の設定
@@ -73,12 +73,12 @@ export default ({ command, mode }) => {
 設定で非同期の関数を呼び出す必要がある場合は、代わりに async 関数をエクスポートできます:
 
 ```js
-export default async ({ command, mode }) => {
+export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
     // build 固有の設定
   }
-}
+})
 ```
 
 ## 共通オプション
@@ -242,7 +242,7 @@ export default async ({ command, mode }) => {
   CSS プリプロセッサに渡すオプションを指定します。例:
 
   ```js
-  export default {
+  export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
@@ -250,7 +250,7 @@ export default async ({ command, mode }) => {
         }
       }
     }
-  }
+  })
   ```
 
 ### json.namedExports
@@ -276,12 +276,12 @@ export default async ({ command, mode }) => {
   `ESBuildOptions` は [ESbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
   ```js
-  export default {
+  export default defineConfig({
     esbuild: {
       jsxFactory: 'h',
       jsxFragment: 'Fragment'
     }
-  }
+  })
   ```
 
   デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
@@ -289,11 +289,11 @@ export default async ({ command, mode }) => {
   また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
 
   ```js
-  export default {
+  export default defineConfig({
     esbuild: {
       jsxInject: `import React from 'react'`
     }
-  }
+  })
   ```
 
   ESbuild の変換を無効にするには `false` を設定します。
@@ -374,11 +374,11 @@ export default async ({ command, mode }) => {
   **例:**
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       open: '/docs/index.html'
     }
-  }
+  })
   ```
 
 ### server.proxy
@@ -392,7 +392,7 @@ export default async ({ command, mode }) => {
   **例:**
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       proxy: {
         // 文字列のショートハンド
@@ -419,7 +419,7 @@ export default async ({ command, mode }) => {
         }
       }
     }
-  }
+  })
   ```
 
 ### server.cors
@@ -514,14 +514,14 @@ createServer()
   Accepts a path to specify the custom workspace root. Could be a absolute path or a path relative to [project root](/guide/#index-html-and-project-root). For example
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       fs: {
         // Allow serving files from one level up to the project root
         allow: ['..']
       }
     }
-  }
+  })
   ```
 
 ## ビルドオプション
