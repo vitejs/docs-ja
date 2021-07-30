@@ -543,23 +543,6 @@ createServer()
 
   esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
 
-### build.polyfillDynamicImport
-
-- **型:** `boolean`
-- **デフォルト:** `false`
-
-  [動的インポートのポリフィル](https://github.com/GoogleChromeLabs/dynamic-import-polyfill)を自動的に注入するか。
-
-  true に設定すると、各 `index.html` エントリーのプロキシモジュールに自動的にポリフィルが注入されます。`build.rollupOptions.input` によって HTML ではないカスタムエントリーを使用するようにビルドが設定されている場合は、カスタムエントリー内でポリフィルを手動でインポートする必要があります:
-
-  ```js
-  import 'vite/dynamic-import-polyfill'
-  ```
-
-  [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う場合、プラグインがこのオプションを自動的に `true` に設定します。
-
-  注意: ポリフィルは[ライブラリモード](/guide/build#library-mode)には適用**されません**。ネイティブの動的インポートがないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けたほうが良いでしょう。
-
 ### build.outDir
 
 - **型:** `string`
