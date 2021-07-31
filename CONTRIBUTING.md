@@ -5,13 +5,13 @@
 
 ### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
 
-1. [GitHub Issues](https://github.com/vuejs-jp/vite-docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
-2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vuejs-jp/vite-docs-ja` のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
-3. 本レポジトリ(`vuejs-jp/vite-docs-ja`)のメンテナの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
+1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
+2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
+3. 本レポジトリ(`vitejs/docs-ja`)のメンテナの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
 4. このレポジトリをフォークします!
 5. `main` から任意の名前のブランチを切って作業を開始しましょう！ (`git checkout -b your-translate-branch`)
 6. フォークした自分のレポジトリに Push します。(`git push origin your-translate-branch`)
-7. 問題がなければ、プルリクエストを `vuejs-jp/vite-docs-ja` の `main` ブランチに送ります。
+7. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります。
 8. レビュー 👀 で指摘事項があったら修正し、再度 Push します 📝
 9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナの方があなたのブランチをマージします🎉
 
