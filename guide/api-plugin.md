@@ -27,7 +27,7 @@ Vite 専用プラグインの場合
 
 ## プラグインの設定
 
-ユーザーはプロジェクトの `devDependencies` にプラグインを追加し、 `plugins` 配列のオプションを使って設定します。
+ユーザはプロジェクトの `devDependencies` にプラグインを追加し、 `plugins` 配列のオプションを使って設定します。
 
 ```js
 // vite.config.js
@@ -65,7 +65,7 @@ export default {
 ## シンプルな例
 
 :::tip
-Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリー関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
+Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリ関数として作成するのが一般的です。この関数はユーザがプラグインの動作をカスタマイズするためのオプションを受け付けます。
 :::
 
 ### 仮想ファイルのインポート
@@ -121,9 +121,9 @@ export default function myPlugin() {
 
 ## 共通のフック
 
-開発中、Vite 開発サーバーは、Rollup が行なうのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/guide/en/#build-hooks)を呼び出すプラグインコンテナを作成します。
+開発中、Vite 開発サーバは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/guide/en/#build-hooks)を呼び出すプラグインコンテナを作成します。
 
-以下のフックはサーバー起動時に一度だけ呼び出されます:
+以下のフックはサーバ起動時に一度だけ呼び出されます:
 
 - [`options`](https://rollupjs.org/guide/en/#options)
 - [`buildStart`](https://rollupjs.org/guide/en/#buildstart)
@@ -134,14 +134,14 @@ export default function myPlugin() {
 - [`load`](https://rollupjs.org/guide/en/#load)
 - [`transform`](https://rollupjs.org/guide/en/#transform)
 
-以下のフックはサーバーが閉じられる時に呼び出されます:
+以下のフックはサーバが閉じられる時に呼び出されます:
 
 - [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
 - [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
 
 Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
 
-[出力生成フック](https://rollupjs.org/guide/en/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバーは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
+[出力生成フック](https://rollupjs.org/guide/en/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
 
 ## Vite 特有のフック
 
@@ -152,7 +152,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 - **型:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
 - **種類:** `sync`, `sequential`
 
-  Vite の設定を解決される前に変更します。このフックは生のユーザー設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
+  Vite の設定を解決される前に変更します。このフックは生のユーザ設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
 
   **例:**
 
@@ -179,7 +179,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   ```
 
   ::: warning 注意
-  ユーザープラグインはこのフックを実行する前に解決されるので、`config` フックの中に他のプラグインを注入しても効果はありません。
+  ユーザプラグインはこのフックを実行する前に解決されるので、`config` フックの中に他のプラグインを注入しても効果はありません。
   :::
 
 ### `configResolved`
@@ -206,7 +206,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       // 保存された設定を他のフックで使用
       transform(code, id) {
         if (config.command === 'serve') {
-          // serve: 開発サーバーから呼び出されるプラグイン
+          // serve: 開発サーバから呼び出されるプラグイン
         } else {
           // build: Rollup から呼び出されるプラグイン
         }
@@ -221,7 +221,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 - **種類:** `async`, `sequential`
 - **参考:** [ViteDevServer](./api-javascript#vitedevserver)
 
-  開発サーバーを設定するためのフック。内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加するのが最も一般的な使用例です:
+  開発サーバを設定するためのフック。内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加するのが最も一般的な使用例です:
 
   ```js
   const myPlugin = () => ({
@@ -253,9 +253,9 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   })
   ```
 
-  **サーバーアクセスの保存**
+  **サーバアクセスの保存**
 
-  場合によっては、他のプラグインフックが開発サーバーのインスタンスへのアクセスを必要とすることがあります（たとえば、Web ソケットサーバー、ファイルシステムウォッチャー、モジュールグラフへのアクセス）。このフックは他のフックでアクセスするためにサーバーインスタンスを保存するためにも使用できます:
+  場合によっては、他のプラグインフックが開発サーバのインスタンスへのアクセスを必要とすることがあります（たとえば、Web ソケットサーバ、ファイルシステムウォッチャ、モジュールグラフへのアクセス）。このフックは他のフックでアクセスするためにサーバインスタンスを保存するためにも使用できます:
 
   ```js
   const myPlugin = () => {
@@ -267,7 +267,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       },
       transform(code, id) {
         if (server) {
-          // サーバーを使用...
+          // サーバを使用...
         }
       }
     }
@@ -363,7 +363,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
   このフックは以下を選択できます:
 
-  - 影響を受けるモジュールをフィルターして絞り込むことで、HMR がより正確になります。
+  - 影響を受けるモジュールをフィルタして絞り込むことで、HMR がより正確になります。
 
   - 空の配列を返し、クライアントにカスタムイベントを送信して、完全なカスタム HMR 処理を実行します:
 
@@ -393,11 +393,11 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 Vite プラグインは、さらに（webpack loader と同様の）`enforce` プロパティを指定して、適用の順序を調整できます。`enforce` の値は `"pre"` か `"post"` のいずれかです。解決されたプラグインは、以下の順序になります:
 
 - エイリアス
-- `enforce: 'pre'` を指定したユーザープラグイン
+- `enforce: 'pre'` を指定したユーザプラグイン
 - Vite のコアプラグイン
-- enforce の値がないユーザープラグイン
+- enforce の値がないユーザプラグイン
 - Vite のビルドプラグイン
-- `enforce: 'post'` を指定したユーザープラグイン
+- `enforce: 'post'` を指定したユーザプラグイン
 - Vite ポストビルドプラグイン (minify, manifest, reporting)
 
 ## 条件付きの適用
@@ -415,7 +415,7 @@ function myPlugin() {
 
 ## Rollup プラグインの互換性
 
-かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバーのコンテキストでは意味をなさないためです。
+かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバのコンテキストでは意味をなさないためです。
 
 一般的に、Rollup プラグインが以下の基準に適合する限り、Vite プラグインとして動作するでしょう:
 
@@ -445,7 +445,7 @@ export default {
 
 ## パスの正規化
 
-Vite は、Windows ではボリュームを維持しつつ、POSIX セパレータ ( / ) を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレータ ( \\ ) を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティ関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行なう前にセパレータを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
+Vite は、Windows ではボリュームを維持しつつ、POSIX セパレータ ( / ) を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレータ ( \\ ) を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティ関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行う前にセパレータを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
 
 したがって、Vite プラグインでは、解決された ID に対するパスを比較する際、最初に POSIX セパレータを使用するようにパスを正規化することが重要です。同等の `normalizePath` ユーティリティ関数が `vite` モジュールからエクスポートされます。
 
