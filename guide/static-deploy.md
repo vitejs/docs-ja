@@ -1,10 +1,15 @@
 # Deploying a Static Site
+# 静的サイトのデプロイ
 
-The following guides are based on some shared assumptions:
+The following guides are based on some shared assumptions:  
+以下のガイドは、いくつかの共通の前提に基づいています:
 
 - You are using the default build output location (`dist`). This location [can be changed using `build.outDir`](https://vitejs.dev/config/#build-outdir), and you can extrapolate instructions from these guides in that case.
+- デフォルトのビルド出力場所（`dist`）を使用します。この場所は [`build.outDir` で変更することができます](https://vitejs.dev/config/#build-outdir)ので、その場合はこれらのガイドを読み替えてください。
 - You are using npm. You can use equivalent commands to run the scripts if you are using Yarn or other package managers.
+- npm を使用します。Yarn や他のパッケージマネージャーを使用している場合は、同等のコマンドを使用してスクリプトを実行できます。
 - Vite is installed as a local dev dependency in your project, and you have setup the following npm scripts:
+- Vite はプロジェクト内のローカルな dev dependency としてインストールされており、以下の npm スクリプトを設定しています。
 
 ```json
 {
@@ -15,34 +20,43 @@ The following guides are based on some shared assumptions:
 }
 ```
 
-It is important to note that `vite preview` is intended for previewing the build locally and not meant as a production server.
+It is important to note that `vite preview` is intended for previewing the build locally and not meant as a production server.  
+`vite preview` は、ローカルでビルドをプレビューするためのものであり、本番用のサーバーとしては使えないことに注意してください。
 
 ::: tip NOTE
-These guides provide instructions for performing a static deployment of your Vite site. Vite also has experimental support for Server Side Rendering. SSR refers to front-end frameworks that support running the same application in Node.js, pre-rendering it to HTML, and finally hydrating it on the client. Check out the [SSR Guide](./ssr) to learn about this feature. On the other hand, if you are looking for integration with traditional server-side frameworks, check out the [Backend Integration guide](./backend-integration) instead.
+These guides provide instructions for performing a static deployment of your Vite site. Vite also has experimental support for Server Side Rendering. SSR refers to front-end frameworks that support running the same application in Node.js, pre-rendering it to HTML, and finally hydrating it on the client. Check out the [SSR Guide](./ssr) to learn about this feature. On the other hand, if you are looking for integration with traditional server-side frameworks, check out the [Backend Integration guide](./backend-integration) instead.  
+これらのガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバーサイドレンダリング (SSR) も試験的にサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバーサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
 :::
 
 ## Building The App
+## アプリのビルド
 
-You may run `npm run build` command to build the app.
+You may run `npm run build` command to build the app.  
+アプリをビルドするために、`npm run build` コマンドを実行します。 
 
 ```bash
 $ npm run build
 ```
 
-By default, the build output will be placed at `dist`. You may deploy this `dist` folder to any of your preferred platforms.
+By default, the build output will be placed at `dist`. You may deploy this `dist` folder to any of your preferred platforms.  
+デフォルトでは、ビルド結果は `dist` に置かれます。この `dist` フォルダーを、お好みのプラットフォームにデプロイします。
 
 ### Testing The App Locally
+## アプリをローカルでテストする
 
-Once you've built the app, you may test it locally by running `npm run preview` command.
+Once you've built the app, you may test it locally by running `npm run preview` command.  
+アプリをビルドしたら、`npm run preview` コマンドを実行し、ローカルでテストします。
 
 ```bash
 $ npm run build
 $ npm run preview
 ```
 
-The `preview` command will boot up local static web server that serves the files from `dist` at http://localhost:5000. It's an easy way to check if the production build looks OK in your local environment.
+The `preview` command will boot up local static web server that serves the files from `dist` at http://localhost:5000. It's an easy way to check if the production build looks OK in your local environment.  
+`preview` コマンドは、ローカルでウェブサーバーを起動し、`dist` のファイルを http://localhost:5000 で提供します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
 
-You may configure the port of the server py passing `--port` flag as an argument.
+You may configure the port of the server py passing `--port` flag as an argument.  
+サーバのポートを設定するには、引数に `--port` フラグを指定します。
 
 ```json
 {
@@ -52,31 +66,40 @@ You may configure the port of the server py passing `--port` flag as an argument
 }
 ```
 
-Now the `preview` method will launch the server at http://localhost:8080.
+Now the `preview` method will launch the server at http://localhost:8080.  
+これで、`preview` は http://localhost:8080 でサーバーを起動します。
 
 ## GitHub Pages
 
-1. Set the correct `base` in `vite.config.js`.
+1. Set the correct `base` in `vite.config.js`.  
+  `vite.config.js` で `base` を正しく設定してください。
 
-   If you are deploying to `https://<USERNAME>.github.io/`, you can omit `base` as it defaults to `'/'`.
+   If you are deploying to `https://<USERNAME>.github.io/`, you can omit `base` as it defaults to `'/'`.  
+   `https://<USERNAME>.github.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
 
-   If you are deploying to `https://<USERNAME>.github.io/<REPO>/`, for example your repository is at `https://github.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.
+   If you are deploying to `https://<USERNAME>.github.io/<REPO>/`, for example your repository is at `https://github.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.  
+   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にある場合は、`base` を `'/<REPO>/'` と設定してください。
 
-2. Inside your project, create `deploy.sh` with the following content (with highlighted lines uncommented appropriately), and run it to deploy:
+2. Inside your project, create `deploy.sh` with the following content (with highlighted lines uncommented appropriately), and run it to deploy:  
+  プロジェクト内で、以下の内容の `deploy.sh` を作成し（ハイライトされた行はコメントアウトされています）、これを実行してデプロイしてください。
 
    ```bash{13,20,23}
    #!/usr/bin/env sh
 
    # abort on errors
+   # エラー時は停止
    set -e
 
    # build
+   # ビルド
    npm run build
 
    # navigate into the build output directory
+   # ビルド出力ディレクトリに移動
    cd dist
 
    # if you are deploying to a custom domain
+   # カスタムドメインにデプロイする場合
    # echo 'www.example.com' > CNAME
 
    git init
@@ -84,19 +107,23 @@ Now the `preview` method will launch the server at http://localhost:8080.
    git commit -m 'deploy'
 
    # if you are deploying to https://<USERNAME>.github.io
+   # https://<USERNAME>.github.io にデプロイする場合
    # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
    # if you are deploying to https://<USERNAME>.github.io/<REPO>
+   # https://<USERNAME>.github.io/<REPO> にデプロイする場合
    # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 
    cd -
    ```
 
 ::: tip
-You can also run the above script in your CI setup to enable automatic deployment on each push.
+You can also run the above script in your CI setup to enable automatic deployment on each push.  
+また、CIの設定で上記のスクリプトを実行することで、プッシュごとの自動デプロイを有効にすることができます。
 :::
 
 ### GitHub Pages and Travis CI
+### GitHub Pages と Travis CI
 
 1. Set the correct `base` in `vite.config.js`.
 
