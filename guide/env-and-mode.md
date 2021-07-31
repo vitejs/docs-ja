@@ -53,7 +53,7 @@ VITE_SOME_KEY=123
 
 ### IntelliSense
 
-デフォルトで Vite は `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript IntelliSense が欲しくなるかもしれません。
+デフォルトで Vite は `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザ定義の環境変数に対する TypeScript IntelliSense が欲しくなるかもしれません。
 
 この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
@@ -66,7 +66,7 @@ interface ImportMetaEnv {
 
 ## Modes
 
-デフォルトで、開発サーバー（`serve` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
+デフォルトで、開発サーバ（`serve` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 

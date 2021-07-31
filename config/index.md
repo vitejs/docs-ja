@@ -38,7 +38,7 @@ const config = {
 export default config
 ```
 
-あるいは、jsdoc のアノテーションがなくても入力補完を提供する `defineConfig` ヘルパーを使用することもできます:
+あるいは、jsdoc のアノテーションがなくても入力補完を提供する `defineConfig` ヘルパを使用することもできます:
 
 ```js
 import { defineConfig } from 'vite'
@@ -48,7 +48,7 @@ export default defineConfig({
 })
 ```
 
-Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパーと一緒に使うこともできます。
+Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパと一緒に使うこともできます。
 
 ### 条件付き設定
 
@@ -118,7 +118,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `Record<string, string>`
 
-  グローバル定数の置換を定義します。エントリーは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
+  グローバル定数の置換を定義します。エントリは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
   - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
@@ -157,7 +157,7 @@ export default defineConfig(async ({ command, mode }) => {
 - **型:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
-  [エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement }` ペアの配列か、オブジェクトを指定します。
+  [エントリオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement }` ペアの配列か、オブジェクトを指定します。
 
   ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
@@ -197,7 +197,7 @@ export default defineConfig(async ({ command, mode }) => {
 - **型:** `string[]`
 - **デフォルト:** `['module', 'jsnext:main', 'jsnext']`
 
-  パッケージのエントリーポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリーポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
+  パッケージのエントリポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
 
 ### resolve.extensions
 
@@ -286,7 +286,7 @@ export default defineConfig(async ({ command, mode }) => {
 
   デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
 
-  また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
+  また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
 
   ```js
   export default defineConfig({
@@ -333,14 +333,14 @@ export default defineConfig(async ({ command, mode }) => {
 
   環境ファイルの詳細については[こちら](/guide/env-and-mode#env-files)をご覧ください。
 
-## サーバーオプション
+## サーバオプション
 
 ### server.host
 
 - **型:** `string`
 - **デフォルト:** `'127.0.0.1'`
 
-  サーバーがリッスンすべき IP アドレスを指定します。
+  サーバがリッスンすべき IP アドレスを指定します。
   `0.0.0.0` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
 
   これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
@@ -349,7 +349,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `number`
 
-  サーバーポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバーが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
+  サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
 ### server.strictPort
 
@@ -369,7 +369,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `boolean | string`
 
-  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
+  サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
   **例:**
 
@@ -385,7 +385,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `Record<string, string | ProxyOptions>`
 
-  開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+  開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
   [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
@@ -426,7 +426,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `boolean | CorsOptions`
 
-  開発サーバーの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
+  開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
 ### server.force
 
@@ -679,9 +679,9 @@ createServer()
 
 - **型:** `string | string[]`
 
-  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
+  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
 
-  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。
+  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。
 
 ### optimizeDeps.exclude
 
@@ -704,14 +704,14 @@ createServer()
 - **型:** `boolean`
 - **デフォルト:** `false`
 
-  バンドラーは、衝突を避けるためにシンボルの名前を変更する必要がある場合があります。
+  バンドラは、衝突を避けるためにシンボルの名前を変更する必要がある場合があります。
   これを `true` に設定すると、関数やクラスの `name` プロパティが維持されます。
   [`keepNames`](https://esbuild.github.io/api/#keep-names) を参照してください。
 
 ## SSR オプション
 
 :::warning 実験的な機能
-SSR オプションは、マイナーリリースで調整される可能性があります。
+SSR オプションは、マイナリリースで調整される可能性があります。
 :::
 
 - **Related:** [外部 SSR](/guide/ssr#ssr-externals)
@@ -733,4 +733,4 @@ SSR オプションは、マイナーリリースで調整される可能性が�
 - **型:** `'node' | 'webworker'`
 - **デフォルト:** `node`
 
-  SSR サーバーのビルドターゲット。
+  SSR サーバのビルドターゲット。
