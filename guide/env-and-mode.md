@@ -1,4 +1,4 @@
-# Env Variables and Modes
+# 環境変数とモード
 
 ## Env Variables
 
@@ -24,7 +24,7 @@ JavaScript の文字列と Vue テンプレートの中に現れる文字列も�
 
 ## `.env` Files
 
-Vite は、[環境ディレクトリ](/config/#envDir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
+Vite は、[環境ディレクトリ](/config/#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
 ```
 .env                # 全ての場合に読み込まれる

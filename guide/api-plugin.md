@@ -34,9 +34,9 @@ Vite 専用プラグインの場合
 import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
-export default {
+export default defineConfig({
   plugins: [vitePlugin(), rollupPlugin()]
-}
+})
 ```
 
 偽値（falsy な値）のプラグインは無視され、プラグインを簡単にアクティブ化や非アクティブ化するのに使えます。
@@ -55,11 +55,12 @@ export default function framework(config) {
 
 ```js
 // vite.config.js
+import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
-export default {
+export default defineConfig({
   plugins: [framework()]
-}
+})
 ```
 
 ## シンプルな例
@@ -150,7 +151,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 ### `config`
 
 - **型:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
-- **種類:** `sync`, `sequential`
+- **種類:** `async`, `sequential`
 
   Vite の設定を解決される前に変更します。このフックは生のユーザ設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
 
@@ -429,8 +430,9 @@ Vite のみのプロパティで既存の Rollup プラグインを拡張する�
 ```js
 // vite.config.js
 import example from 'rollup-plugin-example'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [
     {
       ...example(),
@@ -438,7 +440,7 @@ export default {
       apply: 'build'
     }
   ]
-}
+})
 ```
 
 [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) では、互換性のある公式 Rollup プラグインのリストと使用方法を確認できます。

@@ -55,7 +55,7 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
-export default ({ command, mode }) => {
+export default defineConfig(({ command, mode }) => {
   if (command === 'serve') {
     return {
       // serve 固有の設定
@@ -65,7 +65,7 @@ export default ({ command, mode }) => {
       // build 固有の設定
     }
   }
-}
+})
 ```
 
 ### 非同期の設定
@@ -73,12 +73,12 @@ export default ({ command, mode }) => {
 設定で非同期の関数を呼び出す必要がある場合は、代わりに async 関数をエクスポートできます:
 
 ```js
-export default async ({ command, mode }) => {
+export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
     // build 固有の設定
   }
-}
+})
 ```
 
 ## 共通オプション
@@ -136,10 +136,12 @@ export default async ({ command, mode }) => {
 
 ### publicDir
 
-- **型:** `string`
+- **型:** `string | false`
 - **デフォルト:** `"public"`
 
   加工せずに静的アセットとして配信するディレクトリ。このディレクトリのファイルは、開発時には `/` として配信され、ビルド時には `outDir` のルートにコピーされます。常に変換されることなくそのまま配信またはコピーされます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
+
+  `publicDir` を `false` に設定すると、この機能は無効になります。
 
   詳細は [The `public` Directory](/guide/assets#the-public-directory) を参照してください。
 
@@ -211,7 +213,7 @@ export default async ({ command, mode }) => {
   ```ts
   interface CSSModulesOptions {
     scopeBehaviour?: 'global' | 'local'
-    globalModulePaths?: string[]
+    globalModulePaths?: RegExp[]
     generateScopedName?:
       | string
       | ((name: string, filename: string, css: string) => string)
@@ -240,7 +242,7 @@ export default async ({ command, mode }) => {
   CSS プリプロセッサに渡すオプションを指定します。例:
 
   ```js
-  export default {
+  export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
@@ -248,7 +250,7 @@ export default async ({ command, mode }) => {
         }
       }
     }
-  }
+  })
   ```
 
 ### json.namedExports
@@ -274,12 +276,12 @@ export default async ({ command, mode }) => {
   `ESBuildOptions` は [ESbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
   ```js
-  export default {
+  export default defineConfig({
     esbuild: {
       jsxFactory: 'h',
       jsxFragment: 'Fragment'
     }
-  }
+  })
   ```
 
   デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
@@ -287,11 +289,11 @@ export default async ({ command, mode }) => {
   また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
 
   ```js
-  export default {
+  export default defineConfig({
     esbuild: {
       jsxInject: `import React from 'react'`
     }
-  }
+  })
   ```
 
   ESbuild の変換を無効にするには `false` を設定します。
@@ -367,16 +369,16 @@ export default async ({ command, mode }) => {
 
 - **型:** `boolean | string`
 
-  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。
+  サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
   **例:**
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       open: '/docs/index.html'
     }
-  }
+  })
   ```
 
 ### server.proxy
@@ -390,7 +392,7 @@ export default async ({ command, mode }) => {
   **例:**
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       proxy: {
         // 文字列のショートハンド
@@ -417,7 +419,7 @@ export default async ({ command, mode }) => {
         }
       }
     }
-  }
+  })
   ```
 
 ### server.cors
@@ -512,16 +514,14 @@ createServer()
   Accepts a path to specify the custom workspace root. Could be a absolute path or a path relative to [project root](/guide/#index-html-and-project-root). For example
 
   ```js
-  export default {
+  export default defineConfig({
     server: {
       fs: {
         // Allow serving files from one level up to the project root
-        allow: [
-          '..'
-        ]
+        allow: ['..']
       }
     }
-  }
+  })
   ```
 
 ## ビルドオプション
@@ -542,23 +542,6 @@ createServer()
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
   esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
-
-### build.polyfillDynamicImport
-
-- **型:** `boolean`
-- **デフォルト:** `false`
-
-  [動的インポートのポリフィル](https://github.com/GoogleChromeLabs/dynamic-import-polyfill)を自動的に注入するか。
-
-  true に設定すると、各 `index.html` エントリーのプロキシモジュールに自動的にポリフィルが注入されます。`build.rollupOptions.input` によって HTML ではないカスタムエントリーを使用するようにビルドが設定されている場合は、カスタムエントリー内でポリフィルを手動でインポートする必要があります:
-
-  ```js
-  import 'vite/dynamic-import-polyfill'
-  ```
-
-  [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う場合、プラグインがこのオプションを自動的に `true` に設定します。
-
-  注意: ポリフィルは[ライブラリモード](/guide/build#library-mode)には適用**されません**。ネイティブの動的インポートがないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けたほうが良いでしょう。
 
 ### build.outDir
 
@@ -599,7 +582,7 @@ createServer()
 - **型:** `boolean | 'inline' | 'hidden'`
 - **デフォルト:** `false`
 
-  本番用のソースマップを作成します。
+  本番用のソースマップを作成します。`true` の場合、ソースマップファイルは別に作られます。`inline` の場合、ソースマップは出力結果ファイルにデータ URI として追加されます。`hidden` は `true` と同様に動作しますが、バンドルファイル内のソースマップを指し示すコメントは削除されます。
 
 ### build.rollupOptions
 
@@ -613,12 +596,18 @@ createServer()
 
   Options to pass on to [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs).
 
+### build.dynamicImportVarsOptions
+
+- **型:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
+
+  [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) に渡すオプションです。
+
 ### build.lib
 
-- **Type:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string }`
+- **Type:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
 - **Related:** [Library Mode](/guide/build#library-mode)
 
-  Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Default `formats` are `['es', 'umd']`. `fileName` is the name of the package file output, default `fileName` is the name option of package.json
+  Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Default `formats` are `['es', 'umd']`. `fileName` is the name of the package file output, default `fileName` is the name option of package.json, it can also be defined as function taking the `format` as an argument.
 
 ### build.manifest
 
@@ -626,14 +615,14 @@ createServer()
 - **Default:** `false`
 - **Related:** [Backend Integration](/guide/backend-integration)
 
-  When set to `true`, the build will also generate a `manifest.json` file that contains mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
+  When set to `true`, the build will also generate a `manifest.json` file that contains a mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
 
 ### build.minify
 
 - **Type:** `boolean | 'terser' | 'esbuild'`
 - **Default:** `'terser'`
 
-  Set to `false` to disable minification, or specify the minifier to use. The default is [Terser](https://github.com/terser/terser) which is slower but produces smaller bundles in most cases. Esbuild minification is significantly faster, but will result in slightly larger bundles.
+  Set to `false` to disable minification, or specify the minifier to use. The default is [Terser](https://github.com/terser/terser) which is slower but produces smaller bundles in most cases. Esbuild minification is significantly faster but will result in slightly larger bundles.
 
 ### build.terserOptions
 
@@ -699,6 +688,10 @@ createServer()
 - **型:** `string[]`
 
   事前バンドルから除外する依存関係。
+
+  :::warning CommonJS
+  CommonJS の依存関係は、最適化から除外すべきではありません。ESM の依存関係にネストした CommonJS の依存関係がある場合、これも除外するべきではありません。
+  :::
 
 ### optimizeDeps.include
 

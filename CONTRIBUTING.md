@@ -16,12 +16,6 @@
 9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナの方があなたのブランチをマージします🎉
 
 
-### 未翻訳のページを自分で選択し翻訳を行う
-
-1. [GitHub Issues](https://github.com/vuejs-jp/vite-docs-ja/issues) にないページを翻訳する場合は未翻訳のページを選択し自分で issue を作成しましょう！
-2. issue を作成したら翻訳やります！」のようなコメントで宣言します。
-3. メンテナの方がアサインしますので、アサインされたら上記の `4.` 以降の作業を行ってください！
-
 ### Tips: より円滑な Pull Request のコメント記載方法
 
 GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
@@ -104,3 +98,43 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 - throw: スロー
 - flow: フロー
 - ...
+
+## 注意事項
+### 行の追加・削除をしない
+行番号が変わってしまうと Vite 本体の変更を取り込む際に対応箇所を探すのが難しいので、原文と同じ行に翻訳してください。
+
+原文:
+```
+5 | When running `vite` from the command line, ...
+6 |
+7 | The most basic config file looks like this:
+```
+
+NG: 空行がなくなっている
+```
+5 | コマンドラインから `vite` を実行すると、... 自動的に解決しようとします。
+6 | 最も基本的な設定ファイルは次のようになります:
+```
+NG: 改行が増えている
+```
+5 | コマンドラインから `vite` を実行すると、...
+6 | 自動的に解決しようとします。
+7 |
+8 | 最も基本的な設定ファイルは次のようになります:
+```
+OK: 行がそのまま
+```
+5 | コマンドラインから `vite` を実行すると、... 自動的に解決しようとします。
+6 |
+7 | 最も基本的な設定ファイルは次のようになります:
+```
+
+### Vite 本体との差分 Issue について
+以下の説明文の Issue は Vite 本体のリポジトリに変更があった際に自動的に作られるものです。
+```
+New updates on head repo.
+vitejs/vite@コミット番号
+```
+これらに関しては `help wanted` タグなどが付いていなくても対応可能です。
+もし対応いただける場合は、古いものから順番にお願いします。
+（新しいものを先にやってしまうとデグレの可能性があるため）

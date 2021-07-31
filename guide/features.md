@@ -24,7 +24,7 @@ Vite は HTTP ヘッダーを介して依存関係のリクエストをキャッ
 
 Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) ファーストパーティの HMR を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
 
-これらを手動で設定する必要がないことには注意してください -  [create an app via `@vitejs/create-app`](./) を介してアプリケーションを作成する場合、これらはすでに構成されています。
+これらを手動で設定する必要がないことには注意してください -  [create an app via `create-vite`](./) を介してアプリケーションを作成する場合、これらはすでに構成されています。
 
 ## TypeScript
 
@@ -78,12 +78,12 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 ```js
 // vite.config.js
-export default {
+export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   }
-}
+})
 ```
 
 さらに詳しく知りたい場合は [esbuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
@@ -92,11 +92,11 @@ export default {
 
 ```js
 // vite.config.js
-export default {
+export default defineConfig({
   esbuild: {
     jsxInject: `import React from 'react'`
   }
-}
+})
 ```
 
 ## CSS
@@ -260,7 +260,7 @@ const modules = {
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
-## Web Assembly
+## WebAssembly
 
 プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
 

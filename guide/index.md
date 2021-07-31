@@ -25,13 +25,19 @@ Vite は [Node.js](https://nodejs.org/en/) >=12.0.0 のバージョンが必要�
 NPM を使う場合:
 
 ```bash
-$ npm init @vitejs/app
+$ npm init vite@latest
 ```
 
 Yarn を使う場合:
 
 ```bash
-$ yarn create @vitejs/app
+$ yarn create vite
+```
+
+PNPM を使う場合:
+
+```bash
+$ pnpx create-vite
 ```
 
 あとは画面表示に従ってください！
@@ -40,13 +46,13 @@ $ yarn create @vitejs/app
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-vue-app --template vue
+npm init vite@latest my-vue-app --template vue
 
 # npm 7+ は追加で 2 つのダッシュが必要:
-npm init @vitejs/app my-vue-app -- --template vue
+npm init vite@latest my-vue-app -- --template vue
 
 # yarn
-yarn create @vitejs/app my-vue-app --template vue
+yarn create vite my-vue-app --template vue
 ```
 
 サポートされているテンプレートプリセットは以下のとおりです:
@@ -64,11 +70,11 @@ yarn create @vitejs/app my-vue-app --template vue
 - `svelte`
 - `svelte-ts`
 
-各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
+各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください。
 
 ## コミュニティのテンプレート
 
-@vitejs/create-app はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
+create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
 
 ```bash
 npx degit user/project my-project

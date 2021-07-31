@@ -84,55 +84,55 @@ module.exports = {
           text: 'ガイド',
           children: [
             {
-              text: 'Why Vite',
+              text: 'なぜ Vite なのか',
               link: '/guide/why'
             },
             {
-              text: 'Getting Started',
+              text: 'はじめに',
               link: '/guide/'
             },
             {
-              text: 'Features',
+              text: '特徴',
               link: '/guide/features'
             },
             {
-              text: 'Using Plugins',
+              text: 'プラグインの使用',
               link: '/guide/using-plugins'
             },
             {
-              text: 'Dependency Pre-Bundling',
+              text: '依存関係の事前バンドル',
               link: '/guide/dep-pre-bundling'
             },
             {
-              text: 'Static Asset Handling',
+              text: '静的アセットの取り扱い',
               link: '/guide/assets'
             },
             {
-              text: 'Building for Production',
+              text: '本番環境用のビルド',
               link: '/guide/build'
             },
             {
-              text: 'Deploying a Static Site',
+              text: '静的サイトのデプロイ',
               link: '/guide/static-deploy'
             },
             {
-              text: 'Env Variables and Modes',
+              text: '環境変数とモード',
               link: '/guide/env-and-mode'
             },
             {
-              text: 'Server-Side Rendering (SSR)',
+              text: 'サーバサイドレンダリング',
               link: '/guide/ssr'
             },
             {
-              text: 'Backend Integration',
+              text: 'バックエンドとの統合',
               link: '/guide/backend-integration'
             },
             {
-              text: 'Comparisons',
+              text: '他のツールとの比較',
               link: '/guide/comparisons'
             },
             {
-              text: 'Migration from v1',
+              text: 'v1 からの移行',
               link: '/guide/migration'
             }
           ]
@@ -141,7 +141,7 @@ module.exports = {
           text: 'API',
           children: [
             {
-              text: 'Plugin API',
+              text: 'プラグイン API',
               link: '/guide/api-plugin'
             },
             {
@@ -153,7 +153,7 @@ module.exports = {
               link: '/guide/api-javascript'
             },
             {
-              text: 'Config Reference',
+              text: '設定リファレンス',
               link: '/config/'
             }
           ]
