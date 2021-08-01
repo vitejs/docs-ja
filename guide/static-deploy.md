@@ -78,7 +78,7 @@ Now the `preview` method will launch the server at http://localhost:8080.
    `https://<USERNAME>.github.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
 
    If you are deploying to `https://<USERNAME>.github.io/<REPO>/`, for example your repository is at `https://github.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.  
-   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にある場合は、`base` を `'/<REPO>/'` と設定してください。
+   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
 2. Inside your project, create `deploy.sh` with the following content (with highlighted lines uncommented appropriately), and run it to deploy:  
   プロジェクト内で、以下の内容の `deploy.sh` を作成し（ハイライトされた行はコメントアウトされています）、これを実行してデプロイしてください。
@@ -125,17 +125,23 @@ You can also run the above script in your CI setup to enable automatic deploymen
 ### GitHub Pages and Travis CI
 ### GitHub Pages と Travis CI
 
-1. Set the correct `base` in `vite.config.js`.
+1. Set the correct `base` in `vite.config.js`.  
+  `vite.config.js` で `base` を正しく設定してください。
 
-   If you are deploying to `https://<USERNAME or GROUP>.github.io/`, you can omit `base` as it defaults to `'/'`.
+   If you are deploying to `https://<USERNAME or GROUP>.github.io/`, you can omit `base` as it defaults to `'/'`.  
+   `https://<USERNAME or GROUP>.github.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
 
-   If you are deploying to `https://<USERNAME or GROUP>.github.io/<REPO>/`, for example your repository is at `https://github.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.
+   If you are deploying to `https://<USERNAME or GROUP>.github.io/<REPO>/`, for example your repository is at `https://github.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.  
+   `https://<USERNAME or GROUP>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
-2. Create a file named `.travis.yml` in the root of your project.
+2. Create a file named `.travis.yml` in the root of your project.  
+   プロジェクトルートに `.travis.yml` という名前でファイルを作成してください。
 
-3. Run `npm install` locally and commit the generated lockfile (`package-lock.json`).
+3. Run `npm install` locally and commit the generated lockfile (`package-lock.json`).  
+   ローカルで `npm install` を実行し、生成された lockfile (`package-lock.json`) をコミットしてください。
 
-4. Use the GitHub Pages deploy provider template, and follow the [Travis CI documentation](https://docs.travis-ci.com/user/deployment/pages/).
+4. Use the GitHub Pages deploy provider template, and follow the [Travis CI documentation](https://docs.travis-ci.com/user/deployment/pages/).  
+   GitHub Pages のデプロイプロバイダーテンプレートを使用し、[Travis CI マニュアル](https://docs.travis-ci.com/user/deployment/pages/)に従ってください。
 
    ```yaml
    language: node_js
@@ -151,6 +157,8 @@ You can also run the above script in your CI setup to enable automatic deploymen
      local_dir: dist
      # A token generated on GitHub allowing Travis to push code on you repository.
      # Set in the Travis settings page of your repository, as a secure variable.
+     # GitHub で生成されるトークンで、Travis があなたのリポジトリにコードをプッシュすることを許可します。
+     # リポジトリの Travis 設定ページで、セキュア変数として設定します。
      github_token: $GITHUB_TOKEN
      keep_history: true
      on:
@@ -158,16 +166,22 @@ You can also run the above script in your CI setup to enable automatic deploymen
    ```
 
 ## GitLab Pages and GitLab CI
+## GitLab Pages と GitLab CI
 
-1. Set the correct `base` in `vite.config.js`.
+1. Set the correct `base` in `vite.config.js`.  
+  `vite.config.js` で `base` を正しく設定してください。
 
-   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/`, you can omit `base` as it defaults to `'/'`.
+   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/`, you can omit `base` as it defaults to `'/'`.  
+   `https://<USERNAME or GROUP>.gitlab.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
 
-   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/<REPO>/`, for example your repository is at `https://gitlab.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.
+   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/<REPO>/`, for example your repository is at `https://gitlab.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.  
+   `https://<USERNAME or GROUP>.gitlab.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://gitlab.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
-2. Set `build.outDir` in `vite.config.js` to `public`.
+2. Set `build.outDir` in `vite.config.js` to `public`.  
+   `vite.config.js` で `build.outDir` を `public` と設定してください。
 
-3. Create a file called `.gitlab-ci.yml` in the root of your project with the content below. This will build and deploy your site whenever you make changes to your content:
+3. Create a file called `.gitlab-ci.yml` in the root of your project with the content below. This will build and deploy your site whenever you make changes to your content:  
+   プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます。
 
    ```yaml
    image: node:10.22.0
@@ -188,17 +202,21 @@ You can also run the above script in your CI setup to enable automatic deploymen
 ## Netlify
 
 1. On [Netlify](https://netlify.com), setup up a new project from GitHub with the following settings:
+   [Netlify](https://netlify.com) で、GitHub から新規プロジェクトを以下の設定で立ち上げます。
 
    - **Build Command:** `vite build` or `npm run build`
    - **Publish directory:** `dist`
 
-2. Hit the deploy button.
+2. Hit the deploy button.  
+   デプロイボタンを押します。
 
 ## Google Firebase
 
 1. Make sure you have [firebase-tools](https://www.npmjs.com/package/firebase-tools) installed.
+   [firebase-tools](https://www.npmjs.com/package/firebase-tools) をインストールしていることを確認してください。
 
 2. Create `firebase.json` and `.firebaserc` at the root of your project with the following content:
+   プロジェクトルートに `firebase.json` と `.firebaserc` を作成し、以下のように記述してください。
 
    `firebase.json`:
 
@@ -221,31 +239,40 @@ You can also run the above script in your CI setup to enable automatic deploymen
    }
    ```
 
-3. After running `npm run build`, deploy using the command `firebase deploy`.
+3. After running `npm run build`, deploy using the command `firebase deploy`.  
+   `npm run build` を実行した後、`firebase deploy` コマンドでデプロイしてください。
 
 ## Surge
 
-1. First install [surge](https://www.npmjs.com/package/surge), if you haven’t already.
+1. First install [surge](https://www.npmjs.com/package/surge), if you haven’t already.  
+   まだであれば、[surge](https://www.npmjs.com/package/surge) をインストールしてください。
 
-2. Run `npm run build`.
+2. Run `npm run build`.  
+   `npm run build` を実行してください。
 
-3. Deploy to surge by typing `surge dist`.
+3. Deploy to surge by typing `surge dist`.  
+   `surge dist` とタイプし、surge にデプロイしてください。
 
-You can also deploy to a [custom domain](http://surge.sh/help/adding-a-custom-domain) by adding `surge dist yourdomain.com`.
+You can also deploy to a [custom domain](http://surge.sh/help/adding-a-custom-domain) by adding `surge dist yourdomain.com`.  
+`surge dist yourdomain.com` とすることで、[カスタムドメイン](http://surge.sh/help/adding-a-custom-domain)にデプロイすることもできます。
 
 ## Heroku
 
-1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).  
+   [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) をインストールしてください。
 
-2. Create a Heroku account by [signing up](https://signup.heroku.com).
+2. Create a Heroku account by [signing up](https://signup.heroku.com).  
+   [サインアップ](https://signup.heroku.com)して Heroku アカウントを作成してください。
 
-3. Run `heroku login` and fill in your Heroku credentials:
+3. Run `heroku login` and fill in your Heroku credentials:  
+   `heroku login` を実行し、Heroku の認証情報を入力してください。
 
    ```bash
    $ heroku login
    ```
 
-4. Create a file called `static.json` in the root of your project with the below content:
+4. Create a file called `static.json` in the root of your project with the below content:  
+   プロジェクトルートに `static.json` という名前でファイルを作成し、以下のように記述してください。
 
    `static.json`:
 
@@ -255,55 +282,75 @@ You can also deploy to a [custom domain](http://surge.sh/help/adding-a-custom-do
    }
    ```
 
-   This is the configuration of your site; read more at [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static).
+   This is the configuration of your site; read more at [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static).  
+   これはあなたのサイトの設定です。詳しくは [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static) をご覧ください。
 
-5. Set up your Heroku git remote:
+5. Set up your Heroku git remote:  
+   Heroku の Git リモートを設定してください。
 
    ```bash
    # version change
+   # バージョン更新
    $ git init
    $ git add .
    $ git commit -m "My site ready for deployment."
 
    # creates a new app with a specified name
+   # 名前を指定して新しいアプリを作成
    $ heroku apps:create example
 
    # set buildpack for static sites
+   # 静的サイト用に buildpack を設定
    $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-static.git
    ```
 
-6. Deploy your site:
+6. Deploy your site:  
+   サイトをデプロイしてください。
 
    ```bash
    # publish site
+   # サイトを公開
    $ git push heroku master
 
    # opens a browser to view the Dashboard version of Heroku CI
+   # ブラウザを開いて Heroku CI ダッシュボードを見る
    $ heroku open
    ```
 
 ## Vercel
 
-To deploy your Vite app with a [Vercel for Git](https://vercel.com/docs/git), make sure it has been pushed to a Git repository.
+To deploy your Vite app with a [Vercel for Git](https://vercel.com/docs/git), make sure it has been pushed to a Git repository.  
+Vite アプリを [Vercel for Git](https://vercel.com/docs/git) でデプロイするために、Git リポジトリにコードがプッシュされていることを確認してください。
 
-Go to https://vercel.com/import/git and import the project into Vercel using your Git of choice (GitHub, GitLab or BitBucket). Follow the wizard to select the project root with the project's `package.json` and override the build step using `npm run build` and the output dir to be `./dist`
+Go to https://vercel.com/import/git and import the project into Vercel using your Git of choice (GitHub, GitLab or BitBucket). Follow the wizard to select the project root with the project's `package.json` and override the build step using `npm run build` and the output dir to be `./dist`  
+https://vercel.com/import/git から、お好みの Git（GitHub、GitLab または BitBucket）を使ってプロジェクトを Vercel にインポートしてください。
 
 ![Override Vercel Configuration](../images/vercel-configuration.png)
+![Vercel の設定を上書きする](../images/vercel-configuration.png)
 
-After your project has been imported, all subsequent pushes to branches will generate Preview Deployments, and all changes made to the Production Branch (commonly "main") will result in a Production Deployment.
+After your project has been imported, all subsequent pushes to branches will generate Preview Deployments, and all changes made to the Production Branch (commonly "main") will result in a Production Deployment.  
+プロジェクがトインポートされると、その後のブランチへの全てのプッシュでプレビューデプロイメントが生成され、プロダクションブランチ（通常は "main"）での変更はプロダクションデプロイメントが生成されます。
 
 Once deployed, you will get a URL to see your app live, such as the following: https://vite.vercel.app
+デプロイされると、アプリのライブを見るためのURLが得られます。例えば https://vite.vercel.app のようなものです。
 
 ## Azure Static Web Apps
 
-You can quickly deploy your Vite app with Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) service. You need:
+You can quickly deploy your Vite app with Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) service. You need:  
+Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) サービスを使って、Vite アプリを素早くデプロイすることができます。必要なもの:
 
 - An Azure account and a subscription key. You can create a [free Azure account here](https://azure.microsoft.com/free).
+- Azure アカウントとサブスクリプションキー。[無料で Azure アカウント](https://azure.microsoft.com/free)を作成できます。
 - Your app code pushed to [GitHub](https://github.com).
+- [GitHub](https://github.com) にプッシュされたアプリのコード。
 - The [SWA Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) in [Visual Studio Code](https://code.visualstudio.com).
+- [Visual Studio Code](https://code.visualstudio.com) の [SWA 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps)。
 
-Install the extension in VS Code and navigate to your app root. Open the Static Web Apps extension, sign in to Azure, and click the '+' sign to create a new Static Web App. You will be prompted to designate which subscription key to use.
+Install the extension in VS Code and navigate to your app root. Open the Static Web Apps extension, sign in to Azure, and click the '+' sign to create a new Static Web App. You will be prompted to designate which subscription key to use.  
+VS Code に拡張機能をインストールし、アプリのルートに移動してください。Static Web Apps 拡張機能を開き、Azure にサインインし、'+' マークをクリックして新しい Static Web App を作成してください。使用するサブスクリプションキーを指定するプロンプトが表示されます。
 
-Follow the wizard started by the extension to give your app a name, choose a framework preset, and designate the app root (usually `/`) and built file location `/dist`. The wizard will run and will create a GitHub action in your repo in a `.github` folder.
+Follow the wizard started by the extension to give your app a name, choose a framework preset, and designate the app root (usually `/`) and built file location `/dist`. The wizard will run and will create a GitHub action in your repo in a `.github` folder.  
+拡張機能が起動するウィザードに従って、アプリの名前を決め、フレームワークのプリセットを選択し、アプリのルート（通常は `/`）とビルドファイルの場所 `/dist` を指定します。ウィザードが実行されると、リポジトリの `.github` フォルダに GitHub アクションが作成されます。
 
-The action will work to deploy your app (watch its progress in your repo's Actions tab) and, when successfully completed, you can view your app in the address provided in the extension's progress window by clicking the 'Browse Website' button that appears when the GitHub action has run.
+The action will work to deploy your app (watch its progress in your repo's Actions tab) and, when successfully completed, you can view your app in the address provided in the extension's progress window by clicking the 'Browse Website' button that appears when the GitHub action has run.  
+このアクションが実行されると、アプリがデプロイされます（進行状況はリポジトリの Actions タブで確認できます）。正常に完了すると、GitHub アクション実行時に表示される 'Browse Website' ボタンをクリックすることで、拡張機能の進行状況ウィンドウで指定されたアドレスでアプリを見ることができます。
