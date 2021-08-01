@@ -52,7 +52,7 @@ $ npm run preview
 }
 ```
 
-これで、`preview` は http://localhost:8080 でサーバを起動します。
+これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
 
 ## GitHub Pages
 
