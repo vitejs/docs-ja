@@ -108,7 +108,7 @@ $ npm run preview
 
 3. ローカルで `npm install` を実行し、生成されたロックファイル（`package-lock.json`）をコミットしてください。
 
-4. GitHub Pages のデプロイプロバイダーテンプレートを使用し、[Travis CI マニュアル](https://docs.travis-ci.com/user/deployment/pages/)に従ってください。
+4. GitHub Pages のデプロイプロバイダテンプレートを使用し、[Travis CI マニュアル](https://docs.travis-ci.com/user/deployment/pages/)に従ってください。
 
    ```yaml
    language: node_js
