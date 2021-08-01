@@ -265,7 +265,7 @@ https://vercel.com/import/git から、お好みの Git（GitHub、GitLab また
 
 プロジェクがトインポートされると、その後のブランチへの全てのプッシュでプレビューデプロイメントが生成され、プロダクションブランチ（通常は "main"）での変更はプロダクションデプロイメントが生成されます。
 
-デプロイされると、アプリのライブを見るための URL が得られます。例えば https://vite.vercel.app のようなものです。
+デプロイされると、アプリを直接見るための URL を取得できます。例えば https://vite.vercel.app のようなものです。
 
 ## Azure Static Web Apps
 
