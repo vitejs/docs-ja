@@ -12,13 +12,13 @@ import { someMethod } from 'my-dep'
 
 上のようなコードはブラウザでエラーになります。Vite は提供される全てのソースファイルでこのような生のモジュールのインポートを検出し以下を実行します:
 
-1. [先読みバンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMD モジュールを ESM に変換します。先読みバンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間を  JavaScript ベースのバンドラーよりも大幅に高速化します。
+1. [先読みバンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMD モジュールを ESM に変換します。先読みバンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間を  JavaScript ベースのバンドラよりも大幅に高速化します。
 
 2. インポートを `/node_modules/.vite/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
 
 **依存関係は積極的にキャッシュされます**
 
-Vite は HTTP ヘッダーを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従います。
+Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従います。
 
 ## Hot Module Replacement
 
@@ -32,7 +32,7 @@ Vite は `.ts` ファイルをインポートすることをサポートして�
 
 Vite は `.ts` ファイルに対してのみ変換を実行し、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
 
-Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約20〜30倍速く、HMR の更新は50ミリ秒未満でブラウザーに反映されます
+Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約20〜30倍速く、HMR の更新は50ミリ秒未満でブラウザに反映されます
 
 `esbuild` は型情報なしでビルドを実行するため、const や enum の暗黙の型のみのインポートなどの特定の機能はサポートしていません。TypeScript が分離されたトランスパイルで機能しない機能に対して警告するように、`compilerOptions`の下の `tsconfig.json` で `"isolatedModules": true` を設定する必要があります。
 
@@ -70,7 +70,7 @@ Vite は Vue に対して最高のサポートをします:
 
 ## JSX
 
-`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバーですが、esbuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
+`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバですが、esbuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
@@ -88,7 +88,7 @@ export default defineConfig({
 
 さらに詳しく知りたい場合は [esbuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
 
-また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
+また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパを挿入し、手動インポートを回避できます。
 
 ```js
 // vite.config.js
@@ -186,12 +186,12 @@ import assetAsString from './shader.glsl?raw'
 ```
 
 ```js
-// ウェブワーカーをロードする
+// Web ワーカをロードする
 import Worker from './worker.js?worker'
 ```
 
 ```js
-// ビルド時に base64 文字列としてインライン化されたウェブワーカー
+// ビルド時に base64 文字列としてインライン化された Web ワーカ
 import InlineWorker from './worker.js?worker&inline'
 ```
 
@@ -290,7 +290,7 @@ init({
 
 ## Web Workers
 
-インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクタになります:
+インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカスクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカコンストラクタになります:
 
 ```js
 import MyWorker from './worker?worker'
@@ -298,9 +298,9 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-ワーカースクリプトは、`importScripts()` の代わりに `import` ステートメントを使用することもできます - この機能は現在開発中で、ブラウザーのネイティブサポートに依存し、現在 Chrome でのみ機能しますが、本番ビルドではコンパイルされます。
+ワーカスクリプトは、`importScripts()` の代わりに `import` ステートメントを使用することもできます - この機能は現在開発中で、ブラウザのネイティブサポートに依存し、現在 Chrome でのみ機能しますが、本番ビルドではコンパイルされます。
 
-デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
+デフォルトでは、ワーカスクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
 
 ```js
 import MyWorker from './worker?worker&inline'

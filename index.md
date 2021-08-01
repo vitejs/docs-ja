@@ -8,7 +8,7 @@ altActionText: もっと詳しく
 altActionLink: /guide/why
 
 features:
-  - title: 💡 瞬時にスタートするサーバー
+  - title: 💡 瞬時にスタートするサーバ
     details: ネイティブESMを通してリアルタイムなファイルが提供されるためバンドルをする必要はありません。
   - title: ⚡️ 超高速なHMR
     details: アプリのサイズに関係なく高速を維持するHMRを提供します。
@@ -24,12 +24,12 @@ footer: MIT Licensed | Copyright © 2019-present Evan You & Vite Contributors
 ---
 
 <div class="frontpage sponsors">
-  <h2>スポンサー</h2>
+  <h2>スポンサ</h2>
   <a v-for="{ href, src, name, id } of sponsors" :href="href" target="_blank" rel="noopener" aria-label="sponsor-img">
     <img :src="src" :alt="name" :id="`sponsor-${id}`">
   </a>
   <br>
-  <a href="https://github.com/sponsors/yyx990803" target="_blank" rel="noopener">GitHubでスポンサーになる</a>
+  <a href="https://github.com/sponsors/yyx990803" target="_blank" rel="noopener">GitHubでスポンサになる</a>
 </div>
 
 <script setup>

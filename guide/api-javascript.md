@@ -30,7 +30,7 @@ const { createServer } = require('vite')
 
 ## `InlineConfig`
 
-`InlineConfig` インターフェースは、追加のプロパティで `UserConfig` を拡張します:
+`InlineConfig` インタフェイスは、追加のプロパティで `UserConfig` を拡張します:
 
 - `configFile`: 使用する設定ファイルを指定します。設定されていない場合、Vite はプロジェクトルートからファイルを自動的に解決しようとします。自動解決を無効にするには `false` に設定します。
 - `envFile`: `.env` ファイルを無効にするには `false` に設定します。
@@ -45,15 +45,15 @@ interface ViteDevServer {
   config: ResolvedConfig
   /**
    * 接続アプリのインスタンス
-   * - 開発サーバーにカスタムミドルウェアを追加するために使用できます。
-   * - カスタム HTTP サーバーのハンドラ関数として、もしくは任意の接続スタイルの
+   * - 開発サーバにカスタムミドルウェアを追加するために使用できます。
+   * - カスタム HTTP サーバのハンドラ関数として、もしくは任意の接続スタイルの
    *   Node.js フレームワークのミドルウェアとして使用することもできます。
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
-   * ネイティブの Node HTTP サーバーインスタンス。
+   * ネイティブの Node HTTP サーバインスタンス。
    * ミドルウェアモードでは null になります。
    */
   httpServer: http.Server | null
@@ -63,7 +63,7 @@ interface ViteDevServer {
    */
   watcher: FSWatcher
   /**
-   * `send(payload)` メソッドを持つ WebSocket サーバー。
+   * `send(payload)` メソッドを持つ WebSocket サーバ。
    */
   ws: WebSocketServer
   /**
@@ -109,11 +109,11 @@ interface ViteDevServer {
    */
   ssrFixStacktrace(e: Error): void
   /**
-   * サーバーを起動します。
+   * サーバを起動します。
    */
   listen(port?: number, isRestart?: boolean): Promise<ViteDevServer>
   /**
-   * サーバーを停止します。
+   * サーバを停止します。
    */
   close(): Promise<void>
 }
