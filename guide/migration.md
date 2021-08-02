@@ -4,7 +4,7 @@
 ## 設定オプションの変更
 
 - The following options have been removed and should be implemented via [plugins](./api-plugin):
-- 以下のオプションは削除されましたので、[プラグイン](./api-plugin)で実装してください。
+- 以下のオプションは削除されましたので、[プラグイン](./api-plugin)で実装してください:
 
   - `resolvers`
   - `transforms`
@@ -14,7 +14,7 @@
 - `jsx` と `enableEsbuild` は削除されました。代わりに新しい [`esbuild`](/config/#esbuild) オプションを使ってください。
 
 - [CSS related options](/config/#css-modules) are now nested under `css`.
-- [CSS関連のオプション](/config/#css-modules)は `css` の下に移動しました。
+- [CSS 関連のオプション](/config/#css-modules)は `css` の下に移動しました。
 
 - All [build-specific options](/config/#build-options) are now nested under `build`.
 - すべての[ビルドオプション](/config/#ビルドオプション)は `build` の下に移動しました。
@@ -36,7 +36,7 @@
 
 - All [server-specific options](/config/#server-options) are now nested under
   `server`.
-- すべての[サーバーオプション](/config/#サーバオプション)は、`server` の下に移動しました。
+- すべての[サーバオプション](/config/#サーバオプション)は、`server` の下に移動しました。
 
   - `hostname` is now [`server.host`](/config/#server-host).
   - `hostname` は [`server.host`](/config/#server-host) になりました。
@@ -55,7 +55,7 @@
 ## Alias の動作変更
 
 [`alias`](/config/#alias) is now being passed to `@rollup/plugin-alias` and no longer require start/ending slashes. The behavior is now a direct replacement, so 1.0-style directory alias key should remove the ending slash:  
-[`alias`](/config/#alias) が `@rollup/plugin-alias` に渡されるようになり、開始/終了のスラッシュが不要になりました。この動作は直接置き換わったため、1.0スタイルのディレクトリエイリアスキーから終了のスラッシュを削除する必要があります。
+[`alias`](/config/#alias) が `@rollup/plugin-alias` に渡されるようになり、開始/終了のスラッシュが不要になりました。この動作は直接置き換わったため、1.0スタイルのディレクトリエイリアスキーから終了のスラッシュを削除する必要があります:
 
 ```diff
 - alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
@@ -116,7 +116,7 @@ export default defineConfig({
 ## React サポート
 
 React Fast Refresh support is now provided via [`@vitejs/plugin-react-refresh`](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh).  
-React Fast Refreshのサポートは、[`@vitejs/plugin-react-refresh`](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) で提供されるようになりました。
+React Fast Refresh のサポートは、[`@vitejs/plugin-react-refresh`](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) で提供されるようになりました。
 
 ## HMR API Change
 ## HMR API の変更
@@ -127,7 +127,7 @@ React Fast Refreshのサポートは、[`@vitejs/plugin-react-refresh`](https://
 ## Manifest Format Change
 ## マニフェストフォーマットの変更
 
-The build manifest now uses the following format:
+The build manifest now uses the following format:  
 ビルドマニフェストが以下のフォーマットになりました:
 
 ```json
@@ -146,13 +146,13 @@ The build manifest now uses the following format:
 ```
 
 For entry JS chunks, it also lists its imported chunks which can be used to render preload directives.  
-エントリJSチャンクについては、インポートされたチャンクもリストアップされ、プリロードディレクティブのレンダリングに使用できます。
+エントリ JS チャンクについては、インポートされたチャンクもリストアップされ、プリロードディレクティブのレンダリングに使用できます。
 
 ## For Plugin Authors
 ## プラグイン作成者向け
 
 Vite 2 uses a completely redesigned plugin interface which extends Rollup plugins. Please read the new [Plugin Development Guide](./api-plugin).  
-Vite 2 は、Rollup プラグインを拡張し完全に再設計されたプラグインインターフェイスとなっています。新しい[プラグイン開発ガイド](./api-plugin)をお読みください。
+Vite 2 は、Rollup プラグインを拡張し完全に再設計されたプラグインインタフェイスとなっています。新しい[プラグイン開発ガイド](./api-plugin)をお読みください。
 
 Some general pointers on migrating a v1 plugin to v2:  
 v1 プラグインを v2 に移行する際の一般的なポイントです:
@@ -169,4 +169,4 @@ v1 プラグインを v2 に移行する際の一般的なポイントです:
 - `alias`、`define`、その他の設定オプションの追加 -> [`config`](./api-plugin#config) フックを使用してください。
 
 Since most of the logic should be done via plugin hooks instead of middlewares, the need for middlewares is greatly reduced. The internal server app is now a good old [connect](https://github.com/senchalabs/connect) instance instead of Koa.  
-ロジックのほとんどはミドルウェアではなくプラグインのフックを介して行われるべきなので、ミドルウェアの必要性は大幅に減少しています。内部のサーバーアプリは、Koa から古き良き [connect](https://github.com/senchalabs/connect) のインスタンスに変わりました。
+ロジックのほとんどはミドルウェアではなくプラグインのフックを介して行われるべきなので、ミドルウェアの必要性は大幅に減少しています。内部のサーバアプリは、Koa から古き良き [connect](https://github.com/senchalabs/connect) のインスタンスに変わりました。
