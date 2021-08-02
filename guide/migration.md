@@ -1,23 +1,32 @@
 # v1 からの移行
 
 ## Config Options Change
+## 設定オプションの変更
 
 - The following options have been removed and should be implemented via [plugins](./api-plugin):
+- 以下のオプションは削除されましたので、[プラグイン](./api-plugin)で実装してください。
 
   - `resolvers`
   - `transforms`
   - `indexHtmlTransforms`
 
 - `jsx` and `enableEsbuild` have been removed; Use the new [`esbuild`](/config/#esbuild) option instead.
+- `jsx` と `enableEsbuild` は削除されました。代わりに新しい [`esbuild`](/config/#esbuild) オプションを使ってください。
 
 - [CSS related options](/config/#css-modules) are now nested under `css`.
+- [CSS関連のオプション](/config/#css-modules)は `css` の下に移動しました。
 
 - All [build-specific options](/config/#build-options) are now nested under `build`.
+- すべての[ビルドオプション](/config/#ビルドオプション)は `build` の下に移動しました。
 
   - `rollupInputOptions` and `rollupOutputOptions` are replaced by [`build.rollupOptions`](/config/#build-rollupoptions).
+  - `rollupInputOptions` と `rollupOutputOptions` は [`build.rollupOptions`](/config/#build-rollupoptions) に置き換えられました。
   - `esbuildTarget` is now [`build.target`](/config/#build-target).
+  - `esbuildTarget` は [`build.target`](/config/#build-target) になりました。
   - `emitManifest` is now [`build.manifest`](/config/#build-manifest).
+  - `emitManifest` は [`build.manifest`](/config/#build-manifest) になりました。
   - The following build options have been removed since they can be achieved via plugin hooks or other options:
+  - 以下のビルドオプションは、プラグインフックや他のオプションで実現できるため、削除されました:
     - `entry`
     - `rollupDedupe`
     - `emitAssets`
@@ -27,14 +36,20 @@
 
 - All [server-specific options](/config/#server-options) are now nested under
   `server`.
+- すべての[サーバーオプション](/config/#サーバオプション)は、`server` の下に移動しました。
 
   - `hostname` is now [`server.host`](/config/#server-host).
+  - `hostname` は [`server.host`](/config/#server-host) になりました。
   - `httpsOptions` has been removed. [`server.https`](/config/#server-https) can directly accept the options object.
+  - `httpsOptions` は削除されました。[`server.https`](/config/#server-https) はオプションオブジェクトを直接受け取ることができます。
   - `chokidarWatchOptions` is now [`server.watch`](/config/#server-watch).
+  - `chokidarWatchOptions` は [`server.watch`](/config/#server-watch) になりました。
 
 - [`assetsInclude`](/config/#assetsInclude) now expects `string | RegExp | (string | RegExp)[]` instead of a function.
+- [`assetsInclude`](/config/#assetsInclude) が、関数ではなく、`string | RegExp | (string | RegExp)[]` を想定するようになりました。
 
 - All Vue specific options are removed; Pass options to the Vue plugin instead.
+- すべての Vue 固有のオプションは削除され、代わりに Vue プラグインにオプションを渡します。
 
 ## Alias Behavior Change
 
