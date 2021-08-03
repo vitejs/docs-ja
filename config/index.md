@@ -396,7 +396,7 @@ export default defineConfig(async ({ command, mode }) => {
     server: {
       proxy: {
         // 文字列のショートハンド
-        '/foo': 'http://localhost:4567/foo',
+        '/foo': 'http://localhost:4567',
         // オプションを使用
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
