@@ -127,7 +127,7 @@ v1 プラグインを v2 に移行する際の一般的なポイントです:
 - `resolvers` -> [`resolveId`](https://rollupjs.org/guide/en/#resolveid) フックを使ってください。
 - `transforms` -> [`transform`](https://rollupjs.org/guide/en/#transform) フックを使ってください。
 - `indexHtmlTransforms` -> [`transformIndexHtml`](./api-plugin#transformindexhtml) フックを使ってください。
-- 仮想ファイルの提供 -> [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load) フックを使ってください。
+- 仮想ファイルの配信 -> [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load) フックを使ってください。
 - `alias`、`define`、その他の設定オプションの追加 -> [`config`](./api-plugin#config) フックを使用してください。
 
 ロジックのほとんどはミドルウェアではなくプラグインのフックを介して行われるべきなので、ミドルウェアの必要性は大幅に減少しています。内部のサーバアプリは、Koa から古き良き [connect](https://github.com/senchalabs/connect) のインスタンスに変わりました。
