@@ -1,34 +1,34 @@
 # 本番環境用のビルド
 
-When it is time to deploy your app for production, simply run the `vite build` command. By default, it uses `<root>/index.html` as the build entry point, and produces an application bundle that is suitable to be served over a static hosting service. Check out the [Deploying a Static Site](./static-deploy) for guides about popular services.
+作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [Deploying a Static Site](./static-deploy) をご覧ください。
 
-## Browser Compatibility
+## ブラウザの互換性
 
-The production bundle assumes support for modern JavaScript. By default, vite targets browsers which support the [native ESM script tag](https://caniuse.com/es6-module) and [native ESM dynamic import](https://caniuse.com/es6-module-dynamic-import). As a reference, vite uses this [browserslist](https://github.com/browserslist/browserslist) query:
+本番バンドルではモダンな JavaScript のサポートを前提としています。vite はデフォルトでは [native ESM script tag](https://caniuse.com/es6-module) および [native ESM dynamic import](https://caniuse.com/es6-module-dynamic-import) をサポートするブラウザを対象としています。参考として、vite はこの [browserslist](https://github.com/browserslist/browserslist) のクエリを使用します:
 
 ```
 defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0
 ```
 
-You can specify custom targets via the [`build.target` config option](/config/#build-target), where the lowest target is `es2015`.
+[`build.target` config option](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
-Note that by default, Vite only handles syntax transforms and **does not cover polyfills by default**. You can check out [Polyfill.io](https://polyfill.io/v3/) which is a service that automatically generates polyfill bundles based on the user's browser UserAgent string.
+Vite はデフォルトでは構文変換のみを扱い **デフォルトではポリフィルをカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいてポリフィルバンドルを自動生成するサービスである [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
 
-Legacy browsers can be supported via [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), which will automatically generate legacy chunks and corresponding ES language feature polyfills. The legacy chunks are conditionally loaded only in browsers that do not have native ESM support.
+レガシーブラウザは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能ポリフィルを自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザでのみ条件付きで読み込まれます。
 
 ## Public Base Path
 
-- Related: [Asset Handling](./assets)
+- 関連: [Asset Handling](./assets)
 
-If you are deploying your project under a nested public path, simply specify the [`base` config option](/config/#base) and all asset paths will be rewritten accordingly. This option can also be specified as a command line flag, e.g. `vite build --base=/my/public/path/`.
+ネストしたパブリックパスの下にプロジェクトをデプロイする場合は [`base` 設定オプション](/config/#base) を指定するだけでそれに伴いすべてのアセットパスが書き換えられます。このオプションは `vite build --base=/my/public/path/` のようにコマンドラインフラグとして指定することもできます。
 
-JS-imported asset URLs, CSS `url()` references, and asset references in your `.html` files are all automatically adjusted to respect this option during build.
+JS でインポートされたアセット URL、CSS の `url()` 参照、`.html` ファイルのアセット参照はビルド時にこのオプションを考慮して自動的に調整されます。
 
-The exception is when you need to dynamically concatenate URLs on the fly. In this case, you can use the globally injected `import.meta.env.BASE_URL` variable which will be the public base path. Note this variable is statically replaced during build so it must appear exactly as-is (i.e. `import.meta.env['BASE_URL']` won't work).
+例外はその場で動的に URL を連結する必要がある場合です。この場合は、グローバルに注入された `import.meta.env.BASE_URL` 変数を使用することができ、これがベースのパブリックパスになります。この変数はビルド時に静的に置き換えられるので、そのままの形で表示されなければならないことに注意してください（つまり、`import.meta.env['BASE_URL']` は動作しません）。
 
-## Customizing the Build
+## ビルドのカスタマイズ
 
-The build can be customized via various [build config options](/config/#build-options). Specifically, you can directly adjust the underlying [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) via `build.rollupOptions`:
+ビルドは様々な [build config options](/config/#build-options) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
 
 ```js
 // vite.config.js
@@ -41,11 +41,11 @@ module.exports = defineConfig({
 })
 ```
 
-For example, you can specify multiple Rollup outputs with plugins that are only applied during build.
+例えば、ビルド時にのみ適用されるプラグインを使って複数の Rollup 出力を指定することができます。
 
-## Rebuild on files changes
+## ファイル変更時のリビルド
 
-You can enable rollup watcher with `vite build --watch`. Or, you can directly adjust the underlying [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options) via `build.watch`:
+`vite build --watch` で rollup のウォッチャを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options) を直接調整することもできます:
 
 ```js
 // vite.config.js
@@ -58,9 +58,9 @@ module.exports = defineConfig({
 })
 ```
 
-## Multi-Page App
+## マルチページアプリ
 
-Suppose you have the following source code structure:
+以下のようなソースコード構造があるとします:
 
 ```
 ├── package.json
@@ -72,9 +72,9 @@ Suppose you have the following source code structure:
     └── nested.js
 ```
 
-During dev, simply navigate or link to `/nested/` - it works as expected, just like for a normal static file server.
+開発時には、`/nested/` に移動またはリンクするだけで、通常の静的ファイルサーバと同じように期待通りに動作します。
 
-During build, all you need to do is to specify multiple `.html` files as entry points:
+ビルド時には、エントリーポイントとして複数の `.html` ファイルを指定するだけです:
 
 ```js
 // vite.config.js
@@ -93,13 +93,13 @@ module.exports = defineConfig({
 })
 ```
 
-If you specify a different root, remember that `__dirname` will still be the folder of your vite.config.js file when resolving the input paths. Therefore, you will need to add your `root` entry to the arguments for `resolve`.
+別のルートを指定した場合でも、入力パスを解決する際には `__dirname` が vite.config.js ファイルのフォルダになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリを追加する必要があります。
 
-## Library Mode
+## ライブラリモード
 
-When you are developing a browser-oriented library, you are likely spending most of the time on a test/demo page that imports your actual library. With Vite, you can use your `index.html` for that purpose to get the smooth development experience.
+ブラウザ向けのライブラリを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
 
-When it is time to bundle your library for distribution, use the [`build.lib` config option](/config/#build-lib). Make sure to also externalize any dependencies that you do not want to bundle into your library, e.g. `vue` or `react`:
+配布のためにライブラリをバンドルするときには [`build.lib` 設定オプション](/config/#build-lib) を使用します。また、ライブラリにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
 ```js
 // vite.config.js
@@ -114,12 +114,10 @@ module.exports = defineConfig({
       fileName: (format) => `my-lib.${format}.js`
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
+      // ライブラリにバンドルされるべきではない依存関係を外部化するようにします
       external: ['vue'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
+        // 外部化された依存関係のために UMD のビルドで使用するグローバル変数を提供します
         globals: {
           vue: 'Vue'
         }
@@ -129,7 +127,7 @@ module.exports = defineConfig({
 })
 ```
 
-Running `vite build` with this config uses a Rollup preset that is oriented towards shipping libraries and produces two bundle formats: `es` and `umd` (configurable via `build.lib`):
+この設定で `vite build` を実行するとライブラリの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます。`es` と `umd` (`build.lib` で設定可能):
 
 ```
 $ vite build
@@ -138,7 +136,7 @@ building for production...
 [write] my-lib.umd.js 0.30kb, brotli: 0.16kb
 ```
 
-Recommended `package.json` for your lib:
+ライブラリに推奨される `package.json`:
 
 ```json
 {
