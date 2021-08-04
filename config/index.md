@@ -396,7 +396,7 @@ export default defineConfig(async ({ command, mode }) => {
     server: {
       proxy: {
         // 文字列のショートハンド
-        '/foo': 'http://localhost:4567/foo',
+        '/foo': 'http://localhost:4567',
         // オプションを使用
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
@@ -452,6 +452,8 @@ export default defineConfig(async ({ command, mode }) => {
 - **Type:** `object`
 
   File system watcher options to pass on to [chokidar](https://github.com/paulmillr/chokidar#api).
+
+  When running Vite on Windows Subsystem for Linux (WSL) 2, if the project folder resides in a Windows filesystem, you'll need to set this option to `{ usePolling: true }`. This is due to [a WSL2 limitation](https://github.com/microsoft/WSL/issues/4739) with the Windows filesystem.
 
 ### server.middlewareMode
 
