@@ -20,6 +20,13 @@
    })
    ```
 
+   [module preload polyfill](/config/#polyfillmodulepreload) を無効にしていない場合は、エントリで Polyfill をインポートする必要があります。
+
+   ```js
+   // アプリのエントリの先頭に追加
+   import 'vite/modulepreload-polyfill'
+   ```
+
 2. 開発環境向けには以下をサーバの HTML テンプレートに含めてください。（`http://localhost:3000` を Vite が動作している URL に変更してください）:
 
    ```html

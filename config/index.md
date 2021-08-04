@@ -543,6 +543,21 @@ createServer()
 
   esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
 
+### build.polyfillModulePreload
+
+- **型:** `boolean`
+- **デフォルト:** `true`
+
+  自動的に [module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) を注入するかどうか。
+
+  `true` に設定すると、Polyfill は各 `index.html` エントリのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリを使用するように設定されている場合は、カスタムエントリで Polyfill を手動でインポートする必要があります:
+
+  ```js
+  import 'vite/modulepreload-polyfill'
+  ```
+
+  注意: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
+  
 ### build.outDir
 
 - **型:** `string`
