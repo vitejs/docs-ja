@@ -1,6 +1,6 @@
 # 本番環境用のビルド
 
-作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [Deploying a Static Site](./static-deploy) をご覧ください。
+作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [静的サイトのデプロイ](./static-deploy) をご覧ください。
 
 ## ブラウザの互換性
 
@@ -12,9 +12,9 @@ defaults and supports es6-module and supports es6-module-dynamic-import, not ope
 
 [`build.target` config option](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
-Vite はデフォルトでは構文変換のみを扱い **デフォルトではポリフィルをカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいてポリフィルバンドルを自動生成するサービスである [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
+Vite はデフォルトでは構文変換のみを扱い **デフォルトでは Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスである [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
 
-レガシーブラウザは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能ポリフィルを自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザでのみ条件付きで読み込まれます。
+レガシーブラウザは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能 Polyfill を自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザでのみ条件付きで読み込まれます。
 
 ## Public Base Path
 
@@ -114,10 +114,12 @@ module.exports = defineConfig({
       fileName: (format) => `my-lib.${format}.js`
     },
     rollupOptions: {
-      // ライブラリにバンドルされるべきではない依存関係を外部化するようにします
+      // ライブラリにバンドルされるべきではない依存関係を
+      // 外部化するようにします
       external: ['vue'],
       output: {
-        // 外部化された依存関係のために UMD のビルドで使用するグローバル変数を提供します
+        // 外部化された依存関係のために UMD のビルドで使用する
+        // グローバル変数を提供します
         globals: {
           vue: 'Vue'
         }
