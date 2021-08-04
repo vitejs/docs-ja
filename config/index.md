@@ -601,15 +601,15 @@ createServer()
 
 ### build.rollupOptions
 
-- **Type:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **型:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
 
-  Directly customize the underlying Rollup bundle. This is the same as options that can be exported from a Rollup config file and will be merged with Vite's internal Rollup options. See [Rollup options docs](https://rollupjs.org/guide/en/#big-list-of-options) for more details.
+  基礎となる Rollup バンドルを直接カスタマイズします。これは、Rollup 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rollup オプションにマージされます。詳細は [Rollup options docs](https://rollupjs.org/guide/en/#big-list-of-options) を参照してください。
 
 ### build.commonjsOptions
 
-- **Type:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
+- **型:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
 
-  Options to pass on to [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs).
+  [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) に渡すオプションです。
 
 ### build.dynamicImportVarsOptions
 
@@ -619,72 +619,72 @@ createServer()
 
 ### build.lib
 
-- **Type:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
-- **Related:** [Library Mode](/guide/build#library-mode)
+- **型:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
+- **関連:** [ライブラリモード](/guide/build#library-mode)
 
-  Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Default `formats` are `['es', 'umd']`. `fileName` is the name of the package file output, default `fileName` is the name option of package.json, it can also be defined as function taking the `format` as an argument.
+  ライブラリとしてビルドします。ライブラリではエントリとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` です。デフォルトの `fileName` は package.json の name オプションですが、`format` を引数にとる関数として定義することもできます。
 
 ### build.manifest
 
-- **Type:** `boolean`
-- **Default:** `false`
-- **Related:** [Backend Integration](/guide/backend-integration)
+- **型:** `boolean`
+- **デフォルト:** `false`
+- **関連:** [バックエンドとの統合](/guide/backend-integration)
 
-  When set to `true`, the build will also generate a `manifest.json` file that contains a mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
+  `true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。
 
 ### build.minify
 
-- **Type:** `boolean | 'terser' | 'esbuild'`
-- **Default:** `'terser'`
+- **型:** `boolean | 'terser' | 'esbuild'`
+- **デフォルト:** `'terser'`
 
-  Set to `false` to disable minification, or specify the minifier to use. The default is [Terser](https://github.com/terser/terser) which is slower but produces smaller bundles in most cases. Esbuild minification is significantly faster but will result in slightly larger bundles.
+  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Terser](https://github.com/terser/terser) で、これは低速ですが、ほとんどの場合、より小さなバンドルを生成します。esbuild でのミニファイは非常に高速ですが、バンドルのサイズが若干大きくなります。
 
 ### build.terserOptions
 
-- **Type:** `TerserOptions`
+- **型:** `TerserOptions`
 
-  Additional [minify options](https://terser.org/docs/api-reference#minify-options) to pass on to Terser.
+  Terser に渡す追加の[ミニファイオプション](https://terser.org/docs/api-reference#minify-options)です。
 
 ### build.cleanCssOptions
 
-- **Type:** `CleanCSS.Options`
+- **型:** `CleanCSS.Options`
 
-  Constructor options to pass on to [clean-css](https://github.com/jakubpawlowicz/clean-css#constructor-options).
+  [clean-css](https://github.com/jakubpawlowicz/clean-css#constructor-options) に渡すコンストラクタのオプションです。
 
 ### build.write
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **型:** `boolean`
+- **デフォルト:** `true`
 
-  Set to `false` to disable writing the bundle to disk. This is mostly used in [programmatic `build()` calls](/guide/api-javascript#build) where further post processing of the bundle is needed before writing to disk.
+  バンドルのディスクへの書き込みを無効にするには、`false` を設定します。これは、主に[プログラムによる `build()` 呼び出し](/guide/api-javascript#build)で使用され、ディスクに書き込む前にバンドルの後処理が必要な場合に使用されます。
 
 ### build.emptyOutDir
 
-- **Type:** `boolean`
-- **Default:** `true` if `outDir` is inside `root`
+- **型:** `boolean`
+- **デフォルト:** `outDir` が `root` 内にあると `true`
 
-  By default, Vite will empty the `outDir` on build if it is inside project root. It will emit a warning if `outDir` is outside of root to avoid accidentially removing important files. You can explicitly set this option to suppress the warning. This is also available via command line as `--emptyOutDir`.
+  デフォルトでは、Vite はビルド時に `outDir` がプロジェクトルート内にある場合、それを空にします。重要なファイルを誤って削除してしまわないように、`outDir` がルートの外にある場合は警告を発します。このオプションを明示的に設定することで、警告を出さないようにできます。このオプションは、コマンドラインで `--emptyOutDir` としても利用できます。
 
 ### build.brotliSize
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **型:** `boolean`
+- **デフォルト:** `true`
 
-  Enable/disable brotli-compressed size reporting. Compressing large output files can be slow, so disabling this may increase build performance for large projects.
+  brotli で圧縮されたサイズレポートを有効/無効にします。大きな出力ファイルの圧縮には時間がかかるため、これを無効にすると、大規模なプロジェクトでのビルドのパフォーマンスが向上する可能性があります。
 
 ### build.chunkSizeWarningLimit
 
-- **Type:** `number`
-- **Default:** `500`
+- **型:** `number`
+- **デフォルト:** `500`
 
-  Limit for chunk size warnings (in kbs).
+  チャンクサイズ警告の制限値（kb 単位）。
 
 ### build.watch
 
-- **Type:** [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options)`| null`
-- **Default:** `null`
+- **型:** [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options)`| null`
+- **デフォルト:** `null`
 
-  Set to `{}` to enable rollup watcher. This is mostly used in cases that involve build-only plugins or integrations processes.
+  Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
 
 ## 依存関係の最適化オプション
 
@@ -729,7 +729,7 @@ createServer()
 SSR オプションは、マイナリリースで調整される可能性があります。
 :::
 
-- **Related:** [外部 SSR](/guide/ssr#ssr-externals)
+- **関連:** [外部 SSR](/guide/ssr#ssr-externals)
 
 ### ssr.external
 
