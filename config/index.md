@@ -556,7 +556,7 @@ createServer()
   import 'vite/modulepreload-polyfill'
   ```
 
-  Note: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブのダイナミックインポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
+  注意: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
   
 ### build.outDir
 
