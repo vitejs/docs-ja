@@ -1,8 +1,10 @@
 # バックエンドとの統合
 
+:::tip 注意
 従来のバックエンド（例: Rails, Laravel）を使用して HTML を配信し、アセットの配信には Vite を使用したい場合は、[Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends) の一覧を確認してみてください。
 
-もしくは以下の手順で設定することも可能です:
+カスタム統合が必要な場合は、このガイドの手順に従って手順で設定することも可能です
+:::
 
 1. Vite の設定ファイルで、エントリの指定とマニフェストのビルドの有効化を行ってください:
 
