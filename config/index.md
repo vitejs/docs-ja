@@ -462,7 +462,6 @@ export default defineConfig(async ({ command, mode }) => {
   ミドルウェアモードで Vite サーバを作成します（HTTP サーバなし）。
 
   - `'ssr'` は Vite 自体の HTML 配信ロジックを無効にするため、`index.html` を手動で配信する必要があります。
-
   - `'html'` は Vite 自体の HTML 配信ロジックを有効にします。
 
 - **関連:** [SSR - 開発サーバのセットアップ](/guide/ssr#開発サーバのセットアップ)
