@@ -138,24 +138,28 @@ $ npm run preview
 
    `https://<USERNAME or GROUP>.gitlab.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://gitlab.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
-2. `vite.config.js` で `build.outDir` を `public` と設定してください。
-
-3. プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます:
+2. プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます:
 
    ```yaml
-   image: node:10.22.0
+   image: node:16.5.0
    pages:
+     stage: deploy
      cache:
+       key:
+         files:
+           - package-lock.json
+         prefix: npm
        paths:
          - node_modules/
      script:
        - npm install
        - npm run build
+       - cp -a dist/. public/
      artifacts:
        paths:
          - public
-     only:
-       - master
+     rules:
+       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
    ```
 
 ## Netlify
