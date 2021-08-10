@@ -430,43 +430,43 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### server.force
 
-- **Type:** `boolean`
-- **Related:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
+- **型:** `boolean`
+- **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
 
-  Set to `true` to force dependency pre-bundling.
+  依存関係の事前バンドルを強制するには、`true` に設定します。
 
 ### server.hmr
 
-- **Type:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
-  Disable or configure HMR connection (in cases where the HMR websocket must use a different address from the http server).
+  HMR 接続の無効化または設定（HMR WebSocket が http サーバと異なるアドレスを使用する必要がある場合）。
 
-  Set `server.hmr.overlay` to `false` to disable the server error overlay.
+  `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
 
-  `clientPort` is an advanced option that overrides the port only on the client side, allowing you to serve the websocket on a different port than the client code looks for it on. Useful if you're using an SSL proxy in front of your dev server.
+  `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
-  When using `server.middlewareMode` and `server.https`, setting `server.hmr.server` to your HTTPS server will process HMR secure connection requests through your server. This can be helpful when using self-signed certificates.
+  `server.middlewareMode` および `server.https` を使用している場合、`server.hmr.server` を HTTPS サーバに設定すると、HMR のセキュアな接続要求がサーバ経由で処理されます。これは、自己署名証明書を使用する場合に役立ちます。
 
 ### server.watch
 
-- **Type:** `object`
+- **型:** `object`
 
-  File system watcher options to pass on to [chokidar](https://github.com/paulmillr/chokidar#api).
+  [chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャのオプションです。
 
-  When running Vite on Windows Subsystem for Linux (WSL) 2, if the project folder resides in a Windows filesystem, you'll need to set this option to `{ usePolling: true }`. This is due to [a WSL2 limitation](https://github.com/microsoft/WSL/issues/4739) with the Windows filesystem.
+  Windows Subsystem for Linux (WSL) 2 上で Vite を実行している時に、プロジェクトフォルダが Windows ファイルシステム内にある場合は、このオプションを `{ usePolling: true }` に設定する必要があります。これは、Windows ファイルシステムにおける [WSL2 の制限](https://github.com/microsoft/WSL/issues/4739)によるものです。
 
 ### server.middlewareMode
 
-- **Type:** `'ssr' | 'html'`
+- **型:** `'ssr' | 'html'`
 
-  Create Vite server in middleware mode. (without a HTTP server)
+  ミドルウェアモードで Vite サーバを作成します（HTTP サーバなし）。
 
-  - `'ssr'` will disable Vite's own HTML serving logic so that you should serve `index.html` manually.
-  - `'html'` will enable Vite's own HTML serving logic.
+  - `'ssr'` は Vite 自体の HTML 配信ロジックを無効にするため、`index.html` を手動で配信する必要があります。
+  - `'html'` は Vite 自体の HTML 配信ロジックを有効にします。
 
-- **Related:** [SSR - Setting Up the Dev Server](/guide/ssr#setting-up-the-dev-server)
+- **関連:** [SSR - 開発サーバのセットアップ](/guide/ssr#開発サーバのセットアップ)
 
-- **Example:**
+- **例:**
 
 ```js
 const express = require('express')
@@ -475,17 +475,17 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // Create vite server in middleware mode.
+  // ミドルウェアモードで vite サーバを作成します。
   const vite = await createViteServer({
     server: { middlewareMode: 'ssr' }
   })
-  // Use vite's connect instance as middleware
+  // vite の接続インスタンスをミドルウェアとして使用
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    // If `middlewareMode` is `'ssr'`, should serve `index.html` here.
-    // If `middlewareMode` is `'html'`, there is no need to serve `index.html`
-    // because Vite will do that.
+    // `middlewareMode` が `'ssr'` の場合、ここで `index.html` を配信する必要があります。
+    // `middlewareMode` が `'html'` の場合、Vite が配信するので
+    // `index.html` を配信する必要はありません。
   })
 }
 
@@ -494,32 +494,32 @@ createServer()
 
 ### server.fs.strict
 
-- **Experimental**
-- **Type:** `boolean`
-- **Default:** `false` (will change to `true` in future versions)
+- **実験的機能**
+- **型:** `boolean`
+- **デフォルト:** `false`（将来のバージョンでは `true` に変更されます）
 
-  Restrict serving files outside of workspace root.
+  ワークスペースのルート以外のファイルの配信を制限します。
 
 ### server.fs.allow
 
-- **Experimental**
-- **Type:** `string[]`
+- **実験的機能**
+- **型:** `string[]`
 
-  Restrict files that could be served via `/@fs/`. When `server.fs.strict` is set to `true`, accessing files outside this directory list will result in a 403.
+  `/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリリストの外にあるファイルにアクセスすると、403 が返されます。
 
-  Vite will search for the root of the potential workspace and use it as default. A valid workspace met the following conditions, otherwise will fallback to the [project root](/guide/#index-html-and-project-root).
+  Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)にフォールバックします。
 
-  - contains `workspaces` field in `package.json`
-  - contains one of the following file
+  - `package.json` に `workspaces` フィールドが含まれている
+  - 以下のファイルのいずれかを含んでいる
     - `pnpm-workspace.yaml`
 
-  Accepts a path to specify the custom workspace root. Could be a absolute path or a path relative to [project root](/guide/#index-html-and-project-root). For example
+  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば
 
   ```js
   export default defineConfig({
     server: {
       fs: {
-        // Allow serving files from one level up to the project root
+        // プロジェクトルートの 1 つ上の階層からファイルを配信できるようにする
         allow: ['..']
       }
     }
