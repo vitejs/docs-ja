@@ -1,7 +1,7 @@
 # 静的アセットの取り扱い
 
 - 関連: [Public Base Path](./build#public-base-path)
-- 関連: [`assetsInclude` config option](/config/#assetsinclude)
+- 関連: [`assetsInclude` 設定オプション](/config/#assetsinclude)
 
 ## Importing Asset as URL
 
@@ -76,7 +76,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。 
 
-ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` option](/config/#publicdir) で設定することができます。
+ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/#publicdir) で設定することができます。
 
 注意点:
 

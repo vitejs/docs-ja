@@ -6,7 +6,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.MODE`**: {string} アプリが動作している[モード](#modes)。
 
-- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` config option](/config/#base) によって決まります。
+- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` 設定オプション](/config/#base) によって決まります。
 
 - **`import.meta.env.PROD`**: {boolean} アプリがプロダクションで動作しているかどうか。
 
