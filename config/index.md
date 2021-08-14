@@ -4,7 +4,7 @@
 
 ### 設定ファイルの解決
 
-コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-and-project-root)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします。
+コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-とプロジェクトルート)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします。
 
 最も基本的な設定ファイルは次のようになります:
 
@@ -90,7 +90,7 @@ export default defineConfig(async ({ command, mode }) => {
 
   プロジェクトのルートディレクトリ（`index.html` が置かれている場所）。絶対パス、または設定ファイル自体の場所からの相対パスを指定できます。
 
-  詳細は [プロジェクトルート](/guide/#index-html-and-project-root) を参照してください。
+  詳細は [プロジェクトルート](/guide/#index-html-とプロジェクトルート) を参照してください。
 
 ### base
 
@@ -143,7 +143,7 @@ export default defineConfig(async ({ command, mode }) => {
 
   `publicDir` を `false` に設定すると、この機能は無効になります。
 
-  詳細は [The `public` Directory](/guide/assets#the-public-directory) を参照してください。
+  詳細は [`public` ディレクトリ](/guide/assets#public-ディレクトリ) を参照してください。
 
 ### cacheDir
 
@@ -532,7 +532,7 @@ createServer()
 
 - **型:** `string`
 - **デフォルト:** `'modules'`
-- **関連:** [Browser Compatibility](/guide/build#browser-compatibility)
+- **関連:** [ブラウザの互換性](/guide/build#ブラウザの互換性)
 
   最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
 
@@ -558,14 +558,14 @@ createServer()
   import 'vite/modulepreload-polyfill'
   ```
 
-  注意: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
+  注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
   
 ### build.outDir
 
 - **型:** `string`
 - **デフォルト:** `dist`
 
-  出力ディレクトリを指定します（[プロジェクトルート](/guide/#index-html-and-project-root)からの相対パス）。
+  出力ディレクトリを指定します（[プロジェクトルート](/guide/#index-html-とプロジェクトルート)からの相対パス）。
 
 ### build.assetsDir
 
@@ -731,7 +731,7 @@ createServer()
 SSR オプションは、マイナリリースで調整される可能性があります。
 :::
 
-- **関連:** [外部 SSR](/guide/ssr#ssr-externals)
+- **関連:** [外部 SSR](/guide/ssr#外部-ssr)
 
 ### ssr.external
 

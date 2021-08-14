@@ -74,7 +74,7 @@ Vite は Vue に対して最高のサポートをします:
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
-もし React、または Vue で JSX を使用していない場合は、[`esbuild` option](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
+もし React、または Vue で JSX を使用していない場合は、[`esbuild` オプション](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
 
 ```js
 // vite.config.js
@@ -129,7 +129,7 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS モジュールの動作は [`css.modules` option](/config/#css-modules) を参考にしてください。
+CSS モジュールの動作は [`css.modules` オプション](/config/#css-modules) を参考にしてください。
 
 `css.modules.localsConvention` がキャメルケースローカルを有効にするように設定されている場合（例：`localsConvention: 'camelCaseOnly'`）、名前付きインポートを使用することもできます:
 

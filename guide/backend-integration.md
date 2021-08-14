@@ -22,7 +22,7 @@
    })
    ```
 
-   [module preload polyfill](/config/#polyfillmodulepreload) を無効にしていない場合は、エントリで Polyfill をインポートする必要があります。
+   [module preload polyfill](/config/#build-polyfillmodulepreload) を無効にしていない場合は、エントリで Polyfill をインポートする必要があります。
 
    ```js
    // アプリのエントリの先頭に追加

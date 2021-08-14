@@ -10,7 +10,7 @@
 defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0
 ```
 
-[`build.target` config option](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
+[`build.target` 設定オプション](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
 Vite はデフォルトでは構文変換のみを扱い **デフォルトでは Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
 
@@ -28,7 +28,7 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ## ビルドのカスタマイズ
 
-ビルドは様々な [build config options](/config/#build-options) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
+ビルドは様々な [build 設定オプション](/config/#ビルドオプション) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
 
 ```js
 // vite.config.js
