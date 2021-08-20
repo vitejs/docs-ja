@@ -17,7 +17,7 @@
 
 `vite preview` は、ローカルでビルドをプレビューするためのもので、本番用のサーバとしては使えないことに注意してください。
 
-::: tip NOTE
+::: tip 注意
 このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバサイドレンダリング（SSR）も試験的にサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
 :::
 
@@ -54,8 +54,8 @@ $ npm run serve
 
 これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
 
-::: tip NOTE
-If you change the script name from `serve` to `preview`, you may run into issues with some package managers due to the way they handle [Pre & Post scripts](https://docs.npmjs.com/cli/v7/using-npm/scripts#pre--post-scripts).
+::: tip 注意
+スクリプト名を `serve` から `preview` に変更すると、一部のパッケージマネージャーでは [Pre & Post scripts](https://docs.npmjs.com/cli/v7/using-npm/scripts#pre--post-scripts) の処理方法が原因で問題が発生する可能性があります。
 :::
 
 ## GitHub Pages
