@@ -36,7 +36,7 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 公式プラグインの情報は、 [プラグインのセクション](../plugins/) をご覧ください。コミュニティのプラグインは [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) に一覧があります。互換性のある Rollup プラグインは、 [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) に互換性のある公式 Rollup プラグインの一覧と使い方があります。または一覧になければ、 [互換性のある Rollup プラグインのセクション](../guide/api-plugin#rollup-plugin-compatibility) を確認してください。
 
-[推奨される規約](./api-plugin.md#conventions) に従ったプラグインは次の方法でも見つけることができます。 Vite プラグインは [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity)、 Rollup プラグインは [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) または [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) です。
+[推奨される規約](./api-plugin.md#conventions) に従ったプラグインは次の方法でも見つけることができます。 Vite プラグインは [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity)、 Rollup プラグインは [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) です。
 
 ## プラグインの順番を強制
 
