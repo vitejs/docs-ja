@@ -10,7 +10,7 @@
 {
   "scripts": {
     "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vite preview"
   }
 }
 ```
@@ -33,26 +33,30 @@ $ npm run build
 
 ## アプリをローカルでテストする
 
-アプリをビルドしたら、`npm run preview` コマンドを実行し、ローカルでテストします。
+アプリをビルドしたら、`npm run serve` コマンドを実行し、ローカルでテストします。
 
 ```bash
 $ npm run build
-$ npm run preview
+$ npm run serve
 ```
 
-`preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
+`vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
 
 サーバのポートを設定するには、引数に `--port` フラグを指定します。
 
 ```json
 {
   "scripts": {
-    "preview": "vite preview --port 8080"
+    "serve": "vite preview --port 8080"
   }
 }
 ```
 
 これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
+
+::: tip NOTE
+If you change the script name from `serve` to `preview`, you may run into issues with some package managers due to the way they handle [Pre & Post scripts](https://docs.npmjs.com/cli/v7/using-npm/scripts#pre--post-scripts).
+:::
 
 ## GitHub Pages
 
