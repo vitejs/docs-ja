@@ -251,3 +251,10 @@ export function mySSRPlugin() {
 ## SSR ターゲット
 
 SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバを実行することもできます。パッケージのエントリの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。
+
+## SSR Bundle
+
+In some cases like `webworker` runtimes, you might want to bundle your SSR build into a single JavaScript file. You can enable this behavior by setting `ssr.noExternal` to `true`. This will do two things:
+
+- Treat all dependencies as `noExternal`
+- Throw an error if any Node.js built-ins are imported
