@@ -415,7 +415,7 @@ export default defineConfig(async ({ command, mode }) => {
           changeOrigin: true,
           configure: (proxy, options) => {
             // プロキシは 'http-proxy' のインスタンスになります
-          }),
+          },
         }
       }
     }
