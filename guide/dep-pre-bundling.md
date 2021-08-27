@@ -38,6 +38,11 @@ react, react-dom
 
 モノリポジトリの設定では、依存関係は同じリポジトリからのリンクされたパッケージの可能性があります。依存管理ツールをソースコードとして合わせます。合わせた、依存管理ツールをバンドルしようとはせず、代わりに依存管理ツールから出力された依存関係リストを分析します。
 
+::: warning Note
+Linked dependencies might not work properly in the final build due to differences in dependency resolution.
+Use `npm package` instead for all local dependencies to avoid issues in the final bundle.
+:::
+
 ## 挙動のカスタマイズ
 
 デフォルトの依存関係発見の経験則は、必ずしも望ましいとは限りません。リストから依存関係を明示的に含めたり除外したりする場合は、[`optimizeDeps` 設定オプション](/config/#依存関係の最適化オプション).
