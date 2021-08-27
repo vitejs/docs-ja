@@ -530,7 +530,7 @@ createServer()
 
 ### build.target
 
-- **型:** `string`
+- **型:** `string | string[]`
 - **デフォルト:** `'modules'`
 - **関連:** [ブラウザの互換性](/guide/build#ブラウザの互換性)
 
@@ -646,12 +646,6 @@ createServer()
 - **型:** `TerserOptions`
 
   Terser に渡す追加の[ミニファイオプション](https://terser.org/docs/api-reference#minify-options)です。
-
-### build.cleanCssOptions
-
-- **型:** `CleanCSS.Options`
-
-  [clean-css](https://github.com/jakubpawlowicz/clean-css#constructor-options) に渡すコンストラクタのオプションです。
 
 ### build.write
 
