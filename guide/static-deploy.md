@@ -10,14 +10,14 @@
 {
   "scripts": {
     "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vite preview"
   }
 }
 ```
 
 `vite preview` は、ローカルでビルドをプレビューするためのもので、本番用のサーバとしては使えないことに注意してください。
 
-::: tip NOTE
+::: tip 注意
 このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバサイドレンダリング（SSR）も試験的にサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
 :::
 
@@ -33,26 +33,30 @@ $ npm run build
 
 ## アプリをローカルでテストする
 
-アプリをビルドしたら、`npm run preview` コマンドを実行し、ローカルでテストします。
+アプリをビルドしたら、`npm run serve` コマンドを実行し、ローカルでテストします。
 
 ```bash
 $ npm run build
-$ npm run preview
+$ npm run serve
 ```
 
-`preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
+`vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
 
 サーバのポートを設定するには、引数に `--port` フラグを指定します。
 
 ```json
 {
   "scripts": {
-    "preview": "vite preview --port 8080"
+    "serve": "vite preview --port 8080"
   }
 }
 ```
 
 これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
+
+::: tip 注意
+スクリプト名を `serve` から `preview` に変更すると、一部のパッケージマネージャーでは [Pre & Post scripts](https://docs.npmjs.com/cli/v7/using-npm/scripts#pre--post-scripts) の処理方法が原因で問題が発生する可能性があります。
+:::
 
 ## GitHub Pages
 
