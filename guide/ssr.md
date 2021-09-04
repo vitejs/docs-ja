@@ -251,3 +251,10 @@ export function mySSRPlugin() {
 ## SSR ターゲット
 
 SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバを実行することもできます。パッケージのエントリの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。
+
+## SSR バンドル
+
+`webworker` のランタイムなどの場合、SSR のビルドを 1 つの JavaScript ファイルにバンドルしたい場合があります。`ssr.noExternal` を `true` に設定することで、この動作を有効にできます。これは 2 つのことを行います:
+
+- すべての依存関係を `noExternal` として扱う
+- Node.js のビルドインがインポートされた場合、エラーを投げる
