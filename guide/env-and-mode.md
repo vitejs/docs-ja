@@ -44,6 +44,8 @@ VITE_SOME_KEY=123
 
 `VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
 
+If you want to customize env variables prefix, see [envPrefix](/config/index#envPrefix) option.
+
 :::warning SECURITY NOTES
 
 - `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることができます。git にチェックインされるのを防ぐために、`.gitignore` に `.local` を追加すべきです。
