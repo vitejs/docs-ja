@@ -335,14 +335,14 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### envPrefix
 
-- **Type:** `string | string[]`
-- **Default:** `VITE_`
+- **型:** `string | string[]`
+- **デフォルト:** `VITE_`
 
-  Env variables starts with `envPrefix` will be exposed to your client source code via import.meta.env.
+  `envPrefix` で始まる環境変数は、import.meta.env でクライアントのソースコードに公開されます。
 
 :::warning SECURITY NOTES
 
-- `envPrefix` should not be set as `''`, which will expose all your env variables and cause unexpected leaking of of sensitive information. Vite will throw error when detecting `''`.
+- `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
   :::
 
 ## サーバオプション
