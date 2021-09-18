@@ -34,7 +34,37 @@ Vite は `.ts` ファイルに対してのみ変換を実行し、型チェッ�
 
 Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約20〜30倍速く、HMR の更新は50ミリ秒未満でブラウザに反映されます
 
-`esbuild` は型情報なしでビルドを実行するため、const や enum の暗黙の型のみのインポートなどの特定の機能はサポートしていません。TypeScript が分離されたトランスパイルで機能しない機能に対して警告するように、`compilerOptions`の下の `tsconfig.json` で `"isolatedModules": true` を設定する必要があります。
+### TypeScript コンパイラオプション
+
+`tsconfig.json` の `compilerOptions` にあるいくつかの設定フィールドには、特別な注意が必要です。
+
+#### `isolatedModules`
+
+`true` に設定する必要があります。
+
+`esbuild` は型情報なしにトランスパイルを行うだけなので、const enum や暗黙の型のみのインポートなどの特定の機能をサポートしていないからです。
+
+隔離されたトランスパイルで動作しない機能を TS が警告するように、`tsconfig.json` の `compilerOptions` で `"isolatedModules": true` を設定する必要があります。
+
+#### `useDefineForClassFields`
+
+Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` の場合、デフォルト値は `true` になります。これは [`tsc` 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
+
+しかし、他のプログラミング言語や古いバージョンの TypeScript を使用している人にとっては直感的に理解できないかもしれません。
+移行の詳細については、[TypeScript 3.7 リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)を参照してください。
+
+クラスフィールドに大きく依存しているライブラリを使用している場合は、そのライブラリが意図している使い方に注意してください。
+
+[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties)、[Vue Class Components 8.x](https://github.com/vuejs/vue-class-component/issues/465) など、ほとんどのライブラリは `"useDefineForClassFields": true` を想定しています。
+
+しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
+
+### ビルド結果に影響するその他のコンパイラオプション
+
+- [`extends`](https://www.typescriptlang.org/tsconfig#extends)
+- [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
+- [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
+- [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 
 ### クライアントのタイプ
 
