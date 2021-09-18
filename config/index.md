@@ -713,7 +713,16 @@ createServer()
   事前バンドルから除外する依存関係。
 
   :::warning CommonJS
-  CommonJS の依存関係は、最適化から除外すべきではありません。ESM の依存関係にネストした CommonJS の依存関係がある場合、これも除外するべきではありません。
+  CommonJS の依存関係を最適化から除外してはいけません。ESM の依存関係が最適化から除外されているが、ネストされた CommonJS の依存関係がある場合は、CommonJS の依存関係を `optimizeDeps.include` に追加する必要があります。例:
+
+  ```js
+  export default defineConfig({
+    optimizeDeps: {
+      include: ['esm-dep > cjs-dep']
+    }
+  })
+  ```
+
   :::
 
 ### optimizeDeps.include
