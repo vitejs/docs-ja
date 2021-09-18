@@ -206,8 +206,17 @@ export default defineConfig(async ({ command, mode }) => {
 
   拡張子を省略したインポートに試行するファイル拡張子のリスト。カスタムインポートタイプ（`.vue` など）の拡張子を省略すると、IDE や型のサポートに支障をきたす可能性があるため、推奨され**ません**。
 
-### css.modules
+### resolve.preserveSymlinks
 
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+  この設定を有効にすると、Vite は実際のファイルパス（つまりシンボリックリンクを辿った後のパス）ではなく、オリジナルのファイルパス（つまりシンボリックリンクを辿っていないパス）でファイルの同一性を判別します。
+
+- **関連:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
+  ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+
+### css.modules
 - **型:**
 
   ```ts
