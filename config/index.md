@@ -487,7 +487,7 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // ミドルウェアモードで vite サーバを作成します。
+  // ミドルウェアモードで Vite サーバを作成します。
   const vite = await createViteServer({
     server: { middlewareMode: 'ssr' }
   })
