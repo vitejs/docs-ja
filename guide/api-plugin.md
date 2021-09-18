@@ -414,6 +414,15 @@ function myPlugin() {
 }
 ```
 
+また、関数を使用することで、より精密なコントロールが可能です:
+
+```js
+apply(config, { command }) {
+  // ビルドにのみ適用するが、SSR には適用しない
+  return command === 'build' && !config.build.ssr
+}
+```
+
 ## Rollup プラグインの互換性
 
 かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバのコンテキストでは意味をなさないためです。
