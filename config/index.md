@@ -547,7 +547,7 @@ createServer()
   })
   ```
 
-  When `server.fs.allow` is specified, the auto workspace root detection will be disabled. To extend the original behavior, a utility `searchForWorkspaceRoot` is exposed:
+  `server.fs.allow` を指定すると、ワークスペースルートの自動検出が無効になります。本来の動作を拡張するために、ユーティリティーの `searchForWorkspaceRoot` が公開されています:
 
   ```js
   import { defineConfig, searchForWorkspaceRoot } from 'vite'
@@ -556,9 +556,9 @@ createServer()
     server: {
       fs: {
         allow: [
-          // search up for workspace root
+          // ワークスペースルートの検索
           searchForWorkspaceRoot(process.cwd()),
-          // your custom rules
+          // あなたのカスタムルール
           '/path/to/custom/allow'
         ]
       }
