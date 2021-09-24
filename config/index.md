@@ -534,7 +534,7 @@ createServer()
   - 以下のファイルのいずれかを含んでいる
     - `pnpm-workspace.yaml`
 
-  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば
+  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
 
   ```js
   export default defineConfig({
@@ -542,6 +542,25 @@ createServer()
       fs: {
         // プロジェクトルートの 1 つ上の階層からファイルを配信できるようにする
         allow: ['..']
+      }
+    }
+  })
+  ```
+
+  When `server.fs.allow` is specified, the auto workspace root detection will be disabled. To extend the original behavior, a utility `searchForWorkspaceRoot` is exposed:
+
+  ```js
+  import { defineConfig, searchForWorkspaceRoot } from 'vite'
+
+  export default defineConfig({
+    server: {
+      fs: {
+        allow: [
+          // search up for workspace root
+          searchForWorkspaceRoot(process.cwd()),
+          // your custom rules
+          '/path/to/custom/allow'
+        ]
       }
     }
   })
