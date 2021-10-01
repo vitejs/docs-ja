@@ -68,7 +68,7 @@ interface ImportMetaEnv {
 
 ## Modes
 
-デフォルトで、開発サーバ（`serve` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
+デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` と `serve` コマンドは `production` モードで動作します。
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 
