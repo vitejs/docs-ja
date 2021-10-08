@@ -279,7 +279,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 ### `transformIndexHtml`
 
-- **型:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post' transform: IndexHtmlTransformHook }`
+- **型:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post', transform: IndexHtmlTransformHook }`
 - **種類:** `async`, `sequential`
 
   `index.html` を変換するための専用フック。このフックは現在の HTML 文字列と変換コンテキストを受け取ります。コンテキストは開発時には [`ViteDevServer`](./api-javascript#vitedevserver) を公開し、ビルド時には Rollup の出力バンドルを公開します。
