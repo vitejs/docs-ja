@@ -615,6 +615,17 @@ createServer()
 
   無効にした場合、プロジェクト全体のすべての CSS はひとつの CSS ファイルに抽出されます。
 
+### build.cssTarget
+
+- **Type:** `string | string[]`
+- **Default:** the same as [`build.target`](/config/#build-target)
+
+  This options allows users to set a different browser target for CSS minification from the one used for JavaScript transpilation.
+
+  It should only be used when you are targeting a non-mainstream browser.
+  One example is Android WeChat WebView, which supports most modern JavaScript features but not the [`#RGBA` hexadecimal color notation in CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors).
+  In this case, you need to set `build.cssTarget` to `chrome61` to prevent vite from transform `rgba()` colors into `#RGBA` hexadecimal notations.
+
 ### build.sourcemap
 
 - **型:** `boolean | 'inline' | 'hidden'`
