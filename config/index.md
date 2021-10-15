@@ -476,6 +476,23 @@ export default defineConfig(async ({ command, mode }) => {
 
   Windows Subsystem for Linux (WSL) 2 上で Vite を実行している時に、プロジェクトフォルダが Windows ファイルシステム内にある場合は、このオプションを `{ usePolling: true }` に設定する必要があります。これは、Windows ファイルシステムにおける [WSL2 の制限](https://github.com/microsoft/WSL/issues/4739)によるものです。
 
+  The Vite server watcher skips `.git/` and `node_modules/` directories by default. If you want to watch a package inside `node_moduels/`, you can pass a negated glob pattern to `server.watch.ignored`. That is:
+
+  ```js
+  export default defineConfig({
+    server: {
+      watch: {
+        ignored: ['!**/node_modules/your-package-name/**']
+      }
+    },
+    // The watched package must be excluded from optimization,
+    // so that it can appear in the dependency graph and trigger hot reload.
+    optimizeDeps: {
+      exclude: ['your-package-name']
+    }
+  })
+  ```
+
 ### server.middlewareMode
 
 - **型:** `'ssr' | 'html'`
