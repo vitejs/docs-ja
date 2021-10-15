@@ -617,14 +617,14 @@ createServer()
 
 ### build.cssTarget
 
-- **Type:** `string | string[]`
-- **Default:** the same as [`build.target`](/config/#build-target)
+- **型:** `string | string[]`
+- **デフォルト:** [`build.target`](/config/#build-target) と同じ
 
-  This options allows users to set a different browser target for CSS minification from the one used for JavaScript transpilation.
+  このオプションを使用すると、CSS ミニファイのブラウザターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
 
-  It should only be used when you are targeting a non-mainstream browser.
-  One example is Android WeChat WebView, which supports most modern JavaScript features but not the [`#RGBA` hexadecimal color notation in CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors).
-  In this case, you need to set `build.cssTarget` to `chrome61` to prevent vite from transform `rgba()` colors into `#RGBA` hexadecimal notations.
+  これは主流でないブラウザをターゲットにしている場合にのみ使用してください。
+  例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
+  この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
 
 ### build.sourcemap
 
