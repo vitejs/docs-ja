@@ -16,11 +16,11 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 - デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)と[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)の両方に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
 
-## Trying Vite Online
+## Vite をオンラインで試す
 
-You can try Vite online on [StackBlitz](https://vite.new/). It runs the Vite-based build setup directly in the browser, so it is almost identical to the local setup but doesn't require installing anything on your machine. You can navigate to `vite.new/{template}` to select which framework to use.
+[StackBlitz](https://vite.new/) で Vite をオンラインで試すことができます。Vite ベースのビルドセットアップをブラウザ上で直接実行するので、ローカルセットアップとほぼ同じですが、マシンに何もインストールする必要がありません。`vite.new/{template}` に移動して、使用するフレームワークを選択できます。
 
-The supported template presets are:
+サポートされているテンプレートのプリセットは次のとおりです:
 
 | JavaScript | TypeScript |
 | :---: | :---: |
