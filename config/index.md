@@ -217,6 +217,7 @@ export default defineConfig(async ({ command, mode }) => {
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ### css.modules
+
 - **型:**
 
   ```ts
@@ -312,13 +313,21 @@ export default defineConfig(async ({ command, mode }) => {
 - **型:** `string | RegExp | (string | RegExp)[]`
 - **関連:** [静的アセットの取り扱い](/guide/assets)
 
-  静的アセットとして扱う追加のファイルタイプを指定します。そして:
+  静的アセットとして扱う追加の [picomatch パターン](https://github.com/micromatch/picomatch)を指定します。そして:
 
   - HTML から参照されたり、`fetch` や XHR で直接リクエストされたりすると、プラグインの変換パイプラインから除外されます。
 
   - JS からインポートすると、解決された URL 文字列が返されます（アセットタイプを別の方法で処理するための `enforce: 'pre'` プラグインがある場合は上書きされます）
 
   組み込みのアセットタイプのリストは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts)をご覧ください。
+
+  **例:**
+
+  ```js
+  export default defineConfig({
+    assetsInclude: ['**/*.gltf']
+  })
+  ```
 
 ### logLevel
 
@@ -534,7 +543,7 @@ createServer()
   - 以下のファイルのいずれかを含んでいる
     - `pnpm-workspace.yaml`
 
-  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば
+  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
 
   ```js
   export default defineConfig({
@@ -542,6 +551,25 @@ createServer()
       fs: {
         // プロジェクトルートの 1 つ上の階層からファイルを配信できるようにする
         allow: ['..']
+      }
+    }
+  })
+  ```
+
+  `server.fs.allow` を指定すると、ワークスペースルートの自動検出が無効になります。本来の動作を拡張するために、ユーティリティーの `searchForWorkspaceRoot` が公開されています:
+
+  ```js
+  import { defineConfig, searchForWorkspaceRoot } from 'vite'
+
+  export default defineConfig({
+    server: {
+      fs: {
+        allow: [
+          // ワークスペースルートの検索
+          searchForWorkspaceRoot(process.cwd()),
+          // あなたのカスタムルール
+          '/path/to/custom/allow'
+        ]
       }
     }
   })
@@ -668,6 +696,14 @@ export default defineConfig({
 - **関連:** [バックエンドとの統合](/guide/backend-integration)
 
   `true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。
+
+### build.ssrManifest
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+- **関連:** [サーバサイドレンダリング](/guide/ssr)
+
+  `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。
 
 ### build.minify
 

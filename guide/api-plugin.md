@@ -4,6 +4,17 @@ Vite プラグインは、Rollup の優れた設計のプラグインインタ�
 
 **以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/guide/en/#plugin-development)を読むことをお勧めします。**
 
+## プラグインの作成
+
+Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](https://vitejs.dev/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティプラグインを確認してください。
+
+プラグインを作成する際には、`vite.config.js` にインラインで記述できます。そのために新しいパッケージを作成する必要はありません。あるプラグインが自分のプロジェクトで役に立ったことがわかったら、[エコシステムにいる](https://chat.vitejs.dev)他の人を助けるために共有することを検討してください。
+
+::: tip
+プラグインを学んだり、デバッグしたり、オーサリングしたりする際には [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をプロジェクトに含めることをお勧めします。これにより、Vite プラグインの中間状態を検査できます。インストール後、`localhost:3000/__inspect/` にアクセスして、プロジェクトのモジュールや変換スタックを検査できます。インストール方法については、[vite-plugin-inspect のドキュメント](https://github.com/antfu/vite-plugin-inspect)をご覧ください。
+![vite-plugin-inspect](/images/vite-plugin-inspect.png)
+:::
+
 ## 規約
 
 プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。

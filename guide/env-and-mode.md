@@ -60,15 +60,19 @@ VITE_SOME_KEY=123
 この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
 ```typescript
-interface ImportMetaEnv {
-  VITE_APP_TITLE: string
-  // more env variables...
+interface ImportMetaEnv extends Readonly<Record<string, string>> {
+  readonly VITE_APP_TITLE: string
+  // その他の環境変数...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
 }
 ```
 
 ## Modes
 
-デフォルトで、開発サーバ（`serve` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
+デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` と `serve` コマンドは `production` モードで動作します。
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 
