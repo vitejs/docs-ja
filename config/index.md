@@ -575,6 +575,20 @@ createServer()
   })
   ```
 
+### server.origin
+
+- **型:** `string`
+
+開発時に生成されるアセット URL のオリジンを定義します。
+
+```js
+export default defineConfig({
+  server: {
+    origin: 'http://127.0.0.1:8080/'
+  }
+})
+```
+
 ## ビルドオプション
 
 ### build.target
