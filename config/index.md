@@ -543,7 +543,7 @@ createServer()
   - 以下のファイルのいずれかを含んでいる
     - `pnpm-workspace.yaml`
 
-  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば
+  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
 
   ```js
   export default defineConfig({
@@ -551,6 +551,25 @@ createServer()
       fs: {
         // プロジェクトルートの 1 つ上の階層からファイルを配信できるようにする
         allow: ['..']
+      }
+    }
+  })
+  ```
+
+  `server.fs.allow` を指定すると、ワークスペースルートの自動検出が無効になります。本来の動作を拡張するために、ユーティリティーの `searchForWorkspaceRoot` が公開されています:
+
+  ```js
+  import { defineConfig, searchForWorkspaceRoot } from 'vite'
+
+  export default defineConfig({
+    server: {
+      fs: {
+        allow: [
+          // ワークスペースルートの検索
+          searchForWorkspaceRoot(process.cwd()),
+          // あなたのカスタムルール
+          '/path/to/custom/allow'
+        ]
       }
     }
   })
