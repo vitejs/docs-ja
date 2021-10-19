@@ -88,16 +88,6 @@ interface ViteDevServer {
    */
   transformIndexHtml(url: string, html: string): Promise<string>
   /**
-   * esbuild でファイルを変換するためのユーティリティ。
-   * 特定のプラグインで役立つ場合があります。
-   */
-  transformWithEsbuild(
-    code: string,
-    filename: string,
-    options?: EsbuildTransformOptions,
-    inMap?: object
-  ): Promise<ESBuildTransformResult>
-  /**
    * 指定された URL を SSR 用にインスタンス化されたモジュールとして読み込みます。
    */
   ssrLoadModule(
@@ -158,4 +148,17 @@ async function resolveConfig(
   command: 'build' | 'serve',
   defaultMode?: string
 ): Promise<ResolvedConfig>
+```
+
+## `transformWithEsbuild`
+
+**型シグネチャ:**
+
+```ts
+async function transformWithEsbuild(
+  code: string,
+  filename: string,
+  options?: EsbuildTransformOptions,
+  inMap?: object
+): Promise<ESBuildTransformResult>
 ```
