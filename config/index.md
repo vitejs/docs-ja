@@ -601,7 +601,7 @@ export default defineConfig({
 
   もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
-  - [`build.minify`](#build-minify) が `'terser'`（デフォルト）の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
+  - [`build.minify`](#build-minify) が `'terser'` の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
   - それ以外の場合、トランスパイルはまったく行なわれません。
 
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
@@ -708,9 +708,9 @@ export default defineConfig({
 ### build.minify
 
 - **型:** `boolean | 'terser' | 'esbuild'`
-- **デフォルト:** `'terser'`
+- **デフォルト:** `'esbuild'`
 
-  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Terser](https://github.com/terser/terser) で、これは低速ですが、ほとんどの場合、より小さなバンドルを生成します。esbuild でのミニファイは非常に高速ですが、バンドルのサイズが若干大きくなります。
+  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
 
 ### build.terserOptions
 
