@@ -657,6 +657,17 @@ export default defineConfig({
 
   無効にした場合、プロジェクト全体のすべての CSS はひとつの CSS ファイルに抽出されます。
 
+### build.cssTarget
+
+- **型:** `string | string[]`
+- **デフォルト:** [`build.target`](/config/#build-target) と同じ
+
+  このオプションを使用すると、CSS ミニファイのブラウザターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
+
+  これは主流でないブラウザをターゲットにしている場合にのみ使用してください。
+  例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
+  この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
+
 ### build.sourcemap
 
 - **型:** `boolean | 'inline' | 'hidden'`
