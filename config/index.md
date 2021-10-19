@@ -217,6 +217,7 @@ export default defineConfig(async ({ command, mode }) => {
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ### css.modules
+
 - **型:**
 
   ```ts
@@ -312,13 +313,21 @@ export default defineConfig(async ({ command, mode }) => {
 - **型:** `string | RegExp | (string | RegExp)[]`
 - **関連:** [静的アセットの取り扱い](/guide/assets)
 
-  静的アセットとして扱う追加のファイルタイプを指定します。そして:
+  静的アセットとして扱う追加の [picomatch パターン](https://github.com/micromatch/picomatch)を指定します。そして:
 
   - HTML から参照されたり、`fetch` や XHR で直接リクエストされたりすると、プラグインの変換パイプラインから除外されます。
 
   - JS からインポートすると、解決された URL 文字列が返されます（アセットタイプを別の方法で処理するための `enforce: 'pre'` プラグインがある場合は上書きされます）
 
   組み込みのアセットタイプのリストは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts)をご覧ください。
+
+  **例:**
+
+  ```js
+  export default defineConfig({
+    assetsInclude: ['**/*.gltf']
+  })
+  ```
 
 ### logLevel
 
