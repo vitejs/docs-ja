@@ -20,6 +20,21 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 - デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)と[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)の両方に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
 
+## Vite をオンラインで試す
+
+[StackBlitz](https://vite.new/) で Vite をオンラインで試すことができます。Vite ベースのビルドセットアップをブラウザ上で直接実行するので、ローカルセットアップとほぼ同じですが、マシンに何もインストールする必要がありません。`vite.new/{template}` に移動して、使用するフレームワークを選択できます。
+
+サポートされているテンプレートのプリセットは次のとおりです:
+
+| JavaScript | TypeScript |
+| :---: | :---: |
+| [vanilla](https://vite.new/vanilla) | [vanilla-ts](https://vite.new/vanilla-ts) |
+| [vue](https://vite.new/vue) | [vue-ts](https://vite.new/vue-ts) |
+| [react](https://vite.new/react) | [react-ts](https://vite.new/react-ts) |
+| [preact](https://vite.new/preact) | [preact-ts](https://vite.new/preact-ts) |
+| [lit](https://vite.new/lit) | [lit-ts](https://vite.new/lit-ts) |
+| [svelte](https://vite.new/svelte) | [svelte-ts](https://vite.new/svelte-ts) |
+
 ## 最初の Vite プロジェクトを生成する
 
 ::: tip 互換性について
@@ -59,22 +74,7 @@ npm init vite@latest my-vue-app -- --template vue
 yarn create vite my-vue-app --template vue
 ```
 
-サポートされているテンプレートプリセットは以下のとおりです:
-
-- `vanilla`
-- `vanilla-ts`
-- `vue`
-- `vue-ts`
-- `react`
-- `react-ts`
-- `preact`
-- `preact-ts`
-- `lit`
-- `lit-ts`
-- `svelte`
-- `svelte-ts`
-
-各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください。
+サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`.
 
 ## コミュニティのテンプレート
 
