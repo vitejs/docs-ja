@@ -38,7 +38,7 @@
 
 ## Alias の動作変更
 
-[`alias`](/config/#resolve-alias) が `@rollup/plugin-alias` に渡されるようになり、開始/終了のスラッシュが不要になりました。この動作は直接置換するようになったので、1.0スタイルのディレクトリエイリアスキーから終了のスラッシュを削除する必要があります:
+[`alias`](/config/#resolve-alias) が `@rollup/plugin-alias` に渡されるようになり、開始/終了のスラッシュが不要になりました。この動作は直接置換するようになったので、1.0 スタイルのディレクトリエイリアスキーから終了のスラッシュを削除する必要があります:
 
 ```diff
 - alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }

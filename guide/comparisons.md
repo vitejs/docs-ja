@@ -2,7 +2,7 @@
 
 ## Snowpack
 
-[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバで、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係の先読みビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2つのプロジェクト間の大きな違いは、以下のような点にあります。
+[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバで、Vite と非常に近い目的を持っています。実装の詳細が異なる点を除き、2 つのプロジェクトは伝統的なツールより技術的に優れている点で非常に多くの共通点があります。Vite の依存関係の先読みビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。2 つのプロジェクト間の大きな違いは、以下のような点にあります。
 
 **本番ビルド**
 
@@ -32,7 +32,7 @@ Vite は Sass および Less のより洗練されたサポートを提供して
 
 **第1級の Vue サポート**
 
-もともと Vite は、[Vue.js](https://vuejs.org/) のツールの将来の基礎を担う目的で開発されました。現在の2.0の Vite は完全にフレームワークに依存したものとなりましたが、公式の Vue プラグインは依然として Vue のシングルファイルコンポーネントのフォーマットに対して第1級のサポートを提供しています。テンプレートアセットリファレンス、`<script setup>`、`<style module>`、カスタムブロックを始めとした、あらゆる発展的な機能をカバーしています。さらに、Vite は Vue の SFC に対する細粒度の HMR を提供しています。たとえば、SFC の `<template>` や `<style>` を更新したとき、ステートをリセットせずにホットアップデートが実行可能です。
+もともと Vite は、[Vue.js](https://vuejs.org/) のツールの将来の基礎を担う目的で開発されました。現在の 2.0 の Vite は完全にフレームワークに依存したものとなりましたが、公式の Vue プラグインは依然として Vue のシングルファイルコンポーネントのフォーマットに対して第一級のサポートを提供しています。テンプレートアセットリファレンス、`<script setup>`、`<style module>`、カスタムブロックを始めとした、あらゆる発展的な機能をカバーしています。さらに、Vite は Vue の SFC に対する細粒度の HMR を提供しています。たとえば、SFC の `<template>` や `<style>` を更新したとき、ステートをリセットせずにホットアップデートが実行可能です。
 
 ## WMR
 
@@ -44,6 +44,6 @@ WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開�
 
 [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/)（旧称 `es-dev-server`）は素晴らしいプロジェクトです。Vite 1.0 の Koa ベースのサーバのセットアップはこのプロジェクトに影響を受けたものです。
 
-`@web/dev-server`はスコープの点では少し低レベルです。公式のフレームワークとの統合を提供しておらず、本番ビルドのためには Rollup の設定を手動でセットアップする必要があります。
+`@web/dev-server` はスコープの点では少し低レベルです。公式のフレームワークとの統合を提供しておらず、本番ビルドのためには Rollup の設定を手動でセットアップする必要があります。
 
 全体として、Vite はより out-of-the-box なワークフローを提供することを目的とした opinionated で高レベルのツールです。しかし、`@web` アンブレラプロジェクト内には、その他にも Vite ユーザにも役に立つ優れたツールが存在します。

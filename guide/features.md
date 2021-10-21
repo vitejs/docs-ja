@@ -32,7 +32,7 @@ Vite は `.ts` ファイルをインポートすることをサポートして�
 
 Vite は `.ts` ファイルに対してのみ変換を実行し、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
 
-Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約20〜30倍速く、HMR の更新は50ミリ秒未満でブラウザに反映されます
+Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザに反映されます
 
 ### TypeScript コンパイラオプション
 
@@ -287,7 +287,7 @@ const modules = {
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
-- Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
+- Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）または絶対パス（`/` で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
 ## WebAssembly
@@ -302,7 +302,7 @@ init().then((exports) => {
 })
 ```
 
-init 関数は、第2引数として `WebAssembly.instantiate` に渡される `imports` オブジェクトを受け取ることもできます:
+init 関数は、第 2 引数として `WebAssembly.instantiate` に渡される `imports` オブジェクトを受け取ることもできます:
 
 ```js
 init({
@@ -344,7 +344,7 @@ import MyWorker from './worker?worker&inline'
 
 Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのための個別のファイルを生成します。CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSS が読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
 
-もしすべての CSS を1つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
+もしすべての CSS を 1 つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
 
 ### プリロードディレクティブの生成
 
@@ -352,7 +352,7 @@ Vite は、エントリチャンクとビルドされた HTML への直接イン
 
 ### 非同期チャンク読み込みの最適化
 
-実際のアプリケーションでは、Rollup は「共通の」チャンク（2つ以上の他のチャンク間で共有されるコード）を生成することがよくあります。動的インポートと組み合わせると、次のシナリオが発生するのが非常に一般的です。
+実際のアプリケーションでは、Rollup は「共通の」チャンク（2 つ以上の他のチャンク間で共有されるコード）を生成することがよくあります。動的インポートと組み合わせると、次のシナリオが発生するのが非常に一般的です。
 
 ![graph](/images/graph.png)
 

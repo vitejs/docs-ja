@@ -91,7 +91,7 @@ VITE_APP_TITLE=My App
 vite build --mode staging
 ```
 
-また、望んでいる挙動を得るには、`.env.staging`ファイルが必要です:
+また、望んでいる挙動を得るには、`.env.staging` ファイルが必要です:
 
 ```
 # .env.staging

@@ -16,7 +16,7 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite/tree/main/packages/plugin-react)
 
-- オールインワン の React サポートを提供します。
+- オールインワンの React サポートを提供します。
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
