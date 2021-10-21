@@ -14,9 +14,9 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 - Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/jsx-next) を介して）のサポートを提供します。
 
-### [@vitejs/plugin-react-refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh)
+### [@vitejs/plugin-react](https://github.com/vitejs/vite/tree/main/packages/plugin-react)
 
-- React の Fast Refresh サポートを提供します。
+- オールインワン の React サポートを提供します。
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 

@@ -217,6 +217,7 @@ export default defineConfig(async ({ command, mode }) => {
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ### css.modules
+
 - **型:**
 
   ```ts
@@ -312,13 +313,21 @@ export default defineConfig(async ({ command, mode }) => {
 - **型:** `string | RegExp | (string | RegExp)[]`
 - **関連:** [静的アセットの取り扱い](/guide/assets)
 
-  静的アセットとして扱う追加のファイルタイプを指定します。そして:
+  静的アセットとして扱う追加の [picomatch パターン](https://github.com/micromatch/picomatch)を指定します。そして:
 
   - HTML から参照されたり、`fetch` や XHR で直接リクエストされたりすると、プラグインの変換パイプラインから除外されます。
 
   - JS からインポートすると、解決された URL 文字列が返されます（アセットタイプを別の方法で処理するための `enforce: 'pre'` プラグインがある場合は上書きされます）
 
   組み込みのアセットタイプのリストは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts)をご覧ください。
+
+  **例:**
+
+  ```js
+  export default defineConfig({
+    assetsInclude: ['**/*.gltf']
+  })
+  ```
 
 ### logLevel
 
@@ -466,7 +475,7 @@ export default defineConfig(async ({ command, mode }) => {
 
   `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
-  `server.middlewareMode` および `server.https` を使用している場合、`server.hmr.server` を HTTPS サーバに設定すると、HMR のセキュアな接続要求がサーバ経由で処理されます。これは、自己署名証明書を使用する場合に役立ちます。
+  `server.middlewareMode` または `server.https` を使用している場合、`server.hmr.server` を HTTP(S) サーバに割り当てると、HMR のセキュアな接続要求がサーバ経由で処理されます。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
 
 ### server.watch
 
@@ -534,7 +543,7 @@ createServer()
   - 以下のファイルのいずれかを含んでいる
     - `pnpm-workspace.yaml`
 
-  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば
+  カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
 
   ```js
   export default defineConfig({
@@ -546,6 +555,39 @@ createServer()
     }
   })
   ```
+
+  `server.fs.allow` を指定すると、ワークスペースルートの自動検出が無効になります。本来の動作を拡張するために、ユーティリティーの `searchForWorkspaceRoot` が公開されています:
+
+  ```js
+  import { defineConfig, searchForWorkspaceRoot } from 'vite'
+
+  export default defineConfig({
+    server: {
+      fs: {
+        allow: [
+          // ワークスペースルートの検索
+          searchForWorkspaceRoot(process.cwd()),
+          // あなたのカスタムルール
+          '/path/to/custom/allow'
+        ]
+      }
+    }
+  })
+  ```
+
+### server.origin
+
+- **型:** `string`
+
+開発時に生成されるアセット URL のオリジンを定義します。
+
+```js
+export default defineConfig({
+  server: {
+    origin: 'http://127.0.0.1:8080/'
+  }
+})
+```
 
 ## ビルドオプション
 
@@ -559,7 +601,7 @@ createServer()
 
   もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
-  - [`build.minify`](#build-minify) が `'terser'`（デフォルト）の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
+  - [`build.minify`](#build-minify) が `'terser'` の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
   - それ以外の場合、トランスパイルはまったく行なわれません。
 
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
@@ -615,6 +657,17 @@ createServer()
 
   無効にした場合、プロジェクト全体のすべての CSS はひとつの CSS ファイルに抽出されます。
 
+### build.cssTarget
+
+- **型:** `string | string[]`
+- **デフォルト:** [`build.target`](/config/#build-target) と同じ
+
+  このオプションを使用すると、CSS ミニファイのブラウザターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
+
+  これは主流でないブラウザをターゲットにしている場合にのみ使用してください。
+  例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
+  この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
+
 ### build.sourcemap
 
 - **型:** `boolean | 'inline' | 'hidden'`
@@ -655,12 +708,20 @@ createServer()
 
   `true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。
 
+### build.ssrManifest
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+- **関連:** [サーバサイドレンダリング](/guide/ssr)
+
+  `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。
+
 ### build.minify
 
 - **型:** `boolean | 'terser' | 'esbuild'`
-- **デフォルト:** `'terser'`
+- **デフォルト:** `'esbuild'`
 
-  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Terser](https://github.com/terser/terser) で、これは低速ですが、ほとんどの場合、より小さなバンドルを生成します。esbuild でのミニファイは非常に高速ですが、バンドルのサイズが若干大きくなります。
+  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
 
 ### build.terserOptions
 

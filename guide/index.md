@@ -1,8 +1,12 @@
 # はじめに
 
+<audio id="vite-audio">
+  <source src="/vite.mp3" type="audio/mpeg">
+</audio>
+
 ## 概要
 
-Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は、現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。2 つの主要な部分で構成されています:
+Vite（フランス語で「素早い」という意味の単語で `/vit/`<button style="border:none;padding:3px;border-radius:4px" id="play-vite-audio" onclick="document.getElementById('vite-audio').play();"><img src="/voice.svg" height="15"></button> ヴィートのように発音）は、現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。2 つの主要な部分で構成されています:
 
 - 非常に高速な [Hot Module Replacement (HMR)](./features#hot-module-replacement) など、[ネイティブ ES モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules)を利用した[豊富な機能拡張](./features)を提供する開発サーバ。
 
@@ -122,18 +126,18 @@ Vite がインストールされているプロジェクトでは npm スクリ�
 
 ## 未リリースのコミットの使用
 
-最新機能を試すために新しいリリースを待つことができない場合は、ローカルマシンに [vite repo](https://github.com/vitejs/vite) をクローンしてから自分でビルドとリンクをする必要があります（[Yarn 1.x](https://classic.yarnpkg.com/lang/en/) が必要）:
+最新機能を試すために新しいリリースを待つことができない場合は、ローカルマシンに [vite repo](https://github.com/vitejs/vite) をクローンしてから自分でビルドとリンクをする必要があります（[pnpm](https://pnpm.io/) が必要）:
 
 ```bash
 git clone https://github.com/vitejs/vite.git
 cd vite
-yarn
+pnpm install
 cd packages/vite
-yarn build
-yarn link
+pnpm run build
+pnpm link # このステップでは好きなパッケージマネージャを使用できます
 ```
 
-その後 Vite ベースのプロジェクトに移動し、`yarn link vite` を実行してください。そして開発サーバを再起動（`yarn dev`）して最先端の技術に乗っていきましょう！
+その後 Vite ベースのプロジェクトに移動し、`pnpm link vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャ）を実行してください。そして開発サーバを再起動して最先端の技術に乗っていきましょう！
 
 ## コミュニティ
 
