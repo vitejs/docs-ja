@@ -1,6 +1,6 @@
 name: Lint
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   textlint:
@@ -17,9 +17,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Install deps
+      run: yarn
     - name: Run textlint
-      run: |
-        yarn
-        yarn lint
+      run: yarn lint
       env:
         CI: true

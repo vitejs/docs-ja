@@ -1,5 +1,6 @@
 # Vite 日本語翻訳ガイド
-ようこそ、Vite 日本語翻訳レポジトリへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。   
+
+ようこそ、Vite 日本語翻訳レポジトリへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
 
 ## 貢献方法
 
@@ -8,8 +9,8 @@
 1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
 2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
 3. 本レポジトリ(`vitejs/docs-ja`)のメンテナの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
-4. このレポジトリをフォークします!
-5. `main` から任意の名前のブランチを切って作業を開始しましょう！ (`git checkout -b your-translate-branch`)
+4. このレポジトリをフォークします！
+5. `main` から任意の名前のブランチを切って作業を開始しましょう！　(`git checkout -b your-translate-branch`)
 6. フォークした自分のレポジトリに Push します。(`git push origin your-translate-branch`)
 7. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります。
 8. レビュー 👀 で指摘事項があったら修正し、再度 Push します 📝
@@ -22,13 +23,14 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 ## 翻訳スタイル
 
-- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
-- JTF日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールはVue.js 公式サイト向けに[一部カスタマイズ](.textlintrc)
+- [JTF 日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
+- JTF 日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールは Vue.js 公式サイト向けに [一部カスタマイズ](https://github.com/vitejs/docs-ja/blob/main/.textlintrc)
   - `yarn test` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
 
 ## 翻訳のゆらぎ & トーン
 
 ### 文体
+
 「だである」ではなく「ですます」調
 
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
@@ -61,12 +63,14 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 - NG: 例
 - OK: 例:
 
-ただし、文の途中にハイフン`-` や セミコロン`;` がある場合は、その記号があると理解しづらい訳になる場合は、例外として削除してもよいです。
+ただし、文の途中にハイフン `-` やセミコロン `;` がある場合は、その記号があると理解しづらい訳になる場合は、例外として削除してもよいです。
 
 - 原文:
+
 > NPM Dependency Resolving and Pre-Bundling.
 
 - 訳文:
+
 > NPM の依存関係の解決と事前バンドル。
 
 ### 単語の統一 (特に技術用語)
@@ -79,6 +83,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
   - 例: Two way -> Two way (双方向)
 
 ### 長音訳のついて
+
 原則、**長音なし**で翻訳する。
 
 - NG: コンピューター
@@ -92,6 +97,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 - OK: プルリクエストフロー
 
 #### 長音訳例外リスト
+
 > NOTE: 以下のリストは随時追加していく
 
 - error: エラー
@@ -100,41 +106,52 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 - ...
 
 ## 注意事項
+
 ### 行の追加・削除をしない
+
 行番号が変わってしまうと Vite 本体の変更を取り込む際に対応箇所を探すのが難しいので、原文と同じ行に翻訳してください。
 
 原文:
-```
+
+```text
 5 | When running `vite` from the command line, ...
 6 |
 7 | The most basic config file looks like this:
 ```
 
 NG: 空行がなくなっている
-```
+
+```text
 5 | コマンドラインから `vite` を実行すると、... 自動的に解決しようとします。
 6 | 最も基本的な設定ファイルは次のようになります:
 ```
+
 NG: 改行が増えている
-```
+
+```text
 5 | コマンドラインから `vite` を実行すると、...
 6 | 自動的に解決しようとします。
 7 |
 8 | 最も基本的な設定ファイルは次のようになります:
 ```
+
 OK: 行がそのまま
-```
+
+```text
 5 | コマンドラインから `vite` を実行すると、... 自動的に解決しようとします。
 6 |
 7 | 最も基本的な設定ファイルは次のようになります:
 ```
 
 ### Vite 本体との差分 Issue について
+
 以下の説明文の Issue は Vite 本体のリポジトリに変更があった際に自動的に作られるものです。
-```
+
+```text
 New updates on head repo.
 vitejs/vite@コミット番号
 ```
+
 これらに関しては `help wanted` タグなどが付いていなくても対応可能です。
 もし対応いただける場合は、古いものから順番にお願いします。
 （新しいものを先にやってしまうとデグレの可能性があるため）
