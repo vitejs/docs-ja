@@ -26,14 +26,14 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 サポートされているテンプレートのプリセットは次のとおりです:
 
-| JavaScript | TypeScript |
-| :---: | :---: |
+|             JavaScript              |                TypeScript                 |
+| :---------------------------------: | :---------------------------------------: |
 | [vanilla](https://vite.new/vanilla) | [vanilla-ts](https://vite.new/vanilla-ts) |
-| [vue](https://vite.new/vue) | [vue-ts](https://vite.new/vue-ts) |
-| [react](https://vite.new/react) | [react-ts](https://vite.new/react-ts) |
-| [preact](https://vite.new/preact) | [preact-ts](https://vite.new/preact-ts) |
-| [lit](https://vite.new/lit) | [lit-ts](https://vite.new/lit-ts) |
-| [svelte](https://vite.new/svelte) | [svelte-ts](https://vite.new/svelte-ts) |
+|     [vue](https://vite.new/vue)     |     [vue-ts](https://vite.new/vue-ts)     |
+|   [react](https://vite.new/react)   |   [react-ts](https://vite.new/react-ts)   |
+|  [preact](https://vite.new/preact)  |  [preact-ts](https://vite.new/preact-ts)  |
+|     [lit](https://vite.new/lit)     |     [lit-ts](https://vite.new/lit-ts)     |
+|  [svelte](https://vite.new/svelte)  |  [svelte-ts](https://vite.new/svelte-ts)  |
 
 ## 最初の Vite プロジェクトを生成する
 
