@@ -594,12 +594,12 @@ createServer()
 
 ### server.fs.deny
 
-- **Experimental**
-- **Type:** `string[]`
+- **実験的機能**
+- **型:** `string[]`
 
-  Blocklist for sensitive files being restricted to be served by Vite dev server.
+  Vite 開発サーバでの配信が制限されている機密ファイルのブロックリスト。
 
-  Default to `['.env', '.env.*', '*.{pem,crt}']`.
+  デフォルトは `['.env', '.env.*', '*.{pem,crt}']` です。
 
 ### server.origin
 
