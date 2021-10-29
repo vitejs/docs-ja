@@ -248,10 +248,10 @@ export function mySSRPlugin() {
 }
 ```
 
-The options object in `load` and `transform` is optional, rollup is not currently using this object but may extend these hooks with additional metadata in the future.
+`load` と `transform` の options オブジェクトはオプションであり、rollup は現在このオブジェクトを使用していませんが、将来的に追加のメタデータでこれらのフックを拡張する可能性があります。
 
-::: note
-Before Vite 2.7, this was informed to plugin hooks with a positional `ssr` param instead of using the `options` object. All major frameworks and plugins are updated but you may find outdated posts using the previous API.
+::: 注意
+Vite 2.7 以前では、`options` オブジェクトを使うのではなく、固定の `ssr` 引数を使ってプラグインフックに通知されていました。すべての主要なフレームワークとプラグインは更新されていますが、以前の API を使っている古い記事が見つかる場合があります。
 :::
 
 ## SSR ターゲット
