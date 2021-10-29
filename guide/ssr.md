@@ -227,7 +227,7 @@ Vite は、次のヒューリスティックに基づいて自動化された SS
 
 ## SSR 固有のプラグインロジック
 
-Vue や Svelte などの一部のフレームワークは、クライアントと SSR に基づいてコンポーネントをさまざまな形式にコンパイルします。条件付き変換をサポートするために、Vite は追加の `ssr` 引数を次のプラグインフックに渡します。
+Vue や Svelte などの一部のフレームワークは、クライアントと SSR に基づいてコンポーネントをさまざまな形式にコンパイルします。条件付き変換をサポートするために、Vite は次のプラグインフックの `options` オブジェクトに、追加の `ssr` プロパティをに渡します:
 
 - `resolveId`
 - `load`
@@ -239,14 +239,20 @@ Vue や Svelte などの一部のフレームワークは、クライアント�
 export function mySSRPlugin() {
   return {
     name: 'my-ssr',
-    transform(code, id, ssr) {
-      if (ssr) {
+    transform(code, id, options) {
+      if (options?.ssr) {
         // SSR 固有の transform を実行する...
       }
     }
   }
 }
 ```
+
+The options object in `load` and `transform` is optional, rollup is not currently using this object but may extend these hooks with additional metadata in the future.
+
+::: note
+Before Vite 2.7, this was informed to plugin hooks with a positional `ssr` param instead of using the `options` object. All major frameworks and plugins are updated but you may find outdated posts using the previous API.
+:::
 
 ## SSR ターゲット
 
