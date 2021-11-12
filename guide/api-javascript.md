@@ -142,22 +142,22 @@ const { build } = require('vite')
 
 ## `preview`
 
-**Experimental**
+**実験的機能**
 
-**Type Signature:**
+**型シグネチャ:**
 
 ```ts
 async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 ```
 
-**Example Usage:**
+**使用例:**
 
 ```js
 const { preview } = require('vite')
 
 ;(async () => {
   const previewServer = await preview({
-    // any valid user config options, plus `mode` and `configFile`
+    // 有効なユーザ設定オプションに加え、`mode` と `configFile`
     preview: {
       port: 8080,
       open: true

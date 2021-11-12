@@ -781,26 +781,26 @@ export default defineConfig({
 
   Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
 
-## Preview Options
+## プレビューのオプション
 
 ### preview.host
 
-- **Type:** `string | boolean`
-- **Default:** [`server.host`](#server_host)
+- **型:** `string | boolean`
+- **デフォルト:** [`server.host`](#server_host)
 
-  Specify which IP addresses the server should listen on.
-  Set this to `0.0.0.0` or `true` to listen on all addresses, including LAN and public addresses.
+  サーバがリッスンすべき IP アドレスを指定します。
+  `0.0.0.0` または `true` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
 
-  This can be set via the CLI using `--host 0.0.0.0` or `--host`.
+  これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
 ### preview.port
 
-- **Type:** `number`
-- **Default:** `5000`
+- **型:** `number`
+- **デフォルト:** `5000`
 
-  Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+  サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
-**Example:**
+**例:**
 
   ```js
   export default defineConfig({
@@ -815,42 +815,42 @@ export default defineConfig({
 
 ### preview.strictPort
 
-- **Type:** `boolean`
-- **Default:** [`server.strictPort`](#server_strictport)
+- **型:** `boolean`
+- **デフォルト:** [`server.strictPort`](#server_strictport)
 
-  Set to `true` to exit if port is already in use, instead of automatically try the next available port.
+  `true` に設定すると、ポートがすでに使用されている場合に、次に使用可能なポートを自動的に試すことなく終了します。
 
 ### preview.https
 
-- **Type:** `boolean | https.ServerOptions`
-- **Default:** [`server.https`](#server_https)
+- **型:** `boolean | https.ServerOptions`
+- **デフォルト:** [`server.https`](#server_https)
 
-  Enable TLS + HTTP/2. Note this downgrades to TLS only when the [`server.proxy` option](#server-proxy) is also used.
+  TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-proxy)も使用されている場合にのみ TLS にダウングレードされるので注意してください。
 
-  The value can also be an [options object](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) passed to `https.createServer()`.
+  この値は `https.createServer()` に渡される[オプションオブジェクト](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)でも構いません。
 
 ### preview.open
 
-- **Type:** `boolean | string`
-- **Default:** [`server.open`](#server_open)
+- **型:** `boolean | string`
+- **デフォルト:** [`server.open`](#server_open)
 
-  Automatically open the app in the browser on server start. When the value is a string, it will be used as the URL's pathname. If you want to open the server in a specific browser you like, you can set the env `process.env.BROWSER` (e.g. `firefox`). See [the `open` package](https://github.com/sindresorhus/open#app) for more details.
+  サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
 ### preview.proxy
 
-- **Type:** `Record<string, string | ProxyOptions>`
-- **Default:** [`server.proxy`](#server_proxy)
+- **型:** `Record<string, string | ProxyOptions>`
+- **デフォルト:** [`server.proxy`](#server_proxy)
 
-  Configure custom proxy rules for the dev server. Expects an object of `{ key: options }` pairs. If the key starts with `^`, it will be interpreted as a `RegExp`. The `configure` option can be used to access the proxy instance.
+  開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
-  Uses [`http-proxy`](https://github.com/http-party/node-http-proxy). Full options [here](https://github.com/http-party/node-http-proxy#options).
+  [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
 ### preview.cors
 
-- **Type:** `boolean | CorsOptions`
-- **Default:** [`server.cors`](#server_proxy)
+- **型:** `boolean | CorsOptions`
+- **デフォルト:** [`server.cors`](#server_proxy)
 
-  Configure CORS for the dev server. This is enabled by default and allows any origin. Pass an [options object](https://github.com/expressjs/cors) to fine tune the behavior or `false` to disable.
+  開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
 ## 依存関係の最適化オプション
 
