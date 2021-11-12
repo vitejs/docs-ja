@@ -802,16 +802,16 @@ export default defineConfig({
 
 **例:**
 
-  ```js
-  export default defineConfig({
-    server: {
-      port: 3030
-    },
-    preview: {
-      port: 8080
-    }
-  })
-  ```
+```js
+export default defineConfig({
+  server: {
+    port: 3030
+  },
+  preview: {
+    port: 8080
+  }
+})
+```
 
 ### preview.strictPort
 
