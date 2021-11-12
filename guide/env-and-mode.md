@@ -60,7 +60,7 @@ VITE_SOME_KEY=123
 この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
 ```typescript
-interface ImportMetaEnv extends Readonly<Record<string, string>> {
+interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   // その他の環境変数...
 }
