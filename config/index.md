@@ -52,21 +52,24 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 ### 条件付き設定
 
-コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
+コマンド（`dev`/`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
 export default defineConfig(({ command, mode }) => {
   if (command === 'serve') {
     return {
-      // serve 固有の設定
+      // dev 固有の設定
     }
   } else {
+    // command === 'build'
     return {
       // build 固有の設定
     }
   }
 })
 ```
+
+Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
 
 ### 非同期の設定
 

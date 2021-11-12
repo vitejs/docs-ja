@@ -218,7 +218,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       // 保存された設定を他のフックで使用
       transform(code, id) {
         if (config.command === 'serve') {
-          // serve: 開発サーバから呼び出されるプラグイン
+          // dev: 開発サーバから呼び出されるプラグイン
         } else {
           // build: Rollup から呼び出されるプラグイン
         }
@@ -226,6 +226,8 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     }
   }
   ```
+
+  `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` であることに注意してください。
 
 ### `configureServer`
 
