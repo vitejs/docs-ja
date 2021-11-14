@@ -25,6 +25,8 @@ const { createServer } = require('vite')
     }
   })
   await server.listen()
+
+  server.printUrls()
 })()
 ```
 
@@ -135,6 +137,34 @@ const { build } = require('vite')
       }
     }
   })
+})()
+```
+
+## `preview`
+
+**実験的機能**
+
+**型シグネチャ:**
+
+```ts
+async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
+```
+
+**使用例:**
+
+```js
+const { preview } = require('vite')
+
+;(async () => {
+  const previewServer = await preview({
+    // 有効なユーザ設定オプションに加え、`mode` と `configFile`
+    preview: {
+      port: 8080,
+      open: true
+    }
+  })
+
+  previewServer.printUrls()
 })()
 ```
 
