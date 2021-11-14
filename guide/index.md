@@ -26,14 +26,14 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 サポートされているテンプレートのプリセットは次のとおりです:
 
-| JavaScript | TypeScript |
-| :---: | :---: |
+|             JavaScript              |                TypeScript                 |
+| :---------------------------------: | :---------------------------------------: |
 | [vanilla](https://vite.new/vanilla) | [vanilla-ts](https://vite.new/vanilla-ts) |
-| [vue](https://vite.new/vue) | [vue-ts](https://vite.new/vue-ts) |
-| [react](https://vite.new/react) | [react-ts](https://vite.new/react-ts) |
-| [preact](https://vite.new/preact) | [preact-ts](https://vite.new/preact-ts) |
-| [lit](https://vite.new/lit) | [lit-ts](https://vite.new/lit-ts) |
-| [svelte](https://vite.new/svelte) | [svelte-ts](https://vite.new/svelte-ts) |
+|     [vue](https://vite.new/vue)     |     [vue-ts](https://vite.new/vue-ts)     |
+|   [react](https://vite.new/react)   |   [react-ts](https://vite.new/react-ts)   |
+|  [preact](https://vite.new/preact)  |  [preact-ts](https://vite.new/preact-ts)  |
+|     [lit](https://vite.new/lit)     |     [lit-ts](https://vite.new/lit-ts)     |
+|  [svelte](https://vite.new/svelte)  |  [svelte-ts](https://vite.new/svelte-ts)  |
 
 ## 最初の Vite プロジェクトを生成する
 
@@ -56,7 +56,7 @@ $ yarn create vite
 PNPM を使う場合:
 
 ```bash
-$ pnpm dlx create-vite
+$ pnpm create vite
 ```
 
 あとは画面表示に従ってください！
@@ -72,6 +72,9 @@ npm init vite@latest my-vue-app -- --template vue
 
 # yarn
 yarn create vite my-vue-app --template vue
+
+# pnpm
+pnpm create vite my-vue-app -- --template vue
 ```
 
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`.
@@ -112,12 +115,12 @@ Vite は複数の `.html` エントリポイントを持つ[マルチページ�
 
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
-```json
+```jsonc
 {
   "scripts": {
-    "dev": "vite", // 開発サーバを起動
+    "dev": "vite", // 開発サーバを起動。エイリアス: `vite dev`, `vite serve`
     "build": "vite build", // プロダクション用にビルド
-    "serve": "vite preview" // プロダクション用ビルドをローカルでプレビュー
+    "preview": "vite preview" // プロダクション用ビルドをローカルでプレビュー
   }
 }
 ```

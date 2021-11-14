@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします（仮想モジュールの命名を除く。下の注意を参照）。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
@@ -35,6 +35,10 @@ Vite 専用プラグインの場合
 - Vue プラグインには `vite-plugin-vue-` のプレフィックス
 - React プラグインには `vite-plugin-react-` のプレフィックス
 - Svelte プラグインには `vite-plugin-svelte-` のプレフィックス
+
+Rollup では、「仮想モジュール」（ヘルパー関数など）のモジュール ID の前に、`\0` を付けることを推奨しています。これにより、他のプラグインがそれを処理しようとするのを防ぐことができます。しかし、このパスの規則はブラウザに優しくありません。
+
+Vite の慣例として、仮想モジュールではパスの前に `virtual:` を付けます。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。
 
 ## プラグインの設定
 
@@ -218,7 +222,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       // 保存された設定を他のフックで使用
       transform(code, id) {
         if (config.command === 'serve') {
-          // serve: 開発サーバから呼び出されるプラグイン
+          // dev: 開発サーバから呼び出されるプラグイン
         } else {
           // build: Rollup から呼び出されるプラグイン
         }
@@ -226,6 +230,8 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     }
   }
   ```
+
+  `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` であることに注意してください。
 
 ### `configureServer`
 

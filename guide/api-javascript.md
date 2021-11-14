@@ -25,6 +25,8 @@ const { createServer } = require('vite')
     }
   })
   await server.listen()
+
+  server.printUrls()
 })()
 ```
 
@@ -128,13 +130,41 @@ const { build } = require('vite')
 ;(async () => {
   await build({
     root: path.resolve(__dirname, './project'),
+    base: '/foo/',
     build: {
-      base: '/foo/',
       rollupOptions: {
         // ...
       }
     }
   })
+})()
+```
+
+## `preview`
+
+**実験的機能**
+
+**型シグネチャ:**
+
+```ts
+async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
+```
+
+**使用例:**
+
+```js
+const { preview } = require('vite')
+
+;(async () => {
+  const previewServer = await preview({
+    // 有効なユーザ設定オプションに加え、`mode` と `configFile`
+    preview: {
+      port: 8080,
+      open: true
+    }
+  })
+
+  previewServer.printUrls()
 })()
 ```
 
@@ -149,6 +179,8 @@ async function resolveConfig(
   defaultMode?: string
 ): Promise<ResolvedConfig>
 ```
+
+`command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` になります。
 
 ## `transformWithEsbuild`
 

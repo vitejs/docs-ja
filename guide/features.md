@@ -66,6 +66,8 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` の場合、デフ
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 
+もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
+
 ### クライアントのタイプ
 
 Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `d.ts` の定義ファイルを追加します:
@@ -108,6 +110,8 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 ```js
 // vite.config.js
+import { defineConfig } from 'vite'
+
 export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
@@ -122,6 +126,8 @@ export default defineConfig({
 
 ```js
 // vite.config.js
+import { defineConfig } from 'vite'
+
 export default defineConfig({
   esbuild: {
     jsxInject: `import React from 'react'`
@@ -289,6 +295,7 @@ const modules = {
 - これは Vite のみの機能で、Web または ES の標準ではありません。
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）または絶対パス（`/` で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
+- また、glob インポートは変数を受け付けないので、文字列のパターンを直接渡す必要があることにも注意が必要です。
 
 ## WebAssembly
 

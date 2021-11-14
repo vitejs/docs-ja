@@ -10,7 +10,7 @@
 {
   "scripts": {
     "build": "vite build",
-    "serve": "vite preview"
+    "preview": "vite preview"
   }
 }
 ```
@@ -33,11 +33,11 @@ $ npm run build
 
 ## アプリをローカルでテストする
 
-アプリをビルドしたら、`npm run serve` コマンドを実行し、ローカルでテストします。
+アプリをビルドしたら、`npm run preview` コマンドを実行し、ローカルでテストします。
 
 ```bash
 $ npm run build
-$ npm run serve
+$ npm run preview
 ```
 
 `vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
@@ -47,16 +47,12 @@ $ npm run serve
 ```json
 {
   "scripts": {
-    "serve": "vite preview --port 8080"
+    "preview": "vite preview --port 8080"
   }
 }
 ```
 
 これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
-
-::: tip 注意
-スクリプト名を `serve` から `preview` に変更すると、一部のパッケージマネージャーでは [Pre & Post scripts](https://docs.npmjs.com/cli/v7/using-npm/scripts#pre--post-scripts) の処理方法が原因で問題が発生する可能性があります。
-:::
 
 ## GitHub Pages
 
@@ -88,7 +84,7 @@ $ npm run serve
    git commit -m 'deploy'
 
    # https://<USERNAME>.github.io にデプロイする場合
-   # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+   # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
    # https://<USERNAME>.github.io/<REPO> にデプロイする場合
    # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
@@ -187,7 +183,13 @@ $ npm run serve
    {
      "hosting": {
        "public": "dist",
-       "ignore": []
+       "ignore": [],
+       "rewrites": [
+         {
+           "source": "**",
+           "destination": "/index.html"
+         }
+       ]
      }
    }
    ```

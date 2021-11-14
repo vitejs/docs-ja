@@ -52,21 +52,24 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 ### 条件付き設定
 
-コマンド（`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
+コマンド（`dev`/`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
 export default defineConfig(({ command, mode }) => {
   if (command === 'serve') {
     return {
-      // serve 固有の設定
+      // dev 固有の設定
     }
   } else {
+    // command === 'build'
     return {
       // build 固有の設定
     }
   }
 })
 ```
+
+Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
 
 ### 非同期の設定
 
@@ -367,17 +370,18 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### server.host
 
-- **型:** `string`
+- **型:** `string | boolean`
 - **デフォルト:** `'127.0.0.1'`
 
   サーバがリッスンすべき IP アドレスを指定します。
-  `0.0.0.0` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
+  `0.0.0.0` もしくは `true` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
 
   これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
 ### server.port
 
 - **型:** `number`
+- **デフォルト:** `3000`
 
   サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
@@ -541,18 +545,16 @@ createServer()
 
 ### server.fs.strict
 
-- **実験的機能**
 - **型:** `boolean`
-- **デフォルト:** `false`（将来のバージョンでは `true` に変更されます）
+- **デフォルト:** `true`（Vite 2.7 以降、デフォルトで有効）
 
   ワークスペースのルート以外のファイルの配信を制限します。
 
 ### server.fs.allow
 
-- **実験的機能**
 - **型:** `string[]`
 
-  `/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリリストの外にあるファイルにアクセスすると、403 が返されます。
+  `/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリリストの外にある、許可されたファイルからインポートされていないファイルにアクセスすると、403 が返されます。
 
   Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)にフォールバックします。
 
@@ -591,6 +593,15 @@ createServer()
     }
   })
   ```
+
+### server.fs.deny
+
+- **実験的機能**
+- **型:** `string[]`
+
+  Vite 開発サーバでの配信が制限されている機密ファイルのブロックリスト。
+
+  デフォルトは `['.env', '.env.*', '*.{pem,crt}']` です。
 
 ### server.origin
 
@@ -780,6 +791,77 @@ export default defineConfig({
 - **デフォルト:** `null`
 
   Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
+
+## プレビューのオプション
+
+### preview.host
+
+- **型:** `string | boolean`
+- **デフォルト:** [`server.host`](#server_host)
+
+  サーバがリッスンすべき IP アドレスを指定します。
+  `0.0.0.0` または `true` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
+
+  これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
+
+### preview.port
+
+- **型:** `number`
+- **デフォルト:** `5000`
+
+  サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
+
+**例:**
+
+```js
+export default defineConfig({
+  server: {
+    port: 3030
+  },
+  preview: {
+    port: 8080
+  }
+})
+```
+
+### preview.strictPort
+
+- **型:** `boolean`
+- **デフォルト:** [`server.strictPort`](#server_strictport)
+
+  `true` に設定すると、ポートがすでに使用されている場合に、次に使用可能なポートを自動的に試すことなく終了します。
+
+### preview.https
+
+- **型:** `boolean | https.ServerOptions`
+- **デフォルト:** [`server.https`](#server_https)
+
+  TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-proxy)も使用されている場合にのみ TLS にダウングレードされるので注意してください。
+
+  この値は `https.createServer()` に渡される[オプションオブジェクト](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)でも構いません。
+
+### preview.open
+
+- **型:** `boolean | string`
+- **デフォルト:** [`server.open`](#server_open)
+
+  サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
+
+### preview.proxy
+
+- **型:** `Record<string, string | ProxyOptions>`
+- **デフォルト:** [`server.proxy`](#server_proxy)
+
+  開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+
+  [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
+
+### preview.cors
+
+- **型:** `boolean | CorsOptions`
+- **デフォルト:** [`server.cors`](#server_proxy)
+
+  開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
 ## 依存関係の最適化オプション
 
