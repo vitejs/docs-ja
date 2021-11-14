@@ -120,7 +120,7 @@ Vite がインストールされているプロジェクトでは npm スクリ�
   "scripts": {
     "dev": "vite", // 開発サーバを起動
     "build": "vite build", // プロダクション用にビルド
-    "serve": "vite preview" // プロダクション用ビルドをローカルでプレビュー
+    "preview": "vite preview" // プロダクション用ビルドをローカルでプレビュー
   }
 }
 ```
