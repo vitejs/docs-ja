@@ -56,7 +56,7 @@ $ yarn create vite
 PNPM を使う場合:
 
 ```bash
-$ pnpm dlx create-vite
+$ pnpm create vite
 ```
 
 あとは画面表示に従ってください！
@@ -72,6 +72,9 @@ npm init vite@latest my-vue-app -- --template vue
 
 # yarn
 yarn create vite my-vue-app --template vue
+
+# pnpm
+pnpm create vite my-vue-app -- --template vue
 ```
 
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`.
