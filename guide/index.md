@@ -115,10 +115,10 @@ Vite は複数の `.html` エントリポイントを持つ[マルチページ�
 
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
-```json
+```jsonc
 {
   "scripts": {
-    "dev": "vite", // 開発サーバを起動
+    "dev": "vite", // 開発サーバを起動。エイリアス: `vite dev`, `vite serve`
     "build": "vite build", // プロダクション用にビルド
     "preview": "vite preview" // プロダクション用ビルドをローカルでプレビュー
   }

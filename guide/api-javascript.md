@@ -180,6 +180,8 @@ async function resolveConfig(
 ): Promise<ResolvedConfig>
 ```
 
+`command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` になります。
+
 ## `transformWithEsbuild`
 
 **型シグネチャ:**
