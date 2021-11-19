@@ -739,7 +739,7 @@ export default defineConfig({
 - **デフォルト:** `undefined`
 - **関連:** [サーバサイドレンダリング](/guide/ssr)
 
-  SSR 指向のビルドを生成します。この値は、SSR エントリを直接指定する文字列か、`true` にして `rollupOptions.input` で SSR エントリを指定する必要があります。
+  SSR 向けのビルドを生成します。この値は、SSR エントリを直接指定する文字列か、`true` にして `rollupOptions.input` で SSR エントリを指定する必要があります。
 
 ### build.minify
 
