@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします（仮想モジュールの命名を除く。下の注意を参照）。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
@@ -36,9 +36,10 @@ Vite 専用プラグインの場合
 - React プラグインには `vite-plugin-react-` のプレフィックス
 - Svelte プラグインには `vite-plugin-svelte-` のプレフィックス
 
-Rollup では、「仮想モジュール」（ヘルパー関数など）のモジュール ID の前に、`\0` を付けることを推奨しています。これにより、他のプラグインがそれを処理しようとするのを防ぐことができます。しかし、このパスの規則はブラウザに優しくありません。
+Vite convention for virtual modules is to prefix the user-facing path with `virtual:`. If possible the plugin name should be used as a namespace to avoid collisions with other plugins in the ecosystem. For example, a `vite-plugin-posts` could ask users to import a `virtual:posts` or `virtual:posts/helpers` virtual modules to get build time information. Internally, plugins that use virtual modules should prefix the module ID with `\0` while resolving the id, a convention from the rollup ecosystem. This prevents other plugins from trying to process the id (like node resolution), and core features like sourcemaps can use this info to differentiate between virtual modules and regular files. `\0` is not a permitted char in import URLs so we have to replace them during import analysis. A `\0{id}` virtual id ends up encoded as `/@id/__x00__{id}` during dev in the browser. The id will be decoded back before entering the plugins pipeline, so this is not seen by plugins hooks code.
 
-Vite の慣例として、仮想モジュールではパスの前に `virtual:` を付けます。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。
+Note that modules directly derived from a real file, as in the case of a script module in a Single File Component (like a .vue or .svelte SFC) don't need to follow this convention. SFCs generally generate a set of submodules when processed but the code in these can be mapped back to the filesystem. Using `\0` for these submodules would prevent sourcemaps from working correctly.
+
 
 ## プラグインの設定
 
@@ -88,28 +89,29 @@ Vite/Rollup プラグインは、実際のプラグインオブジェクトを�
 
 ```js
 export default function myPlugin() {
-  const virtualFileId = '@my-virtual-file'
+  const virtualModuleId = '@my-virtual-module'
+  const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
     name: 'my-plugin', // 必須、警告やエラーで表示されます
     resolveId(id) {
-      if (id === virtualFileId) {
-        return virtualFileId
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId
       }
     },
     load(id) {
-      if (id === virtualFileId) {
-        return `export const msg = "from virtual file"`
+      if (id === resolvedVirtualModuleId) {
+        return `export const msg = "from virtual module"`
       }
     }
   }
 }
 ```
 
-これにより、JavaScript でファイルをインポートできます:
+これにより、JavaScript でモジュールをインポートできます:
 
 ```js
-import { msg } from '@my-virtual-file'
+import { msg } from '@my-virtual-module'
 
 console.log(msg)
 ```
