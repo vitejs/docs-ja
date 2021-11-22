@@ -744,6 +744,14 @@ export default defineConfig({
 
   `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。
 
+### build.ssr
+
+- **型:** `boolean | string`
+- **デフォルト:** `undefined`
+- **関連:** [サーバサイドレンダリング](/guide/ssr)
+
+  SSR 向けのビルドを生成します。この値は、SSR エントリを直接指定する文字列か、`true` にして `rollupOptions.input` で SSR エントリを指定する必要があります。
+
 ### build.minify
 
 - **型:** `boolean | 'terser' | 'esbuild'`
