@@ -172,6 +172,10 @@ export default defineConfig(async ({ command, mode }) => {
 
   アプリ内で同じ依存関係のコピーが重複している場合（おそらくモノレポのリンクされたパッケージや巻き上げが原因）、このオプションを使用して、リストされた依存関係を（プロジェクトルートから）常に同じコピーに解決するように Vite に強制します。
 
+  :::warning SSR + ESM
+  SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビルド出力に対して重複排除が機能しません。これを回避するには、ESM のモジュール読み込みのためのプラグインのサポートが改善されるまで、CJS ビルド出力を使用する必要があります。
+  :::
+
 ### resolve.conditions
 
 - **型:** `string[]`
@@ -361,9 +365,8 @@ export default defineConfig(async ({ command, mode }) => {
 
   `envPrefix` で始まる環境変数は、import.meta.env でクライアントのソースコードに公開されます。
 
-:::warning SECURITY NOTES
-
-- `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
+  :::warning SECURITY NOTES
+  `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
   :::
 
 ## サーバオプション
