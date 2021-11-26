@@ -688,6 +688,10 @@ export default defineConfig({
 
   無効にした場合、プロジェクト全体のすべての CSS はひとつの CSS ファイルに抽出されます。
 
+  ::: tip 注意
+  `build.lib` を指定すると、`build.cssCodeSplit` はデフォルトで `false` になります。
+  :::
+
 ### build.cssTarget
 
 - **型:** `string | string[]`
