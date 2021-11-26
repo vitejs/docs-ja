@@ -105,6 +105,12 @@ interface ViteDevServer {
    */
   listen(port?: number, isRestart?: boolean): Promise<ViteDevServer>
   /**
+   * サーバを再起動します。
+   *
+   * @param forceOptimize - オプティマイザに再バンドルを強制する。--force cliフラグと同じ
+   */
+  restart(forceOptimize?: boolean): Promise<void>
+  /**
    * サーバを停止します。
    */
   close(): Promise<void>
