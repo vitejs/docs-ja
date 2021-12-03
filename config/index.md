@@ -919,14 +919,14 @@ export default defineConfig({
 
 - **型:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
 
-  Options to pass to esbuild during the dep scanning and optimization.
+  依存関係のスキャンと最適化の際、 esbuild に渡すオプション。
 
-  Certain options are omitted since changing them would not be compatible
-  with Vite's dep optimization.
+  いくつかのオプションは、変更すると Vite の依存関係最適化と互換性がなくなるため、省略されています。
 
-  - `external` is also omitted, use Vite's `optimizeDeps.exclude` option
-  - `plugins` are merged with Vite's dep plugin
-  - `keepNames` takes precedence over the deprecated `optimizeDeps.keepNames`
+
+  - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
+  - `plugins` は Vite の依存関係プラグインとマージされます
+  - `keepNames` は非推奨の `optimizeDeps.keepNames` よりも優先されます
 
 ## SSR オプション
 
