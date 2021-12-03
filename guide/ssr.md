@@ -111,7 +111,7 @@ app.use('*', async (req, res) => {
 
     // 2. Vite を使用して HTML への変換を適用します。これにより Vite の HMR クライアントが定義され
     //    Vite プラグインからの HTML 変換も適用します。 e.g. global preambles
-    //    from @vitejs/plugin-react-refresh
+    //    from @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
     // 3. サーバサイドのエントリポイントを読み込みます。 vite.ssrLoadModule は自動的に
