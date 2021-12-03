@@ -238,7 +238,12 @@ export default defineConfig(async ({ command, mode }) => {
     /**
      * デフォルト: null
      */
-    localsConvention?: 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly'| null
+    localsConvention?:
+      | 'camelCase'
+      | 'camelCaseOnly'
+      | 'dashes'
+      | 'dashesOnly'
+      | null
   }
   ```
 
