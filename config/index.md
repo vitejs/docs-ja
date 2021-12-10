@@ -923,7 +923,6 @@ export default defineConfig({
 
   いくつかのオプションは、変更すると Vite の依存関係最適化と互換性がなくなるため、省略されています。
 
-
   - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
   - `plugins` は Vite の依存関係プラグインとマージされます
   - `keepNames` は非推奨の `optimizeDeps.keepNames` よりも優先されます
