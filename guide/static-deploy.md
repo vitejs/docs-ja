@@ -87,7 +87,7 @@ $ npm run preview
    # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
    # https://<USERNAME>.github.io/<REPO> にデプロイする場合
-   # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+   # git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
 
    cd -
    ```
@@ -127,7 +127,7 @@ $ npm run preview
      github_token: $GITHUB_TOKEN
      keep_history: true
      on:
-       branch: master
+       branch: main
    ```
 
 ## GitLab Pages と GitLab CI
@@ -259,7 +259,7 @@ $ npm run preview
 
    ```bash
    # サイトを公開
-   $ git push heroku master
+   $ git push heroku main
 
    # ブラウザを開いて Heroku CI ダッシュボードを見る
    $ heroku open
