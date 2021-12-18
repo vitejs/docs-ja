@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします（仮想モジュールの命名を除く。下の注意を参照）。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
@@ -36,9 +36,10 @@ Vite 専用プラグインの場合
 - React プラグインには `vite-plugin-react-` のプレフィックス
 - Svelte プラグインには `vite-plugin-svelte-` のプレフィックス
 
-Rollup では、「仮想モジュール」（ヘルパー関数など）のモジュール ID の前に、`\0` を付けることを推奨しています。これにより、他のプラグインがそれを処理しようとするのを防ぐことができます。しかし、このパスの規則はブラウザに優しくありません。
+Vite の慣例として、仮想モジュールではユーザー向けのパスの前に `virtual:` を付けることになっています。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。内部的には、Rollup エコシステムの慣例として、仮想モジュールを使用するプラグインは、ID を解決する際にモジュール ID の前に `\0` を付ける必要があります。これにより、他のプラグインが ID を処理しようとするのを防ぎ（ノード解決など）、ソースマップなどのコア機能がこの情報を使用して、仮想モジュールと通常のファイルを区別できます。`\0` はインポート URL で許可されていない文字なので、インポート分析中に置き換える必要があります。`\0{id}` の仮想 ID は、ブラウザでの開発中に `/@id/__x00__{id}` としてエンコードされてしまいます。ID はプラグインパイプラインに入る前にデコードされて戻ってくるので、これはプラグインフックコードには表示されません。
 
-Vite の慣例として、仮想モジュールではパスの前に `virtual:` を付けます。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。
+なお、単一ファイルコンポーネント（.vue や .svelte など。SFC）のスクリプトモジュールのように、実際のファイルから直接派生したモジュールは、この規約に従う必要はありません。SFC では通常、処理時に一連のサブモジュールが生成されますが、これらのコードはファイルシステムにマップして戻せます。これらのサブモジュールに `\0` を使用すると、ソースマップが正しく機能しなくなります。
+
 
 ## プラグインの設定
 
@@ -88,28 +89,29 @@ Vite/Rollup プラグインは、実際のプラグインオブジェクトを�
 
 ```js
 export default function myPlugin() {
-  const virtualFileId = '@my-virtual-file'
+  const virtualModuleId = '@my-virtual-module'
+  const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
     name: 'my-plugin', // 必須、警告やエラーで表示されます
     resolveId(id) {
-      if (id === virtualFileId) {
-        return virtualFileId
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId
       }
     },
     load(id) {
-      if (id === virtualFileId) {
-        return `export const msg = "from virtual file"`
+      if (id === resolvedVirtualModuleId) {
+        return `export const msg = "from virtual module"`
       }
     }
   }
 }
 ```
 
-これにより、JavaScript でファイルをインポートできます:
+これにより、JavaScript でモジュールをインポートできます:
 
 ```js
-import { msg } from '@my-virtual-file'
+import { msg } from '@my-virtual-module'
 
 console.log(msg)
 ```
