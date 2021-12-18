@@ -31,6 +31,7 @@ Vite はサーバサイドレンダリング ( SSR ) の組み込みサポート
 
 ```
 - index.html
+- server.js # main application server
 - src/
   - main.js          # exports env-agnostic (universal) app code
   - entry-client.js  # mounts the app to a DOM element
