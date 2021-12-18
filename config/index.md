@@ -920,14 +920,17 @@ export default defineConfig({
 
   デフォルトでは、リンクされたパッケージのうち `node_modules` の外にあるものは事前バンドルされません。このオプションを使用してリンクされたパッケージを強制的に事前バンドルします。
 
-### optimizeDeps.keepNames
+### optimizeDeps.esbuildOptions
 
-- **型:** `boolean`
-- **デフォルト:** `false`
+- **型:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
 
-  バンドラは、衝突を避けるためにシンボルの名前を変更する必要がある場合があります。
-  これを `true` に設定すると、関数やクラスの `name` プロパティが維持されます。
-  [`keepNames`](https://esbuild.github.io/api/#keep-names) を参照してください。
+  依存関係のスキャンと最適化の際、 esbuild に渡すオプション。
+
+  いくつかのオプションは、変更すると Vite の依存関係最適化と互換性がなくなるため、省略されています。
+
+  - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
+  - `plugins` は Vite の依存関係プラグインとマージされます
+  - `keepNames` は非推奨の `optimizeDeps.keepNames` よりも優先されます
 
 ## SSR オプション
 
