@@ -135,10 +135,12 @@ export default defineConfig(async ({ command, mode }) => {
   TypeScript を使用する場合、型チェックと入力補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
 
   例:
+
   ```ts
   // vite-env.d.ts
-  declare const __APP_VERSION__: string;
+  declare const __APP_VERSION__: string
   ```
+
   :::
 
 ### plugins
