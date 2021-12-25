@@ -3,12 +3,11 @@ module.exports = {
   description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   themeConfig: {
-    repo: 'vitejs/vite',
+    repo: 'vitejs/docs-ja',
     logo: '/logo.svg',
-    docsDir: 'docs',
     docsBranch: 'main',
     editLinks: true,
-    editLinkText: 'Suggest changes to this page',
+    editLinkText: 'このページへの変更を提案する',
 
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
