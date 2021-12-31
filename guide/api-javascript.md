@@ -1,6 +1,6 @@
 # JavaScript API
 
-Vite の JavaScript API は完全に型付けされているので、インテリセンスとバリデーションを活用するために VSCode の JS 型チェックを有効にするか、TypeScript を使用することをおすすめします。
+Vite の JavaScript API は完全に型付けされているので、自動補完とバリデーションを活用するために VSCode の JS 型チェックを有効にするか、TypeScript を使用することをおすすめします。
 
 ## `createServer`
 
