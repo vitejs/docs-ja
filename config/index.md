@@ -132,7 +132,7 @@ export default defineConfig(async ({ command, mode }) => {
   例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
 
   ::: tip 注意
-  TypeScript を使用する場合、型チェックと入力補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
+  TypeScript を使用する場合、型チェックと自動補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
 
   例:
 
