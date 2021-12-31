@@ -33,6 +33,15 @@ Vite は、[環境ディレクトリ](/config/#envdir)にある以下のファ�
 .env.[mode].local   # 指定されたモードでのみ読み込まれ、gitには無視される
 ```
 
+:::tip Env Loading Priorities
+
+An env file for a specific mode (e.g. `.env.production`) will take higher priority than a generic one (e.g. `.env`).
+
+In addition, environment variables that already exist when Vite is executed have the highest priority and will not be overwritten by `.env` files.
+
+`.env` files are loaded at the start of Vite. Restart the server after making changes.
+:::
+
 読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも公開されます。
 
 環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下のファイルで:
