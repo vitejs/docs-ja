@@ -959,23 +959,23 @@ SSR オプションは、マイナリリースで調整される可能性があ�
 
   SSR サーバのビルドターゲット。
 
-## Worker Options
+## ワーカのオプション
 
 ### worker.format
 
-- **Type:** `'es' | 'iife'`
-- **Default:** `iife`
+- **型:** `'es' | 'iife'`
+- **デフォルト:** `iife`
 
-  Output format for worker bundle.
+  ワーカバンドルの出力形式。
 
 ### worker.plugins
 
-- **Type:** [`(Plugin | Plugin[])[]`](#plugins)
+- **型:** [`(Plugin | Plugin[])[]`](#plugins)
 
-  Vite plugins that apply to worker bundle
+  ワーカバンドルに適用される Vite プラグイン
 
 ### worker.rollupOptions
 
-- **Type:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **型:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
 
-  Rollup options to build worker bundle.
+  ワーカバンドルをビルドするための Rollup オプション。
