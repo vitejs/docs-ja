@@ -131,9 +131,21 @@ export default defineConfig(async ({ command, mode }) => {
 
   例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
 
+  ::: tip 注意
+  TypeScript を使用する場合、型チェックと自動補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
+
+  例:
+
+  ```ts
+  // vite-env.d.ts
+  declare const __APP_VERSION__: string
+  ```
+
+  :::
+
 ### plugins
 
-- **型:** ` (Plugin | Plugin[])[]`
+- **型:** `(Plugin | Plugin[])[]`
 
   使用するプラグインの配列。falsy なプラグインは無視され、プラグインの配列はフラット化されます。 Vite プラグインの詳細は [プラグイン API](/guide/api-plugin) を参照してください。
 
