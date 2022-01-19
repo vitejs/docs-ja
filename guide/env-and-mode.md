@@ -53,9 +53,9 @@ VITE_SOME_KEY=123
 - Vite のソースコードに公開される変数は最終的にクライアントバンドルに入るので、`VITE_*` 変数はセンシティブな情報を*含まない*ようにすべきです。
   :::
 
-### TypeScript 用の IntelliSense
+### TypeScript 用の自動補完
 
-デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザ定義の環境変数に対する TypeScript IntelliSense が欲しくなるかもしれません。
+デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザ定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
 
 この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
