@@ -70,6 +70,7 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` の場合、デフ
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
+- [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 
