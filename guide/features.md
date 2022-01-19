@@ -34,6 +34,13 @@ Vite は `.ts` ファイルに対してのみ変換を実行し、型チェッ�
 
 Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザに反映されます
 
+[型のみのインポートやエクスポート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export)構文を使用すると、型のみのインポートが正しくバンドルされないなどの潜在的な問題を回避できます。例えば:
+
+```ts
+import type { T } from 'only/types'
+export type { T }
+```
+
 ### TypeScript コンパイラオプション
 
 `tsconfig.json` の `compilerOptions` にあるいくつかの設定フィールドには、特別な注意が必要です。
