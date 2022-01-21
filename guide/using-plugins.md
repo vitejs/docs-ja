@@ -7,7 +7,7 @@ Vite はプラグインを使っての拡張が可能で、Rollup の優れた�
 プラグインを使うには、プロジェクトの `devDependencies` に追加し、 `vite.config.js` 設定ファイルの `plugins` 配列に含める必要があります。例えば、レガシーブラウザのサポートを提供するには、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) が使えます:
 
 ```
-$ npm i -D @vitejs/plugin-legacy
+$ npm add -D @vitejs/plugin-legacy
 ```
 
 ```js

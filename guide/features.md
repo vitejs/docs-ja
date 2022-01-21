@@ -191,13 +191,13 @@ Vite は最新のブラウザのみを対象としているため、CSSWG ドラ
 
 ```bash
 # .scss and .sass
-npm install -D sass
+npm add -D sass
 
 # .less
-npm install -D less
+npm add -D less
 
 # .styl and .stylus
-npm install -D stylus
+npm add -D stylus
 ```
 
 もし Vue で単一ファイルコンポーネントを使用している場合、これにより、`<style lang="sass">` なども自動的に有効になります。
