@@ -267,15 +267,30 @@ $ npm run preview
 
 ## Vercel
 
-Vite アプリを [Vercel for Git](https://vercel.com/docs/git) でデプロイするために、Git リポジトリにコードがプッシュされていることを確認してください。
+### Vercel CLI
 
-https://vercel.com/import/git から、お好みの Git（GitHub、GitLab または BitBucket）を使ってプロジェクトを Vercel にインポートしてください。ウィザードに従って、プロジェクトの `package.json` でプロジェクトルートを選択し、`npm run build` を使ってビルドステップを上書きし、出力ディレクトリを `./dist` としてください。
+1. Install the [Vercel CLI](https://vercel.com/cli) and run `vercel` to deploy.
+2. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
+3. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
-![Vercel の設定を上書きする](../images/vercel-configuration.png)
+```bash
+$ npm i -g vercel
+$ vercel init vite
+Vercel CLI
+> Success! Initialized "vite" example in ~/your-folder.
+- To deploy, `cd vite` and run `vercel`.
+```
 
-プロジェクがトインポートされると、その後のブランチへの全てのプッシュでプレビューデプロイメントが生成され、プロダクションブランチ（通常は "main"）での変更はプロダクションデプロイメントが生成されます。
+### Vercel for Git
 
-デプロイされると、アプリを直接見るための URL を取得できます。例えば https://vite.vercel.app のようなものです。
+1. Push your code to your git repository (GitHub, GitLab, BitBucket).
+2. [Import your Vite project](https://vercel.com/new) into Vercel.
+3. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
+4. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+
+After your project has been imported and deployed, all subsequent pushes to branches will generate [Preview Deployments](https://vercel.com/docs/concepts/deployments/environments#preview), and all changes made to the Production Branch (commonly “main”) will result in a [Production Deployment](https://vercel.com/docs/concepts/deployments/environments#production).
+
+Learn more about Vercel’s [Git Integration](https://vercel.com/docs/concepts/git).
 
 ## Azure Static Web Apps
 
