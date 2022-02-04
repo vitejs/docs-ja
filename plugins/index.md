@@ -28,4 +28,4 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ## Rollup プラグイン
 
-[Vite プラグイン](../guide/api-plugin) は、Rollup プラグインのインタフェイスを拡張したものです。 [Rollup プラグインとの互換性セクション](../guide/api-plugin#rollup-plugin-compatibility) に詳しい情報があります。
+[Vite プラグイン](../guide/api-plugin) は、Rollup プラグインのインタフェイスを拡張したものです。 [Rollup プラグインとの互換性セクション](../guide/api-plugin#rollup-プラグインの互換性) に詳しい情報があります。
