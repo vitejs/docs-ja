@@ -269,9 +269,9 @@ $ npm run preview
 
 ### Vercel CLI
 
-1. Install the [Vercel CLI](https://vercel.com/cli) and run `vercel` to deploy.
-2. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
-3. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+1. [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
+2. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+3. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
 
 ```bash
 $ npm i -g vercel
@@ -283,14 +283,14 @@ Vercel CLI
 
 ### Vercel for Git
 
-1. Push your code to your git repository (GitHub, GitLab, BitBucket).
-2. [Import your Vite project](https://vercel.com/new) into Vercel.
-3. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
-4. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+1. コードを Git リポジトリ（GitHub, GitLab, BitBucket）にプッシュします。
+2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
+3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
 
-After your project has been imported and deployed, all subsequent pushes to branches will generate [Preview Deployments](https://vercel.com/docs/concepts/deployments/environments#preview), and all changes made to the Production Branch (commonly “main”) will result in a [Production Deployment](https://vercel.com/docs/concepts/deployments/environments#production).
+プロジェクトがインポートされてデプロイされた後は、ブランチへのプッシュはすべて[プレビューデプロイメント](https://vercel.com/docs/concepts/deployments/environments#preview)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://vercel.com/docs/concepts/deployments/environments#production)を生成することになります。
 
-Learn more about Vercel’s [Git Integration](https://vercel.com/docs/concepts/git).
+詳細は Vercel の [Git 統合](https://vercel.com/docs/concepts/git)をご覧ください。
 
 ## Azure Static Web Apps
 
