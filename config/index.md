@@ -592,6 +592,7 @@ createServer()
 
   - `package.json` に `workspaces` フィールドが含まれている
   - 以下のファイルのいずれかを含んでいる
+    - `lerna.json`
     - `pnpm-workspace.yaml`
 
   カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
