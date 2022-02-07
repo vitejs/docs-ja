@@ -100,7 +100,7 @@ createServer()
 次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラの実装です:
 
 ```js
-app.use('*', async (req, res) => {
+app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
   try {
@@ -134,8 +134,7 @@ app.use('*', async (req, res) => {
     // エラーが検出された場合は、Vite に stracktrace を修正させて、次のようにマップします。
     // 実際のソースコード
     vite.ssrFixStacktrace(e)
-    console.error(e)
-    res.status(500).end(e.message)
+    next(e)
   }
 })
 ```
