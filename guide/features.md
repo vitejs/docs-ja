@@ -18,7 +18,7 @@ import { someMethod } from 'my-dep'
 
 **依存関係は積極的にキャッシュされます**
 
-Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従います。
+Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#ブラウザ-キャッシュ)に従います。
 
 ## Hot Module Replacement
 
@@ -151,7 +151,7 @@ export default defineConfig({
 
 Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に結合されます。
 
-`@import` エイリアスと URL の結合も Sass ファイルと Less ファイルでサポートされています (詳しくはこちら [CSS Pre-processors](#css-pre-processors))。
+`@import` エイリアスと URL の結合も Sass ファイルと Less ファイルでサポートされています (詳しくはこちら [CSS Pre-processors](#css-プリプロセッサ))。
 
 ### PostCSS
 
@@ -239,7 +239,7 @@ import Worker from './worker.js?worker'
 import InlineWorker from './worker.js?worker&inline'
 ```
 
-詳しくは [Static Asset Handling](./assets) を見てください。
+詳しくは [静的アセットの取り扱い](./assets) を見てください。
 
 ## JSON
 

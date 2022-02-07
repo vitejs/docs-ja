@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-プラグインの互換性)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。

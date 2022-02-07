@@ -12,10 +12,10 @@ Vite では、単一のバンドラ（Rollup）と深く結合することを選
 
 より統合されたビルドプロセスを実現するために、Vite では以下のような Snowpack のビルドオプティマイザでは利用できないような幅広い機能をサポートしています。
 
-- [Multi-Page のサポート](./build#multi-page-app)
-- [ライブラリモード](./build#library-mode)
-- [自動的な CSS コードの分割](./features#css-code-splitting)
-- [最適化された非同期のチャンク読み込み](./features#async-chunk-loading-optimization)
+- [Multi-Page のサポート](./build#マルチページアプリ)
+- [ライブラリモード](./build#ライブラリモード)
+- [自動的な CSS コードの分割](./features#css-のコード分割)
+- [最適化された非同期のチャンク読み込み](./features#非同期チャンク読み込みの最適化)
 - 公式の [legacy モードプラグイン](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)。このプラグインは、modern/legacy のデュアルバンドルを生成し、ブラウザの対応状況をもとに正しいバンドルを自動的に配信します。
 
 **より高速な依存関係の先読みビルド**
@@ -28,7 +28,7 @@ Vite は monorepo のセットアップを意図して設計されており、Ya
 
 **CSS プリプロセッサのサポート**
 
-Vite は Sass および Less のより洗練されたサポートを提供しています。これには、優れた `@import` の解決（エイリアスおよび npm 依存関係）や、[インラインファイルに対する自動的な `url()` のリベース](./features#import-inlining-and-rebasing)などがあります。
+Vite は Sass および Less のより洗練されたサポートを提供しています。これには、優れた `@import` の解決（エイリアスおよび npm 依存関係）や、[インラインファイルに対する自動的な `url()` のリベース](./features#import-のインライン化と結合)などがあります。
 
 **第1級の Vue サポート**
 
