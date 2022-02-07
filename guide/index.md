@@ -44,7 +44,7 @@ Vite は [Node.js](https://nodejs.org/en/) >=12.2.0 のバージョンが必要�
 NPM を使う場合:
 
 ```bash
-$ npm init vite@latest
+$ npm create vite@latest
 ```
 
 Yarn を使う場合:
@@ -65,10 +65,10 @@ $ pnpm create vite
 
 ```bash
 # npm 6.x
-npm init vite@latest my-vue-app --template vue
+npm create vite@latest my-vue-app --template vue
 
 # npm 7+ は追加で 2 つのダッシュが必要:
-npm init vite@latest my-vue-app -- --template vue
+npm create vite@latest my-vue-app -- --template vue
 
 # yarn
 yarn create vite my-vue-app --template vue
