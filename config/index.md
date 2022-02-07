@@ -482,6 +482,11 @@ export default defineConfig(async ({ command, mode }) => {
           configure: (proxy, options) => {
             // プロキシは 'http-proxy' のインスタンスになります
           },
+        },
+        // Web ソケット か socket.io をプロキシ化
+        '/socket.io': {
+          target: 'ws://localhost:3000',
+          ws: true
         }
       }
     }
