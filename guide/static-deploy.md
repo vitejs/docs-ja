@@ -40,7 +40,7 @@ $ npm run build
 $ npm run preview
 ```
 
-`vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを http://localhost:5000 で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
+`vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを `http://localhost:4173` で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
 
 サーバのポートを設定するには、引数に `--port` フラグを指定します。
 
@@ -52,7 +52,7 @@ $ npm run preview
 }
 ```
 
-これで、`preview` メソッドは http://localhost:8080 でサーバを起動します。
+これで、`preview` メソッドは `http://localhost:8080` でサーバを起動します。
 
 ## GitHub Pages
 
