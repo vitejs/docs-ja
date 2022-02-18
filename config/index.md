@@ -923,7 +923,7 @@ export default defineConfig({
 
 - **型:** `string | string[]`
 
-  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
+  デフォルトでは、Vite は `index.html` をクロールして、事前にバンドルする必要のある依存関係を検出します。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
 
   これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。
 
