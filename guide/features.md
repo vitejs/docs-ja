@@ -298,6 +298,22 @@ const modules = {
 }
 ```
 
+`import.meta.glob` と `import.meta.globEager` は[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同じようにファイルを文字列としてインポートすることもサポートしています。ここでは [Import Assertions](https://github.com/tc39/proposal-import-assertions#synopsis) 構文を使ってインポートします。
+
+```js
+const modules = import.meta.glob('./dir/*.js', { assert: { type: 'raw' } })
+```
+
+上のコードは以下のように変換されます:
+
+```js
+// vite によって生成されたコード
+const modules = {
+  './dir/foo.js': '{\n  "msg": "foo"\n}\n',
+  './dir/bar.js': '{\n  "msg": "bar"\n}\n'
+}
+```
+
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
