@@ -164,12 +164,27 @@ $ npm run preview
 
 ## Netlify
 
-1. [Netlify](https://netlify.com) で、GitHub から新規プロジェクトを以下の設定で立ち上げます:
+1. [Netlify CLI](https://cli.netlify.com/) をインストールします。
+2. `ntl init` で新しいサイトを作成します。
+3. `ntl deploy` でデプロイします。
 
-   - **Build Command:** `vite build` or `npm run build`
-   - **Publish directory:** `dist`
+```bash
+# Netlify CLI をインストール
+$ npm install -g netlify-cli
 
-2. デプロイボタンを押します。
+# Netlify に新しいサイトを作成
+$ ntl init
+
+# ユニークなプレビュー URL にデプロイ
+$ ntl deploy
+```
+
+Netlify CLI は検査のためにプレビュー URL を共有します。本番環境への準備ができたら `prod` フラグを使用してください:
+
+```bash
+# サイトを本番環境へデプロイ
+$ ntl deploy --prod
+```
 
 ## Google Firebase
 
