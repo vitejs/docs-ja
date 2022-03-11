@@ -43,6 +43,20 @@ module.exports = defineConfig({
 
 例えば、ビルド時にのみ適用されるプラグインを使って複数の Rollup 出力を指定することができます。
 
+## チャンク戦略
+
+チャンクの分割方法は `build.rollupOptions.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/guide/en/#outputmanualchunks)参照）。Vite 2.7 まではデフォルトのチャンク戦略は `index` と `vendor` にチャンクを分割していました。これは SPA にはよい戦略の場合もありますが、すべての Vite ターゲットのユースケースに対して一般的な解決策を提供するのは困難です。Vite 2.8 からは、`manualChunks` はデフォルトでは変更されなくなりました。設定ファイルに `splitVendorChunkPlugin` を追加すれば、vender を分割するチャンク戦略を引き続き使用できます:
+
+```js
+// vite.config.js
+import { splitVendorChunkPlugin } from 'vite'
+module.exports = defineConfig({
+  plugins: [splitVendorChunkPlugin()]
+})
+```
+
+カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリとしても提供されます。`cache.reset()` はこの場合、ビルドウォッチモードが正しく動作するように `buildStart` で呼び出す必要があります。
+
 ## ファイル変更時のリビルド
 
 `vite build --watch` で rollup のウォッチャを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options) を直接調整することもできます:
