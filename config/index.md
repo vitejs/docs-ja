@@ -508,11 +508,13 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### server.hmr
 
-- **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **型:** `boolean | { protocol?: string, host?: string, port?: number | false, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
   HMR 接続の無効化または設定（HMR WebSocket が http サーバと異なるアドレスを使用する必要がある場合）。
 
   `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
+
+  ポートのないドメインに接続する場合は `server.hmr.port` を `false` に設定します。
 
   `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
@@ -772,19 +774,19 @@ export default defineConfig({
 
 ### build.manifest
 
-- **型:** `boolean`
+- **型:** `boolean | string`
 - **デフォルト:** `false`
 - **関連:** [バックエンドとの統合](/guide/backend-integration)
 
-  `true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。
+  `true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。値が文字列の場合は、それがマニフェストファイル名として使われます。
 
 ### build.ssrManifest
 
-- **型:** `boolean`
+- **型:** `boolean | string`
 - **デフォルト:** `false`
 - **関連:** [サーバサイドレンダリング](/guide/ssr)
 
-  `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。
+  `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。値が文字列の場合は、それがマニフェストファイル名として使われます。
 
 ### build.ssr
 
@@ -923,7 +925,7 @@ export default defineConfig({
 
 - **型:** `string | string[]`
 
-  デフォルトでは、Vite は index.html をクロールして、事前にバンドルする必要のある依存関係を検出します。build.rollupOptions.input が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
+  デフォルトでは、Vite は `index.html` をクロールして、事前にバンドルする必要のある依存関係を検出します。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
 
   これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。
 

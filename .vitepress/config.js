@@ -2,6 +2,9 @@ module.exports = {
   title: 'Vite',
   description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  vue: {
+    reactivityTransform: true
+  },
   themeConfig: {
     repo: 'vitejs/docs-ja',
     logo: '/logo.svg',

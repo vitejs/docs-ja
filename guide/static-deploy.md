@@ -80,6 +80,7 @@ $ npm run preview
    # echo 'www.example.com' > CNAME
 
    git init
+   git checkout -b main
    git add -A
    git commit -m 'deploy'
 
@@ -164,12 +165,27 @@ $ npm run preview
 
 ## Netlify
 
-1. [Netlify](https://netlify.com) で、GitHub から新規プロジェクトを以下の設定で立ち上げます:
+1. [Netlify CLI](https://cli.netlify.com/) をインストールします。
+2. `ntl init` で新しいサイトを作成します。
+3. `ntl deploy` でデプロイします。
 
-   - **Build Command:** `vite build` or `npm run build`
-   - **Publish directory:** `dist`
+```bash
+# Netlify CLI をインストール
+$ npm install -g netlify-cli
 
-2. デプロイボタンを押します。
+# Netlify に新しいサイトを作成
+$ ntl init
+
+# ユニークなプレビュー URL にデプロイ
+$ ntl deploy
+```
+
+Netlify CLI は検査のためにプレビュー URL を共有します。本番環境への準備ができたら `prod` フラグを使用してください:
+
+```bash
+# サイトを本番環境へデプロイ
+$ ntl deploy --prod
+```
 
 ## Google Firebase
 
@@ -267,15 +283,30 @@ $ npm run preview
 
 ## Vercel
 
-Vite アプリを [Vercel for Git](https://vercel.com/docs/git) でデプロイするために、Git リポジトリにコードがプッシュされていることを確認してください。
+### Vercel CLI
 
-https://vercel.com/import/git から、お好みの Git（GitHub、GitLab または BitBucket）を使ってプロジェクトを Vercel にインポートしてください。ウィザードに従って、プロジェクトの `package.json` でプロジェクトルートを選択し、`npm run build` を使ってビルドステップを上書きし、出力ディレクトリを `./dist` としてください。
+1. [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
+2. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+3. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
 
-![Vercel の設定を上書きする](../images/vercel-configuration.png)
+```bash
+$ npm i -g vercel
+$ vercel init vite
+Vercel CLI
+> Success! Initialized "vite" example in ~/your-folder.
+- To deploy, `cd vite` and run `vercel`.
+```
 
-プロジェクがトインポートされると、その後のブランチへの全てのプッシュでプレビューデプロイメントが生成され、プロダクションブランチ（通常は "main"）での変更はプロダクションデプロイメントが生成されます。
+### Vercel for Git
 
-デプロイされると、アプリを直接見るための URL を取得できます。例えば https://vite.vercel.app のようなものです。
+1. コードを Git リポジトリ（GitHub, GitLab, BitBucket）にプッシュします。
+2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
+3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
+
+プロジェクトがインポートされてデプロイされた後は、ブランチへのプッシュはすべて[プレビューデプロイメント](https://vercel.com/docs/concepts/deployments/environments#preview)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://vercel.com/docs/concepts/deployments/environments#production)を生成することになります。
+
+詳細は Vercel の [Git 統合](https://vercel.com/docs/concepts/git)をご覧ください。
 
 ## Azure Static Web Apps
 
