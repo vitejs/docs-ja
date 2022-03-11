@@ -139,9 +139,11 @@ export default defineConfig(async ({ command, mode }) => {
 
   - マッチした部分が単語の境界（`\b`）で囲まれている場合のみ置換されます。
 
+  ::: warning
   構文解析なしの単純なテキスト置換として実装されているため、`define` は「定数」にのみ使用することをおすすめします。
 
   例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
+  :::
 
   ::: tip 注意
   TypeScript を使用する場合、型チェックと自動補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
