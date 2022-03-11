@@ -96,6 +96,22 @@ export default defineConfig(async ({ command, mode }) => {
 })
 ```
 
+### 環境変数
+
+Vite はデフォルトでは `.env` ファイルをロードしません。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
+
+```js
+import { defineConfig, loadEnv } from 'vite'
+
+export default defineConfig(({ command, mode }) => {
+  // `mode` に基づいて現在の作業ディレクトリにある env ファイルをロードする
+  const env = loadEnv(mode, process.cwd())
+  return {
+    // ビルド固有の設定
+  }
+})
+```
+
 ## 共通オプション
 
 ### root
