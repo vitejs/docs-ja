@@ -458,7 +458,7 @@ apply(config, { command }) {
 - [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックを使用していない。
 - bundle-phase フックと output-phase フックの間に強い結合がない。
 
-Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rollupOptions.plugins` で指定できます。
+Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rollupOptions.plugins` で指定できます。これは `enforce: 'post'` と `apply: 'build'` を設定した Vite プラグインと同じように動作します。
 
 Vite のみのプロパティで既存の Rollup プラグインを拡張することもできます:
 
