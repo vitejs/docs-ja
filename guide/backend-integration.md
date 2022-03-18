@@ -33,7 +33,6 @@
 
    ```html
    <!-- 開発環境 -->
-   <script type="module" src="http://localhost:3000/@vite/client"></script>
    <script type="module" src="http://localhost:3000/main.js"></script>
    ```
 
