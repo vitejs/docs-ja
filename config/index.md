@@ -223,6 +223,10 @@ export default defineConfig(async ({ command, mode }) => {
 
   Vite には「許可された条件」のリストがあり、許可されたリストにある最初の条件と一致します。 デフォルトで許可される条件は、`import`、`module`、`browser`、`default` と、現在のモードに基づく `production/development` です。`resolve.conditions` 設定オプションを使用すると、追加の許可条件を指定できます。
 
+  :::warning サブパスのエクスポートの解決
+  エクスポートのキーが "/" で終わるのは Node では非推奨で、うまく動作しない可能性があります。代わりに [`*` サブパスパターン](https://nodejs.org/api/packages.html#package-entry-points) を使って、パッケージそのものにアクセスしてください。
+  :::
+
 ### resolve.mainFields
 
 - **型:** `string[]`
