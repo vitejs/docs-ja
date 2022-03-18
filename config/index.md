@@ -518,7 +518,7 @@ export default defineConfig(async ({ command, mode }) => {
 
   `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
-  `server.middlewareMode` または `server.https` を使用している場合、`server.hmr.server` を HTTP(S) サーバに割り当てると、HMR のセキュアな接続要求がサーバ経由で処理されます。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
+  `server.hmr.server` を指定すると、Vite は指定されたサーバを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
 
 ### server.watch
 
