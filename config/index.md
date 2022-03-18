@@ -499,6 +499,12 @@ export default defineConfig(async ({ command, mode }) => {
 
   開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
+### server.headers
+
+- **型:** `OutgoingHttpHeaders`
+
+  サーバのレスポンスヘッダを指定します。
+
 ### server.force
 
 - **型:** `boolean`
@@ -581,6 +587,12 @@ async function createServer() {
 
 createServer()
 ```
+
+### server.base
+
+- **型:** `string | undefined`
+
+  Vite をサブフォルダとしてプロキシする場合に使用するため、http リクエストの前にこのフォルダを追加します。最初と最後は `/` の文字にする必要があります。
 
 ### server.fs.strict
 
