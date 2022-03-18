@@ -285,7 +285,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `Record<string, object>`
 
-  CSS プリプロセッサに渡すオプションを指定します。例:
+  CSS プリプロセッサに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。例:
 
   ```js
   export default defineConfig({
@@ -293,6 +293,9 @@ export default defineConfig(async ({ command, mode }) => {
       preprocessorOptions: {
         scss: {
           additionalData: `$injectedColor: orange;`
+        },
+        styl: {
+          additionalData: `$injectedColor ?= orange`
         }
       }
     }
