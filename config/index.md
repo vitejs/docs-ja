@@ -277,7 +277,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
 
-  インラインの PostCSS 設定（`postcss.config.js` と同じフォーマットを想定）、もしくは PostCSS の設定ファイルを検索するカスタムパス（デフォルトはプロジェクトルート）。検索には [postcss-load-config](https://github.com/postcss/postcss-load-config) が使用されます。
+  インラインの PostCSS 設定（`postcss.config.js` と同じフォーマットを想定）、もしくは PostCSS の設定ファイルを検索するカスタムディレクトリ（デフォルトはプロジェクトルート）。検索は [postcss-load-config](https://github.com/postcss/postcss-load-config) を使用し、対応する設定ファイル名のみが読み込まれます。
 
   インライン設定が提供された場合、Vite は他の PostCSS 設定ソースを検索しないことに注意してください。
 
