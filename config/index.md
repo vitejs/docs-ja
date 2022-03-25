@@ -36,6 +36,8 @@ const __filename = "value"
 const "path/vite.config.js" = "value"
 ```
 
+:::
+
 ### 設定の自動補完
 
 Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の自動補完を活用できます:
