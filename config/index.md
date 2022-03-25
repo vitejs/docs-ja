@@ -27,7 +27,7 @@ export default {
 vite --config my-config.js
 ```
 
-Vite は `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用すると、エラーになります:
+Vite は **CommonJS** と**TypeScript** の設定ファイルの `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用すると、エラーになります:
 
 ```js
 const __filename = "value"
