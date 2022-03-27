@@ -386,6 +386,8 @@ const worker = new MyWorker()
 import MyWorker from './worker?worker&inline'
 ```
 
+より詳細なワーカのバンドル設定については [Worker Options](/config/#worker-options) を見てください。
+
 ## ビルドの最適化
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に構成する必要はありません。
