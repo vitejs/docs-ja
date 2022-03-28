@@ -386,7 +386,7 @@ const worker = new MyWorker()
 import MyWorker from './worker?worker&inline'
 ```
 
-より詳細なワーカのバンドル設定については [Worker Options](/config/#worker-options) を見てください。
+すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/#worker-options) を見てください。
 
 ## ビルドの最適化
 
