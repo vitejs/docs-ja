@@ -352,6 +352,24 @@ init({
 
 ## Web Workers
 
+### コンストラクタによるインポート
+
+ワーカスクリプトは [`new Worker()`](https://developer.mozilla.org/ja/docs/Web/API/Worker/Worker) や [`new SharedWorker()`](https://developer.mozilla.org/ja/docs/Web/API/SharedWorker/SharedWorker) を使用することでインポートできます。サフィックスによるインポートと比べ、より標準的で**推奨される**ワーカ作成方法となります。
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url))
+```
+
+ワーカコンストラクタはオプションを受け取り、「モジュール」ワーカとして作成することも可能です:
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url), {
+  type: 'module'
+})
+```
+
+### クエリサフィックスによるインポート
+
 インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカスクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカコンストラクタになります:
 
 ```js
@@ -367,6 +385,8 @@ const worker = new MyWorker()
 ```js
 import MyWorker from './worker?worker&inline'
 ```
+
+すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/#worker-options) を見てください。
 
 ## ビルドの最適化
 
