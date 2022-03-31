@@ -123,3 +123,11 @@ HMR イベントを購読します。
 - `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
 
 カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
+
+## `hot.send(event, data)`
+
+カスタムイベントを背後にある Vite の開発サーバーへ送信します。
+
+接続前に呼び出した場合、データはバッファされ、コネクションが確立した後に送信されます。
+
+詳細は [クライアントサーバーとのコミュニケーション](/guide/api-plugin.html#client-server-communication) を参照してください。

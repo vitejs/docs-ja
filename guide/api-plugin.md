@@ -492,3 +492,71 @@ import { normalizePath } from 'vite'
 normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
 ```
+
+## クライアントサーバーとのコミュニケーション
+
+Vite の 2.9 から、プラグインによりクライアントとのコミュニケーションに役立つ機能をいくつか提供しています。
+
+### サーバーからクライアントへ
+
+プラグイン側からは `server.ws.send` を使うことで全クライアントへイベントをブロードキャストすることができます:
+
+```js
+// vite.config.js
+export default defineConfig({
+  plugins: [
+    {
+      // ...
+      configureServer(server) {
+        server.ws.send('my:greetings', { msg: 'hello' })
+      }
+    }
+  ]
+})
+```
+
+::: tip 注意
+イベント名には**常にプレフィックスを付けて**他のプラグインとの衝突を避けることを推奨します。
+:::
+
+クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします:
+
+```ts
+// クライアント側
+if (import.meta.hot) {
+  import.meta.hot.on('my:greetings', (data) => {
+    console.log(data.msg) // hello
+  })
+}
+```
+
+### クライアントからサーバーへ
+
+クライアントからサーバーへイベントをブロードキャストする時は [`hot.send`](/guide/api-hmr.html#hot-send-event-payload) を使うことができます:
+
+```ts
+// クライアント側
+if (import.meta.hot) {
+  import.meta.hot.send('my:from-client', { msg: 'Hey!' })
+}
+```
+
+この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします。
+
+```js
+// vite.config.js
+export default defineConfig({
+  plugins: [
+    {
+      // ...
+      configureServer(server) {
+        server.ws.on('my:from-client', (data, client) => {
+          console.log('Message from client:', data.msg) // Hey!
+          // クライアントへの返信のみ (必要であれば)
+          client.send('my:ack', { msg: 'Hi! I got your message!' })
+        })
+      }
+    }
+  ]
+})
+```
