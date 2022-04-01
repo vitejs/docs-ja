@@ -492,3 +492,19 @@ import { normalizePath } from 'vite'
 normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
 ```
+
+### カスタムイベント用の TypeScript
+
+`CustomEventMap` インタフェイスを拡張することで、カスタムイベントに型をつけられます:
+
+```ts
+// events.d.ts
+import 'vite/types/customEvent'
+
+declare module 'vite/types/customEvent' {
+  interface CustomEventMap {
+    'custom:foo': { msg: string }
+    // 'event-key': payload
+  }
+}
+```
