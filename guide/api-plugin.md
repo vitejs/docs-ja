@@ -493,13 +493,13 @@ normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
 ```
 
-## クライアントサーバーとのコミュニケーション
+## クライアントサーバーとの通信
 
-Vite の 2.9 から、プラグインによりクライアントとのコミュニケーションに役立つ機能をいくつか提供しています。
+Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。
 
 ### サーバーからクライアントへ
 
-プラグイン側からは `server.ws.send` を使うことで全クライアントへイベントをブロードキャストすることができます:
+プラグイン側からは `server.ws.send` を使うことで全クライアントへイベントを配信することができます:
 
 ```js
 // vite.config.js
@@ -519,7 +519,7 @@ export default defineConfig({
 イベント名には**常にプレフィックスを付けて**他のプラグインとの衝突を避けることを推奨します。
 :::
 
-クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします:
+クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします。
 
 ```ts
 // クライアント側
@@ -532,7 +532,7 @@ if (import.meta.hot) {
 
 ### クライアントからサーバーへ
 
-クライアントからサーバーへイベントをブロードキャストする時は [`hot.send`](/guide/api-hmr.html#hot-send-event-payload) を使うことができます:
+クライアントからサーバーへイベント送信する時 [`hot.send`](/guide/api-hmr.html#hot-send-event-payload) を使うことができます:
 
 ```ts
 // クライアント側

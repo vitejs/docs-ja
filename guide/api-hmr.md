@@ -126,8 +126,8 @@ HMR イベントを購読します。
 
 ## `hot.send(event, data)`
 
-カスタムイベントを背後にある Vite の開発サーバーへ送信します。
+カスタムイベントを Vite の開発サーバーへ送信します。
 
 接続前に呼び出した場合、データはバッファされ、コネクションが確立した後に送信されます。
 
-詳細は [クライアントサーバーとのコミュニケーション](/guide/api-plugin.html#client-server-communication) を参照してください。
+詳細は [クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication) を参照してください。
