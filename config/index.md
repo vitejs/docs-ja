@@ -511,13 +511,11 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### server.hmr
 
-- **型:** `boolean | { protocol?: string, host?: string, port?: number | false, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
   HMR 接続の無効化または設定（HMR WebSocket が http サーバと異なるアドレスを使用する必要がある場合）。
 
   `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
-
-  ポートのないドメインに接続する場合は `server.hmr.port` を `false` に設定します。
 
   `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
