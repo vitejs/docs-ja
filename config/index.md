@@ -140,6 +140,8 @@ export default defineConfig(async ({ command, mode }) => {
 
   - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
+  - [esbuild の動作](https://esbuild.github.io/api/#define)と矛盾しないように、式は JSON オブジェクト（null, boolean, number, string, array, object）か単一の識別子でなければなりません。
+
   - マッチした部分が単語の境界（`\b`）で囲まれている場合のみ置換されます。
 
   構文解析なしの単純なテキスト置換として実装されているため、`define` は「定数」にのみ使用することをおすすめします。
