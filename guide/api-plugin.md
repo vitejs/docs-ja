@@ -519,7 +519,7 @@ export default defineConfig({
 イベント名には**常にプレフィックスを付けて**他のプラグインとの衝突を避けることを推奨します。
 :::
 
-クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします。
+クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします:
 
 ```ts
 // クライアント側
@@ -541,7 +541,7 @@ if (import.meta.hot) {
 }
 ```
 
-この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします。
+この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします:
 
 ```js
 // vite.config.js
