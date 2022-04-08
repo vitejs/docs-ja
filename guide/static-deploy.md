@@ -299,7 +299,7 @@ Vercel CLI
 
 ### Vercel for Git
 
-1. コードを Git リポジトリ（GitHub, GitLab, BitBucket）にプッシュします。
+1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket）にプッシュします。
 2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
 3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
 4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）

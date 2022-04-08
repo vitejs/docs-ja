@@ -324,7 +324,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `ESBuildOptions | false`
 
-  `ESBuildOptions` は [ESbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
+  `ESBuildOptions` は [esbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
   ```js
   export default defineConfig({
@@ -335,9 +335,9 @@ export default defineConfig(async ({ command, mode }) => {
   })
   ```
 
-  デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
+  デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
 
-  また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
+  また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
 
   ```js
   export default defineConfig({
@@ -347,7 +347,7 @@ export default defineConfig(async ({ command, mode }) => {
   })
   ```
 
-  ESbuild の変換を無効にするには `false` を設定します。
+  esbuild の変換を無効にするには `false` を設定します。
 
 ### assetsInclude
 
@@ -806,7 +806,7 @@ export default defineConfig({
 - **型:** `boolean | 'terser' | 'esbuild'`
 - **デフォルト:** `'esbuild'`
 
-  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
+  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
 
   ライブラリモードで `'es'` フォーマットを使用する場合、`build.minify` オプションは使えないので注意してください。
 
