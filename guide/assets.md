@@ -108,3 +108,7 @@ function getImageUrl(name) {
 ::: warning 注意: SSR では動作しません
 ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
 :::
+
+::: warning esbuild ターゲット設定が必要
+このパターンでは esbuild ターゲットが `es2020` 以上に設定する必要があります。`vite@2.x` は `es2019` をデフォルトターゲットとして使用します。このパターンを使用する場合は、[build-target](/config/#build-target) と [optimizedeps.esbuildoptions.target](/config/#optimizedeps-esbuildoptions) を `es2020` 以上に設定してください。
+:::
