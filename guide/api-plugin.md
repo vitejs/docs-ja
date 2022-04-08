@@ -186,8 +186,10 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   const partialConfigPlugin = () => ({
     name: 'return-partial',
     config: () => ({
-      alias: {
-        foo: 'bar'
+      resolve: {
+        alias: {
+          foo: 'bar'
+        }
       }
     })
   })
