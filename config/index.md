@@ -98,7 +98,9 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### 環境変数
 
-Vite はデフォルトでは `.env` ファイルをロードしません。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
+通常通り、環境変数は `process.env` から取得することができます。
+
+Vite はデフォルトでは `.env` ファイルをロードしないことに注意してください。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
 
 ```js
 import { defineConfig, loadEnv } from 'vite'
@@ -329,7 +331,7 @@ export default defineConfig(({ command, mode }) => {
 
   `true` に設定すると、インポートされた JSON は `export default JSON.parse("...")` に変換されます。これは特に JSON ファイルが大きい場合、オブジェクトリテラルよりも大幅にパフォーマンスが向上します。
 
-  有効にすると、名前付きインポートは無効になります。 
+  有効にすると、名前付きインポートは無効になります。
 
 ### esbuild
 
@@ -706,7 +708,7 @@ export default defineConfig({
   ```
 
   注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
-  
+
 ### build.outDir
 
 - **型:** `string`
