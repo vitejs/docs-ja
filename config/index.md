@@ -336,7 +336,7 @@ export default defineConfig(({ command, mode }) => {
 
   `true` に設定すると、インポートされた JSON は `export default JSON.parse("...")` に変換されます。これは特に JSON ファイルが大きい場合、オブジェクトリテラルよりも大幅にパフォーマンスが向上します。
 
-  有効にすると、名前付きインポートは無効になります。 
+  有効にすると、名前付きインポートは無効になります。
 
 ### esbuild
 
@@ -675,7 +675,7 @@ createServer()
 ```js
 export default defineConfig({
   server: {
-    origin: 'http://127.0.0.1:8080/'
+    origin: 'http://127.0.0.1:8080'
   }
 })
 ```
@@ -713,7 +713,7 @@ export default defineConfig({
   ```
 
   注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
-  
+
 ### build.outDir
 
 - **型:** `string`
