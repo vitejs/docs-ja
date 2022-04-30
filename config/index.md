@@ -94,7 +94,7 @@ Vite の API において `command` の値は、開発時（CLI で `vite`、`vi
 export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
-    // build 固有の設定
+    // vite の設定
   }
 })
 ```
@@ -110,9 +110,13 @@ import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ command, mode }) => {
   // `mode` に基づいて現在の作業ディレクトリにある env ファイルをロードする
-  const env = loadEnv(mode, process.cwd())
+  // `VITE_` プレフィックスに関係なく全ての環境変数をロードするには、第 3 引数に '' を設定します
+  const env = loadEnv(mode, process.cwd(), '')
   return {
-    // ビルド固有の設定
+    // vite の設定
+    define: {
+      __APP_ENV__: env.APP_ENV
+    }
   }
 })
 ```
