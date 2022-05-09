@@ -81,6 +81,14 @@ interface ImportMeta {
 }
 ```
 
+コードがブラウザー環境の型、例えば [DOM](https://github.com/microsoft/TypeScript/blob/main/lib/lib.dom.d.ts) や [WebWorker](https://github.com/microsoft/TypeScript/blob/main/lib/lib.webworker.d.ts) に依存している場合は、`tsconfig.json` 内の [lib](https://www.typescriptlang.org/tsconfig#lib) フィールドを更新しましょう。
+
+```json
+{
+  "lib": ["WebWorker"]
+}
+```
+
 ## Modes
 
 デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
