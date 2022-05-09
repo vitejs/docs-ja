@@ -111,7 +111,8 @@ module.exports = defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
-      fileName: (format) => `my-lib.${format}.js`
+      // 適切な拡張子が追加されます
+      fileName: 'my-lib'
     },
     rollupOptions: {
       // ライブラリにバンドルされるべきではない依存関係を
@@ -134,7 +135,7 @@ module.exports = defineConfig({
 ```
 $ vite build
 building for production...
-[write] my-lib.es.js 0.08kb, brotli: 0.07kb
+[write] my-lib.es.mjs 0.08kb, brotli: 0.07kb
 [write] my-lib.umd.js 0.30kb, brotli: 0.16kb
 ```
 
@@ -145,7 +146,7 @@ building for production...
   "name": "my-lib",
   "files": ["dist"],
   "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "module": "./dist/my-lib.es.mjs",
   "exports": {
     ".": {
       "import": "./dist/my-lib.es.js",
