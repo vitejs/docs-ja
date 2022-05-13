@@ -89,7 +89,7 @@ async function createServer() {
     // index.html を提供します - 次にこれに取り組みます。
   })
 
-  app.listen(3000)
+  app.listen(5173)
 }
 
 createServer()

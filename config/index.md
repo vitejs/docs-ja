@@ -444,7 +444,7 @@ export default defineConfig(({ command, mode }) => {
 ### server.port
 
 - **型:** `number`
-- **デフォルト:** `3000`
+- **デフォルト:** `5173`
 
   サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
@@ -516,7 +516,7 @@ export default defineConfig(({ command, mode }) => {
         },
         // Web ソケット か socket.io をプロキシ化
         '/socket.io': {
-          target: 'ws://localhost:3000',
+          target: 'ws://localhost:5173',
           ws: true
         }
       }

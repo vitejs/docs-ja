@@ -18,5 +18,5 @@ $ yarn install
 $ yarn docs
 ```  
 
-上記コマンド実行後、`http://localhost:3000` にアクセスするとサイトにアクセスできます。
+上記コマンド実行後、`http://localhost:5173` にアクセスするとサイトにアクセスできます。
 
