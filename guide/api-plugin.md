@@ -11,7 +11,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 プラグインを作成する際には、`vite.config.js` にインラインで記述できます。そのために新しいパッケージを作成する必要はありません。あるプラグインが自分のプロジェクトで役に立ったことがわかったら、[エコシステムにいる](https://chat.vitejs.dev)他の人を助けるために共有することを検討してください。
 
 ::: tip
-プラグインを学んだり、デバッグしたり、オーサリングしたりする際には [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をプロジェクトに含めることをお勧めします。これにより、Vite プラグインの中間状態を検査できます。インストール後、`localhost:3000/__inspect/` にアクセスして、プロジェクトのモジュールや変換スタックを検査できます。インストール方法については、[vite-plugin-inspect のドキュメント](https://github.com/antfu/vite-plugin-inspect)をご覧ください。
+プラグインを学んだり、デバッグしたり、オーサリングしたりする際には [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をプロジェクトに含めることをお勧めします。これにより、Vite プラグインの中間状態を検査できます。インストール後、`localhost:5173/__inspect/` にアクセスして、プロジェクトのモジュールや変換スタックを検査できます。インストール方法については、[vite-plugin-inspect のドキュメント](https://github.com/antfu/vite-plugin-inspect)をご覧ください。
 ![vite-plugin-inspect](/images/vite-plugin-inspect.png)
 :::
 
@@ -113,7 +113,7 @@ export default function myPlugin() {
 
 ```js
 export default function myPlugin() {
-  const virtualModuleId = '@my-virtual-module'
+  const virtualModuleId = 'virtual:my-module'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
@@ -135,7 +135,7 @@ export default function myPlugin() {
 これにより、JavaScript でモジュールをインポートできます:
 
 ```js
-import { msg } from '@my-virtual-module'
+import { msg } from 'virtual:my-module'
 
 console.log(msg)
 ```
@@ -186,8 +186,10 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   const partialConfigPlugin = () => ({
     name: 'return-partial',
     config: () => ({
-      alias: {
-        foo: 'bar'
+      resolve: {
+        alias: {
+          foo: 'bar'
+        }
       }
     })
   })
@@ -491,6 +493,74 @@ import { normalizePath } from 'vite'
 
 normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
+```
+
+## クライアントサーバーとの通信
+
+Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。
+
+### サーバーからクライアントへ
+
+プラグイン側からは `server.ws.send` を使うことで全クライアントへイベントを配信することができます:
+
+```js
+// vite.config.js
+export default defineConfig({
+  plugins: [
+    {
+      // ...
+      configureServer(server) {
+        server.ws.send('my:greetings', { msg: 'hello' })
+      }
+    }
+  ]
+})
+```
+
+::: tip 注意
+イベント名には**常にプレフィックスを付けて**他のプラグインとの衝突を避けることを推奨します。
+:::
+
+クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします:
+
+```ts
+// クライアント側
+if (import.meta.hot) {
+  import.meta.hot.on('my:greetings', (data) => {
+    console.log(data.msg) // hello
+  })
+}
+```
+
+### クライアントからサーバーへ
+
+クライアントからサーバーへイベント送信する時 [`hot.send`](/guide/api-hmr.html#hot-send-event-payload) を使うことができます:
+
+```ts
+// クライアント側
+if (import.meta.hot) {
+  import.meta.hot.send('my:from-client', { msg: 'Hey!' })
+}
+```
+
+この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします:
+
+```js
+// vite.config.js
+export default defineConfig({
+  plugins: [
+    {
+      // ...
+      configureServer(server) {
+        server.ws.on('my:from-client', (data, client) => {
+          console.log('Message from client:', data.msg) // Hey!
+          // クライアントへの返信のみ (必要であれば)
+          client.send('my:ack', { msg: 'Hi! I got your message!' })
+        })
+      }
+    }
+  ]
+})
 ```
 
 ### カスタムイベント用の TypeScript
