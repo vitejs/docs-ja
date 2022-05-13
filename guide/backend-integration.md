@@ -29,11 +29,11 @@
    import 'vite/modulepreload-polyfill'
    ```
 
-2. 開発環境向けには以下をサーバの HTML テンプレートに含めてください。（`http://localhost:3000` を Vite が動作している URL に変更してください）:
+2. 開発環境向けには以下をサーバの HTML テンプレートに含めてください。（`http://localhost:5173` を Vite が動作している URL に変更してください）:
 
    ```html
    <!-- 開発環境 -->
-   <script type="module" src="http://localhost:3000/main.js"></script>
+   <script type="module" src="http://localhost:5173/main.js"></script>
    ```
 
    また、サーバが Vite の作業ディレクトリにある静的アセットを配信するように設定されていることを確認してください。そうなっていない場合、画像などのアセットが適切に読み込まれません。
@@ -42,7 +42,7 @@
 
    ```html
    <script type="module">
-     import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+     import RefreshRuntime from 'http://localhost:5173/@react-refresh'
      RefreshRuntime.injectIntoGlobalHook(window)
      window.$RefreshReg$ = () => {}
      window.$RefreshSig$ = () => (type) => type
