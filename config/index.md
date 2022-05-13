@@ -333,6 +333,14 @@ export default defineConfig(({ command, mode }) => {
   })
   ```
 
+### css.devSourcemap
+
+- **実験的機能**
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+  開発時にソースマップを有効にするかどうか。
+
 ### json.namedExports
 
 - **型:** `boolean`
