@@ -146,6 +146,15 @@ module.exports = defineConfig({
 })
 ```
 
+エントリーファイルには、パッケージのユーザがインポートできるエクスポートが含まれることになります:
+
+```js
+// lib/main.js
+import Foo from './Foo.vue'
+import Bar from './Bar.vue'
+export { Foo, Bar }
+```
+
 この設定で `vite build` を実行するとライブラリの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます。`es` と `umd` (`build.lib` で設定可能):
 
 ```
