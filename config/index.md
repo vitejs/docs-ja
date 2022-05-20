@@ -372,7 +372,7 @@ export default defineConfig(({ command, mode }) => {
   })
   ```
 
-  デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、どちらも `string | RegExp | (string | RegExp)[]` の型を想定しています。
+  デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
 
   また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
 
@@ -391,7 +391,7 @@ export default defineConfig(({ command, mode }) => {
 - **型:** `string | RegExp | (string | RegExp)[]`
 - **関連:** [静的アセットの取り扱い](/guide/assets)
 
-  静的アセットとして扱う追加の [picomatch パターン](https://github.com/micromatch/picomatch)を指定します。そして:
+  静的アセットとして扱う追加の [picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)を指定します。そして:
 
   - HTML から参照されたり、`fetch` や XHR で直接リクエストされたりすると、プラグインの変換パイプラインから除外されます。
 
