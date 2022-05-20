@@ -280,10 +280,10 @@ for (const path in modules) {
 }
 ```
 
-一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに `import.meta.globEager` を使用できます:
+一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに第 2 引数に `{ eager: true }` を渡すことができます:
 
 ```js
-const modules = import.meta.globEager('./dir/*.js')
+const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
 上のコードは以下のように変換されます:
@@ -298,7 +298,9 @@ const modules = {
 }
 ```
 
-`import.meta.glob` と `import.meta.globEager` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルを文字列としてインポートすることもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）。
+### glob インポート
+
+`import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）:
 
 ```js
 const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
@@ -309,17 +311,115 @@ const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
 ```js
 // vite によって生成されたコード
 const modules = {
-  './dir/foo.js': '{\n  "msg": "foo"\n}\n',
-  './dir/bar.js': '{\n  "msg": "bar"\n}\n'
+  './dir/foo.js': 'export default "foo"\n',
+  './dir/bar.js': 'export default "bar"\n'
 }
 ```
+
+`{ as: 'url' }` はアセットの URL としての読み込みもサポートしています。
+
+### マルチパターン
+
+第 1 引数は下記の例のように glob の配列を指定できます
+
+```js
+const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
+```
+
+### ネガティブパターン
+
+ネガティブ glob パターンもサポートされています（接頭辞は `!`）。一部のファイルを結果から無視させるには、最初の引数に除外 glob パターンを追加します:
+
+```js
+const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
+```
+
+```js
+// vite によってコード生成される
+const modules = {
+  './dir/foo.js': () => import('./dir/foo.js')
+}
+```
+
+#### 名前付きインポート
+
+`import` オプションでモジュールの一部だけをインポートすることも可能です。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
+```
+
+```ts
+// vite によってコード生成される
+const modules = {
+  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
+  './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup)
+}
+```
+
+`eager` と組み合わせると、それらのモジュールのツリーシェイキングを有効にすることも可能です。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', { import: 'setup', eager: true })
+```
+
+```ts
+// vite によってコード生成される:
+import { setup as __glob__0_0 } from './dir/foo.js'
+import { setup as __glob__0_1 } from './dir/bar.js'
+const modules = {
+  './dir/foo.js': __glob__0_0,
+  './dir/bar.js': __glob__0_1
+}
+```
+
+default エクスポートをインポートするには `import` に `default` を設定します。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  import: 'default',
+  eager: true
+})
+```
+
+```ts
+// vite によってコード生成される:
+import __glob__0_0 from './dir/foo.js'
+import __glob__0_1 from './dir/bar.js'
+const modules = {
+  './dir/foo.js': __glob__0_0,
+  './dir/bar.js': __glob__0_1
+}
+```
+
+#### カスタムクエリ
+
+また、`query` オプションを使用すると、他のプラグインが使用するカスタムクエリをインポートに指定することができます。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  query: { foo: 'bar', bar: true }
+})
+```
+
+```ts
+// vite によってコード生成される:
+const modules = {
+  './dir/foo.js': () =>
+    import('./dir/foo.js?foo=bar&bar=true').then((m) => m.setup),
+  './dir/bar.js': () =>
+    import('./dir/bar.js?foo=bar&bar=true').then((m) => m.setup)
+}
+```
+
+### Glob インポートの注意事項
 
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）または絶対パス（`/` で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
-- Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
-- また、glob インポートは変数を受け付けないので、文字列のパターンを直接渡す必要があることにも注意が必要です。
+- Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
+- また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
 - Glob パターンは外側の引用符と同じ引用符の文字列（つまり `'`, `"`, `` ` ``）を含むことはできません。例えば `'/Tom\'s files/**'` は、代わりに `"/Tom's files/**"` を使用してください。
 
 ## WebAssembly
