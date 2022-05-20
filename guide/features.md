@@ -300,10 +300,10 @@ const modules = {
 }
 ```
 
-`import.meta.glob` と `import.meta.globEager` は[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同じようにファイルを文字列としてインポートすることもサポートしています。ここでは [Import Assertions](https://github.com/tc39/proposal-import-assertions#synopsis) 構文を使ってインポートします。
+`import.meta.glob` と `import.meta.globEager` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルを文字列としてインポートすることもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）。
 
 ```js
-const modules = import.meta.glob('./dir/*.js', { assert: { type: 'raw' } })
+const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
 ```
 
 上のコードは以下のように変換されます:
