@@ -55,7 +55,7 @@ module.exports = defineConfig({
 })
 ```
 
-カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリとしても提供されます。`cache.reset()` はこの場合、ビルドウォッチモードが正しく動作するように `buildStart` で呼び出す必要があります。
+カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリとしても提供されます。この場合、ビルドウォッチモードが正しく動作するように、`cache.reset()` は `buildStart` で呼び出す必要があります。
 
 ## ファイル変更時のリビルド
 
