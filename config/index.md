@@ -27,13 +27,16 @@ export default {
 vite --config my-config.js
 ```
 
-Vite は `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用すると、エラーになります:
+::: tip 注意
+Vite は設定ファイルとその依存関係内の `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用すると、エラーになります:
 
 ```js
 const __filename = "value"
 // これは次のように変換されます
 const "path/vite.config.js" = "value"
 ```
+
+:::
 
 ### 設定の自動補完
 
@@ -91,7 +94,29 @@ Vite の API において `command` の値は、開発時（CLI で `vite`、`vi
 export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
-    // build 固有の設定
+    // vite の設定
+  }
+})
+```
+
+### 環境変数
+
+通常通り、環境変数は `process.env` から取得することができます。
+
+Vite はデフォルトでは `.env` ファイルをロードしないことに注意してください。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
+
+```js
+import { defineConfig, loadEnv } from 'vite'
+
+export default defineConfig(({ command, mode }) => {
+  // `mode` に基づいて現在の作業ディレクトリにある env ファイルをロードする
+  // `VITE_` プレフィックスに関係なく全ての環境変数をロードするには、第 3 引数に '' を設定します
+  const env = loadEnv(mode, process.cwd(), '')
+  return {
+    // vite の設定
+    define: {
+      __APP_ENV__: env.APP_ENV
+    }
   }
 })
 ```
@@ -137,11 +162,13 @@ export default defineConfig(async ({ command, mode }) => {
 
   - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
-  - マッチした部分が単語の境界（`\b`）で囲まれている場合のみ置換されます。
+  - マッチした部分が他の文字、数字、`_` または `$` で囲まれていない場合のみ置換されます。
 
+  ::: warning
   構文解析なしの単純なテキスト置換として実装されているため、`define` は「定数」にのみ使用することをおすすめします。
 
   例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
+  :::
 
   ::: tip 注意
   TypeScript を使用する場合、型チェックと自動補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
@@ -212,7 +239,7 @@ export default defineConfig(async ({ command, mode }) => {
   {
     "exports": {
       ".": {
-        "import": "./index.esm.js",
+        "import": "./index.esm.mjs",
         "require": "./index.cjs.js"
       }
     }
@@ -277,7 +304,11 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
 
-  インラインの PostCSS 設定（`postcss.config.js` と同じフォーマットを想定）、もしくは PostCSS の設定ファイルを検索するカスタムパス（デフォルトはプロジェクトルート）。検索には [postcss-load-config](https://github.com/postcss/postcss-load-config) が使用されます。
+  インラインの PostCSS 設定、もしくは PostCSS の設定ファイルを検索するカスタムディレクトリ（デフォルトはプロジェクトルート）。
+
+  インラインの PostCSS の設定には、`postcss.config.js` と同じ書式を想定してします。しかし、`plugins` のプロパティには、[配列のフォーマット](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)しか使用できません。
+
+  検索は [postcss-load-config](https://github.com/postcss/postcss-load-config) を使用し、対応する設定ファイル名のみが読み込まれます。
 
   インライン設定が提供された場合、Vite は他の PostCSS 設定ソースを検索しないことに注意してください。
 
@@ -285,7 +316,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 - **型:** `Record<string, object>`
 
-  CSS プリプロセッサに渡すオプションを指定します。例:
+  CSS プリプロセッサに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。例:
 
   ```js
   export default defineConfig({
@@ -293,11 +324,22 @@ export default defineConfig(async ({ command, mode }) => {
       preprocessorOptions: {
         scss: {
           additionalData: `$injectedColor: orange;`
+        },
+        styl: {
+          additionalData: `$injectedColor ?= orange`
         }
       }
     }
   })
   ```
+
+### css.devSourcemap
+
+- **実験的機能**
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+  開発時にソースマップを有効にするかどうか。
 
 ### json.namedExports
 
@@ -313,13 +355,13 @@ export default defineConfig(async ({ command, mode }) => {
 
   `true` に設定すると、インポートされた JSON は `export default JSON.parse("...")` に変換されます。これは特に JSON ファイルが大きい場合、オブジェクトリテラルよりも大幅にパフォーマンスが向上します。
 
-  有効にすると、名前付きインポートは無効になります。 
+  有効にすると、名前付きインポートは無効になります。
 
 ### esbuild
 
 - **型:** `ESBuildOptions | false`
 
-  `ESBuildOptions` は [ESbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
+  `ESBuildOptions` は [esbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
   ```js
   export default defineConfig({
@@ -330,9 +372,9 @@ export default defineConfig(async ({ command, mode }) => {
   })
   ```
 
-  デフォルトでは ESBuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
+  デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
 
-  また、`esbuild.jsxInject` を使用すると、ESBuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
+  また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
 
   ```js
   export default defineConfig({
@@ -342,7 +384,7 @@ export default defineConfig(async ({ command, mode }) => {
   })
   ```
 
-  ESbuild の変換を無効にするには `false` を設定します。
+  esbuild の変換を無効にするには `false` を設定します。
 
 ### assetsInclude
 
@@ -413,7 +455,7 @@ export default defineConfig(async ({ command, mode }) => {
 ### server.port
 
 - **型:** `number`
-- **デフォルト:** `3000`
+- **デフォルト:** `5173`
 
   サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
@@ -485,7 +527,7 @@ export default defineConfig(async ({ command, mode }) => {
         },
         // Web ソケット か socket.io をプロキシ化
         '/socket.io': {
-          target: 'ws://localhost:3000',
+          target: 'ws://localhost:5173',
           ws: true
         }
       }
@@ -499,6 +541,12 @@ export default defineConfig(async ({ command, mode }) => {
 
   開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
 
+### server.headers
+
+- **型:** `OutgoingHttpHeaders`
+
+  サーバのレスポンスヘッダを指定します。
+
 ### server.force
 
 - **型:** `boolean`
@@ -508,17 +556,15 @@ export default defineConfig(async ({ command, mode }) => {
 
 ### server.hmr
 
-- **型:** `boolean | { protocol?: string, host?: string, port?: number | false, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
   HMR 接続の無効化または設定（HMR WebSocket が http サーバと異なるアドレスを使用する必要がある場合）。
 
   `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
 
-  ポートのないドメインに接続する場合は `server.hmr.port` を `false` に設定します。
-
   `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
 
-  `server.middlewareMode` または `server.https` を使用している場合、`server.hmr.server` を HTTP(S) サーバに割り当てると、HMR のセキュアな接続要求がサーバ経由で処理されます。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
+  `server.hmr.server` を指定すると、Vite は指定されたサーバを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
 
 ### server.watch
 
@@ -581,6 +627,12 @@ async function createServer() {
 
 createServer()
 ```
+
+### server.base
+
+- **型:** `string | undefined`
+
+  Vite をサブフォルダとしてプロキシする場合に使用するため、http リクエストの前にこのフォルダを追加します。最初と最後は `/` の文字にする必要があります。
 
 ### server.fs.strict
 
@@ -652,7 +704,7 @@ createServer()
 ```js
 export default defineConfig({
   server: {
-    origin: 'http://127.0.0.1:8080/'
+    origin: 'http://127.0.0.1:8080'
   }
 })
 ```
@@ -690,7 +742,7 @@ export default defineConfig({
   ```
 
   注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
-  
+
 ### build.outDir
 
 - **型:** `string`
@@ -801,7 +853,7 @@ export default defineConfig({
 - **型:** `boolean | 'terser' | 'esbuild'`
 - **デフォルト:** `'esbuild'`
 
-  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
+  ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
 
   ライブラリモードで `'es'` フォーマットを使用する場合、`build.minify` オプションは使えないので注意してください。
 
@@ -964,7 +1016,6 @@ export default defineConfig({
 
   - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
   - `plugins` は Vite の依存関係プラグインとマージされます
-  - `keepNames` は非推奨の `optimizeDeps.keepNames` よりも優先されます
 
 ## SSR オプション
 

@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
   title: 'Vite',
   description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
@@ -55,6 +57,15 @@ module.exports = {
           {
             text: 'Changelog',
             link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
+          }
+        ]
+      },
+      {
+        text: 'v3 (next)',
+        items: [
+          {
+            text: 'v2.x (stable)',
+            link: 'https://v2.vitejs.dev'
           }
         ]
       },
@@ -163,4 +174,4 @@ module.exports = {
       ]
     }
   }
-}
+})

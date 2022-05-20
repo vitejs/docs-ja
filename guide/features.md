@@ -30,7 +30,7 @@ Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します
 
 Vite は `.ts` ファイルをインポートすることをサポートしています。
 
-Vite は `.ts` ファイルに対してのみ変換を実行し、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
+Vite は `.ts` ファイルに対してトランスパイルをするだけで、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
 
 Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザに反映されます
 
@@ -52,6 +52,8 @@ export type { T }
 `esbuild` は型情報なしにトランスパイルを行うだけなので、const enum や暗黙の型のみのインポートなどの特定の機能をサポートしていないからです。
 
 隔離されたトランスパイルで動作しない機能を TS が警告するように、`tsconfig.json` の `compilerOptions` で `"isolatedModules": true` を設定する必要があります。
+
+しかし、一部のライブラリ (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
 
 #### `useDefineForClassFields`
 
@@ -185,7 +187,7 @@ document.getElementById('foo').className = applyColor
 
 ### CSS プリプロセッサ
 
-Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/jonathantneal/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
+Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
 
 とは言うものの、Vite は `.scss`、`.sass`、`.less`、`.styl`、`.stylus` ファイルの組み込みサポートを提供します。それらに Vite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサ自体をインストールする必要があります。
 
@@ -298,10 +300,10 @@ const modules = {
 }
 ```
 
-`import.meta.glob` と `import.meta.globEager` は[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同じようにファイルを文字列としてインポートすることもサポートしています。ここでは [Import Assertions](https://github.com/tc39/proposal-import-assertions#synopsis) 構文を使ってインポートします。
+`import.meta.glob` と `import.meta.globEager` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルを文字列としてインポートすることもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）。
 
 ```js
-const modules = import.meta.glob('./dir/*.js', { assert: { type: 'raw' } })
+const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
 ```
 
 上のコードは以下のように変換されます:
@@ -352,6 +354,24 @@ init({
 
 ## Web Workers
 
+### コンストラクタによるインポート
+
+ワーカスクリプトは [`new Worker()`](https://developer.mozilla.org/ja/docs/Web/API/Worker/Worker) や [`new SharedWorker()`](https://developer.mozilla.org/ja/docs/Web/API/SharedWorker/SharedWorker) を使用することでインポートできます。サフィックスによるインポートと比べ、より標準的で**推奨される**ワーカ作成方法となります。
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url))
+```
+
+ワーカコンストラクタはオプションを受け取り、「モジュール」ワーカとして作成することも可能です:
+
+```ts
+const worker = new Worker(new URL('./worker.js', import.meta.url), {
+  type: 'module'
+})
+```
+
+### クエリサフィックスによるインポート
+
 インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカスクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカコンストラクタになります:
 
 ```js
@@ -367,6 +387,8 @@ const worker = new MyWorker()
 ```js
 import MyWorker from './worker?worker&inline'
 ```
+
+すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/#worker-options) を見てください。
 
 ## ビルドの最適化
 

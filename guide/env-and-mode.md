@@ -37,12 +37,12 @@ Vite は、[環境ディレクトリ](/config/#envdir)にある以下のファ�
 
 特定のモードの env ファイル（例: `.env.production`）は、汎用の env ファイル（例: `.env`）よりも優先されます。
 
-また、Vite の実行時に既に存在している環境変数は最も優先度が高く、`.env` ファイルによって上書きされることはありません。
+また、Vite の実行時に既に存在している環境変数は最も優先度が高く、`.env` ファイルによって上書きされることはありません。例えば、`VITE_SOME_KEY=123 vite build` を実行する場合。
 
 `.env` は Vite 起動時に読み込まれます。変更した後はサーバを再起動してください。
 :::
 
-読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも公開されます。
+読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも文字列として公開されます。
 
 環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下のファイルで:
 
@@ -57,7 +57,7 @@ VITE_SOME_KEY=123
 
 :::warning SECURITY NOTES
 
-- `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることができます。git にチェックインされるのを防ぐために、`.gitignore` に `.local` を追加すべきです。
+- `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることができます。git にチェックインされるのを防ぐために、`.gitignore` に `*.local` を追加すべきです。
 
 - Vite のソースコードに公開される変数は最終的にクライアントバンドルに入るので、`VITE_*` 変数はセンシティブな情報を*含まない*ようにすべきです。
   :::
@@ -78,6 +78,14 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv
+}
+```
+
+コードがブラウザー環境の型、例えば [DOM](https://github.com/microsoft/TypeScript/blob/main/lib/lib.dom.d.ts) や [WebWorker](https://github.com/microsoft/TypeScript/blob/main/lib/lib.webworker.d.ts) に依存している場合は、`tsconfig.json` 内の [lib](https://www.typescriptlang.org/tsconfig#lib) フィールドを更新しましょう。
+
+```json
+{
+  "lib": ["WebWorker"]
 }
 ```
 
