@@ -415,13 +415,13 @@ const modules = {
 ```
 
 ### Glob インポートの注意事項
+
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）か絶対パス（`/` で始まり、プロジェクトルートに対して相対的に解決される）、またはエイリアスのパス（[`resolve.alias` オプション](/config/#resolve-alias) 参照）のいずれかでなければなりません。
-- Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
+- Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。[サポートされている Glob パターン](https://github.com/mrmlnc/fast-glob#pattern-syntax)については、ドキュメントを確認してください。
 - また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
-- Glob パターンは外側の引用符と同じ引用符の文字列（つまり `'`, `"`, `` ` ``）を含むことはできません。例えば `'/Tom\'s files/**'` は、代わりに `"/Tom's files/**"` を使用してください。
 
 ## WebAssembly
 
