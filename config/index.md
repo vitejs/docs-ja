@@ -28,12 +28,14 @@ vite --config my-config.js
 ```
 
 ::: tip 注意
-Vite は設定ファイルとその依存関係内の `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用すると、エラーになります:
+Vite は設定ファイルとその依存関係内の `__filename`, `__dirname`, `import.meta.url` を置換することに注意してください。これらを変数名として使用したり、関数のパラメータとしてダブルクォートを含む文字列のパラメータを渡す（以下の例の `console.log`）と、エラーになります:
 
 ```js
 const __filename = "value"
 // これは次のように変換されます
 const "path/vite.config.js" = "value"
+
+console.log("import.meta.url") // ビルド時にブレークエラー
 ```
 
 :::
