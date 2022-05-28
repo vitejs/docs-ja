@@ -182,6 +182,20 @@ export default defineConfig(({ command, mode }) => {
 
   :::
 
+  ::: tip 注意
+  開発環境とビルド環境で `define` の実装が異なるので、矛盾を回避すために、いくつかの使い方を避ける必要があります。
+
+  例:
+
+  ```js
+  const obj = {
+    __NAME__, // オブジェクトのショートハンドプロパティ名を定義しないこと
+    __KEY__: value // オブジェクトのキーを定義しないこと
+  }
+  ```
+
+  :::
+
 ### plugins
 
 - **型:** `(Plugin | Plugin[])[]`
