@@ -503,6 +503,8 @@ export default defineConfig(({ command, mode }) => {
 
   [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
+  場合によっては、基盤となる開発サーバーを設定したいこともあるでしょう（例: 内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加する場合など）。そのためには、独自の [plugin](/guide/using-plugins.html) を書き、[configureServer](/guide/api-plugin.html#configureserver) 関数を使用する必要があります。
+
   **例:**
 
   ```js
