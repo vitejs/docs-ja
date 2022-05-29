@@ -148,8 +148,6 @@ const { build } = require('vite')
 
 ## `preview`
 
-**実験的機能**
-
 **型シグネチャ:**
 
 ```ts
