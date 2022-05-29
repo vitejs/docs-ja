@@ -425,7 +425,7 @@ const modules = {
 
 ## Dynamic Import
 
-[glob import](#glob-import) と同様に、 Vite は変数付きの動的インポートをサポートしています。
+[glob import](#glob-import) と同様に、 Vite は変数を使った動的インポートをサポートしています。
 
 ```ts
 const module = await import(`./dir/${file}.js`)
