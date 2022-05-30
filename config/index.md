@@ -710,7 +710,6 @@ createServer()
 
 ### server.fs.deny
 
-- **実験的機能**
 - **型:** `string[]`
 
   Vite 開発サーバでの配信が制限されている機密ファイルのブロックリスト。
