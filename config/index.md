@@ -999,9 +999,9 @@ export default defineConfig({
 
 - **型:** `string | string[]`
 
-  デフォルトでは、Vite は `index.html` をクロールして、事前にバンドルする必要のある依存関係を検出します。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
+  デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
 
-  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。
+  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダのみが無視されます。他のフォルダを無視したい場合は、最初の `!` でマークした無視パターンをエントリリストの一部として使用できます。
 
 ### optimizeDeps.exclude
 
