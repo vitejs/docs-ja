@@ -164,6 +164,8 @@ export default defineConfig(({ command, mode }) => {
 
   - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
+  - [esbuild の動作](https://esbuild.github.io/api/#define)と矛盾しないように、式は JSON オブジェクト（null, boolean, number, string, array, object）か単一の識別子でなければなりません。
+
   - マッチした部分が他の文字、数字、`_` または `$` で囲まれていない場合のみ置換されます。
 
   ::: warning
