@@ -10,21 +10,27 @@ Vite は特別な `import.meta.hot` オブジェクトを介して、マニュ�
 
 ```ts
 interface ImportMeta {
-  readonly hot?: {
-    readonly data: any
+  readonly hot?: ViteHotContext
+}
 
-    accept(): void
-    accept(cb: (mod: any) => void): void
-    accept(dep: string, cb: (mod: any) => void): void
-    accept(deps: string[], cb: (mods: any[]) => void): void
+interface ViteHotContext {
+  readonly data: any
 
-    prune(cb: () => void): void
-    dispose(cb: (data: any) => void): void
-    decline(): void
-    invalidate(): void
+  accept(): void
+  accept(cb: (mod: any) => void): void
+  accept(dep: string, cb: (mod: any) => void): void
+  accept(deps: readonly string[], cb: (mods: any[]) => void): void
 
-    on(event: string, cb: (...args: any[]) => void): void
-  }
+  dispose(cb: (data: any) => void): void
+  decline(): void
+  invalidate(): void
+
+  // `InferCustomEventPayload` が組み込みの Vite イベント用の型を提供します
+  on<T extends string>(
+    event: T,
+    cb: (payload: InferCustomEventPayload<T>) => void
+  ): void
+  send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
 ```
 
@@ -123,3 +129,11 @@ HMR イベントを購読します。
 - `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
 
 カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
+
+## `hot.send(event, data)`
+
+カスタムイベントを Vite の開発サーバーへ送信します。
+
+接続前に呼び出した場合、データはバッファされ、コネクションが確立した後に送信されます。
+
+詳細は [クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication) を参照してください。

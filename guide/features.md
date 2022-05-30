@@ -30,7 +30,7 @@ Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します
 
 Vite は `.ts` ファイルをインポートすることをサポートしています。
 
-Vite は `.ts` ファイルに対してのみ変換を実行し、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
+Vite は `.ts` ファイルに対してトランスパイルをするだけで、型チェックは **実行しません**。型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプト内で `tsc --noEmit` を実行するか、`vue-tsc` をインストールして `vue-tsc --noEmit` を実行することで `*.vue` ファイルの型チェックもできます)。
 
 Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザに反映されます
 
@@ -52,6 +52,8 @@ export type { T }
 `esbuild` は型情報なしにトランスパイルを行うだけなので、const enum や暗黙の型のみのインポートなどの特定の機能をサポートしていないからです。
 
 隔離されたトランスパイルで動作しない機能を TS が警告するように、`tsconfig.json` の `compilerOptions` で `"isolatedModules": true` を設定する必要があります。
+
+しかし、一部のライブラリ (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
 
 #### `useDefineForClassFields`
 
@@ -185,7 +187,7 @@ document.getElementById('foo').className = applyColor
 
 ### CSS プリプロセッサ
 
-Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/jonathantneal/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
+Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
 
 とは言うものの、Vite は `.scss`、`.sass`、`.less`、`.styl`、`.stylus` ファイルの組み込みサポートを提供します。それらに Vite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサ自体をインストールする必要があります。
 
@@ -280,10 +282,10 @@ for (const path in modules) {
 }
 ```
 
-一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに `import.meta.globEager` を使用できます:
+一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに第 2 引数に `{ eager: true }` を渡すことができます:
 
 ```js
-const modules = import.meta.globEager('./dir/*.js')
+const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
 上のコードは以下のように変換されます:
@@ -298,10 +300,12 @@ const modules = {
 }
 ```
 
-`import.meta.glob` と `import.meta.globEager` は[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同じようにファイルを文字列としてインポートすることもサポートしています。ここでは [Import Assertions](https://github.com/tc39/proposal-import-assertions#synopsis) 構文を使ってインポートします。
+### glob インポート
+
+`import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）:
 
 ```js
-const modules = import.meta.glob('./dir/*.js', { assert: { type: 'raw' } })
+const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
 ```
 
 上のコードは以下のように変換されます:
@@ -309,28 +313,135 @@ const modules = import.meta.glob('./dir/*.js', { assert: { type: 'raw' } })
 ```js
 // vite によって生成されたコード
 const modules = {
-  './dir/foo.js': '{\n  "msg": "foo"\n}\n',
-  './dir/bar.js': '{\n  "msg": "bar"\n}\n'
+  './dir/foo.js': 'export default "foo"\n',
+  './dir/bar.js': 'export default "bar"\n'
 }
 ```
+
+`{ as: 'url' }` はアセットの URL としての読み込みもサポートしています。
+
+### マルチパターン
+
+第 1 引数は下記の例のように glob の配列を指定できます
+
+```js
+const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
+```
+
+### ネガティブパターン
+
+ネガティブ glob パターンもサポートされています（接頭辞は `!`）。一部のファイルを結果から無視させるには、最初の引数に除外 glob パターンを追加します:
+
+```js
+const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
+```
+
+```js
+// vite によって生成されたコード
+const modules = {
+  './dir/foo.js': () => import('./dir/foo.js')
+}
+```
+
+#### 名前付きインポート
+
+`import` オプションでモジュールの一部だけをインポートすることも可能です。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
+```
+
+```ts
+// vite によって生成されたコード
+const modules = {
+  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
+  './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup)
+}
+```
+
+`eager` と組み合わせると、それらのモジュールのツリーシェイキングを有効にすることも可能です。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', { import: 'setup', eager: true })
+```
+
+```ts
+// vite によって生成されたコード:
+import { setup as __glob__0_0 } from './dir/foo.js'
+import { setup as __glob__0_1 } from './dir/bar.js'
+const modules = {
+  './dir/foo.js': __glob__0_0,
+  './dir/bar.js': __glob__0_1
+}
+```
+
+default エクスポートをインポートするには `import` に `default` を設定します。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  import: 'default',
+  eager: true
+})
+```
+
+```ts
+// vite によって生成されたコード:
+import __glob__0_0 from './dir/foo.js'
+import __glob__0_1 from './dir/bar.js'
+const modules = {
+  './dir/foo.js': __glob__0_0,
+  './dir/bar.js': __glob__0_1
+}
+```
+
+#### カスタムクエリ
+
+また、`query` オプションを使用すると、他のプラグインが使用するカスタムクエリをインポートに指定することができます。
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  query: { foo: 'bar', bar: true }
+})
+```
+
+```ts
+// vite によって生成されたコード:
+const modules = {
+  './dir/foo.js': () =>
+    import('./dir/foo.js?foo=bar&bar=true').then((m) => m.setup),
+  './dir/bar.js': () =>
+    import('./dir/bar.js?foo=bar&bar=true').then((m) => m.setup)
+}
+```
+
+### Glob インポートの注意事項
 
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
-- Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）または絶対パス（`/` で始まり、プロジェクトルートに対して解決される）のいずれかでなければなりません。
-- Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
-- また、glob インポートは変数を受け付けないので、文字列のパターンを直接渡す必要があることにも注意が必要です。
-- Glob パターンは外側の引用符と同じ引用符の文字列（つまり `'`, `"`, `` ` ``）を含むことはできません。例えば `'/Tom\'s files/**'` は、代わりに `"/Tom's files/**"` を使用してください。
+- Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）か絶対パス（`/` で始まり、プロジェクトルートに対して相対的に解決される）、またはエイリアスのパス（[`resolve.alias` オプション](/config/#resolve-alias) 参照）のいずれかでなければなりません。
+- Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。[サポートされている Glob パターン](https://github.com/mrmlnc/fast-glob#pattern-syntax)については、ドキュメントを確認してください。
+- また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
+
+## Dynamic Import
+
+[glob import](#glob-import) と同様に、 Vite は変数を使った動的インポートをサポートしています。
+
+```ts
+const module = await import(`./dir/${file}.js`)
+```
+
+変数は 1 階層分のファイル名しか表さない点に注意してください。`file` が `'foo/bar'` の場合、インポートは失敗します。より高度な使い方をしたい場合は、[glob import](#glob-import) の機能を使うことができます。
 
 ## WebAssembly
 
-プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
+`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
 
 ```js
-import init from './example.wasm'
+import init from './example.wasm?init'
 
-init().then((exports) => {
-  exports.test()
+init().then((instance) => {
+  instance.test()
 })
 ```
 
@@ -349,6 +460,11 @@ init({
 ```
 
 本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
+
+::: warning
+[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
+[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティのプラグインを使用して対処してください。
+:::
 
 ## Web Workers
 

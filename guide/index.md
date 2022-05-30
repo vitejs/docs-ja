@@ -38,7 +38,7 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 ## 最初の Vite プロジェクトを生成する
 
 ::: tip 互換性について
-Vite は [Node.js](https://nodejs.org/en/) >=12.2.0 のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャが警告を出した場合はアップグレードしてください。
+Vite は [Node.js](https://nodejs.org/en/) >=14.6.0 のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャが警告を出した場合はアップグレードしてください。
 :::
 
 NPM を使う場合:
@@ -145,4 +145,4 @@ pnpm link --global # このステップでは好きなパッケージマネー�
 
 ## コミュニティ
 
-質問がある場合やサポートが必要な場合は、[Discord](https://discord.gg/4cmKdMfpU5) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティに連絡してください。
+質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティに連絡してください。
