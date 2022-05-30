@@ -435,13 +435,13 @@ const module = await import(`./dir/${file}.js`)
 
 ## WebAssembly
 
-プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
+`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
 
 ```js
-import init from './example.wasm'
+import init from './example.wasm?init'
 
-init().then((exports) => {
-  exports.test()
+init().then((instance) => {
+  instance.test()
 })
 ```
 
@@ -460,6 +460,11 @@ init({
 ```
 
 本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
+
+::: warning
+[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
+[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティのプラグインを使用して対処してください。
+:::
 
 ## Web Workers
 
