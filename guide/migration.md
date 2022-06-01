@@ -37,7 +37,7 @@ v2 の戦略に戻すには、[`optimizeDeps.devScan`](../config/dep-optimizatio
 
 ## ビルドでの変更
 
-v3 では、Vite はデフォルトで esbuild を利用して依存関係を最適化します。これにより、v2 に存在していた開発環境と本番環境での最も大きな違いを取り除けます。esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は使われなくなりました。
+v3 では、Vite はデフォルトで esbuild を利用して依存関係を最適化します。これにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は使われなくなりました。
 
 v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled) が利用できます。
 
@@ -45,11 +45,11 @@ v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'
 
 Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#ssr-externals)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
-SSR において ESM を利用することが不可能な場合、`ssr.format: 'cjs'` を設定することで、CJS バンドルを生成できます。この場合では、Vite の v2 と同じ外部化戦略が利用されます。
+SSR において ESM を利用することが不可能な場合、`ssr.format: 'cjs'` を設定することで CJS バンドルを生成できます。この場合では Vite の v2 と同じ外部化戦略が利用されます。
 
 ## 全般的な変更
 
-- SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として、有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
+- SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
 
 ### `import.meta.glob`
 
