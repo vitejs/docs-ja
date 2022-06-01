@@ -1,133 +1,113 @@
-# v1 からの移行
+# v2 からの移行
+
+## Node サポート
+
+EOL となった Node v12 はサポートされなくなりました。今後は Node 14.6+ が必要です。
+
+## モダンブラウザ基準の変更
+
+本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [native ES Modules](https://caniuse.com/es6-module) および [native ESM dynamic import](https://caniuse.com/es6-module-dynamic-import) および [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta) をサポートするブラウザを対象としています:
+
+- Chrome >=87
+- Firefox >=78
+- Safari >=13
+- Edge >=88
+
+ごく少数のユーザーは、自動的にレガシーチャンクとそれに対応する ES 言語機能 Polyfill を生成する [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う必要が出てくるでしょう。
 
 ## 設定オプションの変更
 
-- 以下のオプションは削除されましたので、[プラグイン](./api-plugin)で実装してください:
+- v2 にて非推奨となっていた以下のオプションは削除されました:
 
-  - `resolvers`
-  - `transforms`
-  - `indexHtmlTransforms`
+  - `alias` ([`resolve.alias`](../config/shared-options.md#resolvealias) に置き換え)
+  - `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolvededupe) に置き換え)
+  - `build.base` ([`base`](../config/shared-options.md#base) に置き換え)
+  - `build.brotliSize` ([`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize) に置き換え)
+  - `build.cleanCssOptions` (Vite は、現在では esbuild を CSS のミニファイに利用します)
+  - `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
+  - `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions) に置き換え)
 
-- `jsx` と `enableEsbuild` は削除されました。代わりに新しい [`esbuild`](/config/#esbuild) オプションを使ってください。
+## 開発サーバでの変更
 
-- [CSS 関連のオプション](/config/#css-modules)は `css` の下に移動しました。
+Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
 
-- すべての[ビルドオプション](/config/#ビルドオプション)は `build` の下に移動しました。
+Vite は、CJS のみ提供されている依存関係を ESM に変換するため、また、ブラウザがリクエストする必要のあるモジュールの数を減らすため、依存関係を esbuild で最適化します。v3 では、依存関係を発見しバッチ処理する戦略が変更されました。Vite はコールドスタート時に依存関係のリストを取得するために、ユーザのコードを esbuild で事前スキャンしていました。その代わりに、すべてのインポートされたユーザのモジュールが読み込まれるまで、最初の依存関係の最適化の実行を遅延するようになりました。
 
-  - `rollupInputOptions` と `rollupOutputOptions` は [`build.rollupOptions`](/config/#build-rollupoptions) に置き換えられました。
-  - `esbuildTarget` は [`build.target`](/config/#build-target) になりました。
-  - `emitManifest` は [`build.manifest`](/config/#build-manifest) になりました。
-  - 以下のビルドオプションは、プラグインフックや他のオプションで実現できるため、削除されました:
-    - `entry`
-    - `rollupDedupe`
-    - `emitAssets`
-    - `emitIndex`
-    - `shouldPreload`
-    - `configureBuild`
+v2 の戦略に戻すには、[`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan) が利用できます。
 
-- すべての[サーバオプション](/config/#サーバオプション)は、`server` の下に移動しました。
+## ビルドでの変更
 
+v3 では、Vite はデフォルトで esbuild を利用して依存関係を最適化します。これにより、v2 に存在していた開発環境と本番環境での最も大きな違いを取り除けます。esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は使われなくなりました。
 
-  - `hostname` は [`server.host`](/config/#server-host) になりました。
-  - `httpsOptions` は削除されました。[`server.https`](/config/#server-https) はオプションオブジェクトを直接受け取ることができます。
-  - `chokidarWatchOptions` は [`server.watch`](/config/#server-watch) になりました。
+v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled) が利用できます。
 
-- [`assetsInclude`](/config/#assetsinclude) が、関数ではなく、`string | RegExp | (string | RegExp)[]` を想定するようになりました。
+## SSRでの変更
 
-- すべての Vue 固有のオプションは削除され、代わりに Vue プラグインにオプションを渡します。
+Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#ssr-externals)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
-## Alias の動作変更
+SSR において ESM を利用することが不可能な場合、`ssr.format: 'cjs'` を設定することで、CJS バンドルを生成できます。この場合では、Vite の v2 と同じ外部化戦略が利用されます。
 
-[`alias`](/config/#resolve-alias) が `@rollup/plugin-alias` に渡されるようになり、開始/終了のスラッシュが不要になりました。この動作は直接置換するようになったので、1.0 スタイルのディレクトリエイリアスキーから終了のスラッシュを削除する必要があります:
+## 全般的な変更
+
+- SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として、有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
+
+### `import.meta.glob`
+
+- [`raw` での `import.meta.glob`](features.md#glob-import-as) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
+- `import.meta.glob` のキーは現在のモジュールから相対的になりました
+
+  ```diff
+  // ファイル: /foo/index.js
+  const modules = import.meta.glob('../foo/*.js')
+
+  // 変換後:
+  const modules = {
+  -  '../foo/bar.js': () => {}
+  +  './bar.js': () => {}
+  }
+  ```
+
+- `import.meta.glob` でエイリアスを利用した際には、キーは常に絶対的です
+- `import.meta.globEager` は非推奨になりました。`import.meta.glob('*', { eager: true })` を代わりに利用してください。
+
+### WebAssembly サポート
+
+`import init from 'example.wasm'` の記法は、[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration) との将来的な衝突を避けるため、廃止されました。
+以前の挙動に似た `?init` を利用できます。
 
 ```diff
-- alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
-+ alias: { '/@foo': path.resolve(__dirname, 'some-special-dir') }
-```
+-import init from 'example.wasm'
++import init from 'example.wasm?init'
 
-また、`[{ find: RegExp, replacement: string }]` というオプション形式を使えば、より精密な制御が可能です。
-
-## Vue サポート
-
-Vite 2.0 のコアはフレームワークに依存しないようになりました。Vue のサポートは、[`@vitejs/plugin-vue`](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) を通じて提供されるようになりました。これをインストールして、Vite の設定に追加してください:
-
-```js
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [vue()]
+-init().then((instance) => {
++init().then(({ exports }) => {
+  exports.test()
 })
 ```
 
-### カスタムブロックの変換
+## 高度な機能
 
-カスタムプラグインを使用すると、以下のように Vue のカスタムブロックを変換することができます:
+プラグイン・ツール製作者のみに影響のある変更がいくつかあります。
 
-```ts
-// vite.config.js
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
+- [[#5868] refactor: remove deprecated api for 3.0](https://github.com/vitejs/vite/pull/5868)
+  - `printHttpServerUrls` は削除されました
+  - `server.app`、`server.transformWithEsbuild` は削除されました
+  - `import.meta.hot.acceptDeps` は削除されました
+- [[#7995] chore: do not fixStacktrace](https://github.com/vitejs/vite/pull/7995)
+  - `ssrLoadModule` の `fixStacktrace` オプションのデフォルトは、`false` に変更されました
+- [[#8178] feat!: migrate to ESM](https://github.com/vitejs/vite/pull/8178)
+  - `formatPostcssSourceMap` は非同期になりました
+  - `resolvePackageEntry`、`resolvePackageData` は CJS ビルドから利用できなくなりました (CJS で利用するためには dynamic import が必要です)
 
-const vueI18nPlugin = {
-  name: 'vue-i18n',
-  transform(code, id) {
-    if (!/vue&type=i18n/.test(id)) {
-      return
-    }
-    if (/\.ya?ml$/.test(id)) {
-      code = JSON.stringify(require('js-yaml').load(code.trim()))
-    }
-    return `export default Comp => {
-      Comp.i18n = ${code}
-    }`
-  }
-}
+また、少数のユーザーにしか影響のない破壊的変更があります。
 
-export default defineConfig({
-  plugins: [vue(), vueI18nPlugin]
-})
-```
+- [[#5018] feat: enable `generatedCode: 'es2015'` for rollup build](https://github.com/vitejs/vite/pull/5018)
+  - ユーザのコードが ES5 のみしか含んでいない場合でも ES5 へのトランスパイルが必要になりました。
+- [[#7877] fix: vite client types](https://github.com/vitejs/vite/pull/7877)
+  - `/// <reference lib="dom" />` が `vite/client.d.ts` から削除されました。`tsconfig` で `{ "lib": ["dom"] }` または `{ "lib": ["webworker"] }` が必須になりました。
+- [[#8280] feat: non-blocking esbuild optimization at build time](https://github.com/vitejs/vite/pull/8280)
+  - `force` オプションが追加されたため、`server.force` が削除されました。
 
-## React サポート
+## v1 からの移行
 
-React Fast Refresh のサポートは、[`@vitejs/plugin-react`](https://github.com/vitejs/vite/tree/main/packages/plugin-react) で提供されるようになりました。
-
-## HMR API の変更
-
-`import.meta.hot.acceptDeps()` は非推奨となりました。[`import.meta.hot.accept()`](./api-hmr#hot-accept-deps-cb) は、単一または複数の依存関係を受け入れることができるようになりました。
-
-## マニフェストフォーマットの変更
-
-ビルドマニフェストが以下のフォーマットになりました:
-
-```json
-{
-  "index.js": {
-    "file": "assets/index.acaf2b48.js",
-    "imports": [...]
-  },
-  "index.css": {
-    "file": "assets/index.7b7dbd85.css"
-  }
-  "asset.png": {
-    "file": "assets/asset.0ab0f9cd.png"
-  }
-}
-```
-
-エントリ JS チャンクについては、インポートされたチャンクもリストアップされ、プリロードディレクティブのレンダリングに使用できます。
-
-## プラグイン作成者向け
-
-Vite 2 は、Rollup プラグインを拡張し完全に再設計されたプラグインインタフェイスとなっています。新しい[プラグイン開発ガイド](./api-plugin)をお読みください。
-
-v1 プラグインを v2 に移行する際の一般的なポイントです:
-
-- `resolvers` -> [`resolveId`](https://rollupjs.org/guide/en/#resolveid) フックを使ってください。
-- `transforms` -> [`transform`](https://rollupjs.org/guide/en/#transform) フックを使ってください。
-- `indexHtmlTransforms` -> [`transformIndexHtml`](./api-plugin#transformindexhtml) フックを使ってください。
-- 仮想ファイルの配信 -> [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load) フックを使ってください。
-- `alias`、`define`、その他の設定オプションの追加 -> [`config`](./api-plugin#config) フックを使用してください。
-
-ロジックのほとんどはミドルウェアではなくプラグインのフックを介して行われるべきなので、ミドルウェアの必要性は大幅に減少しています。内部のサーバアプリは、Koa から古き良き [connect](https://github.com/senchalabs/connect) のインスタンスに変わりました。
+先に Vite の v2 のドキュメントの [v1 からの移行](https://v2.vitejs.dev/guide/migration.html) を確認して、Vite v2 への移行に必要な変更を見てから、このページの変更の適用に移ってください。

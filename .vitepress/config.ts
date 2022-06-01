@@ -145,7 +145,7 @@ export default defineConfig({
               link: '/guide/comparisons'
             },
             {
-              text: 'v1 からの移行',
+              text: 'v2 からの移行',
               link: '/guide/migration'
             }
           ]
