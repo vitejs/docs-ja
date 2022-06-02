@@ -423,15 +423,25 @@ const modules = {
 - Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。[サポートされている Glob パターン](https://github.com/mrmlnc/fast-glob#pattern-syntax)については、ドキュメントを確認してください。
 - また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
 
+## Dynamic Import
+
+[glob import](#glob-import) と同様に、 Vite は変数を使った動的インポートをサポートしています。
+
+```ts
+const module = await import(`./dir/${file}.js`)
+```
+
+変数は 1 階層分のファイル名しか表さない点に注意してください。`file` が `'foo/bar'` の場合、インポートは失敗します。より高度な使い方をしたい場合は、[glob import](#glob-import) の機能を使うことができます。
+
 ## WebAssembly
 
-プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
+`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます - デフォルトのエクスポートは、wasm インスタンスの Promise を返す初期化関数になります:
 
 ```js
-import init from './example.wasm'
+import init from './example.wasm?init'
 
-init().then((exports) => {
-  exports.test()
+init().then((instance) => {
+  instance.exports.test()
 })
 ```
 
@@ -450,6 +460,11 @@ init({
 ```
 
 本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
+
+::: warning
+[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
+[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティのプラグインを使用して対処してください。
+:::
 
 ## Web Workers
 

@@ -164,6 +164,8 @@ export default defineConfig(({ command, mode }) => {
 
   - `2.0.0-beta.70` 以降、文字列の値は純粋な式として評価されるので、文字列の定数を定義する場合は、明示的に引用符で囲う必要があります（例 `JSON.stringify` を使う）。
 
+  - [esbuild の動作](https://esbuild.github.io/api/#define)と矛盾しないように、式は JSON オブジェクト（null, boolean, number, string, array, object）か単一の識別子でなければなりません。
+
   - マッチした部分が他の文字、数字、`_` または `$` で囲まれていない場合のみ置換されます。
 
   ::: warning
@@ -180,6 +182,20 @@ export default defineConfig(({ command, mode }) => {
   ```ts
   // vite-env.d.ts
   declare const __APP_VERSION__: string
+  ```
+
+  :::
+
+  ::: tip 注意
+  開発環境とビルド環境で `define` の実装が異なるので、矛盾を回避するために、いくつかの使い方を避ける必要があります。
+
+  例:
+
+  ```js
+  const obj = {
+    __NAME__, // オブジェクトのショートハンドプロパティ名を定義しないこと
+    __KEY__: value // オブジェクトのキーを定義しないこと
+  }
   ```
 
   :::
@@ -696,7 +712,6 @@ createServer()
 
 ### server.fs.deny
 
-- **実験的機能**
 - **型:** `string[]`
 
   Vite 開発サーバでの配信が制限されている機密ファイルのブロックリスト。
@@ -729,7 +744,7 @@ export default defineConfig({
 
   もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
-  - [`build.minify`](#build-minify) が `'terser'` の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
+  - [`build.minify`](#build-minify) が `'terser'` の場合、`'esnext'` は強制的に `'es2021'` に下げられます。
   - それ以外の場合、トランスパイルはまったく行なわれません。
 
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
@@ -822,6 +837,7 @@ export default defineConfig({
 ### build.dynamicImportVarsOptions
 
 - **型:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
+- **関連:** [Dynamic Import](/guide/features#dynamic-import)
 
   [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) に渡すオプションです。
 
@@ -985,9 +1001,9 @@ export default defineConfig({
 
 - **型:** `string | string[]`
 
-  デフォルトでは、Vite は `index.html` をクロールして、事前にバンドルする必要のある依存関係を検出します。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
+  デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
 
-  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。
+  これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダのみが無視されます。他のフォルダを無視したい場合は、最初の `!` でマークした無視パターンをエントリリストの一部として使用できます。
 
 ### optimizeDeps.exclude
 

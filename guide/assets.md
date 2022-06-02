@@ -103,8 +103,17 @@ function getImageUrl(name) {
 }
 ```
 
-本番環境では、バンドル後やアセットハッシュ化の後でも URL が正しい場所を指すように、Vite が必要な変換を行ないます。
+本番環境では、バンドル後やアセットハッシュ化の後でも URL が正しい場所を指すように、Vite が必要な変換を行ないます。ただし、URL の文字列は解析できるように静的である必要があります。そうでない場合はコードがそのまま残ってしまい、`build.target` が `import.meta.url` をサポートしていない場合はランタイムエラーが発生する可能性があります。
 
-::: warning 注意: SSR では動作しません
+```js
+// Vite はこれを変換しません
+const imgUrl = new URL(imagePath, import.meta.url).href
+```
+
+::: warning SSR では動作しません
 ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
+:::
+
+::: warning esbuild ターゲット設定が必要
+このパターンでは esbuild ターゲットを `es2020` 以上に設定する必要があります。`vite@2.x` は `es2019` をデフォルトターゲットとして使用します。このパターンを使用する場合は、[build-target](/config/#build-target) と [optimizedeps.esbuildoptions.target](/config/#optimizedeps-esbuildoptions) を `es2020` 以上に設定してください。
 :::
