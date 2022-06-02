@@ -7,7 +7,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
 
   vue: {
-    reactivityTransform: true
+    reactivityTransform: true　g
   },
 
   themeConfig: {
@@ -40,7 +40,7 @@ export default defineConfig({
     },
 
     localeLinks: {
-      text: '日本語',
+      text: 'English',
       items: [
         { text: '简体中文', link: 'https://cn.vitejs.dev' },
         { text: '日本語', link: 'https://ja.vitejs.dev' }
