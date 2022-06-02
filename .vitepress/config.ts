@@ -3,16 +3,42 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Vite',
   description: '次世代フロントエンドツール',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+
+    // TODO: This is neeeded to get smooth dark mode appearance on initial
+    // load. And this will be gone when VitePress figures out how to handle
+    // this in core.
+    [
+      'script',
+      {},
+      `
+        ;(() => {
+          const saved = localStorage.getItem('vitepress-theme-appearance')
+          const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+          if (!saved || saved === 'auto' ? prefereDark : saved === 'dark') {
+            document.documentElement.classList.add('dark')
+          }
+        })()
+      `
+    ]
+  ],
+
   vue: {
     reactivityTransform: true
   },
+
   themeConfig: {
-    repo: 'vitejs/docs-ja',
     logo: '/logo.svg',
-    docsBranch: 'main',
-    editLinks: true,
-    editLinkText: 'このページへの変更を提案する',
+
+    editLink: {
+      repo: 'vitejs/docs-ja',
+      branch: 'main',
+      dir: 'docs',
+      text: 'このページへの変更を提案する'
+    },
 
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
@@ -25,6 +51,14 @@ export default defineConfig({
     carbonAds: {
       carbon: 'CEBIEK3N',
       placement: 'vitejsdev'
+    },
+
+    localeLinks: {
+      text: 'English',
+      items: [
+        { text: '简体中文', link: 'https://cn.vitejs.dev' },
+        { text: '日本語', link: 'https://ja.vitejs.dev' }
+      ]
     },
 
     nav: [
@@ -69,33 +103,13 @@ export default defineConfig({
           }
         ]
       },
-      {
-        text: '言語',
-        items: [
-          {
-            text: 'English',
-            link: 'https://vitejs.dev'
-          },
-          {
-            text: '简体中文',
-            link: 'https://cn.vitejs.dev'
-          },
-          {
-            text: '日本語',
-            link: 'https://ja.vitejs.dev'
-          }
-        ]
-      }
     ],
 
     sidebar: {
-      '/config/': 'auto',
-      '/plugins': 'auto',
-      // catch-all fallback
       '/': [
         {
           text: 'ガイド',
-          children: [
+          items: [
             {
               text: 'なぜ Vite なのか',
               link: '/guide/why'
@@ -152,7 +166,7 @@ export default defineConfig({
         },
         {
           text: 'API',
-          children: [
+          items: [
             {
               text: 'プラグイン API',
               link: '/guide/api-plugin'
