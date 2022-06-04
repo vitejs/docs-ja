@@ -1,8 +1,7 @@
-import { h } from 'vue'
 import Theme from 'vitepress/theme'
+import { h } from 'vue'
 import SponsorsSidebar from './SponsorsSidebar.vue'
-import './styles/vars.css'
-import './styles/custom.css'
+import './custom.css'
 
 export default {
   ...Theme,
