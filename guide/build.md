@@ -4,7 +4,12 @@
 
 ## ブラウザの互換性
 
-本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [native ESM script tag](https://caniuse.com/es6-module) および [native ESM dynamic import](https://caniuse.com/es6-module-dynamic-import) をサポートするブラウザを対象としています。参考として、Vite はこの [browserslist](https://github.com/browserslist/browserslist) のクエリを使用します:
+本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [ネイティブ ES モジュール](https://caniuse.com/es6-module) と [ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import) および [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta) をサポートするブラウザを対象としています:
+
+- Chrome >=87
+- Firefox >=78
+- Safari >=13
+- Edge >=88
 
 ```
 defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0
