@@ -268,7 +268,7 @@ $ ntl deploy --prod
    $ heroku apps:create example
    ```
 
-6. buildpacks の設定。プロジェクトのビルドには `heroku-buildpack-static` を、公開するには `heroku/nodejs` を使用します。
+6. buildpacks の設定。`heroku/nodejs` でプロジェクトをビルドし、それを `heroku-buildpack-static` で配信します。
    ```bash
    # buildpacks を設定
    $ heroku buildpacks:set heroku/nodejs
