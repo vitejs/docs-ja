@@ -462,6 +462,13 @@ export default defineConfig(({ command, mode }) => {
   `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
   :::
 
+### spa
+
+- **型:** `boolean`
+- **デフォルト:** `true`
+
+  アプリケーションがシングルページアプリケーション (SPA) かどうか。MPA などの他のアプリのときは `false` に設定してください。詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。
+
 ## サーバオプション
 
 ### server.host
