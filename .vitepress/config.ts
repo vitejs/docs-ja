@@ -7,7 +7,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
 
   vue: {
-    reactivityTransform: true　g
+    reactivityTransform: true
   },
 
   themeConfig: {
