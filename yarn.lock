@@ -1564,6 +1564,11 @@ json5@^2.1.1:
   dependencies:
     minimist "^1.2.5"
 
+jsonc-parser@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.0.0.tgz#abdd785701c7e7eaca8a9ec8cf070ca51a745a22"
+  integrity sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==
+
 kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
@@ -2266,11 +2271,6 @@ prh@^5.4.4:
     diff "^4.0.1"
     js-yaml "^3.9.1"
 
-prismjs@^1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
-  integrity sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==
-
 pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
@@ -2475,6 +2475,15 @@ shebang-regex@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
+
+shiki@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.10.1.tgz#6f9a16205a823b56c072d0f1a0bcd0f2646bef14"
+  integrity sha512-VsY7QJVzU51j5o1+DguUd+6vmCmZ5v/6gYu4vyYAhzjuNQU6P/vmSy4uQaOhvje031qQMiW0d2BwgMH52vqMng==
+  dependencies:
+    jsonc-parser "^3.0.0"
+    vscode-oniguruma "^1.6.1"
+    vscode-textmate "5.2.0"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   version "3.0.5"
@@ -3036,19 +3045,29 @@ vite@^2.9.7:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress@1.0.0-draft.3:
-  version "1.0.0-draft.3"
-  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-1.0.0-draft.3.tgz#dc9dad4f356a08427d63765cd5924e55becaa71c"
-  integrity sha512-DTbej4xFhfYQ0/RPjORibMXu8DC5QY0L9UjsmT6+Bes6pNULNx0k6rCRZnvv/obJD8ClEaY/CkZ7vzBK+lt+zQ==
+vitepress@1.0.0-draft.6:
+  version "1.0.0-draft.6"
+  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-1.0.0-draft.6.tgz#c07e467b11d419c5fac4809ba5fde2b73f067ec2"
+  integrity sha512-l5V9Z31+D9EBFy4na7aNhAQ4MKRGVuwjBlFKDkY4kSRHPDPUC9XcNbH1mbWepeYaauJc9IDniWj7uVU6ZqJ53g==
   dependencies:
     "@docsearch/css" "^3.0.0"
     "@docsearch/js" "^3.0.0"
     "@vitejs/plugin-vue" "^2.3.2"
     "@vueuse/core" "^8.5.0"
     body-scroll-lock "^4.0.0-beta.0"
-    prismjs "^1.25.0"
+    shiki "^0.10.1"
     vite "^2.9.7"
     vue "3.2.33"
+
+vscode-oniguruma@^1.6.1:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/vscode-oniguruma/-/vscode-oniguruma-1.6.2.tgz#aeb9771a2f1dbfc9083c8a7fdd9cccaa3f386607"
+  integrity sha512-KH8+KKov5eS/9WhofZR8M8dMHWN2gTxjMsG4jd04YhpbPR91fUj7rYQ2/XjeHCJWbg7X++ApRIU9NUwM2vTvLA==
+
+vscode-textmate@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-textmate/-/vscode-textmate-5.2.0.tgz#01f01760a391e8222fe4f33fbccbd1ad71aed74e"
+  integrity sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==
 
 vue-demi@*:
   version "0.13.1"
