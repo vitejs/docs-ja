@@ -3045,10 +3045,10 @@ vite@^2.9.7:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress@1.0.0-draft.6:
-  version "1.0.0-draft.6"
-  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-1.0.0-draft.6.tgz#c07e467b11d419c5fac4809ba5fde2b73f067ec2"
-  integrity sha512-l5V9Z31+D9EBFy4na7aNhAQ4MKRGVuwjBlFKDkY4kSRHPDPUC9XcNbH1mbWepeYaauJc9IDniWj7uVU6ZqJ53g==
+vitepress@1.0.0-draft.8:
+  version "1.0.0-draft.8"
+  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-1.0.0-draft.8.tgz#522e27218f34e09dce501c83d3c8b52d1a229d26"
+  integrity sha512-r1cphHgtJ/KFwtph3cyusGWjRyX0NHvwfBboKnG5mRJpOP/JyvX5q5+NIiRYElPgdFXU7Roxkl8BcJbxWht56Q==
   dependencies:
     "@docsearch/css" "^3.0.0"
     "@docsearch/js" "^3.0.0"
