@@ -2,7 +2,9 @@
 import { computed } from 'vue'
 import { VPDocAsideSponsors } from 'vitepress/theme'
 import { useSponsor } from '../composables/sponsor'
+
 const { data } = useSponsor()
+
 const sponsors = computed(() => {
   return (
     data?.value.map((sponsor) => {

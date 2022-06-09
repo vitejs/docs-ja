@@ -23,7 +23,7 @@
 
 ## アプリのビルド
 
-アプリをビルドするために、`npm run build` コマンドを実行します。 
+アプリをビルドするために、`npm run build` コマンドを実行します。
 
 ```bash
 $ npm run build
@@ -266,12 +266,16 @@ $ ntl deploy --prod
 
    # 名前を指定して新しいアプリを作成
    $ heroku apps:create example
-
-   # 静的サイト用に buildpack を設定
-   $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-static.git
    ```
 
-6. サイトをデプロイしてください:
+6. buildpacks の設定。`heroku/nodejs` でプロジェクトをビルドし、それを `heroku-buildpack-static` で配信します。
+   ```bash
+   # buildpacks を設定
+   $ heroku buildpacks:set heroku/nodejs
+   $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
+   ```
+
+7. サイトをデプロイしてください:
 
    ```bash
    # サイトを公開

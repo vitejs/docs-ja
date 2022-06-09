@@ -14,10 +14,10 @@ hero:
   actions:
     - theme: brand
       text: Vite を始める
-      link: /guide/why
+      link: /guide/
     - theme: alt
       text: なせ Vite なのか?
-      link: /guide/
+      link: /guide/why
     - theme: alt
       text: GitHub で見る
       link: https://github.com/vitejs/vite
