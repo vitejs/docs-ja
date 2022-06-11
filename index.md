@@ -16,7 +16,7 @@ hero:
       text: Vite を始める
       link: /guide/
     - theme: alt
-      text: なせ Vite なのか?
+      text: なぜ Vite なのか?
       link: /guide/why
     - theme: alt
       text: GitHub で見る
