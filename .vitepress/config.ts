@@ -53,9 +53,9 @@ export default defineConfig({
     },
 
     nav: [
-      { text: 'ガイド', link: '/guide/' },
-      { text: '設定', link: '/config/' },
-      { text: 'プラグイン', link: '/plugins/' },
+      { text: 'ガイド', link: '/guide/', activeMatch: '/guide/' },
+      { text: '設定', link: '/config/', activeMatch: '/config/' },
+      { text: 'プラグイン', link: '/plugins/', activeMatch: '/plugins/' },
       {
         text: 'リンク',
         items: [

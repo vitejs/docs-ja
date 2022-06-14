@@ -9,8 +9,8 @@ hero:
   text: 次世代フロントエンドツール
   tagline: 最先端をいく開発環境を構築しましょう
   image:
-    light: /vite-splash-light.jpg
-    dark: /vite-splash-dark.jpg
+    src: /logo-with-shadow.png
+    alt: Vite
   actions:
     - theme: brand
       text: Vite を始める
