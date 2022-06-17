@@ -181,7 +181,7 @@ export default defineConfig({
         {
           text: '設定',
           items: [
-            {　　　　　　　　　　
+            {
               text: 'Vite の設定',
               link: '/config/'
             },
@@ -190,7 +190,7 @@ export default defineConfig({
               link: '/config/shared-options'
             },
             {
-              text: 'サーバーオプション',
+              text: 'サーバオプション',
               link: '/config/server-options'
             },
             {
@@ -198,7 +198,7 @@ export default defineConfig({
               link: '/config/build-options'
             },
             {
-              text: 'プレビューオプション',
+              text: 'プレビューのオプション',
               link: '/config/preview-options'
             },
             {
