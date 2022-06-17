@@ -3,7 +3,7 @@
 ## preview.host
 
 - **型:** `string | boolean`
-- **デフォルト:** [`server.host`](#server_host)
+- **デフォルト:** [`server.host`](./server-options#server_host)
 
 サーバがリッスンすべき IP アドレスを指定します。
 `0.0.0.0` または `true` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
