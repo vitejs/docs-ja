@@ -56,7 +56,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 ## preview.proxy
 
 - **型:** `Record<string, string | ProxyOptions>`
-- **デフォルト:** [`server.proxy`](#server_proxy)
+- **デフォルト:** [`server.proxy`](./server-options#server_proxy)
 
 開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
