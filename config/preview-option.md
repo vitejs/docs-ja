@@ -33,7 +33,7 @@ export default defineConfig({
 ## preview.strictPort
 
 - **型:** `boolean`
-- **デフォルト:** [`server.strictPort`](#server_strictport)
+- **デフォルト:** [`server.strictPort`](./server-options#server-strictport)
 
 `true` に設定すると、ポートがすでに使用されている場合に、次に使用可能なポートを自動的に試すことなく終了します。
 
