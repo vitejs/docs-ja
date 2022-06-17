@@ -9,7 +9,7 @@
 
 ## worker.plugins
 
-- **型:** [`(Plugin | Plugin[])[]`](#plugins)
+- **型:** [`(Plugin | Plugin[])[]`](./shared-options#plugins)
 
 ワーカバンドルに適用される Vite プラグイン
 
