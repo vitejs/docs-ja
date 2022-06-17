@@ -1,10 +1,10 @@
 # SSR オプション
 
+- **関連:** [外部 SSR](/guide/ssr#外部-ssr)
+
 :::warning 実験的な機能
 SSR オプションは、マイナリリースで調整される可能性があります。
 :::
-
-- **関連:** [外部 SSR](/guide/ssr#外部-ssr)
 
 ## ssr.external
 
