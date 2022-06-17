@@ -176,6 +176,45 @@ export default defineConfig({
             }
           ]
         }
+      ],
+      '/config/': [
+        {
+          text: '設定',
+          items: [
+            {
+              text: 'Vite の設定',
+              link: '/config/'
+            },
+            {
+              text: '共通オプション',
+              link: '/config/shared-options'
+            },
+            {
+              text: 'サーバオプション',
+              link: '/config/server-options'
+            },
+            {
+              text: 'ビルドオプション',
+              link: '/config/build-options'
+            },
+            {
+              text: 'プレビューのオプション',
+              link: '/config/preview-options'
+            },
+            {
+              text: '依存関係の最適化オプション',
+              link: '/config/dep-optimization-options'
+            },
+            {
+              text: 'SSR オプション',
+              link: '/config/ssr-options'
+            },
+            {
+              text: 'ワーカのオプション',
+              link: '/config/worker-options'
+            }
+          ]
+        }
       ]
     }
   }
