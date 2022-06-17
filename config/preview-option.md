@@ -49,7 +49,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 ## preview.open
 
 - **型:** `boolean | string`
-- **デフォルト:** [`server.open`](#server_open)
+- **デフォルト:** [`server.open`](./server-options#server_open)
 
 サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
