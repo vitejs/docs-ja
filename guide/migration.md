@@ -43,7 +43,7 @@ v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'
 
 ## SSRでの変更
 
-Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#ssr-externals)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
+Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
 SSR において ESM を利用することが不可能な場合、`ssr.format: 'cjs'` を設定することで CJS バンドルを生成できます。この場合では Vite の v2 と同じ外部化戦略が利用されます。
 
@@ -53,7 +53,7 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
 
 ### `import.meta.glob`
 
-- [`raw` での `import.meta.glob`](features.md#glob-import-as) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
+- [`raw` での `import.meta.glob`](features.md#glob-のインポート) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
 - `import.meta.glob` のキーは現在のモジュールから相対的になりました
 
   ```diff
