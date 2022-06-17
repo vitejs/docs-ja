@@ -186,7 +186,7 @@ export default defineConfig({
               link: '/config/'
             },
             {
-              text: '共有オプション',
+              text: '共通オプション',
               link: '/config/shared-options'
             },
             {
