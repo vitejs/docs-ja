@@ -18,7 +18,7 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 ## ブラウザ対応
 
-- デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)と[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)の両方に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
+- デフォルトのビルドは [ネイティブ ES モジュール](https://caniuse.com/es6-module)と[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)の両方に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
 
 ## Vite をオンラインで試す
 
@@ -116,7 +116,7 @@ Vite は複数の `.html` エントリポイントを持つ[マルチページ�
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
 <!-- prettier-ignore -->
-```json5
+```json
 {
   "scripts": {
     "dev": "vite", // 開発サーバを起動。エイリアス: `vite dev`, `vite serve`

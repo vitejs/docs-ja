@@ -14,7 +14,7 @@ import { someMethod } from 'my-dep'
 
 1. [先読みバンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMD モジュールを ESM に変換します。先読みバンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間を  JavaScript ベースのバンドラよりも大幅に高速化します。
 
-2. インポートを `/node_modules/.vite/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
+2. インポートを `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
 
 **依存関係は積極的にキャッシュされます**
 
@@ -209,6 +209,15 @@ Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリ
 `@import` エイリアスと URL の結合は、API の制約のため、Stylus ではサポートされていません。
 
 ファイル拡張子の前に `.module` を付けることで、プリプロセッサと組み合わせて CSS モジュールを使用することもできます（例：`style.module.scss`）。
+
+### ページへの CSS 注入の無効化
+
+CSS コンテンツの自動注入は `?inline` クエリパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルがページに注入されるわけではありません。
+
+```js
+import styles from './foo.css' // ページに注入される
+import otherStyles from './bar.css?inline' // ページに注入されない
+```
 
 ## 静的なアセット
 

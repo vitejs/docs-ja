@@ -74,7 +74,7 @@ import InlineWorker from './shader.js?worker&inline'
 - 全く同じファイル名を保持する必要がある（ハッシュ化しない）
 - …または、アセットの URL を取得するために、単純にアセットをインポートする必要がないとき
 
-そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。 
+そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。
 
 ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/#publicdir) で設定することができます。
 
@@ -114,6 +114,6 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
 :::
 
-::: warning esbuild ターゲット設定が必要
-このパターンでは esbuild ターゲットを `es2020` 以上に設定する必要があります。`vite@2.x` は `es2019` をデフォルトターゲットとして使用します。このパターンを使用する場合は、[build-target](/config/#build-target) と [optimizedeps.esbuildoptions.target](/config/#optimizedeps-esbuildoptions) を `es2020` 以上に設定してください。
+::: warning `target` は `es2020` 以降が必要
+このパターンは、[build-target](https://vitejs.dev/config/#build-target) や [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) に `es2020` より下の値が設定されている場合、動作しません。
 :::

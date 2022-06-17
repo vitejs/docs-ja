@@ -264,3 +264,14 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 
 - すべての依存関係を `noExternal` として扱う
 - Node.js のビルドインがインポートされた場合、エラーを投げる
+
+## Vite CLI
+
+コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます:
+
+1. 開発サーバには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加します。
+   :::tip 注意
+   ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。
+   :::
+
+2. `config.spa` を `false` に設定します。これにより開発・プレビューサーバが SPA モードから SSR/MPA モードに切り替わります。

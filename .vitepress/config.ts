@@ -3,16 +3,28 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Vite',
   description: '次世代フロントエンドツール',
+
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+
   vue: {
     reactivityTransform: true
   },
+
   themeConfig: {
-    repo: 'vitejs/docs-ja',
     logo: '/logo.svg',
-    docsBranch: 'main',
-    editLinks: true,
-    editLinkText: 'このページへの変更を提案する',
+
+    editLink: {
+      repo: 'vitejs/docs-ja',
+      branch: 'main',
+      dir: 'docs',
+      text: 'このページへの変更を提案する'
+    },
+
+    socialLinks: [
+      { icon: 'twitter', link: 'https://twitter.com/vite_js' },
+      { icon: 'discord', link: 'https://chat.vitejs.dev' },
+      { icon: 'github', link: 'https://github.com/vitejs/vite' }
+    ],
 
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
@@ -23,14 +35,27 @@ export default defineConfig({
     },
 
     carbonAds: {
-      carbon: 'CEBIEK3N',
+      code: 'CEBIEK3N',
       placement: 'vitejsdev'
     },
 
+    localeLinks: {
+      text: 'English',
+      items: [
+        { text: '简体中文', link: 'https://cn.vitejs.dev' },
+        { text: '日本語', link: 'https://ja.vitejs.dev' }
+      ]
+    },
+
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2019-present Evan You & Vite Contributors'
+    },
+
     nav: [
-      { text: 'ガイド', link: '/guide/' },
-      { text: '設定', link: '/config/' },
-      { text: 'プラグイン', link: '/plugins/' },
+      { text: 'ガイド', link: '/guide/', activeMatch: '/guide/' },
+      { text: '設定', link: '/config/', activeMatch: '/config/' },
+      { text: 'プラグイン', link: '/plugins/', activeMatch: '/plugins/' },
       {
         text: 'リンク',
         items: [
@@ -69,33 +94,13 @@ export default defineConfig({
           }
         ]
       },
-      {
-        text: '言語',
-        items: [
-          {
-            text: 'English',
-            link: 'https://vitejs.dev'
-          },
-          {
-            text: '简体中文',
-            link: 'https://cn.vitejs.dev'
-          },
-          {
-            text: '日本語',
-            link: 'https://ja.vitejs.dev'
-          }
-        ]
-      }
     ],
 
     sidebar: {
-      '/config/': 'auto',
-      '/plugins': 'auto',
-      // catch-all fallback
-      '/': [
+      '/guide/': [
         {
           text: 'ガイド',
-          children: [
+          items: [
             {
               text: 'なぜ Vite なのか',
               link: '/guide/why'
@@ -152,7 +157,7 @@ export default defineConfig({
         },
         {
           text: 'API',
-          children: [
+          items: [
             {
               text: 'プラグイン API',
               link: '/guide/api-plugin'
@@ -168,6 +173,45 @@ export default defineConfig({
             {
               text: '設定リファレンス',
               link: '/config/'
+            }
+          ]
+        }
+      ],
+      '/config/': [
+        {
+          text: '設定',
+          items: [
+            {
+              text: 'Vite の設定',
+              link: '/config/'
+            },
+            {
+              text: '共通オプション',
+              link: '/config/shared-options'
+            },
+            {
+              text: 'サーバオプション',
+              link: '/config/server-options'
+            },
+            {
+              text: 'ビルドオプション',
+              link: '/config/build-options'
+            },
+            {
+              text: 'プレビューのオプション',
+              link: '/config/preview-options'
+            },
+            {
+              text: '依存関係の最適化オプション',
+              link: '/config/dep-optimization-options'
+            },
+            {
+              text: 'SSR オプション',
+              link: '/config/ssr-options'
+            },
+            {
+              text: 'ワーカのオプション',
+              link: '/config/worker-options'
             }
           ]
         }
