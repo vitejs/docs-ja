@@ -40,7 +40,7 @@ export default defineConfig({
 ## preview.https
 
 - **型:** `boolean | https.ServerOptions`
-- **デフォルト:** [`server.https`](#server_https)
+- **デフォルト:** [`server.https`](./server-options#server-https)
 
 TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-proxy)も使用されている場合にのみ TLS にダウングレードされるので注意してください。
 
