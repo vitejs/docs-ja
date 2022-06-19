@@ -309,7 +309,7 @@ const modules = {
 }
 ```
 
-### glob インポート
+### glob インポートでの形式の変換
 
 `import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）:
 
@@ -327,7 +327,7 @@ const modules = {
 }
 ```
 
-`{ as: 'url' }` はアセットの URL としての読み込みもサポートしています。
+`{ as: 'url' }` によるアセットの URL としての読み込みもサポートしています。
 
 ### マルチパターン
 

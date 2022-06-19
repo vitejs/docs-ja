@@ -53,7 +53,7 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
 
 ### `import.meta.glob`
 
-- [`raw` での `import.meta.glob`](features.md#glob-インポート) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
+- [`raw` での `import.meta.glob`](features.md#glob-インポートでの形式の変換) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
 - `import.meta.glob` のキーは現在のモジュールから相対的になりました
 
   ```diff
