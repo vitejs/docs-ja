@@ -517,6 +517,10 @@ normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
 ```
 
+## include/exclude パターンのフィルタリング
+
+Vite は [`@rollup/pluginutils` の `createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) 関数を公開し、Vite 固有のプラグインやインテグレーションが標準の include/exclude フィルタリングのパターンを使用できるようにします。これは Vite コア自体でも使用されています。
+
 ## クライアントサーバーとの通信
 
 Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。
