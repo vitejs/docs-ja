@@ -24,7 +24,7 @@ vite --config my-config.js
 ```
 
 ::: tip 注意
-Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` を注入することに注意してください。これら変数をトップレベルで宣言するとエラーになります:
+Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` を注入します。これらの変数をトップレベルで宣言するとエラーになります:
 
 ```js
 const __filename = 'value' // 構文エラー: 識別子 '__filename' は既に宣言されています
