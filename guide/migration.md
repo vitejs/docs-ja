@@ -31,6 +31,8 @@ EOL となった Node v12 はサポートされなくなりました。今後は
 
 Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
 
+現在の Vite のデフォルトの開発サーバのホストは `localhost` です。[`server.host`](../config/server-options.md#server-host) を使用して `127.0.0.1` に設定できます。
+
 Vite は、CJS のみ提供されている依存関係を ESM に変換するため、また、ブラウザがリクエストする必要のあるモジュールの数を減らすため、依存関係を esbuild で最適化します。v3 では、依存関係を発見しバッチ処理する戦略が変更されました。Vite はコールドスタート時に依存関係のリストを取得するために、ユーザのコードを esbuild で事前スキャンしていました。その代わりに、すべてのインポートされたユーザのモジュールが読み込まれるまで、最初の依存関係の最適化の実行を遅延するようになりました。
 
 v2 の戦略に戻すには、[`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan) が利用できます。
