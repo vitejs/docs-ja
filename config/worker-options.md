@@ -11,7 +11,7 @@
 
 - **型:** [`(Plugin | Plugin[])[]`](./shared-options#plugins)
 
-ワーカバンドルに適用される Vite プラグイン
+ワーカバンドルに適用される Vite プラグイン。[config.plugins](./shared-options#plugins) はワーカに適用されないため、代わりにここで設定する必要があることに注意してください。
 
 ## worker.rollupOptions
 
