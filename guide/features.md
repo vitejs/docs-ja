@@ -511,6 +511,12 @@ const worker = new MyWorker()
 import MyWorker from './worker?worker&inline'
 ```
 
+ワーカを URL として取得したい場合は、`url` クエリを追加してください:
+
+```js
+import MyWorker from './worker?worker&url'
+```
+
 すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/#worker-options) を見てください。
 
 ## ビルドの最適化
