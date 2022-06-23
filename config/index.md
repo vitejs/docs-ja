@@ -40,14 +40,10 @@ const func = () => {
 Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の自動補完を活用できます:
 
 ```js
-/**
- * @type {import('vite').UserConfig}
- */
-const config = {
+/** @type {import('vite').UserConfig} */
+export default {
   // ...
 }
-
-export default config
 ```
 
 あるいは、jsdoc のアノテーションがなくても自動補完を提供する `defineConfig` ヘルパを使用することもできます:
