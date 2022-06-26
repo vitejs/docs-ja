@@ -108,7 +108,7 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
 - [[#7877] fix: vite client types](https://github.com/vitejs/vite/pull/7877)
   - `/// <reference lib="dom" />` が `vite/client.d.ts` から削除されました。`tsconfig` で `{ "lib": ["dom"] }` または `{ "lib": ["webworker"] }` が必須になりました。
 - [[#8280] feat: non-blocking esbuild optimization at build time](https://github.com/vitejs/vite/pull/8280)
-  - `force` オプションが追加されたため、`server.force` が削除されました。
+  - `optimizeDeps.force` オプションが追加されたため、`server.force` が削除されました。
 
 ## v1 からの移行
 

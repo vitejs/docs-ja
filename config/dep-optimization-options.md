@@ -45,3 +45,9 @@ export default defineConfig({
 
 - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
 - `plugins` は Vite の依存関係プラグインとマージされます
+
+## optimizeDeps.force
+
+- **型:** `boolean`
+
+`true` に設定すると、前にキャッシュされた最適化された依存関係を無視して、依存関係の事前バンドルをするよう強制します。

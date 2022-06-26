@@ -107,13 +107,6 @@ export default defineConfig({
 
 サーバのレスポンスヘッダを指定します。
 
-## server.force
-
-- **型:** `boolean`
-- **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
-
-依存関係の事前バンドルを強制するには、`true` に設定します。
-
 ## server.hmr
 
 - **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
