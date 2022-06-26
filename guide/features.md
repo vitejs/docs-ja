@@ -18,13 +18,13 @@ import { someMethod } from 'my-dep'
 
 **依存関係は積極的にキャッシュされます**
 
-Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#ブラウザ-キャッシュ)に従います。
+Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#ブラウザ-キャッシュ)に従ってください。
 
 ## Hot Module Replacement
 
-Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react) ファーストパーティの HMR を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vueの単一ファイルコンポーネント](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
 
-これらを手動で設定する必要がないことには注意してください -  [create an app via `create-vite`](./) を介してアプリケーションを作成する場合、これらはすでに構成されています。
+これらを手動で設定する必要がないことには注意してください - [`create-vite` を介してアプリケーションを作成する](./)場合、これらはすでに構成されています。
 
 ## TypeScript
 
@@ -78,7 +78,7 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` の場合、デフ
 
 もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
 
-### クライアントのタイプ
+### クライアントでの型
 
 Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `d.ts` の定義ファイルを追加します:
 
@@ -99,8 +99,8 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 これにより次のことが提供されます:
 
 - アセットのインポート (例: `.svg` ファイルのインポート)
-- `import.meta.env` に Vite が挿入した [env variables](./env-and-mode#env-variables) のタイプ
-- `import.meta.hot` の [HMR API](./api-hmr) のタイプ
+- `import.meta.env` に Vite が挿入した [env variables](./env-and-mode#env-variables) の型
+- `import.meta.hot` の [HMR API](./api-hmr) の型
 
 ## Vue
 
@@ -151,9 +151,9 @@ export default defineConfig({
 
 ### `@import` のインライン化と結合
 
-Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に結合されます。
+Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に書き換えられます。
 
-`@import` エイリアスと URL の結合も Sass ファイルと Less ファイルでサポートされています (詳しくはこちら [CSS Pre-processors](#css-プリプロセッサ))。
+`@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています ([CSS Pre-processors](#css-プリプロセッサ)を参照)。
 
 ### PostCSS
 
@@ -175,7 +175,7 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS モジュールの動作は [`css.modules` オプション](/config/#css-modules) を参考にしてください。
+CSS モジュールの動作は [`css.modules` オプション](/config/#css-modules) により設定できます。
 
 `css.modules.localsConvention` がキャメルケースローカルを有効にするように設定されている場合（例：`localsConvention: 'camelCaseOnly'`）、名前付きインポートを使用することもできます:
 
@@ -204,15 +204,15 @@ npm add -D stylus
 
 もし Vue で単一ファイルコンポーネントを使用している場合、これにより、`<style lang="sass">` なども自動的に有効になります。
 
-Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリアスも尊重されるようにします。さらに、ルートファイルとは異なるディレクトリにあるインポートされた Sass / Less ファイル内の相対的な `url()` の参照も、正確性を確保するために自動的に結合されます。
+Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリアスも尊重されるようにします。さらに、ルートファイルとは異なるディレクトリにあるインポートされた Sass / Less ファイル内の相対的な `url()` の参照も、正確性を確保するために自動的に書き換えられます。
 
-`@import` エイリアスと URL の結合は、API の制約のため、Stylus ではサポートされていません。
+`@import` エイリアスと URL の書き換えは、API の制約のため、Stylus ではサポートされていません。
 
 ファイル拡張子の前に `.module` を付けることで、プリプロセッサと組み合わせて CSS モジュールを使用することもできます（例：`style.module.scss`）。
 
 ### ページへの CSS 注入の無効化
 
-CSS コンテンツの自動注入は `?inline` クエリパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルがページに注入されるわけではありません。
+CSS コンテンツの自動注入は `?inline` クエリパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルはページに注入されません。
 
 ```js
 import styles from './foo.css' // ページに注入される
@@ -254,7 +254,7 @@ import InlineWorker from './worker.js?worker&inline'
 
 ## JSON
 
-JSON ファイルは直接インポートできます - また、名前付きインポートもサポートされています：:
+JSON ファイルは直接インポートできます - また、名前付きインポートもサポートされています：
 
 ```js
 // オブジェクト全体をインポートする場合
@@ -521,17 +521,17 @@ import MyWorker from './worker?worker&url'
 
 ## ビルドの最適化
 
-> 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に構成する必要はありません。
+> 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。
 
 ### CSS のコード分割
 
-Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのための個別のファイルを生成します。CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSS が読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
+Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのチャンクに対応するファイルを個別に生成します。CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSS が読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
 
 もしすべての CSS を 1 つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
 
 ### プリロードディレクティブの生成
 
-Vite は、エントリチャンクとビルドされた HTML への直接インポート用の `<link rel="modulepreload">` ディレクティブを自動的に生成します。
+Vite は、エントリチャンクとそこから直接インポートされたチャンクの `<link rel="modulepreload">` ディレクティブをビルドされた HTML に自動的に生成します。
 
 ### 非同期チャンク読み込みの最適化
 
