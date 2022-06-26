@@ -27,7 +27,7 @@ vite --config my-config.js
 Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` を注入します。これらの変数をトップレベルで宣言するとエラーになります:
 
 ```js
-const __filename = 'value' // 構文エラー: 識別子 '__filename' は既に宣言されています
+const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
 const func = () => {
   const __filename = 'value' // error にならない
 }
