@@ -52,6 +52,10 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
 ## 全般的な変更
 
 - SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
+- Terser はオプションの依存関係になりました。`build.minify: 'terser'` を使用している場合にインストールする必要があります:
+  ```shell
+  npm add -D terser
+  ```
 
 ### `import.meta.glob`
 
@@ -95,6 +99,8 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
   - `printHttpServerUrls` は削除されました
   - `server.app`、`server.transformWithEsbuild` は削除されました
   - `import.meta.hot.acceptDeps` は削除されました
+- [[#6901] fix: sequential injection of tags in transformIndexHtml](https://github.com/vitejs/vite/pull/6901)
+  - `transformIndexHtml` は先行するプラグインによって修正された正しい内容を取得するようになり、注入されたタグの順序が期待通り動作するようになりました。
 - [[#7995] chore: do not fixStacktrace](https://github.com/vitejs/vite/pull/7995)
   - `ssrLoadModule` の `fixStacktrace` オプションのデフォルトは、`false` に変更されました
 - [[#8178] feat!: migrate to ESM](https://github.com/vitejs/vite/pull/8178)
@@ -107,8 +113,12 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
   - ユーザのコードが ES5 のみしか含んでいない場合でも ES5 へのトランスパイルが必要になりました。
 - [[#7877] fix: vite client types](https://github.com/vitejs/vite/pull/7877)
   - `/// <reference lib="dom" />` が `vite/client.d.ts` から削除されました。`tsconfig` で `{ "lib": ["dom"] }` または `{ "lib": ["webworker"] }` が必須になりました。
+- [[#8090] feat: preserve process env vars in lib build](https://github.com/vitejs/vite/pull/8090)
+  - ライブラリモードでも `process.env.*` が保持されるようになりました。
 - [[#8280] feat: non-blocking esbuild optimization at build time](https://github.com/vitejs/vite/pull/8280)
   - `force` オプションが追加されたため、`server.force` が削除されました。
+- [[#8550] fix: dont handle sigterm in middleware mode](https://github.com/vitejs/vite/pull/8550)
+  - ミドルウェアモードで動作しているとき、Vite は `SIGTERM` でプロセスを終了しなくなりました。
 
 ## v1 からの移行
 
