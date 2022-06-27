@@ -1,7 +1,7 @@
 # サーバサイドレンダリング
 
 :::warning 実験的な機能
-SSR のサポートはまだ実験段階で、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進めてください。
+SSR のサポートはまだ実験段階で、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進んでください。
 :::
 
 :::tip 注意
@@ -61,7 +61,7 @@ if (import.meta.env.SSR) {
 
 ## 開発サーバのセットアップ
 
-SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) の例です:
+SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
 **server.js**
 
@@ -110,22 +110,22 @@ app.use('*', async (req, res, next) => {
       'utf-8'
     )
 
-    // 2. Vite を使用して HTML への変換を適用します。これにより Vite の HMR クライアントが定義され
+    // 2. Vite の HTML の変換を適用します。これにより Vite の HMR クライアントが定義され
     //    Vite プラグインからの HTML 変換も適用します。 e.g. global preambles
     //    from @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
     // 3. サーバサイドのエントリポイントを読み込みます。 vite.ssrLoadModule は自動的に
     //    ESM を Node.js で使用できるコードに変換します! ここではバンドルは必要ありません
-    //    さらに HMR と同様に効率的な無効化を提供します。
+    //    さらに HMR と同様な効率的な無効化を提供します。
     const { render } = await vite.ssrLoadModule('/src/entry-server.js')
 
-    // 4. アプリケーションで HTML をレンダリングします。これは entry-server.js からエクスポートされた `render` を使用しています。
-    //    関数は適切なフレームワーク SSR API を呼び出します。
+    // 4. アプリケーションの HTML をレンダリングします。これは entry-server.js からエクスポートされた `render` を使用しています。
+    //    `render` 関数はフレームワークの適切な SSR API を呼び出すことを想定しています。
     //    e.g. ReactDOMServer.renderToString()
     const appHtml = await render(url)
 
-    // 5. アプリケーションでレンダリングされた HTML をテンプレートに挿入します。
+    // 5. アプリケーションのレンダリングされた HTML をテンプレートに挿入します。
     const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
     // 6. レンダリングされた HTML をクライアントに送ります。
@@ -201,7 +201,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules はレンダリング中にしようされたモジュール ID をセットします。
 ```
 
-本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！　詳しくは [demo source](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。
+本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！詳しくは [demo source](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。
 
 ## Pre-Rendering / SSG
 
@@ -209,7 +209,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 ## 外部 SSR
 
-多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React を用いて、それから変換してそれを Node.js 互換に戻す代わりに、単純に `require('react')` を使用する方が効率的です。また、SSR バンドルビルドの速度も大幅に向上します。
+多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。例えば、あらかじめバンドルされている ESM バージョンの React を用いて、それから変換してそれを Node.js 互換に戻す代わりに、単純に `require('react')` を使用する方が効率的です。また、SSR バンドルビルドの速度も大幅に向上します。
 
 Vite は、次のヒューリスティックに基づいて自動化された SSR 外部化を実行します:
 
