@@ -116,7 +116,7 @@ SSR において ESM を利用することが不可能な場合、`ssr.format: '
 - [[#8090] feat: preserve process env vars in lib build](https://github.com/vitejs/vite/pull/8090)
   - ライブラリモードでも `process.env.*` が保持されるようになりました。
 - [[#8280] feat: non-blocking esbuild optimization at build time](https://github.com/vitejs/vite/pull/8280)
-  - `force` オプションが追加されたため、`server.force` が削除されました。
+  - `optimizeDeps.force` オプションが追加されたため、`server.force` が削除されました。
 - [[#8550] fix: dont handle sigterm in middleware mode](https://github.com/vitejs/vite/pull/8550)
   - ミドルウェアモードで動作しているとき、Vite は `SIGTERM` でプロセスを終了しなくなりました。
 
