@@ -11,10 +11,6 @@
 - Safari >=13
 - Edge >=88
 
-```
-defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0
-```
-
 [`build.target` 設定オプション](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
 Vite はデフォルトでは構文変換のみを扱い **デフォルトでは Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
