@@ -27,7 +27,20 @@ EOL となった Node v12 はサポートされなくなりました。今後は
   - `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
   - `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions) に置き換え)
 
-## 開発サーバでの変更
+## アーキテクチャの変更とレガシーオプション
+
+このセクションでは、Vite v3 の最も大きなアーキテクチャの変更について説明します。互換性の問題が発生した場合に、プロジェクトが v2 から移行できるように、Vite v2 のストラテジーに戻すためのレガシーオプションが追加されました。
+
+:::warning
+これらのオプションは実験中かつ非推奨としてマークされています。将来の v3 マイナーで semver を尊重することなく削除される可能性があります。使用する場合は、Vite のバージョンを固定するようにしてください。
+
+- `legacy.devDepsScanner`
+- `legacy.buildRollupPluginCommonjs`
+- `legacy.buildSsrCjsExternalHeuristics`
+
+:::
+
+### 開発サーバでの変更
 
 Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
 
@@ -35,7 +48,7 @@ Vite のデフォルトの開発サーバのホストは `localhost` になり�
 
 Vite は、CJS のみ提供されている依存関係を ESM に変換するため、また、ブラウザがリクエストする必要のあるモジュールの数を減らすため、依存関係を esbuild で最適化します。v3 では、依存関係を発見しバッチ処理する戦略が変更されました。Vite はコールドスタート時に依存関係のリストを取得するために、ユーザのコードを esbuild で事前スキャンしていました。その代わりに、すべてのインポートされたユーザのモジュールが読み込まれるまで、最初の依存関係の最適化の実行を遅延するようになりました。
 
-v2 の戦略に戻すには、[`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan) が利用できます。
+v2 の戦略に戻すには、`legacy.devDepsScanner` が利用できます。
 
 ## ビルドでの変更
 
@@ -47,7 +60,7 @@ v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'
 
 Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
-SSR において ESM を利用することが不可能な場合、`ssr.format: 'cjs'` を設定することで CJS バンドルを生成できます。この場合では Vite の v2 と同じ外部化戦略が利用されます。
+SSR において ESM を利用することが不可能な場合、`legacy.buildSsrCjsExternalHeuristics` を設定することで Vite の v2 と同じ外部化戦略を利用して CJS バンドルを生成できます。
 
 ## 全般的な変更
 
