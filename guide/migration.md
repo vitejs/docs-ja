@@ -56,7 +56,7 @@ v3 では、Vite はデフォルトで esbuild を利用して依存関係を最
 
 v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled) が利用できます。
 
-## SSRでの変更
+### SSRでの変更
 
 Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
