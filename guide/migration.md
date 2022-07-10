@@ -54,7 +54,7 @@ v2 の戦略に戻すには、`legacy.devDepsScanner` が利用できます。
 
 v3 では、Vite はデフォルトで esbuild を利用して依存関係を最適化します。これにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は使われなくなりました。
 
-v2 の戦略に戻す必要がある場合は、[`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled) が利用できます。
+v2 の戦略に戻す必要がある場合は、`legacy.buildRollupPluginCommonjs` が利用できます。
 
 ### SSRでの変更
 
