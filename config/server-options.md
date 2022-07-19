@@ -146,14 +146,12 @@ export default defineConfig({
 
 ## server.middlewareMode
 
-- **型:** `'ssr' | 'html'`
+- **型:** `boolean`
+- **デフォルト:** `false`
 
-ミドルウェアモードで Vite サーバを作成します（HTTP サーバなし）。
+ミドルウェアモードで Vite サーバを作成します。
 
-- `'ssr'` は Vite 自体の HTML 配信ロジックを無効にするため、`index.html` を手動で配信する必要があります。
-- `'html'` は Vite 自体の HTML 配信ロジックを有効にします。
-
-- **関連:** [SSR - 開発サーバのセットアップ](/guide/ssr#開発サーバのセットアップ)
+- **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバのセットアップ](/guide/ssr#開発サーバのセットアップ)
 
 - **例:**
 
@@ -164,17 +162,19 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // ミドルウェアモードで Vite サーバを作成します。
+  // ミドルウェアモードで Vite サーバを作成
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+    server: { middlewareMode: 'ssr' },
+    appType: 'custom' // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
   })
   // vite の接続インスタンスをミドルウェアとして使用
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    // `middlewareMode` が `'ssr'` の場合、ここで `index.html` を配信する必要があります。
-    // `middlewareMode` が `'html'` の場合、Vite が配信するので
-    // `index.html` を配信する必要はありません。
+    // `appType` が `'custom'` なので、ここでレスポンスを返すべきです。
+    // 注: `appType` が `'spa'` または `'mpa'` の際は、Vite に HTML リクエスト と 404 になる
+    // リクエストを処理するミドルウェアが含まれます。したがって、ユーザーのミドルウェアが
+    // 動作するためにはViteのミドルウェアよりも前に追加されるべきです。
   })
 }
 
