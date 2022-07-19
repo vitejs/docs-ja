@@ -78,7 +78,7 @@ async function createServer() {
   // これにより、Vite 自体の HTML 配信ロジックが無効になり、親サーバが
   // 制御できるようになります。
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' },
+    server: { middlewareMode: true },
     appType: 'custom'
   })
   // Vite の接続インスタンスをミドルウェアとして使用します。

@@ -164,7 +164,7 @@ async function createServer() {
 
   // ミドルウェアモードで Vite サーバを作成
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' },
+    server: { middlewareMode: true },
     appType: 'custom' // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
   })
   // vite の接続インスタンスをミドルウェアとして使用
