@@ -77,9 +77,9 @@ const obj = {
 
 ## plugins
 
-- **型:** `(Plugin | Plugin[])[]`
+- **型:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
 
-使用するプラグインの配列。falsy なプラグインは無視され、プラグインの配列はフラット化されます。 Vite プラグインの詳細は [プラグイン API](/guide/api-plugin) を参照してください。
+使用するプラグインの配列。falsy なプラグインは無視され、プラグインの配列はフラット化されます。 promise が返された場合は、実行前に解決されます。 Vite プラグインの詳細は [プラグイン API](/guide/api-plugin) を参照してください。
 
 ## publicDir
 
