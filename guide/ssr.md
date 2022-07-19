@@ -74,13 +74,12 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // ミドルウェアモードで Vite サーバを作成します。これにより、Vite 自体のHTMLが無効になります。
-  // ロジックを提供し、親サーバに制御を任せます。
-  //
-  // ミドルウェアモードで、Vite 自体の HTML 配信ロジックを使用したい場合は、
-  // `middlewareMode` として 'html' を使用します(参照 https://ja.vitejs.dev/config/#server-middlewaremode)
+  // ミドルウェアモードで Vite サーバを作成し、app type を 'custom' に指定します。
+  // これにより、Vite 自体の HTML 配信ロジックが無効になり、親サーバが
+  // 制御できるようになります。
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+    server: { middlewareMode: true },
+    appType: 'custom'
   })
   // Vite の接続インスタンスをミドルウェアとして使用します。
   app.use(vite.middlewares)
@@ -267,11 +266,8 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 
 ## Vite CLI
 
-コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます:
+コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバには `configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
 
-1. 開発サーバには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加します。
-   :::tip 注意
-   ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。
-   :::
-
-2. `config.spa` を `false` に設定します。これにより開発・プレビューサーバが SPA モードから SSR/MPA モードに切り替わります。
+:::tip 注意
+ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。
+:::
