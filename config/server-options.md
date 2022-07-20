@@ -10,6 +10,30 @@
 
 これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
+::: tip 注意
+
+Vite ではなく他のサーバがレスポンスを返す場合があります。
+
+1 つ目の場合は `localhost` が利用されたときです。Node.js v17 未満はデフォルトでは DNS によって解決された結果のアドレスを並び替えます。`localhost` へアクセスするとき、ブラウザは DNS を利用してアドレスを解決し、そのアドレスは Vite がリッスンしているアドレスと異なる場合があります。
+
+[`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/docs/latest-v18.x/api/dns.html#dnssetdefaultresultorderorder) を設定することで、この並び替える動作を無効化できます。または、明示的に `127.0.0.1` を `server.host` に設定できます。
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import dns from 'dns'
+
+dns.setDefaultResultOrder('verbatim')
+
+export default defineConfig({
+  // 省略
+})
+```
+
+2 つ目の場合はワイルドカードホスト (例: `0.0.0.0`) が利用されたときです。これは、ワイルドカードでないホストにリッスンしているサーバが、ワイルドカードをリッスンしているサーバよりも優先されるためです。
+
+:::
+
 ## server.port
 
 - **型:** `number`

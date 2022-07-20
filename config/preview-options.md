@@ -10,6 +10,13 @@
 
 これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
+:::tip 注意
+
+Vite ではなく他のサーバがレスポンスを返す場合があります。
+詳細は [`server.host`](./server-options.md#server-host) をご覧ください。
+
+:::
+
 ## preview.port
 
 - **型:** `number`
