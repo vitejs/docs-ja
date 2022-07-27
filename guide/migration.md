@@ -119,6 +119,8 @@ SSR において ESM を利用することが不可能な場合、`legacy.buildS
 - [[#8178] feat!: migrate to ESM](https://github.com/vitejs/vite/pull/8178)
   - `formatPostcssSourceMap` は非同期になりました
   - `resolvePackageEntry`、`resolvePackageData` は CJS ビルドから利用できなくなりました (CJS で利用するためには dynamic import が必要です)
+- [[#8626] refactor: type client maps](https://github.com/vitejs/vite/pull/8626)
+  - `import.meta.hot.accept` のコールバックの型がより厳密になりました。`(mod: (Record<string, any> & { [Symbol.toStringTag]: 'Module' }) | undefined) => void` に変更されました (`(mod: any) => void` でした)。
 
 また、少数のユーザーにしか影響のない破壊的変更があります。
 
