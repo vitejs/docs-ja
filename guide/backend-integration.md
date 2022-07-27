@@ -22,7 +22,7 @@
    })
    ```
 
-   [module preload polyfill](/config/#build-polyfillmodulepreload) を無効にしていない場合は、エントリで Polyfill をインポートする必要があります。
+   [module preload polyfill](/config/build-options.md#build-polyfillmodulepreload) を無効にしていない場合は、エントリで Polyfill をインポートする必要があります。
 
    ```js
    // アプリのエントリの先頭に追加
@@ -39,7 +39,7 @@
    アセットを適切に処理するには、2 つの選択肢があります。
 
    - サーバが静的アセットのリクエストを Vite サーバにプロキシするよう設定されていることを確認する
-   - 生成されるアセット URL が相対パスではなく、バックエンドサーバの URL を使って解決されるよう [`server.origin`](https://vitejs.dev/config/#server-origin) を設定する
+   - 生成されるアセット URL が相対パスではなく、バックエンドサーバの URL を使って解決されるよう [`server.origin`](/config/server-options.md#server-origin) を設定する
 
    これは、画像などのアセットを正しく読み込むために必要です。
 

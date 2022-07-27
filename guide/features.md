@@ -116,7 +116,7 @@ Vite は Vue に対して最高のサポートをします:
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
-もし React、または Vue で JSX を使用していない場合は、[`esbuild` オプション](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
+もし React、または Vue で JSX を使用していない場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
 
 ```js
 // vite.config.js
@@ -175,7 +175,7 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS モジュールの動作は [`css.modules` オプション](/config/#css-modules) により設定できます。
+CSS モジュールの動作は [`css.modules` オプション](/config/shared-options.md#css-modules) により設定できます。
 
 `css.modules.localsConvention` がキャメルケースローカルを有効にするように設定されている場合（例：`localsConvention: 'camelCaseOnly'`）、名前付きインポートを使用することもできます:
 
@@ -428,7 +428,7 @@ const modules = {
 注意点:
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
-- Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）か絶対パス（`/` で始まり、プロジェクトルートに対して相対的に解決される）、またはエイリアスのパス（[`resolve.alias` オプション](/config/#resolve-alias) 参照）のいずれかでなければなりません。
+- Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）か絶対パス（`/` で始まり、プロジェクトルートに対して相対的に解決される）、またはエイリアスのパス（[`resolve.alias` オプション](/config/shared-options.md#resolve-alias) 参照）のいずれかでなければなりません。
 - Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。[サポートされている Glob パターン](https://github.com/mrmlnc/fast-glob#pattern-syntax)については、ドキュメントを確認してください。
 - また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
 
@@ -517,7 +517,7 @@ import MyWorker from './worker?worker&inline'
 import MyWorker from './worker?worker&url'
 ```
 
-すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/#worker-options) を見てください。
+すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/worker-options.md) を見てください。
 
 ## ビルドの最適化
 
@@ -527,7 +527,7 @@ import MyWorker from './worker?worker&url'
 
 Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのチャンクに対応するファイルを個別に生成します。CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSS が読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
 
-もしすべての CSS を 1 つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
+もしすべての CSS を 1 つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
 
 ### プリロードディレクティブの生成
 

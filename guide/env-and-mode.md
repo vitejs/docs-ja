@@ -6,7 +6,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.MODE`**: {string} アプリが動作している[モード](#modes)。
 
-- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` 設定オプション](/config/#base) によって決まります。
+- **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` 設定オプション](/config/shared-options.md#base) によって決まります。
 
 - **`import.meta.env.PROD`**: {boolean} アプリがプロダクションで動作しているかどうか。
 
@@ -24,7 +24,7 @@ JavaScript の文字列と Vue テンプレートの中に現れる文字列も�
 
 ## `.env` Files
 
-Vite は、[環境ディレクトリ](/config/#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
+Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
 ```
 .env                # 全ての場合に読み込まれる

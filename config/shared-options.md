@@ -347,4 +347,4 @@ Vite が特定のメッセージをログに出力する際、ターミナル画
 - `'mpa'`: SPA 用でない HTML ミドルウェアのみを含める
 - `'custom'`: HTML ミドルウェアを含めない
 
-詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。関連: [`server.middlewareMode`](./server-options#servermiddlewaremode)。
+詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。関連: [`server.middlewareMode`](./server-options#server-middlewaremode)。

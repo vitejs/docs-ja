@@ -73,7 +73,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 ## build.cssTarget
 
 - **型:** `string | string[]`
-- **デフォルト:** [`build.target`](/config/#build-target) と同じ
+- **デフォルト:** [`build.target`](#build-target) と同じ
 
 このオプションを使用すると、CSS ミニファイのブラウザターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
 

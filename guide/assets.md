@@ -1,7 +1,7 @@
 # 静的アセットの取り扱い
 
 - 関連: [Public Base Path](./build#public-base-path)
-- 関連: [`assetsInclude` 設定オプション](/config/#assetsinclude)
+- 関連: [`assetsInclude` 設定オプション](/config/shared-options.md#assetsinclude)
 
 ## Importing Asset as URL
 
@@ -20,11 +20,11 @@ document.getElementById('hero-img').src = imgUrl
 
 - Vue プラグインを使用している場合、 Vue の SFC テンプレート内の asset references も自動的にインポートに変換されます。
 
-- 一般的な画像、メディア、フォントなどの拡張子は自動的にアセットとして検出されます。また、[`assetsInclude` オプション](/config/#assetsinclude) で内部リストを拡張することができます。
+- 一般的な画像、メディア、フォントなどの拡張子は自動的にアセットとして検出されます。また、[`assetsInclude` オプション](/config/shared-options.md#assetsinclude) で内部リストを拡張することができます。
 
 - 参照されたアセットは build assets graph の一部として含まれ、ハッシュ化されたファイル名を取得し、プラグインを用いて最適化されます。
 
-- [`assetsInlineLimit` オプション](/config/#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
+- [`assetsInlineLimit` オプション](/config/build-options.md#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
 ### 明示的な URL のインポート
 
@@ -76,7 +76,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。
 
-ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/#publicdir) で設定することができます。
+ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/shared-options.md#publicdir) で設定することができます。
 
 注意点:
 
@@ -115,5 +115,5 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 :::
 
 ::: warning `target` は `es2020` 以降が必要
-このパターンは、[build-target](https://vitejs.dev/config/#build-target) や [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) に `es2020` より下の値が設定されている場合、動作しません。
+このパターンは、[build-target](/config/build-options.md#build-target) や [optimizedeps.esbuildoptions.target](/config/dep-optimization-options.md#optimizedeps-esbuildoptions) に `es2020` より下の値が設定されている場合、動作しません。
 :::

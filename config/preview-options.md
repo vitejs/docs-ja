@@ -56,14 +56,14 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 ## preview.open
 
 - **型:** `boolean | string`
-- **デフォルト:** [`server.open`](./server-options#server_open)
+- **デフォルト:** [`server.open`](./server-options#server-open)
 
 サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。
 
 ## preview.proxy
 
 - **型:** `Record<string, string | ProxyOptions>`
-- **デフォルト:** [`server.proxy`](./server-options#server_proxy)
+- **デフォルト:** [`server.proxy`](./server-options#server-proxy)
 
 開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
@@ -72,6 +72,6 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 ## preview.cors
 
 - **型:** `boolean | CorsOptions`
-- **デフォルト:** [`server.cors`](./server-options#server_proxy)
+- **デフォルト:** [`server.cors`](./server-options#server-cors)
 
 開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
