@@ -153,6 +153,7 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 フォールバックが発生した際のブラウザに表示されるエラーは無視できます。エラーが発生しないようにリバースプロキシを迂回するためには、次のいずれかを行えます:
 
+- WebSocket もプロキシするようにリバースプロキシを設定する
 - `server.strictPort = true` を設定し、`server.hmr.clientPort` を `server.port` と同じ値に設定する
 - `server.hmr.port` を `server.port` とは異なる値に設定する
 
