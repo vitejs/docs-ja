@@ -27,6 +27,8 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 例外はその場で動的に URL を連結する必要がある場合です。この場合は、グローバルに注入された `import.meta.env.BASE_URL` 変数を使用することができ、これがベースのパブリックパスになります。この変数はビルド時に静的に置き換えられるので、そのままの形で表示されなければならないことに注意してください（つまり、`import.meta.env['BASE_URL']` は動作しません）。
 
+ベースパスの高度な制御については、[高度なベースパスの設定](#高度なベースパスの設定)を参照してください。
+
 ## ビルドのカスタマイズ
 
 ビルドは様々な [build 設定オプション](/config/#ビルドオプション) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
@@ -181,3 +183,59 @@ building for production...
   }
 }
 ```
+
+## 高度なベースパスの設定
+
+::: warning
+この機能は実験的で、semver を準拠せずに将来のマイナーバージョンで API が変更されることがあります。利用する際は Vite のマイナーバージョンを固定してください。
+:::
+
+高度なユースケースでは、異なるキャッシュ戦略を利用する場合を例として、デプロイされたアセットファイルとパブリックファイルが別々のパスに存在することがあります。
+ユーザーは 3 つの異なるパスにデプロイすることを選択することがあります:
+
+- 生成されたエントリー HTML ファイル (SSR により処理されることがある)
+- 生成されたハッシュ付きのアセット (JS や CSS や画像などのほかのファイル)
+- コピーされた[パブリックファイル](assets.md#public-ディレクトリ)
+
+このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.buildAdvancedBaseOptions` により、高度なベースパスの設定に対する実験的なサポートを提供します。
+
+```js
+  experimental: {
+    buildAdvancedBaseOptions: {
+      // base: './' と同様
+      // 型: boolean, デフォルト: false
+      relative: true
+      // 静的な base
+      // 型: string, デフォルト: undefined
+      url: 'https:/cdn.domain.com/'
+      // JS 内でのパスに対して使われる動的な base
+      // 型: (url: string) => string, デフォルト: undefined
+      runtime: (url: string) => `window.__toCdnUrl(${url})`
+    },
+  }
+```
+
+`runtime` が定義されている場合は、JS アセット内のハッシュ付きのアセットファイルとパブリックファイルへのパスに利用されます。生成された CSS と HTML ファイル内では、定義されていれば `url` をパスに利用され、`config.base` にフォールバックします。
+
+`relative` が true で `url` が定義されている場合は、同じグループ内のアセットに対して相対パスが優先して利用されます (例えば、JS ファイルから参照されたハッシュ付きの画像)。そして、`url` はエントリー HTML と異なるグループ間でのパスに利用されます (CSS ファイルから参照されたパブリックファイル)。
+
+ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、それぞれのグループに対しての設定を独立して定義できます:
+
+```js
+  experimental: {
+    buildAdvancedBaseOptions: {
+      assets: {
+        relative: true
+        url: 'https:/cdn.domain.com/assets',
+        runtime: (url: string) => `window.__assetsPath(${url})`
+      },
+      public: {
+        relative: false
+        url: 'https:/www.domain.com/',
+        runtime: (url: string) => `window.__publicPath + ${url}`
+      }
+    }
+  }
+```
+
+`public` または `assets` で定義されなかった設定はいずれもメインの `buildAdvancedBaseOptions` 設定から継承されます。
