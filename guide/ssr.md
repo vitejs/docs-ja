@@ -130,7 +130,7 @@ app.use('*', async (req, res, next) => {
     // 6. レンダリングされた HTML をクライアントに送ります。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    // エラーが検出された場合は、Vite に stracktrace を修正させて、次のようにマップします。
+    // エラーが検出された場合は、Vite にスタックトレースを修正させて、次のようにマップします。
     // 実際のソースコード
     vite.ssrFixStacktrace(e)
     next(e)
