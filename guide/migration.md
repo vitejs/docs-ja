@@ -100,7 +100,7 @@ SSR において ESM を利用することが不可能な場合、`legacy.buildS
 -import init from 'example.wasm'
 +import init from 'example.wasm?init'
 
--init().then((instance) => {
+-init().then((exports) => {
 +init().then(({ exports }) => {
   exports.test()
 })
