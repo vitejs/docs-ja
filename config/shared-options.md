@@ -198,7 +198,7 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 ## css.postcss
 
-- **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
+- **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
 
 インラインの PostCSS 設定、もしくは PostCSS の設定ファイルを検索するカスタムディレクトリ（デフォルトはプロジェクトルート）。
 
