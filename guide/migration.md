@@ -134,6 +134,8 @@ SSR において ESM を利用することが不可能な場合、`legacy.buildS
   - `optimizeDeps.force` オプションが追加されたため、`server.force` が削除されました。
 - [[#8550] fix: dont handle sigterm in middleware mode](https://github.com/vitejs/vite/pull/8550)
   - ミドルウェアモードで動作しているとき、Vite は `SIGTERM` でプロセスを終了しなくなりました。
+- [[#8647] feat: print resolved address for localhost](https://github.com/vitejs/vite/pull/8647)
+  - `server.printUrls` と `previewServer.printUrls` は非同期になりました。
 
 ## v1 からの移行
 
