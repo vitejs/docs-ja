@@ -19,13 +19,13 @@ EOL となった Node v12 はサポートされなくなりました。今後は
 
 - v2 にて非推奨となっていた以下のオプションは削除されました:
 
-  - `alias` ([`resolve.alias`](../config/shared-options.md#resolvealias) に置き換え)
-  - `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolvededupe) に置き換え)
+  - `alias` ([`resolve.alias`](../config/shared-options.md#resolve-alias) に置き換え)
+  - `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolve-dedupe) に置き換え)
   - `build.base` ([`base`](../config/shared-options.md#base) に置き換え)
   - `build.brotliSize` ([`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize) に置き換え)
   - `build.cleanCssOptions` (Vite は、現在では esbuild を CSS のミニファイに利用します)
   - `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
-  - `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions) に置き換え)
+  - `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions) に置き換え)
 
 ## アーキテクチャの変更とレガシーオプション
 
@@ -58,7 +58,7 @@ v2 の戦略に戻す必要がある場合は、`legacy.buildRollupPluginCommonj
 
 ### SSRでの変更
 
-Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
+Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
 
 SSR において ESM を利用することが不可能な場合、`legacy.buildSsrCjsExternalHeuristics` を設定することで Vite の v2 と同じ外部化戦略を利用して CJS バンドルを生成できます。
 

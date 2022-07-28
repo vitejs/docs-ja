@@ -42,7 +42,7 @@ Pre-bundling dependencies:
 
 モノレポの設定では、依存関係は同じリポジトリからのリンクされたパッケージの可能性があります。Vite は `node_modules` から解決されない依存関係を自動的に検出し、リンクされた依存関係をソースコードとして扱います。リンクされた依存関係をバンドルしようとはせず、代わりにリンクされた依存関係のリストを分析します。
 
-ただしこの場合、リンクされた依存関係が ESM としてエクスポートされている必要があります。そうでない場合は、[`optimizeDeps.include`](/config/#optimizedeps-include) と [`build.commonjsOptions.include`](/config/#build-commonjsoptions) に依存関係を追加して、設定することができます。
+ただしこの場合、リンクされた依存関係が ESM としてエクスポートされている必要があります。そうでない場合は、[`optimizeDeps.include`](/config/dep-optimization-options.md#optimizedeps-include) と [`build.commonjsOptions.include`](/config/build-options.md#build-commonjsoptions) に依存関係を追加して、設定することができます。
 
 ```js
 export default defineConfig({
@@ -65,7 +65,7 @@ export default defineConfig({
 
 ## 挙動のカスタマイズ
 
-デフォルトのヒューリスティックな方法による依存関係の発見によって、必ずしも望ましい結果が得られるとは限りません。リストから依存関係を明示的に含めたり除外したりする場合は、[`optimizeDeps` 設定オプション](/config/#依存関係の最適化オプション)を使用してください。
+デフォルトのヒューリスティックな方法による依存関係の発見によって、必ずしも望ましい結果が得られるとは限りません。リストから依存関係を明示的に含めたり除外したりする場合は、[`optimizeDeps` 設定オプション](/config/dep-optimization-options.md)を使用してください。
 
 `optimizeDeps.include` または `optimizeDeps.exclude` の一般的な使用例は、ソースコードで直接検出できないインポートがある場合です。たとえば、インポートはプラグイン変換の結果として作成される可能性があります。これは、Vite が最初のスキャンでインポートを検出できないことを意味します。つまり、ファイルがブラウザによって要求されて変換された後にのみ、インポートを検出できます。 これにより、サーバの起動後すぐにサーバが再バンドルされます。
 

@@ -11,7 +11,7 @@
 - Safari >=13
 - Edge >=88
 
-[`build.target` 設定オプション](/config/#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
+[`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
 Vite はデフォルトでは構文変換のみを扱い **デフォルトでは Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/v3/) をチェックしてみてください。
 
@@ -21,7 +21,7 @@ Vite はデフォルトでは構文変換のみを扱い **デフォルトでは
 
 - 関連: [静的アセットの取り扱い](./assets)
 
-ネストしたパブリックパスの下にプロジェクトをデプロイする場合は [`base` 設定オプション](/config/#base) を指定するだけでそれに伴いすべてのアセットパスが書き換えられます。このオプションは `vite build --base=/my/public/path/` のようにコマンドラインフラグとして指定することもできます。
+ネストしたパブリックパスの下にプロジェクトをデプロイする場合は [`base` 設定オプション](/config/shared-options.md#base) を指定するだけでそれに伴いすべてのアセットパスが書き換えられます。このオプションは `vite build --base=/my/public/path/` のようにコマンドラインフラグとして指定することもできます。
 
 JS でインポートされたアセット URL、CSS の `url()` 参照、`.html` ファイルのアセット参照はビルド時にこのオプションを考慮して自動的に調整されます。
 
@@ -29,7 +29,7 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ## ビルドのカスタマイズ
 
-ビルドは様々な [build 設定オプション](/config/#ビルドオプション) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
+ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
 
 ```js
 // vite.config.js
@@ -116,7 +116,7 @@ module.exports = defineConfig({
 
 ブラウザ向けのライブラリを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
 
-配布のためにライブラリをバンドルするときには [`build.lib` 設定オプション](/config/#build-lib) を使用します。また、ライブラリにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
+配布のためにライブラリをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
 ```js
 // vite.config.js
