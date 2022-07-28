@@ -139,9 +139,26 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバと異�
 
 `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
 
-`clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。開発サーバの前で SSL プロキシを使用している場合に便利です。
+`clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。
 
-`server.hmr.server` を指定すると、Vite は指定されたサーバを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
+`server.hmr.server` を指定されている場合、Vite は指定されたサーバを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
+
+::: tip 注
+
+デフォルトの設定では、Vite の前のリバースプロキシが WebSocket のプロキシに対応していることが期待されています。Vite の HMR クライアントが WebSocket の接続に失敗した場合、クライアントはリバースプロキシを迂回して直接 Vite の HMR サーバーに接続するようにフォールバックします:
+
+```
+Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+```
+
+フォールバックが発生した際のブラウザに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
+
+- WebSocket もプロキシするようにリバースプロキシを設定する
+- [`server.strictPort = true`](#server-strictport) を設定し、`server.hmr.clientPort` を `server.port` と同じ値に設定する
+- `server.hmr.port` を [`server.port`](#server-port) とは異なる値に設定する
+
+:::
+
 
 ## server.watch
 
