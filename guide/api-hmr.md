@@ -13,13 +13,20 @@ interface ImportMeta {
   readonly hot?: ViteHotContext
 }
 
+type ModuleNamespace = Record<string, any> & {
+  [Symbol.toStringTag]: 'Module'
+}
+
 interface ViteHotContext {
   readonly data: any
 
   accept(): void
-  accept(cb: (mod: any) => void): void
-  accept(dep: string, cb: (mod: any) => void): void
-  accept(deps: readonly string[], cb: (mods: any[]) => void): void
+  accept(cb: (mod: ModuleNamespace | undefined) => void): void
+  accept(dep: string, cb: (mod: ModuleNamespace | undefined) => void): void
+  accept(
+    deps: readonly string[],
+    cb: (mods: Array<ModuleNamespace | undefined>) => void
+  ): void
 
   dispose(cb: (data: any) => void): void
   decline(): void
@@ -53,7 +60,10 @@ export const count = 1
 
 if (import.meta.hot) {
   import.meta.hot.accept((newModule) => {
-    console.log('updated: count is now ', newModule.count)
+    if (newModule) {
+      // SyntaxError が発生したときに newModule は undefined です
+      console.log('updated: count is now ', newModule.count)
+    }
   })
 }
 ```
@@ -76,7 +86,7 @@ foo()
 if (import.meta.hot) {
   import.meta.hot.accept('./foo.js', (newFoo) => {
     // コールバックは更新された './foo.js' モジュールを受け取ります
-    newFoo.foo()
+    newFoo?.foo()
   })
 
   // 依存モジュールの配列を受け入れることもできます:
