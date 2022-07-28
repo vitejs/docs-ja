@@ -151,7 +151,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバと異�
 Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
 ```
 
-フォールバックが発生した際のブラウザに表示されるエラーは無視できます。エラーが発生しないようにリバースプロキシを迂回するためには、次のいずれかを行えます:
+フォールバックが発生した際のブラウザに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
 
 - WebSocket もプロキシするようにリバースプロキシを設定する
 - [`server.strictPort = true`](#server-strictport) を設定し、`server.hmr.clientPort` を `server.port` と同じ値に設定する
