@@ -62,6 +62,8 @@ Vite の v3 では、SSR のビルドにデフォルトで ESM を利用する�
 
 SSR において ESM を利用することが不可能な場合、`legacy.buildSsrCjsExternalHeuristics` を設定することで Vite の v2 と同じ外部化戦略を利用して CJS バンドルを生成できます。
 
+また、[`build.rollupOptions.output.inlineDynamicImports`](https://rollupjs.org/guide/en/#outputinlinedynamicimports) は、`ssr.target` が `'node'` の際のデフォルトが `false` になりました。`inlineDynamicImports` は実行順序を変更することと node に対するビルドでは 1 つのファイルにバンドルする必要がないためです。
+
 ## 全般的な変更
 
 - SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
