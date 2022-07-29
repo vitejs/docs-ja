@@ -207,7 +207,7 @@ building for production...
       relative: true
       // 静的な base
       // 型: string, デフォルト: undefined
-      url: 'https:/cdn.domain.com/'
+      url: 'https://cdn.domain.com/'
       // JS 内でのパスに対して使われる動的な base
       // 型: (url: string) => string, デフォルト: undefined
       runtime: (url: string) => `window.__toCdnUrl(${url})`
@@ -226,12 +226,12 @@ building for production...
     buildAdvancedBaseOptions: {
       assets: {
         relative: true
-        url: 'https:/cdn.domain.com/assets',
+        url: 'https://cdn.domain.com/assets',
         runtime: (url: string) => `window.__assetsPath(${url})`
       },
       public: {
         relative: false
-        url: 'https:/www.domain.com/',
+        url: 'https://www.domain.com/',
         runtime: (url: string) => `window.__publicPath + ${url}`
       }
     }
