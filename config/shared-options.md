@@ -280,6 +280,8 @@ export default defineConfig({
 })
 ```
 
+[`build.minify`](./build-options.md#build-minify) が `true` のとき、`esbuild.minifyIdentifiers` 、`esbuild.minifySyntax` 、`esbuild.minifyWhitespace` のいずれかを `true` に設定することで[特定の側面](https://esbuild.github.io/api/#minify)のみをミニファイするように設定できます。`build.minify` を上書きするために `esbuild.minify` を利用できないことに注意してください。
+
 esbuild の変換を無効にするには `false` を設定します。
 
 ## assetsInclude
