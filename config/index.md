@@ -28,6 +28,7 @@ Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` 
 
 ```js
 const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
+
 const func = () => {
   const __filename = 'value' // error にならない
 }
