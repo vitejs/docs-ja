@@ -79,7 +79,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
 Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
 
-より普遍的な `ssr` フラグの代わりに `ssrBuild` のみが含まれているのは、開発時は、SSR のリクエストも SSR でないリクエストも設定を共有する同じサーバにより処理されているためです。
+`ssrBuild` は実験的です。より普遍的な `ssr` フラグの代わりにビルド時のみ利用できるのは、開発時は、SSR のリクエストも SSR でないリクエストも設定を共有する同じサーバにより処理されているためです。ブラウザと SSR ビルドで別々のコマンドがないツールでは、値が `undefined` になることがあるため、`true` と `false` に対する明示的な比較を使用してください。
 
 ## 非同期の設定
 
