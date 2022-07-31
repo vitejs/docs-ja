@@ -189,6 +189,8 @@ $ ntl deploy --prod
 
 ## Cloudflare Pages
 
+### Cloudflare Pages via Wrangler
+
 1. [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/) をインストールします。
 2. `wrangler login` を使って、Cloudflare アカウントで Wrangler を認証します。
 3. ビルドコマンドを実行します。
@@ -209,6 +211,20 @@ $ npx wrangler pages publish dist
 ```
 
 生成物のアップロード後、Wrangler はサイトの確認のためのプレビュー URL を表示します。Cloudflare Pages ダッシュボートにログインすると、新しいプロジェクトが表示されます。
+
+### Cloudflare Pages with Git
+
+1. git リポジトリ (GitHub、GitLab) にコードをプッシュします。
+2. Cloudflare ダッシュボードにログインし、**Account Home** &gt; **Pages** でアカウントを選択します。
+3. **Create a new Project** と **Connect Git** オプションを選択します。
+4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
+5. 選択した Vite のフレームワークに基づいて、ビルド設定の対応するフレームワークプリセットを選択します。
+6. セーブしてデプロイします！
+7. アプリケーションがデプロイされます！　(例: `https://<PROJECTNAME>.pages.dev/`)
+
+プロジェクトのインポートとデプロイ後、以降のブランチへのプッシュは [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) で停止しない限り[プレビューデプロイ](https://developers.cloudflare.com/pages/platform/preview-deployments/)を生成します。本番ブランチ (一般的には「main」) への全ての変更は本番へデプロイされます。
+
+Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは  [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) をご覧ください。
 
 ## Google Firebase
 
