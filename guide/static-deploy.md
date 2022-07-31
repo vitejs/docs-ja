@@ -187,6 +187,29 @@ Netlify CLI は検査のためにプレビュー URL を共有します。本番
 $ ntl deploy --prod
 ```
 
+## Cloudflare Pages
+
+1. [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/) をインストールします。
+2. `wrangler login` を使って、Cloudflare アカウントで Wrangler を認証します。
+3. ビルドコマンドを実行します。
+4. `npx wrangler pages publish dist` を使ってデプロイします。
+
+```bash
+# Wrangler CLI をインストール
+$ npm install -g wrangler
+
+# CLI から Cloudflare アカウントへログイン
+$ wrangler login
+
+# ビルドコマンドの実行
+$ npm run build
+
+# 新しいデプロイの作成
+$ npx wrangler pages publish dist
+```
+
+生成物のアップロード後、Wrangler はサイトの確認のためのプレビュー URL を表示します。Cloudflare Pages ダッシュボートにログインすると、新しいプロジェクトが表示されます。
+
 ## Google Firebase
 
 1. [firebase-tools](https://www.npmjs.com/package/firebase-tools) をインストールしていることを確認してください。
