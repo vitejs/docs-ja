@@ -101,6 +101,19 @@ SSR において ESM を利用することが不可能な場合、`legacy.buildS
 })
 ```
 
+### 自動的な https 証明書の生成
+
+`https` を利用する際には有効な証明書が必要です。Vite v2 では、証明書の設定がされていなかった場合、自動的に自己証明書が作成されキャッシュされていました。
+Vite v3 では、手動で証明書を作成することを推奨します。v2 での自動生成を利用し続けたい場合は、[@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) をプロジェクトのプラグインに追加することでこの機能を再度有効化できます。
+
+```js
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
+export default {
+  plugins: [basicSsl()]
+}
+```
+
 ## 高度な機能
 
 プラグイン・ツール製作者のみに影響のある変更がいくつかあります。
