@@ -128,7 +128,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'lib/main.js'),
+      entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // 適切な拡張子が追加されます
       fileName: 'my-lib'
