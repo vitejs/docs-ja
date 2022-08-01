@@ -81,7 +81,9 @@ async function createServer() {
     server: { middlewareMode: true },
     appType: 'custom'
   })
+
   // Vite の接続インスタンスをミドルウェアとして使用します。
+  // 個別の express のルータ (express.Route()) を利用する場合は、router.use を使用するべきです。
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
