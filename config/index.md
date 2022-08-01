@@ -28,6 +28,7 @@ Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` 
 
 ```js
 const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
+
 const func = () => {
   const __filename = 'value' // error にならない
 }
@@ -60,10 +61,10 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 ## 条件付き設定
 
-コマンド（`dev`/`serve` か `build`）や使用されている[モード](/guide/env-and-mode)に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
+コマンド（`dev`/`serve` か `build`）や使用されている[モード](/guide/env-and-mode)や SSR ビルド (`ssrBuild`) かどうかに基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode, ssrBuild }) => {
   if (command === 'serve') {
     return {
       // dev 固有の設定
@@ -78,6 +79,8 @@ export default defineConfig(({ command, mode }) => {
 ```
 
 Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
+
+`ssrBuild` は実験的です。より普遍的な `ssr` フラグの代わりにビルド時のみ利用できるのは、開発時は、SSR のリクエストも SSR でないリクエストも設定を共有する同じサーバにより処理されているためです。ブラウザと SSR ビルドで別々のコマンドがないツールでは、値が `undefined` になることがあるため、`true` と `false` に対する明示的な比較を使用してください。
 
 ## 非同期の設定
 
