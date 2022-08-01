@@ -197,45 +197,34 @@ building for production...
 - 生成されたハッシュ付きのアセット (JS や CSS や画像などのほかのファイル)
 - コピーされた[パブリックファイル](assets.md#public-ディレクトリ)
 
-このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.buildAdvancedBaseOptions` により、高度なベースパスの設定に対する実験的なサポートを提供します。
+このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.renderBuiltUrl` により、高度なベースパスの設定に対する実験的なサポートを提供します。
 
 ```js
-  experimental: {
-    buildAdvancedBaseOptions: {
-      // base: './' と同様
-      // 型: boolean, デフォルト: false
-      relative: true
-      // 静的な base
-      // 型: string, デフォルト: undefined
-      url: 'https://cdn.domain.com/'
-      // JS 内でのパスに対して使われる動的な base
-      // 型: (url: string) => string, デフォルト: undefined
-      runtime: (url: string) => `window.__toCdnUrl(${url})`
-    },
+experimental: {
+  renderBuiltUrl: (filename: string, { hostType: 'js' | 'css' | 'html' }) => {
+    if (hostType === 'js') {
+      return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
+    } else {
+      return { relative: true }
+    }
   }
+}
 ```
 
-`runtime` が定義されている場合は、JS アセット内のハッシュ付きのアセットファイルとパブリックファイルへのパスに利用されます。生成された CSS と HTML ファイル内では、定義されていれば `url` をパスに利用され、`config.base` にフォールバックします。
-
-`relative` が true で `url` が定義されている場合は、同じグループ内のアセットに対して相対パスが優先して利用されます (例えば、JS ファイルから参照されたハッシュ付きの画像)。そして、`url` はエントリー HTML と異なるグループ間でのパスに利用されます (CSS ファイルから参照されたパブリックファイル)。
-
-ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、それぞれのグループに対しての設定を独立して定義できます:
+ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 3 つ目の `context` パラメータに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
 
 ```js
   experimental: {
-    buildAdvancedBaseOptions: {
-      assets: {
-        relative: true
-        url: 'https://cdn.domain.com/assets',
-        runtime: (url: string) => `window.__assetsPath(${url})`
-      },
-      public: {
-        relative: false
-        url: 'https://www.domain.com/',
-        runtime: (url: string) => `window.__publicPath + ${url}`
+    renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
+      if (type === 'public') {
+        return 'https://www.domain.com/' + filename
+      }
+      else if (path.extname(importer) === '.js') {
+        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      }
+      else {
+        return 'https://cdn.domain.com/assets/' + filename
       }
     }
   }
 ```
-
-`public` または `assets` で定義されなかった設定はいずれもメインの `buildAdvancedBaseOptions` 設定から継承されます。
