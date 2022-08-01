@@ -18,7 +18,7 @@
 `vite preview` は、ローカルでビルドをプレビューするためのもので、本番用のサーバとしては使えないことに注意してください。
 
 ::: tip 注意
-このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバサイドレンダリング（SSR）も試験的にサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
+このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバサイドレンダリング（SSR）もサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
 :::
 
 ## アプリのビルド
@@ -52,7 +52,7 @@ $ npm run preview
 }
 ```
 
-これで、`preview` メソッドは `http://localhost:8080` でサーバを起動します。
+これで、`preview` コマンドは `http://localhost:8080` でサーバを起動します。
 
 ## GitHub Pages
 
@@ -96,40 +96,6 @@ $ npm run preview
 ::: tip
 また、CI の設定で上記のスクリプトを実行することで、プッシュごとの自動デプロイを有効にすることができます。
 :::
-
-### GitHub Pages と Travis CI
-
-1. `vite.config.js` で `base` を正しく設定してください。
-
-   `https://<USERNAME or GROUP>.github.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
-
-   `https://<USERNAME or GROUP>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
-
-2. プロジェクトルートに `.travis.yml` という名前でファイルを作成してください。
-
-3. ローカルで `npm install` を実行し、生成されたロックファイル（`package-lock.json`）をコミットしてください。
-
-4. GitHub Pages のデプロイプロバイダテンプレートを使用し、[Travis CI マニュアル](https://docs.travis-ci.com/user/deployment/pages/)に従ってください。
-
-   ```yaml
-   language: node_js
-   node_js:
-     - lts/*
-   install:
-     - npm ci
-   script:
-     - npm run build
-   deploy:
-     provider: pages
-     skip_cleanup: true
-     local_dir: dist
-     # GitHub で生成されるトークンで、Travis があなたのリポジトリにコードをプッシュすることを許可します。
-     # リポジトリの Travis 設定ページで、セキュア変数として設定します。
-     github_token: $GITHUB_TOKEN
-     keep_history: true
-     on:
-       branch: main
-   ```
 
 ## GitLab Pages と GitLab CI
 
@@ -186,6 +152,33 @@ Netlify CLI は検査のためにプレビュー URL を共有します。本番
 # サイトを本番環境へデプロイ
 $ ntl deploy --prod
 ```
+
+## Vercel
+
+### Vercel CLI
+
+1. [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
+2. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+3. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
+
+```bash
+$ npm i -g vercel
+$ vercel init vite
+Vercel CLI
+> Success! Initialized "vite" example in ~/your-folder.
+- To deploy, `cd vite` and run `vercel`.
+```
+
+### Vercel for Git
+
+1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket）にプッシュします。
+2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
+3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
+4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
+
+プロジェクトがインポートされてデプロイされた後は、ブランチへのプッシュはすべて[プレビューデプロイメント](https://vercel.com/docs/concepts/deployments/environments#preview)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://vercel.com/docs/concepts/deployments/environments#production)を生成することになります。
+
+詳細は Vercel の [Git 統合](https://vercel.com/docs/concepts/git)をご覧ください。
 
 ## Cloudflare Pages
 
@@ -308,6 +301,7 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
    ```
 
 6. buildpacks の設定。`heroku/nodejs` でプロジェクトをビルドし、それを `heroku-buildpack-static` で配信します。
+
    ```bash
    # buildpacks を設定
    $ heroku buildpacks:set heroku/nodejs
@@ -323,33 +317,6 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
    # ブラウザを開いて Heroku CI ダッシュボードを見る
    $ heroku open
    ```
-
-## Vercel
-
-### Vercel CLI
-
-1. [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
-2. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
-3. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
-
-```bash
-$ npm i -g vercel
-$ vercel init vite
-Vercel CLI
-> Success! Initialized "vite" example in ~/your-folder.
-- To deploy, `cd vite` and run `vercel`.
-```
-
-### Vercel for Git
-
-1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket）にプッシュします。
-2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
-3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
-4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
-
-プロジェクトがインポートされてデプロイされた後は、ブランチへのプッシュはすべて[プレビューデプロイメント](https://vercel.com/docs/concepts/deployments/environments#preview)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://vercel.com/docs/concepts/deployments/environments#production)を生成することになります。
-
-詳細は Vercel の [Git 統合](https://vercel.com/docs/concepts/git)をご覧ください。
 
 ## Azure Static Web Apps
 

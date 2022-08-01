@@ -12,6 +12,8 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.DEV`**: {boolean} アプリが開発で動作しているかどうか（常に `import.meta.env.PROD` の逆）
 
+- **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#条件付きロジック)で動作しているかどうか
+
 ### Production Replacement
 
 プロダクションでは、これらの環境変数は、**静的に置換されます**。したがって、常に、完全な静的文字列を使って参照する必要があります。例えば、`import.meta.env[key]` のような動的なキーでのアクセスはうまく行きません。
@@ -47,11 +49,16 @@ Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある
 環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下のファイルで:
 
 ```
-DB_PASSWORD=foobar
 VITE_SOME_KEY=123
+DB_PASSWORD=foobar
 ```
 
 `VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
+
+```js
+console.log(import.meta.env.VITE_SOME_KEY) // 123
+console.log(import.meta.env.DB_PASSWORD) // undefined
+```
 
 環境変数のプレフィックスをカスタマイズしたい場合は、[envPrefix](/config/index#envprefix) オプションを参照してください。
 

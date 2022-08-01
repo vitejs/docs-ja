@@ -17,15 +17,15 @@ EOL となった Node v12 はサポートされなくなりました。今後は
 
 ## 設定オプションの変更
 
-- v2 にて非推奨となっていた以下のオプションは削除されました:
+v2 にて非推奨となっていた以下のオプションは削除されました:
 
-  - `alias` ([`resolve.alias`](../config/shared-options.md#resolve-alias) に置き換え)
-  - `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolve-dedupe) に置き換え)
-  - `build.base` ([`base`](../config/shared-options.md#base) に置き換え)
-  - `build.brotliSize` ([`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize) に置き換え)
-  - `build.cleanCssOptions` (Vite は、現在では esbuild を CSS のミニファイに利用します)
-  - `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
-  - `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions) に置き換え)
+- `alias` ([`resolve.alias`](../config/shared-options.md#resolve-alias) に置き換え)
+- `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolve-dedupe) に置き換え)
+- `build.base` ([`base`](../config/shared-options.md#base) に置き換え)
+- `build.brotliSize` ([`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize) に置き換え)
+- `build.cleanCssOptions` (Vite は、現在では esbuild を CSS のミニファイに利用します)
+- `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
+- `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions) に置き換え)
 
 ## アーキテクチャの変更とレガシーオプション
 
