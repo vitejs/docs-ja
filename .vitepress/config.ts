@@ -73,7 +73,7 @@ export default defineConfig({
       {
         text: 'リソース',
         items: [
-          { text: 'Team', link: '/team' },
+          { text: 'チーム', link: '/team' },
           {
             items: [
               {
