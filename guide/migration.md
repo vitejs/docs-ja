@@ -31,25 +31,11 @@ EOL となった Node v12 はサポートされなくなりました。今後は
 
 このセクションでは、Vite v3 の最も大きなアーキテクチャの変更について説明します。互換性の問題が発生した場合に、プロジェクトが v2 から移行できるように、Vite v2 のストラテジーに戻すためのレガシーオプションが追加されました。
 
-:::warning
-これらのオプションは実験的機能かつ非推奨としてマークされています。将来の v3 マイナーで semver を尊重することなく削除される可能性があります。使用する場合は、Vite のバージョンを固定するようにしてください。
-
-- `legacy.buildRollupPluginCommonjs`
-- `legacy.buildSsrCjsExternalHeuristics`
-
-:::
-
 ### 開発サーバでの変更
 
 Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
 
 Vite のデフォルトの開発サーバのホストは `localhost` になりました。[`server.host`](../config/server-options.md#server-host) を使用して `127.0.0.1` に設定できます。
-
-### ビルドでの変更
-
-v3 では、Vite はデフォルトで esbuild を利用して依存関係を最適化します。これにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は使われなくなりました。
-
-v2 の戦略に戻す必要がある場合は、`legacy.buildRollupPluginCommonjs` が利用できます。
 
 ### SSRでの変更
 
@@ -113,6 +99,15 @@ export default {
   plugins: [basicSsl()]
 }
 ```
+
+## 実験的な機能
+
+### ビルド時での esbuild による依存関係の最適化の利用
+
+v3 では、ビルド時に esbuild を利用して依存関係を最適化することができます。有効化することにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。この場合は、esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は必要ありません。
+
+このビルド戦略を利用してみたい場合は、`optimizeDeps.disabled: false` (v3 でのデフォルトは `disabled: 'build'`) が利用できます。
+`build.commonjsOptions: { include: [] }` を渡すことで `@rollup/plugin-commonjs` を取り除けます。
 
 ## 高度な機能
 
