@@ -53,7 +53,7 @@ export default defineConfig({
 ```js
 // vite.config.js
 import { splitVendorChunkPlugin } from 'vite'
-module.exports = defineConfig({
+export default defineConfig({
   plugins: [splitVendorChunkPlugin()]
 })
 ```
