@@ -53,7 +53,7 @@ VITE_SOME_KEY=123
 
 `VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
 
-環境変数のプレフィックスをカスタマイズしたい場合は、[envPrefix](/config/index#envprefix) オプションを参照してください。
+環境変数のプレフィックスをカスタマイズしたい場合は、[envPrefix](/config/shared-options.html#envprefix) オプションを参照してください。
 
 :::warning SECURITY NOTES
 
