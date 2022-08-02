@@ -41,6 +41,12 @@ const { createServer } = require('vite')
 - `configFile`: 使用する設定ファイルを指定します。設定されていない場合、Vite はプロジェクトルートからファイルを自動的に解決しようとします。自動解決を無効にするには `false` に設定します。
 - `envFile`: `.env` ファイルを無効にするには `false` に設定します。
 
+## `ResolvedConfig`
+
+`ResolvedConfig` インタフェイスは、`UserConfig` の同一のすべてのプロパティを持ちます。ただし、ほとんどの値は解決済みで undefined ではありません。次のようなユーティリティも含んでいます:
+- `config.assetsInclude`: `id` がアセットとしてみなされるかどうかをチェックする関数。
+- `config.logger`: Vite の内部的なロガーオブジェクト。
+
 ## `ViteDevServer`
 
 ```ts
@@ -184,11 +190,73 @@ const { preview } = require('vite')
 async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
-  defaultMode?: string
+  defaultMode = 'development'
 ): Promise<ResolvedConfig>
 ```
 
 `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` になります。
+
+## `mergeConfig`
+
+**型シグネチャ:**
+
+```ts
+function mergeConfig(
+  defaults: Record<string, any>,
+  overrides: Record<string, any>,
+  isRoot = true
+): Record<string, any>
+```
+
+2 つの Vite の設定をディープマージします。`isRoot` はマージされる Vite の設定内の階層を表します。例えば、2 つの `build` オプションをマージする場合は `false` にします。
+
+## `searchForWorkspaceRoot`
+
+**型シグネチャ:**
+
+```ts
+function searchForWorkspaceRoot(
+  current: string,
+  root = searchForPackageRoot(current)
+): string
+```
+
+**関連:** [server.fs.allow](/config/server-options.md#server-fs-allow)
+
+条件を満せば、ワークスペースの候補のルートを検索します。そうでなければ、`root` にフォールバックします:
+
+- `package.json` に `workspaces` フィールドが含まれている
+- 以下のいずれかのファイルを含んでいる
+  - `lerna.json`
+  - `pnpm-workspace.yaml`
+
+## `loadEnv`
+
+**型シグネチャ:**
+
+```ts
+function loadEnv(
+  mode: string,
+  envDir: string,
+  prefixes: string | string[] = 'VITE_'
+): Record<string, string>
+```
+
+**関連:** [`.env` Files](./env-and-mode.md#env-files)
+
+`envDir` 内の `.env` ファイルを読み込みます。デフォルトでは `prefixes` が変更されない限り、`VITE_` のプレフィックスのある環境変数のみが読み込まれます。
+
+## `normalizePath`
+
+**型シグネチャ:**
+
+```ts
+function normalizePath(id: string): string
+```
+
+**関連:** [Path Normalization](./api-plugin.md#path-normalization)
+
+Vite プラグイン間で相互運用するためにパスを正規化します。
 
 ## `transformWithEsbuild`
 
@@ -202,3 +270,24 @@ async function transformWithEsbuild(
   inMap?: object
 ): Promise<ESBuildTransformResult>
 ```
+
+esbuild で JavaScript か TypeScript を変換します。Vite の内部での esbuild の変換に合わせたいプラグインにとって有用です。
+
+## `loadConfigFromFile`
+
+**型シグネチャ:**
+
+```ts
+async function loadConfigFromFile(
+  configEnv: ConfigEnv,
+  configFile?: string,
+  configRoot: string = process.cwd(),
+  logLevel?: LogLevel
+): Promise<{
+  path: string
+  config: UserConfig
+  dependencies: string[]
+} | null>
+```
+
+esbuild で Vite の設定ファイルを手動で読み込みます。
