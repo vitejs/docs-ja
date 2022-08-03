@@ -23,19 +23,6 @@ export default {
 vite --config my-config.js
 ```
 
-::: tip 注意
-Vite は設定ファイルとその依存関係内に `__filename`, `__dirname` を注入します。これらの変数をトップレベルで宣言するとエラーになります:
-
-```js
-const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
-
-const func = () => {
-  const __filename = 'value' // error にならない
-}
-```
-
-:::
-
 ## 設定の自動補完
 
 Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の自動補完を活用できます:
