@@ -1,8 +1,8 @@
 # v2 からの移行
 
-## Node サポート
+## Node.js サポート
 
-EOL となった Node v12 はサポートされなくなりました。今後は Node 14.18+ が必要です。
+EOL となった Node.js 12 はサポートされなくなりました。今後は Node.js 14.18+ が必要です。
 
 ## モダンブラウザ基準の変更
 
@@ -35,7 +35,9 @@ v2 にて非推奨となっていた以下のオプションは削除されま�
 
 Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
 
-Vite のデフォルトの開発サーバのホストは `localhost` になりました。[`server.host`](../config/server-options.md#server-host) を使用して `127.0.0.1` に設定できます。
+Vite のデフォルトの開発サーバのホストは `localhost` になりました。Vite v2 では、Vite はデフォルトで `127.0.0.1` をリッスンしていました。Node.js の v17 未満は通常 `localhost` を `127.0.0.1` に解決するため、それらのバージョンでは、ホストは変化しません。Node.js 17 以上の場合は、[`server.host`](../config/server-options.md#server-host) を使用して `127.0.0.1` に設定して Vite v2 と同じホストを維持できます。
+
+なお、Vite v3 では正しいホストを表示するようになりました。つまり、`localhost` が利用されているときに、Vite はリッスンしているホストとして `127.0.0.1` を表示することがあります。これを防ぐためには [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定できます。詳しくは [`server.host`](../config/server-options.md#server-host) を参照してください。
 
 ### SSRでの変更
 
