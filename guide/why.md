@@ -24,9 +24,12 @@ Vite はまず最初にアプリケーションのモジュールを 2 つのカ
 
   Vite は、[ネイティブ ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) を行使してソースコードを提供します。ブラウザは、実質的にバンドラの仕事の一部を引き受けます: Vite はブラウザのリクエストに応じて、ソースコードを変換し提供するのみになります。条件で囲われている動的インポートのコードは、現在の画面で使われる場合のみ処理されます。
 
-  ![バンドラベースの開発サーバ](/images/bundler.png)
-
-  ![esm ベースの開発サーバ](/images/esm.png)
+<script setup>
+import bundlerSvg from '../images/bundler.svg?raw'
+import esmSvg from '../images/esm.svg?raw'
+</script>
+<svg-image :svg="bundlerSvg" />
+<svg-image :svg="esmSvg" />
 
 ### 遅い更新速度
 
