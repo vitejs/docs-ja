@@ -62,10 +62,10 @@ SSR をビルドする際、メインサーバを完全に制御し、Vite を�
 **server.js**
 
 ```js{17-19}
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const { createServer: createViteServer } = require('vite')
+import fs from 'fs'
+import path from 'path'
+import express from 'express'
+import {createServer as createViteServer} from 'vite'
 
 async function createServer() {
   const app = express()
@@ -150,7 +150,7 @@ app.use('*', async (req, res, next) => {
 SSR プロジェクトを本番環境に適用するには次の作業を行う必要があります:
 
 1. 通常通りクライアントビルドします。
-2. SSR ビルドを作成します、これは `require()` を介して直接ロードできるので、Vite の `ssrLoadModule` を経由する必要はありません。
+2. SSR ビルドを作成します、これは `import()` を介して直接ロードできるので、Vite の `ssrLoadModule` を経由する必要はありません。
 
 `package.json` は次のようになります:
 
@@ -170,7 +170,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 - ルートの `index.html` を読み取る代わりに `dist/client/index.html` を使用します。これはクライアントビルドへの正しいアセットリンクが含まれているためです。
 
-- `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `require('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
+- `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `import('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
 
 - `vite` 開発サーバの作成とすべての使用を開発専用サーバかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 

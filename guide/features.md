@@ -108,11 +108,12 @@ Vite は Vue に対して最高のサポートをします:
 
 - Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Vue 2 はこちら [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Vue 2.7 はこちら [vitejs/vite-plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+- Vue &lt;2.7 はこちら [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 
-`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバですが、esbuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
+`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 

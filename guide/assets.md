@@ -113,7 +113,3 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 ::: warning SSR では動作しません
 ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
 :::
-
-::: warning `target` は `es2020` 以降が必要
-このパターンは、[build-target](/config/build-options.md#build-target) や [optimizedeps.esbuildoptions.target](/config/dep-optimization-options.md#optimizedeps-esbuildoptions) に `es2020` より下の値が設定されている場合、動作しません。
-:::
