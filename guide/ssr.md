@@ -256,7 +256,7 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 
 ## Vite CLI
 
-コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバには `configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
+コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
 
 :::tip 注意
 ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。
