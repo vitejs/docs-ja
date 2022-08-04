@@ -106,7 +106,7 @@ export default {
 
 ### ビルド時での esbuild による依存関係の最適化の利用
 
-v3 では、ビルド時に esbuild を利用して依存関係を最適化することができます。有効化することにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。この場合は、esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は必要ありません。
+v3 では、ビルド時に esbuild を利用して依存関係を最適化することができます。有効化することにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。この場合は、esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は必要ありません。
 
 このビルド戦略を利用してみたい場合は、`optimizeDeps.disabled: false` (v3 でのデフォルトは `disabled: 'build'`) が利用できます。
 `build.commonjsOptions: { include: [] }` を渡すことで `@rollup/plugin-commonjs` を取り除けます。
