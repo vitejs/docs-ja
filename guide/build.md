@@ -163,8 +163,8 @@ export { Foo, Bar }
 ```
 $ vite build
 building for production...
-[write] my-lib.mjs 0.08kb, brotli: 0.07kb
-[write] my-lib.umd.js 0.30kb, brotli: 0.16kb
+dist/my-lib.js      0.08 KiB / gzip: 0.07 KiB
+dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
 ```
 
 ライブラリに推奨される `package.json`:
@@ -172,17 +172,22 @@ building for production...
 ```json
 {
   "name": "my-lib",
+  "type": "module",
   "files": ["dist"],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.mjs",
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.mjs",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
     }
   }
 }
 ```
+
+::: tip Note
+`package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。
+:::
 
 ## 高度なベースパスの設定
 
