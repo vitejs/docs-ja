@@ -64,8 +64,11 @@ SSR をビルドする際、メインサーバを完全に制御し、Vite を�
 ```js{17-19}
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import express from 'express'
-import {createServer as createViteServer} from 'vite'
+import { createServer as createViteServer } from 'vite'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 async function createServer() {
   const app = express()
