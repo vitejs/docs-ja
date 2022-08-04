@@ -61,7 +61,7 @@ SSR をビルドする際、メインサーバを完全に制御し、Vite を�
 
 **server.js**
 
-```js{17-19}
+```js{15-18}
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
