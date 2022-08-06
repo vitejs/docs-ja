@@ -6,7 +6,7 @@
 - **デフォルト:** `'modules'`
 - **関連:** [ブラウザの互換性](/guide/build#ブラウザの互換性)
 
-最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)と[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)をサポートするブラウザを対象にします。
+最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta)をサポートするブラウザを対象にします。
 
 もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 

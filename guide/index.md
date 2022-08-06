@@ -18,7 +18,7 @@ Vite はすぐに使える実用的なデフォルトが付属していて、プ
 
 ## ブラウザ対応
 
-デフォルトのビルドは [ネイティブ ES モジュール](https://caniuse.com/es6-module)と[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)の両方に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
+デフォルトのビルドは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
 
 ## Vite をオンラインで試す
 
