@@ -212,6 +212,10 @@ export default defineConfig({
               link: '/guide/comparisons'
             },
             {
+              text: 'トラブルシューティング',
+              link: '/guide/troubleshooting'
+            },
+            {
               text: 'v2 からの移行',
               link: '/guide/migration'
             }
