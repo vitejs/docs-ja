@@ -65,3 +65,17 @@ Vite を WSL2 で実行している場合、いくつかの条件下では Vite 
 Vite もしくはプラグインによって HMR が処理されていない場合、完全なリロードが発生します。
 
 また、依存関係の循環がある場合、完全なリロードが発生します。これを解決するには、循環を取り除くことを試みてください。
+
+## その他
+
+### Syntax Error / Type Error が発生する
+
+Vite は非厳格モード (sloppy モード) でのみ動作するコードを処理できず、対応していません。これは Vite が ESM を利用していて ESM 内では常に[厳格モード](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode)であるためです。
+
+例えば、次のようなエラーを表示されることがあります。
+
+> [ERROR] With statements cannot be used with the "esm" output format due to strict mode
+
+> TypeError: Cannot create property 'foo' on boolean 'false'
+
+これらのコードが依存関係で使われていた場合、[`patch-package`](https://github.com/ds300/patch-package) (または [`yarn patch`](https://yarnpkg.com/cli/patch) または [`pnpm patch`](https://pnpm.io/cli/patch)) をエスケープハッチとして利用できます。
