@@ -110,6 +110,10 @@ const obj = {
 
 より高度なカスタム解決は[プラグイン](/guide/api-plugin)によって実現できます。
 
+:::warning エイリアスの操作
+SSR の外部化された依存関係のエイリアスを設定した場合は、実際の `node_modules` パッケージのエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.js.org/en/aliases) の両方で `npm:` のエイリアスをサポートします。
+:::
+
 ## resolve.dedupe
 
 - **型:** `string[]`
