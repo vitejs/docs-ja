@@ -102,6 +102,20 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 - `import.meta.env` に Vite が挿入した [env variables](./env-and-mode#env-variables) の型
 - `import.meta.hot` の [HMR API](./api-hmr) の型
 
+::: tip
+デフォルトの型定義を上書きするためには、triple-slash reference の前に型を宣言します。例えば、`*.svg` のデフォルトインポートを React コンポーネントにする場合:
+
+```ts
+declare module '*.svg' {
+  const content: React.FC<React.SVGProps<SVGElement>>
+  export default content
+}
+
+/// <reference types="vite/client" />
+```
+
+:::
+
 ## Vue
 
 Vite は Vue に対して最高のサポートをします:
