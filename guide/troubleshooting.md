@@ -8,12 +8,12 @@
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'`
 
-プロジェクトフォルダへのパスに `?` が含まれているかもしれません。この場合、Windows では `npm` が動作しません ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45))。
+プロジェクトフォルダへのパスに `&` が含まれているかもしれません。この場合、Windows では `npm` が動作しません ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45))。
 
 次のいずれかを行う必要があります:
 
 - ほかのパッケージマネージャに切り替える (例: `pnpm`、`yarn`)
-- プロジェクトへのパスから `?` を取り除く
+- プロジェクトへのパスから `&` を取り除く
 
 ## 開発サーバ
 

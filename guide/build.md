@@ -204,7 +204,7 @@ dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
 
 このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.renderBuiltUrl` により、高度なベースパスの設定に対する実験的なサポートを提供します。
 
-```js
+```ts
 experimental: {
   renderBuiltUrl: (filename: string, { hostType: 'js' | 'css' | 'html' }) => {
     if (hostType === 'js') {
@@ -216,9 +216,9 @@ experimental: {
 }
 ```
 
-ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 3 つ目の `context` パラメータに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
+ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 2 つ目の `context` パラメータに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
 
-```js
+```ts
 experimental: {
   renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
     if (type === 'public') {

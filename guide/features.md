@@ -122,8 +122,8 @@ Vite は Vue に対して最高のサポートをします:
 
 - Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Vue 2.7 はこちら [vitejs/vite-plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Vue &lt;2.7 はこちら [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Vue 2.7 はこちら [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+- Vue &lt;2.7 はこちら [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 
