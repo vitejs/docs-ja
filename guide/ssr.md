@@ -211,7 +211,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 SSR を実行する場合、依存関係はデフォルトで Vite の SSR トランスフォームモジュールシステムから「外部化」されます。これにより、開発とビルドの両方を高速化します。
 
-Vite の機能がトランスパイルされてない状態で使われている場合のように、Vite のパイプラインによって変換される必要のある依存関係は、[`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) に追加できます。
+Vite の機能がトランスパイルされてない状態で使われている場合のように、Vite のパイプラインによって変換される必要のある依存関係は、[`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) に追加できます。
 
 :::warning エイリアスの操作
 あるパッケージを別のパッケージにリダイレクトするエイリアスを設定した場合は、SSR の外部化された依存関係で機能するように、代わりに実際の `node_modules` パッケージにエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.js.org/en/aliases) の両方で `npm:` のエイリアスをサポートします。
