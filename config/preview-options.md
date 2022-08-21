@@ -65,7 +65,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 - **型:** `Record<string, string | ProxyOptions>`
 - **デフォルト:** [`server.proxy`](./server-options#server-proxy)
 
-開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+プレビューサーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
 [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
@@ -74,4 +74,4 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 - **型:** `boolean | CorsOptions`
 - **デフォルト:** [`server.cors`](./server-options#server-cors)
 
-開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
+プレビューサーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
