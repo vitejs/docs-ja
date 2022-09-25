@@ -193,3 +193,10 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 - **デフォルト:** `null`
 
 Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
+
+::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
+
+WSL2 ではファイルシステム監視が動作しない場合があります。
+詳細は [`server.watch`](./server-options.md#server-watch) を参照してください。
+
+:::
