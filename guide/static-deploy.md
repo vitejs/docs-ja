@@ -331,3 +331,26 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 拡張機能が起動するウィザードに従って、アプリの名前を決め、フレームワークのプリセットを選択し、アプリのルート（通常は `/`）とビルドファイルの場所 `/dist` を指定します。ウィザードが実行されると、リポジトリの `.github` フォルダに GitHub アクションが作成されます。
 
 このアクションが実行されると、アプリがデプロイされます（進行状況はリポジトリの Actions タブで確認できます）。正常に完了すると、GitHub アクション実行時に表示される 'Browse Website' ボタンをクリックすることで、拡張機能の進行状況ウィンドウで指定されたアドレスでアプリを見ることができます。
+
+## Render
+
+[Render](https://render.com/)に静的サイトとして Vite アプリをデプロイできます。
+
+1. [Render アカウント](https://dashboard.render.com/register)を作成できます。
+
+2. [ダッシュボート](https://dashboard.render.com/)で、**New** ボタンをクリックし **Static Site** を選択します。
+
+3. GitHub/GitLab アカウントを連携するかパブリックリポジトリを利用します。
+
+4. プロジェクト名とブランチを指定します。
+
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `dist`
+
+5. **Create Static Site** をクリックします。
+
+   アプリが `https://<PROJECTNAME>.onrender.com/` にデプロイされるはずです。
+
+デフォルトでは、指定したブランチへコミットがプッシュされると自動的に新しいデプロイを開始します。[Auto-Deploy](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) はプロジェクト設定で変更できます。
+
+プロジェクトに [custom domain](https://render.com/docs/custom-domains) も追加できます。
