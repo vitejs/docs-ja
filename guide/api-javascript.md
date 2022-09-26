@@ -47,6 +47,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 ## `ResolvedConfig`
 
 `ResolvedConfig` インタフェイスは、`UserConfig` の同一のすべてのプロパティを持ちます。ただし、ほとんどの値は解決済みで undefined ではありません。次のようなユーティリティも含んでいます:
+
 - `config.assetsInclude`: `id` がアセットとしてみなされるかどうかをチェックする関数。
 - `config.logger`: Vite の内部的なロガーオブジェクト。
 

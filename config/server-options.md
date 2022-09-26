@@ -163,7 +163,6 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 :::
 
-
 ## server.watch
 
 - **型:** `object`
