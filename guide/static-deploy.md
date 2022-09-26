@@ -131,6 +131,8 @@ $ npm run preview
 
 ## Netlify
 
+### Netlify CLI
+
 1. [Netlify CLI](https://cli.netlify.com/) をインストールします。
 2. `ntl init` で新しいサイトを作成します。
 3. `ntl deploy` でデプロイします。
@@ -152,6 +154,16 @@ Netlify CLI は検査のためにプレビュー URL を共有します。本番
 # サイトを本番環境へデプロイ
 $ ntl deploy --prod
 ```
+
+### Netlify with Git
+
+1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket, Azure DevOps）にプッシュします。
+2. Netlify に[プロジェクトをインポート](https://app.netlify.com/start)します。
+3. ブランチ、出力ディレクトリを選び、必要に応じて環境変数を設定します。
+4. **Deploy** をクリックします。
+5. アプリケーションがデプロイされます！
+
+プロジェクトがインポートされてデプロイされた後は、プルリクエストを伴ったプロダクションブランチ以外のブランチへのプッシュはすべて[プレビューデプロイメント](https://docs.netlify.com/site-deploys/deploy-previews/)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://docs.netlify.com/site-deploys/overview/#definitions)を生成することになります。
 
 ## Vercel
 
