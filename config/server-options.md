@@ -170,8 +170,6 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 [chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャのオプションです。
 
-Windows Subsystem for Linux (WSL) 2 上で Vite を実行している時に、プロジェクトフォルダが Windows ファイルシステム内にある場合は、このオプションを `{ usePolling: true }` に設定する必要があります。これは、Windows ファイルシステムにおける [WSL2 の制限](https://github.com/microsoft/WSL/issues/4739)によるものです。
-
 Vite サーバのウォッチャは、デフォルトでは `.git/` と `node_modules/` ディレクトリをスキップします。もし `node_modules/` 内のパッケージを監視したい場合は、`server.watch.regard` に否定の glob パターンを渡すことができます。つまり:
 
 ```js
@@ -188,6 +186,19 @@ export default defineConfig({
   }
 })
 ```
+
+::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
+
+Vite を WSL2 で実行している際、ファイルシステム監視はファイルが Windows アプリケーション（WSL2 でないプロセス）により編集された場合に動作しません。これは [WSL2 の制約](https://github.com/microsoft/WSL/issues/4739) によるものです。これは WSL2 バックエンドの Docker で実行している場合でも該当します。
+
+これを修正するためには、次のいずれかを行えます:
+
+- **推奨**: ファイルを編集するのに WSL2 アプリケーションを使用します。
+  - プロジェクトフォルダを Windows ファイルシステムの外へ移動させることも推奨されます。WSL2 から Windows ファイルシステムへアクセスするのは遅いです。このオーバーヘッドを取り除くことでパフォーマンスが向上します。
+- `{ usePolling: true }` を設定する。
+  -  [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar#performance)に注意してください。
+
+:::
 
 ## server.middlewareMode
 
