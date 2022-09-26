@@ -213,6 +213,8 @@ SSR を実行する場合、依存関係はデフォルトで Vite の SSR ト�
 
 Vite の機能がトランスパイルされてない状態で使われている場合のように、Vite のパイプラインによって変換される必要のある依存関係は、[`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) に追加できます。
 
+リンクされた依存関係については、 Vite の HMR を活用するためにデフォルトでは外部化されていません。これが望ましくない場合、例えばリンクされていないかのように依存関係をテストしたい場合は、[`ssr.external`](../config/ssr-options.md#ssr-external) に追加できます。
+
 :::warning エイリアスの操作
 あるパッケージを別のパッケージにリダイレクトするエイリアスを設定した場合は、SSR の外部化された依存関係で機能するように、代わりに実際の `node_modules` パッケージにエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.js.org/en/aliases) の両方で `npm:` のエイリアスをサポートします。
 :::
