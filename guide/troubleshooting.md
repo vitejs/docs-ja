@@ -44,6 +44,16 @@ Linux を利用している場合、ファイルディスクリプタ制限と i
   $ sudo sysctl fs.inotify.max_user_watches=524288
   ```
 
+### 431 Request Header Fields Too Large
+
+サーバ / WebSocket サーバが大きな HTTP ヘッダを受信した場合、リクエストが破棄され次のような警告が表示されます。
+
+> Server responded with status code 431. See https://vitejs.dev/guide/troubleshooting.html#_431-request-header-fields-too-large.
+
+これは [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121) を軽減するため Node.js がリクエストヘッダサイズを制限しているためです。
+
+これを回避するためには、リクエストヘッダサイズを減らすことを試みてください。例えば、クッキーが長い場合、削除します。あるいは、[`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) を利用して最大ヘッダサイズを変更できます。
+
 ## HMR
 
 ### Viteがファイルの変更を検知しているのにHMRが動作しない
