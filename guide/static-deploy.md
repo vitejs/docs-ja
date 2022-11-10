@@ -276,60 +276,6 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
 
 `surge dist yourdomain.com` とすることで、[カスタムドメイン](http://surge.sh/help/adding-a-custom-domain)にデプロイすることもできます。
 
-## Heroku
-
-1. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) をインストールしてください。
-
-2. [サインアップ](https://signup.heroku.com)して Heroku アカウントを作成してください。
-
-3. `heroku login` を実行し、Heroku の認証情報を入力してください:
-
-   ```bash
-   $ heroku login
-   ```
-
-4. プロジェクトルートに `static.json` という名前でファイルを作成し、以下のように記述してください:
-
-   `static.json`:
-
-   ```json
-   {
-     "root": "./dist"
-   }
-   ```
-
-   これはあなたのサイトの設定です。詳しくは [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static) をご覧ください。
-
-5. Heroku の Git リモートを設定してください:
-
-   ```bash
-   # バージョン更新
-   $ git init
-   $ git add .
-   $ git commit -m "My site ready for deployment."
-
-   # 名前を指定して新しいアプリを作成
-   $ heroku apps:create example
-   ```
-
-6. buildpacks の設定。`heroku/nodejs` でプロジェクトをビルドし、それを `heroku-buildpack-static` で配信します。
-
-   ```bash
-   # buildpacks を設定
-   $ heroku buildpacks:set heroku/nodejs
-   $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
-   ```
-
-7. サイトをデプロイしてください:
-
-   ```bash
-   # サイトを公開
-   $ git push heroku main
-
-   # ブラウザを開いて Heroku CI ダッシュボードを見る
-   $ heroku open
-   ```
-
 ## Azure Static Web Apps
 
 Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) サービスを使って、Vite アプリを素早くデプロイすることができます。必要なもの:
