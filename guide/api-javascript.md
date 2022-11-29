@@ -92,6 +92,11 @@ interface ViteDevServer {
    */
   moduleGraph: ModuleGraph
   /**
+   * Vite が CLI に表示する解決済みの URL。ミドルウェアモードの場合や `server.listen` が
+   * 呼び出される前は null になります。
+   */
+  resolvedUrls: ResolvedServerUrls | null
+  /**
    * プログラムで URL を解決、読込、変換して、HTTP リクエストパイプラインを
    * 経由せずに結果を取得します。
    */
