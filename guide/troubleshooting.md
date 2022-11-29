@@ -76,6 +76,20 @@ Vite もしくはプラグインによって HMR が処理されていない場�
 
 また、依存関係の循環がある場合、完全なリロードが発生します。これを解決するには、循環を取り除くことを試みてください。
 
+## ビルド
+
+### ビルドしたファイルが CORS エラーで動作しない
+
+出力される HTML ファイルが `file` プロトコルで開かれている場合、以下のようなエラーでスクリプトが実行されません。
+
+> Access to script at 'file:///foo/bar.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted.
+
+> Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at file:///foo/bar.js. (Reason: CORS request not http).
+
+この現象が発生する理由については、[Reason: CORS request not HTTP - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp) を参照してください。
+
+ファイルには `http` プロトコルでアクセスする必要があります。これを実現する最も簡単な方法は、`npx vite preview` を実行することです。
+
 ## その他
 
 ### Syntax Error / Type Error が発生する
