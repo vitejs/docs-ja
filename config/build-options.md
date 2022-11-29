@@ -53,8 +53,10 @@ import 'vite/modulepreload-polyfill'
 
 インポートもしくは参照されたアセットでこの閾値より小さいものは、余計な HTTP リクエストを避けるために base64 URL としてインライン化されます。`0` に設定するとインライン化は完全に無効になります。
 
+Git LFS のプレースホルダは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。
+
 ::: tip 注意
-`build.lib` を指定すると `build.assetsInlineLimit` は無視され、ファイルサイズに関係なく、アセットは常にインライン化されます。
+`build.lib` を指定すると `build.assetsInlineLimit` は無視され、ファイルサイズや Git LFS のプレースホルダであるかどうかに関係なく、アセットは常にインライン化されます。
 :::
 
 ## build.cssCodeSplit

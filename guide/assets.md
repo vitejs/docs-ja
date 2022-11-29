@@ -26,6 +26,8 @@ document.getElementById('hero-img').src = imgUrl
 
 - [`assetsInlineLimit` オプション](/config/build-options.md#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
+- Git LFS のプレースホルダは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。インライン化するには、ビルドする前に必ずファイルの内容を Git LFS 経由でダウンロードするようにしてください。
+
 ### 明示的な URL のインポート
 
 内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
