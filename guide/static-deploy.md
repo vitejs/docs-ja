@@ -64,7 +64,7 @@ $ npm run preview
 
 2. プロジェクト内で以下の内容の `deploy.sh` を作成し（ハイライトされた行はコメントアウトされています）、これを実行してデプロイしてください:
 
-   ```bash{13,21,24}
+   ```bash{16,24,27}
    #!/usr/bin/env sh
 
    # エラー時は停止
@@ -75,6 +75,9 @@ $ npm run preview
 
    # ビルド出力ディレクトリに移動
    cd dist
+
+   # Jekyll の処理をバイパスするために .nojekyll を配置
+   echo > .nojekyll
 
    # カスタムドメインにデプロイする場合
    # echo 'www.example.com' > CNAME
