@@ -128,6 +128,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
+      // 複数のエントリーポイントのディクショナリや配列にもできます
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // 適切な拡張子が追加されます
@@ -180,6 +181,28 @@ dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
     ".": {
       "import": "./dist/my-lib.js",
       "require": "./dist/my-lib.umd.cjs"
+    }
+  }
+}
+```
+
+あるいは、複数のエントリーポイントを公開する場合:
+
+```json
+{
+  "name": "my-lib",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/my-lib.cjs",
+  "module": "./dist/my-lib.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.mjs",
+      "require": "./dist/my-lib.cjs"
+    },
+    "./secondary": {
+      "import": "./dist/secondary.mjs",
+      "require": "./dist/secondary.cjs"
     }
   }
 }
