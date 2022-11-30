@@ -129,14 +129,14 @@ if (import.meta.hot) {
 
 その直後に `invalidate` を呼び出す場合でも、常に `import.meta.hot.accept` を呼び出す必要があることに注意してください。そうしないと、HMR クライアントは自己受け入れモジュールの今後の変更をリッスンしません。意図を明確に伝えるために、以下のように `accept` コールバック内で `invalidate` をコールすることを推奨します:
 
-    ```ts
-    import.meta.hot.accept(module => {
-      // 新しいモジュールインスタンスを使用して、無効化するかどうかを決定できます。
-      if (cannotHandleUpdate(module)) {
-        import.meta.hot.invalidate()
-      }
-    })
-    ```
+```js
+import.meta.hot.accept((module) => {
+  // 新しいモジュールインスタンスを使用して、無効化するかどうかを決定できます。
+  if (cannotHandleUpdate(module)) {
+    import.meta.hot.invalidate()
+  }
+})
+```
 
 ## `hot.on(event, cb)`
 
