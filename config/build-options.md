@@ -17,20 +17,54 @@
 
 esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
 
-## build.polyfillModulePreload
+## build.modulePreload
 
-- **型:** `boolean`
+- **型:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **デフォルト:** `true`
 
-自動的に [module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) を注入するかどうか。
-
-`true` に設定すると、Polyfill は各 `index.html` エントリのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリを使用するように設定されている場合は、カスタムエントリで Polyfill を手動でインポートする必要があります:
+デフォルトでは、[module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) が自動的に注入されます。Polyfill は各 `index.html` エントリのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリを使用するように設定されている場合は、カスタムエントリで Polyfill を手動でインポートする必要があります:
 
 ```js
 import 'vite/modulepreload-polyfill'
 ```
 
 注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
+
+ポリフィルは `{ polyfill: false }` を使って無効にできます。
+
+動的インポートごとにプリロードするチャンクのリストは Vite によって計算されます。デフォルトでは、これらの依存関係を読み込む際に `base` を含む絶対パスが使用されます。`base` が相対パス (`''` または `'./'`) の場合、最終的にデプロイされるベースに依存する絶対パスを避けるために、実行時に `import.meta.url` が使用されます。
+
+実験的に、`resolveDependencies` 関数を使用して、依存関係のリストとそのパスを細かく制御できるようになりました。この関数は `ResolveModulePreloadDependenciesFn` 型の関数が必要です。
+
+```ts
+type ResolveModulePreloadDependenciesFn = (
+  url: string,
+  deps: string[],
+  context: {
+    importer: string
+  }
+) => (string | { runtime?: string })[]
+```
+
+`resolveDependencies` 関数は動的インポートごとに依存するチャンクのリストとともに呼び出され、またエントリー HTML ファイルでインポートされたチャンクに対しても呼び出されます。新しい依存関係の配列は、これらのフィルタリングされた依存関係、あるいはそれ以上の依存関係を注入し、そのパスを修正した新しい依存関係配列を返すことができます。`deps` のパスは `build.outDir` からの相対パスです。`hostType === 'js'` の場合は `hostId` への相対パスを返すことができます。この場合、このモジュールを HTML ヘッドにプリロードする際に、絶対パスを取得するために `new URL(dep, import.meta.url)` が使用されます。
+
+```js
+modulePreload: {
+  resolveDependencies: (filename, deps, { hostId, hostType }) => {
+    return deps.filter(condition)
+  }
+}
+```
+
+解決された依存関係のパスは、さらに [`experimental.renderBuiltUrl`](../guide/build.md#advanced-base-options) を使って変更できます。
+
+## build.polyfillModulePreload
+
+- **型:** `boolean`
+- **デフォルト:** `true`
+- **非推奨** `build.modulePreload.polyfill` を使用してください
+
+自動的に [module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) を注入するかどうか。
 
 ## build.outDir
 
