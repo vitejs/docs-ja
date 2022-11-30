@@ -125,7 +125,18 @@ if (import.meta.hot) {
 
 ## `hot.invalidate()`
 
-今のところ、`import.meta.hot.invalidate()` を呼び出すとページがリロードされるだけです。
+自己受け入れモジュールは実行中に HMR の更新を処理できないことに気づくかもしれません。そのため、更新は強制的にインポータに伝搬される必要があります。`import.meta.hot.invalidate()` を呼ぶことで、HMR サーバは呼び出し元のインポーターを、呼び出し元が自己受け入れしていないかのように無効化します。
+
+その直後に `invalidate` を呼び出す場合でも、常に `import.meta.hot.accept` を呼び出す必要があることに注意してください。そうしないと、HMR クライアントは自己受け入れモジュールの今後の変更をリッスンしません。意図を明確に伝えるために、以下のように `accept` コールバック内で `invalidate` をコールすることを推奨します:
+
+    ```ts
+    import.meta.hot.accept(module => {
+      // 新しいモジュールインスタンスを使用して、無効化するかどうかを決定できます。
+      if (cannotHandleUpdate(module)) {
+        import.meta.hot.invalidate()
+      }
+    })
+    ```
 
 ## `hot.on(event, cb)`
 
@@ -136,6 +147,7 @@ HMR イベントを購読します。
 - `'vite:beforeUpdate'` アップデートが適用される直前（例: モジュールが置き換えられるなど）
 - `'vite:beforeFullReload'` 完全なリロードが発生する直前
 - `'vite:beforePrune'` もう必要なくなったモジュールが取り除かれる直前
+- `'vite:invalidate'` モジュールが `import.meta.hot.invalidate()` で無効にされたとき
 - `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
 
 カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
