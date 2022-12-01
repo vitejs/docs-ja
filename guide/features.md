@@ -57,7 +57,7 @@ export type { T }
 
 #### `useDefineForClassFields`
 
-Vite 2.5.0 からは、TypeScript ターゲットが `ES2022` 以降（`ESNext` を含む）場合、デフォルト値は `true` になります。これは [`tsc` 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
+Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` の場合、デフォルト値は `true` になります。これは [`tsc` 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
 
 しかし、他のプログラミング言語や古いバージョンの TypeScript を使用している人にとっては直感的に理解できないかもしれません。
 移行の詳細については、[TypeScript 3.7 リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)を参照してください。
@@ -71,13 +71,10 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ES2022` 以降（`ESNext` 
 ### ビルド結果に影響するその他のコンパイラオプション
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
-- [`jsx`](https://www.typescriptlang.org/tsconfig#jsx)
+- [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
-- [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
-- [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
 
 もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
 
