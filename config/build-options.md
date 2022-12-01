@@ -209,6 +209,14 @@ Terser に渡す追加の[ミニファイオプション](https://terser.org/doc
 
 デフォルトでは、Vite はビルド時に `outDir` がプロジェクトルート内にある場合、それを空にします。重要なファイルを誤って削除してしまわないように、`outDir` がルートの外にある場合は警告を発します。このオプションを明示的に設定することで、警告を出さないようにできます。このオプションは、コマンドラインで `--emptyOutDir` としても利用できます。
 
+## build.copyPublicDir
+
+- **実験的機能**
+- **型:** `boolean`
+- **デフォルト:** `true`
+
+デフォルトでは、Vite はビルド時にファイルを `publicDir` から `outDir` にコピーします。無効にするには `false` に設定します。
+
 ## build.reportCompressedSize
 
 - **型:** `boolean`
