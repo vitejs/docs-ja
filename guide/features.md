@@ -174,6 +174,8 @@ Vite は、`postcss-import` を介した CSS `@import` のインライン化を�
 
 もしプロジェクトに有効な PostCSS が含まれている場合 ([postcss-load-config](https://github.com/postcss/postcss-load-config) でサポートされている任意の形式、例: `postcss.config.js`)、インポートされたすべての CSS に自動的に適用されます。
 
+CSS の圧縮は PostCSS の後に実行され、[`build.cssTarget`](/config/build-options.md#build-csstarget) オプションを使用することに注意してください。
+
 ### CSS Modules
 
 `.module.css` で終わる全ての CSS ファイルは全て [CSS modules file](https://github.com/css-modules/css-modules) とみなされます。このようなファイルをインポートすると、対応するモジュールオブジェクトが返されます:
