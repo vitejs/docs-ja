@@ -120,6 +120,11 @@ interface ViteDevServer {
    */
   ssrFixStacktrace(e: Error): void
   /**
+   * モジュールグラフにあるモジュールに対して HMR をトリガーします。server.moduleGraph` API を使用して、
+   * リロードするモジュールを取得できます。`hmr` が false の場合、このコマンドは実行されません。
+   */
+  reloadModule(module: ModuleNode): Promise<void>
+  /**
    * サーバを起動します。
    */
   listen(port?: number, isRestart?: boolean): Promise<ViteDevServer>
