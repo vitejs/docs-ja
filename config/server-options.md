@@ -77,7 +77,9 @@ export default defineConfig({
 
 - **型:** `Record<string, string | ProxyOptions>`
 
-開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。リクエストパスがそのキーで始まるすべてのリクエストは、その指定されたターゲットにプロキシされます。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+
+相対的でない [`base`](/config/shared-options.md#base) を使用する場合、各キーの先頭に `base` を付けなければならないことに注意してください。
 
 [`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
 
@@ -89,15 +91,15 @@ export default defineConfig({
 export default defineConfig({
   server: {
     proxy: {
-      // 文字列のショートハンド
+      // 文字列のショートハンド: http://localhost:5173/foo -> http://localhost:4567/foo
       '/foo': 'http://localhost:4567',
-      // オプションを使用
+      // オプションを使用: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
-      // 正規表現を使用
+      // 正規表現を使用: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
       '^/fallback/.*': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
@@ -111,9 +113,9 @@ export default defineConfig({
           // プロキシは 'http-proxy' のインスタンスになります
         },
       },
-      // Web ソケット か socket.io をプロキシ化
+      // Web ソケット か socket.io をプロキシ化: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
       '/socket.io': {
-        target: 'ws://localhost:5173',
+        target: 'ws://localhost:5174',
         ws: true
       }
     }
