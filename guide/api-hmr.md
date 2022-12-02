@@ -29,6 +29,7 @@ interface ViteHotContext {
   ): void
 
   dispose(cb: (data: any) => void): void
+  prune(cb: (data: any) => void): void
   decline(): void
   invalidate(message?: string): void
 
@@ -111,6 +112,18 @@ setupSideEffect()
 if (import.meta.hot) {
   import.meta.hot.dispose((data) => {
     // 副作用をクリーンアップ
+  })
+}
+```
+
+## `hot.prune(cb)`
+
+モジュールがページにインポートされなくなったときに呼び出されるコールバックを登録します。これは、スタイルインジェクションのような副作用をクリーンアップするために使用できます。Vite は `.css` のインポートに対してすでにこれを行なっています。
+
+```js
+if (import.meta.hot) {
+  import.meta.hot.prune((data) => {
+    // 副作用のクリーンアップ
   })
 }
 ```
