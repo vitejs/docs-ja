@@ -94,7 +94,8 @@ if (import.meta.hot) {
   import.meta.hot.accept(
     ['./foo.js', './bar.js'],
     ([newFooModule, newBarModule]) => {
-      // コールバックは更新されたモジュールを配列で受け取ります
+      // コールバックは、更新されたモジュールだけが null でない配列を受け取ります
+      // アップデートが成功しなかった場合（構文エラーなど）、配列は空となります
     }
   )
 }
