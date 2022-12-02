@@ -359,8 +359,8 @@ Vite が特定のメッセージをログに出力する際、ターミナル画
 
 アプリケーションがシングルページアプリケーション (SPA) か、[マルチページアプリケーション (MPA)](../guide/build#マルチページアプリ)か、カスタムアプリケーション (SSR と独自に HTML を処理するフレームワーク):
 
-- `'spa'`: SPA 用のフォールバックミドルウェアを含め、プレビューで `single: true` を [sirv](https://github.com/lukeed/sirv) に設定する
-- `'mpa'`: SPA 用でない HTML ミドルウェアのみを含める
+- `'spa'`: HTML ミドルウェアを含め、SPA 用のフォールバックを使用する。プレビューで `single: true` を [sirv](https://github.com/lukeed/sirv) に設定する
+- `'mpa'`: HTML ミドルウェアを含める
 - `'custom'`: HTML ミドルウェアを含めない
 
 詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。関連: [`server.middlewareMode`](./server-options#server-middlewaremode)。
