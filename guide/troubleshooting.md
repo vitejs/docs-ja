@@ -44,6 +44,13 @@ Linux を利用している場合、ファイルディスクリプタ制限と i
   $ sudo sysctl fs.inotify.max_user_watches=524288
   ```
 
+上記の手順でうまくいかない場合は、以下のファイルに `DefaultLimitNOFILE=65536` をコメント無しで追加してみてください:
+
+- /etc/systemd/system.conf
+- /etc/systemd/user.conf
+
+これらの設定は持続しますが、**再起動が必要**なことに注意してください。
+
 ### 431 Request Header Fields Too Large
 
 サーバ / WebSocket サーバが大きな HTTP ヘッダを受信した場合、リクエストが破棄され次のような警告が表示されます。
