@@ -30,7 +30,7 @@ interface ViteHotContext {
 
   dispose(cb: (data: any) => void): void
   decline(): void
-  invalidate(): void
+  invalidate(message?: string): void
 
   // `InferCustomEventPayload` が組み込みの Vite イベント用の型を提供します
   on<T extends string>(
@@ -123,9 +123,9 @@ if (import.meta.hot) {
 
 `import.meta.hot.decline()` を呼び出すと、このモジュールはホットアップデート可能でないことが示されます。HMR 更新の伝播中にこのモジュールが検出された場合、ブラウザは完全なリロードを行うべきです。
 
-## `hot.invalidate()`
+## `hot.invalidate(message?: string)`
 
-自己受け入れモジュールは実行中に HMR の更新を処理できないことに気づくかもしれません。そのため、更新は強制的にインポータに伝搬される必要があります。`import.meta.hot.invalidate()` を呼ぶことで、HMR サーバは呼び出し元のインポーターを、呼び出し元が自己受け入れしていないかのように無効化します。
+自己受け入れモジュールは実行中に HMR の更新を処理できないことに気づくかもしれません。そのため、更新は強制的にインポータに伝搬される必要があります。`import.meta.hot.invalidate()` を呼ぶことで、HMR サーバは呼び出し元のインポーターを、呼び出し元が自己受け入れしていないかのように無効化します。これはブラウザのコンソールとターミナルの両方にメッセージを記録します。メッセージを渡すことで、なぜ無効化が起こったのかについてのコンテキストを与えることができます。
 
 その直後に `invalidate` を呼び出す場合でも、常に `import.meta.hot.accept` を呼び出す必要があることに注意してください。そうしないと、HMR クライアントは自己受け入れモジュールの今後の変更をリッスンしません。意図を明確に伝えるために、以下のように `accept` コールバック内で `invalidate` をコールすることを推奨します:
 
