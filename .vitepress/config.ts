@@ -186,6 +186,10 @@ export default defineConfig({
               link: '/guide/features'
             },
             {
+              text: 'CLI',
+              link: '/guide/cli'
+            },
+            {
               text: 'プラグインの使用',
               link: '/guide/using-plugins'
             },
