@@ -8,7 +8,7 @@
 
 - Chrome >=87
 - Firefox >=78
-- Safari >=13
+- Safari >=14
 - Edge >=88
 
 [`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
