@@ -77,9 +77,10 @@ export default defineConfig({
 
 Vite は、`node_modules/.vite` に、事前バンドル済みの依存関係をキャッシュします。いくつかのソースに基づいて、事前バンドルを再実行する必要があるかどうか決定します:
 
-- `package.json` の `dependencies` リスト。
-- パッケージマネージャのロックファイル　例： `package-lock.json`、`yarn.lock`、または `pnpm-lock.yaml`。
+- パッケージマネージャのロックファイルの内容、例： `package-lock.json`、`yarn.lock`、`pnpm-lock.yaml`、`bun.lockb` など。
 - もし存在すれば、vite.config.js の関連するフィールド。
+- パッチフォルダの変更時間。
+- `NODE_ENV` の値。
 
 上記のいずれかが変更された場合のみ、事前バンドルを再実行する必要があります。
 
