@@ -22,7 +22,7 @@ Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシ
 
 ## Hot Module Replacement
 
-Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vueの単一ファイルコンポーネント](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vueの単一ファイルコンポーネント](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
 
 これらを手動で設定する必要がないことには注意してください - [`create-vite` を介してアプリケーションを作成する](./)場合、これらはすでに構成されています。
 
@@ -120,8 +120,8 @@ declare module '*.svg' {
 
 Vite は Vue に対して最高のサポートをします:
 
-- Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
-- Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+- Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Vue 2.7 はこちら [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
 - Vue &lt;2.7 はこちら [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
@@ -129,7 +129,7 @@ Vite は Vue に対して最高のサポートをします:
 
 `.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。
 
-Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
+Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
 もし React、または Vue で JSX を使用していない場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
 
