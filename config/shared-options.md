@@ -69,7 +69,7 @@ declare const __APP_VERSION__: string
 ```js
 const obj = {
   __NAME__, // オブジェクトのショートハンドプロパティ名を定義しないこと
-  __KEY__: value // オブジェクトのキーを定義しないこと
+  __KEY__: value, // オブジェクトのキーを定義しないこと
 }
 ```
 
@@ -233,13 +233,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `$injectedColor: orange;`
+        additionalData: `$injectedColor: orange;`,
       },
       styl: {
-        additionalData: `$injectedColor ?= orange`
-      }
-    }
-  }
+        additionalData: `$injectedColor ?= orange`,
+      },
+    },
+  },
 })
 ```
 
@@ -277,20 +277,20 @@ export default defineConfig({
 export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
-    jsxFragment: 'Fragment'
-  }
+    jsxFragment: 'Fragment',
+  },
 })
 ```
 
 デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
 
-  また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
+また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
 
 ```js
 export default defineConfig({
   esbuild: {
-    jsxInject: `import React from 'react'`
-  }
+    jsxInject: `import React from 'react'`,
+  },
 })
 ```
 
@@ -315,7 +315,7 @@ esbuild の変換を無効にするには `false` を設定します。
 
 ```js
 export default defineConfig({
-  assetsInclude: ['**/*.gltf']
+  assetsInclude: ['**/*.gltf'],
 })
 ```
 

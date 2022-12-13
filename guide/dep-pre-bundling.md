@@ -47,13 +47,13 @@ Pre-bundling dependencies:
 ```js
 export default defineConfig({
   optimizeDeps: {
-    include: ['linked-dep']
+    include: ['linked-dep'],
   },
   build: {
     commonjsOptions: {
-      include: [/linked-dep/, /node_modules/]
-    }
-  }
+      include: [/linked-dep/, /node_modules/],
+    },
+  },
 })
 ```
 

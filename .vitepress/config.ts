@@ -44,8 +44,8 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
         },
         {
           text: 'Vite 2 Docs',
-          link: 'https://v2.vitejs.dev'
-        }
+          link: 'https://v2.vitejs.dev',
+        },
       ]
     case 'release':
       return [
@@ -55,8 +55,8 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
         },
         {
           text: 'Vite 2 Docs',
-          link: 'https://v2.vitejs.dev'
-        }
+          link: 'https://v2.vitejs.dev',
+        },
       ]
   }
 })()
@@ -81,13 +81,13 @@ export default defineConfig({
         src: 'https://cdn.usefathom.com/script.js',
         'data-site': 'CBDFBSLI',
         'data-spa': 'auto',
-        defer: ''
-      }
-    ]
+        defer: '',
+      },
+    ],
   ],
 
   vue: {
-    reactivityTransform: true
+    reactivityTransform: true,
   },
 
   themeConfig: {
@@ -95,13 +95,13 @@ export default defineConfig({
 
     editLink: {
       pattern: 'https://github.com/vitejs/docs-ja/edit/main/:path',
-      text: 'このページへの変更を提案する'
+      text: 'このページへの変更を提案する',
     },
 
     socialLinks: [
       { icon: 'twitter', link: 'https://twitter.com/vite_js' },
       { icon: 'discord', link: 'https://chat.vitejs.dev' },
-      { icon: 'github', link: 'https://github.com/vitejs/vite' }
+      { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
 
     algolia: {
@@ -109,13 +109,13 @@ export default defineConfig({
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
       indexName: 'vitejs',
       searchParameters: {
-        facetFilters: ['tags:en']
-      }
+        facetFilters: ['tags:en'],
+      },
     },
 
     carbonAds: {
       code: 'CEBIEK3N',
-      placement: 'vitejsdev'
+      placement: 'vitejsdev',
     },
 
     localeLinks: {
@@ -123,13 +123,13 @@ export default defineConfig({
       items: [
         { text: 'English', link: 'https://vitejs.dev' },
         { text: '简体中文', link: 'https://cn.vitejs.dev' },
-        { text: 'Español', link: 'https://es.vitejs.dev' }
-      ]
+        { text: 'Español', link: 'https://es.vitejs.dev' },
+      ],
     },
 
     footer: {
       message: `Released under the MIT License. (${commitRef})`,
-      copyright: 'Copyright © 2019-present Evan You & Vite Contributors'
+      copyright: 'Copyright © 2019-present Evan You & Vite Contributors',
     },
 
     nav: [
@@ -144,35 +144,35 @@ export default defineConfig({
             items: [
               {
                 text: 'Twitter',
-                link: 'https://twitter.com/vite_js'
+                link: 'https://twitter.com/vite_js',
               },
               {
                 text: 'Discord Chat',
-                link: 'https://chat.vitejs.dev'
+                link: 'https://chat.vitejs.dev',
               },
               {
                 text: 'Awesome Vite',
-                link: 'https://github.com/vitejs/awesome-vite'
+                link: 'https://github.com/vitejs/awesome-vite',
               },
               {
                 text: 'DEV Community',
-                link: 'https://dev.to/t/vite'
+                link: 'https://dev.to/t/vite',
               },
               {
                 text: 'Rollup Plugins Compat',
-                link: 'https://vite-rollup-plugins.patak.dev/'
+                link: 'https://vite-rollup-plugins.patak.dev/',
               },
               {
                 text: 'Changelog',
-                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
-              }
-            ]
-          }
-        ]
+                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+              },
+            ],
+          },
+        ],
       },
       {
         text: 'Version',
-        items: versionLinks
+        items: versionLinks,
       },
     ],
 
@@ -183,87 +183,87 @@ export default defineConfig({
           items: [
             {
               text: 'なぜ Vite なのか',
-              link: '/guide/why'
+              link: '/guide/why',
             },
             {
               text: 'はじめに',
-              link: '/guide/'
+              link: '/guide/',
             },
             {
               text: '特徴',
-              link: '/guide/features'
+              link: '/guide/features',
             },
             {
               text: 'CLI',
-              link: '/guide/cli'
+              link: '/guide/cli',
             },
             {
               text: 'プラグインの使用',
-              link: '/guide/using-plugins'
+              link: '/guide/using-plugins',
             },
             {
               text: '依存関係の事前バンドル',
-              link: '/guide/dep-pre-bundling'
+              link: '/guide/dep-pre-bundling',
             },
             {
               text: '静的アセットの取り扱い',
-              link: '/guide/assets'
+              link: '/guide/assets',
             },
             {
               text: '本番環境用のビルド',
-              link: '/guide/build'
+              link: '/guide/build',
             },
             {
               text: '静的サイトのデプロイ',
-              link: '/guide/static-deploy'
+              link: '/guide/static-deploy',
             },
             {
               text: '環境変数とモード',
-              link: '/guide/env-and-mode'
+              link: '/guide/env-and-mode',
             },
             {
               text: 'サーバサイドレンダリング',
-              link: '/guide/ssr'
+              link: '/guide/ssr',
             },
             {
               text: 'バックエンドとの統合',
-              link: '/guide/backend-integration'
+              link: '/guide/backend-integration',
             },
             {
               text: '他のツールとの比較',
-              link: '/guide/comparisons'
+              link: '/guide/comparisons',
             },
             {
               text: 'トラブルシューティング',
-              link: '/guide/troubleshooting'
+              link: '/guide/troubleshooting',
             },
             {
               text: 'v2 からの移行',
-              link: '/guide/migration'
-            }
-          ]
+              link: '/guide/migration',
+            },
+          ],
         },
         {
           text: 'API',
           items: [
             {
               text: 'プラグイン API',
-              link: '/guide/api-plugin'
+              link: '/guide/api-plugin',
             },
             {
               text: 'HMR API',
-              link: '/guide/api-hmr'
+              link: '/guide/api-hmr',
             },
             {
               text: 'JavaScript API',
-              link: '/guide/api-javascript'
+              link: '/guide/api-javascript',
             },
             {
               text: '設定リファレンス',
-              link: '/config/'
-            }
-          ]
-        }
+              link: '/config/',
+            },
+          ],
+        },
       ],
       '/config/': [
         {
@@ -271,39 +271,39 @@ export default defineConfig({
           items: [
             {
               text: 'Vite の設定',
-              link: '/config/'
+              link: '/config/',
             },
             {
               text: '共通オプション',
-              link: '/config/shared-options'
+              link: '/config/shared-options',
             },
             {
               text: 'サーバオプション',
-              link: '/config/server-options'
+              link: '/config/server-options',
             },
             {
               text: 'ビルドオプション',
-              link: '/config/build-options'
+              link: '/config/build-options',
             },
             {
               text: 'プレビューのオプション',
-              link: '/config/preview-options'
+              link: '/config/preview-options',
             },
             {
               text: '依存関係の最適化オプション',
-              link: '/config/dep-optimization-options'
+              link: '/config/dep-optimization-options',
             },
             {
               text: 'SSR オプション',
-              link: '/config/ssr-options'
+              link: '/config/ssr-options',
             },
             {
               text: 'ワーカのオプション',
-              link: '/config/worker-options'
-            }
-          ]
-        }
-      ]
-    }
-  }
+              link: '/config/worker-options',
+            },
+          ],
+        },
+      ],
+    },
+  },
 })

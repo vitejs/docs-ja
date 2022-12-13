@@ -39,8 +39,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#big-list-of-options
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -54,7 +54,7 @@ export default defineConfig({
 // vite.config.js
 import { splitVendorChunkPlugin } from 'vite'
 export default defineConfig({
-  plugins: [splitVendorChunkPlugin()]
+  plugins: [splitVendorChunkPlugin()],
 })
 ```
 
@@ -70,8 +70,8 @@ export default defineConfig({
   build: {
     watch: {
       // https://rollupjs.org/guide/en/#watch-options
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -105,10 +105,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'nested/index.html')
-      }
-    }
-  }
+        nested: resolve(__dirname, 'nested/index.html'),
+      },
+    },
+  },
 })
 ```
 
@@ -142,11 +142,11 @@ export default defineConfig({
         // 外部化された依存関係のために UMD のビルドで使用する
         // グローバル変数を提供します
         globals: {
-          vue: 'Vue'
-        }
-      }
-    }
-  }
+          vue: 'Vue',
+        },
+      },
+    },
+  },
 })
 ```
 

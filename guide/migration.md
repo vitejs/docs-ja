@@ -98,7 +98,7 @@ Vite v3 では、手動で証明書を作成することを推奨します。v2 
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default {
-  plugins: [basicSsl()]
+  plugins: [basicSsl()],
 }
 ```
 
