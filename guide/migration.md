@@ -1,147 +1,60 @@
-# v2 からの移行
+# v3 からの移行
 
-## Node.js サポート
+## Rollup 3
 
-EOL となった Node.js 12 / 13 / 15 はサポートされなくなりました。今後は Node.js 14.18+ / 16+ が必要です。
+Vite は現在、[Rollup 3](https://github.com/vitejs/vite/issues/9870)を使用しており、Vite 内部のアセット処理を簡素化でき、多くの改良が施されています。[Rollup 3 のリリースノートはこちら](https://github.com/rollup/rollup/releases) を参照してください。
 
-## モダンブラウザ基準の変更
+Rollup 3 は Rollup 2 とほぼ互換性があります。プロジェクトでカスタム [`rollupOptions`](../config/build-options.md#rollup-options) を使用していて問題が発生した場合、[Rollup migration guide](https://rollupjs.org/guide/en/#migration) を参照して設定を更新してください。
 
-本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [native ES Modules](https://caniuse.com/es6-module)、[native ESM dynamic import](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザを対象としています:
+## モダンブラウザのベースラインの変更
 
-- Chrome >=87
-- Firefox >=78
-- Safari >=13
-- Edge >=88
+最新のブラウザ ビルドは、ES2020 との互換性を高めるために、デフォルトで `safari14` をターゲットにしました（`safari13` からバンプされました）。これは、モダンビルドで [`BigInt`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/BigInt) が使えるようになったことと、[Null 合体演算子](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing) がトランスパイルされなくなったことを意味します。古いブラウザをサポートする必要がある場合は、通常通り [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を追加すればよいでしょう。
 
-ごく少数のユーザーは、自動的にレガシーチャンクとそれに対応する ES 言語機能 Polyfill を生成する [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う必要が出てくるでしょう。
+## 一般的な変更点
 
-## 設定オプションの変更
+### エンコーディング
 
-v2 にて非推奨となっていた以下のオプションは削除されました:
+ビルドのデフォルトの文字セットが utf8 になりました（詳しくは [#10753](https://github.com/vitejs/vite/issues/10753) を参照）。
 
-- `alias` ([`resolve.alias`](../config/shared-options.md#resolve-alias) に置き換え)
-- `dedupe` ([`resolve.dedupe`](../config/shared-options.md#resolve-dedupe) に置き換え)
-- `build.base` ([`base`](../config/shared-options.md#base) に置き換え)
-- `build.brotliSize` ([`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize) に置き換え)
-- `build.cleanCssOptions` (Vite は、現在では esbuild を CSS のミニファイに利用します)
-- `build.polyfillDynamicImport` (dynamic import をサポートしていないブラウザのためには [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を利用してください)
-- `optimizeDeps.keepNames` ([`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions) に置き換え)
+### CSS を文字列としてインポートする
 
-## アーキテクチャの変更とレガシーオプション
+Vite 3 では、`.css` ファイルのデフォルトエクスポートをインポートすると、CSS の二重読み込みが発生することがありました。
 
-このセクションでは、Vite v3 の最も大きなアーキテクチャの変更について説明します。互換性の問題が発生した場合に、プロジェクトが v2 から移行できるように、Vite v2 のストラテジーに戻すためのレガシーオプションが追加されました。
-
-### 開発サーバでの変更
-
-Vite の開発サーバのデフォルトポートが 5173 に変更されました。[`server.port`](../config/server-options.md#server-port) を利用することで 3000 に変更できます。
-
-Vite のデフォルトの開発サーバのホストは `localhost` になりました。Vite v2 では、Vite はデフォルトで `127.0.0.1` をリッスンしていました。Node.js の v17 未満は通常 `localhost` を `127.0.0.1` に解決するため、それらのバージョンでは、ホストは変化しません。Node.js 17 以上の場合は、[`server.host`](../config/server-options.md#server-host) を使用して `127.0.0.1` に設定して Vite v2 と同じホストを維持できます。
-
-なお、Vite v3 では正しいホストを表示するようになりました。つまり、`localhost` が利用されているときに、Vite はリッスンしているホストとして `127.0.0.1` を表示することがあります。これを防ぐためには [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定できます。詳しくは [`server.host`](../config/server-options.md#server-host) を参照してください。
-
-### SSRでの変更
-
-Vite の v3 では、SSR のビルドにデフォルトで ESM を利用するようになりました。ESM を利用する際には、[SSRでのヒューリスティックな方法による外部化](../guide/ssr.md#外部-ssr)が不要になりました。デフォルトでは、すべての依存関係が外部化されます。[`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) を利用してどの依存関係を SSR バンドルに含めるかコントロールできます。
-
-SSR において ESM を利用することが不可能な場合、`legacy.buildSsrCjsExternalHeuristics` を設定することで Vite の v2 と同じ外部化戦略を利用して CJS バンドルを生成できます。
-
-また、[`build.rollupOptions.output.inlineDynamicImports`](https://rollupjs.org/guide/en/#outputinlinedynamicimports) は、`ssr.target` が `'node'` の際のデフォルトが `false` になりました。`inlineDynamicImports` は実行順序を変更することと node に対するビルドでは 1 つのファイルにバンドルする必要がないためです。
-
-## 全般的な変更
-
-- SSR とライブラリモードで、ファイル形式やパッケージの形式によって、出力した JS のエントリとチャンクの拡張子として有効なもの (`js`, `mjs`, or `cjs`) が選択されるようになりました。
-- Terser はオプションの依存関係になりました。`build.minify: 'terser'` を使用している場合にインストールする必要があります:
-  ```shell
-  npm add -D terser
-  ```
-
-### `import.meta.glob`
-
-- [`raw` での `import.meta.glob`](features.md#glob-インポートでの形式の変換) は、記法が `{ assert: { type: 'raw' }}` から `{ as: 'raw' }` に変更されました
-- `import.meta.glob` のキーは現在のモジュールから相対的になりました
-
-  ```diff
-  // ファイル: /foo/index.js
-  const modules = import.meta.glob('../foo/*.js')
-
-  // 変換後:
-  const modules = {
-  -  '../foo/bar.js': () => {}
-  +  './bar.js': () => {}
-  }
-  ```
-
-- `import.meta.glob` でエイリアスを利用した際には、キーは常に絶対的です
-- `import.meta.globEager` は非推奨になりました。`import.meta.glob('*', { eager: true })` を代わりに利用してください。
-
-### WebAssembly サポート
-
-`import init from 'example.wasm'` の記法は、[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration) との将来的な衝突を避けるため、廃止されました。
-以前の挙動に似た `?init` を利用できます。
-
-```diff
--import init from 'example.wasm'
-+import init from 'example.wasm?init'
-
--init().then((exports) => {
-+init().then(({ exports }) => {
-  exports.test()
-})
+```ts
+import cssString from './global.css'
 ```
 
-### 自動的な https 証明書の生成
+この二重読み込みは、`.css` ファイルが出力され、その CSS 文字列がアプリケーションコードでも使用される可能性があるためです（たとえば、フレームワークのランタイムによって注入されます）。Vite 4 からは、`.css` のデフォルトエクスポートは [非推奨](https://github.com/vitejs/vite/issues/11094) になっています。この場合、インポートされた `.css` スタイルを出力しないので、`?inline` クエリーサフィックス修飾子を使用する必要があります。
 
-`https` を利用する際には有効な証明書が必要です。Vite v2 では、証明書の設定がされていなかった場合、自動的に自己証明書が作成されキャッシュされていました。
-Vite v3 では、手動で証明書を作成することを推奨します。v2 での自動生成を利用し続けたい場合は、[@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) をプロジェクトのプラグインに追加することでこの機能を再度有効化できます。
-
-```js
-import basicSsl from '@vitejs/plugin-basic-ssl'
-
-export default {
-  plugins: [basicSsl()],
-}
+```ts
+import stuff from './global.css?inline'
 ```
 
-## 実験的な機能
+### `dotenv` のアップデート
 
-### ビルド時での esbuild による依存関係の最適化の利用
+Vite は現在 dotenv 16 と dotenv-expand 9 を使用しています（以前は dotenv 14 と dotenv-expand 5）。
 
-v3 では、ビルド時に esbuild を利用して依存関係を最適化することができます。有効化することにより、v2 に存在していた開発環境と本番環境との最も大きな違いを取り除けます。この場合は、esbuild が CJS のみ提供されている依存関係を ESM に変換するため、[`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) は必要ありません。
+`#` や `` `` を含む値がある場合は、それらを引用符で囲む必要があります。詳細はそれらの変更履歴を参照してください（[`dotenv`](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md)、[`dotenv-expand`](https://github.com/motdotla/dotenv-expand/blob/master/CHANGELOG.md)）。
 
-このビルド戦略を利用してみたい場合は、`optimizeDeps.disabled: false` (v3 でのデフォルトは `disabled: 'build'`) が利用できます。
-`build.commonjsOptions: { include: [] }` を渡すことで `@rollup/plugin-commonjs` を取り除けます。
+## 高度な内容
 
-## 高度な機能
+プラグインやツールの作成者にのみ影響する変更点があります。
 
-プラグイン・ツール製作者のみに影響のある変更がいくつかあります。
+- [[#11036] feat(client)!: remove never implemented hot.decline](https://github.com/vitejs/vite/issues/11036)
+  - 代わりに `hot.invalidate` を使ってください
+- [[#9669] feat: align object interface for `transformIndexHtml` hook](https://github.com/vitejs/vite/issues/9669)
+  - `enforce` の代わりに `order` を使ってください
 
-- [[#5868] refactor: remove deprecated api for 3.0](https://github.com/vitejs/vite/pull/5868)
-  - `printHttpServerUrls` は削除されました
-  - `server.app`、`server.transformWithEsbuild` は削除されました
-  - `import.meta.hot.acceptDeps` は削除されました
-- [[#6901] fix: sequential injection of tags in transformIndexHtml](https://github.com/vitejs/vite/pull/6901)
-  - `transformIndexHtml` は先行するプラグインによって修正された正しい内容を取得するようになり、注入されたタグの順序が期待通り動作するようになりました。
-- [[#7995] chore: do not fixStacktrace](https://github.com/vitejs/vite/pull/7995)
-  - `ssrLoadModule` の `fixStacktrace` オプションのデフォルトは、`false` に変更されました
-- [[#8178] feat!: migrate to ESM](https://github.com/vitejs/vite/pull/8178)
-  - `formatPostcssSourceMap` は非同期になりました
-  - `resolvePackageEntry`、`resolvePackageData` は CJS ビルドから利用できなくなりました (CJS で利用するためには dynamic import が必要です)
-- [[#8626] refactor: type client maps](https://github.com/vitejs/vite/pull/8626)
-  - `import.meta.hot.accept` のコールバックの型がより厳密になりました。`(mod: (Record<string, any> & { [Symbol.toStringTag]: 'Module' }) | undefined) => void` に変更されました (`(mod: any) => void` でした)。
+また、少数のユーザーにのみ影響する破壊的変更が他にもあります。
 
-また、少数のユーザーにしか影響のない破壊的変更があります。
+- [[#11101] feat(ssr)!: remove dedupe and mode support for CJS](https://github.com/vitejs/vite/pull/11101)
+  - SSR のデフォルトの ESM モードに移行する必要があります。CJS の SSR サポートは次の Vite メジャーで削除される可能性があります。
+- [[#10475] feat: handle static assets in case-sensitive manner](https://github.com/vitejs/vite/pull/10475)
+  - ファイル名の大文字小文字を無視する OS に依存しないようにしましょう。
+- [[#10996] fix!: make `NODE_ENV` more predictable](https://github.com/vitejs/vite/pull/10996)
+  - この変更に関する説明は PR を参照してください。
+- [[#10903] refactor(types)!: remove facade type files](https://github.com/vitejs/vite/pull/10903)
 
-- [[#5018] feat: enable `generatedCode: 'es2015'` for rollup build](https://github.com/vitejs/vite/pull/5018)
-  - ユーザのコードが ES5 のみしか含んでいない場合でも ES5 へのトランスパイルが必要になりました。
-- [[#7877] fix: vite client types](https://github.com/vitejs/vite/pull/7877)
-  - `/// <reference lib="dom" />` が `vite/client.d.ts` から削除されました。`tsconfig` で `{ "lib": ["dom"] }` または `{ "lib": ["webworker"] }` が必須になりました。
-- [[#8090] feat: preserve process env vars in lib build](https://github.com/vitejs/vite/pull/8090)
-  - ライブラリモードでも `process.env.*` が保持されるようになりました。
-- [[#8280] feat: non-blocking esbuild optimization at build time](https://github.com/vitejs/vite/pull/8280)
-  - `optimizeDeps.force` オプションが追加されたため、`server.force` が削除されました。
-- [[#8550] fix: dont handle sigterm in middleware mode](https://github.com/vitejs/vite/pull/8550)
-  - ミドルウェアモードで動作しているとき、Vite は `SIGTERM` でプロセスを終了しなくなりました。
+## v2 からの移行
 
-## v1 からの移行
-
-先に Vite の v2 のドキュメントの [v1 からの移行](https://v2.vitejs.dev/guide/migration.html) を確認して、Vite v2 への移行に必要な変更を見てから、このページの変更の適用に移ってください。
+Vite v3 ドキュメントの [Migration from v2 Guide](https://v3.vitejs.dev/guide/migration.html) をまず確認し、アプリを Vite v3 に移植するための必要な変更を調べてから、このページの変更点を進めてください。
