@@ -18,8 +18,8 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 
 Vite はサーバサイドレンダリング ( SSR ) の組み込みサポートを提供します。Vite プレイグラウンドには、Vue 3 および React の SSR セットアップの例が含まれています。これらは、このガイドのリファレンスとして使用できます。:
 
-- [Vue 3](https://github.com/vitejs/vite/tree/main/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react)
+- [Vue 3](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)
+- [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react)
 
 ## ソースファイルの構成
 
@@ -177,7 +177,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 - `vite` 開発サーバの作成とすべての使用を開発専用サーバかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 
-詳しくは [Vue](https://github.com/vitejs/vite/tree/main/playground/ssr-vue) と [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react) のデモを参照してください。
+詳しくは [Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue) と [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react) のデモを参照してください。
 
 ## Preload Directives の作成
 
@@ -201,11 +201,11 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules はレンダリング中にしようされたモジュール ID をセットします。
 ```
 
-本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！詳しくは [demo source](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。
+本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！詳しくは [demo source](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。
 
 ## Pre-Rendering / SSG
 
-ルートと特定のルートに必要なデータが事前にわかっている場合は、本番 SSR と同じロジックを使用して、これらのルートを静的 HTML に先読みでレンダリングすることができます。これは、SSG の形式と見なすこともできます。 詳しくは [demo pre-render script](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/prerender.js) をご覧ください。
+ルートと特定のルートに必要なデータが事前にわかっている場合は、本番 SSR と同じロジックを使用して、これらのルートを静的 HTML に先読みでレンダリングすることができます。これは、SSG の形式と見なすこともできます。 詳しくは [demo pre-render script](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js) をご覧ください。
 
 ## 外部 SSR
 
