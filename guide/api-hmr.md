@@ -30,7 +30,6 @@ interface ViteHotContext {
 
   dispose(cb: (data: any) => void): void
   prune(cb: (data: any) => void): void
-  decline(): void
   invalidate(message?: string): void
 
   // `InferCustomEventPayload` が組み込みの Vite イベント用の型を提供します
@@ -139,7 +138,7 @@ if (import.meta.hot) {
 
 ## `hot.decline()`
 
-`import.meta.hot.decline()` を呼び出すと、このモジュールはホットアップデート可能でないことが示されます。HMR 更新の伝播中にこのモジュールが検出された場合、ブラウザは完全なリロードを行うべきです。
+これは現在何もせず、後方互換性のために存在しています。将来、新しい使い道があれば変更される可能性があります。モジュールがホットアップデート可能でないことを示すには、`hot.invalidate()` を使ってください。
 
 ## `hot.invalidate(message?: string)`
 
