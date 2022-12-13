@@ -22,8 +22,8 @@ CommonJS の依存関係を最適化から除外してはいけません。ESM �
 ```js
 export default defineConfig({
   optimizeDeps: {
-    include: ['esm-dep > cjs-dep']
-  }
+    include: ['esm-dep > cjs-dep'],
+  },
 })
 ```
 

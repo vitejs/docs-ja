@@ -68,8 +68,8 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-pr
 ```js
 export default defineConfig({
   server: {
-    open: '/docs/index.html'
-  }
+    open: '/docs/index.html',
+  },
 })
 ```
 
@@ -97,13 +97,13 @@ export default defineConfig({
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
       // 正規表現を使用: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
       '^/fallback/.*': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/fallback/, '')
+        rewrite: (path) => path.replace(/^\/fallback/, ''),
       },
       // プロキシインスタンスを使用
       '/api': {
@@ -116,10 +116,10 @@ export default defineConfig({
       // Web ソケット か socket.io をプロキシ化: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
       '/socket.io': {
         target: 'ws://localhost:5174',
-        ws: true
-      }
-    }
-  }
+        ws: true,
+      },
+    },
+  },
 })
 ```
 
@@ -177,14 +177,14 @@ Vite サーバのウォッチャは、デフォルトでは `.git/` と `node_mo
 export default defineConfig({
   server: {
     watch: {
-      ignored: ['!**/node_modules/your-package-name/**']
-    }
+      ignored: ['!**/node_modules/your-package-name/**'],
+    },
   },
   // 監視するパッケージは、最適化から除外する必要があります。
   // これにより、依存関係グラフに現れ、ホットリロードをトリガーできるようになります。
   optimizeDeps: {
-    exclude: ['your-package-name']
-  }
+    exclude: ['your-package-name'],
+  },
 })
 ```
 
@@ -197,7 +197,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 - **推奨**: ファイルを編集するのに WSL2 アプリケーションを使用します。
   - プロジェクトフォルダを Windows ファイルシステムの外へ移動させることも推奨されます。WSL2 から Windows ファイルシステムへアクセスするのは遅いです。このオーバーヘッドを取り除くことでパフォーマンスが向上します。
 - `{ usePolling: true }` を設定する。
-  -  [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar#performance)に注意してください。
+  - [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar#performance)に注意してください。
 
 :::
 
@@ -222,7 +222,7 @@ async function createServer() {
   // ミドルウェアモードで Vite サーバを作成
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    appType: 'custom' // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
+    appType: 'custom', // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
   })
   // vite の接続インスタンスをミドルウェアとして使用
   app.use(vite.middlewares)
@@ -271,9 +271,9 @@ export default defineConfig({
   server: {
     fs: {
       // プロジェクトルートの 1 つ上の階層からファイルを配信できるようにする
-      allow: ['..']
-    }
-  }
+      allow: ['..'],
+    },
+  },
 })
 ```
 
@@ -289,10 +289,10 @@ export default defineConfig({
         // ワークスペースルートの検索
         searchForWorkspaceRoot(process.cwd()),
         // あなたのカスタムルール
-        '/path/to/custom/allow'
-      ]
-    }
-  }
+        '/path/to/custom/allow',
+      ],
+    },
+  },
 })
 ```
 
@@ -312,7 +312,7 @@ Vite 開発サーバでの配信が制限されている機密ファイルのブ
 ```js
 export default defineConfig({
   server: {
-    origin: 'http://127.0.0.1:8080'
-  }
+    origin: 'http://127.0.0.1:8080',
+  },
 })
 ```

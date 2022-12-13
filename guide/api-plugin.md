@@ -48,7 +48,7 @@ import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
 export default defineConfig({
-  plugins: [vitePlugin(), rollupPlugin()]
+  plugins: [vitePlugin(), rollupPlugin()],
 })
 ```
 
@@ -72,7 +72,7 @@ import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
 export default defineConfig({
-  plugins: [framework()]
+  plugins: [framework()],
 })
 ```
 
@@ -95,10 +95,10 @@ export default function myPlugin() {
       if (fileRegex.test(id)) {
         return {
           code: compileFileToJS(src),
-          map: null // ソースマップがあれば提供する
+          map: null, // ソースマップがあれば提供する
         }
       }
-    }
+    },
   }
 }
 ```
@@ -127,7 +127,7 @@ export default function myPlugin() {
       if (id === resolvedVirtualModuleId) {
         return `export const msg = "from virtual module"`
       }
-    }
+    },
   }
 }
 ```
@@ -188,10 +188,10 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     config: () => ({
       resolve: {
         alias: {
-          foo: 'bar'
-        }
-      }
-    })
+          foo: 'bar',
+        },
+      },
+    }),
   })
 
   // 設定を直接変更する（マージが動作しない場合のみ使用する）
@@ -201,7 +201,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       if (command === 'build') {
         config.root = 'foo'
       }
-    }
+    },
   })
   ```
 
@@ -237,7 +237,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
         } else {
           // build: Rollup から呼び出されるプラグイン
         }
-      }
+      },
     }
   }
   ```
@@ -259,7 +259,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       server.middlewares.use((req, res, next) => {
         // カスタムハンドルリクエスト...
       })
-    }
+    },
   })
   ```
 
@@ -278,7 +278,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
           // カスタムハンドルリクエスト...
         })
       }
-    }
+    },
   })
   ```
 
@@ -298,7 +298,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
         if (server) {
           // サーバを使用...
         }
-      }
+      },
     }
   }
   ```
@@ -323,7 +323,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
           // カスタムハンドルリクエスト...
         })
       }
-    }
+    },
   })
   ```
 
@@ -349,9 +349,9 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       transformIndexHtml(html) {
         return html.replace(
           /<title>(.*?)<\/title>/,
-          `<title>Title replaced!</title>`
+          `<title>Title replaced!</title>`,
         )
-      }
+      },
     }
   }
   ```
@@ -367,7 +367,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       server?: ViteDevServer
       bundle?: import('rollup').OutputBundle
       chunk?: import('rollup').OutputChunk
-    }
+    },
   ) =>
     | IndexHtmlTransformResult
     | void
@@ -459,7 +459,7 @@ Vite プラグインは、さらに（webpack loader と同様の）`enforce` �
 function myPlugin() {
   return {
     name: 'build-only',
-    apply: 'build' // もしくは 'serve'
+    apply: 'build', // もしくは 'serve'
   }
 }
 ```
@@ -496,9 +496,9 @@ export default defineConfig({
     {
       ...example(),
       enforce: 'post',
-      apply: 'build'
-    }
-  ]
+      apply: 'build',
+    },
+  ],
 })
 ```
 
@@ -537,9 +537,9 @@ export default defineConfig({
       // ...
       configureServer(server) {
         server.ws.send('my:greetings', { msg: 'hello' })
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 ```
 
@@ -583,9 +583,9 @@ export default defineConfig({
           // クライアントへの返信のみ (必要であれば)
           client.send('my:ack', { msg: 'Hi! I got your message!' })
         })
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 ```
 

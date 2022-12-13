@@ -107,7 +107,7 @@ app.use('*', async (req, res, next) => {
     // 1. index.html を読み込む
     let template = fs.readFileSync(
       path.resolve(__dirname, 'index.html'),
-      'utf-8'
+      'utf-8',
     )
 
     // 2. Vite の HTML の変換を適用します。これにより Vite の HMR クライアントが定義され
@@ -237,7 +237,7 @@ export function mySSRPlugin() {
       if (options?.ssr) {
         // SSR 固有の transform を実行する...
       }
-    }
+    },
   }
 }
 ```
