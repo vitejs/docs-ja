@@ -30,6 +30,14 @@ import cssString from './global.css'
 import stuff from './global.css?inline'
 ```
 
+### デフォルトは本番環境用ビルド
+
+`vite build` は、渡された `--mode` に関係なく、常に本番環境用にビルドするようになりました。以前は、`mode` を `production` 以外に変更すると、開発用にビルドされていました。もし、開発用にビルドしたい場合は、`.env.{mode}` ファイルで `NODE_ENV=development` を設定します。
+
+この変更の一部として、`vite dev` と `vite build` は `process.env.`<wbr>`NODE_ENV` が既に定義されている場合は上書きしないようになりました。そのため、ビルド前に `process.env.`<wbr>`NODE_ENV = 'development'`' を設定した場合、開発用のビルドも行われるようになります。これにより、複数のビルドや開発用サーバを並行して動作させる際に、よりコントロールしやすくなります。
+
+詳しくは、更新された [`mode` のドキュメント](/guide/env-and-mode.html#modes)を参照してください。
+
 ### 環境変数
 
 Vite では `dotenv` 16 と `dotenv-expand` 9 を使うようになりました（以前は `dotenv` 14 と `dotenv-expand` 5）。`#` や `` `` を含む値がある場合は、それらを引用符で囲む必要があります。
