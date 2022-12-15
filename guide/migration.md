@@ -30,11 +30,16 @@ import cssString from './global.css'
 import stuff from './global.css?inline'
 ```
 
-### `dotenv` のアップデート
+### 環境変数
 
-Vite は現在 dotenv 16 と dotenv-expand 9 を使用しています（以前は dotenv 14 と dotenv-expand 5）。
+Vite では `dotenv` 16 と `dotenv-expand` 9 を使うようになりました（以前は `dotenv` 14 と `dotenv-expand` 5）。`#` や `` `` を含む値がある場合は、それらを引用符で囲む必要があります。
 
-`#` や `` `` を含む値がある場合は、それらを引用符で囲む必要があります。詳細はそれらの変更履歴を参照してください（[`dotenv`](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md)、[`dotenv-expand`](https://github.com/motdotla/dotenv-expand/blob/master/CHANGELOG.md)）。
+```diff
+-VITE_APP=ab#cd`ef
++VITE_APP="ab#cd`ef"
+```
+
+詳しくは [`dotenv`](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md) と [`dotenv-expand` 変更履歴](https://github.com/motdotla/dotenv-expand/blob/master/CHANGELOG.md)を参照してください。
 
 ## 高度な内容
 
