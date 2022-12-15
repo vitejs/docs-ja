@@ -18,7 +18,11 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-- オールインワンの React サポートを提供します。
+- esbuild と Babel を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。
+
+### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+- ビルド時は esbuild を使用し、開発中は Babel を SWC に置き換えます。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
