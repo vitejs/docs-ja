@@ -1,5 +1,7 @@
 # ワーカのオプション
 
+Web Worker に関連するオプション。
+
 ## worker.format
 
 - **型:** `'es' | 'iife'`
