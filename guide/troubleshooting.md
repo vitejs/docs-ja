@@ -51,6 +51,24 @@ Linux を利用している場合、ファイルディスクリプタ制限と i
 
 これらの設定は持続しますが、**再起動が必要**なことに注意してください。
 
+### ネットワークリクエストの読み込みが止まる
+ 
+自己署名 SSL 証明書を使用する場合、Chrome はすべてのキャッシュディレクティブを無視し、コンテンツを再読み込みします。Vite は、これらのキャッシュディレクティブに依存しています。
+
+この問題を解決するには、信頼できる SSL 証明書を使用してください。
+
+参照: [キャッシュの問題](https://helpx.adobe.com/mt/experience-manager/kb/cache-problems-on-chrome-with-SSL-certificate-errors.html)、[Chrome の問題](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
+
+#### macOS
+
+このコマンドで、CLI から信頼できる証明書をインストールできます:
+
+```
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db your-cert.cer
+```
+
+または、キーチェーンアクセスアプリにインポートして、証明書の信頼度を「常に信頼」に更新します。
+
 ### 431 Request Header Fields Too Large
 
 サーバ / WebSocket サーバが大きな HTTP ヘッダを受信した場合、リクエストが破棄され次のような警告が表示されます。
@@ -82,6 +100,10 @@ Vite を WSL2 で実行している場合、いくつかの条件下では Vite 
 Vite もしくはプラグインによって HMR が処理されていない場合、完全なリロードが発生します。
 
 また、依存関係の循環がある場合、完全なリロードが発生します。これを解決するには、循環を取り除くことを試みてください。
+
+### コンソールに表示される HMR の更新回数が多い
+
+これは、循環した依存関係によって引き起こされる可能性があります。これを解決するには、ループを断ち切ってみてください。
 
 ## ビルド
 
