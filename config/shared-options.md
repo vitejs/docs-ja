@@ -33,7 +33,7 @@ config でこれを指定すると、**serve と build 両方**のデフォル�
 
 ## define
 
-- **型:** `Record<string, string>`
+- **型:** `Record<string, any>`
 
 グローバル定数の置換を定義します。エントリは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
