@@ -20,7 +20,7 @@ esbuild で安全にトランスパイルできない機能がコードに含ま
 ## build.modulePreload
 
 - **型:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
-- **デフォルト:** `true`
+- **デフォルト:** `{ polyfill: true }`
 
 デフォルトでは、[module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) が自動的に注入されます。Polyfill は各 `index.html` エントリのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリを使用するように設定されている場合は、カスタムエントリで Polyfill を手動でインポートする必要があります:
 
@@ -169,7 +169,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 ## build.ssr
 
 - **型:** `boolean | string`
-- **デフォルト:** `undefined`
+- **デフォルト:** `false`
 - **関連:** [サーバサイドレンダリング](/guide/ssr)
 
 SSR 向けのビルドを生成します。この値は、SSR エントリを直接指定する文字列か、`true` にして `rollupOptions.input` で SSR エントリを指定する必要があります。
