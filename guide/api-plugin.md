@@ -2,7 +2,7 @@
 
 Vite プラグインは、Rollup の優れた設計のプラグインインターフェースを Vite 特有のオプションで拡張しています。その結果、Vite プラグインを一度作成すれば、開発とビルドの両方で動作させることができます。
 
-**以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/guide/en/#plugin-development)を読むことをお勧めします。**
+**以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/plugin-development/)を読むことをお勧めします。**
 
 ## プラグインの作成
 
@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-プラグインの互換性)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/guide/en/#conventions)を使用することをお勧めします。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-プラグインの互換性)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/plugin-development/#conventions)を使用することをお勧めします。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
@@ -146,27 +146,27 @@ Vite (および Rollup) の仮想モジュールは慣例により、ユーザ�
 
 ## 共通のフック
 
-開発中、Vite 開発サーバは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/guide/en/#build-hooks)を呼び出すプラグインコンテナを作成します。
+開発中、Vite 開発サーバは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/plugin-development/#build-hooks)を呼び出すプラグインコンテナを作成します。
 
 以下のフックはサーバ起動時に一度だけ呼び出されます:
 
-- [`options`](https://rollupjs.org/guide/en/#options)
-- [`buildStart`](https://rollupjs.org/guide/en/#buildstart)
+- [`options`](https://rollupjs.org/plugin-development/#options)
+- [`buildStart`](https://rollupjs.org/plugin-development/#buildstart)
 
 以下のフックはモジュールのリクエストが来るたびに呼び出されます:
 
-- [`resolveId`](https://rollupjs.org/guide/en/#resolveid)
-- [`load`](https://rollupjs.org/guide/en/#load)
-- [`transform`](https://rollupjs.org/guide/en/#transform)
+- [`resolveId`](https://rollupjs.org/plugin-development/#resolveid)
+- [`load`](https://rollupjs.org/plugin-development/#load)
+- [`transform`](https://rollupjs.org/plugin-development/#transform)
 
 以下のフックはサーバが閉じられる時に呼び出されます:
 
-- [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
-- [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
+- [`buildEnd`](https://rollupjs.org/plugin-development/#buildend)
+- [`closeBundle`](https://rollupjs.org/plugin-development/#closebundle)
 
-Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
+Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
 
-[出力生成フック](https://rollupjs.org/guide/en/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
+[出力生成フック](https://rollupjs.org/plugin-development/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
 
 ## Vite 特有のフック
 
