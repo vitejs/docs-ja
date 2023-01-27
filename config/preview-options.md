@@ -76,7 +76,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](./server-o
 - **型:** `boolean | CorsOptions`
 - **デフォルト:** [`server.cors`](./server-options#server-cors)
 
-プレビューサーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors)を渡して微調整するか、`false` で無効にします。
+プレビューサーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors#configuration-options)を渡して微調整するか、`false` で無効にします。
 
 ## preview.headers
 
