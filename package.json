@@ -13,7 +13,7 @@
     "textlint": "^12.0.2",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
-    "vitepress": "^1.0.0-alpha.4",
+    "vitepress": "^1.0.0-alpha.40",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
