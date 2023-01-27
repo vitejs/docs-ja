@@ -31,14 +31,14 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ## ビルドのカスタマイズ
 
-ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/guide/en/#big-list-of-options) を `build.rollupOptions` で直接調整することができます:
+ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/configuration-options/) を `build.rollupOptions` で直接調整することができます:
 
 ```js
 // vite.config.js
 export default defineConfig({
   build: {
     rollupOptions: {
-      // https://rollupjs.org/guide/en/#big-list-of-options
+      // https://rollupjs.org/configuration-options/
     },
   },
 })
@@ -48,7 +48,7 @@ export default defineConfig({
 
 ## チャンク戦略
 
-チャンクの分割方法は `build.rollupOptions.output.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/guide/en/#outputmanualchunks)参照）。Vite 2.8 まではデフォルトのチャンク戦略は `index` と `vendor` にチャンクを分割していました。これは SPA にはよい戦略の場合もありますが、すべての Vite ターゲットのユースケースに対して一般的な解決策を提供するのは困難です。Vite 2.9 からは、`manualChunks` はデフォルトでは変更されなくなりました。設定ファイルに `splitVendorChunkPlugin` を追加すれば、vendor を分割するチャンク戦略を引き続き使用できます:
+チャンクの分割方法は `build.rollupOptions.output.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/configuration-options/#output-manualchunks)参照）。Vite 2.8 まではデフォルトのチャンク戦略は `index` と `vendor` にチャンクを分割していました。これは SPA にはよい戦略の場合もありますが、すべての Vite ターゲットのユースケースに対して一般的な解決策を提供するのは困難です。Vite 2.9 からは、`manualChunks` はデフォルトでは変更されなくなりました。設定ファイルに `splitVendorChunkPlugin` を追加すれば、vendor を分割するチャンク戦略を引き続き使用できます:
 
 ```js
 // vite.config.js
@@ -62,14 +62,14 @@ export default defineConfig({
 
 ## ファイル変更時のリビルド
 
-`vite build --watch` で rollup のウォッチャを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options) を直接調整することもできます:
+`vite build --watch` で rollup のウォッチャを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
 
 ```js
 // vite.config.js
 export default defineConfig({
   build: {
     watch: {
-      // https://rollupjs.org/guide/en/#watch-options
+      // https://rollupjs.org/configuration-options/#watch
     },
   },
 })

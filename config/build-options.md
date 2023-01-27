@@ -126,9 +126,9 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 ## build.rollupOptions
 
-- **型:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **型:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
-基礎となる Rollup バンドルを直接カスタマイズします。これは、Rollup 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rollup オプションにマージされます。詳細は [Rollup options docs](https://rollupjs.org/guide/en/#big-list-of-options) を参照してください。
+基礎となる Rollup バンドルを直接カスタマイズします。これは、Rollup 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rollup オプションにマージされます。詳細は [Rollup options docs](https://rollupjs.org/configuration-options/) を参照してください。
 
 ## build.commonjsOptions
 
@@ -233,7 +233,7 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 
 ## build.watch
 
-- **型:** [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options)`| null`
+- **型:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
 - **デフォルト:** `null`
 
 Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。

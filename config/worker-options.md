@@ -17,6 +17,6 @@ Web Worker に関連するオプション。
 
 ## worker.rollupOptions
 
-- **型:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **型:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
 ワーカバンドルをビルドするための Rollup オプション。

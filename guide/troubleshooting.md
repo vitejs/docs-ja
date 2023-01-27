@@ -1,6 +1,6 @@
 # トラブルシューティング
 
-さらなる情報は[Rollupのトラブルシューティングガイド](https://rollupjs.org/guide/en/#troubleshooting)もご覧ください。
+さらなる情報は[Rollupのトラブルシューティングガイド](https://rollupjs.org/troubleshooting/)もご覧ください。
 
 こちらに提案されているもので動作しなかった場合、[GitHub Discussions](https://github.com/vitejs/vite/discussions) や [Vite Land Discord](https://chat.vitejs.dev) の `#help` チャンネルで質問してみてください。
 
