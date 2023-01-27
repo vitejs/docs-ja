@@ -201,7 +201,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules はレンダリング中にしようされたモジュール ID をセットします。
 ```
 
-本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！詳しくは [demo source](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。
+本番ブランチの `server.js` では、マニフェストを読み取って、`src/entry-server.js` によってエクスポートされた `render` 関数に渡す必要があります。これにより、非同期ルートで使用されるファイルのプリロードディレクティブをレンダリングするのに十分な情報が得られます！完全な例は [demo source](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) をご覧ください。[103 Early Hints](https://developer.mozilla.org/ja/docs/Web/HTTP/Status/103) にも利用できます。
 
 ## Pre-Rendering / SSG
 
