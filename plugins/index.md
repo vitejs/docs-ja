@@ -16,6 +16,10 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 - Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/jsx-next) を介して）のサポートを提供します。
 
+### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+
+- Vue 2 の単一ファイルコンポーネントのサポートを提供します。
+
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
 - esbuild と Babel を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。
