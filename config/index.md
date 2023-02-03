@@ -82,7 +82,7 @@ export default defineConfig(async ({ command, mode }) => {
 })
 ```
 
-## 環境変数
+## 環境変数を設定に使用する
 
 通常通り、環境変数は `process.env` から取得することができます。
 
