@@ -121,6 +121,16 @@ Vite もしくはプラグインによって HMR が処理されていない場�
 
 ## その他
 
+### ブラウザ互換性のためにモジュールを外部化
+
+Node.js のモジュールをブラウザで使用する場合、Vite では以下のような警告が出力されます。
+
+> Module "fs" has been externalized for browser compatibility. Cannot access "fs.readFile" in client code.
+
+これは、Vite が Node.js のモジュールを自動的にポリフィルしないためです。
+
+ポリフィルは手動で追加できますが、バンドルサイズを小さくするため、ブラウザコードに Node.js モジュールを使うのは避けることをお勧めします。もし、モジュールが（ブラウザで使用することを想定した）サードパーティのライブラリからインポートされている場合は、それぞれのライブラリに問題を報告することをお勧めします。
+
 ### Syntax Error / Type Error が発生する
 
 Vite は非厳格モード (sloppy モード) でのみ動作するコードを処理できず、対応していません。これは Vite が ESM を利用していて ESM 内では常に[厳格モード](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode)であるためです。
