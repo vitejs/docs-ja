@@ -62,43 +62,61 @@ $ npm run preview
 
    `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
-2. プロジェクト内で以下の内容の `deploy.sh` を作成し（ハイライトされた行はコメントアウトされています）、これを実行してデプロイしてください:
+2. リポジトリ設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
 
-   ```bash{16,24,27}
-   #!/usr/bin/env sh
+   ```yml
+   # 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
+   name: Deploy static content to Pages
 
-   # エラー時は停止
-   set -e
+   on:
+     # デフォルトブランチを対象としたプッシュ時にで実行されます
+     push:
+       branches: ['main']
 
-   # ビルド
-   npm run build
+     # Actions タブから手動でワークフローを実行できるようにします
+     workflow_dispatch:
 
-   # ビルド出力ディレクトリに移動
-   cd dist
+   # GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
+   permissions:
+     contents: read
+     pages: write
+     id-token: write
 
-   # Jekyll の処理をバイパスするために .nojekyll を配置
-   echo > .nojekyll
+   # 1 つの同時デプロイメントを可能にする
+   concurrency:
+     group: 'pages'
+     cancel-in-progress: true
 
-   # カスタムドメインにデプロイする場合
-   # echo 'www.example.com' > CNAME
-
-   git init
-   git checkout -B main
-   git add -A
-   git commit -m 'deploy'
-
-   # https://<USERNAME>.github.io にデプロイする場合
-   # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
-
-   # https://<USERNAME>.github.io/<REPO> にデプロイする場合
-   # git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
-
-   cd -
+   jobs:
+     # デプロイするだけなので、単一のデプロイジョブ
+     deploy:
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v3
+         - name: Set up Node
+           uses: actions/setup-node@v3
+           with:
+             node-version: 18
+             cache: 'npm'
+         - name: Install dependencies
+           run: npm install
+         - name: Build
+           run: npm run build
+         - name: Setup Pages
+           uses: actions/configure-pages@v3
+         - name: Upload artifact
+           uses: actions/upload-pages-artifact@v1
+           with:
+             # dist リポジトリのアップロード
+             path: './dist'
+         - name: Deploy to GitHub Pages
+           id: deployment
+           uses: actions/deploy-pages@v1
    ```
-
-::: tip
-また、CI の設定で上記のスクリプトを実行することで、プッシュごとの自動デプロイを有効にすることができます。
-:::
 
 ## GitLab Pages と GitLab CI
 
