@@ -83,7 +83,7 @@ export default defineConfig({
 
 相対的でない [`base`](/config/shared-options.md#base) を使用する場合、各キーの先頭に `base` を付けなければならないことに注意してください。
 
-[`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
+[`http-proxy`](https://github.com/http-party/node-http-proxy#options) を拡張します。他のオプションは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13)。
 
 場合によっては、基盤となる開発サーバーを設定したいこともあるでしょう（例: 内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加する場合など）。そのためには、独自の [plugin](/guide/using-plugins.html) を書き、[configureServer](/guide/api-plugin.html#configureserver) 関数を使用する必要があります。
 
