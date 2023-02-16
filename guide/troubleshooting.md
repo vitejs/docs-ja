@@ -49,6 +49,8 @@ Linux を利用している場合、ファイルディスクリプタ制限と i
 - /etc/systemd/system.conf
 - /etc/systemd/user.conf
 
+Ubuntu Linux では、systemd 設定ファイルを更新する代わりに、`/etc/security/limits.conf` のファイルに `* - nofile 65536` という行を追加する必要があるかもしれません。
+
 これらの設定は持続しますが、**再起動が必要**なことに注意してください。
 
 ### ネットワークリクエストの読み込みが止まる
