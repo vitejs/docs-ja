@@ -479,7 +479,7 @@ apply(config, { command }) {
 
 一般的に、Rollup プラグインが以下の基準に適合する限り、Vite プラグインとして動作するでしょう:
 
-- [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) フックを使用していない。
+- [`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed) フックを使用していない。
 - bundle-phase フックと output-phase フックの間に強い結合がない。
 
 Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rollupOptions.plugins` で指定できます。これは `enforce: 'post'` と `apply: 'build'` を設定した Vite プラグインと同じように動作します。
