@@ -2,7 +2,7 @@
 
 ## Rollup 3
 
-Vite は現在、[Rollup 3](https://github.com/vitejs/vite/issues/9870)を使用しており、Vite 内部のアセット処理を簡素化でき、多くの改良が施されています。[Rollup 3 のリリースノートはこちら](https://github.com/rollup/rollup/releases) を参照してください。
+Vite は現在、[Rollup 3](https://github.com/vitejs/vite/issues/9870)を使用しており、Vite 内部のアセット処理を簡素化でき、多くの改良が施されています。[Rollup 3 のリリースノートはこちら](https://github.com/rollup/rollup/releases/tag/v3.0.0) を参照してください。
 
 Rollup 3 は Rollup 2 とほぼ互換性があります。プロジェクトでカスタム [`rollupOptions`](../config/build-options.md#rollup-options) を使用していて問題が発生した場合、[Rollup migration guide](https://rollupjs.org/guide/en/#migration) を参照して設定を更新してください。
 
