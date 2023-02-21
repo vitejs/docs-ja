@@ -113,16 +113,22 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 - `import.meta.hot` の [HMR API](./api-hmr) の型
 
 ::: tip
-デフォルトの型定義を上書きするためには、triple-slash reference の前に型を宣言します。例えば、`*.svg` のデフォルトインポートを React コンポーネントにする場合:
+デフォルトの型を上書きするためには、自身の型を含む型定義ファイルを追加します。その後、`vite/client` の前に型参照を追加してください。
 
-```ts
-declare module '*.svg' {
-  const content: React.FC<React.SVGProps<SVGElement>>
-  export default content
-}
+例えば、`*.svg` のデフォルトインポートを React コンポーネントにする場合:
 
-/// <reference types="vite/client" />
-```
+- `vite-env-override.d.ts`（自身の型を含むファイル）:
+  ```ts
+  declare module '*.svg' {
+    const content: React.FC<React.SVGProps<SVGElement>>
+    export default content
+  }
+  ```
+- `vite/client` への参照を含むファイル:
+  ```ts
+  /// <reference types="./vite-env-override.d.ts" />
+  /// <reference types="vite/client" />
+  ```
 
 :::
 
