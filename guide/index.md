@@ -140,7 +140,7 @@ cd vite
 pnpm install
 cd packages/vite
 pnpm run build
-pnpm link --global # このステップでは好きなパッケージマネージャを使用できます
+pnpm link --global # このステップでは好きなパッケージマネージャを使用
 ```
 
 その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャ）を実行してください。そして開発サーバを再起動して最先端の技術に乗っていきましょう！

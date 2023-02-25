@@ -81,8 +81,8 @@ async function createServer() {
     appType: 'custom'
   })
 
-  // Vite の接続インスタンスをミドルウェアとして使用します。
-  // 個別の express のルータ (express.Route()) を利用する場合は、router.use を使用するべきです。
+  // Vite の接続インスタンスをミドルウェアとして使用。独自の express ルータ
+  // (express.Route()) を利用する場合は、router.use を使用してください
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -115,14 +115,14 @@ app.use('*', async (req, res, next) => {
     //    from @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
-    // 3. サーバサイドのエントリポイントを読み込みます。 vite.ssrLoadModule は自動的に
+    // 3. サーバサイドのエントリポイントを読み込みます。 ssrLoadModule は自動的に
     //    ESM を Node.js で使用できるコードに変換します! ここではバンドルは必要ありません
     //    さらに HMR と同様な効率的な無効化を提供します。
     const { render } = await vite.ssrLoadModule('/src/entry-server.js')
 
-    // 4. アプリケーションの HTML をレンダリングします。これは entry-server.js からエクスポートされた `render` を使用しています。
-    //    `render` 関数はフレームワークの適切な SSR API を呼び出すことを想定しています。
-    //    e.g. ReactDOMServer.renderToString()
+    // 4. アプリケーションの HTML をレンダリングします。これは entry-server.js から
+    //    エクスポートされた `render` 関数が、ReactDOMServer.renderToString() などの
+    //    適切なフレームワークの SSR API を呼び出すことを想定しています。
     const appHtml = await render(url)
 
     // 5. アプリケーションのレンダリングされた HTML をテンプレートに挿入します。
@@ -131,8 +131,8 @@ app.use('*', async (req, res, next) => {
     // 6. レンダリングされた HTML をクライアントに送ります。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    // エラーが検出された場合は、Vite にスタックトレースを修正させて、次のようにマップします。
-    // 実際のソースコード
+    // エラーが検出された場合は、Vite にスタックトレースを修正させ、実際のソースコードに
+    // マップし直します。
     vite.ssrFixStacktrace(e)
     next(e)
   }
