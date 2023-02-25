@@ -536,7 +536,10 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        server.ws.send('my:greetings', { msg: 'hello' })
+        // 例：メッセージ送信前にクライアントが接続されるのを待つ
+        server.ws.on('connection', () => {
+          server.ws.send('my:greetings', { msg: 'hello' })
+        })
       },
     },
   ],
