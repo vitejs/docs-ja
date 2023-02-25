@@ -249,7 +249,7 @@ CSS コンテンツの自動注入は `?inline` クエリパラメータでオ�
 
 ```js
 import styles from './foo.css' // ページに注入される
-import otherStyles from './bar.css?inline' // ページに注入されない
+import otherStyles from './bar.css?inline' // 注入されない
 ```
 
 ## 静的なアセット
@@ -404,7 +404,10 @@ const modules = {
 `eager` と組み合わせると、それらのモジュールのツリーシェイキングを有効にすることも可能です。
 
 ```ts
-const modules = import.meta.glob('./dir/*.js', { import: 'setup', eager: true })
+const modules = import.meta.glob('./dir/*.js', {
+  import: 'setup',
+  eager: true,
+})
 ```
 
 ```ts
