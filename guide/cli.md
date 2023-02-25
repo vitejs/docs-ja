@@ -54,7 +54,7 @@ vite build [root]
 | `--assetsDir <dir>`            | 出力先のディレクトリ内で静的アセットを配置するディレクトリ（デフォルト: `"assets"`） (`string`)              |
 | `--assetsInlineLimit <number>` | 静的アセットを base64 inline 化する閾値（単位はバイト。デフォルト: `4096`） (`number`)                      |
 | `--ssr [entry]`                | サーバーサイドレンダリング用に特定のエントリをビルドする (`string`)                                         |
-| `--sourcemap`                  | ビルド用のソースマップを出力する (デフォルト: `false`) (`boolean`)                                              |
+| `--sourcemap [output]`         | ビルド用のソースマップを出力する (デフォルト: `false`) (`boolean \| "inline" \| "hidden"`)                                 |
 | `--minify [minifier]`          | 最小化を有効/無効にする、または使用するミニファイアを指定する (デフォルト: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
 | `--manifest [name]`            | ビルドマニフェスト JSON を出力する (`boolean \| string`)                                                                |
 | `--ssrManifest [name]`         | SSR マニフェスト JSON を出力する (`boolean \| string`)                                                                  |
