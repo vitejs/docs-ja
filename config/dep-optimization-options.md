@@ -41,7 +41,7 @@ export default defineConfig({
 
 依存関係のスキャンと最適化の際、 esbuild に渡すオプション。
 
-いくつかのオプションは、変更すると Vite の依存関係最適化と互換性がなくなるため、省略されています。
+いくつかのオプションは、変更すると Vite の依存関係の最適化と互換性がなくなるため、省略されています。
 
 - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
 - `plugins` は Vite の依存関係プラグインとマージされます
@@ -51,3 +51,16 @@ export default defineConfig({
 - **型:** `boolean`
 
 `true` に設定すると、前にキャッシュされた最適化された依存関係を無視して、依存関係の事前バンドルをするよう強制します。
+
+## optimizeDeps.disabled
+
+- **型:** `boolean | 'build' | 'dev'`
+- **デフォルト:** `'build'`
+
+依存関係の最適化を無効にします。`true` はビルド時とデバッグ時にオプティマイザを無効にします。`'build'` または `'dev'` を渡すと、どちらか一方のモードでのみオプティマイザを無効にできます。依存関係の最適化は、デフォルトでは開発時にのみ有効です。
+
+:::warning
+ビルドモードでの依存関係の最適化は**実験的**なものです。有効にすると、開発環境と本番環境の間の最も大きな違いの 1 つを取り除くことができます。esbuild は CJS だけの依存関係を ESM に変換するので、[`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) はこの場合もう必要ないでしょう。
+
+このビルド戦略を試したい場合は、`optimizeDeps.disabled: false` を使用します。`@rollup/plugin-commonjs` は `build.commonjsOptions: { include: [] }` を渡すことで削除できます。
+:::
