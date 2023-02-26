@@ -51,6 +51,14 @@ if (import.meta.hot) {
 }
 ```
 
+## TypeScript の IntelliSense
+
+Vite は `import.meta.hot` の型定義を [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で提供しています。`src` ディレクトリに `env.d.ts` を作成することで、TypeScript が型定義を読み込むようになります:
+
+```ts
+/// <reference types="vite/client" />
+```
+
 ## `hot.accept(cb)`
 
 自身を受け入れるモジュールには、`import.meta.hot.accept` と更新されたモジュールを受け取るコールバックを使用します:
