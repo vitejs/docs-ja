@@ -54,6 +54,7 @@ export default defineConfig({
 
 ## optimizeDeps.disabled
 
+- **実験的機能**
 - **型:** `boolean | 'build' | 'dev'`
 - **デフォルト:** `'build'`
 
