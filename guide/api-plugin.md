@@ -159,6 +159,8 @@ Vite (および Rollup) の仮想モジュールは慣例により、ユーザ�
 - [`load`](https://rollupjs.org/plugin-development/#load)
 - [`transform`](https://rollupjs.org/plugin-development/#transform)
 
+また、Vite 固有のプロパティを追加した拡張 `options` パラメータを持ちます。詳しくは [SSR ドキュメント](/guide/ssr#ssr-specific-plugin-logic)に書かれています。
+
 以下のフックはサーバが閉じられる時に呼び出されます:
 
 - [`buildEnd`](https://rollupjs.org/plugin-development/#buildend)
