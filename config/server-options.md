@@ -318,3 +318,22 @@ export default defineConfig({
   },
 })
 ```
+
+## server.sourcemapIgnoreList
+
+- **型:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
+- **デフォルト:** `(sourcePath) => sourcePath.includes('node_modules')`
+
+サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/blog/devtools-better-angular-debugging/#the-x_google_ignorelist-source-map-extension)を設定するため使用されます。
+
+デフォルトでは `node_modules` を含むすべてのパスを除外します。この動作を無効にするには `false` を渡します。もしくは、完全に制御するには、ソースパスとソースマップパスを受け取り、ソースパスを無視するかどうかを返す関数を指定します。
+
+```js
+export default defineConfig({
+  server: {
+    // これはデフォルトの値であり、パスに node_modules を含むすべてのファイルを
+    // 無視リストに追加します。
+    sourcemapIgnoreList: (sourcePath, sourcemapPath) => sourcePath.includes('node_modules')
+  }
+};
+```
