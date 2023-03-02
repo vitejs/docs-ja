@@ -212,6 +212,10 @@ dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
 `package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。
 :::
 
+::: tip 環境変数
+ライブラリモードでは、すべての `import.meta.env.*` の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用すると、静的に置き換えることができます。
+:::
+
 ## 高度なベースパスの設定
 
 ::: warning
