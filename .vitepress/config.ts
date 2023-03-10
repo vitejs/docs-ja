@@ -35,26 +35,26 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Vite 4 Docs (release)',
+          text: 'Vite 4 ドキュメント（リリース）',
           link: 'https://vitejs.dev',
         },
         {
-          text: 'Vite 3 Docs',
+          text: 'Vite 3 ドキュメント',
           link: 'https://v3.vitejs.dev',
         },
         {
-          text: 'Vite 2 Docs',
+          text: 'Vite 2 ドキュメント',
           link: 'https://v2.vitejs.dev',
         },
       ]
     case 'release':
       return [
         {
-          text: 'Vite 3 Docs',
+          text: 'Vite 3 ドキュメント',
           link: 'https://v3.vitejs.dev',
         },
         {
-          text: 'Vite 2 Docs',
+          text: 'Vite 2 ドキュメント',
           link: 'https://v2.vitejs.dev',
         },
       ]
@@ -126,6 +126,13 @@ export default defineConfig({
       placement: 'vitejsdev',
     },
 
+    outlineTitle: '目次',
+
+    docFooter: {
+      prev: '前のページ',
+      next: '次のページ',
+    },
+
     footer: {
       message: `Released under the MIT License. (${commitRef})`,
       copyright: 'Copyright © 2019-present Evan You & Vite Contributors',
@@ -162,7 +169,7 @@ export default defineConfig({
                 link: 'https://vite-rollup-plugins.patak.dev/',
               },
               {
-                text: 'Changelog',
+                text: '変更履歴',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
               },
             ],
@@ -170,7 +177,7 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Version',
+        text: 'バージョン',
         items: versionLinks,
       },
     ],
