@@ -91,6 +91,7 @@ export default defineConfig({
     en: { label: 'English', link: 'https://vitejs.dev' },
     zh: { label: '简体中文', link: 'https://cn.vitejs.dev' },
     es: { label: 'Español', link: 'https://es.vitejs.dev' },
+    pt: { label: 'Português', link: 'https://pt.vitejs.dev' },
   },
 
   vue: {
