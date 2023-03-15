@@ -258,7 +258,7 @@ function loadEnv(
 ): Record<string, string>
 ```
 
-**関連:** [`.env` Files](./env-and-mode.md#env-files)
+**関連:** [`.env` ファイル](./env-and-mode.md#env-files)
 
 `envDir` 内の `.env` ファイルを読み込みます。デフォルトでは `prefixes` が変更されない限り、`VITE_` のプレフィックスのある環境変数のみが読み込まれます。
 
