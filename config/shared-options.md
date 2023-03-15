@@ -226,7 +226,15 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 - **型:** `Record<string, object>`
 
-CSS プリプロセッサに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。例:
+CSS プリプロセッサに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサでサポートされているオプションは、それぞれのドキュメントで確認できます:
+
+- `sass`/`scss` - [オプション](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions)。
+- `less` - [オプション](https://lesscss.org/usage/#less-options)。
+- `styl`/`stylus` - オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
+
+すべてのプリプロセッサオプションは `additionalData` オプションもサポートしており、これを使用して各スタイルのコンテンツに追加のコードを注入できます。
+
+例:
 
 ```js
 export default defineConfig({
@@ -235,8 +243,13 @@ export default defineConfig({
       scss: {
         additionalData: `$injectedColor: orange;`,
       },
+      less: {
+        math: 'parens-division',
+      },
       styl: {
-        additionalData: `$injectedColor ?= orange`,
+        define: {
+          $specialColor: new stylus.nodes.RGBA(51, 197, 255, 1),
+        },
       },
     },
   },
