@@ -1,6 +1,6 @@
 # 環境変数とモード
 
-## Env Variables
+## 環境変数 {#env-variables}
 
 Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公開します。いくつかのビルトイン変数は全てのケースで利用可能です:
 
@@ -14,7 +14,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#条件付きロジック)で動作しているかどうか
 
-### Production Replacement
+### プロダクションでの置換
 
 プロダクションでは、これらの環境変数は、**静的に置換されます**。したがって、常に、完全な静的文字列を使って参照する必要があります。例えば、`import.meta.env[key]` のような動的なキーでのアクセスはうまく行きません。
 
@@ -24,7 +24,7 @@ JavaScript の文字列と Vue テンプレートの中に現れる文字列も�
 
 - Vue のテンプレートや他の HTML タグに対しては、[`<wbr>` タグ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr)を使うことができます（例 `import.meta.<wbr>env.MODE`）。
 
-## `.env` Files
+## `.env` ファイル {#env-files}
 
 Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
@@ -107,7 +107,18 @@ interface ImportMeta {
 }
 ```
 
-## Modes
+## HTML での置換
+
+Vite は HTML ファイルでの環境変数の置換もサポートしています。`import.meta.env` にあるプロパティは、特別な `%ENV_NAME%` 構文使用して HTML ファイルで使用できます:
+
+```html
+<h1>Vite is running in %MODE%</h1>
+<p>Using data from %VITE_API_URL%</p>
+```
+
+環境変数が `import.meta.env` に存在しない場合（例: `%NON_EXISTENT%`）、JS では `import.meta.env.NON_EXISTENT` が `undefined` として置換されるのとは異なり、（HTML では）無視されて置換されません。
+
+## モード {#modes}
 
 デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
 
