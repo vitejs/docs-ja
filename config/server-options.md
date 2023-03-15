@@ -151,7 +151,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバと異�
 
 いくつかの例については、[`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue)をご覧ください。
 
-::: tip 注
+::: tip 注意
 
 デフォルトの設定では、Vite の前のリバースプロキシが WebSocket のプロキシに対応していることが期待されています。Vite の HMR クライアントが WebSocket の接続に失敗した場合、クライアントはリバースプロキシを迂回して直接 Vite の HMR サーバーに接続するようにフォールバックします:
 
@@ -326,16 +326,22 @@ export default defineConfig({
 
 サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/blog/devtools-better-angular-debugging/#the-x_google_ignorelist-source-map-extension)を設定するため使用されます。
 
-`server.sourcemapIgnoreList` は、開発サーバの [build.rollupOptions.output.sourcemapIgnoreList](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
+`server.sourcemapIgnoreList` は、開発サーバの [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
 
 デフォルトでは `node_modules` を含むすべてのパスを除外します。この動作を無効にするには `false` を渡します。もしくは、完全に制御するには、ソースパスとソースマップパスを受け取り、ソースパスを無視するかどうかを返す関数を指定します。
 
 ```js
 export default defineConfig({
   server: {
-    // これはデフォルトの値であり、パスに node_modules を含むすべてのファイルを
-    // 無視リストに追加します。
-    sourcemapIgnoreList: (sourcePath, sourcemapPath) => sourcePath.includes('node_modules')
+    // これはデフォルトの値であり、パスに node_modules を含むすべての
+    // ファイルを無視リストに追加します。
+    sourcemapIgnoreList(sourcePath, sourcemapPath) {
+      return sourcePath.includes('node_modules')
+    }
   }
 };
 ```
+
+::: tip 
+[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) と [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) は個別に設定する必要があります。`server.sourcemapIgnoreList` はサーバのみの設定であり、定義された rollup オプションからデフォルト値を取得しません。
+:::
