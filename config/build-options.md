@@ -117,6 +117,13 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
 この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
 
+## build.cssMinify
+
+- **型:** `boolean`
+- **デフォルト:** [`build.minify`](#build-minify) と同じ
+
+このオプションによって、デフォルトの `build.minify` を使うのではなく、CSS ミニファイを具体的に上書きすることで、JS と CSS のミニファイを別々に設定できるようになります。Vite は `esbuild` を使用して CSS をミニファイしています。
+
 ## build.sourcemap
 
 - **型:** `boolean | 'inline' | 'hidden'`
