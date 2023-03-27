@@ -397,6 +397,15 @@ Vite が特定のメッセージをログに出力する際、ターミナル画
 
 :::warning SECURITY NOTES
 `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
+
+プレフィックスのない変数を公開したい場合は、[define](#define) を使って公開できます:
+
+```js
+define: {
+  'import.meta.env.ENV_VARIABLE': JSON.stringify(process.env.ENV_VARIABLE)
+}
+```
+
 :::
 
 ## appType
