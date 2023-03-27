@@ -22,7 +22,7 @@ Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシ
 
 ## Hot Module Replacement
 
-Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vueの単一ファイルコンポーネント](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vue の単一ファイルコンポーネント](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
 
 これらを手動で設定する必要がないことには注意してください - [`create-vite` を介してアプリケーションを作成する](./)場合、これらはすでに構成されています。
 
@@ -248,9 +248,13 @@ Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリ
 CSS コンテンツの自動注入は `?inline` クエリパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルはページに注入されません。
 
 ```js
-import styles from './foo.css' // ページに注入される
+import './foo.css' // ページに注入される
 import otherStyles from './bar.css?inline' // 注入されない
 ```
+
+::: tip 注意
+Vite 4 以降、CSS ファイルからのデフォルトインポートおよび名前付きインポート（例：`import style from './foo.css'`）は非推奨となりました。代わりに `?inline` クエリを使用してください。
+:::
 
 ## 静的なアセット
 
