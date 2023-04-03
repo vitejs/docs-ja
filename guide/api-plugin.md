@@ -309,10 +309,11 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 ### `configurePreviewServer`
 
-- **型:** `(server: { middlewares: Connect.Server, httpServer: http.Server }) => (() => void) | void | Promise<(() => void) | void>`
+- **型:** `(server: PreviewServerForHook) => (() => void) | void | Promise<(() => void) | void>`
 - **種類:** `async`, `sequential`
+- **参照:** [PreviewServerForHook](./api-javascript#previewserverforhook)
 
-  [`configureServer`](/guide/api-plugin.html#configureserver) と同じですがプレビューサーバ用です。[connect](https://github.com/senchalabs/connect) サーバとその配下にある [http server](https://nodejs.org/api/http.html) を提供します。`configureServer` と同様に、`configurePreviewServer` フックは他のミドルウェアがインストールされる前に呼び出されます。他のミドルウェアをインストールした**後に**ミドルウェアをインジェクトしたい場合は、`configurePreviewServer` から関数を返すことで、内部のミドルウェアがインストールされた後に呼び出されるようにすることができます:
+  [`configureServer`](/guide/api-plugin.html#configureserver) と同じですがプレビューサーバ用です。`configureServer` と同様に、`configurePreviewServer` フックは他のミドルウェアがインストールされる前に呼び出されます。他のミドルウェアをインストールした**後に**ミドルウェアをインジェクトしたい場合は、`configurePreviewServer` から関数を返すことで、内部のミドルウェアがインストールされた後に呼び出されるようにすることができます:
 
   ```js
   const myPlugin = () => ({
