@@ -198,6 +198,46 @@ import { preview } from 'vite'
 })()
 ```
 
+## `PreviewServer`
+
+```ts
+interface PreviewServer extends PreviewServerForHook {
+  resolvedUrls: ResolvedServerUrls
+}
+```
+
+## `PreviewServerForHook`
+
+```ts
+interface PreviewServerForHook {
+  /**
+   * 解決された vite config オブジェクト
+   */
+  config: ResolvedConfig
+  /**
+   * connect アプリのインスタンス。
+   * - プレビューサーバにカスタムミドルウェアをアタッチするために使用できます。
+   * - カスタム http サーバのハンドラ関数として、もしくは connect スタイルの
+   *   Node.js フレームワークのミドルウェアとしても使用可能
+   *
+   * https://github.com/senchalabs/connect#use-middleware
+   */
+  middlewares: Connect.Server
+  /**
+   * ネイティブの Node http サーバインスタンス
+   */
+  httpServer: http.Server
+  /**
+   * Vite が CLI に表示する解決済みURL
+   */
+  resolvedUrls: ResolvedServerUrls | null
+  /**
+   * サーバの URL を表示
+   */
+  printUrls(): void
+}
+```
+
 ## `resolveConfig`
 
 **型シグネチャ:**
