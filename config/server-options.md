@@ -324,7 +324,7 @@ export default defineConfig({
 - **型:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
 - **デフォルト:** `(sourcePath) => sourcePath.includes('node_modules')`
 
-サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/blog/devtools-better-angular-debugging/#the-x_google_ignorelist-source-map-extension)を設定するため使用されます。
+サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/articles/x-google-ignore-list/)を設定するため使用されます。
 
 `server.sourcemapIgnoreList` は、開発サーバの [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
 
