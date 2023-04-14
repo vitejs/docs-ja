@@ -144,3 +144,7 @@ Vite は非厳格モード (sloppy モード) でのみ動作するコードを�
 > TypeError: Cannot create property 'foo' on boolean 'false'
 
 これらのコードが依存関係で使われていた場合、[`patch-package`](https://github.com/ds300/patch-package) (または [`yarn patch`](https://yarnpkg.com/cli/patch) または [`pnpm patch`](https://pnpm.io/cli/patch)) をエスケープハッチとして利用できます。
+
+### ブラウザの拡張機能
+
+ブラウザの拡張機能（広告ブロッカーなど）によっては、Vite クライアントが Vite 開発サーバーにリクエストを送信できなくすることがあります。この場合、白い画面が表示され、ログにはエラーが出力されません。この問題が発生した場合は、拡張機能を無効にしてみてください。
