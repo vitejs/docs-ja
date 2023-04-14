@@ -96,7 +96,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 /// <reference types="vite/client" />
 ```
 
-`tsconfig` の `compilerOptions.types` に `vite/client` を追加することもできます:
+または、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加することもできます:
 
 ```json
 {
