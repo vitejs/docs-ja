@@ -74,7 +74,7 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以�
 
 クラスフィールドに大きく依存しているライブラリを使用している場合は、そのライブラリが意図している使い方に注意してください。
 
-[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties)、[Vue Class Components 8.x](https://github.com/vuejs/vue-class-component/issues/465) など、ほとんどのライブラリは `"useDefineForClassFields": true` を想定しています。
+[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties) などのほとんどのライブラリは `"useDefineForClassFields": true` を想定しています。
 
 しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
 
