@@ -351,7 +351,7 @@ const modules = {
 `import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）:
 
 ```js
-const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
+const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
 ```
 
 上のコードは以下のように変換されます:
