@@ -159,7 +159,9 @@ Vite (および Rollup) の仮想モジュールは慣例により、ユーザ�
 - [`load`](https://rollupjs.org/plugin-development/#load)
 - [`transform`](https://rollupjs.org/plugin-development/#transform)
 
-また、Vite 固有のプロパティを追加した拡張 `options` パラメータを持ちます。詳しくは [SSR ドキュメント](/guide/ssr#ssr-specific-plugin-logic)に書かれています。
+また、これらのフックは Vite 固有のプロパティを追加した拡張 `options` パラメータを持ちます。詳しくは [SSR ドキュメント](/guide/ssr#ssr-specific-plugin-logic)に書かれています。
+
+Vite によるバンドルされていない開発サーバパターンにより、実際のインポータを導き出すことができない場合があるため、一部の `resolveId` 呼び出しの `importer` 値はルートにある一般的な `index.html` の絶対パスであるかもしれません。Vite の resolve pipeline 内で処理されるインポートについては、インポートの解析段階でインポータを追跡して、正しい `importer` 値を提供することができます。
 
 以下のフックはサーバが閉じられる時に呼び出されます:
 
