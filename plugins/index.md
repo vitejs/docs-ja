@@ -18,7 +18,11 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
 
-- Vue 2 の単一ファイルコンポーネントのサポートを提供します。
+- Vue 2.7 の単一ファイルコンポーネントのサポートを提供します。
+
+### [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+
+- Vue 2.7 の JSX（[専用の Babel transform ](https://github.com/vuejs/jsx-vue2/)を介して）のサポートを提供します。
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
