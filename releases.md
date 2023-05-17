@@ -1,0 +1,61 @@
+# リリース
+
+Vite のリリースは[セマンティック バージョニング](https://semver.org/)に準拠します。Vite の [npm パッケージページ](https://www.npmjs.com/package/vite)で Vite の最新安定バージョンを確認できます。
+
+過去のリリースの完全な変更履歴は [GitHub にて利用できます](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)。
+
+::: tip note
+Vite の次のメジャーバージョンは、9 月の Node 16 の EOL の後にリリースされます。
+
+詳しい情報は [Vite 5 ディスカッション](https://github.com/vitejs/vite/discussions/12466)をご確認ください。
+:::
+
+## リリースサイクル
+
+Vite は、一定のリリースサイクルがありません。
+
+- **パッチ**リリースは必要に応じてリリースされます。
+- **マイナー**リリースは常に新しい機能が含まれており、同様に必要に応じてリリースされます。マイナーリリースは常にベータプレリリース段階を通過します。
+- **メジャー**リリースは通常 [Node.js の EOL スケジュール](https://endoflife.date/nodejs)に従い、予めアナウンスされます。これらのリリースは早期ディスカッション段階、アルファプレリリース段階、ベータプレリリース段階を通過します。
+
+1 つ前のメジャーバージョンは重要な修正とセキュリティパッチが提供され続けます。その後は、セキュリティの懸念があるときのみアップデートが提供されます。Vite を定期的にアップデートすることをお勧めします。各メジャーバージョンをアップデートする際には、[移行ガイド](/guide/migration)をご確認ください。
+
+Vite チームはエコシステムの主要なプロジェクトと連携して新しい Vite のバージョンをリリース前に [vite-ecosystem-ci プロジェクト](https://github.com/vitejs/vite-ecosystem-ci)を用いてテストしています。Vite を利用しているほとんどのプロジェクトは新しいバージョンがリリースされてすぐにサポートを提供したり新しいバージョンに移行したりすることができるはずです。
+
+## セマンティックバージョニングエッジケース
+
+### TypeScript 定義
+
+マイナーバージョンの間で TypeScript 定義に互換性のない変更を出す可能性があります。この理由は:
+
+- TypeScript 自体がマイナーバージョンの間に互換性のない変更を出すことがあり、TypeScript の新しいバージョンをサポートするために型を調整せざるを得ない可能性があります。
+- まれに TypeScript の新しいバージョンでのみ利用可能な機能を採用する必要が出てくる可能性があり、必要な TypeScript の最小バージョンが引き上げられます。
+- TypeScript を使用している場合、現在のマイナーを固定させる semver 範囲を使うことができ、 Vite の新しいマイナーバージョンが公開されるときに手動でアップグレードすることができます。
+
+### esbuild
+
+[esbuild](https://esbuild.github.io/) は 1.0.0 に達しておらず、新しい機能やパフォーマンス改善を取り込むために、時に破壊的変更を含むことがあります。マイナーバージョンで esbuild のバージョンを上げることがあります。
+
+### LTS でない Node.js のバージョン
+
+LTS でない Node.js のバージョン (奇数のもの) は Vite の CI でテストされていませんが、それらの [EOL](https://endoflife.date/nodejs) 以前では動くはずです。
+
+## プレリリース
+
+マイナーリリースは通常決められていない数のベータ版を通過します。メジャーリリースはアルファ段階とベータ段階を通過します。
+
+プレリリースはアーリーアダプターやエコシステムからのメンテナーに統合 / 安定性テストの機会を提供し、フィードバックを受けるために存在します。本番でプレリリースを使用しないでください。すべてのプレリリースは不安定であると取り扱われ、途中で破壊的変更を出す可能性があります。プレリリースを使用するときは常に厳密なバージョンに固定してください。
+
+## 非推奨
+
+マイナーリリースでより良い代替品に取って代わられた機能を定期的に非推奨にしています。非推奨となった機能は引き続き動作しますが、型やログによる警告が出力されます。これらは非推奨となった後、次のメジャーリリースで削除されます。各メジャーバージョンの[移行ガイド](/guide/migration)にはこれらの削除される機能のリストや代替手段の説明が含まれます。
+
+## 実験的機能
+
+Vite の安定したバージョンでリリースされる一部の機能は実験的機能と指定されます。実験的機能では実体験を収集し最終的な設計に活用されます。この目的はユーザーに本番でテストしてもらうことでユーザーからのフィードバックを集めることです。実験的機能自体は不安定であると取り扱われ、制御下でのみ使用されるべきです。これらの機能はマイナーの間で変更されることがあるため、ユーザーはこれらの機能を利用する際には Vite のバージョンを固定する必要があります。
+
+## RFCs​
+
+Many changes, including features, bug fixes, and documentation improvements are discussed, implemented and reviewed via GitHub discussions, issues, and pull requests workflow. For substantial changes that would affect several downstream projects, we offer a Request For Comments (RFC) process to help gather consensus among the Vite core team, the Ecosystem, and the community.
+
+Continue reading about the RFC process in the [vitejs/rfcs](https://github.com/vitejs/rfcs) repo on GitHub.
