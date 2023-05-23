@@ -53,9 +53,3 @@ LTS でない Node.js のバージョン (奇数のもの) は Vite の CI で�
 ## 実験的機能
 
 Vite の安定したバージョンでリリースされる一部の機能は実験的機能と指定されます。実験的機能では実体験を収集し最終的な設計に活用されます。この目的はユーザーに本番でテストしてもらうことでユーザーからのフィードバックを集めることです。実験的機能自体は不安定であると取り扱われ、制御下でのみ使用されるべきです。これらの機能はマイナーの間で変更されることがあるため、ユーザーはこれらの機能を利用する際には Vite のバージョンを固定する必要があります。
-
-## RFCs​
-
-Many changes, including features, bug fixes, and documentation improvements are discussed, implemented and reviewed via GitHub discussions, issues, and pull requests workflow. For substantial changes that would affect several downstream projects, we offer a Request For Comments (RFC) process to help gather consensus among the Vite core team, the Ecosystem, and the community.
-
-Continue reading about the RFC process in the [vitejs/rfcs](https://github.com/vitejs/rfcs) repo on GitHub.
