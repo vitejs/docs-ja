@@ -15,6 +15,23 @@
 - ほかのパッケージマネージャに切り替える (例: `pnpm`、`yarn`)
 - プロジェクトへのパスから `&` を取り除く
 
+## 設定
+
+### ESM のみのパッケージ
+
+ESM のみのパッケージを `require` でインポートすると、以下のエラーが発生します。
+
+> Failed to resolve "foo". This package is ESM only but it was tried to load by `require`.
+
+> "foo" resolved to an ESM file. ESM file cannot be loaded by `require`.
+
+ESM ファイルは [`require`](<https://nodejs.org/docs/latest-v18.x/api/esm.html#require:~:text=Using%20require%20to%20load%20an%20ES%20module%20is%20not%20supported%20because%20ES%20modules%20have%20asynchronous%20execution.%20Instead%2C%20use%20import()%20to%20load%20an%20ES%20module%20from%20a%20CommonJS%20module.>) で読み込むことができません。
+
+以下のいずれかの方法で、設定を ESM に変換することをお勧めします:
+
+- 一番近い `package.json` に `"type": "module"` を追加する
+- `vite.config.js` / `vite.config.ts` を `vite.config.mjs` / `vite.config.mts` にファイル名を変更する
+
 ## 開発サーバ
 
 ### リクエストがいつまでも終わらない
