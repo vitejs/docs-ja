@@ -266,6 +266,10 @@ function mergeConfig(
 
 2 つの Vite の設定をディープマージします。`isRoot` はマージされる Vite の設定内の階層を表します。例えば、2 つの `build` オプションをマージする場合は `false` にします。
 
+::: tip 注意
+`mergeConfig` はオブジェクト形式の設定のみを受け付けます。コールバック形式の設定がある場合は、 `mergeConfig` に渡す前にコールバックを呼び出す必要があります。
+:::
+
 ## `searchForWorkspaceRoot`
 
 **型シグネチャ:**
