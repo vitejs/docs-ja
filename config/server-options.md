@@ -266,6 +266,8 @@ Vite をサブフォルダとしてプロキシする場合に使用するため
 
 `/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリリストの外にある、許可されたファイルからインポートされていないファイルにアクセスすると、403 が返されます。
 
+ディレクトリとファイルの両方を指定することができます。
+
 Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)にフォールバックします。
 
 - `package.json` に `workspaces` フィールドが含まれている
@@ -298,7 +300,8 @@ export default defineConfig({
         // ワークスペースルートの検索
         searchForWorkspaceRoot(process.cwd()),
         // あなたのカスタムルール
-        '/path/to/custom/allow',
+        '/path/to/custom/allow_directory',
+        '/path/to/custom/allow_file.demo',
       ],
     },
   },
