@@ -35,6 +35,16 @@ export default defineConfig({
 
 デフォルトでは、リンクされたパッケージのうち `node_modules` の外にあるものは事前バンドルされません。このオプションを使用してリンクされたパッケージを強制的に事前バンドルします。
 
+**実験的機能:** 多くのディープインポートを持つライブラリを使用している場合、末尾に glob パターンを指定して、すべてのディープインポートを一度に事前バンドルすることもできます。これにより、新たにディープインポートが使用されるたびに常に事前バンドルされることを避けることができます。例:
+
+```js
+export default defineConfig({
+  optimizeDeps: {
+    include: ["my-lib/components/**/*.vue"],
+  },
+});
+```
+
 ## optimizeDeps.esbuildOptions
 
 - **型:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
