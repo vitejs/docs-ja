@@ -247,12 +247,6 @@ async function createServer() {
 createServer()
 ```
 
-## server.base
-
-- **型:** `string | undefined`
-
-Vite をサブフォルダとしてプロキシする場合に使用するため、http リクエストの前にこのフォルダを追加します。先頭は `/` の文字にする必要があります。
-
 ## server.fs.strict
 
 - **型:** `boolean`
