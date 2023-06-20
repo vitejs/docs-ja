@@ -175,6 +175,8 @@ HMR イベントを購読します。
 - `'vite:beforePrune'` もう必要なくなったモジュールが取り除かれる直前
 - `'vite:invalidate'` モジュールが `import.meta.hot.invalidate()` で無効にされたとき
 - `'vite:error'` エラーが発生したとき（例: 構文エラーなど）
+- `'vite:ws:disconnect'` WebSocket 接続が切断されたとき
+- `'vite:ws:connect'` WebSocket 接続が（再）確立されたとき
 
 カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
 
