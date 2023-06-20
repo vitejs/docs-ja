@@ -71,7 +71,7 @@ Vite の API において `command` の値は、開発時（CLI で `vite`、`vi
 
 ## 非同期の設定
 
-設定で非同期の関数を呼び出す必要がある場合は、代わりに async 関数をエクスポートできます:
+設定で非同期の関数を呼び出す必要がある場合は、代わりに非同期関数をエクスポートできます。また、この非同期関数は `defineConfig` を通じて渡すことができ、自動補完のサポートを向上させることができます:
 
 ```js
 export default defineConfig(async ({ command, mode }) => {
