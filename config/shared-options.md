@@ -210,6 +210,8 @@ interface CSSModulesOptions {
 
 CSS モジュールの動作を設定します。オプションは [postcss-modules](https://github.com/css-modules/postcss-modules) に渡されます。
 
+このオプションは [Lightning CSS](../guide/features.md#lightning-css) 使用時には効果がありません。有効にする場合は [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) を使用してください。
+
 ## css.postcss
 
 - **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
@@ -263,6 +265,46 @@ export default defineConfig({
 - **デフォルト:** `false`
 
   開発時にソースマップを有効にするかどうか。
+
+## css.transformer
+
+- **実験的機能**
+- **型:** `'postcss' | 'lightningcss'`
+- **デフォルト:** `'postcss'`
+
+CSS 処理に使用するエンジンを選択します。詳細は [Lightning CSS](../guide/features.md#lightning-css) を参照してください。
+
+## css.lightningcss
+
+- **実験的機能**
+- **型:**
+
+```js
+import type {
+  CSSModulesConfig,
+  Drafts,
+  Features,
+  NonStandard,
+  PseudoClasses,
+  Targets,
+} from 'lightningcss'
+```
+
+```js
+{
+  targets?: Targets
+  include?: Features
+  exclude?: Features
+  drafts?: Drafts
+  nonStandard?: NonStandard
+  pseudoClasses?: PseudoClasses
+  unusedSymbols?: string[]
+  cssModules?: CSSModulesConfig,
+  // ...
+}
+```
+
+Lightning CSS の設定。すべての変換オプションは [Lightning CSS のリポジトリ](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts)で確認できます。
 
 ## json.namedExports
 
