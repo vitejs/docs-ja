@@ -258,20 +258,20 @@ Vite 4 以降、CSS ファイルからのデフォルトインポートおよび
 
 ### Lightning CSS
 
-Vite 4.4 から、 [Lightning CSS](https://lightningcss.dev/) の実験的なサポートがあります。設定ファイルに [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer) を追加し、オプションの [`lightningcss`](https://www.npmjs.com/package/lightningcss) 依存関係をインストールすることで有効にできます:
+Vite 4.4 から、[Lightning CSS](https://lightningcss.dev/) の実験的なサポートがあります。設定ファイルに [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer) を追加し、オプションの [`lightningcss`](https://www.npmjs.com/package/lightningcss) 依存関係をインストールすることで有効にできます:
 
 ```bash
 npm add -D lightningcss
 ```
 
-有効にすると、 CSS ファイルは PostCSS の代わりに Lightning CSS によって処理されます。設定するには、 Lightning CSS のオプションを [`css.lightningcss`](../config/shared-options.md#css-lightningcss) に渡します。
+有効にすると、CSS ファイルは PostCSS の代わりに Lightning CSS によって処理されます。設定するには、Lightning CSS のオプションを [`css.lightningcss`](../config/shared-options.md#css-lightningcss) に渡します。
 
 CSS Modules を設定するには、[`css.modules`](../config/shared-options.md#css-modules)（PostCSS が CSS モジュールを処理する方法の設定）の代わりに [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) を使用します。
 
-デフォルトでは、 Vite は CSS の圧縮に esbuild を使用します。 [`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify) を使用することで、 Lightning CSS を CSS の圧縮に使用できます。
+デフォルトでは、Vite は CSS の圧縮に esbuild を使用します。[`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify) を使用することで、Lightning CSS を CSS の圧縮に使用できます。
 
 ::: tip NOTE
-Lightning CSS 使用時は、 [CSS プリプロセッサ](/#css-pre-processors)はサポートされていません。
+Lightning CSS 使用時は、[CSS プリプロセッサ](/#css-pre-processors)はサポートされていません。
 :::
 
 ## 静的なアセット
