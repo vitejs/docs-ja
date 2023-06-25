@@ -266,7 +266,7 @@ npm add -D lightningcss
 
 有効にすると、 CSS ファイルは PostCSS の代わりに Lightning CSS によって処理されます。設定するには、 Lightning CSS のオプションを [`css.lightningcss`](../config/shared-options.md#css-lightningcss) に渡します。
 
-CSS Modules を設定するには、 [`css.modules`](../config/shared-options.md#css-modules) の代わりに [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) を使用します（PostCSS が CSS モジュールを処理する方法を設定します）。
+CSS Modules を設定するには、[`css.modules`](../config/shared-options.md#css-modules)（PostCSS が CSS モジュールを処理する方法の設定）の代わりに [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) を使用します。
 
 デフォルトでは、 Vite は CSS の圧縮に esbuild を使用します。 [`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify) を使用することで、 Lightning CSS を CSS の圧縮に使用できます。
 
