@@ -119,10 +119,10 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 ## build.cssMinify
 
-- **型:** `boolean`
+- **型:** `boolean | 'esbuild' | 'lightningcss'`
 - **デフォルト:** [`build.minify`](#build-minify) と同じ
 
-このオプションによって、デフォルトの `build.minify` を使うのではなく、CSS ミニファイを具体的に上書きすることで、JS と CSS のミニファイを別々に設定できるようになります。Vite は `esbuild` を使用して CSS をミニファイしています。
+このオプションによって、デフォルトの `build.minify` を使うのではなく、CSS ミニファイを具体的に上書きすることで、JS と CSS のミニファイを別々に設定できるようになります。Vite はデフォルトでは `esbuild` を使用して CSS をミニファイしています。`'lightningcss'` を指定すると代わりに [Lightning CSS](https://lightningcss.dev/minification.html) を使用します。指定した場合は、 [`css.lightningcss`](./shared-options.md#css-lightningcss) を使用して設定ができます。
 
 ## build.sourcemap
 
