@@ -239,6 +239,10 @@ export default defineConfig({
               link: '/guide/comparisons',
             },
             {
+              text: '理念',
+              link: '/guide/philosophy',
+            },
+            {
               text: 'トラブルシューティング',
               link: '/guide/troubleshooting',
             },
