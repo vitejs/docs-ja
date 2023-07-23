@@ -64,7 +64,7 @@ export default defineConfig({
 
 ## optimizeDeps.disabled
 
-- **実験的機能**
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13839)
 - **型:** `boolean | 'build' | 'dev'`
 - **デフォルト:** `'build'`
 

@@ -260,7 +260,7 @@ export default defineConfig({
 
 ## css.devSourcemap
 
-- **実験的機能**
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13845)
 - **型:** `boolean`
 - **デフォルト:** `false`
 
@@ -268,7 +268,7 @@ export default defineConfig({
 
 ## css.transformer
 
-- **実験的機能**
+- **実験的機能: ** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
 - **型:** `'postcss' | 'lightningcss'`
 - **デフォルト:** `'postcss'`
 
@@ -276,7 +276,7 @@ CSS 処理に使用するエンジンを選択します。詳細は [Lightning C
 
 ## css.lightningcss
 
-- **実験的機能**
+- **実験的機能: ** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
 - **型:**
 
 ```js
