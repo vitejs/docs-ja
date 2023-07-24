@@ -34,7 +34,7 @@ import 'vite/modulepreload-polyfill'
 
 動的インポートごとにプリロードするチャンクのリストは Vite によって計算されます。デフォルトでは、これらの依存関係を読み込む際に `base` を含む絶対パスが使用されます。`base` が相対パス (`''` または `'./'`) の場合、最終的にデプロイされるベースに依存する絶対パスを避けるために、実行時に `import.meta.url` が使用されます。
 
-実験的に、`resolveDependencies` 関数を使用して、依存関係のリストとそのパスを細かく制御できるようになりました。この関数は `ResolveModulePreloadDependenciesFn` 型の関数が必要です。
+実験的に、`resolveDependencies` 関数を使用して、依存関係のリストとそのパスを細かく制御できるようになりました。[フィードバックをしてください](https://github.com/vitejs/vite/discussions/13841)。この関数は `ResolveModulePreloadDependenciesFn` 型の関数が必要です。
 
 ```ts
 type ResolveModulePreloadDependenciesFn = (
@@ -218,7 +218,7 @@ Terser に渡す追加の[ミニファイオプション](https://terser.org/doc
 
 ## build.copyPublicDir
 
-- **実験的機能**
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13807)
 - **型:** `boolean`
 - **デフォルト:** `true`
 
