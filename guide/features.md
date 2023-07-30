@@ -559,7 +559,7 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-ワーカスクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザのネイティブサポート](https://caniuse.com/?search=module%20worker)（現在 Firefox ではサポートされていません）に依存しますが、プロダクションビルドではコンパイルされます。
+ワーカスクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザのネイティブサポート](https://caniuse.com/?search=module%20worker)に依存しますが、プロダクションビルドではコンパイルされます。
 
 デフォルトでは、ワーカスクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
 
