@@ -337,3 +337,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 ## Flightcontrol
 
 [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) を使用して静的サイトをデプロイする場合、この[指示](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite)に従います。
+
+## AWS Amplify Hosting
+
+[AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/) を使用して静的サイトをデプロイする場合、この[指示](https://docs.amplify.aws/guides/hosting/vite/q/platform/js/)に従います。
