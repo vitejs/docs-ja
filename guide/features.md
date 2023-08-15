@@ -555,7 +555,7 @@ main()
 SSR では、`?init` インポートの一部として発生する `fetch()` は `TypeError: Invalid URL` で失敗する可能性があります。
 [SSR での wasm のサポート](https://github.com/vitejs/vite/issues/8882)の issue を参照してください。
 
-プロジェクトのベースが現在の作業ディレクトリであると仮定した場合の代替案を以下に示します:
+プロジェクトのベースが現在のディレクトリであると仮定した場合の代替案を以下に示します:
 
 ```js
 import wasmUrl from 'foo.wasm?url'
