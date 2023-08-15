@@ -500,7 +500,8 @@ const module = await import(`./dir/${file}.js`)
 
 ## WebAssembly
 
-`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます - デフォルトのエクスポートは、wasm インスタンスの Promise を返す初期化関数になります:
+`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます。
+デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
 
 ```js
 import init from './example.wasm?init'
@@ -510,7 +511,7 @@ init().then((instance) => {
 })
 ```
 
-init 関数は、第 2 引数として `WebAssembly.instantiate` に渡される `imports` オブジェクトを受け取ることもできます:
+init 関数は、第 2 引数として [`WebAssembly.instantiate`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/instantiate) に渡される importObject を受け取ることもできます:
 
 ```js
 init({
@@ -524,12 +525,53 @@ init({
 })
 ```
 
-本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
+本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、[静的アセット](./assets.md)として扱われ、オンデマンドでフェッチされます。
 
-::: warning
+::: tip 注意
 [WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
 [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティのプラグインを使用して対処してください。
 :::
+
+### WebAssembly モジュールへのアクセス
+
+もし `Module` オブジェクトにアクセスする必要がある場合、例えば複数回インスタンス化する場合は、[明示的な URL のインポート](./assets#明示的な-url-のインポート)を使用してアセットを解決してから、インスタンス化を実行してください:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+
+const main = async () => {
+  const responsePromise = fetch(wasmUrl)
+  const { module, instance } = await WebAssembly.instantiateStreaming(
+    responsePromise,
+  )
+  /* ... */
+}
+
+main()
+```
+
+### Node.js でモジュールをフェッチする
+
+SSR では、`?init` インポートの一部として発生する `fetch()` は `TypeError: Invalid URL` で失敗する可能性があります。
+[SSR での wasm のサポート](https://github.com/vitejs/vite/issues/8882)の issue を参照してください。
+
+プロジェクトのベースが現在のディレクトリであると仮定した場合の代替案を以下に示します:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+import { readFile } from 'node:fs/promises'
+
+const main = async () => {
+  const resolvedUrl = (await import('./test/boot.test.wasm?url')).default
+  const buffer = await readFile('.' + resolvedUrl)
+  const { instance } = await WebAssembly.instantiate(buffer, {
+    /* ... */
+  })
+  /* ... */
+}
+
+main()
+```
 
 ## Web Workers
 
