@@ -511,7 +511,7 @@ init().then((instance) => {
 })
 ```
 
-init 関数は、第 2 引数として [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) に渡される importObject を受け取ることもできます:
+init 関数は、第 2 引数として [`WebAssembly.instantiate`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/instantiate) に渡される importObject を受け取ることもできます:
 
 ```js
 init({
