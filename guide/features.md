@@ -501,7 +501,7 @@ const module = await import(`./dir/${file}.js`)
 ## WebAssembly
 
 `?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます。
-デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
+デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
 
 ```js
 import init from './example.wasm?init'
