@@ -326,7 +326,7 @@ Lightning CSS の設定。すべての変換オプションは [Lightning CSS �
 
 - **型:** `ESBuildOptions | false`
 
-`ESBuildOptions` は [esbuild 自身の変換オプション](https://esbuild.github.io/api/#transform-api)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
+`ESBuildOptions` は [esbuild 自身の変換オプション](https://esbuild.github.io/api/#transform)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
 ```js
 export default defineConfig({
