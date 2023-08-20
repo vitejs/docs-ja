@@ -25,7 +25,7 @@ vite [root]
 | `--force`                | オプティマイザにキャッシュを無視して再バンドルさせる (`boolean`) |
 | `-c, --config <file>`    | 指定された設定ファイルを使用する (`string`)                              |
 | `--base <path>`          | public のベースパス（デフォルト: `/`） (`string`)                        |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                        |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか (`boolean`)               |
 | `--profile`              | 組み込みの Node.js インスペクタを起動する ([パフォーマンスのボトルネック](/guide/troubleshooting#パフォーマンスのボトルネック)を確認してください) |
 | `-d, --debug [feat]`     | デバッグログを表示する (`string \| boolean`)                             |
