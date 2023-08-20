@@ -27,6 +27,7 @@ vite [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`） (`string`)                        |
 | `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか (`boolean`)               |
+| `--profile`              | 組み込みの Node.js インスペクタを起動する ([パフォーマンスのボトルネック](/guide/troubleshooting#パフォーマンスのボトルネック)を確認してください) |
 | `-d, --debug [feat]`     | デバッグログを表示する (`string \| boolean`)                             |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする (`string`)                                      |
 | `-m, --mode <mode>`      | env モードを設定する (`string`)                                           |
@@ -65,6 +66,7 @@ vite build [root]
 | `--base <path>`                | public のベースパス（デフォルト: `/`） (`string`)                                                                          |
 | `-l, --logLevel <level>`       | Info \| warn \| error \| silent (`string`)                                                                          |
 | `--clearScreen`                | ログを表示する際に画面をクリアするかどうか (`boolean`)                                                                 |
+| `--profile`                    | 組み込みの Node.js インスペクタを起動する ([パフォーマンスのボトルネック](/guide/troubleshooting#パフォーマンスのボトルネック)を確認してください) |
 | `-d, --debug [feat]`           | デバッグログを表示する (`string \| boolean`)                                                                               |
 | `-f, --filter <filter>`        | デバッグログをフィルタリングする (`string`)                                                                                        |
 | `-m, --mode <mode>`            | env モードを設定する (`string`)                                                                                             |
