@@ -191,7 +191,7 @@ export default defineConfig({
           text: 'ガイド',
           items: [
             {
-              text: 'なぜ Vite なのか',
+              text: 'Vite を使う理由',
               link: '/guide/why',
             },
             {
