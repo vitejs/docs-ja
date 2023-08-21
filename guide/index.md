@@ -45,23 +45,21 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 Vite は [Node.js](https://nodejs.org/en/) 14.18+、16+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャが警告を出した場合はアップグレードしてください。
 :::
 
-NPM を使う場合:
+::: code-group
 
-```bash
+```bash [NPM]
 $ npm create vite@latest
 ```
 
-Yarn を使う場合:
-
-```bash
+```bash [Yarn]
 $ yarn create vite
 ```
 
-PNPM を使う場合:
-
-```bash
+```bash [PNPM]
 $ pnpm create vite
 ```
+
+:::
 
 あとは画面表示に従ってください！
 

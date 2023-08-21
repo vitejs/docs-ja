@@ -171,6 +171,10 @@ export default defineConfig({
                 text: '変更履歴',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
               },
+              {
+                text: '貢献ガイド',
+                link: 'https://github.com/vitejs/docs-ja/blob/main/CONTRIBUTING.md',
+              },
             ],
           },
         ],
