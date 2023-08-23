@@ -166,6 +166,8 @@ vite build --profile
 
 Node.js インスペクターはルートフォルダに `vite-profile-0.cpuprofile` を生成し、https://www.speedscope.app/ に遷移、`BROWSE` ボタンを使って CPU プロファイルをアップロードし、結果を検証します。
 
+[vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をインストールすると、Vite プラグインの中間状態を検査することができ、アプリケーションのボトルネックとなっているプラグインやミドルウェアを特定するのに役立ちます。このプラグインは開発モードとビルドモードの両方で使用できます。詳しくは readme ファイルをご覧ください。
+
 ## その他
 
 ### ブラウザ互換性のためにモジュールを外部化
