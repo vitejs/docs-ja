@@ -218,7 +218,6 @@ Terser に渡す追加の[ミニファイオプション](https://terser.org/doc
 
 ## build.copyPublicDir
 
-- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13807)
 - **型:** `boolean`
 - **デフォルト:** `true`
 
