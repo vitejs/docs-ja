@@ -8,7 +8,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.BASE_URL`**: {string} アプリが配信されているベース URL。これは [`base` 設定オプション](/config/shared-options.md#base) によって決まります。
 
-- **`import.meta.env.PROD`**: {boolean} アプリがプロダクションで動作しているかどうか。
+- **`import.meta.env.PROD`**: {boolean} アプリがプロダクションで動作しているかどうか（`NODE_ENV='production'` で開発サーバーを起動するか `NODE_ENV='production'` でビルドしたアプリを実行する）。
 
 - **`import.meta.env.DEV`**: {boolean} アプリが開発で動作しているかどうか（常に `import.meta.env.PROD` の逆）
 
