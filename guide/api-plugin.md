@@ -311,7 +311,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 ### `configurePreviewServer`
 
-- **型:** `(server: PreviewServerForHook) => (() => void) | void | Promise<(() => void) | void>`
+- **型:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
 - **種類:** `async`, `sequential`
 - **参照:** [PreviewServer](./api-javascript#previewserver)
 
