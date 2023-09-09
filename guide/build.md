@@ -214,12 +214,16 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-::: tip Note
+::: tip ファイル拡張子
 `package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。
 :::
 
 ::: tip 環境変数
 ライブラリモードでは、すべての `import.meta.env.*` の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用すると、静的に置き換えることができます。
+:::
+
+::: warning 高度な使い方
+ライブラリモードには、ブラウザ向けのライブラリや JS フレームワークライブラリのためのシンプルで opinionated な設定が含まれています。非ブラウザライブラリをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
 :::
 
 ## 高度なベースパスの設定
