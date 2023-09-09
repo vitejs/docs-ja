@@ -261,6 +261,15 @@ function mergeConfig(
 
 ::: tip 注意
 `mergeConfig` はオブジェクト形式の設定のみを受け付けます。コールバック形式の設定がある場合は、 `mergeConfig` に渡す前にコールバックを呼び出す必要があります。
+
+`defineConfig` ヘルパーを使うと、コールバック形式の設定を別の設定にマージすることができます。
+
+```ts
+export default defineConfig((configEnv) =>
+  mergeConfig(configAsCallback(configEnv), configAsObject),
+)
+```
+
 :::
 
 ## `searchForWorkspaceRoot`
