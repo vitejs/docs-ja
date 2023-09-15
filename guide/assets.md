@@ -1,7 +1,3 @@
----
-outline: [2, 3]
----
-
 # 静的アセットの取り扱い
 
 - 関連: [Public Base Path](./build#public-base-path)
