@@ -66,9 +66,6 @@ $ pnpm create vite
 プロジェクト名や使用するテンプレートは、追加のコマンドラインオプションによって直接指定することもできます。例えば Vite + Vue のプロジェクトを生成するには以下のコマンドを実行します:
 
 ```bash
-# npm 6.x
-npm create vite@latest my-vue-app --template vue
-
 # npm 7+ は追加で 2 つのダッシュが必要:
 npm create vite@latest my-vue-app -- --template vue
 
