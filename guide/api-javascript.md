@@ -30,6 +30,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
   await server.listen()
 
   server.printUrls()
+  server.bindCLIShortcuts({ print: true })
 })()
 ```
 
@@ -138,6 +139,10 @@ interface ViteDevServer {
    * サーバを停止します。
    */
   close(): Promise<void>
+  /**
+   * CLI ショートカットをバインドします。
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
 }
 ```
 
@@ -195,6 +200,7 @@ import { preview } from 'vite'
   })
 
   previewServer.printUrls()
+  previewServer.bindCLIShortcuts({ print: true })
 })()
 ```
 
@@ -228,6 +234,10 @@ interface PreviewServer {
    * サーバの URL を表示
    */
   printUrls(): void
+  /**
+   * CLI ショートカットをバインドする
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<PreviewServer>): void
 }
 ```
 
