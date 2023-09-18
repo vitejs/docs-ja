@@ -59,6 +59,10 @@ $ yarn create vite
 $ pnpm create vite
 ```
 
+```bash [Bun]
+$ bunx create-vite
+```
+
 :::
 
 あとは画面表示に従ってください！
@@ -74,6 +78,9 @@ yarn create vite my-vue-app --template vue
 
 # pnpm
 pnpm create vite my-vue-app --template vue
+
+# bun
+bunx create-vite my-vue-app --template vue
 ```
 
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
