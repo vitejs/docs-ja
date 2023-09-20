@@ -178,7 +178,7 @@ export default defineConfig({
 
 ## CSS
 
-`.css` ファイルをインポートすると、HMR をサポートする `<style>` タグを介してそのコンテンツがページに挿入されます。モジュールのデフォルトのエクスポートとして、処理された CSS を文字列として取得することもできます。
+`.css` ファイルをインポートすると、HMR をサポートする `<style>` タグを介してそのコンテンツがページに挿入されます。
 
 ### `@import` のインライン化と書き換え
 
@@ -253,7 +253,7 @@ import otherStyles from './bar.css?inline' // 注入されない
 ```
 
 ::: tip 注意
-Vite 4 以降、CSS ファイルからのデフォルトインポートおよび名前付きインポート（例：`import style from './foo.css'`）は非推奨となりました。代わりに `?inline` クエリを使用してください。
+Vite 5 以降、CSS ファイルからのデフォルトインポートおよび名前付きインポート（例：`import style from './foo.css'`）は削除されました。代わりに `?inline` クエリを使用してください。
 :::
 
 ### Lightning CSS
