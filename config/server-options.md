@@ -176,7 +176,7 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 ## server.watch
 
-- **型:** `object`
+- **型:** `object| null`
 
 [chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャのオプションです。
 
@@ -196,6 +196,8 @@ export default defineConfig({
   },
 })
 ```
+
+`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッタを返しますが、`add` や `unwatch` を呼び出しても何も起こりません。
 
 ::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
 

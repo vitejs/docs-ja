@@ -75,7 +75,8 @@ interface ViteDevServer {
    */
   httpServer: http.Server | null
   /**
-   * chokidar watcher のインスタンス。
+   * chokidar watcher のインスタンス。`config.server.watch` が `null` に
+   * 設定されている場合、何もしないイベントエミッターを返します。
    * https://github.com/paulmillr/chokidar#api
    */
   watcher: FSWatcher
