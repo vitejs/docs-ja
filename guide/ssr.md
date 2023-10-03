@@ -181,14 +181,14 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 ## Preload Directives の作成
 
-`vite build` はビルド出力ディレクトリに `ssr-manifest.json` を生成する `--ssrManifest` フラグをサポートしています:
+`vite build` はビルド出力ディレクトリに `.vite/ssr-manifest.json` を生成する `--ssrManifest` フラグをサポートしています:
 
 ```diff
 - "build:client": "vite build --outDir dist/client",
 + "build:client": "vite build --outDir dist/client --ssrManifest",
 ```
 
-上記のスクリプトはクライアントビルドの際に `dist/client/ssr-manifest.json` を生成します（モジュール ID をクライアントファイルにマップするため、SSR マニフェストはクライアントビルドから生成されます）。マニフェストには、モジュール ID の関連するチャンクおよびアセットファイルへのマッピングが含まれています。
+上記のスクリプトはクライアントビルドの際に `dist/client/.vite/ssr-manifest.json` を生成します（モジュール ID をクライアントファイルにマップするため、SSR マニフェストはクライアントビルドから生成されます）。マニフェストには、モジュール ID の関連するチャンクおよびアセットファイルへのマッピングが含まれています。
 
 マニフェストを活用するには、フレームワークはサーバのレンダリング呼び出し中に使用されたコンポーネントのモジュール ID を収集する方法を提供する必要があります。
 
