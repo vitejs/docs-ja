@@ -12,7 +12,7 @@
    // vite.config.js
    export default defineConfig({
      build: {
-       // outDir に manifest.json を出力
+       // outDir に .vite/manifest.json を出力
        manifest: true,
        rollupOptions: {
          // デフォルトの .html エントリを上書き
@@ -56,7 +56,7 @@
    </script>
    ```
 
-3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
+3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `.vite/manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
 
    ```json
    {
