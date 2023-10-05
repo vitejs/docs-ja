@@ -5,7 +5,6 @@
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
     "serve-docs": "vitepress serve",
-    "test": "npm run lint",
     "lint": "textlint --format pretty-error **/*.md"
   },
   "devDependencies": {

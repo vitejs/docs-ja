@@ -25,7 +25,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 - [JTF 日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
 - JTF 日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールは Vue.js 公式サイト向けに [一部カスタマイズ](https://github.com/vitejs/docs-ja/blob/main/.textlintrc)
-  - `yarn test` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
+  - `yarn lint` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
 
 ## 翻訳のゆらぎ & トーン
 
