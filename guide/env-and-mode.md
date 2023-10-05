@@ -20,7 +20,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 JavaScript の文字列と Vue テンプレートの中に現れる文字列も置換されます。これはまれなケースのはずですが、意図的でないこともありえます。この場合、たとえば `"process.env.NODE_ENV"` が `""development": "` に変換されると、`Missing Semicolon` や `Unexpected token` などのエラーが表示されることがあります。この挙動を一時的に解決する方法はいくつかあります:
 
-- JavaScript の文字列に対しては、ユニコードの​ゼロ幅スペースでその文字列を分割できます（例 `'import.meta\u200b.env.MODE'`）。
+- JavaScript の文字列に対しては、ユニコードのゼロ幅スペースでその文字列を分割できます（例 `'import.meta\u200b.env.MODE'`）。
 
 - Vue のテンプレートや他の HTML タグに対しては、[`<wbr>` タグ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr)を使うことができます（例 `import.meta.<wbr>env.MODE`）。
 

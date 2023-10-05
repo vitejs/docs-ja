@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
@@ -8,12 +9,12 @@
     "lint": "textlint --format pretty-error **/*.md"
   },
   "devDependencies": {
-    "@types/node": "^18.6.3",
-    "lint-staged": "^11.1.1",
-    "textlint": "^12.0.2",
+    "@types/node": "^18.17.17",
+    "lint-staged": "^14.0.1",
+    "textlint": "^13.3.3",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
-    "vitepress": "1.0.0-beta.1",
+    "vitepress": "1.0.0-rc.14",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
