@@ -180,24 +180,15 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 [chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャのオプションです。
 
-Vite サーバのウォッチャは、デフォルトでは `.git/` と `node_modules/` ディレクトリをスキップします。もし `node_modules/` 内のパッケージを監視したい場合は、`server.watch.regard` に否定の glob パターンを渡すことができます。つまり:
-
-```js
-export default defineConfig({
-  server: {
-    watch: {
-      ignored: ['!**/node_modules/your-package-name/**'],
-    },
-  },
-  // 監視するパッケージは、最適化から除外する必要があります。
-  // これにより、依存関係グラフに現れ、ホットリロードをトリガーできるようになります。
-  optimizeDeps: {
-    exclude: ['your-package-name'],
-  },
-})
-```
+Vite サーバのウォッチャはデフォルトで `root` を監視し、`.git/` と `node_modules/` ディレクトリをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
 `null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッタを返しますが、`add` や `unwatch` を呼び出しても何も起こりません。
+
+::: warning `node_modules` 内のファイルの監視
+
+現在、`node_modules` 内のファイルやパッケージを監視することはできません。 さらなる進捗状況と回避策については、[issue #8619](https://github.com/vitejs/vite/issues/8619) を参照してください。
+
+:::
 
 ::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
 
