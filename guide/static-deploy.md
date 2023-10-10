@@ -233,7 +233,7 @@ $ wrangler login
 $ npm run build
 
 # 新しいデプロイの作成
-$ npx wrangler pages publish dist
+$ npx wrangler pages deploy dist
 ```
 
 生成物のアップロード後、Wrangler はサイトの確認のためのプレビュー URL を表示します。Cloudflare Pages ダッシュボートにログインすると、新しいプロジェクトが表示されます。
