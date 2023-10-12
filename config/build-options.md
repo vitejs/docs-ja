@@ -43,7 +43,7 @@ type ResolveModulePreloadDependenciesFn = (
   context: {
     importer: string
   },
-) => (string | { runtime?: string })[]
+) => string[]
 ```
 
 `resolveDependencies` 関数は動的インポートごとに依存するチャンクのリストとともに呼び出され、またエントリー HTML ファイルでインポートされたチャンクに対しても呼び出されます。新しい依存関係の配列は、これらのフィルタリングされた依存関係、あるいはそれ以上の依存関係を注入し、そのパスを修正した新しい依存関係配列を返すことができます。`deps` のパスは `build.outDir` からの相対パスです。`hostType === 'js'` の場合は `hostId` への相対パスを返すことができます。この場合、このモジュールを HTML ヘッドにプリロードする際に、絶対パスを取得するために `new URL(dep, import.meta.url)` が使用されます。
