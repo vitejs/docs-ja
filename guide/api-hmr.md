@@ -37,6 +37,10 @@ interface ViteHotContext {
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
+  off<T extends string>(
+    event: T,
+    cb: (payload: InferCustomEventPayload<T>) => void,
+  ): void
   send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
 ```
@@ -179,6 +183,10 @@ HMR イベントを購読します。
 - `'vite:ws:connect'` WebSocket 接続が（再）確立されたとき
 
 カスタム HMR イベントは、プラグインから送信することもできます。詳細は [handleHotUpdate](./api-plugin#handlehotupdate) を参照してください。
+
+## `hot.off(event, cb)`
+
+イベントリスナーからコールバックを削除します。
 
 ## `hot.send(event, data)`
 
