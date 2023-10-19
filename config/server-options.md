@@ -174,6 +174,34 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 :::
 
+## server.warmup
+
+- **型:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+
+変換するファイルをウォームアップし、結果を事前にキャッシュします。これにより、サーバー起動時の初期ページ読み込みが改善され、変換ウォーターフォールを防げます。
+
+`clientFiles` および `ssrFiles` オプションは、`root` を基準としたファイルパスか glob パターンの配列を受け入れます。追加しすぎると変換処理が遅くなる可能性があるため、ホットコードであるファイルのみを追加するようにしてください。
+
+ウォームアップがなぜ役立つのかを理解するために、例を示します。左側のファイルが右側のファイルをインポートするこのモジュールグラフがあるとします:
+
+```
+main.js -> Component.vue -> big-file.js -> large-data.json
+```
+
+インポートされた ID はファイルが変換された後でないと分からないので、`Component.vue` の変換に時間がかかると、`big-file.js` は順番が来るまで待たなければなりません。これにより内部的なウォーターフォールが発生します。
+
+`big-file.js` やアプリ内のホットパスであることがわかっているファイルをウォームアップすると、それらのファイルはキャッシュされ、すぐに提供できるようになります。
+
+```js
+export default defineConfig({
+  server: {
+    warmup: {
+      clientFiles: ['./src/big-file.js', './src/components/*.vue'],
+    },
+  },
+})
+```
+
 ## server.watch
 
 - **型:** `object| null`
