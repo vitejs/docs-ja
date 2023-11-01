@@ -7,7 +7,7 @@
 
 プロジェクトのルートディレクトリ（`index.html` が置かれている場所）。絶対パス、または現在のワーキングディレクトリからの相対パスを指定できます。
 
-詳細は [プロジェクトルート](/guide/#index-html-とプロジェクトルート) を参照してください。
+詳細は [プロジェクトルート](/guide/#index-html-and-project-root) を参照してください。
 
 ## base
 
@@ -90,7 +90,7 @@ const obj = {
 
 `publicDir` を `false` に設定すると、この機能は無効になります。
 
-詳細は [`public` ディレクトリ](/guide/assets#public-ディレクトリ) を参照してください。
+詳細は [`public` ディレクトリ](/guide/assets#the-public-directory) を参照してください。
 
 ## cacheDir
 
@@ -111,7 +111,7 @@ const obj = {
 より高度なカスタム解決は[プラグイン](/guide/api-plugin)によって実現できます。
 
 :::warning エイリアスの操作
-[SSR の外部化された依存関係](/guide/ssr#外部-ssr)のエイリアスを設定した場合は、実際の `node_modules` パッケージのエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.io/aliases/) の両方で `npm:` のエイリアスをサポートします。
+[SSR の外部化された依存関係](/guide/ssr#ssr-externals)のエイリアスを設定した場合は、実際の `node_modules` パッケージのエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.io/aliases/) の両方で `npm:` のエイリアスをサポートします。
 :::
 
 ## resolve.dedupe
@@ -455,7 +455,7 @@ define: {
 - **型:** `'spa' | 'mpa' | 'custom'`
 - **デフォルト:** `'spa'`
 
-アプリケーションがシングルページアプリケーション (SPA) か、[マルチページアプリケーション (MPA)](../guide/build#マルチページアプリ)か、カスタムアプリケーション (SSR と独自に HTML を処理するフレームワーク):
+アプリケーションがシングルページアプリケーション (SPA) か、[マルチページアプリケーション (MPA)](../guide/build#multi-page-app)か、カスタムアプリケーション (SSR と独自に HTML を処理するフレームワーク):
 
 - `'spa'`: HTML ミドルウェアを含め、SPA 用のフォールバックを使用する。プレビューで `single: true` を [sirv](https://github.com/lukeed/sirv) に設定する
 - `'mpa'`: HTML ミドルウェアを含める

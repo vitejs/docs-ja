@@ -12,7 +12,7 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.DEV`**: {boolean} アプリが開発で動作しているかどうか（常に `import.meta.env.PROD` の逆）
 
-- **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#条件付きロジック)で動作しているかどうか
+- **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#conditional-logic)で動作しているかどうか
 
 ### プロダクションでの置換
 

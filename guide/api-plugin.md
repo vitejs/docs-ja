@@ -17,7 +17,7 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-プラグインの互換性)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/plugin-development/#conventions)を使用することをお勧めします。
+プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/plugin-development/#conventions)を使用することをお勧めします。
 
 - Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
 - package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
@@ -36,7 +36,7 @@ Vite 専用プラグインの場合
 - React プラグインには `vite-plugin-react-` のプレフィックス
 - Svelte プラグインには `vite-plugin-svelte-` のプレフィックス
 
-[仮想モジュールの規約](#仮想モジュールの規約)も参照してください。
+[仮想モジュールの規約](#virtual-modules-convention)も参照してください。
 
 ## プラグインの設定
 
@@ -105,9 +105,9 @@ export default function myPlugin() {
 
 ### 仮想ファイルのインポート
 
-[次のセクション](#仮想モジュールの規約)の例を参照してください。
+[次のセクション](#virtual-modules-convention)の例を参照してください。
 
-## 仮想モジュールの規約
+## 仮想モジュールの規約 {#virtual-modules-convention}
 
 仮想モジュールは、通常の ESM インポート構文を使用して、ビルド時の情報をソースファイルに渡すことができる便利な機構です。
 
@@ -446,7 +446,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     }
     ```
 
-## プラグインの順序
+## プラグインの順序 {#plugin-ordering}
 
 Vite プラグインは、さらに（webpack loader と同様の）`enforce` プロパティを指定して、適用の順序を調整できます。`enforce` の値は `"pre"` か `"post"` のいずれかです。解決されたプラグインは、以下の順序になります:
 
@@ -480,7 +480,7 @@ apply(config, { command }) {
 }
 ```
 
-## Rollup プラグインの互換性
+## Rollup プラグインの互換性 {#rollup-plugin-compatibility}
 
 かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバのコンテキストでは意味をなさないためです。
 
@@ -528,7 +528,7 @@ normalizePath('foo/bar') // 'foo/bar'
 
 Vite は [`@rollup/pluginutils` の `createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) 関数を公開し、Vite 固有のプラグインやインテグレーションが標準の include/exclude フィルタリングのパターンを使用できるようにします。これは Vite コア自体でも使用されています。
 
-## クライアントサーバーとの通信
+## クライアントサーバーとの通信 {#client-server-communication}
 
 Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。
 
@@ -570,7 +570,7 @@ if (import.meta.hot) {
 
 ### クライアントからサーバーへ
 
-クライアントからサーバーへイベント送信する時 [`hot.send`](/guide/api-hmr.html#hot-send-event-payload) を使うことができます:
+クライアントからサーバーへイベント送信する時 [`hot.send`](/guide/api-hmr.html#hot-send-event-data) を使うことができます:
 
 ```ts
 // クライアント側

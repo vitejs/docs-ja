@@ -43,7 +43,7 @@ Vite はサーバサイドレンダリング ( SSR ) の組み込みサポート
 
 正確に置き換えることができる限り、`<!--ssr-outlet-->` の代わりに任意のプレースホルダを使用することができます。
 
-## 条件付きロジック
+## 条件付きロジック {#conditional-logic}
 
 SSR とクライアントに基づいて条件付きロジックを実行する場合は次を使用できます。
 
@@ -55,7 +55,7 @@ if (import.meta.env.SSR) {
 
 これはビルド中に静的に置き換えられるため、未使用のブランチのツリーシェイクが可能になります。
 
-## 開発サーバのセットアップ
+## 開発サーバのセットアップ {#setting-up-the-dev-server}
 
 SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
@@ -207,7 +207,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 ルートと特定のルートに必要なデータが事前にわかっている場合は、本番 SSR と同じロジックを使用して、これらのルートを静的 HTML に先読みでレンダリングすることができます。これは、SSG の形式と見なすこともできます。 詳しくは [demo pre-render script](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js) をご覧ください。
 
-## 外部 SSR
+## 外部 SSR {#ssr-externals}
 
 SSR を実行する場合、依存関係はデフォルトで Vite の SSR トランスフォームモジュールシステムから「外部化」されます。これにより、開発とビルドの両方を高速化します。
 
@@ -219,7 +219,7 @@ Vite の機能がトランスパイルされてない状態で使われている
 あるパッケージを別のパッケージにリダイレクトするエイリアスを設定した場合は、SSR の外部化された依存関係で機能するように、代わりに実際の `node_modules` パッケージにエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.js.org/en/aliases) の両方で `npm:` のエイリアスをサポートします。
 :::
 
-## SSR 固有のプラグインロジック
+## SSR 固有のプラグインロジック {#ssr-specific-plugin-logic}
 
 Vue や Svelte などの一部のフレームワークは、クライアントと SSR に基づいてコンポーネントをさまざまな形式にコンパイルします。条件付き変換をサポートするために、Vite は次のプラグインフックの `options` オブジェクトに、追加の `ssr` プロパティをに渡します:
 

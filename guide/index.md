@@ -22,7 +22,7 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 デフォルトのビルドは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
 
-## Vite をオンラインで試す
+## Vite をオンラインで試す {#trying-vite-online}
 
 [StackBlitz](https://vite.new/) で Vite をオンラインで試すことができます。Vite ベースのビルドセットアップをブラウザ上で直接実行するので、ローカルセットアップとほぼ同じですが、マシンに何もインストールする必要がありません。`vite.new/{template}` に移動して、使用するフレームワークを選択できます。
 
@@ -103,7 +103,7 @@ npm run dev
 npx degit user/project#main my-project
 ```
 
-## `index.html` とプロジェクトルート
+## `index.html` とプロジェクトルート {#index-html-and-project-root}
 
 お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバで、`index.html` はアプリケーションのエントリポイントです。
 
@@ -111,7 +111,7 @@ Vite は `index.html` をソースコードとして、またモジュールグ�
 
 静的な http サーバと同様に、Vite には、ファイルの提供元となる「ルートディレクトリ」の概念があります。ドキュメントの残りの部分では `<root>` として示されています。ソースコード内の絶対 URL は、プロジェクトルートをベースとして使って解決されるため、通常の静的ファイルサーバを使用しているかのようにコードを記述できます（遥かに強力であることを除いては！）。Vite はルート外のファイルシステムの場所に解決される依存関係を処理することもできるため、モノレポベースの構成でも使用できます。
 
-Vite は複数の `.html` エントリポイントを持つ[マルチページアプリ](./build#マルチページアプリ)にも対応しています。
+Vite は複数の `.html` エントリポイントを持つ[マルチページアプリ](./build#multi-page-app)にも対応しています。
 
 #### 代替ルートの指定
 

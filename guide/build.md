@@ -2,7 +2,7 @@
 
 作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [静的サイトのデプロイ](./static-deploy) をご覧ください。
 
-## ブラウザの互換性
+## ブラウザの互換性 {#browser-compatibility}
 
 本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、 [ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、 [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザを対象としています:
 
@@ -27,7 +27,7 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 例外はその場で動的に URL を連結する必要がある場合です。この場合は、グローバルに注入された `import.meta.env.BASE_URL` 変数を使用することができ、これがベースのパブリックパスになります。この変数はビルド時に静的に置き換えられるので、そのままの形で表示されなければならないことに注意してください（つまり、`import.meta.env['BASE_URL']` は動作しません）。
 
-ベースパスの高度な制御については、[高度なベースパスの設定](#高度なベースパスの設定)を参照してください。
+ベースパスの高度な制御については、[高度なベースパスの設定](#advanced-base-options)を参照してください。
 
 ## ビルドのカスタマイズ
 
@@ -81,7 +81,7 @@ export default defineConfig({
 
 `--watch` フラグを有効にすると、`vite.config.js` やバンドルするファイルを変更した際に、リビルドがトリガーされます。
 
-## マルチページアプリ
+## マルチページアプリ {#multi-page-app}
 
 以下のようなソースコード構造があるとします:
 
@@ -120,7 +120,7 @@ export default defineConfig({
 
 HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクトのエントリに指定された名前を無視し、代わりに dist フォルダに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
 
-## ライブラリモード
+## ライブラリモード {#library-mode}
 
 ブラウザ向けのライブラリを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
 
@@ -226,7 +226,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ライブラリモードには、ブラウザ向けのライブラリや JS フレームワークライブラリのためのシンプルで opinionated な設定が含まれています。非ブラウザライブラリをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
 :::
 
-## 高度なベースパスの設定
+## 高度なベースパスの設定 {#advanced-base-options}
 
 ::: warning
 この機能は実験的です。[フィードバックをしてください](https://github.com/vitejs/vite/discussions/13834)。
@@ -237,7 +237,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 - 生成されたエントリー HTML ファイル (SSR により処理されることがある)
 - 生成されたハッシュ付きのアセット (JS や CSS や画像などのほかのファイル)
-- コピーされた[パブリックファイル](assets.md#public-ディレクトリ)
+- コピーされた[パブリックファイル](assets.md#the-public-directory)
 
 このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.renderBuiltUrl` により、高度なベースパスの設定に対する実験的なサポートを提供します。
 
