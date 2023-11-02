@@ -238,7 +238,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 
 ミドルウェアモードで Vite サーバを作成します。
 
-- **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバのセットアップ](/guide/ssr#開発サーバのセットアップ)
+- **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバのセットアップ](/guide/ssr#setting-up-the-dev-server)
 
 - **例:**
 
@@ -283,14 +283,14 @@ createServer()
 
 ディレクトリとファイルの両方を指定することができます。
 
-Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)にフォールバックします。
+Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-and-project-root)にフォールバックします。
 
 - `package.json` に `workspaces` フィールドが含まれている
 - 以下のファイルのいずれかを含んでいる
   - `lerna.json`
   - `pnpm-workspace.yaml`
 
-カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-とプロジェクトルート)からの相対パスを指定します。例えば:
+カスタムワークスペースのルートを指定するパスを受け取ります。絶対パスか、[プロジェクトのルート](/guide/#index-html-and-project-root)からの相対パスを指定します。例えば:
 
 ```js
 export default defineConfig({

@@ -4,7 +4,7 @@
 
 - **型:** `string | string[]`
 - **デフォルト:** `'modules'`
-- **関連:** [ブラウザの互換性](/guide/build#ブラウザの互換性)
+- **関連:** [ブラウザの互換性](/guide/build#browser-compatibility)
 
 最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートするブラウザを対象にします。Vite は `'modules'` を `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']` へ置き換えます。
 
@@ -28,7 +28,7 @@ esbuild で安全にトランスパイルできない機能がコードに含ま
 import 'vite/modulepreload-polyfill'
 ```
 
-注意: この Polyfill は[ライブラリモード](/guide/build#ライブラリモード)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
+注意: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けた方が良いでしょう。
 
 ポリフィルは `{ polyfill: false }` を使って無効にできます。
 
@@ -71,7 +71,7 @@ modulePreload: {
 - **型:** `string`
 - **デフォルト:** `dist`
 
-出力ディレクトリを指定します（[プロジェクトルート](/guide/#index-html-とプロジェクトルート)からの相対パス）。
+出力ディレクトリを指定します（[プロジェクトルート](/guide/#index-html-and-project-root)からの相対パス）。
 
 ## build.assetsDir
 
@@ -153,7 +153,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 ## build.lib
 
 - **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
-- **関連:** [ライブラリモード](/guide/build#ライブラリモード)
+- **関連:** [ライブラリモード](/guide/build#library-mode)
 
 ライブラリとしてビルドします。ライブラリではエントリとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` で、複数のエントリを使用する場合は `['es', 'cjs']` です。`fileName` は出力されるパッケージファイルの名前です。デフォルトの `fileName` は package.json の name オプションですが、`format` と `entryAlias` を引数にとる関数として定義することもできます。
 

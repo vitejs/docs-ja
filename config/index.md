@@ -2,9 +2,9 @@
 title: Vite の設定
 ---
 
-# Vite の設定
+# Vite の設定 {#configuring-vite}
 
-コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-とプロジェクトルート)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします（その他の JS および TS の拡張子もサポートされています）。
+コマンドラインから `vite` を実行すると、Vite は[プロジェクトルート](/guide/#index-html-and-project-root)内の `vite.config.js` という名前の設定ファイルを自動的に解決しようとします（その他の JS および TS の拡張子もサポートされています）。
 
 最も基本的な設定ファイルは次のようになります:
 

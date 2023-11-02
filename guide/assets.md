@@ -28,9 +28,9 @@ document.getElementById('hero-img').src = imgUrl
 
 - Git LFS のプレースホルダは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。インライン化するには、ビルドする前に必ずファイルの内容を Git LFS 経由でダウンロードするようにしてください。
 
-- TypeScript はデフォルトでは静的アセットのインポートを有効なモジュールとして認識しません。これを修正するには、[`vite/client`](./features#クライアントでの型)を追加します。
+- TypeScript はデフォルトでは静的アセットのインポートを有効なモジュールとして認識しません。これを修正するには、[`vite/client`](./features#client-types)を追加します。
 
-### 明示的な URL のインポート
+### 明示的な URL のインポート {#explicit-url-imports}
 
 内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
 
@@ -39,7 +39,7 @@ import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
-### アセットを文字列としてインポートする
+### アセットを文字列としてインポートする {#importing-asset-as-string}
 
 アセットは末尾に `?raw` を付与することで文字列としてインポートすることができます。
 
@@ -70,7 +70,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 詳細は [Web Worker section](./features.md#web-workers) を参照してください。
 
-## `public` ディレクトリ
+## `public` ディレクトリ {#the-public-directory}
 
 アセットが以下のような場合のとき:
 

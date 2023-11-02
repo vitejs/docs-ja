@@ -18,7 +18,7 @@ import { someMethod } from 'my-dep'
 
 **依存関係は積極的にキャッシュされます**
 
-Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#ブラウザ-キャッシュ)に従ってください。
+Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従ってください。
 
 ## Hot Module Replacement
 
@@ -88,7 +88,7 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以�
 
 もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
 
-### クライアントでの型
+### クライアントでの型 {#client-types}
 
 Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `d.ts` の定義ファイルを追加します:
 
@@ -184,7 +184,7 @@ export default defineConfig({
 
 Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に書き換えられます。
 
-`@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています ([CSS Pre-processors](#css-プリプロセッサ)を参照)。
+`@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています ([CSS Pre-processors](#css-pre-processors)を参照)。
 
 ### PostCSS
 
@@ -218,7 +218,7 @@ import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
 ```
 
-### CSS プリプロセッサ
+### CSS プリプロセッサ {#css-pre-processors}
 
 Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
 
@@ -366,7 +366,7 @@ const modules = {
 
 ### glob インポートでの形式の変換
 
-`import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#アセットを文字列としてインポートする)と同様）:
+`import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#importing-asset-as-string)と同様）:
 
 ```js
 const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
@@ -534,7 +534,7 @@ init({
 
 ### WebAssembly モジュールへのアクセス
 
-もし `Module` オブジェクトにアクセスする必要がある場合、例えば複数回インスタンス化する場合は、[明示的な URL のインポート](./assets#明示的な-url-のインポート)を使用してアセットを解決してから、インスタンス化を実行してください:
+もし `Module` オブジェクトにアクセスする必要がある場合、例えば複数回インスタンス化する場合は、[明示的な URL のインポート](./assets#explicit-url-imports)を使用してアセットを解決してから、インスタンス化を実行してください:
 
 ```js
 import wasmUrl from 'foo.wasm?url'
@@ -616,7 +616,7 @@ import MyWorker from './worker?worker&url'
 
 すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/worker-options.md) を見てください。
 
-## ビルドの最適化
+## ビルドの最適化 {#build-optimizations}
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。
 

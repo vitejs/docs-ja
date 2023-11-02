@@ -34,7 +34,7 @@ export default defineConfig({
 Vite は、一般的な Web 開発パターンをすぐに使えるようにサポートすることを目的としています。Vite や互換性のある Rollup プラグインを探す前に、 [特徴ガイド](../guide/features.md) を確認してください。 Rollup プロジェクトでプラグインが必要になる多くのケースは、 Vite ですでにカバーされています。
 :::
 
-公式プラグインの情報は、 [プラグインのセクション](../plugins/) をご覧ください。コミュニティのプラグインは [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) に一覧があります。互換性のある Rollup プラグインは、 [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) に互換性のある公式 Rollup プラグインの一覧と使い方があります。または一覧になければ、 [互換性のある Rollup プラグインのセクション](../guide/api-plugin#rollup-プラグインの互換性) を確認してください。
+公式プラグインの情報は、 [プラグインのセクション](../plugins/) をご覧ください。コミュニティのプラグインは [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) に一覧があります。互換性のある Rollup プラグインは、 [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) に互換性のある公式 Rollup プラグインの一覧と使い方があります。または一覧になければ、 [互換性のある Rollup プラグインのセクション](../guide/api-plugin#rollup-plugin-compatibility) を確認してください。
 
 [推奨される規約](./api-plugin.md#規約) に従ったプラグインは次の方法でも見つけることができます。 Vite プラグインは [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity)、 Rollup プラグインは [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) です。
 
@@ -61,7 +61,7 @@ export default defineConfig({
 })
 ```
 
-詳しくは [プラグイン API ガイド](./api-plugin.md#プラグインの順序) を参照してください。また、 `enforce` ラベルと人気のプラグインの使い方は [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) の互換性一覧にあります。
+詳しくは [プラグイン API ガイド](./api-plugin.md#plugin-ordering) を参照してください。また、 `enforce` ラベルと人気のプラグインの使い方は [Vite Rollup プラグイン](https://vite-rollup-plugins.patak.dev) の互換性一覧にあります。
 
 ## 条件付きの適用
 
