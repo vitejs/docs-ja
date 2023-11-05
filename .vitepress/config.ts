@@ -255,7 +255,7 @@ export default defineConfig({
               link: '/guide/troubleshooting',
             },
             {
-              text: 'v3 からの移行',
+              text: 'v4 からの移行',
               link: '/guide/migration',
             },
           ],
