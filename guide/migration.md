@@ -104,7 +104,7 @@ Vite 4 では、[`worker.plugins`](/config/worker-options.md#worker-plugins) は
 
 Vite 4 では、[`appType`](/config/shared-options.md#apptype) が `'spa'`（デフォルト）に設定されている場合でも、開発中に `.` を含むパスにアクセスした際に、index.html　にフォールバックしませんでした。Vite 5 からは、index.html にフォールバックします。
 
-なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザはコンソールに 404 エラーメッセージを表示しなくなります。
+なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザはコンソールに 404 エラーメッセージを表示しなくなるので注意してください。
 
 ### 開発時とプレビュー時の HTML 配信動作の一致するように
 
