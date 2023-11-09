@@ -18,7 +18,6 @@ vite [root]
 | ------------------------ | ----------------------------------------------------------------- |
 | `--host [host]`          | ホスト名を指定する (`string`)                                       |
 | `--port <port>`          | ポートを指定する (`number`)                                           |
-| `--https`                | TLS + HTTP/2 を使用する (`boolean`)                                      |
 | `--open [path]`          | 起動時にブラウザを起動する (`boolean \| string`)                     |
 | `--cors`                 | CORS を有効化する (`boolean`)                                           |
 | `--strictPort`           | 指定されたポートが既に使用されている場合は終了する (`boolean`)              |
@@ -115,7 +114,6 @@ vite preview [root]
 | `--host [host]`          | ホスト名を指定する (`string`)                          |
 | `--port <port>`          | ポートを指定する (`number`)                              |
 | `--strictPort`           | 指定されたポートが既に使用されている場合は終了する (`boolean`) |
-| `--https`                | TLS + HTTP/2 を使用する (`boolean`)                         |
 | `--open [path]`          | 起動時にブラウザを起動する (`boolean \| string`)        |
 | `--outDir <dir>`         | 出力ディレクトリ（デフォルト: `dist`） (`string`)         |
 | `-c, --config <file>`    | 指定された設定ファイルを使用する (`string`)                 |
