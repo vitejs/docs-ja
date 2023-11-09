@@ -266,11 +266,3 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 :::tip 注意
 ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。
 :::
-
-## SSR 形式
-
-デフォルトでは、Vite は SSR バンドルを ESM で生成します。`ssr.format` 設定の実験的なサポートがありますが、推奨されていません。SSR の開発に関する今後の取り組みは ESM を基本とし、後方互換性のために CommonJS は引き続き利用可能です。もし、あなたのプロジェクトで SSR に ESM を利用できない場合は、 `legacy.buildSsrCjsExternalHeuristics: true` を設定することで、[Vite v2 と同じ外部化戦略](https://v2.vitejs.dev/guide/ssr.html#ssr-externals)を利用して CJS バンドルを生成できます。
-
-:::warning 警告
-実験的な `legacy.buildSsrCjsExternalHeuristics` と `ssr.format: 'cjs'` は Vite 5 で削除される予定です。[このディスカッション](https://github.com/vitejs/vite/discussions/13816)で詳細情報を見つけ、フィードバックしてください。
-:::
