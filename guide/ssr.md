@@ -259,6 +259,10 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 - すべての依存関係を `noExternal` として扱う
 - Node.js のビルドインがインポートされた場合、エラーを投げる
 
+## SSR の解決条件
+
+デフォルトでは、パッケージエントリの解決は [`resolve.conditions`](../config/shared-options.md#resolve-conditions) で設定された条件を SSR ビルドに使用します。この動作をカスタマイズするには、[`ssr.resolve.conditions`](../config/ssr-options.md#ssr-resolve-conditions)と[`ssr.resolve.externalConditions`](../config/ssr-options.md#ssr-resolve-externalconditions) を使用します。
+
 ## Vite CLI
 
 コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
