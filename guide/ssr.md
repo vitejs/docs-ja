@@ -16,10 +16,16 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 
 ## プロジェクトの例
 
-Vite はサーバサイドレンダリング ( SSR ) の組み込みサポートを提供します。Vite プレイグラウンドには、Vue 3 および React の SSR セットアップの例が含まれています。これらは、このガイドのリファレンスとして使用できます。:
+Vite はサーバサイドレンダリング ( SSR ) の組み込みサポートを提供します。[`create-vite-extra`](https://github.com/bluwy/create-vite-extra) には、このガイドのリファレンスとして使用できる SSR セットアップの例が含まれています:
 
-- [Vue 3](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react)
+- [Vanilla](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vanilla)
+- [Vue](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vue)
+- [React](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
+- [Preact](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-preact)
+- [Svelte](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-svelte)
+- [Solid](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-solid)
+
+[`create-vite` を実行](./index.md#scaffolding-your-first-vite-project)し、フレームワークオプションで `Others > create-vite-extra` を選択することで、これらのプロジェクトをローカルで生成することもできます。
 
 ## ソースファイルの構成
 
@@ -177,7 +183,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 - `vite` 開発サーバの作成とすべての使用を開発専用サーバかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 
-詳しくは [Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue) と [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react) のデモを参照してください。
+動作するセットアップについては、[サンプルプロジェクト](#example-projects)を参照してください。
 
 ## Preload Directives の作成
 
