@@ -154,19 +154,9 @@ Vite には「許可された条件」のリストがあり、許可されたリ
 ## resolve.mainFields
 
 - **型:** `string[]`
-- **デフォルト:** `['module', 'jsnext:main', 'jsnext']`
+- **デフォルト:** `['browser', 'module', 'jsnext:main', 'jsnext']`
 
 パッケージのエントリポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
-
-## resolve.browserField
-
-- **型:** `boolean`
-- **デフォルト:** `true`
-- **非推奨**
-
-`browser` フィールドへの解決を有効にするかどうか。
-
-将来的に `resolve.mainFields` のデフォルト値は `['browser', 'module', 'jsnext:main', 'jsnext']` となり、このオプションは削除される予定です。
 
 ## resolve.extensions
 
