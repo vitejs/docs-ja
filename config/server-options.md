@@ -56,7 +56,7 @@ WSL2 上で Vite を動作させる場合、LAN からサーバーにアクセ�
 
 ## server.https
 
-- **型:** `boolean | https.ServerOptions`
+- **型:** `https.ServerOptions`
 
 TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-proxy)も使用されている場合にのみ TLS にダウングレードされるので注意してください。
 
