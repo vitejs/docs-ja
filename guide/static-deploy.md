@@ -220,7 +220,7 @@ Vercel CLI
 1. [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/) をインストールします。
 2. `wrangler login` を使って、Cloudflare アカウントで Wrangler を認証します。
 3. ビルドコマンドを実行します。
-4. `npx wrangler pages publish dist` を使ってデプロイします。
+4. `npx wrangler pages deploy dist` を使ってデプロイします。
 
 ```bash
 # Wrangler CLI をインストール
