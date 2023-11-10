@@ -33,6 +33,8 @@ VITE_CJS_TRACE=true vite dev
 VITE_CJS_IGNORE_WARNING=true vite dev
 ```
 
+なお、postcss の設定ファイルは ESM + TypeScript（`"type": "module"` の `.mts` や `.ts`）にはまだ対応していないので注意してください。もし、postcss の設定ファイルが `.ts` で、package.json に `"type"： "module"` を追加した場合、postcss の設定ファイル名を `.cts` に変更する必要があります。
+
 ## CLI
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'`
