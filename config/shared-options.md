@@ -37,17 +37,18 @@ config でこれを指定すると、**serve と build 両方**のデフォル�
 
 グローバル定数の置換を定義します。エントリは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
-- 文字列の値は未加工の式として評価されるので、文字列の定数を定義する場合は、**明示的に引用符で囲う必要があります**（例えば `JSON.stringify` を使う）。
+Vite は [esbuild の define](https://esbuild.github.io/api/#define) を使って置換を行うので、値の式は JSON でシリアライズ可能な値（null、boolean、数値、文字列、配列、オブジェクト）または単一の識別子を含む文字列でなければなりません。文字列以外の値の場合、Vite は自動的に `JSON.stringify` で文字列に変換します。
 
-- [esbuild の動作](https://esbuild.github.io/api/#define)と矛盾しないように、式は JSON オブジェクト（null, boolean, number, string, array, object）か単一の識別子でなければなりません。
+**例:**
 
-- マッチした部分が他の文字、数字、`_` または `$` で囲まれていない場合のみ置換されます。
-
-::: warning
-構文解析なしの単純なテキスト置換として実装されているため、`define` は「定数」にのみ使用することをおすすめします。
-
-例えば、`process.env.FOO` や `__APP_VERSION__` などが適しています。しかし、`process` や `global` はこのオプションに入れるべきではありません。変数は代わりに Shim や Polyfill で使用できます。
-:::
+```js
+export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify('v1.0.0'),
+    __API_URL__: 'window.__backend_api_url',
+  },
+})
+```
 
 ::: tip 注意
 TypeScript を使用する場合、型チェックと自動補完を利用するには `env.d.ts` または `vite-env.d.ts` ファイルに型定義を追加してください。
@@ -57,20 +58,6 @@ TypeScript を使用する場合、型チェックと自動補完を利用する
 ```ts
 // vite-env.d.ts
 declare const __APP_VERSION__: string
-```
-
-:::
-
-::: tip 注意
-開発環境とビルド環境で `define` の実装が異なるので、矛盾を回避するために、いくつかの使い方を避ける必要があります。
-
-例:
-
-```js
-const obj = {
-  __NAME__, // オブジェクトのショートハンドプロパティ名を定義しないこと
-  __KEY__: value, // オブジェクトのキーを定義しないこと
-}
 ```
 
 :::
