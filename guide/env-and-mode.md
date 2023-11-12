@@ -108,6 +108,8 @@ Vite は HTML ファイルでの環境変数の置換もサポートしていま
 
 環境変数が `import.meta.env` に存在しない場合（例: `%NON_EXISTENT%`）、JS では `import.meta.env.NON_EXISTENT` が `undefined` として置換されるのとは異なり、（HTML では）無視されて置換されません。
 
+Vite は多くのフレームワークで使用されているため、条件分岐のような複雑な置換については意図的に主張を持たないようにしています。Vite は[既存のユーザーランドプラグイン](https://github.com/vitejs/awesome-vite#transformers)、または [`transformIndexHtml` フック](./api-plugin#transformindexhtml)を実装したカスタムプラグインを使って拡張できます。
+
 ## モード {#modes}
 
 デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
