@@ -48,10 +48,10 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 ## 条件付き設定
 
-コマンド（`dev`/`serve` か `build`）や使用されている[モード](/guide/env-and-mode)や SSR ビルド (`ssrBuild`) かどうかに基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
+設定がコマンド（`serve` や `build`）、使用されている[モード](/guide/env-and-mode)、SSR ビルドかどうか（`isSsrBuild`）、ビルドのプレビューかどうか（`isPreview`）に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js
-export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   if (command === 'serve') {
     return {
       // dev 固有の設定
@@ -67,7 +67,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
 Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
 
-`ssrBuild` は実験的です。より普遍的な `ssr` フラグの代わりにビルド時のみ利用できるのは、開発時は、SSR のリクエストも SSR でないリクエストも設定を共有する同じサーバにより処理されているためです。ブラウザと SSR ビルドで別々のコマンドがないツールでは、値が `undefined` になることがあるため、`true` と `false` に対する明示的な比較を使用してください。
+`isSsrBuild` と `isPreview` はそれぞれ `build` コマンドと `serve` コマンドの種類を区別するための追加のオプションフラグです。Vite の設定を読み込むツールの中には、これらのフラグをサポートしておらず、代わりに `undefined` を渡すものもあります。そのため、明示的に `true` と `false` を比較することをおすすめします。
 
 ## 非同期の設定
 

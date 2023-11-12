@@ -251,10 +251,12 @@ async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
   defaultMode = 'development',
+  defaultNodeEnv = 'development',
+  isPreview = false,
 ): Promise<ResolvedConfig>
 ```
 
-`command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）は `serve` になります。
+`command` の値は dev と preview では `serve`、build では `build` になります。
 
 ## `mergeConfig`
 
