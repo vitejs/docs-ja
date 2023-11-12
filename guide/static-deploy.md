@@ -299,7 +299,7 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
 
 ## Azure Static Web Apps
 
-Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) サービスを使って、Vite アプリを素早くデプロイすることができます。必要なもの:
+Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) サービスを使って、Vite アプリを素早くデプロイできます。必要なもの:
 
 - Azure アカウントとサブスクリプションキー。[無料で Azure アカウント](https://azure.microsoft.com/free)を作成できます。
 - [GitHub](https://github.com) にプッシュされたアプリのコード。
@@ -341,3 +341,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 ## AWS Amplify Hosting
 
 [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/) を使用して静的サイトをデプロイする場合、この[指示](https://docs.amplify.aws/guides/hosting/vite/q/platform/js/)に従います。
+
+## Kinsta 静的サイトホスティング
+
+以下の[手順](https://kinsta.com/docs/react-vite-example/)に従って、Vite アプリを静的サイトとして [Kinsta](https://kinsta.com/static-site-hosting/) にデプロイできます。
