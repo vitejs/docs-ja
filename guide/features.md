@@ -57,6 +57,8 @@ export type { T }
 
 #### `isolatedModules`
 
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#isolatedModules)
+
 `true` に設定する必要があります。
 
 `esbuild` は型情報なしにトランスパイルを行うだけなので、const enum や暗黙の型のみのインポートなどの特定の機能をサポートしていないからです。
@@ -67,7 +69,11 @@ export type { T }
 
 #### `useDefineForClassFields`
 
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
+
 Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以上の場合、デフォルト値は `true` になります。これは [`tsc` 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
+
+他の TypeScript ターゲットはデフォルトで `false` になります。
 
 しかし、他のプログラミング言語や古いバージョンの TypeScript を使用している人にとっては直感的に理解できないかもしれません。
 移行の詳細については、[TypeScript 3.7 リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)を参照してください。
@@ -78,13 +84,32 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以�
 
 しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
 
+#### `target`
+
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#target)
+
+Vite はデフォルトでは設定された `target` 値で TypeScript をトランスパイルせず、`esbuild` と同じ動作に従います。
+
+代わりに [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
+
+::: warning `useDefineForClassFields`
+`target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザでサポートされていない可能性があります。
+
+そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
+:::
+
 ### ビルド結果に影響するその他のコンパイラオプション
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
 - [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
+- [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax)
+- [`jsx`](https://www.typescriptlang.org/tsconfig#jsx)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
+- [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
+- [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
+- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
 
