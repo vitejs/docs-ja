@@ -207,6 +207,8 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
   - `configurePreviewServer` フックは `PreviewServerForHook` 型の代わりに　`PreviewServer` 型を受け入れるようになりました。
 - [[#14818] refactor(preview)!: use base middleware](https://github.com/vitejs/vite/pull/14818)
   - `configurePreviewServer` から返された関数で追加されたミドルウェアは、`req.url` の値を比較する際に `base` の値を持たなくなりました。これにより、開発サーバーと整合性を取るようになりました。必要であれば、`configResolved` フックから `base` を確認できます。
+- [[#14834] fix(types)!: expose httpServer with Http2SecureServer union](https://github.com/vitejs/vite/pull/14834)
+  - `http.Server | http2.Http2SecureServer` は、適切な場合には `http.Server` の代わりに使用されるようになりました。
 
 また、少数のユーザーにのみ影響する破壊的変更が他にもあります。
 
