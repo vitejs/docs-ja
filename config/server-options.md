@@ -177,26 +177,20 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 ## server.warmup
 
 - **型:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+- **関連:** [よく使うファイルのウォームアップ](/guide/performance.html#warm-up-frequently-used-files)
 
 変換するファイルをウォームアップし、結果を事前にキャッシュします。これにより、サーバー起動時の初期ページ読み込みが改善され、変換ウォーターフォールを防げます。
 
-`clientFiles` および `ssrFiles` オプションは、`root` を基準としたファイルパスか glob パターンの配列を受け入れます。追加しすぎると変換処理が遅くなる可能性があるため、ホットコードであるファイルのみを追加するようにしてください。
+`clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`fast-glob`](https://github.com/mrmlnc/fast-glob) パターンの配列を受け入れます。
 
-ウォームアップがなぜ役立つのかを理解するために、例を示します。左側のファイルが右側のファイルをインポートするこのモジュールグラフがあるとします:
-
-```
-main.js -> Component.vue -> big-file.js -> large-data.json
-```
-
-インポートされた ID はファイルが変換された後でないと分からないので、`Component.vue` の変換に時間がかかると、`big-file.js` は順番が来るまで待たなければなりません。これにより内部的なウォーターフォールが発生します。
-
-`big-file.js` やアプリ内のホットパスであることがわかっているファイルをウォームアップすると、それらのファイルはキャッシュされ、すぐに提供できるようになります。
+起動時に Vite dev サーバーに負荷がかからないように、頻繁に使用するファイルのみを追加するようにしてください。
 
 ```js
 export default defineConfig({
   server: {
     warmup: {
-      clientFiles: ['./src/big-file.js', './src/components/*.vue'],
+      clientFiles: ['./src/components/*.vue', './src/utils/big-utils.js'],
+      ssrFiles: ['./src/server/modules/*.js'],
     },
   },
 })
