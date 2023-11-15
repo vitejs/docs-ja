@@ -183,7 +183,7 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 `clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`fast-glob`](https://github.com/mrmlnc/fast-glob) パターンの配列を受け入れます。
 
-起動時に Vite dev サーバーに負荷がかからないように、頻繁に使用するファイルのみを追加するようにしてください。
+起動時に Vite 開発サーバーに負荷がかからないように、頻繁に使用するファイルのみを追加するようにしてください。
 
 ```js
 export default defineConfig({
