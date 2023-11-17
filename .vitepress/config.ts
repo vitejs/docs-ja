@@ -145,6 +145,7 @@ export default defineConfig({
         text: 'リソース',
         items: [
           { text: 'チーム', link: '/team' },
+          { text: 'ブログ', link: '/blog' },
           { text: 'リリース', link: '/releases' },
           {
             items: [
