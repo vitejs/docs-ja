@@ -30,34 +30,33 @@ const additionalTitle = ((): string => {
   }
 })()
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
+  const oldVersions: DefaultTheme.NavItemWithLink[] = [
+    {
+      text: 'Vite 4 ドキュメント',
+      link: 'https://v4.vitejs.dev',
+    },
+    {
+      text: 'Vite 3 ドキュメント',
+      link: 'https://v3.vitejs.dev',
+    },
+    {
+      text: 'Vite 2 ドキュメント',
+      link: 'https://v2.vitejs.dev',
+    },
+  ]
+
   switch (deployType) {
     // case 'main':
     case 'local':
       return [
         {
-          text: 'Vite 4 ドキュメント（リリース）',
+          text: 'Vite 5 ドキュメント（リリース）',
           link: 'https://vitejs.dev',
         },
-        {
-          text: 'Vite 3 ドキュメント',
-          link: 'https://v3.vitejs.dev',
-        },
-        {
-          text: 'Vite 2 ドキュメント',
-          link: 'https://v2.vitejs.dev',
-        },
+        ...oldVersions,
       ]
     case 'release':
-      return [
-        {
-          text: 'Vite 3 ドキュメント',
-          link: 'https://v3.vitejs.dev',
-        },
-        {
-          text: 'Vite 2 ドキュメント',
-          link: 'https://v2.vitejs.dev',
-        },
-      ]
+      return oldVersions
   }
 })()
 
