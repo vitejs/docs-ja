@@ -4,12 +4,6 @@ Vite のリリースは[セマンティック バージョニング](https://sem
 
 過去のリリースの完全な変更履歴は [GitHub にて利用できます](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)。
 
-::: tip note
-Vite の次のメジャーバージョンは、9 月の Node 16 の EOL の後にリリースされます。
-
-詳しい情報は [Vite 5 ディスカッション](https://github.com/vitejs/vite/discussions/12466)をご確認ください。
-:::
-
 ## リリースサイクル
 
 Vite は、一定のリリースサイクルがありません。
