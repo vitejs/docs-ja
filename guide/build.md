@@ -219,7 +219,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 :::
 
 ::: tip 環境変数
-ライブラリモードでは、すべての `import.meta.env.*` の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用すると、静的に置き換えることができます。
+ライブラリモードでは、すべての [`import.meta.env.*`](./env-and-mode.md) の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用して静的に置き換えたり、[`esm-env`](https://github.com/benmccann/esm-env) を使用してバンドラーやランタイムとの互換性を高めることができます。
 :::
 
 ::: warning 高度な使い方
