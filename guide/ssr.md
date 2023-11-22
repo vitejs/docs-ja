@@ -89,7 +89,13 @@ async function createServer() {
 
   // Vite の接続インスタンスをミドルウェアとして使用。独自の express ルータ
   // (express.Route()) を利用する場合は、router.use を使用してください
-  app.use(vite.middlewares)
+  app.use((req, res, next) => {
+    // サーバが再起動すると（例えばユーザがvite.config.jsを修飾した後）、
+    // `vite.middlewares` は再割り当てされます。
+    // ラッパーハンドラの内部で `vite.middlewares` を呼び出すと、
+    // 常に最新の Vite ミドルウェアが使用されます。
+    vite.middlewares.handle(req, res, next)
+  })
 
   app.use('*', async (req, res) => {
     // index.html を提供します - 次にこれに取り組みます。
