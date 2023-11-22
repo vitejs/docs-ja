@@ -111,7 +111,9 @@ Vite はデフォルトでは設定された `target` 値で TypeScript をト�
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
 - [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
-もしコードベースを `"isolatedModules": true` に移行することが無理な場合は、[rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports) のようなサードパーティのプラグインを使って回避できるかも知れません。しかし、この方法は Vite では公式にサポートされていません。
+::: tip `skipLibCheck`
+Vite のスターターテンプレートでは依存関係の型チェックを避けるため、デフォルトで `"skipLibCheck": "true"` となっています。これは TypeScript の特定のバージョンや設定のみをサポートするように選択できるようにするためです。詳しくは [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688) を参照してください。
+:::
 
 ### クライアントでの型 {#client-types}
 
