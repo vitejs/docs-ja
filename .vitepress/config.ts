@@ -320,7 +320,7 @@ export default defineConfig({
               link: '/config/ssr-options',
             },
             {
-              text: 'ワーカのオプション',
+              text: 'ワーカーのオプション',
               link: '/config/worker-options',
             },
           ],
