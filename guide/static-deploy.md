@@ -58,9 +58,9 @@ $ npm run preview
 
 1. `vite.config.js` で `base` を正しく設定してください。
 
-   `https://<USERNAME>.github.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
+   `https://<USERNAME>.github.io/` や、GitHub Pages 経由のカスタムドメイン（例 `www.example.com`）にデプロイする場合、`base` を `'/'` に設定します。デフォルトは `'/'` なので、設定から `base` を削除することもできます。
 
-   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://github.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
+   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合（例: リポジトリは `https://github.com/<USERNAME>/<REPO>`）、`base` を `'/<REPO>/'` と設定してください。
 
 2. リポジトリ設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
 
