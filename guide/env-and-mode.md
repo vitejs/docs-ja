@@ -142,3 +142,35 @@ VITE_APP_TITLE=My App (staging)
 # .env.testing
 NODE_ENV=development
 ```
+
+## NODE_ENV とモード
+
+`NODE_ENV`（`process.env.NODE_ENV`）とモードは異なる概念であると意識するのが重要です。それぞれのコマンドが `NODE_ENV` とモードにどのように影響するかを以下に示します:
+
+| コマンド                                              | NODE_ENV        | モード              |
+| ---------------------------------------------------- | --------------- | --------------- |
+| `vite build`                                         | `"production"`  | `"production"`  |
+| `vite build --mode development`                      | `"production"`  | `"development"` |
+| `NODE_ENV=development vite build`                    | `"development"` | `"production"`  |
+| `NODE_ENV=development vite build --mode development` | `"development"` | `"development"` |
+
+`NODE_ENV` およびモードのいろいろな値は、それに対応する `import.meta.env` プロパティにも反映されます:
+
+| コマンド                | `import.meta.env.PROD` | `import.meta.env.DEV` |
+| ---------------------- | ---------------------- | --------------------- |
+| `NODE_ENV=production`  | `true`                 | `false`               |
+| `NODE_ENV=development` | `false`                | `true`                |
+| `NODE_ENV=other`       | `false`                | `true`                |
+
+| コマンド               | `import.meta.env.MODE` |
+| -------------------- | ---------------------- |
+| `--mode production`  | `"production"`         |
+| `--mode development` | `"development"`        |
+| `--mode staging`     | `"staging"`            |
+
+:::tip `.env` ファイル内での `NODE_ENV`
+
+`NODE_ENV=...` はコマンドや `.env` ファイルで設定できます。`.env.[mode]` ファイルで `NODE_ENV` が指定されている場合、モードを使用してその値を制御できます。ただし、`NODE_ENV` とモードは依然として異なる概念として残ります。
+
+コマンドでの `NODE_ENV=...` の主な利点は、Vite がその値を早期に検出できることです。Vite は設定ファイルが評価された後でしか env ファイルを読み込めないので、（コマンドで `NODE_ENV` を指定すると）Vite の設定内で `process.env.NODE_ENV` を読み取ることができます。
+:::
