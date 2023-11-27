@@ -38,6 +38,41 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 同じ Node.js プロセス内で `createServer` と `build` を使用する場合、どちらの関数も `process.env.NODE_ENV` に依存して正しく動作しますが、これは `mode` 設定オプションに依存します。 矛盾した挙動にならないよう、`process.env.NODE_ENV` または 2 つの API の `mode` を `development` に設定します。もしくは、子プロセスを生成して、2 つの API を別々に実行することができます。
 :::
 
+::: tip 注意
+[ミドルウェアモード](/config/server-options.html#server-middlewaremode)と [WebSocket のプロキシ設定](/config/server-options.html#server-proxy)を組み合わせて使用する場合、プロキシを正しくバインドするには `middlewareMode` で親 http サーバーを指定する必要があります。
+
+<details>
+<summary>Example</summary>
+
+```ts
+import http from 'http'
+import { createServer } from 'vite'
+
+const parentServer = http.createServer() // もしくは express や koa など
+
+const vite = await createServer({
+  server: {
+    // ミドルウェアモードを有効化
+    middlewareMode: {
+      // プロキシ WebSocket 用の親 http サーバーを提供
+      server: parentServer,
+    },
+  },
+  proxy: {
+    '/ws': {
+      target: 'ws://localhost:3000',
+      // WebSocket をプロキシ
+      ws: true,
+    },
+  },
+})
+
+server.use(vite.middlewares)
+```
+
+</details>
+:::
+
 ## `InlineConfig`
 
 `InlineConfig` インタフェイスは、追加のプロパティで `UserConfig` を拡張します:
