@@ -166,25 +166,35 @@ Vite には「許可された条件」のリストがあり、許可されたリ
 ## css.modules
 
 - **型:**
-```ts
-interface CSSModulesOptions {
-  scopeBehaviour?: 'global' | 'local'
-  globalModulePaths?: RegExp[]
-  generateScopedName?:
-    | string
-    | ((name: string, filename: string, css: string) => string)
-  hashPrefix?: string
-  /**
-   * デフォルト: null
-   */
-  localsConvention?:
-    | 'camelCase'
-    | 'camelCaseOnly'
-    | 'dashes'
-    | 'dashesOnly'
-    | null
-}
-```
+  ```ts
+  interface CSSModulesOptions {
+    getJSON?: (
+      cssFileName: string,
+      json: Record<string, string>,
+      outputFileName: string,
+    ) => void
+    scopeBehaviour?: 'global' | 'local'
+    globalModulePaths?: RegExp[]
+    exportGlobals?: boolean
+    generateScopedName?:
+      | string
+      | ((name: string, filename: string, css: string) => string)
+    hashPrefix?: string
+    /**
+     * デフォルト: undefined
+     */
+    localsConvention?:
+      | 'camelCase'
+      | 'camelCaseOnly'
+      | 'dashes'
+      | 'dashesOnly'
+      | ((
+          originalClassName: string,
+          generatedClassName: string,
+          inputFile: string,
+        ) => string)
+  }
+  ```
 
 CSS モジュールの動作を設定します。オプションは [postcss-modules](https://github.com/css-modules/postcss-modules) に渡されます。
 
