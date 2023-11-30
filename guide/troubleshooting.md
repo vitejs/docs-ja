@@ -12,8 +12,8 @@ Vite の Node API の CJS ビルドは非推奨となり、Vite 6 で削除さ�
 
 基本的な Vite プロジェクトでは、以下を確認してください:
 
-1. `vite.config.js` ファイルの内容が ESM 構文を使用している。
-2. 最も近い `package.json` ファイルに `"type": "module"` が設定されている。もしくは `.mjs` という拡張子を使用している（例: `vite.config.mjs`）。
+1. `vite.config.js` ファイルの内容が ESM 構文を使っていること
+2. 最も近い `package.json` ファイルが `"type": "module"` を含むか、`.mjs`/`.mts` 拡張子を利用すること（例：`vite.config.mjs` か `vite.config.mts`）
 
 その他のプロジェクトについては、いくつかの一般的なアプローチがあります:
 

@@ -22,7 +22,7 @@ Vite の CJS Node API は非推奨になりました。今後、`require('vite')
 基本的な Vite のプロジェクトでは、以下のようになっていることを確認してください：
 
 1. `vite.config.js` ファイルの内容が ESM 構文を使っていること
-2. 最も近い `package.json` ファイルが `"type": "module"` を含むか、`.mjs` 拡張子を利用すること（例：`vite.config.mjs`）
+2. 最も近い `package.json` ファイルが `"type": "module"` を含むか、`.mjs`/`.mts` 拡張子を利用すること（例：`vite.config.mjs` か `vite.config.mts`）
 
 その他のプロジェクトでは、いくつかの一般的な方法があります：
 
