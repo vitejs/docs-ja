@@ -20,7 +20,9 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 ## ブラウザ対応
 
-デフォルトのビルドは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM のダイナミックインポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [本番環境用のビルド](./build) セクションをご覧ください。
+開発中、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これは、最新のブラウザが使用され、最新の JavaScript および CSS 機能がすべてサポートされていることが前提となっているためです。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。
+
+本番ビルドの場合、Vite はデフォルトで [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM 動的インポート](https://caniuse.com/es6-module-dynamic-import)、および [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザをターゲットとします。レガシーブラウザは、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
 
 ## Vite をオンラインで試す {#trying-vite-online}
 

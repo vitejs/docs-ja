@@ -60,7 +60,7 @@ export default defineConfig({
 
 これには、`include` と `exclude` の両方が使用できます。依存関係が大きい（多くの内部モジュールがある）場合や、CommonJS の場合には、それを含める必要があります。依存関係が小さく、すでに有効な ESM の場合には、それを除外し、ブラウザに直接読み込ませることができます。
 
-esbuild も [`optimizeDeps.esbuildOptions` オプション](/config/dep-optimization-options.md#optimizedeps-esbuildoptions)でさらにカスタマイズできます。例えば、esbuild のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにします。
+esbuild も [`optimizeDeps.esbuildOptions` オプション](/config/dep-optimization-options.md#optimizedeps-esbuildoptions)でさらにカスタマイズできます。例えば、esbuild のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにするか、[build `target`](https://esbuild.github.io/api/#target) を変更します。
 
 ## キャッシュ
 
