@@ -323,12 +323,12 @@ import assetAsString from './shader.glsl?raw'
 ```
 
 ```js
-// Web ワーカをロードする
+// Web ワーカーをロードする
 import Worker from './worker.js?worker'
 ```
 
 ```js
-// ビルド時に base64 文字列としてインライン化された Web ワーカ
+// ビルド時に base64 文字列としてインライン化された Web ワーカー
 import InlineWorker from './worker.js?worker&inline'
 ```
 
@@ -603,13 +603,13 @@ main()
 
 ### コンストラクタによるインポート
 
-ワーカスクリプトは [`new Worker()`](https://developer.mozilla.org/ja/docs/Web/API/Worker/Worker) や [`new SharedWorker()`](https://developer.mozilla.org/ja/docs/Web/API/SharedWorker/SharedWorker) を使用することでインポートできます。サフィックスによるインポートと比べ、より標準的で**推奨される**ワーカ作成方法となります。
+ワーカースクリプトは [`new Worker()`](https://developer.mozilla.org/ja/docs/Web/API/Worker/Worker) や [`new SharedWorker()`](https://developer.mozilla.org/ja/docs/Web/API/SharedWorker/SharedWorker) を使用することでインポートできます。サフィックスによるインポートと比べ、より標準的で**推奨される**ワーカー作成方法となります。
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url))
 ```
 
-ワーカコンストラクタはオプションを受け取り、「モジュール」ワーカとして作成することも可能です:
+ワーカーコンストラクタはオプションを受け取り、「モジュール」ワーカーとして作成することも可能です:
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url), {
@@ -619,7 +619,7 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 
 ### クエリサフィックスによるインポート
 
-インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカスクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカコンストラクタになります:
+インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクタになります:
 
 ```js
 import MyWorker from './worker?worker'
@@ -627,21 +627,21 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-ワーカスクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザのネイティブサポート](https://caniuse.com/?search=module%20worker)に依存しますが、プロダクションビルドではコンパイルされます。
+ワーカースクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザのネイティブサポート](https://caniuse.com/?search=module%20worker)に依存しますが、プロダクションビルドではコンパイルされます。
 
-デフォルトでは、ワーカスクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
+デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
 
 ```js
 import MyWorker from './worker?worker&inline'
 ```
 
-ワーカを URL として取得したい場合は、`url` クエリを追加してください:
+ワーカーを URL として取得したい場合は、`url` クエリを追加してください:
 
 ```js
 import MyWorker from './worker?worker&url'
 ```
 
-すべてのワーカをバンドルする設定についての詳細は [Worker Options](/config/worker-options.md) を見てください。
+すべてのワーカーをバンドルする設定についての詳細は [Worker Options](/config/worker-options.md) を見てください。
 
 ## ビルドの最適化 {#build-optimizations}
 
