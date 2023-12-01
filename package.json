@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.17.17",
+    "feed": "^4.2.2",
     "lint-staged": "^14.0.1",
     "textlint": "^13.3.3",
     "textlint-filter-rule-allowlist": "^4.0.0",
