@@ -89,20 +89,18 @@ bunx create-vite my-vue-app --template vue
 
 ## コミュニティのテンプレート
 
-create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成できます。
+create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。
+
+例えば `https://github.com/user/project` にあるテンプレートについては、`https://github.stackblitz.com/user/project`（プロジェクトの URL の `github` の後に `.stackblitz` を追加）を使ってオンラインで試すことができます。
+
+また、[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成することもできます。プロジェクトが GitHub 上にあり、デフォルトのブランチとして `main` を使用していると仮定すると、次のようにしてローカルコピーを作成できます:
 
 ```bash
-npx degit user/project my-project
+npx degit user/project#main my-project
 cd my-project
 
 npm install
 npm run dev
-```
-
-テンプレートのプロジェクトがデフォルトブランチとして `main` を使っている場合は、プロジェクトリポジトリの末尾に `#main` をつけてください。
-
-```bash
-npx degit user/project#main my-project
 ```
 
 ## `index.html` とプロジェクトルート {#index-html-and-project-root}
