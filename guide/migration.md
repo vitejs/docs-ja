@@ -134,6 +134,14 @@ Vite 4 では、マニフェストファイル（[`build.manifest`](/config/buil
 
 Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリのマニフェストファイルとの競合を回避できます。
 
+### 対応する CSS ファイルは manifest.json ファイルのトップレベル項目としてリストされない
+
+Vite 4 では、JavaScript エントリーポイントに対応する CSS ファイルもマニフェストファイル ([`build.manifest`](/config/build-options.md#build-manifest)) のトップレベルエントリーとしてリストされていました。これらのエントリーは意図せずに追加されたもので、単純な場合にのみ機能しました。
+
+Vite 5 では、対応する CSS ファイルは JavaScript エントリーファイルのセクション内にしかありません。
+JS ファイルを注入する場合、対応する CSS ファイルを[注入する必要があります](/guide/backend-integration.md#:~:text=%3C!%2D%2D%20if%20production%20%2D%2D%3E%0A%3Clink%20rel%3D%22stylesheet%22%20href%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.css%20%7D%7D%22%20/%3E%0A%3Cscript%20type%3D%22module%22%20src%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.file%20%7D%7D%22%3E%3C/script%3E)。
+CSS を個別に挿入する必要がある場合は、別のエントリーポイントとして追加する必要があります。
+
 ### CLI ショートカットには追加の `Enter` キーが必要に
 
 CLI ショートカット、例えば開発サーバーを再起動するための `r` は、ショートカットをトリガーするために追加の `Enter` キーの押下が必要になりました。例えば、開発サーバーを再起動するには `r + Enter` が必要です。
@@ -230,6 +238,8 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
   - [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields) の更新されたデフォルト値の `['browser', 'module', 'jsnext:main', 'jsnext']` により、 `resolve.browserField` は Vite 3 から非推奨化されました
 - [[#14855] feat!: add isPreview to ConfigEnv and resolveConfig](https://github.com/vitejs/vite/pull/14855)
   - `ConfigEnv` オブジェクトの `ssrBuild` を `isSsrBuild` にリネームしました
+- [[#14945] fix(css): correctly set manifest source name and emit CSS file](https://github.com/vitejs/vite/pull/14945)
+  - CSS ファイル名はチャンクの名前に基づいて生成されるようになりました。
 
 ## v3 からの移行
 
