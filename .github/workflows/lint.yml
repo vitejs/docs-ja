@@ -13,8 +13,8 @@ jobs:
       with:
         node-version: 18
     - name: Install deps
-      run: yarn
+      run: pnpm install
     - name: Run textlint
-      run: yarn lint
+      run: pnpm run lint
       env:
         CI: true
