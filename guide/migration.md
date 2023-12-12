@@ -110,7 +110,7 @@ Vite 4 では、[`appType`](/config/shared-options.md#apptype) が `'spa'`（デ
 
 ### 開発時とプレビュー時の HTML 配信動作の一致するように
 
-Vite 4 では、開発およびプレビューサーバーはディレクトリ構造と末尾のスラッシュに基づいて異なるアルゴリズムで HTML を配信してしました。これにより、ビルドされたアプリをテストする際に整合性の問題が発生していました。Vite 5 は、単一の動作にリファクタリングされ、次のファイル構造では、以下のような動作をします：
+Vite 4 では、開発およびプレビューサーバーはディレクトリー構造と末尾のスラッシュに基づいて異なるアルゴリズムで HTML を配信してしました。これにより、ビルドされたアプリをテストする際に整合性の問題が発生していました。Vite 5 は、単一の動作にリファクタリングされ、次のファイル構造では、以下のような動作をします：
 
 ```
 ├── index.html
@@ -128,11 +128,11 @@ Vite 4 では、開発およびプレビューサーバーはディレクトリ�
 | `/file`           | `/index.html` (SPA フォールバック) | `/file.html`        | `/file.html`                       |
 | `/file/`          | `/index.html` (SPA フォールバック) | `/file.html`        | `/index.html` (SPA フォールバック) |
 
-### デフォルトではマニフェストファイルは `.vite` ディレクトリに生成されるように
+### デフォルトではマニフェストファイルは `.vite` ディレクトリーに生成されるように
 
 Vite 4 では、マニフェストファイル（[`build.manifest`](/config/build-options.md#build-manifest) および [`build.ssrManifest`](/config/build-options.md#build-ssrmanifest)）はデフォルトでは [`build.outDir`](/config/build-options.md#build-outdir) の直下に生成されていました。
 
-Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリのマニフェストファイルとの競合を回避できます。
+Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリーに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリのマニフェストファイルとの競合を回避できます。
 
 ### 対応する CSS ファイルは manifest.json ファイルのトップレベル項目としてリストされない
 
@@ -184,7 +184,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 `resolvePackageEntry` および `resolvePackageData` の API は削除されました。これらの API は Vite の内部実装を公開し、過去に Vite 4.3 での最適化を妨げたためです。これらの API はサードパーティのパッケージで置き換えることができます。例えば：
 
 - `resolvePackageEntry`: [`import.meta.resolve`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/import.meta/resolve) または [`import-meta-resolve`](https://github.com/wooorm/import-meta-resolve) パッケージを使用できます。
-- `resolvePackageData`: 上記と同じで、パッケージディレクトリを遡ってルートの `package.json` を取得するか、コミュニティの [`vitefu`](https://github.com/svitejs/vitefu) パッケージを使用できます。
+- `resolvePackageData`: 上記と同じで、パッケージディレクトリーを遡ってルートの `package.json` を取得するか、コミュニティーの [`vitefu`](https://github.com/svitejs/vitefu) パッケージを使用できます。
 
 ```js
 import { resolve } from 'import-meta-env'
@@ -233,7 +233,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 - [[#5657] fix: return 404 for resources requests outside the base path](https://github.com/vitejs/vite/pull/5657)
   - 今まで Vite は `Accept: text/html` なしでのベースパス外のリクエストに応答し、それらがベースパス付きでリクエストされたかのように処理していました。Vite はそのような処理を行わずに、代わりに 404 を返すようになりました。
 - [[#14723] fix(resolve)!: remove special .mjs handling](https://github.com/vitejs/vite/pull/14723)
-  - 今まで、ライブラリの `"exports"` フィールドが `.mjs` ファイルにマップされている場合では、Vite は依然として一部のライブラリとの互換性を修正するために `"browser"` および `"module"` フィールドを利用しようとしました。この動作は削除され、exports 解決アルゴリズムに整合するようになりました。
+  - 今まで、ライブラリーの `"exports"` フィールドが `.mjs` ファイルにマップされている場合では、Vite は依然として一部のライブラリーとの互換性を修正するために `"browser"` および `"module"` フィールドを利用しようとしました。この動作は削除され、exports 解決アルゴリズムに整合するようになりました。
 - [[#14733] feat(resolve)!: remove `resolve.browserField`](https://github.com/vitejs/vite/pull/14733)
   - [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields) の更新されたデフォルト値の `['browser', 'module', 'jsnext:main', 'jsnext']` により、 `resolve.browserField` は Vite 3 から非推奨化されました
 - [[#14855] feat!: add isPreview to ConfigEnv and resolveConfig](https://github.com/vitejs/vite/pull/14855)

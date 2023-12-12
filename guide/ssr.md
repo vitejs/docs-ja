@@ -11,7 +11,7 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 :::
 
 :::tip ヘルプ
-質問がある場合は、[Vite Discord の #ssr チャンネル](https://discord.gg/PkbxgzPhJv)でコミュニティがいつでも助けてくれます。
+質問がある場合は、[Vite Discord の #ssr チャンネル](https://discord.gg/PkbxgzPhJv)でコミュニティーがいつでも助けてくれます。
 :::
 
 ## プロジェクトの例
@@ -63,7 +63,7 @@ if (import.meta.env.SSR) {
 
 ## 開発サーバのセットアップ {#setting-up-the-dev-server}
 
-SSR をビルドする際、メインサーバを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
+SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
 **server.js**
 
@@ -109,7 +109,7 @@ createServer()
 
 ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
 
-次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラの実装です:
+次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラーの実装です:
 
 ```js
 app.use('*', async (req, res, next) => {
@@ -179,7 +179,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 }
 ```
 
-これは SSR ビルドだということを示す `--ssr` フラグに注意してください。 また、SSR エントリを指定する必要があります。
+これは SSR ビルドだということを示す `--ssr` フラグに注意してください。 また、SSR エントリーを指定する必要があります。
 
 次に `server.js` で `process.env.NODE_ENV` をチェックして本番固有のロジックを追加する必要があります:
 
@@ -187,13 +187,13 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 - `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `import('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
 
-- `vite` 開発サーバの作成とすべての使用を開発専用サーバかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
+- `vite` 開発サーバーの作成とすべての使用を開発専用サーバーかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 
 動作するセットアップについては、[サンプルプロジェクト](#example-projects)を参照してください。
 
 ## Preload Directives の作成
 
-`vite build` はビルド出力ディレクトリに `.vite/ssr-manifest.json` を生成する `--ssrManifest` フラグをサポートしています:
+`vite build` はビルド出力ディレクトリーに `.vite/ssr-manifest.json` を生成する `--ssrManifest` フラグをサポートしています:
 
 ```diff
 - "build:client": "vite build --outDir dist/client",
@@ -262,7 +262,7 @@ Vite 2.7 以前では、`options` オブジェクトを使うのではなく、�
 
 ## SSR ターゲット
 
-SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバを実行することもできます。パッケージのエントリの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。
+SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Worker でサーバーを実行することもできます。パッケージのエントリーの解決方法はプラットフォームごとに異なります。ターゲットを Web Worker に設定するには、`ssr.target` を `'webworker'` に設定します。
 
 ## SSR バンドル
 
@@ -273,11 +273,11 @@ SSR ビルドのデフォルトターゲットは Node 環境ですが、Web Wor
 
 ## SSR の解決条件
 
-デフォルトでは、パッケージエントリの解決は [`resolve.conditions`](../config/shared-options.md#resolve-conditions) で設定された条件を SSR ビルドに使用します。この動作をカスタマイズするには、[`ssr.resolve.conditions`](../config/ssr-options.md#ssr-resolve-conditions)と[`ssr.resolve.externalConditions`](../config/ssr-options.md#ssr-resolve-externalconditions) を使用します。
+デフォルトでは、パッケージエントリーの解決は [`resolve.conditions`](../config/shared-options.md#resolve-conditions) で設定された条件を SSR ビルドに使用します。この動作をカスタマイズするには、[`ssr.resolve.conditions`](../config/ssr-options.md#ssr-resolve-conditions)と[`ssr.resolve.externalConditions`](../config/ssr-options.md#ssr-resolve-externalconditions) を使用します。
 
 ## Vite CLI
 
-コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
+コマンドラインコマンドの `$ vite dev` と `$ vite preview` は SSR アプリでも使用することができます。開発サーバーには [`configureServer`](/guide/api-plugin#configureserver) 、プレビューサーバーには [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver) で SSR ミドルウェアを追加できます。
 
 :::tip 注意
 ポストフックを使用して、SSR ミドルウェアが Vite のミドルウェアの後に実行されるようにしてください。

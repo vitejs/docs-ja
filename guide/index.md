@@ -18,15 +18,15 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 プロジェクトの背景にある基本原理について、[Vite を使う理由](./why) セクションで詳しく知ることができます。
 
-## ブラウザ対応
+## ブラウザー対応
 
-開発中、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これは、最新のブラウザが使用され、最新の JavaScript および CSS 機能がすべてサポートされていることが前提となっているためです。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。
+開発中、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これは、最新のブラウザーが使用され、最新の JavaScript および CSS 機能がすべてサポートされていることが前提となっているためです。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。
 
-本番ビルドの場合、Vite はデフォルトで [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM 動的インポート](https://caniuse.com/es6-module-dynamic-import)、および [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザをターゲットとします。レガシーブラウザは、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
+本番ビルドの場合、Vite はデフォルトで [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM 動的インポート](https://caniuse.com/es6-module-dynamic-import)、および [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザをターゲットとします。レガシーブラウザーは、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
 
 ## Vite をオンラインで試す {#trying-vite-online}
 
-[StackBlitz](https://vite.new/) で Vite をオンラインで試すことができます。Vite ベースのビルドセットアップをブラウザ上で直接実行するので、ローカルセットアップとほぼ同じですが、マシンに何もインストールする必要がありません。`vite.new/{template}` に移動して、使用するフレームワークを選択できます。
+[StackBlitz](https://vite.new/) で Vite をオンラインで試すことができます。Vite ベースのビルドセットアップをブラウザー上で直接実行するので、ローカルセットアップとほぼ同じですが、マシンに何もインストールする必要がありません。`vite.new/{template}` に移動して、使用するフレームワークを選択できます。
 
 サポートされているテンプレートのプリセットは次のとおりです:
 
@@ -44,7 +44,7 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 ## 最初の Vite プロジェクトを生成する
 
 ::: tip 互換性について
-Vite は [Node.js](https://nodejs.org/en/) 18+、20+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャが警告を出した場合はアップグレードしてください。
+Vite は [Node.js](https://nodejs.org/en/) 18+、20+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャーが警告を出した場合はアップグレードしてください。
 :::
 
 ::: code-group
@@ -105,22 +105,22 @@ npm run dev
 
 ## `index.html` とプロジェクトルート {#index-html-and-project-root}
 
-お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバで、`index.html` はアプリケーションのエントリポイントです。
+お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーで、`index.html` はアプリケーションのエントリポイントです。
 
 Vite は `index.html` をソースコードとして、またモジュールグラフの一部として扱います。JavaScript のソースコードを参照している `<script type="module" src="...">` を解決します。インラインの `<script type="module">` や `<link href>` で参照される CSS も Vite 固有の機能を利用できます。さらに、`index.html` 内の URL は自動的にリベースされるため、特別な `%PUBLIC_URL%` プレースホルダは必要ありません。
 
-静的な http サーバと同様に、Vite には、ファイルの提供元となる「ルートディレクトリ」の概念があります。ドキュメントの残りの部分では `<root>` として示されています。ソースコード内の絶対 URL は、プロジェクトルートをベースとして使って解決されるため、通常の静的ファイルサーバを使用しているかのようにコードを記述できます（遥かに強力であることを除いては！）。Vite はルート外のファイルシステムの場所に解決される依存関係を処理することもできるため、モノレポベースの構成でも使用できます。
+静的な http サーバーと同様に、Vite には、ファイルの提供元となる「ルートディレクトリー」の概念があります。ドキュメントの残りの部分では `<root>` として示されています。ソースコード内の絶対 URL は、プロジェクトルートをベースとして使って解決されるため、通常の静的ファイルサーバーを使用しているかのようにコードを記述できます（遥かに強力であることを除いては！）。Vite はルート外のファイルシステムの場所に解決される依存関係を処理することもできるため、モノレポベースの構成でも使用できます。
 
 Vite は複数の `.html` エントリポイントを持つ[マルチページアプリ](./build#multi-page-app)にも対応しています。
 
 #### 代替ルートの指定
 
-`vite` を実行すると、現在の作業ディレクトリをルートとして使用する開発サーバが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
+`vite` を実行すると、現在の作業ディレクトリをルートとして使用する開発サーバーが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
 なお、Vite は[設定ファイル（`vite.config.js`）](/config/#configuring-vite)もプロジェクトルート内で解決するので、ルートが変更された場合は設定ファイルも移動する必要があります。
 
 ## コマンドラインインタフェイス
 
-Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
+Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリーを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
 <!-- prettier-ignore -->
 ```json
@@ -150,8 +150,8 @@ pnpm run build
 pnpm link --global # このステップでは好きなパッケージマネージャを使用
 ```
 
-その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャ）を実行してください。そして開発サーバを再起動して最先端の技術に乗っていきましょう！
+その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャー）を実行してください。そして開発サーバーを再起動して最先端の技術に乗っていきましょう！
 
 ## コミュニティ
 
-質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティに連絡してください。
+質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。

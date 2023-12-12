@@ -39,11 +39,11 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'`
 
-プロジェクトフォルダへのパスに `&` が含まれているかもしれません。この場合、Windows では `npm` が動作しません ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45))。
+プロジェクトフォルダーへのパスに `&` が含まれているかもしれません。この場合、Windows では `npm` が動作しません ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45))。
 
 次のいずれかを行う必要があります:
 
-- ほかのパッケージマネージャに切り替える (例: `pnpm`、`yarn`)
+- ほかのパッケージマネージャーに切り替える (例: `pnpm`、`yarn`)
 - プロジェクトへのパスから `&` を取り除く
 
 ## 設定
@@ -67,7 +67,7 @@ ESM ファイルは [`require`](<https://nodejs.org/docs/latest-v18.x/api/esm.ht
 
 ### リクエストがいつまでも終わらない
 
-Linux を利用している場合、ファイルディスクリプタ制限と inotify 制限が問題を引き起こしているかもしれません。Vite はほとんどのファイルをバンドルしないため、ブラウザが大量のファイルをリクエストし、大量のファイルディスクリプタが必要になり、制限を超えることがあります。
+Linux を利用している場合、ファイルディスクリプタ制限と inotify 制限が問題を引き起こしているかもしれません。Vite はほとんどのファイルをバンドルしないため、ブラウザーが大量のファイルをリクエストし、大量のファイルディスクリプタが必要になり、制限を超えることがあります。
 
 これを解決するためには:
 
@@ -121,7 +121,7 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 ### 431 Request Header Fields Too Large
 
-サーバ / WebSocket サーバが大きな HTTP ヘッダを受信した場合、リクエストが破棄され次のような警告が表示されます。
+サーバー / WebSocket サーバーが大きな HTTP ヘッダーを受信した場合、リクエストが破棄され次のような警告が表示されます。
 
 > Server responded with status code 431. See https://vitejs.dev/guide/troubleshooting.html#_431-request-header-fields-too-large.
 
@@ -188,24 +188,24 @@ vite build --profile
 :::
 
 ::: tip Vite 開発サーバー
-アプリケーションをブラウザで開いたら、読み込みが終わるのを待ち、ターミナルに戻って `p` キーを押し（Node.js インスペクターを停止します）、次に `q` キーを押して開発サーバーを停止します。
+アプリケーションをブラウザーで開いたら、読み込みが終わるのを待ち、ターミナルに戻って `p` キーを押し（Node.js インスペクターを停止します）、次に `q` キーを押して開発サーバーを停止します。
 :::
 
-Node.js インスペクターはルートフォルダに `vite-profile-0.cpuprofile` を生成し、https://www.speedscope.app/ に遷移、`BROWSE` ボタンを使って CPU プロファイルをアップロードし、結果を検証します。
+Node.js インスペクターはルートフォルダーに `vite-profile-0.cpuprofile` を生成し、https://www.speedscope.app/ に遷移、`BROWSE` ボタンを使って CPU プロファイルをアップロードし、結果を検証します。
 
 [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をインストールすると、Vite プラグインの中間状態を検査でき、アプリケーションのボトルネックとなっているプラグインやミドルウェアを特定するのに役立ちます。このプラグインは開発モードとビルドモードの両方で使用できます。詳しくは readme ファイルをご覧ください。
 
 ## その他
 
-### ブラウザ互換性のためにモジュールを外部化
+### ブラウザー互換性のためにモジュールを外部化
 
-Node.js のモジュールをブラウザで使用する場合、Vite では以下のような警告が出力されます。
+Node.js のモジュールをブラウザーで使用する場合、Vite では以下のような警告が出力されます。
 
 > Module "fs" has been externalized for browser compatibility. Cannot access "fs.readFile" in client code.
 
 これは、Vite が Node.js のモジュールを自動的にポリフィルしないためです。
 
-ポリフィルは手動で追加できますが、バンドルサイズを小さくするため、ブラウザコードに Node.js モジュールを使うのは避けることをお勧めします。もし、モジュールが（ブラウザで使用することを想定した）サードパーティのライブラリからインポートされている場合は、それぞれのライブラリに問題を報告することをお勧めします。
+ポリフィルは手動で追加できますが、バンドルサイズを小さくするため、ブラウザーコードに Node.js モジュールを使うのは避けることをお勧めします。もし、モジュールが（ブラウザーで使用することを想定した）サードパーティのライブラリーからインポートされている場合は、それぞれのライブラリーに問題を報告することをお勧めします。
 
 ### Syntax Error / Type Error が発生する
 
@@ -219,9 +219,9 @@ Vite は非厳格モード (sloppy モード) でのみ動作するコードを�
 
 これらのコードが依存関係で使われていた場合、[`patch-package`](https://github.com/ds300/patch-package) (または [`yarn patch`](https://yarnpkg.com/cli/patch) または [`pnpm patch`](https://pnpm.io/cli/patch)) をエスケープハッチとして利用できます。
 
-### ブラウザの拡張機能
+### ブラウザーの拡張機能
 
-ブラウザの拡張機能（広告ブロッカーなど）によっては、Vite クライアントが Vite 開発サーバーにリクエストを送信できなくすることがあります。この場合、白い画面が表示され、ログにはエラーが出力されません。この問題が発生した場合は、拡張機能を無効にしてみてください。
+ブラウザーの拡張機能（広告ブロッカーなど）によっては、Vite クライアントが Vite 開発サーバーにリクエストを送信できなくすることがあります。この場合、白い画面が表示され、ログにはエラーが出力されません。この問題が発生した場合は、拡張機能を無効にしてみてください。
 
 ### Windows のクロスドライブリンク
 

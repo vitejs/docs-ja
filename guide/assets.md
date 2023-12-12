@@ -70,7 +70,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 詳細は [Web Worker section](./features.md#web-workers) を参照してください。
 
-## `public` ディレクトリ {#the-public-directory}
+## `public` ディレクトリー {#the-public-directory}
 
 アセットが以下のような場合のとき:
 
@@ -78,7 +78,7 @@ import InlineWorker from './shader.js?worker&inline'
 - 全く同じファイル名を保持する必要がある（ハッシュ化しない）
 - …または、アセットの URL を取得するためだけに、アセットのインポートを単純に書きたくない
 
-そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。
+そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリーに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。
 
 ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/shared-options.md#publicdir) で設定することができます。
 
@@ -115,5 +115,5 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 ```
 
 ::: warning SSR では動作しません
-ブラウザと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
+ブラウザーと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
 :::

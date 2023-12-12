@@ -2,9 +2,9 @@
 
 作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [静的サイトのデプロイ](./static-deploy) をご覧ください。
 
-## ブラウザの互換性 {#browser-compatibility}
+## ブラウザーの互換性 {#browser-compatibility}
 
-本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、 [ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、 [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザを対象としています:
+本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、 [ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、 [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザーを対象としています:
 
 - Chrome >=87
 - Firefox >=78
@@ -13,9 +13,9 @@
 
 [`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
-Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/) をチェックしてみてください。
+Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/) をチェックしてみてください。
 
-レガシーブラウザは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能 Polyfill を自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザでのみ条件付きで読み込まれます。
+レガシーブラウザーは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能 Polyfill を自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザーでのみ条件付きで読み込まれます。
 
 ## Public Base Path
 
@@ -95,7 +95,7 @@ export default defineConfig({
     └── nested.js
 ```
 
-開発時には、`/nested/` に移動またはリンクするだけで、通常の静的ファイルサーバと同じように期待通りに動作します。
+開発時には、`/nested/` に移動またはリンクするだけで、通常の静的ファイルサーバーと同じように期待通りに動作します。
 
 ビルド時には、エントリーポイントとして複数の `.html` ファイルを指定するだけです:
 
@@ -116,13 +116,13 @@ export default defineConfig({
 })
 ```
 
-別のルートを指定した場合でも、入力パスを解決する際には `__dirname` が vite.config.js ファイルのフォルダになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリを追加する必要があります。
+別のルートを指定した場合でも、入力パスを解決する際には `__dirname` が vite.config.js ファイルのフォルダーになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリーを追加する必要があります。
 
-HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクトのエントリに指定された名前を無視し、代わりに dist フォルダに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
+HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクトのエントリーに指定された名前を無視し、代わりに dist フォルダーに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
 
-## ライブラリモード {#library-mode}
+## ライブラリーモード {#library-mode}
 
-ブラウザ向けのライブラリを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
+ブラウザー向けのライブラリーを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
 
 配布のためにライブラリをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
@@ -165,7 +165,7 @@ import Bar from './Bar.vue'
 export { Foo, Bar }
 ```
 
-この設定で `vite build` を実行するとライブラリの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます。`es` と `umd` (`build.lib` で設定可能):
+この設定で `vite build` を実行するとライブラリーの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます。`es` と `umd` (`build.lib` で設定可能):
 
 ```
 $ vite build
@@ -174,7 +174,7 @@ dist/my-lib.js      0.08 kB / gzip: 0.07 kB
 dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ```
 
-ライブラリに推奨される `package.json`:
+ライブラリーに推奨される `package.json`:
 
 ```json
 {
@@ -219,11 +219,11 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 :::
 
 ::: tip 環境変数
-ライブラリモードでは、すべての [`import.meta.env.*`](./env-and-mode.md) の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用して静的に置き換えたり、[`esm-env`](https://github.com/benmccann/esm-env) を使用してバンドラーやランタイムとの互換性を高めることができます。
+ライブラリーモードでは、すべての [`import.meta.env.*`](./env-and-mode.md) の使用箇所はプロダクション用にビルドする際、静的に置き換えられます。ただし、`process.env.*` の使用箇所はそうではないので、ライブラリーの利用者は動的にそれを変更できます。これが望ましくない場合は、例えば `define: { 'process.env.NODE_ENV': '"production"' }` を使用して静的に置き換えたり、[`esm-env`](https://github.com/benmccann/esm-env) を使用してバンドラーやランタイムとの互換性を高めることができます。
 :::
 
 ::: warning 高度な使い方
-ライブラリモードには、ブラウザ向けのライブラリや JS フレームワークライブラリのためのシンプルで opinionated な設定が含まれています。非ブラウザライブラリをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
+ライブラリーモードには、ブラウザー向けのライブラリーや JS フレームワークライブラリーのためのシンプルで opinionated な設定が含まれています。非ブラウザライブラリをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
 :::
 
 ## 高度なベースパスの設定 {#advanced-base-options}
@@ -253,7 +253,7 @@ experimental: {
 }
 ```
 
-ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 2 つ目の `context` パラメータに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
+ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 2 つ目の `context` パラメーターに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
 
 ```ts
 experimental: {

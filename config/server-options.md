@@ -14,7 +14,7 @@
 
 Vite ではなく他のサーバがレスポンスを返す場合があります。
 
-1 つ目の場合は `localhost` が利用されたときです。Node.js v17 未満はデフォルトでは DNS によって解決された結果のアドレスを並び替えます。`localhost` へアクセスするとき、ブラウザは DNS を利用してアドレスを解決し、そのアドレスは Vite がリッスンしているアドレスと異なる場合があります。アドレスが異なっている場合は Vite は解決したアドレスを表示します。
+1 つ目の場合は `localhost` が利用されたときです。Node.js v17 未満はデフォルトでは DNS によって解決された結果のアドレスを並び替えます。`localhost` へアクセスするとき、ブラウザーは DNS を利用してアドレスを解決し、そのアドレスは Vite がリッスンしているアドレスと異なる場合があります。アドレスが異なっている場合は Vite は解決したアドレスを表示します。
 
 [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定することで、この並び替える動作を無効化できます。そうすると、Vite はアドレスを `localhost` と出力します。
 
@@ -30,7 +30,7 @@ export default defineConfig({
 })
 ```
 
-2 つ目の場合はワイルドカードホスト (例: `0.0.0.0`) が利用されたときです。これは、ワイルドカードでないホストにリッスンしているサーバが、ワイルドカードをリッスンしているサーバよりも優先されるためです。
+2 つ目の場合はワイルドカードホスト (例: `0.0.0.0`) が利用されたときです。これは、ワイルドカードでないホストにリッスンしているサーバーが、ワイルドカードをリッスンしているサーバーよりも優先されるためです。
 
 :::
 
@@ -46,7 +46,7 @@ WSL2 上で Vite を動作させる場合、LAN からサーバーにアクセ�
 - **型:** `number`
 - **デフォルト:** `5173`
 
-サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
+サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバーが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
 ## server.strictPort
 
@@ -68,7 +68,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-pr
 
 - **型:** `boolean | string`
 
-サーバ起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。また、`process.env.BROWSER_ARGS` を設定して、追加の引数を渡すこともできます（例: `--incognito`）。
+サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。また、`process.env.BROWSER_ARGS` を設定して、追加の引数を渡すこともできます（例: `--incognito`）。
 
 また、`BROWSER` と `BROWSER_ARGS` は `.env` ファイルで設定できる特別な環境変数です。詳しくは [`open` パッケージ](https://github.com/sindresorhus/open#app) を参照してください。
 
@@ -136,25 +136,25 @@ export default defineConfig({
 
 - **型:** `boolean | CorsOptions`
 
-開発サーバの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors#configuration-options)を渡して微調整するか、`false` で無効にします。
+開発サーバーの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors#configuration-options)を渡して微調整するか、`false` で無効にします。
 
 ## server.headers
 
 - **型:** `OutgoingHttpHeaders`
 
-サーバのレスポンスヘッダを指定します。
+サーバのレスポンスヘッダーを指定します。
 
 ## server.hmr
 
 - **型:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
-HMR 接続の無効化または設定（HMR WebSocket が http サーバと異なるアドレスを使用する必要がある場合）。
+HMR 接続の無効化または設定（HMR WebSocket が http サーバーと異なるアドレスを使用する必要がある場合）。
 
 `server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
 
 `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。
 
-`server.hmr.server` を指定されている場合、Vite は指定されたサーバを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
+`server.hmr.server` を指定されている場合、Vite は指定されたサーバーを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバーを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
 
 いくつかの例については、[`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue)をご覧ください。
 
@@ -166,7 +166,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバと異�
 Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
 ```
 
-フォールバックが発生した際のブラウザに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
+フォールバックが発生した際のブラウザーに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
 
 - WebSocket もプロキシするようにリバースプロキシを設定する
 - [`server.strictPort = true`](#server-strictport) を設定し、`server.hmr.clientPort` を `server.port` と同じ値に設定する
@@ -219,7 +219,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 これを修正するためには、次のいずれかを行えます:
 
 - **推奨**: ファイルを編集するのに WSL2 アプリケーションを使用します。
-  - プロジェクトフォルダを Windows ファイルシステムの外へ移動させることも推奨されます。WSL2 から Windows ファイルシステムへアクセスするのは遅いです。このオーバーヘッドを取り除くことでパフォーマンスが向上します。
+  - プロジェクトフォルダーを Windows ファイルシステムの外へ移動させることも推奨されます。WSL2 から Windows ファイルシステムへアクセスするのは遅いです。このオーバーヘッドを取り除くことでパフォーマンスが向上します。
 - `{ usePolling: true }` を設定する。
   - [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar#performance)に注意してください。
 
@@ -230,7 +230,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 - **型:** `boolean`
 - **デフォルト:** `false`
 
-ミドルウェアモードで Vite サーバを作成します。
+ミドルウェアモードで Vite サーバーを作成します。
 
 - **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバのセットアップ](/guide/ssr#setting-up-the-dev-server)
 
@@ -324,7 +324,7 @@ export default defineConfig({
 - **型:** `string[]`
 - **デフォルト:** `['.env', '.env.*', '*.{crt,pem}']`
 
-Vite 開発サーバでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
+Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
 
 ## server.origin
 
@@ -347,7 +347,7 @@ export default defineConfig({
 
 サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/articles/x-google-ignore-list/)を設定するため使用されます。
 
-`server.sourcemapIgnoreList` は、開発サーバの [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
+`server.sourcemapIgnoreList` は、開発サーバーの [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダーにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
 
 デフォルトでは `node_modules` を含むすべてのパスを除外します。この動作を無効にするには `false` を渡します。もしくは、完全に制御するには、ソースパスとソースマップパスを受け取り、ソースパスを無視するかどうかを返す関数を指定します。
 
@@ -364,5 +364,5 @@ export default defineConfig({
 ```
 
 ::: tip 
-[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) と [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) は個別に設定する必要があります。`server.sourcemapIgnoreList` はサーバのみの設定であり、定義された rollup オプションからデフォルト値を取得しません。
+[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) と [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) は個別に設定する必要があります。`server.sourcemapIgnoreList` はサーバーのみの設定であり、定義された rollup オプションからデフォルト値を取得しません。
 :::
