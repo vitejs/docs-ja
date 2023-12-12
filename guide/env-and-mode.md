@@ -12,11 +12,11 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.DEV`**: {boolean} アプリが開発で動作しているかどうか（常に `import.meta.env.PROD` の逆）
 
-- **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#conditional-logic)で動作しているかどうか
+- **`import.meta.env.SSR`**: {boolean} アプリが[サーバー](./ssr.md#conditional-logic)で動作しているかどうか
 
 ## `.env` ファイル {#env-files}
 
-Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
+Vite は、[環境ディレクトリー](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
 ```
 .env                # 全ての場合に読み込まれる
@@ -31,7 +31,7 @@ Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある
 
 また、Vite の実行時に既に存在している環境変数は最も優先度が高く、`.env` ファイルによって上書きされることはありません。例えば、`VITE_SOME_KEY=123 vite build` を実行する場合。
 
-`.env` は Vite 起動時に読み込まれます。変更した後はサーバを再起動してください。
+`.env` は Vite 起動時に読み込まれます。変更した後はサーバーを再起動してください。
 :::
 
 読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも文字列として公開されます。
@@ -72,9 +72,9 @@ NEW_KEY3=test$KEY   # test123
 
 ### TypeScript 用の自動補完
 
-デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザ定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
+デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
 
-この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
+この目的を達するには、`src` ディレクトリーに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
 ```typescript
 /// <reference types="vite/client" />
@@ -112,7 +112,7 @@ Vite は多くのフレームワークで使用されているため、条件分
 
 ## モード {#modes}
 
-デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
+デフォルトで、開発サーバー（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 

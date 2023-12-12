@@ -4,7 +4,7 @@ Vite の JavaScript API は完全に型付けされているので、自動補�
 
 ## `createServer`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
@@ -20,7 +20,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 ;(async () => {
   const server = await createServer({
-    // 有効なユーザ設定オプションに `mode` と `configFile` を追加
+    // 有効なユーザー設定オプションに `mode` と `configFile` を追加
     configFile: false,
     root: __dirname,
     server: {
@@ -77,14 +77,14 @@ server.use((req, res, next) => {
 
 ## `InlineConfig`
 
-`InlineConfig` インタフェイスは、追加のプロパティで `UserConfig` を拡張します:
+`InlineConfig` インターフェイスは、追加のプロパティで `UserConfig` を拡張します:
 
 - `configFile`: 使用する設定ファイルを指定します。設定されていない場合、Vite はプロジェクトルートからファイルを自動的に解決しようとします。自動解決を無効にするには `false` に設定します。
 - `envFile`: `.env` ファイルを無効にするには `false` に設定します。
 
 ## `ResolvedConfig`
 
-`ResolvedConfig` インタフェイスは、`UserConfig` の同一のすべてのプロパティを持ちます。ただし、ほとんどの値は解決済みで undefined ではありません。次のようなユーティリティも含んでいます:
+`ResolvedConfig` インターフェイスは、`UserConfig` の同一のすべてのプロパティを持ちます。ただし、ほとんどの値は解決済みで undefined ではありません。次のようなユーティリティーも含んでいます:
 
 - `config.assetsInclude`: `id` がアセットとしてみなされるかどうかをチェックする関数。
 - `config.logger`: Vite の内部的なロガーオブジェクト。
@@ -99,15 +99,15 @@ interface ViteDevServer {
   config: ResolvedConfig
   /**
    * 接続アプリのインスタンス
-   * - 開発サーバにカスタムミドルウェアを追加するために使用できます。
-   * - カスタム HTTP サーバのハンドラ関数として、もしくは任意の接続スタイルの
+   * - 開発サーバーにカスタムミドルウェアを追加するために使用できます。
+   * - カスタム HTTP サーバーのハンドラー関数として、もしくは任意の接続スタイルの
    *   Node.js フレームワークのミドルウェアとして使用することもできます。
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
-   * ネイティブの Node HTTP サーバインスタンス。
+   * ネイティブの Node HTTP サーバーインスタンス。
    * ミドルウェアモードでは null になります。
    */
   httpServer: http.Server | null
@@ -118,7 +118,7 @@ interface ViteDevServer {
    */
   watcher: FSWatcher
   /**
-   * `send(payload)` メソッドを持つ WebSocket サーバ。
+   * `send(payload)` メソッドを持つ WebSocket サーバー。
    */
   ws: WebSocketServer
   /**
@@ -164,17 +164,17 @@ interface ViteDevServer {
    */
   reloadModule(module: ModuleNode): Promise<void>
   /**
-   * サーバを起動します。
+   * サーバーを起動します。
    */
   listen(port?: number, isRestart?: boolean): Promise<ViteDevServer>
   /**
-   * サーバを再起動します。
+   * サーバーを再起動します。
    *
-   * @param forceOptimize - オプティマイザに再バンドルを強制する。--force cliフラグと同じ
+   * @param forceOptimize - オプティマイザーに再バンドルを強制する。--force cliフラグと同じ
    */
   restart(forceOptimize?: boolean): Promise<void>
   /**
-   * サーバを停止します。
+   * サーバーを停止します。
    */
   close(): Promise<void>
   /**
@@ -186,7 +186,7 @@ interface ViteDevServer {
 
 ## `build`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function build(
@@ -218,7 +218,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 ## `preview`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
@@ -230,7 +230,7 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 import { preview } from 'vite'
 ;(async () => {
   const previewServer = await preview({
-    // 有効なユーザ設定オプションに加え、`mode` と `configFile`
+    // 有効なユーザー設定オプションに加え、`mode` と `configFile`
     preview: {
       port: 8080,
       open: true,
@@ -252,15 +252,15 @@ interface PreviewServer {
   config: ResolvedConfig
   /**
    * connect アプリのインスタンス。
-   * - プレビューサーバにカスタムミドルウェアをアタッチするために使用できます。
-   * - カスタム http サーバのハンドラ関数として、もしくは connect スタイルの
+   * - プレビューサーバーにカスタムミドルウェアをアタッチするために使用できます。
+   * - カスタム http サーバーのハンドラー関数として、もしくは connect スタイルの
    *   Node.js フレームワークのミドルウェアとしても使用可能
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
-   * ネイティブの Node http サーバインスタンス
+   * ネイティブの Node http サーバーインスタンス
    */
   httpServer: http.Server
   /**
@@ -269,7 +269,7 @@ interface PreviewServer {
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
-   * サーバの URL を表示
+   * サーバーの URL を表示
    */
   printUrls(): void
   /**
@@ -281,7 +281,7 @@ interface PreviewServer {
 
 ## `resolveConfig`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function resolveConfig(
@@ -297,7 +297,7 @@ async function resolveConfig(
 
 ## `mergeConfig`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 function mergeConfig(
@@ -324,7 +324,7 @@ export default defineConfig((configEnv) =>
 
 ## `searchForWorkspaceRoot`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 function searchForWorkspaceRoot(
@@ -344,7 +344,7 @@ function searchForWorkspaceRoot(
 
 ## `loadEnv`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 function loadEnv(
@@ -360,7 +360,7 @@ function loadEnv(
 
 ## `normalizePath`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 function normalizePath(id: string): string
@@ -372,7 +372,7 @@ Vite プラグイン間で相互運用するためにパスを正規化します
 
 ## `transformWithEsbuild`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function transformWithEsbuild(
@@ -387,7 +387,7 @@ esbuild で JavaScript か TypeScript を変換します。Vite の内部での 
 
 ## `loadConfigFromFile`
 
-**型シグネチャ:**
+**型シグネチャー:**
 
 ```ts
 async function loadConfigFromFile(

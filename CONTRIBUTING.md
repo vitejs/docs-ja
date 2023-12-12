@@ -1,25 +1,25 @@
 # Vite 日本語翻訳ガイド
 
-ようこそ、Vite 日本語翻訳レポジトリへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
+ようこそ、Vite 日本語翻訳リポジトリーへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
 
 ## 貢献方法
 
 ### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
 
 1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
-2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
-3. 本レポジトリ(`vitejs/docs-ja`)のメンテナの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
-4. このレポジトリをフォークします！
+2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナーの方々は、GitHub の assign 機能で self assign で OK です)
+3. 本リポジトリー(`vitejs/docs-ja`)のメンテナーの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
+4. このリポジトリーをフォークします！
 5. `main` から任意の名前のブランチを切って作業を開始しましょう！　(`git checkout -b your-translate-branch`)
-6. フォークした自分のレポジトリに Push します。(`git push origin your-translate-branch`)
+6. フォークした自分のリポジトリーに Push します。(`git push origin your-translate-branch`)
 7. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります。
 8. レビュー 👀 で指摘事項があったら修正し、再度 Push します 📝
-9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナの方があなたのブランチをマージします🎉
+9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナーの方があなたのブランチをマージします🎉
 
 
 ### Tips: より円滑な Pull Request のコメント記載方法
 
-GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
+GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュワーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
 
 ## 翻訳スタイル
 
@@ -35,14 +35,18 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
 
+<!-- textlint-disable -->
 - NG : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツール**である**。
+<!-- textlint-enable -->
 - OK : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツール**です**。
 
 ### 半角スペースでアルファベット両端を入れて読みやすく！
 
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
 
+<!-- textlint-disable -->
 - NG : Vite(フランス語で「速い」という意味の単語で`/vit/`と発音)は現代のWebプロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
+<!-- textlint-enable -->
 - OK : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
 
 例外として、句読点の前後にアルファベットがある場合は、スペースを入れなくてもいいです。
@@ -76,34 +80,18 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 ### 単語の統一 (特に技術用語)
 
 - 技術用語は基本英語、ただ日本語で一般的に使われている場合は日本語 OK !!
-  - 例: 英語の filter 、日本語のフィルタ
+  - 例: 英語の filter 、日本語のフィルター
 - 和訳に困った、とりあえず英語
   - 例: expression -> 式、表現
 - 和訳にして分かりづらい場合は、翻訳と英語(どちらかに括弧付け)でも OK
   - 例: Two way -> Two way (双方向)
 
-### 長音訳のついて
+### 長音訳について
 
-原則、**長音なし**で翻訳する。
+原則、**長音あり**で翻訳する。
 
-- NG: コンピューター
-- OK: コンピュータ
-
-ただし、長音なしで訳した場合、**意味が分かりにくいものは、例外として長音あり**で訳してもよいです。
-
-> Pull Request flow
-
-- NG: プルリクエストフロ
-- OK: プルリクエストフロー
-
-#### 長音訳例外リスト
-
-> NOTE: 以下のリストは随時追加していく
-
-- error: エラー
-- throw: スロー
-- flow: フロー
-- ...
+- NG: コンピュータ
+- OK: コンピューター
 
 ## 注意事項
 
@@ -145,7 +133,7 @@ OK: 行がそのまま
 
 ### Vite 本体との差分 Issue について
 
-以下の説明文の Issue は Vite 本体のリポジトリに変更があった際に自動的に作られるものです。
+以下の説明文の Issue は Vite 本体のリポジトリーに変更があった際に自動的に作られるものです。
 
 ```text
 New updates on head repo.

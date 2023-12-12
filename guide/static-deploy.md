@@ -3,7 +3,7 @@
 以下のガイドは、いくつかの共通の前提に基づいています:
 
 - デフォルトのビルド出力場所（`dist`）を使用します。この場所は [`build.outDir` で変更することができます](/config/build-options.md#build-outdir)ので、その場合はこれらのガイドを読み替えてください。
-- npm を使用します。Yarn や他のパッケージマネージャを使用している場合は、同等のコマンドを使用してスクリプトを実行できます。
+- npm を使用します。Yarn や他のパッケージマネージャーを使用している場合は、同等のコマンドを使用してスクリプトを実行できます。
 - Vite はプロジェクト内のローカルな dev dependency としてインストールされており、以下の npm スクリプトを設定しています。
 
 ```json
@@ -15,10 +15,10 @@
 }
 ```
 
-`vite preview` は、ローカルでビルドをプレビューするためのもので、本番用のサーバとしては使えないことに注意してください。
+`vite preview` は、ローカルでビルドをプレビューするためのもので、本番用のサーバーとしては使えないことに注意してください。
 
 ::: tip 注意
-このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバサイドレンダリング（SSR）もサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
+このガイドは、Vite で静的サイトをデプロイするための手順を提供します。Vite は、サーバーサイドレンダリング（SSR）もサポートしています。SSR とは、Node.js で同じアプリケーションを実行し、それを HTML にプリレンダリングし、最終的にクライアント上でハイドレートすることをサポートするフロントエンドフレームワークを指します。この機能については、[SSR ガイド](./ssr)をご覧ください。一方、従来のサーバーサイドフレームワークとの統合を探している場合は、代わりに[バックエンドとの統合ガイド](./backend-integration)をチェックしてください。
 :::
 
 ## アプリのビルド
@@ -29,7 +29,7 @@
 $ npm run build
 ```
 
-デフォルトでは、ビルド結果は `dist` に置かれます。この `dist` フォルダを、お好みのプラットフォームにデプロイします。
+デフォルトでは、ビルド結果は `dist` に置かれます。この `dist` フォルダーを、お好みのプラットフォームにデプロイします。
 
 ## アプリをローカルでテストする
 
@@ -40,9 +40,9 @@ $ npm run build
 $ npm run preview
 ```
 
-`vite preview` コマンドは、ローカルで静的なウェブサーバを起動し、`dist` のファイルを `http://localhost:4173` で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
+`vite preview` コマンドは、ローカルで静的なウェブサーバーを起動し、`dist` のファイルを `http://localhost:4173` で配信します。これは、プロダクションビルドが問題ないかどうかを自分のローカル環境で確認する簡単な方法です。
 
-サーバのポートを設定するには、引数に `--port` フラグを指定します。
+サーバーのポートを設定するには、引数に `--port` フラグを指定します。
 
 ```json
 {
@@ -52,7 +52,7 @@ $ npm run preview
 }
 ```
 
-これで、`preview` コマンドは `http://localhost:8080` でサーバを起動します。
+これで、`preview` コマンドは `http://localhost:8080` でサーバーを起動します。
 
 ## GitHub Pages
 
@@ -60,9 +60,9 @@ $ npm run preview
 
    `https://<USERNAME>.github.io/` や、GitHub Pages 経由のカスタムドメイン（例 `www.example.com`）にデプロイする場合、`base` を `'/'` に設定します。デフォルトは `'/'` なので、設定から `base` を削除することもできます。
 
-   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合（例: リポジトリは `https://github.com/<USERNAME>/<REPO>`）、`base` を `'/<REPO>/'` と設定してください。
+   `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合（例: リポジトリーは `https://github.com/<USERNAME>/<REPO>`）、`base` を `'/<REPO>/'` と設定してください。
 
-2. リポジトリ設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
+2. リポジトリー設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
 
    ```yml
    # 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
@@ -111,7 +111,7 @@ $ npm run preview
          - name: Upload artifact
            uses: actions/upload-pages-artifact@v2
            with:
-             # dist リポジトリのアップロード
+             # dist リポジトリーのアップロード
              path: './dist'
          - name: Deploy to GitHub Pages
            id: deployment
@@ -124,7 +124,7 @@ $ npm run preview
 
    `https://<USERNAME or GROUP>.gitlab.io/` にデプロイする場合、`base` はデフォルトで `'/'` となるのでこれを省略できます。
 
-   `https://<USERNAME or GROUP>.gitlab.io/<REPO>/` にデプロイする場合、例えばリポジトリが `https://gitlab.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
+   `https://<USERNAME or GROUP>.gitlab.io/<REPO>/` にデプロイする場合、例えばリポジトリーが `https://gitlab.com/<USERNAME>/<REPO>` にあるなら、`base` を `'/<REPO>/'` と設定してください。
 
 2. プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます:
 
@@ -178,9 +178,9 @@ $ ntl deploy --prod
 
 ### Netlify with Git
 
-1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket, Azure DevOps）にプッシュします。
+1. コードを Git リポジトリー（GitHub, GitLab, Bitbucket, Azure DevOps）にプッシュします。
 2. Netlify に[プロジェクトをインポート](https://app.netlify.com/start)します。
-3. ブランチ、出力ディレクトリを選び、必要に応じて環境変数を設定します。
+3. ブランチ、出力ディレクトリーを選び、必要に応じて環境変数を設定します。
 4. **Deploy** をクリックします。
 5. アプリケーションがデプロイされます！
 
@@ -204,7 +204,7 @@ Vercel CLI
 
 ### Vercel for Git
 
-1. コードを Git リポジトリ（GitHub, GitLab, Bitbucket）にプッシュします。
+1. コードを Git リポジトリー（GitHub, GitLab, Bitbucket）にプッシュします。
 2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
 3. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
 4. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
@@ -240,7 +240,7 @@ $ npx wrangler pages deploy dist
 
 ### Cloudflare Pages with Git
 
-1. git リポジトリ (GitHub、GitLab) にコードをプッシュします。
+1. git リポジトリー (GitHub、GitLab) にコードをプッシュします。
 2. Cloudflare ダッシュボードにログインし、**Account Home** &gt; **Pages** でアカウントを選択します。
 3. **Create a new Project** と **Connect Git** オプションを選択します。
 4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
@@ -307,9 +307,9 @@ Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) サービスを�
 
 VS Code に拡張機能をインストールし、アプリのルートに移動してください。Static Web Apps 拡張機能を開き、Azure にサインインし、'+' マークをクリックして新しい Static Web App を作成してください。使用するサブスクリプションキーを指定するプロンプトが表示されます。
 
-拡張機能が起動するウィザードに従って、アプリの名前を決め、フレームワークのプリセットを選択し、アプリのルート（通常は `/`）とビルドファイルの場所 `/dist` を指定します。ウィザードが実行されると、リポジトリの `.github` フォルダに GitHub アクションが作成されます。
+拡張機能が起動するウィザードに従って、アプリの名前を決め、フレームワークのプリセットを選択し、アプリのルート（通常は `/`）とビルドファイルの場所 `/dist` を指定します。ウィザードが実行されると、リポジトリーの `.github` フォルダーに GitHub アクションが作成されます。
 
-このアクションが実行されると、アプリがデプロイされます（進行状況はリポジトリの Actions タブで確認できます）。正常に完了すると、GitHub アクション実行時に表示される 'Browse Website' ボタンをクリックすることで、拡張機能の進行状況ウィンドウで指定されたアドレスでアプリを見ることができます。
+このアクションが実行されると、アプリがデプロイされます（進行状況はリポジトリーの Actions タブで確認できます）。正常に完了すると、GitHub アクション実行時に表示される 'Browse Website' ボタンをクリックすることで、拡張機能の進行状況ウィンドウで指定されたアドレスでアプリを見ることができます。
 
 ## Render
 
@@ -319,7 +319,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 2. [ダッシュボート](https://dashboard.render.com/)で、**New** ボタンをクリックし **Static Site** を選択します。
 
-3. GitHub/GitLab アカウントを連携するかパブリックリポジトリを利用します。
+3. GitHub/GitLab アカウントを連携するかパブリックリポジトリーを利用します。
 
 4. プロジェクト名とブランチを指定します。
 

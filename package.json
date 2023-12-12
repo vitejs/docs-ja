@@ -13,6 +13,7 @@
     "lint-staged": "^14.0.1",
     "textlint": "^13.3.3",
     "textlint-filter-rule-allowlist": "^4.0.0",
+    "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
     "vitepress": "1.0.0-rc.14",
     "yorkie": "^2.0.0"

@@ -34,7 +34,7 @@ export default {
 }
 ```
 
-あるいは、jsdoc のアノテーションがなくても自動補完を提供する `defineConfig` ヘルパを使用することもできます:
+あるいは、jsdoc のアノテーションがなくても自動補完を提供する `defineConfig` ヘルパーを使用することもできます:
 
 ```js
 import { defineConfig } from 'vite'
@@ -44,7 +44,7 @@ export default defineConfig({
 })
 ```
 
-Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパと一緒に使うこともできます。
+Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパーと一緒に使うこともできます。
 
 ## 条件付き設定
 
@@ -92,7 +92,7 @@ Vite はデフォルトでは `.env` ファイルをロードしないことに�
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ command, mode }) => {
-  // `mode` に基づいて現在の作業ディレクトリにある env ファイルをロードする
+  // `mode` に基づいて現在の作業ディレクトリーにある env ファイルをロードする
   // `VITE_` プレフィックスに関係なく全ての環境変数をロードするには、第 3 引数に '' を設定します
   const env = loadEnv(mode, process.cwd(), '')
   return {

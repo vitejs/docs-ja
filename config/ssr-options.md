@@ -19,7 +19,7 @@ SSR の依存関係を強制的に外部化します。
 - **型:** `'node' | 'webworker'`
 - **デフォルト:** `node`
 
-SSR サーバのビルドターゲット。
+SSR サーバーのビルドターゲット。
 
 ## ssr.resolve.conditions
 

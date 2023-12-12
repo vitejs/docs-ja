@@ -1,6 +1,6 @@
 # 特徴
 
-基本的に、Vite を使用した開発は静的ファイルサーバを使用した時とそれほど変わりません。しかし、Vite はバンドラベースのセットアップで一般的な機能をサポートするためにネイティブ ESM をインポートすることで様々な拡張機能を提供します。
+基本的に、Vite を使用した開発は静的ファイルサーバーを使用した時とそれほど変わりません。しかし、Vite はバンドラーベースのセットアップで一般的な機能をサポートするためにネイティブ ESM をインポートすることで様々な拡張機能を提供します。
 
 ## NPM の依存関係の解決と事前バンドル
 
@@ -10,19 +10,19 @@
 import { someMethod } from 'my-dep'
 ```
 
-上のようなコードはブラウザでエラーになります。Vite は提供される全てのソースファイルでこのような生のモジュールのインポートを検出し以下を実行します:
+上のようなコードはブラウザーでエラーになります。Vite は提供される全てのソースファイルでこのような生のモジュールのインポートを検出し以下を実行します:
 
-1. [事前バンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMD モジュールを ESM に変換します。事前バンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間をどんな JavaScript ベースのバンドラよりも大幅に高速にします。
+1. [事前バンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMD モジュールを ESM に変換します。事前バンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間をどんな JavaScript ベースのバンドラーよりも大幅に高速にします。
 
-2. インポートを `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
+2. インポートを `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザーが正しくモジュールをインポートできるようにします。
 
 **依存関係は積極的にキャッシュされます**
 
-Vite は HTTP ヘッダを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従ってください。
+Vite は HTTP ヘッダーを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従ってください。
 
 ## Hot Module Replacement
 
-Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vue の単一ファイルコンポーネント](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。Vite は [Vue の単一ファイルコンポーネント](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) に対しての HMR 統合を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリーもあります。
 
 これらを手動で設定する必要がないことには注意してください - [`create-vite` を介してアプリケーションを作成する](./)場合、これらはすでに構成されています。
 
@@ -36,13 +36,13 @@ Vite は `.ts` ファイルのトランスパイルを行うだけで、型チ�
 
 Vite が変換処理の一部として型チェックを行わないのは、この 2 つのジョブが根本的に異なる動作をするからです。トランスパイルはファイル単位で行うことができ、Vite のオンデマンドコンパイルモデルと完全に調和しています。これに対して、型チェックはモジュールグラフ全体についての知識が必要です。Vite の変換パイプラインに型チェックを組み込むと、必然的に Vite の利点であるスピードが損なわれてしまいます。
 
-Vite の仕事は、ソースモジュールをできるだけ速くブラウザで実行できる形にすることです。そのため、Vite の変換パイプラインから静的解析チェックを切り離すことをお勧めします。この原則は、ESLint のような他の静的解析チェックにも当てはまります。
+Vite の仕事は、ソースモジュールをできるだけ速くブラウザーで実行できる形にすることです。そのため、Vite の変換パイプラインから静的解析チェックを切り離すことをお勧めします。この原則は、ESLint のような他の静的解析チェックにも当てはまります。
 
 - プロダクションビルドの場合は、Vite のビルドコマンドに加えて、`tsc --noEmit` を実行できます。
 
-- 開発中、IDE のヒント以上が必要な場合は、別プロセスで `tsc --noEmit --watch` を実行するか、型エラーをブラウザに直接報告させたい場合は [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) を使用することをおすすめします。
+- 開発中、IDE のヒント以上が必要な場合は、別プロセスで `tsc --noEmit --watch` を実行するか、型エラーをブラウザーに直接報告させたい場合は [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) を使用することをおすすめします。
 
-Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザに反映されます
+Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を JavaScript に変換します。これは、vanilla の `tsc` よりも約 20〜30 倍速く、HMR の更新は 50 ミリ秒未満でブラウザーに反映されます
 
 [型のみのインポートやエクスポート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export)構文を使用すると、型のみのインポートが正しくバンドルされないなどの潜在的な問題を回避できます。例えば:
 
@@ -51,7 +51,7 @@ import type { T } from 'only/types'
 export type { T }
 ```
 
-### TypeScript コンパイラオプション
+### TypeScript コンパイラーオプション
 
 `tsconfig.json` の `compilerOptions` にあるいくつかの設定フィールドには、特別な注意が必要です。
 
@@ -65,7 +65,7 @@ export type { T }
 
 隔離されたトランスパイルで動作しない機能を TS が警告するように、`tsconfig.json` の `compilerOptions` で `"isolatedModules": true` を設定する必要があります。
 
-しかし、一部のライブラリ (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
+しかし、一部のライブラリー (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
 
 #### `useDefineForClassFields`
 
@@ -78,11 +78,11 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以�
 しかし、他のプログラミング言語や古いバージョンの TypeScript を使用している人にとっては直感的に理解できないかもしれません。
 移行の詳細については、[TypeScript 3.7 リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)を参照してください。
 
-クラスフィールドに大きく依存しているライブラリを使用している場合は、そのライブラリが意図している使い方に注意してください。
+クラスフィールドに大きく依存しているライブラリーを使用している場合は、そのライブラリーが意図している使い方に注意してください。
 
-[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties) などのほとんどのライブラリは `"useDefineForClassFields": true` を想定しています。
+[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties) などのほとんどのライブラリーは `"useDefineForClassFields": true` を想定しています。
 
-しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
+しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリーもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
 
 #### `target`
 
@@ -93,12 +93,12 @@ Vite はデフォルトでは設定された `target` 値で TypeScript をト�
 代わりに [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
 
 ::: warning `useDefineForClassFields`
-`target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザでサポートされていない可能性があります。
+`target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザーでサポートされていない可能性があります。
 
 そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
 :::
 
-### ビルド結果に影響するその他のコンパイラオプション
+### ビルド結果に影響するその他のコンパイラーオプション
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
@@ -190,7 +190,7 @@ export default defineConfig({
 
 さらに詳しく知りたい場合は [esbuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
 
-また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパを挿入し、手動インポートを回避できます。
+また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
 ```js
 // vite.config.js
@@ -209,7 +209,7 @@ export default defineConfig({
 
 ### `@import` のインライン化と書き換え
 
-Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に書き換えられます。
+Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリーにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に書き換えられます。
 
 `@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています ([CSS Pre-processors](#css-pre-processors)を参照)。
 
@@ -245,11 +245,11 @@ import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
 ```
 
-### CSS プリプロセッサ {#css-pre-processors}
+### CSS プリプロセッサー {#css-pre-processors}
 
-Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
+Vite は最新のブラウザーのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンな CSS を作成することをお勧めします。
 
-とは言うものの、Vite は `.scss`、`.sass`、`.less`、`.styl`、`.stylus` ファイルの組み込みサポートを提供します。それらに Vite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサ自体をインストールする必要があります。
+とは言うものの、Vite は `.scss`、`.sass`、`.less`、`.styl`、`.stylus` ファイルの組み込みサポートを提供します。それらに Vite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサー自体をインストールする必要があります。
 
 ```bash
 # .scss and .sass
@@ -264,15 +264,15 @@ npm add -D stylus
 
 もし Vue で単一ファイルコンポーネントを使用している場合、これにより、`<style lang="sass">` なども自動的に有効になります。
 
-Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリアスも尊重されるようにします。さらに、ルートファイルとは異なるディレクトリにあるインポートされた Sass / Less ファイル内の相対的な `url()` の参照も、正確性を確保するために自動的に書き換えられます。
+Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリアスも尊重されるようにします。さらに、ルートファイルとは異なるディレクトリーにあるインポートされた Sass / Less ファイル内の相対的な `url()` の参照も、正確性を確保するために自動的に書き換えられます。
 
 `@import` エイリアスと URL の書き換えは、API の制約のため、Stylus ではサポートされていません。
 
-ファイル拡張子の前に `.module` を付けることで、プリプロセッサと組み合わせて CSS モジュールを使用することもできます（例：`style.module.scss`）。
+ファイル拡張子の前に `.module` を付けることで、プリプロセッサーと組み合わせて CSS モジュールを使用することもできます（例：`style.module.scss`）。
 
 ### ページへの CSS 注入の無効化
 
-CSS コンテンツの自動注入は `?inline` クエリパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルはページに注入されません。
+CSS コンテンツの自動注入は `?inline` クエリーパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルはページに注入されません。
 
 ```js
 import './foo.css' // ページに注入される
@@ -280,7 +280,7 @@ import otherStyles from './bar.css?inline' // 注入されない
 ```
 
 ::: tip 注意
-Vite 5 以降、CSS ファイルからのデフォルトインポートおよび名前付きインポート（例：`import style from './foo.css'`）は削除されました。代わりに `?inline` クエリを使用してください。
+Vite 5 以降、CSS ファイルからのデフォルトインポートおよび名前付きインポート（例：`import style from './foo.css'`）は削除されました。代わりに `?inline` クエリーを使用してください。
 :::
 
 ### Lightning CSS
@@ -298,7 +298,7 @@ CSS Modules を設定するには、[`css.modules`](../config/shared-options.md#
 デフォルトでは、Vite は CSS の圧縮に esbuild を使用します。[`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify) を使用することで、Lightning CSS を CSS の圧縮に使用できます。
 
 ::: tip NOTE
-Lightning CSS 使用時は、[CSS プリプロセッサ](#css-pre-processors)はサポートされていません。
+Lightning CSS 使用時は、[CSS プリプロセッサー](#css-pre-processors)はサポートされていません。
 :::
 
 ## 静的なアセット
@@ -310,7 +310,7 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-特別なクエリにより、アセットの読み込み方法を変更できます:
+特別なクエリーにより、アセットの読み込み方法を変更できます:
 
 ```js
 // アセットを URL として明示的にロードする
@@ -488,9 +488,9 @@ const modules = {
 }
 ```
 
-#### カスタムクエリ
+#### カスタムクエリー
 
-また、`query` オプションを使用すると、他のプラグインが使用するカスタムクエリをインポートに指定することができます。
+また、`query` オプションを使用すると、他のプラグインが使用するカスタムクエリーをインポートに指定することができます。
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', {
@@ -581,7 +581,7 @@ main()
 SSR では、`?init` インポートの一部として発生する `fetch()` は `TypeError: Invalid URL` で失敗する可能性があります。
 [SSR での wasm のサポート](https://github.com/vitejs/vite/issues/8882)の issue を参照してください。
 
-プロジェクトのベースが現在のディレクトリであると仮定した場合の代替案を以下に示します:
+プロジェクトのベースが現在のディレクトリーであると仮定した場合の代替案を以下に示します:
 
 ```js
 import wasmUrl from 'foo.wasm?url'
@@ -601,7 +601,7 @@ main()
 
 ## Web Workers
 
-### コンストラクタによるインポート
+### コンストラクターによるインポート
 
 ワーカースクリプトは [`new Worker()`](https://developer.mozilla.org/ja/docs/Web/API/Worker/Worker) や [`new SharedWorker()`](https://developer.mozilla.org/ja/docs/Web/API/SharedWorker/SharedWorker) を使用することでインポートできます。サフィックスによるインポートと比べ、より標準的で**推奨される**ワーカー作成方法となります。
 
@@ -609,7 +609,7 @@ main()
 const worker = new Worker(new URL('./worker.js', import.meta.url))
 ```
 
-ワーカーコンストラクタはオプションを受け取り、「モジュール」ワーカーとして作成することも可能です:
+ワーカーコンストラクターはオプションを受け取り、「モジュール」ワーカーとして作成することも可能です:
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url), {
@@ -617,9 +617,9 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 })
 ```
 
-### クエリサフィックスによるインポート
+### クエリーサフィックスによるインポート
 
-インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクタになります:
+インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクターになります:
 
 ```js
 import MyWorker from './worker?worker'
@@ -627,15 +627,15 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-ワーカースクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザのネイティブサポート](https://caniuse.com/?search=module%20worker)に依存しますが、プロダクションビルドではコンパイルされます。
+ワーカースクリプトは、`importScripts()` の代わりに ESM の `import` ステートメントを使用することもできます。**注意**: 開発中は[ブラウザーのネイティブサポート](https://caniuse.com/?search=module%20worker)に依存しますが、プロダクションビルドではコンパイルされます。
 
-デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
+デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリーを追加します:
 
 ```js
 import MyWorker from './worker?worker&inline'
 ```
 
-ワーカーを URL として取得したい場合は、`url` クエリを追加してください:
+ワーカーを URL として取得したい場合は、`url` クエリーを追加してください:
 
 ```js
 import MyWorker from './worker?worker&url'
@@ -655,7 +655,7 @@ Vite は、非同期チャンク内のモジュールによって使用される
 
 ### プリロードディレクティブの生成
 
-Vite は、エントリチャンクとそこから直接インポートされたチャンクの `<link rel="modulepreload">` ディレクティブをビルドされた HTML に自動的に生成します。
+Vite は、エントリーチャンクとそこから直接インポートされたチャンクの `<link rel="modulepreload">` ディレクティブをビルドされた HTML に自動的に生成します。
 
 ### 非同期チャンク読み込みの最適化
 
@@ -666,7 +666,7 @@ import graphSvg from '../images/graph.svg?raw'
 </script>
 <svg-image :svg="graphSvg" />
 
-最適化されていないシナリオでは、非同期チャンク `A` がインポートされると、ブラウザは、共通チャンク `C` も必要と判断する前に、`A` を要求して解析する必要があります。これにより、余分なネットワークラウンドトリップが発生します。
+最適化されていないシナリオでは、非同期チャンク `A` がインポートされると、ブラウザーは、共通チャンク `C` も必要と判断する前に、`A` を要求して解析する必要があります。これにより、余分なネットワークラウンドトリップが発生します。
 
 ```
 Entry ---> A ---> C

@@ -1,6 +1,7 @@
 {
   "rules": {
     "preset-vuejs-jp": {
+      "2.1.6.カタカナの長音": true,
       "no-mix-dearu-desumasu": {
         "strict": false
       }
@@ -12,6 +13,7 @@
         "->",
         ">="
       ]
-    }
+    },
+    "comments": true
   }
 }

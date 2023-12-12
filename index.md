@@ -27,7 +27,7 @@ hero:
 
 features:
   - icon: 💡
-    title: 瞬時にスタートするサーバ
+    title: 瞬時にスタートするサーバー
     details: ネイティブ ESM により要求時にファイルが提供されるため、バンドルが不要です！
   - icon: ⚡️
     title: 超高速な HMR
@@ -37,7 +37,7 @@ features:
     details: TypeScript、JSX、CSS などがすぐに使えるようにサポートされています。
   - icon: 📦
     title: 最適化されたビルド
-    details: 設定済みの Rollup によるビルドによってマルチページおよびライブラリモードをサポートします。
+    details: 設定済みの Rollup によるビルドによってマルチページおよびライブラリーモードをサポートします。
   - icon: 🔩
     title:  ユニバーサルなプラグイン
     details: 開発とビルドの間で共有される Rollup と互換性のあるプラグインを提供します。

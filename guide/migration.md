@@ -106,11 +106,11 @@ Vite 4 では、[`worker.plugins`](/config/worker-options.md#worker-plugins) は
 
 Vite 4 では、[`appType`](/config/shared-options.md#apptype) が `'spa'`（デフォルト）に設定されている場合でも、開発中に `.` を含むパスにアクセスした際に、index.html　にフォールバックしませんでした。Vite 5 からは、index.html にフォールバックします。
 
-なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザはコンソールに 404 エラーメッセージを表示しなくなるので注意してください。
+なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザーはコンソールに 404 エラーメッセージを表示しなくなるので注意してください。
 
 ### 開発時とプレビュー時の HTML 配信動作の一致するように
 
-Vite 4 では、開発およびプレビューサーバーはディレクトリ構造と末尾のスラッシュに基づいて異なるアルゴリズムで HTML を配信してしました。これにより、ビルドされたアプリをテストする際に整合性の問題が発生していました。Vite 5 は、単一の動作にリファクタリングされ、次のファイル構造では、以下のような動作をします：
+Vite 4 では、開発およびプレビューサーバーはディレクトリー構造と末尾のスラッシュに基づいて異なるアルゴリズムで HTML を配信してしました。これにより、ビルドされたアプリをテストする際に整合性の問題が発生していました。Vite 5 は、単一の動作にリファクタリングされ、次のファイル構造では、以下のような動作をします：
 
 ```
 ├── index.html
@@ -128,11 +128,11 @@ Vite 4 では、開発およびプレビューサーバーはディレクトリ�
 | `/file`           | `/index.html` (SPA フォールバック) | `/file.html`        | `/file.html`                       |
 | `/file/`          | `/index.html` (SPA フォールバック) | `/file.html`        | `/index.html` (SPA フォールバック) |
 
-### デフォルトではマニフェストファイルは `.vite` ディレクトリに生成されるように
+### デフォルトではマニフェストファイルは `.vite` ディレクトリーに生成されるように
 
 Vite 4 では、マニフェストファイル（[`build.manifest`](/config/build-options.md#build-manifest) および [`build.ssrManifest`](/config/build-options.md#build-ssrmanifest)）はデフォルトでは [`build.outDir`](/config/build-options.md#build-outdir) の直下に生成されていました。
 
-Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリのマニフェストファイルとの競合を回避できます。
+Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリーに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリーのマニフェストファイルとの競合を回避できます。
 
 ### 対応する CSS ファイルは manifest.json ファイルのトップレベル項目としてリストされない
 
@@ -158,7 +158,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 
 - **`useDefineForClassFields` のデフォルトは TypeScript の `target` 値に依存します**
 
-  `target` が `ESNext` または `ES2022` またはそれ以降でない場合、または `tsconfig.json` ファイルが存在しない場合、`useDefineForClassFields` はデフォルトで `false` に設定され、これは `esbuild.target` のデフォルトが `esnext` であることで問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks)にトランスパイルされ、ブラウザでサポートされていない可能性があります。
+  `target` が `ESNext` または `ES2022` またはそれ以降でない場合、または `tsconfig.json` ファイルが存在しない場合、`useDefineForClassFields` はデフォルトで `false` に設定され、これは `esbuild.target` のデフォルトが `esnext` であることで問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks)にトランスパイルされ、ブラウザーでサポートされていない可能性があります。
 
   したがって、`tsconfig.json` を設定する際に `target` を `ESNext` または `ES2022` またはそれ以降に設定するか、明示的に `useDefineForClassFields` を `true` に設定することが推奨されています。
 
@@ -167,7 +167,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
   "compilerOptions": {
     // デコレータを使用する場合、trueにします
     "experimentalDecorators": true,
-    // ブラウザでパースエラーに遭遇した場合、trueにします
+    // ブラウザーでパースエラーに遭遇した場合、trueにします
     "useDefineForClassFields": true
   }
 }
@@ -184,7 +184,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 `resolvePackageEntry` および `resolvePackageData` の API は削除されました。これらの API は Vite の内部実装を公開し、過去に Vite 4.3 での最適化を妨げたためです。これらの API はサードパーティのパッケージで置き換えることができます。例えば：
 
 - `resolvePackageEntry`: [`import.meta.resolve`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/import.meta/resolve) または [`import-meta-resolve`](https://github.com/wooorm/import-meta-resolve) パッケージを使用できます。
-- `resolvePackageData`: 上記と同じで、パッケージディレクトリを遡ってルートの `package.json` を取得するか、コミュニティの [`vitefu`](https://github.com/svitejs/vitefu) パッケージを使用できます。
+- `resolvePackageData`: 上記と同じで、パッケージディレクトリーを遡ってルートの `package.json` を取得するか、コミュニティーの [`vitefu`](https://github.com/svitejs/vitefu) パッケージを使用できます。
 
 ```js
 import { resolve } from 'import-meta-env'
@@ -204,7 +204,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 ## 非推奨な API の削除
 
-- CSS ファイルのデフォルトエクスポート（例： `import style from './foo.css'`）: 代わりに `?inline` クエリを使用してください
+- CSS ファイルのデフォルトエクスポート（例： `import style from './foo.css'`）: 代わりに `?inline` クエリーを使用してください
 - `import.meta.globEager`: 代わりに `import.meta.glob('*', { eager: true })` を使用してください
 - `ssr.format: 'cjs'` と `legacy.buildSsrCjsExternalHeuristics` ([#13816](https://github.com/vitejs/vite/discussions/13816))
 - `server.middlewareMode: 'ssr'` と `server.middlewareMode: 'html'`: 代わりに [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) を使用してください ([#8452](https://github.com/vitejs/vite/pull/8452))
@@ -233,7 +233,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 - [[#5657] fix: return 404 for resources requests outside the base path](https://github.com/vitejs/vite/pull/5657)
   - 今まで Vite は `Accept: text/html` なしでのベースパス外のリクエストに応答し、それらがベースパス付きでリクエストされたかのように処理していました。Vite はそのような処理を行わずに、代わりに 404 を返すようになりました。
 - [[#14723] fix(resolve)!: remove special .mjs handling](https://github.com/vitejs/vite/pull/14723)
-  - 今まで、ライブラリの `"exports"` フィールドが `.mjs` ファイルにマップされている場合では、Vite は依然として一部のライブラリとの互換性を修正するために `"browser"` および `"module"` フィールドを利用しようとしました。この動作は削除され、exports 解決アルゴリズムに整合するようになりました。
+  - 今まで、ライブラリーの `"exports"` フィールドが `.mjs` ファイルにマップされている場合では、Vite は依然として一部のライブラリーとの互換性を修正するために `"browser"` および `"module"` フィールドを利用しようとしました。この動作は削除され、exports 解決アルゴリズムに整合するようになりました。
 - [[#14733] feat(resolve)!: remove `resolve.browserField`](https://github.com/vitejs/vite/pull/14733)
   - [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields) の更新されたデフォルト値の `['browser', 'module', 'jsnext:main', 'jsnext']` により、 `resolve.browserField` は Vite 3 から非推奨化されました
 - [[#14855] feat!: add isPreview to ConfigEnv and resolveConfig](https://github.com/vitejs/vite/pull/14855)

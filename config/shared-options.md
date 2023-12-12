@@ -5,7 +5,7 @@
 - **型:** `string`
 - **デフォルト:** `process.cwd()`
 
-プロジェクトのルートディレクトリ（`index.html` が置かれている場所）。絶対パス、または現在のワーキングディレクトリからの相対パスを指定できます。
+プロジェクトのルートディレクトリー（`index.html` が置かれている場所）。絶対パス、または現在のワーキングディレクトリーからの相対パスを指定できます。
 
 詳細は [プロジェクトルート](/guide/#index-html-and-project-root) を参照してください。
 
@@ -36,7 +36,7 @@ config でこれを指定すると、**serve と build 両方**のデフォル�
 
 - **型:** `Record<string, any>`
 
-グローバル定数の置換を定義します。エントリは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
+グローバル定数の置換を定義します。エントリーは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
 Vite は [esbuild の define](https://esbuild.github.io/api/#define) を使って置換を行うので、値の式は JSON でシリアライズ可能な値（null、boolean、数値、文字列、配列、オブジェクト）または単一の識別子を含む文字列でなければなりません。文字列以外の値の場合、Vite は自動的に `JSON.stringify` で文字列に変換します。
 
@@ -74,25 +74,25 @@ declare const __APP_VERSION__: string
 - **型:** `string | false`
 - **デフォルト:** `"public"`
 
-加工せずに静的アセットとして配信するディレクトリ。このディレクトリのファイルは、開発時には `/` として配信され、ビルド時には `outDir` のルートにコピーされます。常に変換されることなくそのまま配信またはコピーされます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
+加工せずに静的アセットとして配信するディレクトリー。このディレクトリーのファイルは、開発時には `/` として配信され、ビルド時には `outDir` のルートにコピーされます。常に変換されることなくそのまま配信またはコピーされます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。
 
 `publicDir` を `false` に設定すると、この機能は無効になります。
 
-詳細は [`public` ディレクトリ](/guide/assets#the-public-directory) を参照してください。
+詳細は [`public` ディレクトリー](/guide/assets#the-public-directory) を参照してください。
 
 ## cacheDir
 
 - **型:** `string`
 - **デフォルト:** `"node_modules/.vite"`
 
-キャッシュファイルを保存するディレクトリ。このディレクトリのファイルは、事前バンドルされた依存関係や Vite によって生成されたキャッシュファイルで、パフォーマンスを向上させることができます。`--force` フラグを使用したり、手動でディレクトリを削除するとキャッシュファイルを再生成できます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。package.json が検出されなかった場合のデフォルトは `.vite` です。
+キャッシュファイルを保存するディレクトリー。このディレクトリーのファイルは、事前バンドルされた依存関係や Vite によって生成されたキャッシュファイルで、パフォーマンスを向上させることができます。`--force` フラグを使用したり、手動でディレクトリーを削除するとキャッシュファイルを再生成できます。この値にはファイルシステムの絶対パスかプロジェクトルートからの相対パスを指定できます。package.json が検出されなかった場合のデフォルトは `.vite` です。
 
 ## resolve.alias
 
 - **型:**
 `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
-[エントリオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement, customResolver }` の配列か、オブジェクトを指定します。
+[エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement, customResolver }` の配列か、オブジェクトを指定します。
 
 ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
@@ -144,7 +144,7 @@ Vite には「許可された条件」のリストがあり、許可されたリ
 - **型:** `string[]`
 - **デフォルト:** `['browser', 'module', 'jsnext:main', 'jsnext']`
 
-パッケージのエントリポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
+パッケージのエントリーポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリーポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
 
 ## resolve.extensions
 
@@ -204,7 +204,7 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 - **型:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
 
-インラインの PostCSS 設定、もしくは PostCSS の設定ファイルを検索するカスタムディレクトリ（デフォルトはプロジェクトルート）。
+インラインの PostCSS 設定、もしくは PostCSS の設定ファイルを検索するカスタムディレクトリー（デフォルトはプロジェクトルート）。
 
 インラインの PostCSS の設定には、`postcss.config.js` と同じ書式を想定してします。しかし、`plugins` のプロパティには、[配列のフォーマット](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)しか使用できません。
 
@@ -216,13 +216,13 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 - **型:** `Record<string, object>`
 
-CSS プリプロセッサに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサでサポートされているオプションは、それぞれのドキュメントで確認できます:
+CSS プリプロセッサーに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサーでサポートされているオプションは、それぞれのドキュメントで確認できます:
 
 - `sass`/`scss` - [オプション](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions)。
 - `less` - [オプション](https://lesscss.org/usage/#less-options)。
 - `styl`/`stylus` - オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
 
-すべてのプリプロセッサオプションは `additionalData` オプションもサポートしており、これを使用して各スタイルのコンテンツに追加のコードを注入できます。変数だけでなく実際のスタイルを含めると、それらのスタイルは最終的なバンドルに複製されるので注意してください。
+すべてのプリプロセッサーオプションは `additionalData` オプションもサポートしており、これを使用して各スタイルのコンテンツに追加のコードを注入できます。変数だけでなく実際のスタイルを含めると、それらのスタイルは最終的なバンドルに複製されるので注意してください。
 
 例:
 
@@ -292,7 +292,7 @@ import type {
 }
 ```
 
-Lightning CSS の設定。すべての変換オプションは [Lightning CSS のリポジトリ](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts)で確認できます。
+Lightning CSS の設定。すべての変換オプションは [Lightning CSS のリポジトリー](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts)で確認できます。
 
 ## json.namedExports
 
@@ -327,7 +327,7 @@ export default defineConfig({
 
 デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
 
-また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパの import を自動的に注入できます:
+また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
 
 ```js
 export default defineConfig({
@@ -414,7 +414,7 @@ Vite が特定のメッセージをログに出力する際、ターミナル画
 - **型:** `string`
 - **デフォルト:** `root`
 
-`.env` ファイルを読み込むディレクトリ。絶対パス、もしくはプロジェクトルートからの相対パスを指定します。
+`.env` ファイルを読み込むディレクトリー。絶対パス、もしくはプロジェクトルートからの相対パスを指定します。
 
 環境ファイルの詳細については[こちら](/guide/env-and-mode#env-files)をご覧ください。
 
