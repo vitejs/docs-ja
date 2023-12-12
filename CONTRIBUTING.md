@@ -35,14 +35,18 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
 
+<!-- textlint-disable -->
 - NG : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツール**である**。
+<!-- textlint-enable -->
 - OK : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツール**です**。
 
 ### 半角スペースでアルファベット両端を入れて読みやすく！
 
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
 
+<!-- textlint-disable -->
 - NG : Vite(フランス語で「速い」という意味の単語で`/vit/`と発音)は現代のWebプロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
+<!-- textlint-enable -->
 - OK : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
 
 例外として、句読点の前後にアルファベットがある場合は、スペースを入れなくてもいいです。
@@ -76,34 +80,18 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 ### 単語の統一 (特に技術用語)
 
 - 技術用語は基本英語、ただ日本語で一般的に使われている場合は日本語 OK !!
-  - 例: 英語の filter 、日本語のフィルタ
+  - 例: 英語の filter 、日本語のフィルター
 - 和訳に困った、とりあえず英語
   - 例: expression -> 式、表現
 - 和訳にして分かりづらい場合は、翻訳と英語(どちらかに括弧付け)でも OK
   - 例: Two way -> Two way (双方向)
 
-### 長音訳のついて
+### 長音訳について
 
-原則、**長音なし**で翻訳する。
+原則、**長音あり**で翻訳する。
 
-- NG: コンピューター
-- OK: コンピュータ
-
-ただし、長音なしで訳した場合、**意味が分かりにくいものは、例外として長音あり**で訳してもよいです。
-
-> Pull Request flow
-
-- NG: プルリクエストフロ
-- OK: プルリクエストフロー
-
-#### 長音訳例外リスト
-
-> NOTE: 以下のリストは随時追加していく
-
-- error: エラー
-- throw: スロー
-- flow: フロー
-- ...
+- NG: コンピュータ
+- OK: コンピューター
 
 ## 注意事項
 
@@ -145,7 +133,7 @@ OK: 行がそのまま
 
 ### Vite 本体との差分 Issue について
 
-以下の説明文の Issue は Vite 本体のリポジトリに変更があった際に自動的に作られるものです。
+以下の説明文の Issue は Vite 本体のリポジトリーに変更があった際に自動的に作られるものです。
 
 ```text
 New updates on head repo.
