@@ -106,7 +106,7 @@ Vite 4 では、[`worker.plugins`](/config/worker-options.md#worker-plugins) は
 
 Vite 4 では、[`appType`](/config/shared-options.md#apptype) が `'spa'`（デフォルト）に設定されている場合でも、開発中に `.` を含むパスにアクセスした際に、index.html　にフォールバックしませんでした。Vite 5 からは、index.html にフォールバックします。
 
-なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザはコンソールに 404 エラーメッセージを表示しなくなるので注意してください。
+なお、画像のパスが存在しないファイルを指していても（例：`<img src="./file-does-not-exist.png">`）、今後ブラウザーはコンソールに 404 エラーメッセージを表示しなくなるので注意してください。
 
 ### 開発時とプレビュー時の HTML 配信動作の一致するように
 
@@ -132,7 +132,7 @@ Vite 4 では、開発およびプレビューサーバーはディレクトリ�
 
 Vite 4 では、マニフェストファイル（[`build.manifest`](/config/build-options.md#build-manifest) および [`build.ssrManifest`](/config/build-options.md#build-ssrmanifest)）はデフォルトでは [`build.outDir`](/config/build-options.md#build-outdir) の直下に生成されていました。
 
-Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリーに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリのマニフェストファイルとの競合を回避できます。
+Vite 5 からは、これらのファイルはデフォルトでは `build.outDir` 内の `.vite` ディレクトリーに生成されます。この変更により、`build.outDir` にコピーされるときに同じファイル名を持つ `public` ディレクトリーのマニフェストファイルとの競合を回避できます。
 
 ### 対応する CSS ファイルは manifest.json ファイルのトップレベル項目としてリストされない
 
@@ -158,7 +158,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 
 - **`useDefineForClassFields` のデフォルトは TypeScript の `target` 値に依存します**
 
-  `target` が `ESNext` または `ES2022` またはそれ以降でない場合、または `tsconfig.json` ファイルが存在しない場合、`useDefineForClassFields` はデフォルトで `false` に設定され、これは `esbuild.target` のデフォルトが `esnext` であることで問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks)にトランスパイルされ、ブラウザでサポートされていない可能性があります。
+  `target` が `ESNext` または `ES2022` またはそれ以降でない場合、または `tsconfig.json` ファイルが存在しない場合、`useDefineForClassFields` はデフォルトで `false` に設定され、これは `esbuild.target` のデフォルトが `esnext` であることで問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks)にトランスパイルされ、ブラウザーでサポートされていない可能性があります。
 
   したがって、`tsconfig.json` を設定する際に `target` を `ESNext` または `ES2022` またはそれ以降に設定するか、明示的に `useDefineForClassFields` を `true` に設定することが推奨されています。
 
@@ -167,7 +167,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
   "compilerOptions": {
     // デコレータを使用する場合、trueにします
     "experimentalDecorators": true,
-    // ブラウザでパースエラーに遭遇した場合、trueにします
+    // ブラウザーでパースエラーに遭遇した場合、trueにします
     "useDefineForClassFields": true
   }
 }
@@ -204,7 +204,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 ## 非推奨な API の削除
 
-- CSS ファイルのデフォルトエクスポート（例： `import style from './foo.css'`）: 代わりに `?inline` クエリを使用してください
+- CSS ファイルのデフォルトエクスポート（例： `import style from './foo.css'`）: 代わりに `?inline` クエリーを使用してください
 - `import.meta.globEager`: 代わりに `import.meta.glob('*', { eager: true })` を使用してください
 - `ssr.format: 'cjs'` と `legacy.buildSsrCjsExternalHeuristics` ([#13816](https://github.com/vitejs/vite/discussions/13816))
 - `server.middlewareMode: 'ssr'` と `server.middlewareMode: 'html'`: 代わりに [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) を使用してください ([#8452](https://github.com/vitejs/vite/pull/8452))

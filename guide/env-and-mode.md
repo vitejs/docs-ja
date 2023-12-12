@@ -12,11 +12,11 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.DEV`**: {boolean} アプリが開発で動作しているかどうか（常に `import.meta.env.PROD` の逆）
 
-- **`import.meta.env.SSR`**: {boolean} アプリが[サーバ](./ssr.md#conditional-logic)で動作しているかどうか
+- **`import.meta.env.SSR`**: {boolean} アプリが[サーバー](./ssr.md#conditional-logic)で動作しているかどうか
 
 ## `.env` ファイル {#env-files}
 
-Vite は、[環境ディレクトリ](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
+Vite は、[環境ディレクトリー](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
 ```
 .env                # 全ての場合に読み込まれる
@@ -112,7 +112,7 @@ Vite は多くのフレームワークで使用されているため、条件分
 
 ## モード {#modes}
 
-デフォルトで、開発サーバ（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
+デフォルトで、開発サーバー（`dev` コマンド）は `development` モードで動作し、`build` コマンドは `production` モードで動作します。
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 

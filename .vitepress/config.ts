@@ -242,7 +242,7 @@ export default defineConfig({
               link: '/guide/env-and-mode',
             },
             {
-              text: 'サーバサイドレンダリング',
+              text: 'サーバーサイドレンダリング',
               link: '/guide/ssr',
             },
             {
@@ -306,7 +306,7 @@ export default defineConfig({
               link: '/config/shared-options',
             },
             {
-              text: 'サーバオプション',
+              text: 'サーバーオプション',
               link: '/config/server-options',
             },
             {

@@ -34,7 +34,7 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
-- 本番環境向けにレガシーブラウザのサポートを提供します。
+- 本番環境向けにレガシーブラウザーのサポートを提供します。
 
 ## コミュニティプラグイン
 
@@ -42,4 +42,4 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ## Rollup プラグイン
 
-[Vite プラグイン](../guide/api-plugin) は、Rollup プラグインのインタフェイスを拡張したものです。 [Rollup プラグインとの互換性セクション](../guide/api-plugin#rollup-plugin-compatibility) に詳しい情報があります。
+[Vite プラグイン](../guide/api-plugin) は、Rollup プラグインのインターフェイスを拡張したものです。 [Rollup プラグインとの互換性セクション](../guide/api-plugin#rollup-plugin-compatibility) に詳しい情報があります。

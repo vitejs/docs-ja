@@ -1,18 +1,18 @@
-# サーバオプション
+# サーバーオプション
 
 ## server.host
 
 - **型:** `string | boolean`
 - **デフォルト:** `'localhost'`
 
-サーバがリッスンすべき IP アドレスを指定します。
+サーバーがリッスンすべき IP アドレスを指定します。
 `0.0.0.0` もしくは `true` に設定すると、LAN やパブリックアドレスを含むすべてのアドレスをリッスンします。
 
 これは CLI で `--host 0.0.0.0` や `--host` を使用して設定できます。
 
 ::: tip 注意
 
-Vite ではなく他のサーバがレスポンスを返す場合があります。
+Vite ではなく他のサーバーがレスポンスを返す場合があります。
 
 1 つ目の場合は `localhost` が利用されたときです。Node.js v17 未満はデフォルトでは DNS によって解決された結果のアドレスを並び替えます。`localhost` へアクセスするとき、ブラウザーは DNS を利用してアドレスを解決し、そのアドレスは Vite がリッスンしているアドレスと異なる場合があります。アドレスが異なっている場合は Vite は解決したアドレスを表示します。
 
@@ -46,7 +46,7 @@ WSL2 上で Vite を動作させる場合、LAN からサーバーにアクセ�
 - **型:** `number`
 - **デフォルト:** `5173`
 
-サーバのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバーが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
+サーバーのポートを指定します。このポートがすでに使用されている場合、Vite は次に使用可能なポートを自動的に試すので、サーバーが最終的にリッスンする実際のポートとは異なる場合があることに注意してください。
 
 ## server.strictPort
 
@@ -68,7 +68,7 @@ TLS + HTTP/2 を有効にします。[`server.proxy` オプション](#server-pr
 
 - **型:** `boolean | string`
 
-サーバー起動時に自動的にブラウザでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。また、`process.env.BROWSER_ARGS` を設定して、追加の引数を渡すこともできます（例: `--incognito`）。
+サーバー起動時に自動的にブラウザーでアプリを開きます。値が文字列の場合、URL のパス名として使用されます。もしあなたの好きなブラウザーでアプリを開きたい場合、環境変数 `process.env.BROWSER`（例: `firefox`）を定義できます。詳細は [`open` パッケージ](https://github.com/sindresorhus/open#app) をご覧ください。また、`process.env.BROWSER_ARGS` を設定して、追加の引数を渡すこともできます（例: `--incognito`）。
 
 また、`BROWSER` と `BROWSER_ARGS` は `.env` ファイルで設定できる特別な環境変数です。詳しくは [`open` パッケージ](https://github.com/sindresorhus/open#app) を参照してください。
 
@@ -86,7 +86,7 @@ export default defineConfig({
 
 - **型:** `Record<string, string | ProxyOptions>`
 
-開発サーバのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。リクエストパスがそのキーで始まるすべてのリクエストは、その指定されたターゲットにプロキシされます。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。リクエストパスがそのキーで始まるすべてのリクエストは、その指定されたターゲットにプロキシされます。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
 相対的でない [`base`](/config/shared-options.md#base) を使用する場合、各キーの先頭に `base` を付けなければならないことに注意してください。
 
@@ -142,7 +142,7 @@ export default defineConfig({
 
 - **型:** `OutgoingHttpHeaders`
 
-サーバのレスポンスヘッダーを指定します。
+サーバーのレスポンスヘッダーを指定します。
 
 ## server.hmr
 
@@ -150,7 +150,7 @@ export default defineConfig({
 
 HMR 接続の無効化または設定（HMR WebSocket が http サーバーと異なるアドレスを使用する必要がある場合）。
 
-`server.hmr.overlay` を `false` に設定すると、サーバエラーのオーバレイが無効になります。
+`server.hmr.overlay` を `false` に設定すると、サーバーエラーのオーバレイが無効になります。
 
 `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。
 
@@ -200,11 +200,11 @@ export default defineConfig({
 
 - **型:** `object| null`
 
-[chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャのオプションです。
+[chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャーのオプションです。
 
-Vite サーバのウォッチャはデフォルトで `root` を監視し、`.git/` と `node_modules/` ディレクトリをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
+Vite サーバーのウォッチャーはデフォルトで `root` を監視し、`.git/` と `node_modules/` ディレクトリーをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
-`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッタを返しますが、`add` や `unwatch` を呼び出しても何も起こりません。
+`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッターを返しますが、`add` や `unwatch` を呼び出しても何も起こりません。
 
 ::: warning `node_modules` 内のファイルの監視
 
@@ -232,7 +232,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 
 ミドルウェアモードで Vite サーバーを作成します。
 
-- **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバのセットアップ](/guide/ssr#setting-up-the-dev-server)
+- **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバーのセットアップ](/guide/ssr#setting-up-the-dev-server)
 
 - **例:**
 
@@ -243,7 +243,7 @@ import { createServer as createViteServer } from 'vite'
 async function createServer() {
   const app = express()
 
-  // ミドルウェアモードで Vite サーバを作成
+  // ミドルウェアモードで Vite サーバーを作成
   const vite = await createViteServer({
     server: { middlewareMode: true },
     appType: 'custom', // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
@@ -275,9 +275,9 @@ createServer()
 
 - **型:** `string[]`
 
-`/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリリストの外にある、許可されたファイルからインポートされていないファイルにアクセスすると、403 が返されます。
+`/@fs/` 経由で配信可能なファイルを制限します。`server.fs.strict` が `true` に設定されている場合、このディレクトリーリストの外にある、許可されたファイルからインポートされていないファイルにアクセスすると、403 が返されます。
 
-ディレクトリとファイルの両方を指定することができます。
+ディレクトリーとファイルの両方を指定することができます。
 
 Vite は、潜在的なワークスペースのルートを検索し、それをデフォルトとして使用します。有効なワークスペースは以下の条件を満たすもので、そうでない場合は[プロジェクトのルート](/guide/#index-html-and-project-root)にフォールバックします。
 
@@ -345,7 +345,7 @@ export default defineConfig({
 - **型:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
 - **デフォルト:** `(sourcePath) => sourcePath.includes('node_modules')`
 
-サーバのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/articles/x-google-ignore-list/)を設定するため使用されます。
+サーバーのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/articles/x-google-ignore-list/)を設定するため使用されます。
 
 `server.sourcemapIgnoreList` は、開発サーバーの [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) に相当します。2 つの設定オプションの違いは、rollup の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダーにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
 

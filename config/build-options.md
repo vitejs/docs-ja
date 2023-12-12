@@ -4,7 +4,7 @@
 
 - **型:** `string | string[]`
 - **デフォルト:** `'modules'`
-- **関連:** [ブラウザの互換性](/guide/build#browser-compatibility)
+- **関連:** [ブラウザーの互換性](/guide/build#browser-compatibility)
 
 最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートするブラウザーを対象にします。Vite は `'modules'` を `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']` へ置き換えます。
 
@@ -22,13 +22,13 @@ esbuild で安全にトランスパイルできない機能がコードに含ま
 - **型:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **デフォルト:** `{ polyfill: true }`
 
-デフォルトでは、[module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) が自動的に注入されます。Polyfill は各 `index.html` エントリのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリーを使用するように設定されている場合は、カスタムエントリーで Polyfill を手動でインポートする必要があります:
+デフォルトでは、[module preload polyfill](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) が自動的に注入されます。Polyfill は各 `index.html` エントリーのプロキシモジュールに自動注入されます。ビルドが `build.rollupOptions.input` を通して非 HTML のカスタムエントリーを使用するように設定されている場合は、カスタムエントリーで Polyfill を手動でインポートする必要があります:
 
 ```js
 import 'vite/modulepreload-polyfill'
 ```
 
-注意: この Polyfill は[ライブラリモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザをサポートする必要がある場合は、ライブラリーでの使用は避けた方が良いでしょう。
+注意: この Polyfill は[ライブラリーモード](/guide/build#library-mode)には **適用されません** 。ネイティブの動的インポートを持たないブラウザーをサポートする必要がある場合は、ライブラリーでの使用は避けた方が良いでしょう。
 
 ポリフィルは `{ polyfill: false }` を使って無効にできます。
 
@@ -78,7 +78,7 @@ modulePreload: {
 - **型:** `string`
 - **デフォルト:** `assets`
 
-生成されたアセットをネストするディレクトリーを指定します（`build.outDir` からの相対パス。[ライブラリモード](/guide/build#library-mode)では使用しません）。
+生成されたアセットをネストするディレクトリーを指定します（`build.outDir` からの相対パス。[ライブラリーモード](/guide/build#library-mode)では使用しません）。
 
 ## build.assetsInlineLimit
 
@@ -87,10 +87,10 @@ modulePreload: {
 
 インポートもしくは参照されたアセットでこの閾値より小さいものは、余計な HTTP リクエストを避けるために base64 URL としてインライン化されます。`0` に設定するとインライン化は完全に無効になります。
 
-Git LFS のプレースホルダは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。
+Git LFS のプレースホルダーは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。
 
 ::: tip 注意
-`build.lib` を指定すると `build.assetsInlineLimit` は無視され、ファイルサイズや Git LFS のプレースホルダであるかどうかに関係なく、アセットは常にインライン化されます。
+`build.lib` を指定すると `build.assetsInlineLimit` は無視され、ファイルサイズや Git LFS のプレースホルダーであるかどうかに関係なく、アセットは常にインライン化されます。
 :::
 
 ## build.cssCodeSplit
@@ -113,7 +113,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 このオプションを使用すると、CSS ミニファイのブラウザーターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
 
-これは主流でないブラウザをターゲットにしている場合にのみ使用してください。
+これは主流でないブラウザーをターゲットにしている場合にのみ使用してください。
 例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
 この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
 
@@ -153,7 +153,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 ## build.lib
 
 - **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
-- **関連:** [ライブラリモード](/guide/build#library-mode)
+- **関連:** [ライブラリーモード](/guide/build#library-mode)
 
 ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` で、複数のエントリーを使用する場合は `['es', 'cjs']` です。`fileName` は出力されるパッケージファイルの名前です。デフォルトの `fileName` は package.json の name オプションですが、`format` と `entryAlias` を引数にとる関数として定義することもできます。
 
@@ -163,13 +163,13 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 - **デフォルト:** `false`
 - **関連:** [バックエンドとの統合](/guide/backend-integration)
 
-`true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `.vite/manifest.json` ファイルを生成するようになり、サーバフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。値が文字列の場合は、それがマニフェストファイル名として使われます。
+`true` に設定すると、ビルドはハッシュ化されていないアセットファイル名とハッシュ化されたバージョンのマッピングを含む `.vite/manifest.json` ファイルを生成するようになり、サーバーフレームワークがこれを使用して正しいアセットリンクをレンダリングできるようになります。値が文字列の場合は、それがマニフェストファイル名として使われます。
 
 ## build.ssrManifest
 
 - **型:** `boolean | string`
 - **デフォルト:** `false`
-- **関連:** [サーバサイドレンダリング](/guide/ssr)
+- **関連:** [サーバーサイドレンダリング](/guide/ssr)
 
 `true` に設定すると、本番環境でのスタイルリンクやアセットプリロードディレクティブを決定するための SSR マニフェストもビルドで生成されます。値が文字列の場合は、それがマニフェストファイル名として使われます。
 
@@ -177,7 +177,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 - **型:** `boolean | string`
 - **デフォルト:** `false`
-- **関連:** [サーバサイドレンダリング](/guide/ssr)
+- **関連:** [サーバーサイドレンダリング](/guide/ssr)
 
 SSR 向けのビルドを生成します。この値は、SSR エントリーを直接指定する文字列か、`true` にして `rollupOptions.input` で SSR エントリーを指定する必要があります。
 
@@ -251,7 +251,7 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 - **型:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
 - **デフォルト:** `null`
 
-Rollup ウォッチャを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
+Rollup ウォッチャーを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
 
 ::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
 

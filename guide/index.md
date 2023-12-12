@@ -8,7 +8,7 @@
 
 Vite（フランス語で「素早い」という意味の単語で `/vit/`<button style="border:none;padding:3px;border-radius:4px;vertical-align:bottom" id="play-vite-audio" onclick="document.getElementById('vite-audio').play();"><svg style="height:2em;width:2em"><use href="/voice.svg#voice" /></svg></button> ヴィートのように発音）は、現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。2 つの主要な部分で構成されています:
 
-- 非常に高速な [Hot Module Replacement (HMR)](./features#hot-module-replacement) など、[ネイティブ ES モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules)を利用した[豊富な機能拡張](./features)を提供する開発サーバ。
+- 非常に高速な [Hot Module Replacement (HMR)](./features#hot-module-replacement) など、[ネイティブ ES モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules)を利用した[豊富な機能拡張](./features)を提供する開発サーバー。
 
 - [Rollup](https://rollupjs.org) でコードをバンドルするビルドコマンド。プロダクション用に高度に最適化された静的アセットを出力するように事前に設定されています。
 
@@ -22,7 +22,7 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 開発中、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これは、最新のブラウザーが使用され、最新の JavaScript および CSS 機能がすべてサポートされていることが前提となっているためです。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。
 
-本番ビルドの場合、Vite はデフォルトで [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM 動的インポート](https://caniuse.com/es6-module-dynamic-import)、および [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザをターゲットとします。レガシーブラウザーは、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
+本番ビルドの場合、Vite はデフォルトで [ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM 動的インポート](https://caniuse.com/es6-module-dynamic-import)、および [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザーをターゲットとします。レガシーブラウザーは、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
 
 ## Vite をオンラインで試す {#trying-vite-online}
 
@@ -105,20 +105,20 @@ npm run dev
 
 ## `index.html` とプロジェクトルート {#index-html-and-project-root}
 
-お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーで、`index.html` はアプリケーションのエントリポイントです。
+お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーで、`index.html` はアプリケーションのエントリーポイントです。
 
-Vite は `index.html` をソースコードとして、またモジュールグラフの一部として扱います。JavaScript のソースコードを参照している `<script type="module" src="...">` を解決します。インラインの `<script type="module">` や `<link href>` で参照される CSS も Vite 固有の機能を利用できます。さらに、`index.html` 内の URL は自動的にリベースされるため、特別な `%PUBLIC_URL%` プレースホルダは必要ありません。
+Vite は `index.html` をソースコードとして、またモジュールグラフの一部として扱います。JavaScript のソースコードを参照している `<script type="module" src="...">` を解決します。インラインの `<script type="module">` や `<link href>` で参照される CSS も Vite 固有の機能を利用できます。さらに、`index.html` 内の URL は自動的にリベースされるため、特別な `%PUBLIC_URL%` プレースホルダーは必要ありません。
 
 静的な http サーバーと同様に、Vite には、ファイルの提供元となる「ルートディレクトリー」の概念があります。ドキュメントの残りの部分では `<root>` として示されています。ソースコード内の絶対 URL は、プロジェクトルートをベースとして使って解決されるため、通常の静的ファイルサーバーを使用しているかのようにコードを記述できます（遥かに強力であることを除いては！）。Vite はルート外のファイルシステムの場所に解決される依存関係を処理することもできるため、モノレポベースの構成でも使用できます。
 
-Vite は複数の `.html` エントリポイントを持つ[マルチページアプリ](./build#multi-page-app)にも対応しています。
+Vite は複数の `.html` エントリーポイントを持つ[マルチページアプリ](./build#multi-page-app)にも対応しています。
 
 #### 代替ルートの指定
 
-`vite` を実行すると、現在の作業ディレクトリをルートとして使用する開発サーバーが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
+`vite` を実行すると、現在の作業ディレクトリーをルートとして使用する開発サーバーが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
 なお、Vite は[設定ファイル（`vite.config.js`）](/config/#configuring-vite)もプロジェクトルート内で解決するので、ルートが変更された場合は設定ファイルも移動する必要があります。
 
-## コマンドラインインタフェイス
+## コマンドラインインターフェイス
 
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリーを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
@@ -126,7 +126,7 @@ Vite がインストールされているプロジェクトでは npm スクリ�
 ```json
 {
   "scripts": {
-    "dev": "vite", // 開発サーバを起動。エイリアス: `vite dev`, `vite serve`
+    "dev": "vite", // 開発サーバーを起動。エイリアス: `vite dev`, `vite serve`
     "build": "vite build", // プロダクション用にビルド
     "preview": "vite preview" // プロダクション用ビルドをローカルでプレビュー
   }
@@ -147,7 +147,7 @@ cd vite
 pnpm install
 cd packages/vite
 pnpm run build
-pnpm link --global # このステップでは好きなパッケージマネージャを使用
+pnpm link --global # このステップでは好きなパッケージマネージャーを使用
 ```
 
 その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャー）を実行してください。そして開発サーバーを再起動して最先端の技術に乗っていきましょう！

@@ -26,7 +26,7 @@ document.getElementById('hero-img').src = imgUrl
 
 - [`assetsInlineLimit` オプション](/config/build-options.md#build-assetsinlinelimit) で指定したバイト数よりも小さいアセットは base64 データの URL としてインライン化されます
 
-- Git LFS のプレースホルダは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。インライン化するには、ビルドする前に必ずファイルの内容を Git LFS 経由でダウンロードするようにしてください。
+- Git LFS のプレースホルダーは、それが表すファイルの内容を含んでいないため、自動的にインライン化の対象から除外されます。インライン化するには、ビルドする前に必ずファイルの内容を Git LFS 経由でダウンロードするようにしてください。
 
 - TypeScript はデフォルトでは静的アセットのインポートを有効なモジュールとして認識しません。これを修正するには、[`vite/client`](./features#client-types)を追加します。
 
@@ -78,9 +78,9 @@ import InlineWorker from './shader.js?worker&inline'
 - 全く同じファイル名を保持する必要がある（ハッシュ化しない）
 - …または、アセットの URL を取得するためだけに、アセットのインポートを単純に書きたくない
 
-そのとき、プロジェクトのルート配下の特別な `public` ディレクトリにアセットを置くことができます。このディレクトリーに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリのルートにコピーされます。
+そのとき、プロジェクトのルート配下の特別な `public` ディレクトリーにアセットを置くことができます。このディレクトリーに配置されたアセットは開発環境ではルートパス `/` で提供され、そのまま dist ディレクトリーのルートにコピーされます。
 
-ディレクトリのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/shared-options.md#publicdir) で設定することができます。
+ディレクトリーのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/shared-options.md#publicdir) で設定することができます。
 
 注意点:
 
@@ -89,7 +89,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 ## new URL(url, import.meta.url)
 
-[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクタ](https://developer.mozilla.org/en-US/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
+[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクター](https://developer.mozilla.org/en-US/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
 
 ```js
 const imgUrl = new URL('./img.png', import.meta.url).href
@@ -97,7 +97,7 @@ const imgUrl = new URL('./img.png', import.meta.url).href
 document.getElementById('hero-img').src = imgUrl
 ```
 
-これはモダンブラウザでネイティブに動作します。実際、開発中に Vite はこのコードを処理する必要が全くありません！
+これはモダンブラウザーでネイティブに動作します。実際、開発中に Vite はこのコードを処理する必要が全くありません！
 
 このパターンはテンプレートリテラルによる動的な URL もサポートします:
 
@@ -115,5 +115,5 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 ```
 
 ::: warning SSR では動作しません
-ブラウザーと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバサイドレンダリングで使用している場合には動作しません。サーババンドルは事前にクライアントホストの URL を決定することもできません。
+ブラウザーと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバーサイドレンダリングで使用している場合には動作しません。サーバーバンドルは事前にクライアントホストの URL を決定することもできません。
 :::

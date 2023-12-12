@@ -2,13 +2,13 @@
 
 ## WMR
 
-Preact チームが開発した [WMR](https://github.com/preactjs/wmr) にも似たような機能群があり、Vite 2.0 の Rollup プラグインインタフェイスのサポートは、これに影響を受けています。
+Preact チームが開発した [WMR](https://github.com/preactjs/wmr) にも似たような機能群があり、Vite 2.0 の Rollup プラグインインターフェイスのサポートは、これに影響を受けています。
 
 WMR は主に [Preact](https://preactjs.com/) プロジェクトのために開発されていて、プリレンダリングなどのより統合された機能を提供しています。スコープの点では、Preact meta framework に近いものです。Preact を使用しているなら、WMR はより洗練された経験をもたらしてくれるでしょう。
 
 ## @web/dev-server
 
-[@web/dev-server](https://modern-web.dev/docs/dev-server/overview/)（旧称 `es-dev-server`）は素晴らしいプロジェクトです。Vite 1.0 の Koa ベースのサーバのセットアップはこのプロジェクトに影響を受けたものです。
+[@web/dev-server](https://modern-web.dev/docs/dev-server/overview/)（旧称 `es-dev-server`）は素晴らしいプロジェクトです。Vite 1.0 の Koa ベースのサーバーのセットアップはこのプロジェクトに影響を受けたものです。
 
 `@web/dev-server` はスコープの点では少し低レベルです。公式のフレームワークとの統合を提供しておらず、本番ビルドのためには Rollup の設定を手動でセットアップする必要があります。
 

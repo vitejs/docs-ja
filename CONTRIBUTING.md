@@ -1,25 +1,25 @@
 # Vite 日本語翻訳ガイド
 
-ようこそ、Vite 日本語翻訳レポジトリへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
+ようこそ、Vite 日本語翻訳リポジトリーへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
 
 ## 貢献方法
 
 ### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
 
 1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
-2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
-3. 本レポジトリ(`vitejs/docs-ja`)のメンテナの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
-4. このレポジトリをフォークします！
+2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナーの方々は、GitHub の assign 機能で self assign で OK です)
+3. 本リポジトリー(`vitejs/docs-ja`)のメンテナーの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
+4. このリポジトリーをフォークします！
 5. `main` から任意の名前のブランチを切って作業を開始しましょう！　(`git checkout -b your-translate-branch`)
-6. フォークした自分のレポジトリに Push します。(`git push origin your-translate-branch`)
+6. フォークした自分のリポジトリーに Push します。(`git push origin your-translate-branch`)
 7. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります。
 8. レビュー 👀 で指摘事項があったら修正し、再度 Push します 📝
-9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナの方があなたのブランチをマージします🎉
+9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナーの方があなたのブランチをマージします🎉
 
 
 ### Tips: より円滑な Pull Request のコメント記載方法
 
-GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
+GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュワーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
 
 ## 翻訳スタイル
 

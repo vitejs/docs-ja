@@ -6,9 +6,9 @@
 
 - **型:** `string | string[]`
 
-デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリポイントをクロールします。
+デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
 
-これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリリストの一部として使用できます。
+これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。
 
 ## optimizeDeps.exclude
 
@@ -68,7 +68,7 @@ export default defineConfig({
 - **型:** `boolean | 'build' | 'dev'`
 - **デフォルト:** `'build'`
 
-依存関係の最適化を無効にします。`true` はビルド時とデバッグ時にオプティマイザを無効にします。`'build'` または `'dev'` を渡すと、どちらか一方のモードでのみオプティマイザを無効にできます。依存関係の最適化は、デフォルトでは開発時にのみ有効です。
+依存関係の最適化を無効にします。`true` はビルド時とデバッグ時にオプティマイザーを無効にします。`'build'` または `'dev'` を渡すと、どちらか一方のモードでのみオプティマイザーを無効にできます。依存関係の最適化は、デフォルトでは開発時にのみ有効です。
 
 :::warning
 ビルドモードでの依存関係の最適化は**実験的**なものです。有効にすると、開発環境と本番環境の間の最も大きな違いの 1 つを取り除くことができます。esbuild は CJS だけの依存関係を ESM に変換するので、[`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) はこの場合もう必要ないでしょう。

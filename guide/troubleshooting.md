@@ -63,7 +63,7 @@ ESM ファイルは [`require`](<https://nodejs.org/docs/latest-v18.x/api/esm.ht
 - 一番近い `package.json` に `"type": "module"` を追加する
 - `vite.config.js` / `vite.config.ts` を `vite.config.mjs` / `vite.config.mts` にファイル名を変更する
 
-## 開発サーバ
+## 開発サーバー
 
 ### リクエストがいつまでも終わらない
 
@@ -78,7 +78,7 @@ Linux を利用している場合、ファイルディスクリプタ制限と i
   $ ulimit -Sn
   # 制限を変更 (一時的)
   $ ulimit -Sn 10000 # ハードリミットを変更する必要もあるかもしれません
-  # ブラウザを再起動する
+  # ブラウザーを再起動する
   ```
 
 - `sysctl` により次の inotify 関連の制限を引き上げる
@@ -125,9 +125,9 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 > Server responded with status code 431. See https://vitejs.dev/guide/troubleshooting.html#_431-request-header-fields-too-large.
 
-これは [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121) を軽減するため Node.js がリクエストヘッダサイズを制限しているためです。
+これは [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121) を軽減するため Node.js がリクエストヘッダーサイズを制限しているためです。
 
-これを回避するためには、リクエストヘッダサイズを減らすことを試みてください。例えば、クッキーが長い場合、削除します。あるいは、[`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) を利用して最大ヘッダサイズを変更できます。
+これを回避するためには、リクエストヘッダーサイズを減らすことを試みてください。例えば、クッキーが長い場合、削除します。あるいは、[`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) を利用して最大ヘッダーサイズを変更できます。
 
 ## HMR
 
@@ -169,11 +169,11 @@ HMR が処理されているものの、それが循環依存関係の中にあ�
 
 ### ローカルパッケージにリンクする際、事前バンドルした依存関係が古くなる
 
-最適化された依存関係を無効にするために使用されるハッシュキーは、パッケージロックの内容、依存関係に適用されるパッチ、およびノードモジュールのバンドルに影響を与える Vite 設定ファイルのオプションに依存します。つまり、Vite は [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) のような機能を使って依存関係が上書きされたことを検出し、次のサーバー起動時に依存関係を再バンドルします。[npm link](https://docs.npmjs.com/cli/v9/commands/npm-link) のような機能を使っても、Vite は依存関係を無効化することはありません。依存関係をリンクまたはリンク解除した場合、次のサーバー起動時に `vite --force` を使って強制的に再最適化する必要があります。代わりにオーバーライドを使うことをお勧めします。オーバーライドは現在すべてのパッケージマネージャでサポートされています（[pnpm overrides](https://pnpm.io/package_json#pnpmoverrides) および [yarn resolutions](https://yarnpkg.com/configuration/manifest/#resolutions) も参照してください）。
+最適化された依存関係を無効にするために使用されるハッシュキーは、パッケージロックの内容、依存関係に適用されるパッチ、およびノードモジュールのバンドルに影響を与える Vite 設定ファイルのオプションに依存します。つまり、Vite は [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) のような機能を使って依存関係が上書きされたことを検出し、次のサーバー起動時に依存関係を再バンドルします。[npm link](https://docs.npmjs.com/cli/v9/commands/npm-link) のような機能を使っても、Vite は依存関係を無効化することはありません。依存関係をリンクまたはリンク解除した場合、次のサーバー起動時に `vite --force` を使って強制的に再最適化する必要があります。代わりにオーバーライドを使うことをお勧めします。オーバーライドは現在すべてのパッケージマネージャーでサポートされています（[pnpm overrides](https://pnpm.io/package_json#pnpmoverrides) および [yarn resolutions](https://yarnpkg.com/configuration/manifest/#resolutions) も参照してください）。
 
 ## パフォーマンスのボトルネック {#performance-bottlenecks}
 
-アプリケーションのパフォーマンスがボトルネックとなり読み込みに時間がかかる場合、Vite 開発サーバーまたはアプリケーションをビルドするときに組み込みの Node.js インスペクタを起動して CPU プロファイルを作成できます:
+アプリケーションのパフォーマンスがボトルネックとなり読み込みに時間がかかる場合、Vite 開発サーバーまたはアプリケーションをビルドするときに組み込みの Node.js インスペクターを起動して CPU プロファイルを作成できます:
 
 ::: code-group
 
@@ -229,7 +229,7 @@ Windows でプロジェクトにクロスドライブリンクがある場合、
 
 クロスドライブリンクの例としては、以下のようなものがあります:
 
-- `subst` コマンドでフォルダにリンクされた仮想ドライブ
+- `subst` コマンドでフォルダーにリンクされた仮想ドライブ
 - `mklink` コマンドによる別ドライブへのシンボリックリンク/ジャンクション（例：Yarn のグローバルキャッシュ）
 
 関連 issue: [#10802](https://github.com/vitejs/vite/issues/10802)

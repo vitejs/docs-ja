@@ -13,7 +13,7 @@
 
 [`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
-Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/) をチェックしてみてください。
+Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザーのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/) をチェックしてみてください。
 
 レガシーブラウザーは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能 Polyfill を自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザーでのみ条件付きで読み込まれます。
 
@@ -66,7 +66,7 @@ export default defineConfig({
 
 ## ファイル変更時のリビルド
 
-`vite build --watch` で rollup のウォッチャを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
+`vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
 
 ```js
 // vite.config.js
@@ -122,9 +122,9 @@ HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクト�
 
 ## ライブラリーモード {#library-mode}
 
-ブラウザー向けのライブラリーを開発していると、実際のライブラリをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
+ブラウザー向けのライブラリーを開発していると、実際のライブラリーをインポートしたテスト/デモページにほとんどの時間を費やすことになると思われます。Vite を使えば、`index.html` をその目的のために使うことができスムーズな開発を行うことができます。
 
-配布のためにライブラリをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
+配布のためにライブラリーをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリーにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
 ```js
 // vite.config.js
@@ -141,7 +141,7 @@ export default defineConfig({
       fileName: 'my-lib'
     },
     rollupOptions: {
-      // ライブラリにバンドルされるべきではない依存関係を
+      // ライブラリーにバンドルされるべきではない依存関係を
       // 外部化するようにします
       external: ['vue'],
       output: {
@@ -156,7 +156,7 @@ export default defineConfig({
 })
 ```
 
-エントリーファイルには、パッケージのユーザがインポートできるエクスポートが含まれることになります:
+エントリーファイルには、パッケージのユーザーがインポートできるエクスポートが含まれることになります:
 
 ```js
 // lib/main.js
@@ -223,7 +223,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 :::
 
 ::: warning 高度な使い方
-ライブラリーモードには、ブラウザー向けのライブラリーや JS フレームワークライブラリーのためのシンプルで opinionated な設定が含まれています。非ブラウザライブラリをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
+ライブラリーモードには、ブラウザー向けのライブラリーや JS フレームワークライブラリーのためのシンプルで opinionated な設定が含まれています。非ブラウザーライブラリーをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
 :::
 
 ## 高度なベースパスの設定 {#advanced-base-options}
