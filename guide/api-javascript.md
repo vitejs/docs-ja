@@ -122,7 +122,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * 指定したファイル上でプラグインフックを実行できる Rollup プラグインコンテナ。
+   * 指定したファイル上でプラグインフックを実行できる Rollup プラグインコンテナー。
    */
   pluginContainer: PluginContainer
   /**

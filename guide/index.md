@@ -87,9 +87,9 @@ bunx create-vite my-vue-app --template vue
 
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
-## コミュニティのテンプレート
+## コミュニティーのテンプレート
 
-create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。
+create-vite はよく使われているフレームワークの基本的なテンプレートを元に、プロジェクトをすばやく開始するためのツールです。他のツールを含んでいたり、別のフレームワークを対象としている、[コミュニティーが管理しているテンプレート](https://github.com/vitejs/awesome-vite#templates)については Awesome Vite をチェックしてみてください。
 
 例えば `https://github.com/user/project` にあるテンプレートについては、`https://github.stackblitz.com/user/project`（プロジェクトの URL の `github` の後に `.stackblitz` を追加）を使ってオンラインで試すことができます。
 
@@ -152,6 +152,6 @@ pnpm link --global # このステップでは好きなパッケージマネー�
 
 その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャー）を実行してください。そして開発サーバーを再起動して最先端の技術に乗っていきましょう！
 
-## コミュニティ
+## コミュニティー
 
 質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。

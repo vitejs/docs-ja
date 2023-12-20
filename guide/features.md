@@ -556,7 +556,7 @@ init({
 
 ::: tip 注意
 [WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
-[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティのプラグインを使用して対処してください。
+[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティーのプラグインを使用して対処してください。
 :::
 
 ### WebAssembly モジュールへのアクセス
