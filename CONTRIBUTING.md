@@ -25,7 +25,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 - [JTF 日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
 - JTF 日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールは Vue.js 公式サイト向けに [一部カスタマイズ](https://github.com/vitejs/docs-ja/blob/main/.textlintrc)
-  - `yarn lint` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
+  - `pnpm run lint` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
 
 ## 翻訳のゆらぎ & トーン
 
@@ -33,7 +33,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 「だである」ではなく「ですます」調
 
-> Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
+> Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects.
 
 <!-- textlint-disable -->
 - NG : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツール**である**。
@@ -42,7 +42,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 ### 半角スペースでアルファベット両端を入れて読みやすく！
 
-> Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. 
+> Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects.
 
 <!-- textlint-disable -->
 - NG : Vite(フランス語で「速い」という意味の単語で`/vit/`と発音)は現代のWebプロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。

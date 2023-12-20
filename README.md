@@ -12,11 +12,10 @@
 
 ```bash
 # NPMパッケージをインストール
-$ yarn install
+$ pnpm install
 
 # ローカル Web サーバーを起動
-$ yarn docs
-```  
+$ pnpm run docs
+```
 
 上記コマンド実行後、`http://localhost:5173` にアクセスするとサイトにアクセスできます。
-
