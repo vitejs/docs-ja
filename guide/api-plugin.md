@@ -6,7 +6,7 @@ Vite プラグインは、Rollup の優れた設計のプラグインインタ�
 
 ## プラグインの作成
 
-Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](https://vitejs.dev/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティプラグインを確認してください。
+Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](https://vitejs.dev/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティープラグインを確認してください。
 
 プラグインを作成する際には、`vite.config.js` にインラインで記述できます。そのために新しいパッケージを作成する必要はありません。あるプラグインが自分のプロジェクトで役に立ったことがわかったら、[エコシステムにいる](https://chat.vitejs.dev)他の人を助けるために共有することを検討してください。
 
@@ -79,7 +79,7 @@ export default defineConfig({
 ## シンプルな例
 
 :::tip
-Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリ関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
+Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリー関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
 :::
 
 ### カスタムファイルタイプの変換
@@ -146,7 +146,7 @@ Vite (および Rollup) の仮想モジュールは慣例により、ユーザ�
 
 ## 共通のフック
 
-開発中、Vite 開発サーバーは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/plugin-development/#build-hooks)を呼び出すプラグインコンテナを作成します。
+開発中、Vite 開発サーバーは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/plugin-development/#build-hooks)を呼び出すプラグインコンテナーを作成します。
 
 以下のフックはサーバー起動時に一度だけ呼び出されます:
 

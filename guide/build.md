@@ -58,7 +58,7 @@ export default defineConfig({
 })
 ```
 
-カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリとしても提供されます。この場合、ビルドウォッチモードが正しく動作するように、`cache.reset()` は `buildStart` で呼び出す必要があります。
+カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリーとしても提供されます。この場合、ビルドウォッチモードが正しく動作するように、`cache.reset()` は `buildStart` で呼び出す必要があります。
 
 ::: warning
 このプラグインを使用する場合は、 `build.rollupOptions.output.manualChunks` を関数形式で使用する必要があります。オブジェクト形式を使用すると、プラグインは何の効果も持ちません。
