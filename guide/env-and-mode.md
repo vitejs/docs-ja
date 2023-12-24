@@ -46,9 +46,14 @@ DB_PASSWORD=foobar
 `VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
 
 ```js
-console.log(import.meta.env.VITE_SOME_KEY) // 123
+console.log(import.meta.env.VITE_SOME_KEY) // "123"
 console.log(import.meta.env.DB_PASSWORD) // undefined
 ```
+
+:::tip env のパース
+
+上に示したように、`VITE_SOME_KEY` は数値ですが、パースすると文字列が返ります。同じことはブール型の環境変数にも起こります。コード内で使用する場合には、必ず目的の型に変換するようにしてください。
+:::
 
 また、Vite は [dotenv-expand](https://github.com/motdotla/dotenv-expand) を使って、設定不要で変数を展開できます。構文の詳細については、[ドキュメント](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow)を参照してください。
 
@@ -74,7 +79,7 @@ NEW_KEY3=test$KEY   # test123
 
 デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
 
-この目的を達するには、`src` ディレクトリーに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
+この目的を達するには、`src` ディレクトリーに `vite-env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
 ```typescript
 /// <reference types="vite/client" />
@@ -96,6 +101,11 @@ interface ImportMeta {
   "lib": ["WebWorker"]
 }
 ```
+
+:::warning import は型拡張を破壊する
+
+`ImportMetaEnv` の拡張が上手く動かない場合、`import` ステートメントが `vite-env.d.ts` 内に存在しないことを確認してください。詳しい情報については、[TypeScript のドキュメント](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) を参照してください。
+:::
 
 ## HTML での置換
 
