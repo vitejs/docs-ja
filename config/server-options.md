@@ -249,9 +249,7 @@ async function createServer() {
     appType: 'custom', // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
   })
   // vite の接続インスタンスをミドルウェアとして使用
-  app.use((req, res, next) => {
-    vite.middlewares.handle(req, res, next)
-  })
+  app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
     // `appType` が `'custom'` なので、ここでレスポンスを返すべきです。
