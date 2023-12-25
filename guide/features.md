@@ -65,7 +65,7 @@ export type { T }
 
 隔離されたトランスパイルで動作しない機能を TS が警告するように、`tsconfig.json` の `compilerOptions` で `"isolatedModules": true` を設定する必要があります。
 
-しかし、一部のライブラリー (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
+しかし、一部のライブラリー (例えば [`vue`](https://github.com/vuejs/core/issues/1228)) は `"isolatedModules": true` でうまく動作しないことがあります。`"skipLibCheck": true` を使用すると、アップストリームで修正されるまで一時的にエラーを抑制することができます。
 
 #### `useDefineForClassFields`
 
