@@ -64,6 +64,18 @@ export default defineConfig({
 このプラグインを使用する場合は、 `build.rollupOptions.output.manualChunks` を関数形式で使用する必要があります。オブジェクト形式を使用すると、プラグインは何の効果も持ちません。
 :::
 
+## 読み込みエラーのハンドリング
+
+Vite は動的インポートの読み込みに失敗したときに `vite:preloadError` イベントを出力します。`event.payload` には元のインポートエラーが含まれます。`event.preventDefault()` を呼んだ場合、エラーはスローされません。
+
+```js
+window.addEventListener('vite:preloadError', (event) => {
+  window.reload() // たとえば、ページをリロードする
+})
+```
+
+新しいデプロイが行われると、ホスティングサービスは前回のデプロイからアセットを削除することがあります。その結果、新しいデプロイメントの前にあなたのサイトを訪れたユーザーがインポートエラーに遭遇してしまう可能性があります。このエラーが起こるのは、そのユーザーのデバイス上で実行されているアセットが古くなり、対応する削除された古いチャンクをインポートしようとしてしまうためです。このイベントは、このような状況に対処するのに便利です。
+
 ## ファイル変更時のリビルド
 
 `vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
