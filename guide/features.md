@@ -391,26 +391,6 @@ const modules = {
 }
 ```
 
-### glob インポートでの形式の変換
-
-`import.meta.glob` は [Import Reflection](https://github.com/tc39/proposal-import-reflection) 構文でファイルの文字列としてのインポートもサポートしています（[アセットを文字列としてインポートする](./assets#importing-asset-as-string)と同様）:
-
-```js
-const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
-```
-
-上のコードは以下のように変換されます:
-
-```js
-// vite によって生成されたコード
-const modules = {
-  './dir/foo.js': 'export default "foo"\n',
-  './dir/bar.js': 'export default "bar"\n',
-}
-```
-
-`{ as: 'url' }` によりアセットの URL としての読み込みもサポートしています。
-
 ### マルチパターン
 
 第 1 引数は下記の例のように glob の配列を指定できます
@@ -490,20 +470,37 @@ const modules = {
 
 #### カスタムクエリー
 
-また、`query` オプションを使用すると、他のプラグインが使用するカスタムクエリーをインポートに指定することができます。
+また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vitejs.dev/guide/assets.html#importing-asset-as-string)または[urlとして](https://vitejs.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
+
+```ts
+const moduleStrings = import.meta.glob('./dir/*.svg', {
+  query: '?raw',
+  import: 'default',
+})
+const moduleUrls = import.meta.glob('./dir/*.svg', {
+  query: '?url',
+  import: 'default',
+})
+```
+
+```ts
+// vite によって生成されるコード:
+const moduleStrings = {
+  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
+}
+const moduleUrls = {
+  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+}
+```
+
+他のプラグインが使用するカスタムクエリーを指定することもできます:
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true },
 })
-```
-
-```ts
-// vite によって生成されたコード:
-const modules = {
-  './dir/foo.js': () => import('./dir/foo.js?foo=bar&bar=true'),
-  './dir/bar.js': () => import('./dir/bar.js?foo=bar&bar=true'),
-}
 ```
 
 ### Glob インポートの注意事項
