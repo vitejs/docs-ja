@@ -470,7 +470,7 @@ const modules = {
 
 #### カスタムクエリー
 
-また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vitejs.dev/guide/assets.html#importing-asset-as-string)または[urlとして](https://vitejs.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
+また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vitejs.dev/guide/assets.html#importing-asset-as-string)または [url として](https://vitejs.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
 
 ```ts
 const moduleStrings = import.meta.glob('./dir/*.svg', {
