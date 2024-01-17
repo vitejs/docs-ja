@@ -64,16 +64,17 @@ export default defineConfig({
 
 ## optimizeDeps.disabled
 
+- **非推奨**
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13839)
 - **型:** `boolean | 'build' | 'dev'`
 - **デフォルト:** `'build'`
 
-依存関係の最適化を無効にします。`true` はビルド時とデバッグ時にオプティマイザーを無効にします。`'build'` または `'dev'` を渡すと、どちらか一方のモードでのみオプティマイザーを無効にできます。依存関係の最適化は、デフォルトでは開発時にのみ有効です。
+このオプションは非推奨です。Vite 5.1 時点で、ビルド中の依存関係の事前バンドルは削除されています。`optimizeDeps.disabled` を `true` または `'dev'` に設定するとオプティマイザーが無効になり、`false` または `'build'` に設定すると開発中のオプティマイザーは有効のままになります。
+             
+オプティマイザーを完全に無効化するには、`optimizeDeps.noDiscovery: true` を使用して依存関係の自動的なディスカバリーを禁止し、`optimizeDeps.include` を undefined または空のままにしてください。
 
 :::warning
-ビルドモードでの依存関係の最適化は**実験的**なものです。有効にすると、開発環境と本番環境の間の最も大きな違いの 1 つを取り除くことができます。esbuild は CJS だけの依存関係を ESM に変換するので、[`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) はこの場合もう必要ないでしょう。
-
-このビルド戦略を試したい場合は、`optimizeDeps.disabled: false` を使用します。`@rollup/plugin-commonjs` は `build.commonjsOptions: { include: [] }` を渡すことで削除できます。
+ビルド時の依存関係の最適化は**実験的な**機能でした。この戦略を試したプロジェクトでは、`build.commonjsOptions: { include: [] }` を使用して `@rollup/plugin-commonjs` も削除しました。もし削除していた場合、バンドル中に CJS のみのパッケージをサポートするために、再び有効にするよう警告が表示されます。
 :::
 
 ## optimizeDeps.needsInterop
