@@ -168,8 +168,8 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
     // デコレータを使用する場合、trueにします
     "experimentalDecorators": true,
     // ブラウザーでパースエラーに遭遇した場合、trueにします
-    "useDefineForClassFields": true
-  }
+    "useDefineForClassFields": true,
+  },
 }
 ```
 
