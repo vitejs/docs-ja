@@ -135,7 +135,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 
 これにより次のことが提供されます:
 
-- アセットのインポート (例: `.svg` ファイルのインポート)
+- アセットのインポート（例: `.svg` ファイルのインポート）
 - `import.meta.env` に Vite が挿入した[環境変数](./env-and-mode#env-variables)の型
 - `import.meta.hot` の [HMR API](./api-hmr) の型
 
@@ -211,11 +211,11 @@ export default defineConfig({
 
 Vite は、`postcss-import` を介した CSS `@import` のインライン化をサポートするように事前構成されています。CSS `@import` では、Vite エイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリーにある場合でも、すべての CSS `url()` 参照は、正確性を確保するために常に自動的に書き換えられます。
 
-`@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています ([CSS Pre-processors](#css-pre-processors)を参照)。
+`@import` エイリアスと URL の書き換えは Sass ファイルと Less ファイルでもサポートされています（[CSS Pre-processors](#css-pre-processors)を参照）。
 
 ### PostCSS
 
-もしプロジェクトに有効な PostCSS が含まれている場合 ([postcss-load-config](https://github.com/postcss/postcss-load-config) でサポートされている任意の形式、例: `postcss.config.js`)、インポートされたすべての CSS に自動的に適用されます。
+もしプロジェクトに有効な PostCSS が含まれている場合（[postcss-load-config](https://github.com/postcss/postcss-load-config) でサポートされている任意の形式、例: `postcss.config.js`）、インポートされたすべての CSS に自動的に適用されます。
 
 CSS の圧縮は PostCSS の後に実行され、[`build.cssTarget`](/config/build-options.md#build-csstarget) オプションを使用することに注意してください。
 

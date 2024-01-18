@@ -8,7 +8,7 @@ Vite は EOL となった Node.js 14 / 16 / 17 / 19 をサポートしなくな�
 
 Vite は現在、Rollup 4 を使用しており、その破壊的変更を含んでいます。具体的には：
 
-- Import assertions (`assertions` プロパティ) は import attributes (`attributes` プロパティ) にリネームされました
+- Import assertions（`assertions` プロパティ）は import attributes（`attributes` プロパティ）にリネームされました
 - Acorn プラグインはサポートされなくなりました
 - Vite プラグインにおいて、`this.resolve` `skipSelf` オプションはデフォルトが `true` になりました
 - Vite プラグインにおいて、`this.parse` は今のところ `allowReturnOutsideFunction` オプションのみをサポートします
