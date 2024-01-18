@@ -71,7 +71,7 @@ export default defineConfig({
 
 このオプションは非推奨です。Vite 5.1 時点で、ビルド中の依存関係の事前バンドルは削除されています。`optimizeDeps.disabled` を `true` または `'dev'` に設定するとオプティマイザーが無効になり、`false` または `'build'` に設定すると開発中のオプティマイザーは有効のままになります。
              
-オプティマイザーを完全に無効化するには、`optimizeDeps.noDiscovery: true` を使用して依存関係の自動的なディスカバリーを禁止し、`optimizeDeps.include` を undefined または空のままにしてください。
+オプティマイザーを完全に無効化するには、`optimizeDeps.noDiscovery: true` を使用して依存関係の自動検出を禁止し、`optimizeDeps.include` を undefined または空のままにしてください。
 
 :::warning
 ビルド時の依存関係の最適化は**実験的な**機能でした。この戦略を試したプロジェクトでは、`build.commonjsOptions: { include: [] }` を使用して `@rollup/plugin-commonjs` も削除しました。もし削除していた場合、バンドル中に CJS のみのパッケージをサポートするために、再び有効にするよう警告が表示されます。
