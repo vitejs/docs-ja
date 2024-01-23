@@ -243,4 +243,4 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 ## v3 からの移行
 
-Vite v4 ドキュメントの [Migration from v3 Guide](https://v4.vitejs.dev/guide/migration.html) をまず確認し、アプリを Vite v3 に移植するための必要な変更を調べてから、このページの変更点を進めてください。
+Vite v4 ドキュメントの [Migration from v3 Guide](https://v4.vitejs.dev/guide/migration.html) をまず確認し、アプリを Vite v4 に移植するために必要な変更を調べてから、このページの変更点を進めてください。
