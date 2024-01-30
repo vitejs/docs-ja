@@ -193,7 +193,7 @@ SSR ビルドの間、静的アセットはクライアントビルドの一部�
 ## build.minify
 
 - **型:** `boolean | 'terser' | 'esbuild'`
-- **デフォルト:** `'esbuild'`
+- **デフォルト:** クライアントビルドは `'esbuild'`、SSR ビルドでは `false`
 
 ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
 
