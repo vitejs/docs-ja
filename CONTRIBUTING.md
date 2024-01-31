@@ -1,31 +1,43 @@
 # Vite 日本語翻訳ガイド
 
-ようこそ、Vite 日本語翻訳リポジトリーへ！翻訳プロジェクトに貢献したい方は以下の内容を一読の上、お願いします。
+ようこそ、Vite 日本語翻訳リポジトリーへ！
+翻訳プロジェクトに貢献したい方は、以下の内容を一読の上、お願いします。
 
 ## 貢献方法
 
-### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
+### GitHub Issues にある本家ドキュメントの差分更新
+英語版ドキュメントが更新されると、自動的に本リポジトリーにも issue が生成されるようになっています（説明文が `New updates on head repo.` となっているもの）。
 
-1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) の中でまだアサインされていない issues 一覧から自分のやりたい issue を選択します。
-2. 選択した issue で「翻訳やります！」のようなコメントで宣言します。(`vitejs/docs-ja` のメンテナーの方々は、GitHub の assign 機能で self assign で OK です)
-3. 本リポジトリー(`vitejs/docs-ja`)のメンテナーの方から同 issue でコメントで承認されたら、正式自分が選んだ issue の翻訳担当者としてアサインされたことになります。
+1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) から、[このクエリー](https://github.com/vitejs/docs-ja/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc+New+updates+on+head+repo.) でソート & フィルターして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
+2. 選択した issue で、「対応します！」などのコメントで宣言します（`vitejs/docs-ja` のメンテナーの方々は、GitHub の assign 機能で self assign で OK です）
+3. このリポジトリー `vitejs/docs-ja` のメンテナーから同 issue でリアクションされたら、自分が選んだ issue の担当者として正式にアサインされたことになります
 4. このリポジトリーをフォークします！
-5. `main` から任意の名前のブランチを切って作業を開始しましょう！　(`git checkout -b your-translate-branch`)
-6. フォークした自分のリポジトリーに Push します。(`git push origin your-translate-branch`)
-7. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります。
-8. レビュー 👀 で指摘事項があったら修正し、再度 Push します 📝
-9. レビュー 👀 で OK 🙆‍♀️ ならば、メンテナーの方があなたのブランチをマージします🎉
+    - README に従い、必ずパッケージをインストールしてください（textlint のため）
+5. `main` ブランチからトピックブランチを作成します: `git branch my-topic-branch main`
+6. 変更をコミットします: `git commit -am 'docs: fix typo'`
+    - コミットメッセージは issue のタイトル（英語版のコミットメッセージ）と同じにしてください
+7. textlint で引っかかる場合は再度修正を行いコミットします
+8. フォークした自分のリポジトリーに Push します: `git push origin my-topic-branch`
+9. 問題がなければ、プルリクエストを `vitejs/docs-ja` の `main` ブランチに送ります
+10. レビューで指摘事項があったら修正 + Push し、再レビュー依頼（ :arrows_counterclockwise: ボタン）します
+    - 依頼の前に、修正漏れがないか確認してください
+11. レビューで OK ならば、マージされてドキュメントに反映されます :tada:
 
+#### Tips: より円滑な Pull Request のコメント記載方法
 
-### Tips: より円滑な Pull Request のコメント記載方法
+GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。
+Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります :pray:
 
-GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。 Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュワーが非常に助かります 🙏 詳しくは、[プルリクエストをIssueにリンクする - GitHub Docs](https://docs.github.com/ja/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) を参照してください。
+### タイポなどの修正
+
+手順は上記の `4.` 以降と同じです。
 
 ## 翻訳スタイル
 
-- [JTF 日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
-- JTF 日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールは Vue.js 公式サイト向けに [一部カスタマイズ](https://github.com/vitejs/docs-ja/blob/main/.textlintrc)
-  - `pnpm run lint` コマンドを実行すると、Markdown ファイルに対して textlint を実行できます。
+- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) - 基本的な翻訳スタイル。
+- [Microsoft ローカリゼーション スタイル ガイド](https://www.microsoft.com/ja-jp/language/styleguides) - 技術文書におけるスタイル。
+- [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) - JTF 日本語標準スタイルガイド（翻訳用）の textlint のルールセット。
+- [textlint-rule-preset-vuejs-jp](https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp) - Vue.js 日本ユーザーグループで一部カスタマイズした textlint のルールセット。
 
 ## 翻訳のゆらぎ & トーン
 
@@ -53,7 +65,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 - 読点: お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。
 
-### 原則、一語一句翻訳、ただ日本語として分かりにくい場合は読みやすさを優先
+### 原則、一語一句翻訳。ただし日本語として分かりにくい場合は読みやすさを優先
 
 > Dependencies are Strongly Cached.
 
@@ -67,7 +79,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 - NG: 例
 - OK: 例:
 
-ただし、文の途中にハイフン `-` やセミコロン `;` がある場合は、その記号があると理解しづらい訳になる場合は、例外として削除してもよいです。
+ただし、文の途中にハイフン `-` やセミコロン `;` があり、その記号があると理解しづらい訳になる場合は、例外として削除してもよいです。
 
 - 原文:
 
@@ -83,8 +95,8 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
   - 例: 英語の filter 、日本語のフィルター
 - 和訳に困った、とりあえず英語
   - 例: expression -> 式、表現
-- 和訳にして分かりづらい場合は、翻訳と英語(どちらかに括弧付け)でも OK
-  - 例: Two way -> Two way (双方向)
+- 和訳にして分かりづらい場合は、翻訳と英語（どちらかに括弧付け）でも OK
+  - 例: Two way -> Two way（双方向）
 
 ### 長音訳について
 
@@ -97,7 +109,7 @@ GitHub の Pull Request には、特定の記法を Pull Request の本文に書
 
 ### 行の追加・削除をしない
 
-行番号が変わってしまうと Vite 本体の変更を取り込む際に対応箇所を探すのが難しいので、原文と同じ行に翻訳してください。
+行番号が変わってしまうと英語版ドキュメントの変更を取り込む際に対応箇所を探すのが難しくなるので、原文と同じ行に翻訳してください。
 
 原文:
 
@@ -130,16 +142,3 @@ OK: 行がそのまま
 6 |
 7 | 最も基本的な設定ファイルは次のようになります:
 ```
-
-### Vite 本体との差分 Issue について
-
-以下の説明文の Issue は Vite 本体のリポジトリーに変更があった際に自動的に作られるものです。
-
-```text
-New updates on head repo.
-vitejs/vite@コミット番号
-```
-
-これらに関しては `help wanted` タグなどが付いていなくても対応可能です。
-もし対応いただける場合は、古いものから順番にお願いします。
-（新しいものを先にやってしまうとデグレの可能性があるため）
