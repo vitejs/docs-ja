@@ -222,17 +222,12 @@ CSS プリプロセッサーに渡すオプションを指定します。オプ�
 - `less` - [オプション](https://lesscss.org/usage/#less-options)。
 - `styl`/`stylus` - オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
 
-すべてのプリプロセッサーオプションは `additionalData` オプションもサポートしており、これを使用して各スタイルのコンテンツに追加のコードを注入できます。変数だけでなく実際のスタイルを含めると、それらのスタイルは最終的なバンドルに複製されるので注意してください。
-
-例:
+**例:**
 
 ```js
 export default defineConfig({
   css: {
     preprocessorOptions: {
-      scss: {
-        additionalData: `$injectedColor: orange;`,
-      },
       less: {
         math: 'parens-division',
       },
@@ -246,6 +241,34 @@ export default defineConfig({
 })
 ```
 
+### css.preprocessorOptions[extension].additionalData
+
+- **型:** `string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))`
+
+このオプションは、各スタイルコンテンツに追加のコードを挿入するために使用できます。変数だけではなく実際のスタイルを含めた場合、それらのスタイルは最終的なバンドルに複製されることに注意してください。
+
+**例:**
+
+```js
+export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `$injectedColor: orange;`,
+      },
+    },
+  },
+})
+```
+
+## css.preprocessorMaxWorkers
+
+- **実験的機能:** フィードバックをしてください (TODO: update)
+- **型:** `number | true`
+- **デフォルト:** `0`（ワーカーを 1 つも作らず、メインスレッドで実行します）
+
+このオプションを設定すると、可能な場合に CSS プリプロセッサーがワーカーで実行されます `true` は CPU の数 -1 を意味します。
+
 ## css.devSourcemap
 
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13845)
@@ -256,7 +279,7 @@ export default defineConfig({
 
 ## css.transformer
 
-- **実験的機能: ** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
 - **型:** `'postcss' | 'lightningcss'`
 - **デフォルト:** `'postcss'`
 
@@ -264,7 +287,7 @@ CSS 処理に使用するエンジンを選択します。詳細は [Lightning C
 
 ## css.lightningcss
 
-- **実験的機能: ** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
 - **型:**
 
 ```js
