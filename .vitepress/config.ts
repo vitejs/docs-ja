@@ -287,6 +287,10 @@ export default defineConfig({
               link: '/guide/api-javascript',
             },
             {
+              text: 'Vite ランタイム API',
+              link: '/guide/api-vite-runtime',
+            },
+            {
               text: '設定リファレンス',
               link: '/config/',
             },
