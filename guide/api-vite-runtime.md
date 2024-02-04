@@ -1,12 +1,12 @@
 # Vite ランタイム API
 
 :::warning 低レベル API
-この API は Vite 5.1 で実験的機能として導入されました。[フィードバックの収集](https://github.com/vitejs/vite/discussions/15774)に追加されています。おそらく Vite 5.2 で破壊的な変更があるため、使用する場合は Vite のバージョンを `~5.1.0` にピンするようにしてください。この機能は、ライブラリやフレームサークの作者向けの低レベル API です。アプリケーションを作ることが目的なら、はじめに高レベルの SSR プラグインと [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) にあるツールを確認してください。
+この API は Vite 5.1 で実験的機能として導入されました。[フィードバックの収集](https://github.com/vitejs/vite/discussions/15774)に追加されています。おそらく Vite 5.2 で破壊的な変更があるため、使用する場合は Vite のバージョンを `~5.1.0` に固定するようにしてください。この機能は、ライブラリやフレームワークの作者向けの低レベル API です。アプリケーションを作ることが目的なら、はじめに高レベルの SSR プラグインと [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) にあるツールを確認してください。
 :::
 
-「Vite ランタイム」は、はじめに Vite プラグインで処理することにより、任意のコードを実行できるようにするツールです。ランタイムの実行がサーバーから分離されているため、`server.ssrLoadModule` とは異なります。これにより、ライブラリやフレームワークの作者は、サーバーとランタイム間に独自の通信レイヤーを実装できるようになります。
+「Vite ランタイム」は、はじめに Vite プラグインで処理することにより、任意のコードを実行できるようにするツールです。ランタイムの実装がサーバーから分離されているため、`server.ssrLoadModule` とは異なります。これにより、ライブラリやフレームワークの作者は、サーバーとランタイム間に独自の通信レイヤーを実装できるようになります。
 
-この機能の目的の目的の 1 つは、カスタマイズ可能な API を提供して、コードを処理・実行できるようにすることです。Vite は、Vite ランタイムをデフォルトで使えるようにするための十分なツールを提供していますが、Vite のビルトインの実装がユーザーニーズに合わない場合には、ユーザーがそれをベースに構築することができます。
+この機能の目的の 1 つは、カスタマイズ可能な API を提供して、コードを処理・実行できるようにすることです。Vite は、Vite ランタイムをデフォルトで使えるようにするための十分なツールを提供していますが、Vite のビルトインの実装がユーザーニーズに合わない場合には、ユーザーがそれをベースに構築することができます。
 
 すべての API は、インポート不可であると明示されていない限り `vite/runtime` からインポートできます。
 
@@ -41,7 +41,7 @@ export class ViteRuntime {
    */
   public async destroy(): Promise<void>
   /**
-   * `destroy()` メソッドの呼び出しによりランタイムが 破壊された場合に `true` を返します。
+   * `destroy()` メソッドの呼び出しによりランタイムが破棄された場合に `true` を返します。
    */
   public isDestroyed(): boolean
 }
@@ -55,7 +55,7 @@ export class ViteRuntime {
 
 `ViteRuntime` 内のランナーには、コードを実行する責務があります。Vite はデフォルトで `ESModulesRunner` をエクスポートしており、コードの実行に `new AsyncFunction` を使用します。もし JavaScript ランタイムが安全ではない評価をサポートしていない場合は、自分自身の実装を提供できます。
 
-ランタイムが公開している主な 2 つのメソッドは、`executeUrl` と `executeEntrypoint` です。メソッド間の唯一の違いは、HMR が `full-reload` イベントをトリガーした場合に、`executeEntrypoint` によって実行されるすべてのモジュールが再実行されるという点です。このとき、Vite ランタイムは `exports` オブジェクトを更新しないことに注意してください（オーバーライドします）。最新の `exports` オブジェクトがあることに依存する場合は、再度 `executeUrl` を実行するか、`moduleCache` からモジュールを取得する必要があります。
+ランタイムが公開している主な 2 つのメソッドは、`executeUrl` と `executeEntrypoint` です。メソッド間の唯一の違いは、HMR が `full-reload` イベントをトリガーした場合に、`executeEntrypoint` によって実行されるすべてのモジュールが再実行されるという点です。このとき、Vite ランタイムは `exports` オブジェクトを更新しないことに注意してください（上書きします）。最新の `exports` オブジェクトがあることに依存する場合は、再度 `executeUrl` を実行するか、`moduleCache` からモジュールを取得する必要があります。
 
 **使用例:**
 
@@ -114,7 +114,7 @@ export interface ViteRuntimeOptions {
         logger?: false | HMRLogger
       }
   /**
-   * カスタムのモジュールキャッシュ。与えられた場合、ViteRuntime インスタンスごとに別のモジュールキャッシュを作成します。
+   * カスタムのモジュールキャッシュ。指定しない場合、ViteRuntime インスタンスごとに別のモジュールキャッシュを作成します。
    */
   moduleCache?: ModuleCacheMap
 }
@@ -128,7 +128,7 @@ export interface ViteRuntimeOptions {
 export interface ViteModuleRunner {
   /**
    * Vite によって変換されたコードを実行します。
-   * @param context コンテキスト関数
+   * @param context 関数のコンテキスト
    * @param code 変換されたコード
    * @param id モジュールをフェッチするために使われる ID
    */
@@ -154,7 +154,7 @@ Vite は、このインターフェイスを実行している `ESModulesRunner`
 ```ts
 export interface HMRRuntimeConnection {
   /**
-   * メッセージをクライアントに送信するまえにチェックされます。
+   * メッセージをクライアントに送信する前にチェックされます。
    */
   isReady(): boolean
   /**
