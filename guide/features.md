@@ -174,7 +174,7 @@ Vite は Vue に対して最高のサポートをします:
 
 Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
-もし React、または Vue で JSX を使用していない場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
+React や Vue 以外で JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact の場合:
 
 ```js
 // vite.config.js
