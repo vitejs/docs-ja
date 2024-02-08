@@ -144,7 +144,11 @@ interface ViteDevServer {
   /**
    * Vite の組み込み HTML 変換と、プラグイン HTML 変換を適用します。
    */
-  transformIndexHtml(url: string, html: string): Promise<string>
+  transformIndexHtml(
+    url: string,
+    html: string,
+    originalUrl?: string,
+  ): Promise<string>
   /**
    * 指定された URL を SSR 用にインスタンス化されたモジュールとして読み込みます。
    */
