@@ -263,7 +263,7 @@ export default defineConfig({
 
 ## css.preprocessorMaxWorkers
 
-- **実験的機能:** フィードバックをしてください (TODO: update)
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/15835)
 - **型:** `number | true`
 - **デフォルト:** `0`（ワーカーを 1 つも作らず、メインスレッドで実行します）
 
