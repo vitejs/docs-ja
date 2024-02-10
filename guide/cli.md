@@ -58,7 +58,6 @@ vite build [root]
 | `--minify [minifier]`          | 最小化を有効/無効にする、または使用するミニファイアを指定する (デフォルト: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
 | `--manifest [name]`            | ビルドマニフェスト JSON を出力する (`boolean \| string`)                                                                |
 | `--ssrManifest [name]`         | SSR マニフェスト JSON を出力する (`boolean \| string`)                                                                  |
-| `--force`                      | オプティマイザーにキャッシュを無視して再バンドルさせる（実験的機能）(`boolean`)                                     |
 | `--emptyOutDir`                | root の外部に outDir がある場合、outDir を強制的に空にする (`boolean`)                                                            |
 | `-w, --watch`                  | ディスク上のモジュールが変更されたときに再ビルドする (`boolean`)                                                              |
 | `-c, --config <file>`          | 指定された設定ファイルを使用する (`string`)                                                                                |
