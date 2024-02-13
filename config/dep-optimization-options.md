@@ -46,9 +46,19 @@ export default defineConfig({
 ```
 
 ## optimizeDeps.esbuildOptions
-
-- **型:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
-
+<!-- textlint-disable -->
+- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)`,
+| 'bundle'
+| 'entryPoints'
+| 'external'
+| 'write'
+| 'watch'
+| 'outdir'
+| 'outfile'
+| 'outbase'
+| 'outExtension'
+| 'metafile'>`
+<!-- textlint-enable -->
 依存関係のスキャンと最適化の際、 esbuild に渡すオプション。
 
 いくつかのオプションは、変更すると Vite の依存関係の最適化と互換性がなくなるため、省略されています。
