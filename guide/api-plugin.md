@@ -509,8 +509,6 @@ export default defineConfig({
 })
 ```
 
-[Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) では、互換性のある公式 Rollup プラグインのリストと使用方法を確認できます。
-
 ## パスの正規化
 
 Vite は、Windows ではボリュームを維持しつつ、POSIX セパレーター ( / ) を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレーター ( \\ ) を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティー関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行う前にセパレーターを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
