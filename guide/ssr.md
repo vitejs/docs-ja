@@ -130,7 +130,7 @@ app.use('*', async (req, res, next) => {
     //    さらに HMR と同様な効率的な無効化を提供します。
     const { render } = await vite.ssrLoadModule('/src/entry-server.js')
 
-    // 3b. Vite 5.1 以降では、代わりに createViteRuntime API を利用できます。
+    // 3b. Vite 5.1 以降では、代わりに実験的な createViteRuntime API を利用できます。
     //    HMR を完全にサポートしており、ssrLoadModule と同じように機能します。
     //    より高度なユースケースは、ViteRuntime クラスを使用して
     //    別スレッドや異なるマシン上にランタイムを作成することです。
