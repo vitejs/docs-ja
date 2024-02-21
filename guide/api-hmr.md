@@ -185,6 +185,7 @@ HMR イベントを購読します。
 以下の HMR イベントは Vite によって自動的にディスパッチされます:
 
 - `'vite:beforeUpdate'` アップデートが適用される直前（例: モジュールが置き換えられるなど）
+- `'vite:afterUpdate'` アップデートが適用された直後（例: モジュールが置き換えられるなど）
 - `'vite:beforeFullReload'` 完全なリロードが発生する直前
 - `'vite:beforePrune'` もう必要なくなったモジュールが取り除かれる直前
 - `'vite:invalidate'` モジュールが `import.meta.hot.invalidate()` で無効にされたとき
@@ -205,3 +206,9 @@ HMR イベントを購読します。
 接続前に呼び出した場合、データはバッファーされ、コネクションが確立した後に送信されます。
 
 詳細は [クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication) を参照してください。
+
+## 参考資料
+
+HMR API の使用方法や、内部でどのように機能するのかについて詳しく知りたい場合は、次の資料を参照してください:
+
+- [Hot Module Replacement is Easy](https://bjornlu.com/blog/hot-module-replacement-is-easy)
