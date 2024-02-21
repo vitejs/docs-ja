@@ -252,7 +252,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 - **型:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
 - **種類:** `async`, `sequential`
-- **参考:** [ViteDevServer](./api-javascript#vitedevserver)
+- **参照:** [ViteDevServer](./api-javascript#vitedevserver)
 
   開発サーバーを設定するためのフック。内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加するのが最も一般的な使用例です:
 
