@@ -402,6 +402,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 ### `handleHotUpdate`
 
 - **型:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
+- **参照:** [HMR API](./api-hmr)
 
   カスタム HMR 更新処理を実行します。このフックは以下のシグネチャーのコンテキストオブジェクトを受け取ります:
 
@@ -423,10 +424,31 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
   - 影響を受けるモジュールをフィルターして絞り込むことで、HMR がより正確になります。
 
-  - 空の配列を返し、クライアントにカスタムイベントを送信して、完全なカスタム HMR 処理を実行します（例では Vite 5.1 で導入された `server.hot` を使用しています。以前のバージョンをサポートする場合、`server.ws` を使用することをおすすめします）:
+  - 空の配列を返し、完全なリロードを実行します:
+
+    ```js
+    handleHotUpdate({ server, modules, timestamp }) {
+      // Also use `server.ws.send` to support Vite <5.1 if needed
+      server.hot.send({ type: 'full-reload' })
+      // Invalidate modules manually
+      const invalidatedModules = new Set()
+      for (const mod of modules) {
+        server.moduleGraph.invalidateModule(
+          mod,
+          invalidatedModules,
+          timestamp,
+          true
+        )
+      }
+      return []
+    }
+  ```
+
+  - 空の配列を返し、クライアントにカスタムイベントを送信して、完全なカスタム HMR 処理を実行します:
 
     ```js
     handleHotUpdate({ server }) {
+      // 必要に応じて Vite <5.1 をサポートするために `server.ws.send` も使用
       server.hot.send({
         type: 'custom',
         event: 'special-update',

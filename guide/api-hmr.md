@@ -206,3 +206,9 @@ HMR イベントを購読します。
 接続前に呼び出した場合、データはバッファーされ、コネクションが確立した後に送信されます。
 
 詳細は [クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication) を参照してください。
+
+## 参考資料
+
+HMR API の使用方法や、内部でどのように機能するのかについて詳しく知りたい場合は、次の資料を参照してください:
+
+- [Hot Module Replacement is Easy](https://bjornlu.com/blog/hot-module-replacement-is-easy)
