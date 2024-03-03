@@ -30,6 +30,16 @@ document.getElementById('hero-img').src = imgUrl
 
 - TypeScript はデフォルトでは静的アセットのインポートを有効なモジュールとして認識しません。これを修正するには、[`vite/client`](./features#client-types)を追加します。
 
+::: tip `url()` を用いた SVG のインライン化
+SVG の URL を JS により手動で構築した `url()` に渡すときには、変数をダブルクオートで囲む必要があります。 
+
+```js
+import imgUrl from './img.svg'
+document.getElementById('hero-img').style.background = `url("${imgUrl}")`
+```
+
+:::
+
 ### 明示的な URL のインポート {#explicit-url-imports}
 
 内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
