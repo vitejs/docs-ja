@@ -152,7 +152,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバーと�
 
 `server.hmr.overlay` を `false` に設定すると、サーバーエラーのオーバレイが無効になります。
 
-`protocol` は、HMR コネクションのために使われる WebSocket プロトコルを設定します: `ws`（WebSocket）または `wss`（WebSocket Secure）
+`protocol` は、HMR 接続のために使われる WebSocket プロトコルを設定します: `ws`（WebSocket）または `wss`（WebSocket Secure）
 
 `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。
 
