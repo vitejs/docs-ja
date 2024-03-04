@@ -152,6 +152,8 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバーと�
 
 `server.hmr.overlay` を `false` に設定すると、サーバーエラーのオーバレイが無効になります。
 
+`protocol` は、HMR 接続のために使われる WebSocket プロトコルを設定します: `ws`（WebSocket）または `wss`（WebSocket Secure）
+
 `clientPort` は、クライアント側のポートのみを上書きする高度なオプションで、クライアントコードが探すポートとは異なるポートで WebSocket を配信できます。
 
 `server.hmr.server` を指定されている場合、Vite は指定されたサーバーを通して HMR 接続要求を処理します。ミドルウェアモードでない場合、Vite は既存のサーバーを通して HMR 接続要求を処理しようとします。これは、自己署名証明書を使用する場合や、Vite を単一ポートでネットワーク上に公開したい場合に役立ちます。
