@@ -26,7 +26,7 @@ Vite の内部および公式プラグインは、幅広いエコシステムと
 
    ファイルを変換するのにかかる時間が長いほど、ブラウザーでサイトを読み込む際のリクエストウォーターフォールがより顕著になります。
 
-   `DEBUG="vite:plugin-transform" vite` または [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) を使用してファイルの変換にかかる時間を調査できます。非同期操作はタイミングが不正確になる傾向があるため、これらの数字はおおよその推定値として扱うべきですが、よりコストのかかる操作を明らかにするのには十分です。
+   `DEBUG="vite:plugin-transform" vite` または [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) を使用してファイルの変換にかかる時間を調査できます。非同期操作はタイミングが不正確になる傾向があるため、これらの数字はおおよその推定値として扱うべきですが、よりコストのかかる操作を明らかにするのには十分です。Windows プラットフォームでの環境変数の設定については、[ドキュメント](https://github.com/debug-js/debug?tab=readme-ov-file#windows-command-prompt-notes) を参照してください。
 
 ::: tip プロファイリング
 `vite --profile` を実行してサイトにアクセスし、ターミナルで `p + enter` を押して `.cpuprofile` を記録できます。[speedscope](https://www.speedscope.app) のようなツールを使用してプロファイルを検査し、ボトルネックを特定できます。また、[プロファイルを共有](https://chat.vitejs.dev) して Vite チームがパフォーマンスの問題を特定するのに役立てることもできます。
