@@ -65,7 +65,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
 })
 ```
 
-Vite の API において `command` の値は、開発時（CLI で `vite`、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（`vite build`）するときには `build` となることに注意してください。
+Vite の API において `command` の値は、開発時（CLI で [`vite`](/guide/cli#vite)、`vite dev`、`vite serve` がエイリアス）には `serve` となり、本番用にビルド（[`vite build`](/guide/cli#vite-build)）するときには `build` となることに注意してください。
 
 `isSsrBuild` と `isPreview` はそれぞれ `build` コマンドと `serve` コマンドの種類を区別するための追加のオプションフラグです。Vite の設定を読み込むツールの中には、これらのフラグをサポートしておらず、代わりに `undefined` を渡すものもあります。そのため、明示的に `true` と `false` を比較することをおすすめします。
 
