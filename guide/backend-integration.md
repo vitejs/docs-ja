@@ -66,7 +66,8 @@
        "isEntry": true,
        "dynamicImports": ["views/foo.js"],
        "css": ["assets/main.b82dbe22.css"],
-       "assets": ["assets/asset.0ab0f9cd.png"]
+       "assets": ["assets/asset.0ab0f9cd.png"],
+       "imports": ["_shared.83069a53.js"]
      },
      "views/foo.js": {
        "file": "assets/foo.869aea0d.js",
@@ -75,7 +76,8 @@
        "imports": ["_shared.83069a53.js"]
      },
      "_shared.83069a53.js": {
-       "file": "assets/shared.83069a53.js"
+       "file": "assets/shared.83069a53.js",
+       "css": ["assets/shared.a834bfc3.css"]
      }
    }
    ```
@@ -85,10 +87,54 @@
    - エントリー以外のチャンクでは、生成されたファイル名の前に `_` を付けたものがキーとなります。
    - チャンクには、静的インポートと動的インポートの情報（どちらもマニフェスト内の対応するチャンクをマップするキー）と、それらと対応する CSS とアセットファイルが含まれます（あれば）。
 
-   このファイルを使用してハッシュを付加されたファイル名でリンクや preload directives をレンダリングすることができます（注意: ここでの構文は説明用なので、使用しているサーバーのテンプレート言語に替えてください）:
+4. このファイルを使用してハッシュを付加されたファイル名でリンクや preload directives をレンダリングすることができます。
+
+   以下は、適切なリンクをレンダリングする HTML テンプレートの例です。ここでの構文は説明用なので、使用しているサーバーのテンプレート言語に替えてください。`importedChunks` 関数は説明用であり、Vite により提供されているわけではありません。
+
+
 
    ```html
    <!-- 本番環境 -->
-   <link rel="stylesheet" href="/assets/{{ manifest['main.js'].css }}" />
-   <script type="module" src="/assets/{{ manifest['main.js'].file }}"></script>
+
+   <!-- for cssFile of manifest[name].css -->
+   <link rel="stylesheet" href="/{{ cssFile }}" />
+
+   <!-- for chunk of importedChunks(manifest, name) -->
+   <!-- for cssFile of chunk.css -->
+   <link rel="stylesheet" href="/{{ cssFile }}" />
+
+   <script type="module" src="/{{ manifest[name].file }}"></script>
+
+   <!-- for chunk of importedChunks(manifest, name) -->
+   <link rel="modulepreload" src="/{{ chunk.file }}" />
+   ```
+
+   具体的には、マニフェストファイルとエントリーポイントが指定された場合、HTML を生成するバックエンドは以下のタグを含める必要があります。
+
+
+   - エントリーポイントのチャンクの `css` リストのファイルごとに `<link rel="stylesheet">` タグ
+   - エントリーポイントの `imports` リスト内のすべてのチャンクを再帰的にたどり、インポートされた各チャンクの css ファイルごとに
+     `<link rel="stylesheet">` タグを含める。
+   - エントリーポイントのチャンクの `file` キーに対するタグ（Javascript に対する `<script type="moudle">`
+     または css に対する `<link rel="stylesheet">`）
+   - オプションとして、インポートされた JavaScript ごとの `file` に対する `<link rel="modulepreload">` タグ。
+     再度、エントリーポイントのチャンクから imports を再帰的にたどる。
+
+   上記のマニフェスト例に従うと、本番環境では、エントリーポイント `main.js` に対して以下のタグが含まれるはずです。
+
+   ```html
+   <link rel="stylesheet" href="assets/main.b82dbe22.css" />
+   <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
+   <script type="module" src="assets/main.4889e940.js"></script>
+   <!-- オプション -->
+   <link rel="modulepreload" src="assets/shared.83069a53.js" />
+   ```
+                    
+   一方、エントリーポイント `views/foo.js` に対しては、以下が含まれるはずです。
+
+   ```html
+   <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
+   <script type="module" src="assets/foo.869aea0d.js"></script>
+   <!-- オプション -->
+   <link rel="modulepreload" src="assets/shared.83069a53.js" />
    ```
