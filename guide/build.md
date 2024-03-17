@@ -70,7 +70,7 @@ Vite は動的インポートの読み込みに失敗したときに `vite:prelo
 
 ```js
 window.addEventListener('vite:preloadError', (event) => {
-  window.reload() // たとえば、ページをリロードする
+  window.location.reload() // たとえば、ページをリロードする
 })
 ```
 
