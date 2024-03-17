@@ -183,8 +183,20 @@ interface ViteDevServer {
    * CLI ショートカットをバインドします。
    */
   bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
+  /**
+   * `await server.waitForRequestsIdle(id)` を呼ぶと、すべての静的インポートが処理されるまで待ちます。
+   * load または transform プラグインフックから呼ばれた場合は、デッドロックを避けるために id を引数として
+   * 渡す必要があります。モジュールグラフの最初の静的インポートセクションが処理された後にこの関数を呼んだ場合、
+   * 即座に解決されます。
+   * @experimental
+   */
+  waitForRequestsIdle: (ignoredId?: string) => Promise<void>
 }
 ```
+
+:::info
+`waitForRequestsIdle` は、Vite 開発サーバーのオンデマンドな性質に従うと実装できない機能の DX を改善するためのエスケープハッチとして使われることを目的としています。起動時に Tailwind などのツールで使用することで、アプリのコードが見えるようになるまでアプリの CSS クラスの生成を遅延させて、スタイル変更によるフラッシュを避けることができます。この関数が load または transform フック内で使用され、デフォルトの HTTP1 サーバーが使用された場合、6 つの HTTP チャンネルのうち 1 つは、サーバーがすべての静的インポートを処理するまでブロックされます。Vite の依存関係オプティマイザーは現在この関数を使用して、事前バンドルされた依存関係をすべてのインポートされた依存関係が静的インポートされたソースから収集されるまで遅延させることにより、見つからない依存関係上でのページ全体のリロードを防いでいます。Vite の将来のメジャーリリースでは、大規模なアプリケーションでコールドスタート中に性能低下を防ぐために、デフォルトで `optimizeDeps.crawlUntilStaticImports: false` に設定して、異なる戦略に切り替えるかもしれません。
+:::
 
 ## `build`
 
