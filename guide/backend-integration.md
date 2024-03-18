@@ -8,7 +8,9 @@
 
 1. Vite の設定ファイルで、エントリーの指定とマニフェストのビルドの有効化を行ってください:
 
-   ```js
+   ```js twoslash
+   import { defineConfig } from 'vite'
+   // ---cut---
    // vite.config.js
    export default defineConfig({
      build: {

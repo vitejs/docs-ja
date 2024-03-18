@@ -408,7 +408,7 @@ export default defineConfig({
 
 メッセージを記録するためのカスタムロガーを使用します。Vite の `createLogger` API を使って、デフォルトのロガーを取得し、例えば、メッセージを変更したり、特定の警告をフィルタリングしたりするようにカスタマイズできます。
 
-```js
+```js twoslash
 import { createLogger, defineConfig } from 'vite'
 
 const logger = createLogger()

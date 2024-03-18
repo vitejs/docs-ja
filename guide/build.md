@@ -34,7 +34,6 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/configuration-options/) を `build.rollupOptions` で直接調整することができます:
 
 ```js
-// vite.config.js
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -68,7 +67,7 @@ export default defineConfig({
 
 Vite は動的インポートの読み込みに失敗したときに `vite:preloadError` イベントを出力します。`event.payload` には元のインポートエラーが含まれます。`event.preventDefault()` を呼んだ場合、エラーはスローされません。
 
-```js
+```js twoslash
 window.addEventListener('vite:preloadError', (event) => {
   window.location.reload() // たとえば、ページをリロードする
 })
@@ -111,7 +110,7 @@ export default defineConfig({
 
 ビルド時には、エントリーポイントとして複数の `.html` ファイルを指定するだけです:
 
-```js
+```js twoslash
 // vite.config.js
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -138,7 +137,7 @@ HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクト�
 
 配布のためにライブラリーをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリーにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
-```js
+```js twoslash
 // vite.config.js
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -253,33 +252,44 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.renderBuiltUrl` により、高度なベースパスの設定に対する実験的なサポートを提供します。
 
-```ts
+<!-- prettier-ignore-start -->
+```ts twoslash
+import type { UserConfig } from 'vite'
+const config: UserConfig = {
+// ---cut-before---
 experimental: {
-  renderBuiltUrl(filename: string, { hostType }: { hostType: 'js' | 'css' | 'html' }) {
+  renderBuiltUrl(filename, { hostType }) {
     if (hostType === 'js') {
       return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
     } else {
       return { relative: true }
     }
-  }
+  },
+},
+// ---cut-after---
 }
 ```
+<!-- prettier-ignore-end -->
 
 ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 2 つ目の `context` パラメーターに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
 
-```ts
-experimental: {
-  renderBuiltUrl(filename: string, { hostId, hostType, type }: { hostId: string, hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
-    if (type === 'public') {
-      return 'https://www.domain.com/' + filename
-    }
-    else if (path.extname(hostId) === '.js') {
-      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
-    }
-    else {
-      return 'https://cdn.domain.com/assets/' + filename
-    }
-  }
+```ts twoslash
+import type { UserConfig } from 'vite'
+import path from 'node:path'
+const config: UserConfig = {
+  // ---cut-before---
+  experimental: {
+    renderBuiltUrl(filename, { hostId, hostType, type }) {
+      if (type === 'public') {
+        return 'https://www.domain.com/' + filename
+      } else if (path.extname(hostId) === '.js') {
+        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      } else {
+        return 'https://cdn.domain.com/assets/' + filename
+      }
+    },
+  },
+  // ---cut-after---
 }
 ```
 

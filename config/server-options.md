@@ -18,10 +18,10 @@ Vite ではなく他のサーバーがレスポンスを返す場合がありま
 
 [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定することで、この並び替える動作を無効化できます。そうすると、Vite はアドレスを `localhost` と出力します。
 
-```js
+```js twoslash
 // vite.config.js
 import { defineConfig } from 'vite'
-import dns from 'dns'
+import dns from 'note:dns'
 
 dns.setDefaultResultOrder('verbatim')
 
@@ -238,7 +238,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 
 - **例:**
 
-```js
+```js twoslash
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
 
@@ -358,9 +358,9 @@ export default defineConfig({
     // ファイルを無視リストに追加します。
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
       return sourcePath.includes('node_modules')
-    }
-  }
-};
+    },
+  },
+})
 ```
 
 ::: tip 
