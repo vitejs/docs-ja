@@ -642,6 +642,28 @@ import MyWorker from './worker?worker&url'
 
 すべてのワーカーをバンドルする設定についての詳細は [Worker Options](/config/worker-options.md) を見てください。
 
+## コンテンツセキュリティポリシー（CSP）
+
+CSP をデプロイするには、Vite 内部の理由により、特定のディレクティブまたは設定を行う必要があります。
+
+### [`'nonce-{RANDOM}'`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#nonce-base64-value)
+
+[`html.cspNonce`](/config/shared-options#html-cspnonce) が設定された場合、Vite は出力する script タグとスタイルシートの link タグに、指定された値を持つ nonce 属性を追加します。`<style>` などの他のタグには nonce 属性を追加しないことに注意してください。それに加えて、このオプションを設定すると、Vite が meta タグ（`<meta property="csp-nonce" nonce="PLACEHOLDER" />`）を挿入するようになります。
+
+`property="csp-nonce"` を持つ meta タグの nonce の値は、Vite により開発中とビルド後のいずれでも必要なときに利用されます。
+
+:::warning
+各リクエストごとにユニークな値を持つように、プレースホルダーを必ず置換してください。これはリソースポリシーの回避を防ぐために重要です。もし置換しなければ、簡単に回避されてしまいます。
+:::
+
+### [`data:`](<https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#:~:text=%E3%81%BE%E3%81%99%20(%E9%9D%9E%E6%8E%A8%E5%A5%A8)%E3%80%82-,data%3A,-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9>)
+
+デフォルトでは、Vite はビルド時に小さなアセットをデータ URI としてインライン化します。関連ディレクティブに対して `data:` を許可するか（例: [`img-src`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/img-src)、[`font-src`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/font-src)）、設定 [`build.assetsInlineLimit: 0`](/config/build-options#build-assetsinlinelimit) により無効化する必要があります。
+
+:::warning
+[`script-src`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) に対して `data:` を許可してはいけません。任意のスクリプトのインジェクションを許してしまうことになります。
+:::
+
 ## ビルドの最適化 {#build-optimizations}
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。

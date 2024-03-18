@@ -163,6 +163,13 @@ Vite には「許可された条件」のリストがあり、許可されたリ
 - **関連:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
+## html.cspNonce
+
+- **型:** `string`
+- **関連:** [コンテンツセキュリティポリシー（CSP）](/guide/features#content-security-policy-csp)
+
+script や style タグを生成するときに使われる nonce 値のプレースホルダー。この値を設定すると、nonce 値を持つ meta タグも生成されます。
+
 ## css.modules
 
 - **型:**
