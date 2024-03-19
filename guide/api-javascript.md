@@ -12,7 +12,7 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 
 **使用例:**
 
-```ts two-slash TODO: あとでハイフンを消す
+```ts twoslash
 import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
@@ -42,7 +42,7 @@ server.bindCLIShortcuts({ print: true })
 <details>
 <summary>Example</summary>
 
-```ts two-slash TODO: あとでハイフンを消す
+```ts twoslash
 import http from 'http'
 import { createServer } from 'vite'
 
@@ -237,7 +237,7 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 
 **使用例:**
 
-```ts two-slash TODO: あとでハイフンを消す
+```ts twoslash
 import { preview } from 'vite'
 
 const previewServer = await preview({
