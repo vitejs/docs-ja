@@ -10,7 +10,7 @@ Vite はプラグインを使っての拡張が可能で、Rollup の優れた�
 $ npm add -D @vitejs/plugin-legacy
 ```
 
-```js
+```js twoslash
 // vite.config.js
 import legacy from '@vitejs/plugin-legacy'
 import { defineConfig } from 'vite'
@@ -46,7 +46,7 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 - デフォルト: Vite コアプラグインの後にプラグインを起動する
 - `post`: Vite ビルドプラグインの後にプラグインを起動する
 
-```js
+```js twoslash
 // vite.config.js
 import image from '@rollup/plugin-image'
 import { defineConfig } from 'vite'
@@ -67,7 +67,7 @@ export default defineConfig({
 
 デフォルトでは、プラグインは配信とビルドの両方で起動されます。配信時やビルド時のみに条件付きでプラグインを適用する必要がある場合は、 `apply` プロパティを使って `'build'` か `'serve'` の時にだけプラグインを呼び出します:
 
-```js
+```js twoslash
 // vite.config.js
 import typescript2 from 'rollup-plugin-typescript2'
 import { defineConfig } from 'vite'

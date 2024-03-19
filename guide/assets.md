@@ -7,7 +7,9 @@
 
 静的アセットをインポートすると、配信された際に解決されたパブリックな URL が返されます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
@@ -33,7 +35,9 @@ document.getElementById('hero-img').src = imgUrl
 ::: tip `url()` を用いた SVG のインライン化
 SVG の URL を JS により手動で構築した `url()` に渡すときには、変数をダブルクオートで囲む必要があります。 
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import imgUrl from './img.svg'
 document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 ```
@@ -44,7 +48,9 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
@@ -53,7 +59,9 @@ CSS.paintWorklet.addModule(workletURL)
 
 アセットは末尾に `?raw` を付与することで文字列としてインポートすることができます。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import shaderString from './shader.glsl?raw'
 ```
 
@@ -61,19 +69,25 @@ import shaderString from './shader.glsl?raw'
 
 スクリプトは末尾に `?worker` もしくは `?sharedworker` を付与することで web workers としてインポートすることができます。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // Separate chunk in the production build
 import Worker from './shader.js?worker'
 const worker = new Worker()
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // sharedworker
 import SharedWorker from './shader.js?sharedworker'
 const sharedWorker = new SharedWorker()
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // Inlined as base64 strings
 import InlineWorker from './shader.js?worker&inline'
 ```

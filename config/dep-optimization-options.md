@@ -19,7 +19,9 @@
 :::warning CommonJS
 CommonJS の依存関係を最適化から除外してはいけません。ESM の依存関係が最適化から除外されているが、ネストされた CommonJS の依存関係がある場合は、CommonJS の依存関係を `optimizeDeps.include` に追加する必要があります。例:
 
-```js
+```js twoslash
+import { defineConfig } from 'vite'
+// ---cut---
 export default defineConfig({
   optimizeDeps: {
     include: ['esm-dep > cjs-dep'],
@@ -37,7 +39,9 @@ export default defineConfig({
 
 **実験的機能:** 多くのディープインポートを持つライブラリーを使用している場合、末尾に glob パターンを指定して、すべてのディープインポートを一度に事前バンドルすることもできます。これにより、新たにディープインポートが使用されるたびに常に事前バンドルされることを避けることができます。[フィードバックをしてください](https://github.com/vitejs/vite/discussions/15833)。例:
 
-```js
+```js twoslash
+import { defineConfig } from 'vite'
+// ---cut---
 export default defineConfig({
   optimizeDeps: {
     include: ["my-lib/components/**/*.vue"],

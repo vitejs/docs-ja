@@ -579,7 +579,9 @@ export default defineConfig({
 
 クライアント側では、[`hot.on`](/guide/api-hmr.html#hot-on-event-cb) を使用してイベントをリッスンします:
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 // クライアント側
 if (import.meta.hot) {
   import.meta.hot.on('my:greetings', (data) => {

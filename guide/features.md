@@ -176,7 +176,7 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 React や Vue 以外で JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact の場合:
 
-```js
+```js twoslash
 // vite.config.js
 import { defineConfig } from 'vite'
 
@@ -192,7 +192,7 @@ export default defineConfig({
 
 また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
-```js
+```js twoslash
 // vite.config.js
 import { defineConfig } from 'vite'
 
@@ -230,7 +230,9 @@ CSS の圧縮は PostCSS の後に実行され、[`build.cssTarget`](/config/bui
 }
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
@@ -239,7 +241,9 @@ CSS モジュールの動作は [`css.modules` オプション](/config/shared-o
 
 `css.modules.localsConvention` がキャメルケースローカルを有効にするように設定されている場合（例：`localsConvention: 'camelCaseOnly'`）、名前付きインポートを使用することもできます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // .apply-color -> applyColor
 import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
@@ -274,7 +278,9 @@ Vite は、Sass および Less の `@import` 解決を改善し、Vite エイリ
 
 CSS コンテンツの自動注入は `?inline` クエリーパラメータでオフにできます。この場合、処理された CSS 文字列は通常通りモジュールのデフォルトエクスポートとして返されますが、スタイルはページに注入されません。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import './foo.css' // ページに注入される
 import otherStyles from './bar.css?inline' // 注入されない
 ```
@@ -305,29 +311,39 @@ Lightning CSS 使用時は、[CSS プリプロセッサー](#css-pre-processors)
 
 静的アセットをインポートすると、提供時に解決されたパブリック URL が返されます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
 特別なクエリーにより、アセットの読み込み方法を変更できます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // アセットを URL として明示的にロードする
 import assetAsURL from './asset.js?url'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // アセットを文字列として明示的にロードする
 import assetAsString from './shader.glsl?raw'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // Web ワーカーをロードする
 import Worker from './worker.js?worker'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // ビルド時に base64 文字列としてインライン化された Web ワーカー
 import InlineWorker from './worker.js?worker&inline'
 ```
@@ -338,7 +354,9 @@ import InlineWorker from './worker.js?worker&inline'
 
 JSON ファイルは直接インポートできます - また、名前付きインポートもサポートされています：
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // オブジェクト全体をインポートする場合
 import json from './example.json'
 // 名前付きエクスポートとしてルートフィールドをインポートします - ツリーシェイクに役立ちます！
@@ -349,7 +367,9 @@ import { field } from './example.json'
 
 Vite は、特別な `import.meta.glob` 関数を介してファイルシステムから複数のモジュールをインポートすることをサポートしています:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js')
 ```
 
@@ -375,7 +395,9 @@ for (const path in modules) {
 
 一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに第 2 引数に `{ eager: true }` を渡すことができます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
@@ -395,7 +417,9 @@ const modules = {
 
 第 1 引数は下記の例のように glob の配列を指定できます
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 ```
 
@@ -403,7 +427,9 @@ const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 
 ネガティブ glob パターンもサポートされています（接頭辞は `!`）。一部のファイルを結果から無視させるには、最初の引数に除外 glob パターンを追加します:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```
 
@@ -418,7 +444,9 @@ const modules = {
 
 `import` オプションでモジュールの一部だけをインポートすることも可能です。
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```
 
@@ -432,7 +460,9 @@ const modules = {
 
 `eager` と組み合わせると、それらのモジュールのツリーシェイキングを有効にすることも可能です。
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'setup',
   eager: true,
@@ -451,7 +481,9 @@ const modules = {
 
 default エクスポートをインポートするには `import` に `default` を設定します。
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'default',
   eager: true,
@@ -472,7 +504,9 @@ const modules = {
 
 また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vitejs.dev/guide/assets.html#importing-asset-as-string)または [url として](https://vitejs.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const moduleStrings = import.meta.glob('./dir/*.svg', {
   query: '?raw',
   import: 'default',
@@ -497,7 +531,9 @@ const moduleUrls = {
 
 他のプラグインが使用するカスタムクエリーを指定することもできます:
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true },
 })
@@ -527,7 +563,9 @@ const module = await import(`./dir/${file}.js`)
 `?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます。
 デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import init from './example.wasm?init'
 
 init().then((instance) => {
@@ -537,7 +575,10 @@ init().then((instance) => {
 
 init 関数は、第 2 引数として [`WebAssembly.instantiate`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/instantiate) に渡される importObject を受け取ることもできます:
 
-```js
+```js twoslash
+import 'vite/client'
+import init from './example.wasm?init'
+// ---cut---
 init({
   imports: {
     someFunc: () => {
@@ -560,7 +601,9 @@ init({
 
 もし `Module` オブジェクトにアクセスする必要がある場合、例えば複数回インスタンス化する場合は、[明示的な URL のインポート](./assets#explicit-url-imports)を使用してアセットを解決してから、インスタンス化を実行してください:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
@@ -580,7 +623,9 @@ SSR では、`?init` インポートの一部として発生する `fetch()` は
 
 プロジェクトのベースが現在のディレクトリーであると仮定した場合の代替案を以下に示します:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import wasmUrl from 'foo.wasm?url'
 import { readFile } from 'node:fs/promises'
 
@@ -620,7 +665,9 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 
 インポートリクエストに `?worker` もしくは `?sharedworker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクターになります:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker'
 
 const worker = new MyWorker()
@@ -630,13 +677,17 @@ const worker = new MyWorker()
 
 デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリーを追加します:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker&inline'
 ```
 
 ワーカーを URL として取得したい場合は、`url` クエリーを追加してください:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker&url'
 ```
 

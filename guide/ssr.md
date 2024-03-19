@@ -53,7 +53,9 @@ Vite はサーバーサイドレンダリング（SSR）の組み込みサポー
 
 SSR とクライアントに基づいて条件付きロジックを実行する場合は次を使用できます。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 if (import.meta.env.SSR) {
   // ... サーバーのロジック
 }
@@ -67,10 +69,10 @@ SSR をビルドする際、メインサーバーを完全に制御し、Vite �
 
 **server.js**
 
-```js{15-18}
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+```js{15-18} twoslash
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
 
@@ -109,7 +111,18 @@ createServer()
 
 次のステップはサーバーサイドでレンダリングされた HTML を提供するための `*` ハンドラーの実装です:
 
-```js
+```js twoslash
+// @noErrors
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+/** @type {import('express').Express} */
+var app
+/** @type {import('vite').ViteDevServer}  */
+var vite
+
+// ---cut---
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
@@ -246,7 +259,9 @@ Vue や Svelte などの一部のフレームワークは、クライアント�
 
 **例:**
 
-```js
+```js twoslash
+/** @type {() => import('vite').Plugin} */
+// ---cut---
 export function mySSRPlugin() {
   return {
     name: 'my-ssr',

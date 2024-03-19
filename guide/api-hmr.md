@@ -8,13 +8,13 @@
 
 Vite は特別な `import.meta.hot` オブジェクトを介して、マニュアル HMR の API を公開しています:
 
-```ts
+```ts twoslash
+import type { ModuleNamespace } from 'vite/types/hot.d.ts'
+import type { InferCustomEventPayload } from 'vite/types/customEvent.d.ts'
+
+// ---cut---
 interface ImportMeta {
   readonly hot?: ViteHotContext
-}
-
-type ModuleNamespace = Record<string, any> & {
-  [Symbol.toStringTag]: 'Module'
 }
 
 interface ViteHotContext {
@@ -32,7 +32,6 @@ interface ViteHotContext {
   prune(cb: (data: any) => void): void
   invalidate(message?: string): void
 
-  // `InferCustomEventPayload` が組み込みの Vite イベント用の型を提供します
   on<T extends string>(
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
@@ -67,7 +66,9 @@ Vite は `import.meta.hot` の型定義を [`vite/client.d.ts`](https://github.c
 
 自身を受け入れるモジュールには、`import.meta.hot.accept` と更新されたモジュールを受け取るコールバックを使用します:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 export const count = 1
 
 if (import.meta.hot) {
@@ -90,7 +91,13 @@ Vite では、モジュールがアップデートを受け入れるために、
 
 モジュールは自身をリロードすることなく、直接の依存関係からの更新を受け入れることもできます:
 
-```js
+```js twoslash
+// @filename: /foo.d.ts
+export declare const foo: () => void
+
+// @filename: /example.js
+import 'vite/client'
+// ---cut---
 import { foo } from './foo.js'
 
 foo()
@@ -117,7 +124,9 @@ if (import.meta.hot) {
 
 自己受け入れモジュールや、他に受け入れられることを期待するモジュールは `hot.dispose` を使うことで、更新されたコピーによって生成された永続的な副作用をクリーンアップできます:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 function setupSideEffect() {}
 
 setupSideEffect()
@@ -133,7 +142,9 @@ if (import.meta.hot) {
 
 モジュールがページにインポートされなくなったときに呼び出されるコールバックを登録します。`hot.dispose` と比較すると、ソースコードが更新されたときに副作用をクリーンアップしてくれて、ページから削除されたときだけクリーンアップすればよい場合に使用できます。Vite では現在、 `.css` のインポートにこれを使用しています。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 function setupOrReuseSideEffect() {}
 
 setupOrReuseSideEffect()
@@ -151,7 +162,9 @@ if (import.meta.hot) {
 
 `data` 自体の再代入はサポートされていないことに注意してください。代わりに、`data` オブジェクトのプロパティを変更して、他のハンドラーから追加された情報が保持されるようにする必要があります。
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // これは OK
 import.meta.hot.data.someValue = 'hello'
 
@@ -169,7 +182,9 @@ import.meta.hot.data = { someValue: 'hello' }
 
 その直後に `invalidate` を呼び出す場合でも、常に `import.meta.hot.accept` を呼び出す必要があることに注意してください。そうしないと、HMR クライアントは自己受け入れモジュールの今後の変更をリッスンしません。意図を明確に伝えるために、以下のように `accept` コールバック内で `invalidate` をコールすることを推奨します:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import.meta.hot.accept((module) => {
   // 新しいモジュールインスタンスを使用して、無効化するかどうかを決定できます。
   if (cannotHandleUpdate(module)) {

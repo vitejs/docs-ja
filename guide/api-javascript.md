@@ -12,26 +12,24 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 
 **使用例:**
 
-```js
-import { fileURLToPath } from 'url'
+```ts twoslash
+import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-;(async () => {
-  const server = await createServer({
-    // 有効なユーザー設定オプションに `mode` と `configFile` を追加
-    configFile: false,
-    root: __dirname,
-    server: {
-      port: 1337,
-    },
-  })
-  await server.listen()
+const server = await createServer({
+  // 有効なユーザー設定オプションに `mode` と `configFile` を追加
+  configFile: false,
+  root: __dirname,
+  server: {
+    port: 1337,
+  },
+})
+await server.listen()
 
-  server.printUrls()
-  server.bindCLIShortcuts({ print: true })
-})()
+server.printUrls()
+server.bindCLIShortcuts({ print: true })
 ```
 
 ::: tip 注意
@@ -44,7 +42,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 <details>
 <summary>Example</summary>
 
-```ts
+```ts twoslash
 import http from 'http'
 import { createServer } from 'vite'
 
@@ -57,16 +55,17 @@ const vite = await createServer({
       // プロキシ WebSocket 用の親 http サーバーを提供
       server: parentServer,
     },
-  },
-  proxy: {
-    '/ws': {
-      target: 'ws://localhost:3000',
-      // WebSocket をプロキシ
-      ws: true,
+    proxy: {
+      '/ws': {
+        target: 'ws://localhost:3000',
+        // WebSocket をプロキシ
+        ws: true,
+      },
     },
   },
 })
 
+// @noErrors: 2339
 parentServer.use(vite.middlewares)
 ```
 
@@ -210,24 +209,22 @@ async function build(
 
 **使用例:**
 
-```js
-import path from 'path'
-import { fileURLToPath } from 'url'
+```ts twoslash
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-;(async () => {
-  await build({
-    root: path.resolve(__dirname, './project'),
-    base: '/foo/',
-    build: {
-      rollupOptions: {
-        // ...
-      },
+await build({
+  root: path.resolve(__dirname, './project'),
+  base: '/foo/',
+  build: {
+    rollupOptions: {
+      // ...
     },
-  })
-})()
+  },
+})
 ```
 
 ## `preview`
@@ -240,20 +237,19 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 
 **使用例:**
 
-```js
+```ts twoslash
 import { preview } from 'vite'
-;(async () => {
-  const previewServer = await preview({
-    // 有効なユーザー設定オプションに加え、`mode` と `configFile`
-    preview: {
-      port: 8080,
-      open: true,
-    },
-  })
 
-  previewServer.printUrls()
-  previewServer.bindCLIShortcuts({ print: true })
-})()
+const previewServer = await preview({
+  // 有効なユーザー設定オプションに加え、`mode` と `configFile`
+  preview: {
+    port: 8080,
+    open: true,
+  },
+})
+
+previewServer.printUrls()
+previewServer.bindCLIShortcuts({ print: true })
 ```
 
 ## `PreviewServer`
@@ -328,7 +324,17 @@ function mergeConfig(
 
 `defineConfig` ヘルパーを使うと、コールバック形式の設定を別の設定にマージすることができます。
 
-```ts
+```ts twoslash
+import {
+  defineConfig,
+  mergeConfig,
+  type UserConfigFnObject,
+  type UserConfig,
+} from 'vite'
+declare const configAsCallback: UserConfigFnObject
+declare const configAsObject: UserConfig
+
+// ---cut---
 export default defineConfig((configEnv) =>
   mergeConfig(configAsCallback(configEnv), configAsObject),
 )

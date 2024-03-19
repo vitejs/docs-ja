@@ -50,7 +50,9 @@ Vite は TS の設定ファイルも直接サポートしています。`vite.co
 
 設定がコマンド（`serve` や `build`）、使用されている[モード](/guide/env-and-mode)、SSR ビルドかどうか（`isSsrBuild`）、ビルドのプレビューかどうか（`isPreview`）に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
-```js
+```js twoslash
+import { defineConfig } from 'vite'
+// ---cut---
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   if (command === 'serve') {
     return {
@@ -73,7 +75,9 @@ Vite の API において `command` の値は、開発時（CLI で [`vite`](/gu
 
 設定で非同期の関数を呼び出す必要がある場合は、代わりに非同期関数をエクスポートできます。また、この非同期関数は `defineConfig` を通じて渡すことができ、自動補完のサポートを向上させることができます:
 
-```js
+```js twoslash
+import { defineConfig } from 'vite'
+// ---cut---
 export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
@@ -88,7 +92,7 @@ export default defineConfig(async ({ command, mode }) => {
 
 Vite はデフォルトでは `.env` ファイルをロードしないことに注意してください。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
 
-```js
+```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ command, mode }) => {

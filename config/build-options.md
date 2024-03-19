@@ -48,13 +48,22 @@ type ResolveModulePreloadDependenciesFn = (
 
 `resolveDependencies` 関数は動的インポートごとに依存するチャンクのリストとともに呼び出され、またエントリー HTML ファイルでインポートされたチャンクに対しても呼び出されます。新しい依存関係の配列は、これらのフィルタリングされた依存関係、あるいはそれ以上の依存関係を注入し、そのパスを修正した新しい依存関係配列を返すことができます。`deps` のパスは `build.outDir` からの相対パスです。`hostType === 'js'` の場合は `hostId` への相対パスを返すことができます。この場合、このモジュールを HTML ヘッドにプリロードする際に、絶対パスを取得するために `new URL(dep, import.meta.url)` が使用されます。
 
-```js
+<!-- prettier-ignore-start -->
+```js twoslash
+/** @type {import('vite').UserConfig} */
+const config = {
+  build: {
+// ---cut-before---
 modulePreload: {
   resolveDependencies: (filename, deps, { hostId, hostType }) => {
     return deps.filter(condition)
-  }
+  },
+},
+// ---cut-after---
+  },
 }
 ```
+<!-- prettier-ignore-end -->
 
 解決された依存関係のパスは、さらに [`experimental.renderBuiltUrl`](../guide/build.md#advanced-base-options) を使って変更できます。
 
