@@ -12,7 +12,7 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 
 **使用例:**
 
-```ts twoslash
+```ts two-slash TODO: あとでハイフンを消す
 import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
@@ -42,7 +42,7 @@ server.bindCLIShortcuts({ print: true })
 <details>
 <summary>Example</summary>
 
-```ts twoslash
+```ts two-slash TODO: あとでハイフンを消す
 import http from 'http'
 import { createServer } from 'vite'
 
@@ -237,7 +237,7 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 
 **使用例:**
 
-```ts twoslash
+```ts two-slash TODO: あとでハイフンを消す
 import { preview } from 'vite'
 
 const previewServer = await preview({
@@ -324,7 +324,6 @@ function mergeConfig(
 
 `defineConfig` ヘルパーを使うと、コールバック形式の設定を別の設定にマージすることができます。
 
-
 ```ts twoslash
 import {
   defineConfig,
@@ -334,6 +333,7 @@ import {
 } from 'vite'
 declare const configAsCallback: UserConfigFnObject
 declare const configAsObject: UserConfig
+
 // ---cut---
 export default defineConfig((configEnv) =>
   mergeConfig(configAsCallback(configEnv), configAsObject),
