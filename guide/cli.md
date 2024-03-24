@@ -26,7 +26,7 @@ vite [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`） (`string`)                        |
 | `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか (`boolean`)               |
-| `--profile`              | 組み込みの Node.js インスペクターを起動する ([パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください) |
+| `--profile`              | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）|
 | `-d, --debug [feat]`     | デバッグログを表示する (`string \| boolean`)                             |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする (`string`)                                      |
 | `-m, --mode <mode>`      | env モードを設定する (`string`)                                           |
@@ -54,8 +54,8 @@ vite build [root]
 | `--assetsDir <dir>`            | 出力先のディレクトリー内で静的アセットを配置するディレクトリー（デフォルト: `"assets"`） (`string`)              |
 | `--assetsInlineLimit <number>` | 静的アセットを base64 inline 化する閾値（単位はバイト。デフォルト: `4096`） (`number`)                      |
 | `--ssr [entry]`                | サーバーサイドレンダリング用に特定のエントリーをビルドする (`string`)                                         |
-| `--sourcemap [output]`         | ビルド用のソースマップを出力する (デフォルト: `false`) (`boolean \| "inline" \| "hidden"`)                                 |
-| `--minify [minifier]`          | 最小化を有効/無効にする、または使用するミニファイアを指定する (デフォルト: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
+| `--sourcemap [output]`         | ビルド用のソースマップを出力する（デフォルト: `false`）(`boolean \| "inline" \| "hidden"`)                                 |
+| `--minify [minifier]`          | 最小化を有効/無効にする、または使用するミニファイアを指定する（デフォルト: `"esbuild"`）(`boolean \| "terser" \| "esbuild"`) |
 | `--manifest [name]`            | ビルドマニフェスト JSON を出力する (`boolean \| string`)                                                                |
 | `--ssrManifest [name]`         | SSR マニフェスト JSON を出力する (`boolean \| string`)                                                                  |
 | `--emptyOutDir`                | root の外部に outDir がある場合、outDir を強制的に空にする (`boolean`)                                                            |
@@ -64,7 +64,7 @@ vite build [root]
 | `--base <path>`                | public のベースパス（デフォルト: `/`） (`string`)                                                                          |
 | `-l, --logLevel <level>`       | Info \| warn \| error \| silent (`string`)                                                                          |
 | `--clearScreen`                | ログを表示する際に画面をクリアするかどうか (`boolean`)                                                                 |
-| `--profile`                    | 組み込みの Node.js インスペクターを起動する ([パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください) |
+| `--profile`                    | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）|
 | `-d, --debug [feat]`           | デバッグログを表示する (`string \| boolean`)                                                                               |
 | `-f, --filter <filter>`        | デバッグログをフィルタリングする (`string`)                                                                                        |
 | `-m, --mode <mode>`            | env モードを設定する (`string`)                                                                                             |

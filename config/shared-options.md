@@ -473,7 +473,7 @@ define: {
 - **型:** `'spa' | 'mpa' | 'custom'`
 - **デフォルト:** `'spa'`
 
-アプリケーションがシングルページアプリケーション (SPA) か、[マルチページアプリケーション (MPA)](../guide/build#multi-page-app)か、カスタムアプリケーション (SSR と独自に HTML を処理するフレームワーク):
+アプリケーションがシングルページアプリケーション（SPA）か、[マルチページアプリケーション (MPA)](../guide/build#multi-page-app)か、カスタムアプリケーション（SSR と独自に HTML を処理するフレームワーク）:
 
 - `'spa'`: HTML ミドルウェアを含め、SPA 用のフォールバックを使用する。プレビューで `single: true` を [sirv](https://github.com/lukeed/sirv) に設定する
 - `'mpa'`: HTML ミドルウェアを含める
