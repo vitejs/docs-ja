@@ -246,9 +246,9 @@ $ npx wrangler pages deploy dist
 4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
 5. 選択した Vite のフレームワークに基づいて、ビルド設定の対応するフレームワークプリセットを選択します。
 6. セーブしてデプロイします！
-7. アプリケーションがデプロイされます！　(例: `https://<PROJECTNAME>.pages.dev/`)
+7. アプリケーションがデプロイされます！（例: `https://<PROJECTNAME>.pages.dev/`）
 
-プロジェクトのインポートとデプロイ後、以降のブランチへのプッシュは [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) で停止しない限り[プレビューデプロイ](https://developers.cloudflare.com/pages/platform/preview-deployments/)を生成します。本番ブランチ (一般的には「main」) への全ての変更は本番へデプロイされます。
+プロジェクトのインポートとデプロイ後、以降のブランチへのプッシュは [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) で停止しない限り[プレビューデプロイ](https://developers.cloudflare.com/pages/platform/preview-deployments/)を生成します。本番ブランチ（一般的には「main」）への全ての変更は本番へデプロイされます。
 
 Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは  [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) をご覧ください。
 

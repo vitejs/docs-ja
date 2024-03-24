@@ -57,7 +57,7 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 > Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects.
 
 <!-- textlint-disable -->
-- NG : Vite(フランス語で「速い」という意味の単語で`/vit/`と発音)は現代のWebプロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
+- NG : Vite（フランス語で「速い」という意味の単語で`/vit/`と発音）は現代のWebプロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
 <!-- textlint-enable -->
 - OK : Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。
 
@@ -89,7 +89,7 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 
 > NPM の依存関係の解決と事前バンドル。
 
-### 単語の統一 (特に技術用語)
+### 単語の統一（特に技術用語）
 
 - 技術用語は基本英語、ただ日本語で一般的に使われている場合は日本語 OK !!
   - 例: 英語の filter 、日本語のフィルター
