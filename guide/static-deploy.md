@@ -240,7 +240,7 @@ $ npx wrangler pages deploy dist
 
 ### Cloudflare Pages with Git
 
-1. git リポジトリー (GitHub、GitLab) にコードをプッシュします。
+1. git リポジトリー（GitHub、GitLab）にコードをプッシュします。
 2. Cloudflare ダッシュボードにログインし、**Account Home** &gt; **Pages** でアカウントを選択します。
 3. **Create a new Project** と **Connect Git** オプションを選択します。
 4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
