@@ -136,7 +136,7 @@ Vite 5 からは、これらのファイルはデフォルトでは `build.outDi
 
 ### 対応する CSS ファイルは manifest.json ファイルのトップレベル項目としてリストされない
 
-Vite 4 では、JavaScript エントリーポイントに対応する CSS ファイルもマニフェストファイル ([`build.manifest`](/config/build-options.md#build-manifest)) のトップレベルエントリーとしてリストされていました。これらのエントリーは意図せずに追加されたもので、単純な場合にのみ機能しました。
+Vite 4 では、JavaScript エントリーポイントに対応する CSS ファイルもマニフェストファイル（[`build.manifest`](/config/build-options.md#build-manifest)）のトップレベルエントリーとしてリストされていました。これらのエントリーは意図せずに追加されたもので、単純な場合にのみ機能しました。
 
 Vite 5 では、対応する CSS ファイルは JavaScript エントリーファイルのセクション内にしかありません。
 JS ファイルを注入する場合、対応する CSS ファイルを[注入する必要があります](/guide/backend-integration.md#:~:text=%3C!%2D%2D%20if%20production%20%2D%2D%3E%0A%3Clink%20rel%3D%22stylesheet%22%20href%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.css%20%7D%7D%22%20/%3E%0A%3Cscript%20type%3D%22module%22%20src%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.file%20%7D%7D%22%3E%3C/script%3E)。
@@ -207,7 +207,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 - CSS ファイルのデフォルトエクスポート（例： `import style from './foo.css'`）: 代わりに `?inline` クエリーを使用してください
 - `import.meta.globEager`: 代わりに `import.meta.glob('*', { eager: true })` を使用してください
 - `ssr.format: 'cjs'` と `legacy.buildSsrCjsExternalHeuristics` ([#13816](https://github.com/vitejs/vite/discussions/13816))
-- `server.middlewareMode: 'ssr'` と `server.middlewareMode: 'html'`: 代わりに [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) を使用してください ([#8452](https://github.com/vitejs/vite/pull/8452))
+- `server.middlewareMode: 'ssr'` と `server.middlewareMode: 'html'`: 代わりに [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) を使用してください（[#8452](https://github.com/vitejs/vite/pull/8452)）
 
 ## 高度な内容
 
@@ -225,7 +225,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 - [[#14098] fix!: avoid rewriting this (reverts #5312)](https://github.com/vitejs/vite/pull/14098)
   - デフォルトではビルド時にトップレベルの `this` は `globalThis` に書き換えられていました。この挙動は削除されました。
 - [[#14231] feat!: add extension to internal virtual modules](https://github.com/vitejs/vite/pull/14231)
-  - 内部のバーチャルモジュールの ID に拡張子 (`.js`) が追加されました。
+  - 内部のバーチャルモジュールの ID に拡張子（`.js`）が追加されました。
 - [[#14583] refactor!: remove exporting internal APIs](https://github.com/vitejs/vite/pull/14583)
   - 意図せず露出されていた内部用 API が削除されました：`isDepsOptimizerEnabled` and `getDepOptimizationConfig`
   - エクスポートされていた内部用の型が削除されました：`DepOptimizationResult`, `DepOptimizationProcessing`, and `DepsOptimizer`

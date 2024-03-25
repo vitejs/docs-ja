@@ -478,7 +478,7 @@ Vite プラグインは、さらに（webpack loader と同様の）`enforce` �
 - enforce の値がないユーザープラグイン
 - Vite のビルドプラグイン
 - `enforce: 'post'` を指定したユーザープラグイン
-- Vite ポストビルドプラグイン (minify, manifest, reporting)
+- Vite ポストビルドプラグイン（minify, manifest, reporting）
 
 ## 条件付きの適用
 
@@ -533,7 +533,7 @@ export default defineConfig({
 
 ## パスの正規化
 
-Vite は、Windows ではボリュームを維持しつつ、POSIX セパレーター ( / ) を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレーター ( \\ ) を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティー関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行う前にセパレーターを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
+Vite は、Windows ではボリュームを維持しつつ、POSIX セパレーター（/）を使用して ID を解決しながらパスを正規化します。一方で、Rollup はデフォルトでは解決されたパスをそのままにするので、Windows では解決された ID は win32 セパレーター（\\）を持つことになります。ただし、Rollup プラグインは `@rollup/pluginutils` の [`normalizePath` ユーティリティー関数](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath)を内部で使用しており、比較を行う前にセパレーターを POSIX に変換しています。これは、これらのプラグインが Vite で使用されている場合、解決された ID の比較に対する `include` と `exclude` の設定パターンやその他の同様のパスが正しく動作することを意味します。
 
 したがって、Vite プラグインでは、解決された ID に対するパスを比較する際、最初に POSIX セパレーターを使用するようにパスを正規化することが重要です。同等の `normalizePath` ユーティリティー関数が `vite` モジュールからエクスポートされます。
 

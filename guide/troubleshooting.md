@@ -39,7 +39,7 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'`
 
-プロジェクトフォルダーへのパスに `&` が含まれているかもしれません。この場合、Windows では `npm` が動作しません ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45))。
+プロジェクトフォルダーへのパスに `&` が含まれているかもしれません。この場合、Windows では `npm` が動作しません（[npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45)）。
 
 次のいずれかを行う必要があります:
 
