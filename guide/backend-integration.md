@@ -117,7 +117,7 @@
    - エントリーポイントのチャンクの `css` リストのファイルごとに `<link rel="stylesheet">` タグ
    - エントリーポイントの `imports` リスト内のすべてのチャンクを再帰的にたどり、インポートされた各チャンクの css ファイルごとに
      `<link rel="stylesheet">` タグを含める。
-   - エントリーポイントのチャンクの `file` キーに対するタグ（Javascript に対する `<script type="moudle">`
+   - エントリーポイントのチャンクの `file` キーに対するタグ（Javascript に対する `<script type="module">`
      または css に対する `<link rel="stylesheet">`）
    - オプションとして、インポートされた JavaScript ごとの `file` に対する `<link rel="modulepreload">` タグ。
      再度、エントリーポイントのチャンクから imports を再帰的にたどる。
