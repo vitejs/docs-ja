@@ -480,6 +480,8 @@ Vite プラグインは、さらに（webpack loader と同様の）`enforce` �
 - `enforce: 'post'` を指定したユーザープラグイン
 - Vite ポストビルドプラグイン（minify, manifest, reporting）
 
+これはフックの並び順とは別のものであることに注意してください。フックの並び順は [Rollup フックと同様](https://rollupjs.org/plugin-development/#build-hooks)、`order` 属性に従います。
+
 ## 条件付きの適用
 
 デフォルトではプラグインは配信とビルドの両方で起動されます。配信時やビルド時のみに条件付きでプラグインを適用する必要がある場合は、 `apply` プロパティを使って `'build'` か `'serve'` の時にだけプラグインを呼び出します:
