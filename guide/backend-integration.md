@@ -108,7 +108,7 @@
    <script type="module" src="/{{ manifest[name].file }}"></script>
 
    <!-- for chunk of importedChunks(manifest, name) -->
-   <link rel="modulepreload" src="/{{ chunk.file }}" />
+   <link rel="modulepreload" href="/{{ chunk.file }}" />
    ```
 
    具体的には、マニフェストファイルとエントリーポイントが指定された場合、HTML を生成するバックエンドは以下のタグを含める必要があります。
@@ -129,7 +129,7 @@
    <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
    <script type="module" src="assets/main.4889e940.js"></script>
    <!-- オプション -->
-   <link rel="modulepreload" src="assets/shared.83069a53.js" />
+   <link rel="modulepreload" href="assets/shared.83069a53.js" />
    ```
                     
    一方、エントリーポイント `views/foo.js` に対しては、以下が含まれるはずです。
@@ -138,5 +138,5 @@
    <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
    <script type="module" src="assets/foo.869aea0d.js"></script>
    <!-- オプション -->
-   <link rel="modulepreload" src="assets/shared.83069a53.js" />
+   <link rel="modulepreload" href="assets/shared.83069a53.js" />
    ```
