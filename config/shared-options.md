@@ -292,6 +292,10 @@ export default defineConfig({
 
 CSS 処理に使用するエンジンを選択します。詳細は [Lightning CSS](../guide/features.md#lightning-css) を参照してください。
 
+::: info `@import` の重複
+postcss (postcss-import) は、ブラウザーからの `@import` が重複した場合の動作が異なることに注意してください。[postcss/postcss-import#462](https://github.com/postcss/postcss-import/issues/462) を参照してください。
+:::
+
 ## css.lightningcss
 
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13835)
