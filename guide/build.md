@@ -47,21 +47,7 @@ export default defineConfig({
 
 ## チャンク戦略
 
-チャンクの分割方法は `build.rollupOptions.output.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/configuration-options/#output-manualchunks)参照）。Vite 2.8 まではデフォルトのチャンク戦略は `index` と `vendor` にチャンクを分割していました。これは SPA にはよい戦略の場合もありますが、すべての Vite ターゲットのユースケースに対して一般的な解決策を提供するのは困難です。Vite 2.9 からは、`manualChunks` はデフォルトでは変更されなくなりました。設定ファイルに `splitVendorChunkPlugin` を追加すれば、vendor を分割するチャンク戦略を引き続き使用できます:
-
-```js
-// vite.config.js
-import { splitVendorChunkPlugin } from 'vite'
-export default defineConfig({
-  plugins: [splitVendorChunkPlugin()],
-})
-```
-
-カスタムロジックによる合成が必要な場合に備えて、この戦略は `splitVendorChunk({ cache: SplitVendorChunkCache })` ファクトリーとしても提供されます。この場合、ビルドウォッチモードが正しく動作するように、`cache.reset()` は `buildStart` で呼び出す必要があります。
-
-::: warning
-このプラグインを使用する場合は、 `build.rollupOptions.output.manualChunks` を関数形式で使用する必要があります。オブジェクト形式を使用すると、プラグインは何の効果も持ちません。
-:::
+チャンクの分割方法は `build.rollupOptions.output.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/configuration-options/#output-manualchunks)参照）。フレームワークを使用する場合は、チャンクの分割方法の構成についてそのフレームワークのドキュメントを参照してください。
 
 ## 読み込みエラーのハンドリング
 
