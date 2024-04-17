@@ -8,6 +8,8 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 
 :::warning 低レベル API
 これは、ライブラリーやフレームワーク製作者のための低レベル API です。アプリケーションを作成することが目的ならば、まず [Awesome Vite の SSR セクション](https://github.com/vitejs/awesome-vite#ssr)にある高レベルの SSR プラグインとツールを確認してください。とはいえ、多くのアプリケーションは、Vite のネイティブの低レベル API 上に直接構築されています。
+
+現在、Vite は [Environment API](https://github.com/vitejs/vite/discussions/16358) を使用して SSR API の改良に取り組んでいます。詳しくはリンクをチェックしてください。
 :::
 
 :::tip ヘルプ
@@ -138,17 +140,10 @@ app.use('*', async (req, res, next) => {
     //    from @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
-    // 3a. サーバーサイドのエントリーポイントを読み込みます。 ssrLoadModule は自動的に
+    // 3. サーバーサイドのエントリーポイントを読み込みます。 ssrLoadModule は自動的に
     //    ESM を Node.js で使用できるコードに変換します! ここではバンドルは必要ありません
     //    さらに HMR と同様な効率的な無効化を提供します。
     const { render } = await vite.ssrLoadModule('/src/entry-server.js')
-
-    // 3b. Vite 5.1 以降では、代わりに実験的な createViteRuntime API を利用できます。
-    //    HMR を完全にサポートしており、ssrLoadModule と同じように機能します。
-    //    より高度なユースケースは、ViteRuntime クラスを使用して
-    //    別スレッドや異なるマシン上にランタイムを作成することです。
-    const runtime = await vite.createViteRuntime(server)
-    const { render } = await runtime.executeEntrypoint('/src/entry-server.js')
 
     // 4. アプリケーションの HTML をレンダリングします。これは entry-server.js から
     //    エクスポートされた `render` 関数が、ReactDOMServer.renderToString() などの
@@ -183,7 +178,7 @@ app.use('*', async (req, res, next) => {
 SSR プロジェクトを本番環境に適用するには次の作業を行う必要があります:
 
 1. 通常通りクライアントビルドします。
-2. SSR ビルドを作成します、これは `import()` を介して直接ロードできるので、Vite の `ssrLoadModule` や `runtime.executeEntrypoint` を経由する必要はありません。
+2. SSR ビルドを作成します、これは `import()` を介して直接ロードできるので、Vite の `ssrLoadModule` を経由する必要はありません。
 
 `package.json` は次のようになります:
 
@@ -203,7 +198,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 - ルートの `index.html` を読み取る代わりに `dist/client/index.html` を使用します。これはクライアントビルドへの正しいアセットリンクが含まれているためです。
 
-- `await vite.ssrLoadModule('/src/entry-server.js')` または `await runtime.executeEntrypoint('/src/entry-server.js')` の代わりに `import('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
+- `await vite.ssrLoadModule('/src/entry-server.js')` の代わりに `import('./dist/server/entry-server.js')` を使用します（このファイルは SSR ビルドした結果のファイルです）。
 
 - `vite` 開発サーバーの作成とすべての使用を開発専用サーバーかどうかの条件分岐の後ろに移動します。次に静的ファイルを提供するミドルウェアを追加し、`dist/client` からファイルを提供します。
 
