@@ -1,7 +1,9 @@
 # Vite ランタイム API
 
 :::warning 低レベル API
-この API は Vite 5.1 で実験的機能として導入されました。[フィードバックの収集](https://github.com/vitejs/vite/discussions/15774)に追加されています。おそらく Vite 5.2 で破壊的な変更があるため、使用する場合は Vite のバージョンを `~5.1.0` に固定するようにしてください。この機能は、ライブラリやフレームワークの作者向けの低レベル API です。アプリケーションを作ることが目的なら、はじめに高レベルの SSR プラグインと [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) にあるツールを確認してください。
+この API は Vite 5.1 で実験的機能として導入されました。[フィードバックの収集](https://github.com/vitejs/vite/discussions/15774)に追加されています。おそらく破壊的変更の可能性が高いため、使用する場合は Vite のバージョンを `~5.1.0` に固定するようにしてください。この機能は、ライブラリやフレームワークの作者向けの低レベル API です。アプリケーションを作ることが目的なら、はじめに高レベルの SSR プラグインと [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) にあるツールを確認してください。
+
+現在、この API は [Environment API](https://github.com/vitejs/vite/discussions/16358) として改訂されており、`^6.0.0-alpha.0` でリリースされています。
 :::
 
 「Vite ランタイム」は、はじめに Vite プラグインで処理することにより、任意のコードを実行できるようにするツールです。ランタイムの実装がサーバーから分離されているため、`server.ssrLoadModule` とは異なります。これにより、ライブラリやフレームワークの作者は、サーバーとランタイム間に独自の通信レイヤーを実装できるようになります。
