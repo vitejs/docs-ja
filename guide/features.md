@@ -699,7 +699,7 @@ CSP をデプロイするには、Vite 内部の理由により、特定のデ�
 
 ### [`'nonce-{RANDOM}'`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#nonce-base64-value)
 
-[`html.cspNonce`](/config/shared-options#html-cspnonce) が設定された場合、Vite は出力する script タグとスタイルシートの link タグに、指定された値を持つ nonce 属性を追加します。`<style>` などの他のタグには nonce 属性を追加しないことに注意してください。それに加えて、このオプションを設定すると、Vite が meta タグ（`<meta property="csp-nonce" nonce="PLACEHOLDER" />`）を挿入するようになります。
+[`html.cspNonce`](/config/shared-options#html-cspnonce) が設定された場合、Vite は任意の `<script>` および `<style>` タグに加えて、スタイルシートおよびモジュールプリロードのための `<link>` タグに、指定された値を持つ nonce 属性を追加します。`<style>` などの他のタグには nonce 属性を追加しないことに注意してください。それに加えて、このオプションを設定すると、Vite が meta タグ（`<meta property="csp-nonce" nonce="PLACEHOLDER" />`）を挿入するようになります。
 
 `property="csp-nonce"` を持つ meta タグの nonce の値は、Vite により開発中とビルド後のいずれでも必要なときに利用されます。
 
