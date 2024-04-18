@@ -21,9 +21,9 @@ hero:
     - theme: alt
       text: GitHub で見る
       link: https://github.com/vitejs/vite
-    - theme: brand
-      text: 🎉 ViteConf 23!
-      link: https://viteconf.org/23/replay?utm=vite-homepage
+    - theme: alt
+      text: 📅 Vite Meetup SF
+      link: https://lu.ma/vite
 
 features:
   - icon: 💡
@@ -45,3 +45,12 @@ features:
     title: 完全に型定義がされている API
     details: 完全な TypeScript の型定義を備えた柔軟なプログラミング志向の API です。
 ---
+
+<style>
+.VPButton.alt[href="https://lu.ma/vite"] {
+  background: var(--vp-home-hero-name-background);
+  border: none;
+  padding: 1px 21px;
+  color: #fff !important;
+}
+</style>
