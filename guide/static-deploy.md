@@ -334,17 +334,27 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 プロジェクトに [custom domain](https://render.com/docs/custom-domains) も追加できます。
 
+<!--
+  NOTE: The sections below are reserved for more deployment platforms not listed above.
+  Feel free to submit a PR that adds a new section with a link to your platform's
+  deployment guide, as long as it meets these criteria:
+
+  1. Users should be able to deploy their site for free.
+  2. Free tier offerings should host the site indefinitely and are not time-bound.
+     Offering a limited number of computation resource or site counts in exchange is fine.
+  3. The linked guides should not contain any malicious content.
+
+  The Vite team may change the criteria and audit the current list from time to time.
+  If a section is removed, we will ping the original PR authors before doing so.
+-->
+
 ## Flightcontrol
 
-[Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) を使用して静的サイトをデプロイする場合、この[指示](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite)に従います。
-
-## AWS Amplify Hosting
-
-[AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/) を使用して静的サイトをデプロイする場合、この[指示](https://docs.amplify.aws/guides/hosting/vite/q/platform/js/)に従います。
+[Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) を使用して静的サイトをデプロイする場合はこの[案内](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite)に従ってください。
 
 ## Kinsta 静的サイトホスティング
 
-以下の[手順](https://kinsta.com/docs/react-vite-example/)に従って、Vite アプリを静的サイトとして [Kinsta](https://kinsta.com/static-site-hosting/) にデプロイできます。
+[Kinsta](https://kinsta.com/static-site-hosting/) を使用して静的サイトをデプロイする場合はこの[案内](https://kinsta.com/docs/react-vite-example/)に従ってください。
 
 ## xmit 静的サイトホスティング
 
