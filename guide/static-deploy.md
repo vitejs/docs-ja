@@ -345,3 +345,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 ## Kinsta 静的サイトホスティング
 
 以下の[手順](https://kinsta.com/docs/react-vite-example/)に従って、Vite アプリを静的サイトとして [Kinsta](https://kinsta.com/static-site-hosting/) にデプロイできます。
+
+## xmit 静的サイトホスティング
+
+[xmit](https://xmit.co) を使用して静的サイトをデプロイする場合はこの[ガイド](https://xmit.dev/posts/vite-quickstart/)に従ってください。
