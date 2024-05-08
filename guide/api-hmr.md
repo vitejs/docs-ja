@@ -220,7 +220,7 @@ HMR イベントを購読します。
 
 接続前に呼び出した場合、データはバッファーされ、コネクションが確立した後に送信されます。
 
-詳細は [クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication) を参照してください。
+詳細は[カスタムイベント用の TypeScript](/guide/api-plugin.html#typescript-for-custom-events) セクションを含む[クライアントサーバーとの通信](/guide/api-plugin.html#client-server-communication)を参照してください。
 
 ## 参考資料
 

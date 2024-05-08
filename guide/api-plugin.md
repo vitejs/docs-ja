@@ -623,18 +623,42 @@ export default defineConfig({
 })
 ```
 
-### カスタムイベント用の TypeScript
+### カスタムイベント用の TypeScript {#typescript-for-custom-events}
 
-`CustomEventMap` インターフェイスを拡張することで、カスタムイベントに型をつけられます:
+内部では、Vite はペイロードの型を `CustomEventMap` インターフェイスから推論しますが、インターフェイスを拡張することでカスタムイベントを型付けすることも可能です。
+
+:::tip 注意
+TypeScript の型宣言ファイルを指定する際は `.d.ts` 拡張子を含めてください。そうしなければ、TypeScript はモジュールがどのファイルを拡張しようとしているのかを認識できない可能性があります。
+:::
 
 ```ts
 // events.d.ts
-import 'vite/types/customEvent'
+import 'vite/types/customEvent.d.ts'
 
-declare module 'vite/types/customEvent' {
+declare module 'vite/types/customEvent.d.ts' {
   interface CustomEventMap {
     'custom:foo': { msg: string }
     // 'event-key': payload
   }
 }
+```
+
+このインターフェイス拡張は、イベント `T` に対するペイロードの型を推論するために `InferCustomEventPayload<T>` により使用されます。このインターフェイスの使用に関する詳しい情報については、[HMR API のドキュメント](./api-hmr#hmr-api)を参照してください。
+
+```ts twoslash
+import 'vite/client'
+import type { InferCustomEventPayload } from 'vite/types/customEvent.d.ts'
+declare module 'vite/types/customEvent.d.ts' {
+  interface CustomEventMap {
+    'custom:foo': { msg: string }
+  }
+}
+// ---cut---
+type CustomFooPayload = InferCustomEventPayload<'custom:foo'>
+import.meta.hot?.on('custom:foo', (payload) => {
+  // ペイロードの型は { msg: string } になります
+})
+import.meta.hot?.on('unknown:event', (payload) => {
+  // ペイロードの型は any になります
+})
 ```
