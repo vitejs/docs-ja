@@ -62,24 +62,36 @@
 
    ```json
    {
-     "main.js": {
-       "file": "assets/main.4889e940.js",
-       "src": "main.js",
+     "_shared-!~{003}~.js": {
+       "file": "assets/shared-ChJ_j-JJ.css",
+       "src": "_shared-!~{003}~.js"
+     },
+     "_shared-B7PI925R.js": {
+       "file": "assets/shared-B7PI925R.js",
+       "name": "shared",
+       "css": ["assets/shared-ChJ_j-JJ.css"]
+     },
+     "baz.js": {
+       "file": "assets/baz-B2H3sXNv.js",
+       "name": "baz",
+       "src": "baz.js",
+       "isDynamicEntry": true
+     },
+     "views/bar.js": {
+       "file": "assets/bar-gkvgaI9m.js",
+       "name": "bar",
+       "src": "views/bar.js",
        "isEntry": true,
-       "dynamicImports": ["views/foo.js"],
-       "css": ["assets/main.b82dbe22.css"],
-       "assets": ["assets/asset.0ab0f9cd.png"],
-       "imports": ["_shared.83069a53.js"]
+       "imports": ["_shared-B7PI925R.js"],
+       "dynamicImports": ["baz.js"]
      },
      "views/foo.js": {
-       "file": "assets/foo.869aea0d.js",
+       "file": "assets/foo-BRBmoGS9.js",
+       "name": "foo",
        "src": "views/foo.js",
-       "isDynamicEntry": true,
-       "imports": ["_shared.83069a53.js"]
-     },
-     "_shared.83069a53.js": {
-       "file": "assets/shared.83069a53.js",
-       "css": ["assets/shared.a834bfc3.css"]
+       "isEntry": true,
+       "imports": ["_shared-B7PI925R.js"],
+       "css": ["assets/foo-5UjPuW-k.css"]
      }
    }
    ```
@@ -122,21 +134,21 @@
    - オプションとして、インポートされた JavaScript ごとの `file` に対する `<link rel="modulepreload">` タグ。
      再度、エントリーポイントのチャンクから imports を再帰的にたどる。
 
-   上記のマニフェスト例に従うと、本番環境では、エントリーポイント `main.js` に対して以下のタグが含まれるはずです。
+   上記のマニフェスト例に従うと、本番環境では、エントリーポイント `views/foo.js` に対して以下のタグが含まれるはずです。
 
    ```html
-   <link rel="stylesheet" href="assets/main.b82dbe22.css" />
-   <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
-   <script type="module" src="assets/main.4889e940.js"></script>
+   <link rel="stylesheet" href="assets/foo-5UjPuW-k.css" />
+   <link rel="stylesheet" href="assets/shared-ChJ_j-JJ.css" />
+   <script type="module" src="assets/foo-BRBmoGS9.js"></script>
    <!-- オプション -->
-   <link rel="modulepreload" href="assets/shared.83069a53.js" />
+   <link rel="modulepreload" href="assets/shared-B7PI925R.js" />
    ```
-                    
-   一方、エントリーポイント `views/foo.js` に対しては、以下が含まれるはずです。
+
+   一方、エントリーポイント `views/bar.js` に対しては、以下が含まれるはずです。
 
    ```html
-   <link rel="stylesheet" href="assets/shared.a834bfc3.css" />
-   <script type="module" src="assets/foo.869aea0d.js"></script>
+   <link rel="stylesheet" href="assets/shared-ChJ_j-JJ.css" />
+   <script type="module" src="assets/bar-gkvgaI9m.js"></script>
    <!-- オプション -->
-   <link rel="modulepreload" href="assets/shared.83069a53.js" />
+   <link rel="modulepreload" href="assets/shared-B7PI925R.js" />
    ```
