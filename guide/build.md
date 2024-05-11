@@ -238,9 +238,9 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 このような事例では単一の静的な [base](#public-base-path) だけでは不十分です。Vite は `experimental.renderBuiltUrl` により、高度なベースパスの設定に対する実験的なサポートを提供します。
 
-<!-- prettier-ignore-start -->
 ```ts twoslash
 import type { UserConfig } from 'vite'
+// prettier-ignore
 const config: UserConfig = {
 // ---cut-before---
 experimental: {
@@ -255,14 +255,13 @@ experimental: {
 // ---cut-after---
 }
 ```
-<!-- prettier-ignore-end -->
 
 ハッシュ付きのアセットファイルとパブリックファイルが一緒にデプロイされていない場合は、関数に渡される 2 つ目の `context` パラメーターに含まれるアセット `type` を使って、それぞれのグループに対する設定を独立して定義できます。
 
-<!-- prettier-ignore-start -->
 ```ts twoslash
 import type { UserConfig } from 'vite'
 import path from 'node:path'
+// prettier-ignore
 const config: UserConfig = {
 // ---cut-before---
 experimental: {
@@ -279,6 +278,5 @@ experimental: {
 // ---cut-after---
 }
 ```
-<!-- prettier-ignore-end -->
 
 渡される `filename` はデコードされた URL であり、関数が URL 文字列を返す場合には、その文字列もデコードする必要があるということに注意してください。Vite は URL をレンダリングする時にエンコーディングを自動的に処理します。ランタイムコードはそのままレンダリングされるため、`runtime` を持つオブジェクトが返される場合には、必要な場所で自分自身でエンコーディングを処理する必要があります。
