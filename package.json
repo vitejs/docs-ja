@@ -20,7 +20,7 @@
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
     "vite": "^5.2.10",
     "vitepress": "1.1.4",
-    "vue": "^3.4.26",
+    "vue": "^3.4.27",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
