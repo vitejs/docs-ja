@@ -428,8 +428,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
     ```js
     handleHotUpdate({ server, modules, timestamp }) {
-      // Also use `server.ws.send` to support Vite <5.1 if needed
-      server.hot.send({ type: 'full-reload' })
+      server.ws.send({ type: 'full-reload' })
       // Invalidate modules manually
       const invalidatedModules = new Set()
       for (const mod of modules) {
@@ -448,8 +447,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
     ```js
     handleHotUpdate({ server }) {
-      // 必要に応じて Vite <5.1 をサポートするために `server.ws.send` も使用
-      server.hot.send({
+      server.ws.send({
         type: 'custom',
         event: 'special-update',
         data: {}
@@ -556,7 +554,7 @@ Vite の 2.9 から、プラグインによりクライアントとの通信に�
 
 ### サーバーからクライアントへ
 
-プラグイン側からは `server.hot.send`（Vite 5.1 以降）または `server.ws.send` を使うことで全クライアントへイベントを配信することができます:
+プラグイン側からは `server.ws.send` を使うことでクライアントへイベントを配信できます:
 
 ```js
 // vite.config.js
@@ -565,9 +563,8 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        // 例：メッセージ送信前にクライアントが接続されるのを待つ
-        server.hot.on('connection', () => {
-          server.hot.send('my:greetings', { msg: 'hello' })
+        server.ws.on('connection', () => {
+          server.ws.send('my:greetings', { msg: 'hello' })
         })
       },
     },
@@ -603,7 +600,7 @@ if (import.meta.hot) {
 }
 ```
 
-この時、サーバー側では `server.hot.on`（Vite 5.1 以降）または `server.ws.on` を使ってイベントをリッスンします:
+この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします:
 
 ```js
 // vite.config.js
@@ -612,7 +609,7 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        server.hot.on('my:from-client', (data, client) => {
+        server.ws.on('my:from-client', (data, client) => {
           console.log('Message from client:', data.msg) // Hey!
           // クライアントへの返信のみ（必要であれば）
           client.send('my:ack', { msg: 'Hi! I got your message!' })
