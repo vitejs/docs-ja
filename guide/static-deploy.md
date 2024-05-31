@@ -36,7 +36,6 @@ $ npm run build
 アプリをビルドしたら、`npm run preview` コマンドを実行し、ローカルでテストします。
 
 ```bash
-$ npm run build
 $ npm run preview
 ```
 
