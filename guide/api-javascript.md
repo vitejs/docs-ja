@@ -424,3 +424,30 @@ async function loadConfigFromFile(
 ```
 
 esbuild で Vite の設定ファイルを手動で読み込みます。
+
+## `preprocessCSS`
+
+- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13815)
+
+**型:**
+
+```ts
+async function preprocessCSS(
+  code: string,
+  filename: string,
+  config: ResolvedConfig,
+): Promise<PreprocessCSSResult>
+
+interface PreprocessCSSResult {
+  code: string
+  map?: SourceMapInput
+  modules?: Record<string, string>
+  deps?: Set<string>
+}
+```
+
+`.css`、`.scss`、`.sass`、`.less`、`.styl`、および `.stylus` ファイルをプリプロセスし、プレーンな CSS に変換することで、プラウザーで使用したり、他のツールでパースできるようにします。[ビルトインの CSS プリプロセスのサポート](/guide/features#css-pre-processors)と同様に、使用する場合には対応するプリプロセッサーをインストールする必要があります。
+
+使用するプリプロセッサーは、`filename` の拡張子から推定されます。`filename` の最後が `.module.{ext}` で終わる場合、[CSS module](https://github.com/css-modules/css-modules) として推定され、返される結果には、元のクラス名を変換後のクラス名にマッピングする `modules` オブジェクトが含まれます。
+
+プリプロセスは、`url()` や `image-set()` 内の URL を解決しないことに注意してください。
