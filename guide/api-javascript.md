@@ -429,7 +429,7 @@ esbuild で Vite の設定ファイルを手動で読み込みます。
 
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13815)
 
-**型:**
+**型シグネチャー:**
 
 ```ts
 async function preprocessCSS(
