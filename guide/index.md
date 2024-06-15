@@ -105,6 +105,44 @@ npm install
 npm run dev
 ```
 
+## 手動インストール
+                 
+プロジェクト内に `vite` CLI をインストールするには、次のコマンドを使用します。
+
+::: code-group
+
+```bash [NPM]
+$ npm install -D vite
+```
+
+```bash [Yarn]
+$ yarn add -D vite
+```
+
+```bash [PNPM]
+$ pnpm add -D vite
+```
+
+```bash [Bun]
+$ bun add -D vite
+```
+
+:::
+
+そして、次のような `index.html` ファイルを作成します。
+
+```html
+<p>Hello Vite!</p>
+```
+
+次に、`vite` CLI をターミナルで実行します。
+
+```bash
+vite
+```
+
+`index.html` は `http://localhost:5173` で配信されます。
+
 ## `index.html` とプロジェクトルート {#index-html-and-project-root}
 
 お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーで、`index.html` はアプリケーションのエントリーポイントです。
