@@ -129,13 +129,13 @@ $ bun add -D vite
 
 :::
 
-そして、次のような `index.html` ファイルを作成します。
+そして、次のような `index.html` ファイルを作成します:
 
 ```html
 <p>Hello Vite!</p>
 ```
 
-次に、`vite` CLI をターミナルで実行します。
+次に、`vite` CLI をターミナルで実行します:
 
 ```bash
 vite
