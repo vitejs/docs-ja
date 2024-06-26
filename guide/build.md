@@ -13,7 +13,7 @@
 
 [`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
 
-Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザーのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill.io](https://polyfill.io/) をチェックしてみてください。
+Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザーのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成するサービスの [Polyfill JS](https://cdnjs.cloudflare.com/polyfill/) をチェックしてみてください。
 
 レガシーブラウザーは [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を介してサポートすることができます。このプラグインはレガシーチャンクとそれに対応する ES 言語機能 Polyfill を自動的に生成します。レガシーチャンクは ESM をネイティブにサポートしていないブラウザーでのみ条件付きで読み込まれます。
 
