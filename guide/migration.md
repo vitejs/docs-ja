@@ -187,7 +187,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 - `resolvePackageData`: 上記と同じで、パッケージディレクトリーを遡ってルートの `package.json` を取得するか、コミュニティーの [`vitefu`](https://github.com/svitejs/vitefu) パッケージを使用できます。
 
 ```js
-import { resolve } from 'import-meta-env'
+import { resolve } from 'import-meta-resolve'
 import { findDepPkgJsonPath } from 'vitefu'
 import fs from 'node:fs'
 
