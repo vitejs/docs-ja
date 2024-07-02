@@ -90,7 +90,7 @@ export default defineConfig({
 
 相対的でない [`base`](/config/shared-options.md#base) を使用する場合、各キーの先頭に `base` を付けなければならないことに注意してください。
 
-[`http-proxy`](https://github.com/http-party/node-http-proxy#options) を拡張します。他のオプションは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13)。[http-proxy とは違い](https://github.com/http-party/node-http-proxy/issues/1669)、`changeOrigin` オプションは host と origin ヘッダーの両方を target に一致するように変更することに注意してください。
+[`http-proxy`](https://github.com/http-party/node-http-proxy#options) を拡張します。他のオプションは[こちら](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13)。
 
 場合によっては、基盤となる開発サーバーを設定したいこともあるでしょう（例: 内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加する場合など）。そのためには、独自の [plugin](/guide/using-plugins.html) を書き、[configureServer](/guide/api-plugin.html#configureserver) 関数を使用する必要があります。
 
@@ -123,9 +123,11 @@ export default defineConfig({
         },
       },
       // Web ソケット か socket.io をプロキシ化: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
+      // `rewriteWsOrigin` を使用すると、プロキシが CSRF 攻撃に無防備なままになる可能性があるため、使用には注意してください。
       '/socket.io': {
         target: 'ws://localhost:5174',
         ws: true,
+        rewriteWsOrigin: true,
       },
     },
   },
