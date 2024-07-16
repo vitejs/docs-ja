@@ -44,7 +44,15 @@ export default defineConfig({
 })
 ```
 
-Vite は TS の設定ファイルも直接サポートしています。`vite.config.ts` を `defineConfig` ヘルパーと一緒に使うこともできます。
+Vite は TypeScript の設定ファイルもサポートしています。`vite.config.ts` は、上記の `defineConfig` ヘルパー関数または `satisfies` 演算子とともに使用できます:
+
+```ts
+import type { UserConfig } from 'vite'
+
+export default {
+  // ...
+} satisfies UserConfig
+```
 
 ## 条件付き設定
 
