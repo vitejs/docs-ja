@@ -22,8 +22,8 @@ hero:
       text: GitHub で見る
       link: https://github.com/vitejs/vite
     - theme: alt
-      text: 📅 Vite Meetup SF
-      link: https://lu.ma/vite
+      text: ⚡ ViteConf 24!
+      link: https://viteconf.org/?utm=vite-homepage
 
 features:
   - icon: 💡
