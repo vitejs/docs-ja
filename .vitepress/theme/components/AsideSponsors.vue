@@ -18,11 +18,16 @@ const sponsors = computed(() => {
 </script>
 
 <template>
-  <a class="vite-event" href="https://lu.ma/vite" target="_blank">
-    <img width="22" height="22" src="/logo.svg" />
+  <a
+      class="viteconf"
+      href="https://viteconf.org/?utm=vite-sidebar"
+      target="_blank"
+  >
+    <img width="22" height="22" src="/viteconf.svg" />
     <span>
-      <p class="extra-info">May 9th, 2024</p>
-      <p class="heading">Vite Meetup SF</p>
+      <p class="extra-info">Building Together</p>
+      <p class="heading">ViteConf 24 - Oct 3</p>
+      <p class="extra-info">Get your free ticket!</p>
     </span>
   </a>
   <VPDocAsideSponsors v-if="data" :data="sponsors" />
