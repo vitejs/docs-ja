@@ -71,19 +71,26 @@ $ bun create vite
 
 プロジェクト名や使用するテンプレートは、追加のコマンドラインオプションによって直接指定することもできます。例えば Vite + Vue のプロジェクトを生成するには以下のコマンドを実行します:
 
-```bash
+::: code-group
+
+```bash [NPM]
 # npm 7+ は追加で 2 つのダッシュが必要:
-npm create vite@latest my-vue-app -- --template vue
-
-# yarn
-yarn create vite my-vue-app --template vue
-
-# pnpm
-pnpm create vite my-vue-app --template vue
-
-# bun
-bun create vite my-vue-app --template vue
+$ npm create vite@latest my-vue-app -- --template vue
 ```
+
+```bash [Yarn]
+$ yarn create vite my-vue-app --template vue
+```
+
+```bash [PNPM]
+$ pnpm create vite my-vue-app --template vue
+```
+
+```bash [Bun]
+$ bun create vite my-vue-app --template vue
+```
+
+:::
 
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
