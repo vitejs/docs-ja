@@ -399,6 +399,10 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   }
   ```
 
+::: warning 注意
+エントリーファイルのカスタム処理があるフレームワークを使用している場合、このフックは呼ばれません（たとえば、[SvelteKit](https://github.com/sveltejs/kit/discussions/8269#discussioncomment-4509145)）。
+:::
+
 ### `handleHotUpdate`
 
 - **型:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
