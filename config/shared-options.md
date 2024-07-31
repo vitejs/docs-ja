@@ -225,7 +225,7 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 CSS プリプロセッサーに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサーでサポートされているオプションは、それぞれのドキュメントで確認できます:
 
-- `sass`/`scss` - トップレベルのオプション `api: "legacy" | "modern"`（デフォルト `"legacy"`）で、使用する sass API を切り替えることができます。[オプション（legacy）](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions)、[オプション（modern）](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)。
+- `sass`/`scss` - トップレベルのオプション `api: "legacy" | "modern" | "modern-compiler"`（デフォルト `"legacy"`）で、使用する sass API を切り替えることができます。最高のパフォーマンスを得るには、`sass-embedded` パッケージとともに `api: "modern-compiler"` を使用することをおすすめします。[オプション（legacy）](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions)、[オプション（modern）](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)。
 - `less` - [オプション](https://lesscss.org/usage/#less-options)。
 - `styl`/`stylus` - オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
 
@@ -244,7 +244,7 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern', // または "legacy"
+        api: 'modern-compiler', // または "modern"
         importers: [
           // ...
         ],
