@@ -257,7 +257,7 @@ Vite は最新のブラウザーのみを対象としているため、CSSWG ド
 
 ```bash
 # .scss and .sass
-npm add -D sass
+npm add -D sass-embedded # または sass
 
 # .less
 npm add -D less
