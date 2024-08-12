@@ -432,7 +432,6 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
     ```js
     handleHotUpdate({ server, modules, timestamp }) {
-      server.ws.send({ type: 'full-reload' })
       // Invalidate modules manually
       const invalidatedModules = new Set()
       for (const mod of modules) {
@@ -443,6 +442,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
           true
         )
       }
+      server.ws.send({ type: 'full-reload' })
       return []
     }
     ```
