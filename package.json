@@ -9,11 +9,11 @@
     "lint": "textlint --format pretty-error **/*.md"
   },
   "devDependencies": {
-    "@shikijs/vitepress-twoslash": "^1.14.1",
+    "@shikijs/vitepress-twoslash": "^1.16.1",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.16.1",
+    "@types/node": "^20.16.3",
     "feed": "^4.2.2",
-    "lint-staged": "^15.2.9",
+    "lint-staged": "^15.2.10",
     "textlint": "^13.4.1",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
