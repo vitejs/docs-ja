@@ -1,35 +1,35 @@
-# Environment API
+# 環境 API
 
-:::warning Low-level API
-Initial work for this API was introduced in Vite 5.1 with the name "Vite Runtime API". This guide describes a revised API, renamed to Environment API. This API will be released in Vite 6. You can already test it in the latest `vite@6.0.0-alpha.x` version.
+:::warning 低レベル API
+この API の初期研究は、Vite 5.1 で「Vite ランタイム API」という名前で導入されました。このガイドでは、Environment API と改名された改訂版 API について説明します。この API は Vite 6 でリリースされる予定です。すでに最新の `vite@6.0.0-alpha.x` バージョンでテストできます。
 
-Resources:
+リソース:
 
-- [Environment API PR](https://github.com/vitejs/vite/pull/16471) where the new API is implemented and reviewed.
-- [Feedback discussion](https://github.com/vitejs/vite/discussions/16358) where we are gathering feedback about the new APIs.
+- 新しい API が実装され、レビューされる [Environment API PR](https://github.com/vitejs/vite/pull/16471)
+- 新しい API に関するフィードバックを収集する [Feedback discussion](https://github.com/vitejs/vite/discussions/16358)
 
-Feel free to send us PRs against the `v6/environment-api` branch to fix the issues you discover. Please share with us your feedback as you test the proposal.
+問題を発見したら、お気軽に `v6/environment-api` ブランチに PR を送ってください。提案をテストしてからフィードバックを共有してください。
 :::
 
-Vite 6 formalizes the concept of Environments, introducing new APIs to create and configure them as well as accessing options and context utilities with a consistent API. Since Vite 2, there were two implicit Environments (`client` and `ssr`). Plugin Hooks received a `ssr` boolean in the last options parameter to identify the target environment for each processed module. Several APIs expected an optional last `ssr` parameter to properly associate modules to the correct environment (for example `server.moduleGraph.getModuleByUrl(url, { ssr })`). The `ssr` environment was configured using `config.ssr` that had a partial set of the options present in the client environment. During dev, both `client` and `ssr` environment were running concurrently with a single shared plugin pipeline. During build, each build got a new resolved config instance with a new set of plugins.
+Vite 6 は環境の概念が形式化され、環境を作成・設定するための新しい API を導入するとともに、一貫した API でオプションやコンテキストユーティリティにアクセスできるようになりました。Vite 2 以降、2 つの暗黙的な環境（`client` と `ssr`）が存在していました。プラグインフックは、最後のオプションパラメーターで `ssr` という真偽値を受け取り、処理される各モジュールのターゲット環境を識別しました。いくつかの API はモジュールを正しい環境に適切に関連付けるために、オプションの最後の `ssr` パラメーターを受け付けていました（例えば `server.moduleGraph.getModuleByUrl(url, { ssr })`）。`ssr` 環境は、クライアント環境に存在するオプションの一部が設定された `config.ssr` を使って設定されました。開発時には、`client` 環境と `ssr` 環境の両方が単一の共有プラグインパイプラインで同時に実行されていました。ビルド時には、各ビルドは新しいプラグインのセットを含む新しい解決済みの設定インスタンスを取得していました。
 
-The new Environment API not only makes these two default environment explicit, but allows users to create as many named environments as needed. There is a uniform way to configure environments (using `config.environments`) and the environment options and context utilities associated to a module being processed is accessible in plugin hooks using `this.environment`. APIs that previously expected a `ssr` boolean are now scoped to the proper environment (for example `environment.moduleGraph.getModuleByUrl(url)`). During dev, all environments are run concurrently as before. During build, for backward compatibility each build gets its own resolved config instance. But plugins or users can opt-in into a shared build pipeline.
+新しい環境 API はこれら 2 つのデフォルト環境を明示的にするだけでなく、ユーザーが必要な数だけ名前付き環境を作成できるようにします。環境を設定するための統一された方法（`config.environment` を使用）があり、処理中のモジュールに関連する環境オプションとコンテキストユーティリティーは、`this.environment` を使用してプラグインフックでアクセスできます。以前は `ssr` という真偽値を受け取っていた API は適切な環境にスコープされるようになりました（例えば `environment.moduleGraph.getModuleByUrl(url)`）。開発中は、以前と同じようにすべての環境が同時に実行されます。ビルド時には、後方互換性のために、各ビルドは独自の解決された設定インスタンスを取得します。ただし、プラグインやユーザーは共有ビルドパイプラインにオプトインできます。
 
-Even if there are big changes internally, and new opt-in APIs, there are no breaking changes from Vite 5. The initial goal of Vite 6 will be to move the ecosystem to the new major as smoothly as possible, delaying promoting the adoption of new APIs in plugins until there is enough users ready to consume the new versions of these plugins.
+内部的に大きな変更があり、新しいオプトイン API があったとしても、Vite 5 からの破壊的変更はありません。Vite 6 の最初の目標は、エコシステムをできるだけスムーズに新メジャーに移行させ、プラグインの新バージョンを利用できる十分なユーザーが揃うまで、プラグインの新 API の採用促進を遅らせることです。
 
-## Using environments in the Vite server
+## Vite サーバーでの環境の使用
 
-A single Vite dev server can be used to interact with different module execution environments concurrently. We'll use the word environment to refer to a configured Vite processing pipeline that can resolve ids, load, and process source code and is connected to a runtime where the code is executed. The transformed source code is called a module, and the relationships between the modules processed in each environment are kept in a module graph. The code for these modules is sent to the runtimes associated with each environment to be executed. When a module is evaluated, the runtime will request its imported modules triggering the processing of a section of the module graph. In a typical Vite app, environments will be used for the ES modules served to the client and for the server program that does SSR. An app can do SSR in a Node server, but also other JS runtimes like [Cloudflare's workerd](https://github.com/cloudflare/workerd). So we can have different types of environments on the same Vite server: browser environments, node environments, and workerd environments, to name a few.
+単一の Vite 開発サーバーを使用して、異なるモジュール実行環境と同時にやり取りできます。ここでは環境という言葉は、ID を解決し、ソースコードをロードし、処理でき、コードが実行されるランタイムに接続されている、構成された Vite 処理パイプラインを指します。変換されたソースコードはモジュールと呼ばれ、各環境で処理されるモジュール間の関係はモジュールグラフに保持されます。これらのモジュールのコードは、実行される各環境に関連付けられたランタイムに送信されます。モジュールが評価されると、ランタイムはインポートされたモジュールを要求し、モジュールグラフのセクションの処理をトリガーします。典型的な Vite アプリでは、環境はクライアントに提供される ES モジュールと SSR を行うサーバープログラムに使用されます。アプリは Node サーバーだけでなく、[Cloudflare の workerd](https://github.com/cloudflare/workerd) のような他の JS ランタイムでも SSR を行うことができます。つまり、ブラウザー環境、Node 環境、workerd 環境など、さまざまなタイプの環境を同じ Vite サーバー上に持つことができるのです。
 
-A Vite Module Runner allows running any code by processing it with Vite plugins first. It is different from `server.ssrLoadModule` because the runner implementation is decoupled from the server. This allows library and framework authors to implement their layer of communication between the Vite server and the runner. The browser communicates with its corresponding environment using the server Web Socket and through HTTP requests. The Node Module runner can directly do function calls to process modules as it is running in the same process. Other environments could run modules connecting to a JS runtime like workerd, or a Worker Thread as Vitest does.
+Vite モジュールランナーは、最初に Vite プラグインで処理することで任意のコードを実行できます。`server.ssrLoadModule` とは異なり、ランナーの実装はサーバーから切り離されています。これにより、ライブラリやフレームワークの作者は Vite サーバーとランナー間の通信レイヤーを実装できます。ブラウザーは、サーバーの Web ソケットや HTTP リクエストを使って対応する環境と通信します。Node モジュールランナーは、同じプロセスで実行されているため、モジュールを処理するための関数呼び出しを直接行うことができます。他の環境では、workerd のような JS ランタイムに接続するモジュールや Vitest のようにワーカースレッドに接続するモジュールを実行できます。
 
-All these environments share Vite's HTTP server, middlewares, and Web Socket. The resolved config and plugins pipeline are also shared, but plugins can use `apply` so its hooks are only called for certain environments. The environment can also be accessed inside hooks for fine-grained control.
+これらの環境はすべて Vite の HTTP サーバー、ミドルウェア、Web ソケットを共有しています。解決された設定とプラグインのパイプラインも共有されますが、プラグインは `apply` を使うことができるので、フックは特定の環境でのみ呼び出されます。環境はフック内部でアクセスすることもでき、きめ細かい制御が可能です。
 
 ![Vite Environments](../images/vite-environments.svg)
 
-A Vite dev server exposes two environments by default: a `client` environment and an `ssr` environment. The client environment is a browser environment by default, and the module runner is implemented by importing the virtual module `/@vite/client` to client apps. The SSR environment runs in the same Node runtime as the Vite server by default and allows application servers to be used to render requests during dev with full HMR support. We'll discuss later how frameworks and users can change the environment types for the default client and SSR environments, or register new environments (for example to have a separate module graph for [RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)).
+Vite 開発サーバーはデフォルトで `client` 環境と `ssr` 環境の 2 つの環境を公開します。クライアント環境はデフォルトではブラウザー環境であり、モジュールランナーは `/@vite/client` という仮想モジュールをクライアントアプリにインポートすることで実装されています。SSR 環境はデフォルトで Vite サーバーと同じ Node ランタイムで実行され、HMR を完全にサポートした開発中のリクエストのレンダリングにアプリケーションサーバーを使用できます。フレームワークやユーザーがデフォルトのクライアントと SSR 環境の環境タイプを変更したり、新しい環境を登録したりする方法については後で説明します（例えば [RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) 用の独立したモジュールグラフを持つなど）。
 
-The available environments can be accessed using `server.environments`:
+利用可能な環境は `server.environments` を使ってアクセスできます:
 
 ```js
 const environment = server.environments.client
@@ -39,63 +39,63 @@ environment.transformRequest(url)
 console.log(server.environments.ssr.moduleGraph)
 ```
 
-Most of the time, the current `environment` instance will be available as part of the context of the code being run so the need to access them through `server.environments` should be rare. For example, inside plugin hooks the environment is exposed as part of the `PluginContext`, so it can be accessed using `this.environment`.
+ほとんどの場合、現在の `environment` インスタンスは実行中のコードのコンテキストの一部として利用できるので、 `server.environments` を使ってアクセスする必要はほとんどないはずです。例えば、プラグインフックの内部では、環境は `PluginContext` の一部として公開されるので、`this.environment` を使ってアクセスできます。
 
-A dev environment is an instance of the `DevEnvironment` class:
+開発環境は `DevEnvironment` クラスのインスタンスです:
 
 ```ts
 class DevEnvironment {
   /**
-   * Unique identifier for the environment in a Vite server.
-   * By default Vite exposes 'client' and 'ssr' environments.
+   * Vite サーバー内の環境の一意な識別子。
+   * デフォルトでは、Vite は 'client' と 'ssr' 環境を公開します。
    */
   name: string
   /**
-   * Communication channel to send and receive messages from the
-   * associated module runner in the target runtime.
+   * ターゲットランタイム内の関連モジュールランナーから
+   * メッセージを送受信するための通信チャネル。
    */
   hot: HotChannel | null
   /**
-   * Graph of module nodes, with the imported relationship between
-   * processed modules and the cached result of the processed code.
+   * 処理されたモジュールと処理されたコードのキャッシュ結果との間の
+   * インポートされた関係を示すモジュールノードのグラフ。
    */
   moduleGraph: EnvironmentModuleGraph
   /**
-   * Resolved plugins for this environment, including the ones
-   * created using the per-environment `create` hook
+   * この環境の解決済みプラグイン。
+   * 環境ごとの `create` フックを使って作成されたものも含む。
    */
   plugins: Plugin[]
   /**
-   * Allows to resolve, load, and transform code through the
-   * environment plugins pipeline
+   * 環境プラグインパイプラインを通じて、
+   * コードの解決、ロード、変換を可能にする
    */
   pluginContainer: EnvironmentPluginContainer
   /**
-   * Resolved config options for this environment. Options at the server
-   * global scope are taken as defaults for all environments, and can
-   * be overridden (resolve conditions, external, optimizedDeps)
+   * この環境の解決された設定オプション。
+   * サーバーのグローバルスコープのオプションはすべての環境のデフォルトとして扱われ、
+   * オーバーライドすることができます (resolve conditions、external、optimizedDeps)。
    */
   config: ResolvedConfig & ResolvedDevEnvironmentOptions
 
   constructor(name, config, { hot, options }: DevEnvironmentSetup)
 
   /**
-   * Resolve the URL to an id, load it, and process the code using the
-   * plugins pipeline. The module graph is also updated.
+   * URL を id に解決してロードし、プラグインパイプラインを使ってコードを処理する。
+   * モジュールグラフも更新されます。
    */
   async transformRequest(url: string): TransformResult
 
   /**
-   * Register a request to be processed with low priority. This is useful
-   * to avoid waterfalls. The Vite server has information about the imported
-   * modules by other requests, so it can warmup the module graph so the
-   * modules are already processed when they are requested.
+   * 低い優先度で処理されるリクエストを登録します。ウォーターフォールを回避するのに
+   * 役立ちます。Vite サーバーは他のリクエストによってインポートされたモジュールに関する
+   * 情報を持っているため、モジュールがリクエストされたときにすでに処理されているよう、
+   * モジュールグラフをウォームアップできます。
    */
   async warmupRequest(url: string): void
 }
 ```
 
-With `TransformResult` being:
+`TransformResult` は次のようになります:
 
 ```ts
 interface TransformResult {
@@ -107,37 +107,37 @@ interface TransformResult {
 }
 ```
 
-An environment instance in the Vite server lets you process a URL using the `environment.transformRequest(url)` method. This function will use the plugin pipeline to resolve the `url` to a module `id`, load it (reading the file from the file system or through a plugin that implements a virtual module), and then transform the code. While transforming the module, imports and other metadata will be recorded in the environment module graph by creating or updating the corresponding module node. When processing is done, the transform result is also stored in the module.
+Vite サーバーの環境インスタンスでは、`environment.transformRequest(url)` メソッドを使用して URL を処理できます。この関数はプラグインパイプラインを使用して `url` をモジュール `id` に解決し、（ファイルシステムからファイルを読み込むか、仮想モジュールを実装するプラグインを介して）モジュールをロードし、コードを変換します。モジュールを変換している間、インポートやその他のメタデータは、対応するモジュールノードを作成または更新することで、環境モジュールグラフに記録されます。処理が完了すると、変換結果もモジュールに保存されます。
 
-But the environment instance can't execute the code itself, as the runtime where the module will be run could be different from the one the Vite server is running in. This is the case for the browser environment. When a html is loaded in the browser, its scripts are executed triggering the evaluation of the entire static module graph. Each imported URL generates a request to the Vite server to get the module code, which ends up handled by the Transform Middleware by calling `server.environments.client.transformRequest(url)`. The connection between the environment instance in the server and the module runner in the browser is carried out through HTTP in this case.
+しかし、モジュールが実行されるランタイムが Vite サーバーが実行されているランタイムと異なる可能性があるため、環境インスタンスはコード自体を実行することはできません。これはブラウザー環境の場合です。HTML がブラウザーに読み込まれると、そのスクリプトが実行され、静的モジュールグラフ全体の評価が開始されます。インポートされた各 URL は、モジュールコードを取得するために Vite サーバーへのリクエストを生成します。このリクエストは、`server.environment.client.transformRequest(url)` を呼び出すことによって、変換ミドルウェアによって処理されます。サーバーの環境インスタンスとブラウザーのモジュールランナー間の接続は、この場合 HTTP を通して行われます。
 
-:::info transformRequest naming
-We are using `transformRequest(url)` and `warmupRequest(url)` in the current version of this proposal so it is easier to discuss and understand for users used to Vite's current API. Before releasing, we can take the opportunity to review these names too. For example, it could be named `environment.processModule(url)` or `environment.loadModule(url)` taking a page from Rollup's `context.load(id)` in plugin hooks. For the moment, we think keeping the current names and delaying this discussion is better.
+
+:::info transformRequest の命名
+この提案の現在のバージョンでは `transformRequest(url)` と `warmupRequest(url)` を使っているので、Vite の現在の API に慣れているユーザーにとっては議論しやすく、理解しやすいと思います。リリースする前に、これらの名前を見直す機会を設ける可能性があります。例えば、プラグインフックで Rollup の `context.load(id)` からページを取得する `environment.processModule(url)` や `environment.loadModule(url)` という名前にすることもできます。今のところは現在の名前のままで、この議論を遅らせる方が良いと考えています。
+
+:::info モジュールの実行
+最初の提案では、コンシューマが `transport` オプションを使うことでランナー側でインポートを呼び出すことができる `run` メソッドがありました。テスト中に、この API を推奨するほど汎用的なものではないことがわかりました。私たちはフレームワークからのフィードバックに基づいて、リモート SSR 実装のための組み込みレイヤーを実装する予定です。それまでの間、Vite はランナー RPC の複雑さを隠すために [`RunnerTransport` API](#runnertransport) を公開しています。
 :::
 
-:::info Running a module
-The initial proposal had a `run` method that would allow consumers to invoke an import on the runner side by using the `transport` option. During our testing we found out that the API was not universal enough to start recommending it. We are open to implement a built-in layer for remote SSR implementation based on the frameworks feedback. In the meantime, Vite still exposes a [`RunnerTransport` API](#runnertransport) to hide the complexity of the runner RPC.
-:::
-
-For the `ssr` environment running in Node by default, Vite creates a module runner that implements evaluation using `new AsyncFunction` running in the same JS runtime as the dev server. This runner is an instance of `ModuleRunner` that exposes:
+デフォルトで Node で動作する `ssr` 環境では、Vite は開発サーバーと同じ JS ランタイムで動作される `new AsyncFunction` を使って評価を実装するモジュールランナーを作成します。このランナーは `ModuleRunner` のインスタンスで、次のように公開します:
 
 ```ts
 class ModuleRunner {
   /**
-   * URL to execute. Accepts file path, server path, or id relative to the root.
-   * Returns an instantiated module (same as in ssrLoadModule)
+   * 実行するURL。ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
+   * インスタンス化されたモジュールを返します (ssrLoadModule と同じ)
    */
   public async import(url: string): Promise<Record<string, any>>
   /**
-   * Other ModuleRunner methods...
+   * その他の ModuleRunner メソッド...
    */
 ```
 
 :::info
-In the v5.1 Runtime API, there were `executeUrl` and `executeEntryPoint` methods - they are now merged into a single `import` method. If you want to opt-out of the HMR support, create a runner with `hmr: false` flag.
+v5.1 のランタイム API では `executeUrl` メソッドと `executeEntryPoint` メソッドがありましたが、現在は単一の `import` メソッドに統合されています。HMR のサポートを停止したい場合は、`hmr: false` フラグを付けてランナーを作成します。
 :::
 
-The default SSR Node module runner is not exposed. You can use `createNodeEnvironment` API with `createServerModuleRunner` together to create a runner that runs code in the same thread, supports HMR and doesn't conflict with the SSR implementation (in case it's been overridden in the config). Given a Vite server configured in middleware mode as described by the [SSR setup guide](/guide/ssr#setting-up-the-dev-server), let's implement the SSR middleware using the environment API. Error handling is omitted.
+デフォルトの SSR Node モジュールランナーは公開されていません。`createNodeEnvironment` API と `createServerModuleRunner` を一緒に使うことで、同じスレッドでコードを実行し、HMR をサポートし、SSR の実装と衝突しないランナーを作成できます（設定でオーバーライドされている場合）。[SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、環境 API を使って SSR ミドルウェアを実装してみましょう。エラー処理は省略します。
 
 ```js
 import {
@@ -153,8 +153,8 @@ const server = await createServer({
   environments: {
     node: {
       dev: {
-        // Default Vite SSR environment can be overridden in the config, so
-        // make sure you have a Node environment before the request is received.
+        // デフォルトの Vite SSR 環境はコンフィグで上書きできるので、
+        // リクエストを受け取る前に Node 環境があることを確認してください。
         createEnvironment(name, config) {
           return createNodeDevEnvironment(name, config, {
             hot: createServerHotChannel(),
@@ -170,28 +170,28 @@ const runner = createServerModuleRunner(server.environments.node)
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
-  // 1. Read index.html
+  // 1. index.html を読み込む
   let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
 
-  // 2. Apply Vite HTML transforms. This injects the Vite HMR client,
-  //    and also applies HTML transforms from Vite plugins, e.g. global
-  //    preambles from @vitejs/plugin-react
+  // 2. Vite HTML 変換を適用します。これにより、Vite HMR クライアントが挿入され、
+  //    Vite プラグインからの HTML 変換も適用されます。
+  //    例: global preambles from @vitejs/plugin-react
   template = await server.transformIndexHtml(url, template)
 
-  // 3. Load the server entry. import(url) automatically transforms
-  //    ESM source code to be usable in Node.js! There is no bundling
-  //    required, and provides full HMR support.
+  // 3. サーバーエントリをロードします。import(url) は、
+  //    ESM ソースコードを Node.js で使用できるように自動的に変換します。
+  //    バンドルは不要で、完全な HMR サポートを提供します。
   const { render } = await runner.import('/src/entry-server.js')
 
-  // 4. render the app HTML. This assumes entry-server.js's exported
-  //     `render` function calls appropriate framework SSR APIs,
-  //    e.g. ReactDOMServer.renderToString()
+  // 4. アプリの HTML をレンダリングします。これは、entry-server.js のエクスポートされた
+  //    `render` 関数が適切なフレームワーク SSR API を呼び出すことを前提としています。
+  //    例: ReactDOMServer.renderToString()
   const appHtml = await render(url)
 
-  // 5. Inject the app-rendered HTML into the template.
+  // 5. アプリでレンダリングされた HTML をテンプレートに挿入します。
   const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
-  // 6. Send the rendered HTML back.
+  // 6. レンダリングされた HTML を送信します。
   res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
 })
 ```
