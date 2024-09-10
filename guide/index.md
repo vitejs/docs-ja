@@ -142,11 +142,27 @@ $ bun add -D vite
 <p>Hello Vite!</p>
 ```
 
-次に、`vite` CLI をターミナルで実行します:
+次に、適切な CLI コマンドをターミナルで実行します:
 
-```bash
-vite
+::: code-group
+
+```bash [NPM]
+$ npx vite
 ```
+
+```bash [Yarn]
+$ yarn vite
+```
+
+```bash [PNPM]
+$ pnpm vite
+```
+
+```bash [Bun]
+$ bunx vite
+```
+
+:::
 
 `index.html` は `http://localhost:5173` で配信されます。
 
