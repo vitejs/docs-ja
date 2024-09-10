@@ -196,21 +196,21 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## Environment agnostic SSR
+## 環境に依存しない SSR
 
 ::: info
-It isn't clear yet what APIs Vite should provide to cover the most common SSR use cases. We are thinking on releasing the Environment API without an official way to do environment agnostic SSR to let the ecosystem explore common patterns first.
+最も一般的な SSR のユースケースをカバーするために Vite がどのような API を提供すべきかはまだ明確ではありません。私たちはエコシステムがまず共通のパターンを探索できるように、環境に依存しない SSR を行うための公式な方法なしに環境 API をリリースすることを考えています。
 :::
 
-## Separate module graphs
+## 独立したモジュールグラフ
 
-Each environment has an isolated module graph. All module graphs have the same signature, so generic algorithms can be implemented to crawl or query the graph without depending on the environment. `hotUpdate` is a good example. When a file is modified, the module graph of each environment will be used to discover the affected modules and perform HMR for each environment independently.
+各環境は独立したモジュールグラフを持ちます。すべてのモジュールグラフは同じシグネチャーを持つので、環境に依存せずにグラフをクロールしたりクエリしたりする汎用的なアルゴリズムを実装できます。`hotUpdate` が良い例です。ファイルが変更されると、各環境のモジュールグラフを使用して、影響を受けるモジュールを検出し、各環境に対して個別に HMR を実行します。
 
 ::: info
-Vite v5 had a mixed Client and SSR module graph. Given an unprocessed or invalidated node, it isn't possible to know if it corresponds to the Client, SSR, or both environments. Module nodes have some properties prefixed, like `clientImportedModules` and `ssrImportedModules` (and `importedModules` that returns the union of both). `importers` contains all importers from both the Client and SSR environment for each module node. A module node also has `transformResult` and `ssrTransformResult`. A backward compatibility layer allows the ecosystem to migrate from the deprecated `server.moduleGraph`.
+Vite v5 ではクライアントと SSR のモジュールグラフが混在していました。未処理のノードや無効化されたノードがあった場合、それがクライアントに対応するのか、SSR に対応するのか、あるいは両方の環境に対応するのかを知ることはできません。モジュールノードには、`clientImportedModules` や `ssrImportedModules` (および両者の和を返す `importedModules`) のようなプレフィックス付きのプロパティがあります。`importers` には、各モジュールノードのクライアントと SSR 環境のすべてのインポーターが含まれます。モジュールノードには `transformResult` と `ssrTransformResult` もあります。後方互換性レイヤーはエコシステムが非推奨の `server.moduleGraph` から移行できます。
 :::
 
-Each module is represented by a `EnvironmentModuleNode` instance. Modules may be registered in the graph without yet being processed (`transformResult` would be `null` in that case). `importers` and `importedModules` are also updated after the module is processed.
+各モジュールは `EnvironmentModuleNode` インスタンスで表現されます。モジュールはまだ処理されていなくてもグラフに登録できます（その場合 `transformResult` は `null` となります）。モジュールが処理されると `importers` と `importedModules` も更新されます。
 
 ```ts
 class EnvironmentModuleNode {
@@ -238,7 +238,7 @@ class EnvironmentModuleNode {
 }
 ```
 
-`environment.moduleGraph` is an instance of `EnvironmentModuleGraph`:
+`environment.moduleGraph` は `EnvironmentModuleGraph` のインスタンスです:
 
 ```ts
 export class EnvironmentModuleGraph {
@@ -289,9 +289,9 @@ export class EnvironmentModuleGraph {
 }
 ```
 
-## Creating new environments
+## 新しい環境の作成
 
-One of the goals of this feature is to provide a customizable API to process and run code. Users can create new environment types using the exposed primitives.
+この機能の目的のひとつは、コードを処理し実行するためのカスタマイズ可能な API を提供することです。ユーザーは、公開されているプリミティブを使って新しい環境タイプを作成できます。
 
 ```ts
 import { DevEnvironment, RemoteEnvironmentTransport } from 'vite'
@@ -318,49 +318,49 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
 }
 ```
 
-Then users can create a workerd environment to do SSR using:
+そして、ユーザーは以下を使用して SSR を実行するための workerd 環境を作成できます:
 
 ```js
 const ssrEnvironment = createWorkerdEnvironment('ssr', config)
 ```
 
-## Environment Configuration
+## 環境設定
 
-Environments are explicitly configured with the `environments` config option.
+環境は `environments` 設定オプションで明示的に設定します。
 
 ```js
 export default {
   environments: {
     client: {
       resolve: {
-        conditions: [], // configure the Client environment
+        conditions: [], // クライアント環境を設定する
       },
     },
     ssr: {
       dev: {
-        optimizeDeps: {}, // configure the SSR environment
+        optimizeDeps: {}, // SSR 環境を設定する
       },
     },
     rsc: {
       resolve: {
-        noExternal: true, // configure a custom environment
+        noExternal: true, // カスタム環境を設定する
       },
     },
   },
 }
 ```
 
-All environment configs extend from user's root config, allowing users add defaults for all environments at the root level. This is quite useful for the common use case of configuring a Vite client only app, that can be done without going through `environments.client`.
+すべての環境設定はユーザーのルート設定から拡張され、ユーザーはルートレベルですべての環境のデフォルトを追加できます。これは、Vite クライアントのみのアプリを設定するような一般的なユースケースで、`environments.client` を経由せずに設定できるため、非常に便利です。
 
 ```js
 export default {
   resolve: {
-    conditions: [], // configure a default for all environments
+    conditions: [], // すべての環境のデフォルトを設定する
   },
 }
 ```
 
-The `EnvironmentOptions` interface exposes all the per-environment options. There are `SharedEnvironmentOptions` that apply to both `build` and `dev`, like `resolve`. And there are `DevEnvironmentOptions` and `BuildEnvironmentOptions` for dev and build specific options (like `dev.optimizeDeps` or `build.outDir`).
+`EnvironmentOptions` インターフェースは環境ごとのオプションをすべて公開します。`resolve` のように、`build` と `dev` の両方に適用される `SharedEnvironmentOptions` があります。また、開発環境やビルド環境固有のオプション（`dev.optimizeDeps` や `build.outDir` など）については、`DevEnvironmentOptions` と `BuildEnvironmentOptions` があります。
 
 ```ts
 interface EnvironmentOptions extends SharedEnvironmentOptions {
@@ -369,18 +369,18 @@ interface EnvironmentOptions extends SharedEnvironmentOptions {
 }
 ```
 
-As we explained, Environment specific options defined at the root level of user config are used for the default client environment (the `UserConfig` interface extends from the `EnvironmentOptions` interface). And environments can be configured explicitly using the `environments` record. The `client` and `ssr` environments are always present during dev, even if an empty object is set to `environments`. This allows backward compatibility with `server.ssrLoadModule(url)` and `server.moduleGraph`. During build, the `client` environment is always present, and the `ssr` environment is only present if it is explicitly configured (using `environments.ssr` or for backward compatibility `build.ssr`).
+説明したように、ユーザー設定のルートレベルで定義された環境固有のオプションは、デフォルトのクライアント環境に使用されます（`UserConfig` インターフェースは `EnvironmentOptions` インターフェースを継承しています）。また、環境は `environments` レコードを使用して明示的に設定できます。たとえ `environments` に空のオブジェクトが設定されていたとしても、開発中は `client` と `ssr` の環境は常に存在します。これは `server.ssrLoadModule(url)` と `server.moduleGraph` との後方互換性を保つためです。ビルド時には `client` 環境が常に存在し、`ssr` 環境は明示的に設定された場合（`environments.ssr` または後方互換性のために `build.ssr` を使用します）のみ存在します。
 
 ```ts
 interface UserConfig extends EnvironmentOptions {
   environments: Record<string, EnvironmentOptions>
-  // other options
+  // その他のオプション
 }
 ```
 
 ::: info
 
-The `ssr` top level property has many options in common with `EnvironmentOptions`. This option was created for the same use case as `environments` but only allowed configuration of a small number of options. We're going to deprecate it in favour of a unified way to define environment configuration.
+トップレベルプロパティの `ssr` には `EnvironmentOptions` と共通する多くのオプションがあります。このオプションは `environments` と同じユースケースのために作成されましたが、設定できるオプションは限られていました。環境設定を統一的に定義するために、このオプションは非推奨とします。
 
 :::
 
