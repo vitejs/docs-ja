@@ -384,9 +384,9 @@ interface UserConfig extends EnvironmentOptions {
 
 :::
 
-## Custom environment instances
+## カスタム環境インスタンス
 
-To create custom dev or build environment instances, you can use the `dev.createEnvironment` or `build.createEnvironment` functions.
+カスタムの開発環境やビルド環境のインスタンスを作成するには、`dev.createEnvironment` または `build.createEnvironment` 関数を使用します。
 
 ```js
 export default {
@@ -394,7 +394,7 @@ export default {
     rsc: {
       dev: {
         createEnvironment(name, config, { watcher }) {
-          // Called with 'rsc' and the resolved config during dev
+          // 開発中に 'rsc' と解決されたコンフィグで呼び出される
           return createNodeDevEnvironment(name, config, {
             hot: customHotChannel(),
             watcher
@@ -403,7 +403,7 @@ export default {
       },
       build: {
         createEnvironment(name, config) {
-          // Called with 'rsc' and the resolved config during build
+          // ビルド中に 'rsc' と解決されたコンフィグで呼び出される
           return createNodeBuildEnvironment(name, config)
         }
         outDir: '/dist/rsc',
@@ -413,9 +413,9 @@ export default {
 }
 ```
 
-The environment will be accessible in middlewares or plugin hooks through `server.environments`. In plugin hooks, the environment instance is passed in the options so they can do conditions depending on the way they are configured.
+この環境は `server.environments` を通してミドルウェアやプラグインフックでアクセスできます。プラグインフックでは、環境インスタンスがオプションで渡されるので、設定方法に応じて条件を実行できます。
 
-Environment providers like Workerd, can expose an environment provider for the most common case of using the same runtime for both dev and build environments. The default environment options can also be set so the user doesn't need to do it.
+Workerd のような環境プロバイダーは、開発環境とビルド環境の両方に同じランタイムを使うという最も一般的なケースのために、環境プロバイダーを公開できます。デフォルトの環境オプションも設定できるので、ユーザーは設定する必要がありません。
 
 ```js
 function createWorkedEnvironment(userConfig) {
@@ -445,7 +445,7 @@ function createWorkedEnvironment(userConfig) {
 }
 ```
 
-Then the config file can be written as
+設定ファイルは次のように記述できます
 
 ```js
 import { createWorkerdEnvironment } from 'vite-environment-workerd'
@@ -466,18 +466,18 @@ export default {
 }
 ```
 
-In this case we see how the `ssr` environment can be configured to use workerd as it's runtime. Additionally a new custom RSC environment is also defined, backed by a separate instance of the workerd runtime.
+この例では、`ssr` 環境がランタイムとして workerd を使用するようにどのように設定できるかが分かります。さらに、workerd ランタイムの別のインスタンスによってサポートされる新しいカスタム RSC 環境も定義されます。
 
-## Plugins and environments
+## プラグインと環境
 
-### Accessing the current environment in hooks
+### フックで現在の環境にアクセスする
 
-The Vite server has a shared plugin pipeline, but when a module is processed it is always done in the context of a given environment. The `environment` instance is available in the plugin context of `resolveId`, `load`, and `transform`.
+Vite サーバーには共有プラグインパイプラインがありますが、モジュールが処理されるときは常に指定された環境のコンテキストで行われます。`environment` インスタンスは `resolveId`、`load`、`transform` のプラグインコンテキストで利用できます。
 
-A plugin could use the `environment` instance to:
+プラグインは `environment` インスタンスを次のように使用できます:
 
-- Only apply logic for certain environments.
-- Change the way they work depending on the configuration for the environment, which can be accessed using `environment.config`. The vite core resolve plugin modifies the way it resolves ids based on `environment.config.resolve.conditions` for example.
+- 特定の環境に対してのみロジックを適用する。
+- `environment.config` を使用してアクセスできる環境の設定に応じて、動作方法を変更する。例えば vite core resolve プラグインは、`environment.config.resolve.conditions` に基づいて id を解決する方法を変更します。
 
 ```ts
   transform(code, id) {
@@ -485,9 +485,9 @@ A plugin could use the `environment` instance to:
   }
 ```
 
-### Registering new environments using hooks
+### フックを使用して新しい環境を登録する
 
-Plugins can add new environments in the `config` hook:
+プラグインは `config` フックで新しい環境を追加できます:
 
 ```ts
   config(config: UserConfig) {
@@ -495,12 +495,12 @@ Plugins can add new environments in the `config` hook:
   }
 ```
 
-An empty object is enough to register the environment, default values from the root level environment config.
+環境を登録するには空のオブジェクトで十分で、デフォルト値はルートレベルの環境設定から取得されます。
 
-### Configuring environment using hooks
+### フックを使用した環境の設定
 
-While the `config` hook is running, the complete list of environments isn't yet known and the environments can be affected by both the default values from the root level environment config or explicitly through the `config.environments` record.
-Plugins should set default values using the `config` hook. To configure each environment, they can use the new `configEnvironment` hook. This hook is called for each environment with its partially resolved config including resolution of final defaults.
+`config` フックが実行されている間、環境の完全なリストはまだ分かっておらず、環境はルートレベルの環境設定からのデフォルト値、または `config.environments` レコードを通して明示的に影響を受ける可能性があります。
+プラグインは `config` フックを使ってデフォルト値を設定してください。各環境を設定するには、新しい `configEnvironment` フックを使用します。このフックは、最終的なデフォルト値の解決を含む、部分的に解決された設定を持つ各環境に対して呼び出されます。
 
 ```ts
   configEnvironment(name: string, options: EnvironmentOptions) {
@@ -508,12 +508,12 @@ Plugins should set default values using the `config` hook. To configure each env
       options.resolve.conditions = // ...
 ```
 
-### The `hotUpdate` hook
+### `hotUpdate` フック
 
-- **Type:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
-- **See also:** [HMR API](./api-hmr)
+- **型:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
+- **参照:** [HMR API](./api-hmr)
 
-The `hotUpdate` hook allows plugins to perform custom HMR update handling for a given environment. When a file changes, the HMR algorithm is run for each environment in series according to the order in `server.environments`, so the `hotUpdate` hook will be called multiple times. The hook receives a context object with the following signature:
+`hotUpdate` フックを使用すると、プラグインが指定された環境に対してカスタム HMR 更新処理を実行できるようになります。ファイルが変更されると、HMR アルゴリズムは `server.environments` の順番に従って各環境で順に実行されるので、`hotUpdate` フックは複数回呼び出されることになります。このフックは以下のシグネチャを持つコンテキストオブジェクトを受け取ります:
 
 ```ts
 interface HotUpdateContext {
@@ -526,24 +526,24 @@ interface HotUpdateContext {
 }
 ```
 
-- `this.environment` is the module execution environment where a file update is currently being processed.
+- `this.environment` は現在ファイルの更新が処理されているモジュール実行環境です。
 
-- `modules` is an array of modules in this environment that are affected by the changed file. It's an array because a single file may map to multiple served modules (e.g. Vue SFCs).
+- `modules` は、変更されたファイルの影響を受ける、この環境のモジュールの配列です。1 つのファイルが複数のモジュール（Vue SFC など）にマッピングされる可能性があるため、配列になっています。
 
-- `read` is an async read function that returns the content of the file. This is provided because, on some systems, the file change callback may fire too fast before the editor finishes updating the file, and direct `fs.readFile` will return empty content. The read function passed in normalizes this behavior.
+- `read` はファイルの内容を返す非同期の読み込み関数です。システムによっては、エディターがファイルの更新を終了する前にファイル変更コールバックが高速に実行され、`fs.readFile` が空の内容を返すことがあるためです。渡された読み込み関数はこの動作を正常化します。
 
-The hook can choose to:
+フックは以下を選択できます:
 
-- Filter and narrow down the affected module list so that the HMR is more accurate.
+- HMR がより正確になるように、影響を受けるモジュールリストをフィルタリングして絞り込む。
 
-- Return an empty array and perform a full reload:
+- 空の配列を返し、フルリロードを実行する:
 
   ```js
   hotUpdate({ modules, timestamp }) {
     if (this.environment.name !== 'client')
       return
 
-    // Invalidate modules manually
+    // モジュールを手動で無効化
     const invalidatedModules = new Set()
     for (const mod of modules) {
       this.environment.moduleGraph.invalidateModule(
@@ -558,7 +558,7 @@ The hook can choose to:
   }
   ```
 
-- Return an empty array and perform complete custom HMR handling by sending custom events to the client:
+- 空の配列を返し、カスタムイベントをクライアントに送信することで、完全なカスタム HMR 処理を行う：
 
   ```js
   hotUpdate() {
@@ -574,36 +574,36 @@ The hook can choose to:
   }
   ```
 
-  Client code should register the corresponding handler using the [HMR API](./api-hmr) (this could be injected by the same plugin's `transform` hook):
+  クライアントコードは [HMR API](./api-hmr) を使って対応するハンドラーを登録する必要があります（これは同じプラグインの `transform` フックによって注入できます）：
 
   ```js
   if (import.meta.hot) {
     import.meta.hot.on('special-update', (data) => {
-      // perform custom update
+      // カスタム更新を実行する
     })
   }
   ```
 
-### Per-environment Plugins
+### 環境ごとのプラグイン
 
-A plugin can define what are the environments it should apply to with the `applyToEnvironment` function.
+プラグインは `applyToEnvironment` 関数で、適用する環境を定義できます。
 
 ```js
 const UnoCssPlugin = () => {
-  // shared global state
+  // 共有グローバル状態
   return {
     buildStart() {
-      // init per environment state with WeakMap<Environment,Data>, this.environment
+      // WeakMap<Environment,Data>, this.environment を使って環境ごとの状態を初期化
     },
     configureServer() {
-      // use global hooks normally
+      // グローバルフックを通常どおり使用
     },
     applyToEnvironment(environment) {
-      // return true if this plugin should be active in this environment
-      // if the function isn't provided, the plugin is active in all environments
+      // このプラグインがこの環境でアクティブになる必要がある場合は true を返します
+      // この関数が提供されていない場合、プラグインはすべての環境でアクティブになります
     },
     resolveId(id, importer) {
-      // only called for environments this plugin apply to
+      // このプラグインが適用される環境に対してのみ呼び出されます
     },
   }
 }
@@ -611,9 +611,9 @@ const UnoCssPlugin = () => {
 
 ## `ModuleRunner`
 
-A module runner is instantiated in the target runtime. All APIs in the next section are imported from `vite/module-runner` unless stated otherwise. This export entry point is kept as lightweight as possible, only exporting the minimal needed to create module runners.
+モジュールランナーはターゲットランタイムでインスタンス化されます。次のセクションの全ての API は、特に断りのない限り `vite/module-runner` からインポートされます。このエクスポート・エントリーポイントは可能な限り軽量に保たれており、モジュールランナーを作成するために必要な最小限のものだけがエクスポートされます。
 
-**Type Signature:**
+**型シグネチャー:**
 
 ```ts
 export class ModuleRunner {
@@ -623,30 +623,30 @@ export class ModuleRunner {
     private debug?: ModuleRunnerDebugger,
   ) {}
   /**
-   * URL to execute. Accepts file path, server path, or id relative to the root.
+   * 実行するURL。ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
    */
   public async import<T = any>(url: string): Promise<T>
   /**
-   * Clear all caches including HMR listeners.
+   * HMR リスナーを含むすべてのキャッシュをクリアします。
    */
   public clearCache(): void
   /**
-   * Clears all caches, removes all HMR listeners, and resets source map support.
-   * This method doesn't stop the HMR connection.
+   * すべてのキャッシュをクリアし、すべての HMR リスナーを削除し、ソースマップのサポートをリセットします。
+   * このメソッドは HMR 接続を停止しません。
    */
   public async destroy(): Promise<void>
   /**
-   * Returns `true` if the runner has been destroyed by calling `destroy()` method.
+   * ランナーが `destroy()` メソッドを呼び出して破棄された場合は `true` を返します。
    */
   public isDestroyed(): boolean
 }
 ```
 
-The module evaluator in `ModuleRunner` is responsible for executing the code. Vite exports `ESModulesEvaluator` out of the box, it uses `new AsyncFunction` to evaluate the code. You can provide your own implementation if your JavaScript runtime doesn't support unsafe evaluation.
+`ModuleRunner` のモジュール評価機能はコードの実行を担当します。Vite は `ESModulesEvaluator` をエクスポートしており、`new AsyncFunction` を使用してコードを評価します。JavaScript ランタイムが安全でない評価をサポートしていない場合は、独自の実装を提供できます。
 
-Module runner exposes `import` method. When Vite server triggers `full-reload` HMR event, all affected modules will be re-executed. Be aware that Module Runner doesn't update `exports` object when this happens (it overrides it), you would need to run `import` or get the module from `moduleCache` again if you rely on having the latest `exports` object.
+モジュールランナーは `import` メソッドを公開します。Vite サーバーが `full-reload` HMR イベントをトリガーすると、影響を受けるすべてのモジュールが再実行されます。このとき、モジュールランナーは `exports` オブジェクトを更新しないことに注意してください（上書きされます）。最新の `exports` オブジェクトが必要であれば、 `import` を実行するか、もう一度 `moduleCache` からモジュールを取得する必要があります。
 
-**Example Usage:**
+**使用例:**
 
 ```js
 import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
@@ -656,7 +656,7 @@ const moduleRunner = new ModuleRunner(
   {
     root,
     fetchModule,
-    // you can also provide hmr.connection to support HMR
+    // HMR をサポートするために hmr.connection を提供することもできます
   },
   new ESModulesEvaluator(),
 )
@@ -669,17 +669,17 @@ await moduleRunner.import('/src/entry-point.js')
 ```ts
 export interface ModuleRunnerOptions {
   /**
-   * Root of the project
+   * プロジェクトのルート
    */
   root: string
   /**
-   * A set of methods to communicate with the server.
+   * サーバーと通信するための一連のメソッド。
    */
   transport: RunnerTransport
   /**
-   * Configure how source maps are resolved. Prefers `node` if `process.setSourceMapsEnabled` is available.
-   * Otherwise it will use `prepareStackTrace` by default which overrides `Error.prepareStackTrace` method.
-   * You can provide an object to configure how file contents and source maps are resolved for files that were not processed by Vite.
+   * ソースマップの解決方法を設定します。`process.setSourceMapsEnabled` が使用可能な場合は `node` を優先します。
+   * それ以外の場合は、デフォルトで `prepareStackTrace` を使用し、`Error.prepareStackTrace` メソッドをオーバーライドします。
+   * Vite によって処理されなかったファイルのファイル内容とソースマップの解決方法を設定するオブジェクトを提供できます。
    */
   sourcemapInterceptor?:
     | false
@@ -687,22 +687,22 @@ export interface ModuleRunnerOptions {
     | 'prepareStackTrace'
     | InterceptorOptions
   /**
-   * Disable HMR or configure HMR options.
+   * HMR を無効にするか、HMR オプションを設定します。
    */
   hmr?:
     | false
     | {
         /**
-         * Configure how HMR communicates between the client and the server.
+         * HMR がクライアントとサーバー間で通信する方法を設定します。
          */
         connection: ModuleRunnerHMRConnection
         /**
-         * Configure HMR logger.
+         * HMR ロガーを設定します。
          */
         logger?: false | HMRLogger
       }
   /**
-   * Custom module cache. If not provided, it creates a separate module cache for each module runner instance.
+   * カスタムモジュールキャッシュ。指定されていない場合は、モジュールランナーインスタンスごとに個別のモジュールキャッシュが作成されます。
    */
   moduleCache?: ModuleCacheMap
 }
@@ -710,15 +710,15 @@ export interface ModuleRunnerOptions {
 
 ## `ModuleEvaluator`
 
-**Type Signature:**
+**型シグネチャー:**
 
 ```ts
 export interface ModuleEvaluator {
   /**
-   * Evaluate code that was transformed by Vite.
-   * @param context Function context
-   * @param code Transformed code
-   * @param id ID that was used to fetch the module
+   * Vite によって変換されたコードを評価します。
+   * @param context 関数コンテキスト
+   * @param code 変換されたコード
+   * @param id モジュールを取得するために使用された ID 
    */
   runInlinedModule(
     context: ModuleRunnerContext,
@@ -726,14 +726,14 @@ export interface ModuleEvaluator {
     id: string,
   ): Promise<any>
   /**
-   * evaluate externalized module.
-   * @param file File URL to the external module
+   * 外部化されたモジュールを評価します。
+   * @param file 外部モジュールへのファイル URL 
    */
   runExternalModule(file: string): Promise<any>
 }
 ```
 
-Vite exports `ESModulesEvaluator` that implements this interface by default. It uses `new AsyncFunction` to evaluate code, so if the code has inlined source map it should contain an [offset of 2 lines](https://tc39.es/ecma262/#sec-createdynamicfunction) to accommodate for new lines added. This is done automatically in the server node environment. If your runner implementation doesn't have this constraint, you should use `fetchModule` (exported from `vite`) directly.
+Vite はデフォルトでこのインターフェイスを実装した `ESModulesEvaluator` をエクスポートします。コードの評価には `new AsyncFunction` を使用するので、インライン化されたソースマップがある場合は、新しい行が追加されたことを考慮して [2 行分のオフセット](https://tc39.es/ecma262/#sec-createdynamicfunction)を追加する必要があります。これはサーバーノード環境で自動的に行われます。ランナーの実装にこの制約がない場合は、（`vite` からエクスポートされている）`fetchModule` を直接使用する必要があります。
 
 ## RunnerTransport
 
