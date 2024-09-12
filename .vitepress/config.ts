@@ -272,6 +272,10 @@ export default defineConfig({
               text: 'v4 からの移行',
               link: '/guide/migration',
             },
+            {
+              text: '破壊的変更',
+              link: '/changes/',
+            },
           ],
         },
         {
@@ -337,6 +341,45 @@ export default defineConfig({
               link: '/config/worker-options',
             },
           ],
+        },
+      ],
+      '/changes/': [
+        {
+          text: '破壊的変更',
+          link: '/changes/',
+        },
+        {
+          text: '現在',
+          items: [],
+        },
+        {
+          text: '将来',
+          items: [
+            {
+              text: 'フック内の this.environment',
+              link: '/changes/this-environment-in-hooks',
+            },
+            {
+              text: 'HMR hotUpdate プラグインフック',
+              link: '/changes/hotupdate-hook',
+            },
+            {
+              text: '環境ごとの API への移行',
+              link: '/changes/per-environment-apis',
+            },
+            {
+              text: 'ModuleRunner API を使った SSR',
+              link: '/changes/ssr-using-modulerunner',
+            },
+            {
+              text: 'ビルド時の共有プラグイン',
+              link: '/changes/shared-plugins-during-build',
+            },
+          ],
+        },
+        {
+          text: '過去',
+          items: [],
         },
       ],
     },

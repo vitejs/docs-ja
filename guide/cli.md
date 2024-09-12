@@ -69,6 +69,7 @@ vite build [root]
 | `-f, --filter <filter>`        | デバッグログをフィルタリングする（`string`）                                                                                       |
 | `-m, --mode <mode>`            | env モードを設定する（`string`）                                                                                            |
 | `-h, --help`                   | 利用可能な CLI オプションを表示する                                                                                       |
+| `--app`                        | すべての環境をビルドする。`builder.entireApp` と同じ。（`boolean`、実験的機能）                                       |
 
 ## その他
 
