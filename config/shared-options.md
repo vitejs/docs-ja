@@ -490,3 +490,12 @@ define: {
 - `'custom'`: HTML ミドルウェアを含めない
 
 詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。関連: [`server.middlewareMode`](./server-options#server-middlewaremode)。
+
+## future
+
+- **型:** `Record<string, 'warn' | undefined>`
+- **関連:** [破壊的変更](/changes/)
+
+Vite の次期メジャーバージョンへのスムーズな移行に備え、将来的な破壊的変更を可能にします。このリストは、新機能の開発に伴い、いつでも更新、追加、削除される可能性があります。
+
+設定可能なオプションの詳細については、[破壊的変更](/changes/) ページを参照してください。
