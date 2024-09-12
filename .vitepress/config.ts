@@ -290,7 +290,7 @@ export default defineConfig({
               link: '/guide/api-javascript',
             },
             {
-              text: '環境 API',
+              text: 'Environment API',
               link: '/guide/api-environment',
             },
             {
