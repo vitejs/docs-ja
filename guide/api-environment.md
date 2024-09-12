@@ -1,14 +1,14 @@
 # Environment API
 
 :::warning 低レベル API
-この API の初期研究は、Vite 5.1 で「Vite ランタイム API」という名前で導入されました。このガイドでは、Environment API と改名された改訂版 API について説明します。この API は Vite 6 でリリースされる予定です。すでに最新の `vite@6.0.0-alpha.x` バージョンでテストできます。
+この API の初期研究は、Vite 5.1 で「Vite ランタイム API」という名前で導入されました。このガイドでは、Environment API と改名された改訂版 API について説明します。この API は Vite 6 で実験的機能としてリリースされる予定です。すでに最新の `vite@6.0.0-beta.x` バージョンでテストできます。
 
 リソース:
 
-- 新しい API が実装され、レビューされる [Environment API PR](https://github.com/vitejs/vite/pull/16471)
 - 新しい API に関するフィードバックを収集する [Feedback discussion](https://github.com/vitejs/vite/discussions/16358)
+- 新しい API が実装され、レビューされる [Environment API PR](https://github.com/vitejs/vite/pull/16471)
 
-問題を発見したら、お気軽に `v6/environment-api` ブランチに PR を送ってください。提案をテストしてからフィードバックを共有してください。
+この提案をテストする際には、ぜひフィードバックをお寄せください。
 :::
 
 Vite 6 は環境の概念が形式化され、環境を作成・設定するための新しい API を導入するとともに、一貫した API でオプションやコンテキストユーティリティにアクセスできるようになりました。Vite 2 以降、2 つの暗黙的な環境（`client` と `ssr`）が存在していました。プラグインフックは、最後のオプションパラメーターで `ssr` という真偽値を受け取り、処理される各モジュールのターゲット環境を識別しました。いくつかの API はモジュールを正しい環境に適切に関連付けるために、オプションの最後の `ssr` パラメーターを受け付けていました（例えば `server.moduleGraph.getModuleByUrl(url, { ssr })`）。`ssr` 環境は、クライアント環境に存在するオプションの一部が設定された `config.ssr` を使って設定されました。開発時には、`client` 環境と `ssr` 環境の両方が単一の共有プラグインパイプラインで同時に実行されていました。ビルド時には、各ビルドは新しいプラグインのセットを含む新しい解決済みの設定インスタンスを取得していました。
