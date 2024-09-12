@@ -394,7 +394,7 @@ export default {
     rsc: {
       dev: {
         createEnvironment(name, config, { watcher }) {
-          // 開発中に 'rsc' と解決されたコンフィグで呼び出される
+          // 開発時に 'rsc' と解決されたコンフィグで呼び出される
           return createNodeDevEnvironment(name, config, {
             hot: customHotChannel(),
             watcher
@@ -403,7 +403,7 @@ export default {
       },
       build: {
         createEnvironment(name, config) {
-          // ビルド中に 'rsc' と解決されたコンフィグで呼び出される
+          // ビルド時に 'rsc' と解決されたコンフィグで呼び出される
           return createNodeBuildEnvironment(name, config)
         }
         outDir: '/dist/rsc',
@@ -737,18 +737,18 @@ Vite はデフォルトでこのインターフェイスを実装した `ESModul
 
 ## RunnerTransport
 
-**Type Signature:**
+**型シグネチャー:**
 
 ```ts
 interface RunnerTransport {
   /**
-   * A method to get the information about the module.
+   * モジュールに関する情報を取得するメソッド。
    */
   fetchModule: FetchFunction
 }
 ```
 
-Transport object that communicates with the environment via an RPC or by directly calling the function. By default, you need to pass an object with `fetchModule` method - it can use any type of RPC inside of it, but Vite also exposes bidirectional transport interface via a `RemoteRunnerTransport` class to make the configuration easier. You need to couple it with the `RemoteEnvironmentTransport` instance on the server like in this example where module runner is created in the worker thread:
+RPC 経由または関数を直接呼び出して環境と通信するトランスポートオブジェクト。デフォルトでは、`fetchModule` メソッドでオブジェクトを渡す必要があります。このメソッド内ではどのようなタイプの RPC も使用できますが、Vite では設定を簡単にするために `RemoteRunnerTransport` クラスを使用して双方向のトランスポートインターフェースを公開しています。モジュールランナーがワーカースレッドで作成される次の例のように、サーバー上の `RemoteEnvironmentTransport` インスタンスと合わせる必要があります:
 
 ::: code-group
 
@@ -804,7 +804,7 @@ await createServer({
 
 :::
 
-`RemoteRunnerTransport` and `RemoteEnvironmentTransport` are meant to be used together, but you don't have to use them at all. You can define your own function to communicate between the runner and the server. For example, if you connect to the environment via an HTTP request, you can call `fetch().json()` in `fetchModule` function:
+`RemoteRunnerTransport` と `RemoteEnvironmentTransport` は一緒に使うことを想定していますが、必ずしも使う必要はありません。独自の関数を定義して、ランナーとサーバー間の通信を行えます。例えば、HTTP リクエストで環境に接続する場合、`fetchModule` 関数で `fetch().json()` を呼び出せます:
 
 ```ts
 import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
@@ -827,8 +827,8 @@ export const runner = new ModuleRunner(
 await runner.import('/entry.js')
 ```
 
-::: warning Acessing Module on the Server
-We do not want to encourage communication between the server and the runner. One of the problems that was exposed with `vite.ssrLoadModule` is over-reliance on the server state inside the processed modules. This makes it harder to implement runtime-agnostic SSR since user environment might have no access to server APIs. For example, this code assumes that Vite server and user code can run in the same context:
+::: warning サーバー上のモジュールへのアクセス
+私たちはサーバーとランナー間の通信を推奨するつもりはありません。`vite.ssrLoadModule` で明らかになった問題の 1 つは、処理されたモジュールの内部でサーバーの状態に依存しすぎていることです。これにより、ユーザー環境がサーバー API にアクセスできない可能性があるため、ランタイムに依存しない SSR を実装することを難しくします。例えば、次のコードは Vite サーバーとユーザーコードが同じコンテキストで実行できることを想定しています:
 
 ```ts
 const vite = createServer()
@@ -838,10 +838,10 @@ const { processRoutes } = await vite.ssrLoadModule('internal:routes-processor')
 processRoutes(routes)
 ```
 
-This makes it impossible to run user code in the same way it might run in production (for example, on the edge) because the server state and user state are coupled. So instead, we recommend using virtual modules to import the state and process it inside the user module:
+これでは、サーバーの状態とユーザーの状態が連動しているため、ユーザーコードをプロダクション（たとえばエッジなど）と同じように実行できません。そのため、代わりに仮想モジュールを使って状態をインポートし、ユーザーモジュール内で処理することを推奨します:
 
 ```ts
-// this code runs on another machine or in another thread
+// このコードは別のマシンまたは別のスレッドで実行されます
 
 import { runner } from './ssr-module-runner.js'
 import { processRoutes } from './routes-processor.js'
@@ -850,7 +850,7 @@ const { routes } = await runner.import('virtual:ssr-routes')
 processRoutes(routes)
 ```
 
-Simple setups like in [SSR Guide](/guide/ssr) can still use `server.transformIndexHtml` directly if it's not expected that the server will run in a different process in production. However, if the server will run in an edge environment or a separate process, we recommend creating a virtual module to load HTML:
+[SSR ガイド](/guide/ssr)にあるようなシンプルなセットアップで、プロダクション環境でサーバーが別のプロセスで実行されることが想定されていない場合なら、`server.transformIndexHtml` を直接使用できます。しかし、サーバーがエッジ環境や別のプロセスで実行される場合は、HTML をロードする仮想モジュールを作成することをお勧めします:
 
 ```ts {13-21}
 function vitePluginVirtualIndexHtml(): Plugin {
@@ -881,16 +881,16 @@ function vitePluginVirtualIndexHtml(): Plugin {
 }
 ```
 
-Then in SSR entry point you can call `import('virtual:index-html')` to retrieve the processed HTML:
+そして SSR のエントリーポイントで `import('virtual:index-html')` を呼び出すと、処理された HTML を取り出すことができます:
 
 ```ts
 import { render } from 'framework'
 
-// this example uses cloudflare syntax
+// この例では、cloudflare 構文を使用します
 export default {
   async fetch() {
-    // during dev, it will return transformed HTML
-    // during build, it will bundle the basic index.html into a string
+    // 開発時は、変換された HTML を返します
+    // ビルド時は、基本的な index.html を文字列にバンドルします
     const { default: html } = await import('virtual:index-html')
     return new Response(render(html), {
       headers: { 'content-type': 'text/html' },
@@ -899,35 +899,35 @@ export default {
 }
 ```
 
-This keeps the HTML processing server agnostic.
+これにより、HTML 処理はサーバーに依存しなくなります。
 
 :::
 
 ## ModuleRunnerHMRConnection
 
-**Type Signature:**
+**型シグネチャー:**
 
 ```ts
 export interface ModuleRunnerHMRConnection {
   /**
-   * Checked before sending messages to the client.
+   * クライアントにメッセージを送信する前にチェックされます。
    */
   isReady(): boolean
   /**
-   * Send a message to the client.
+   * クライアントにメッセージを送信します。
    */
   send(message: string): void
   /**
-   * Configure how HMR is handled when this connection triggers an update.
-   * This method expects that the connection will start listening for HMR updates and call this callback when it's received.
+   * この接続が更新をトリガーしたときに HMR がどのように処理されるかを設定します。
+   * このメソッドは、接続が HMR 更新のリッスンを開始し、受信時にこのコールバックを呼び出すことを想定しています。
    */
   onUpdate(callback: (payload: HotPayload) => void): void
 }
 ```
 
-This interface defines how HMR communication is established. Vite exports `ServerHMRConnector` from the main entry point to support HMR during Vite SSR. The `isReady` and `send` methods are usually called when the custom event is triggered (like, `import.meta.hot.send("my-event")`).
+このインターフェイスは HMR 通信の確立方法を定義します。Vite の SSR 中に HMR をサポートするために、Vite は `ServerHMRConnector` をメインエントリーからエクスポートします。`isReady` と `send` メソッドは通常、カスタムイベントがトリガーされたときに呼び出されます（`import.meta.hot.send("my-event")` のように）。
 
-`onUpdate` is called only once when the new module runner is initiated. It passed down a method that should be called when connection triggers the HMR event. The implementation depends on the type of connection (as an example, it can be `WebSocket`/`EventEmitter`/`MessageChannel`), but it usually looks something like this:
+`onUpdate` は、新しいモジュールランナーが初期化されたときに一度だけ呼ばれます。接続が HMR イベントをトリガーしたときに呼び出されるメソッドを渡します。実装は接続の種類（例として、`WebSocket`/`EventEmitter`/`MessageChannel`）に依存しますが、通常は以下のようになります:
 
 ```js
 function onUpdate(callback) {
@@ -935,13 +935,13 @@ function onUpdate(callback) {
 }
 ```
 
-The callback is queued and it will wait for the current update to be resolved before processing the next update. Unlike the browser implementation, HMR updates in a module runner will wait until all listeners (like, `vite:beforeUpdate`/`vite:beforeFullReload`) are finished before updating the modules.
+コールバックはキューに入れられ、次の更新を処理する前に現在の更新が解決されるのを待ちます。ブラウザーの実装とは異なり、モジュールランナーにおける HMR の更新は、モジュールを更新する前に、すべてのリスナー（`vite:beforeUpdate`/`vite:beforeFullReload` など）が終了するまで待機します。
 
-## Environments during build
+## ビルド中の環境
 
-In the CLI, calling `vite build` and `vite build --ssr` will still build the client only and ssr only environments for backward compatibility.
+CLI において、`vite build` と `vite build --ssr` を呼び出すと、後方互換性のためにクライアントのみの環境と ssr のみの環境がビルドされます。
 
-When `builder.entireApp` is `true` (or when calling `vite build --app`), `vite build` will opt-in into building the entire app instead. This would later on become the default in a future major. A `ViteBuilder` instance will be created (build-time equivalent to a `ViteDevServer`) to build all configured environments for production. By default the build of environments is run in series respecting the order of the `environments` record. A framework or user can further configure how the environments are built using:
+`builder.entireApp` が `true` の場合（または `vite build --app` を呼び出した場合）、`vite build` はアプリ全体のビルドを行います。これは将来のメジャーバージョンではデフォルトになる予定です。`ViteBuilder` インスタンス（ビルド時の `ViteDevServer` に相当）が作成され、プロダクション環境用に設定されたすべての環境がビルドされます。デフォルトでは、環境のビルドは `environments` レコードの順番に従って直列に実行されます。フレームワークやユーザーは環境を構築する方法を設定できます:
 
 ```js
 export default {
@@ -956,54 +956,54 @@ export default {
 }
 ```
 
-### Environment in build hooks
+### ビルドフックの環境
 
-In the same way as during dev, plugin hooks also receive the environment instance during build, replacing the `ssr` boolean.
-This also works for `renderChunk`, `generateBundle`, and other build only hooks.
+開発時と同じように、プラグインフックもビルド時に環境インスタンスを受け取り、`ssr` ブール値を置き換えます。
+これは `renderChunk` や `generateBundle` などのビルド専用のフックでも動作します。
 
-### Shared plugins during build
+### ビルド時の共有プラグイン
 
-Before Vite 6, the plugins pipelines worked in a different way during dev and build:
+Vite 6 以前は、プラグインパイプラインは開発時とビルド時に異なる方法で動作していました:
 
-- **During dev:** plugins are shared
-- **During Build:** plugins are isolated for each environment (in different processes: `vite build` then `vite build --ssr`).
+- **開発時:** プラグインは共有されます
+- **ビルド時:** プラグインは環境ごとに分離されます（`vite build` と `vite build --ssr` という別々のプロセスで分離されます）。
 
-This forced frameworks to share state between the `client` build and the `ssr` build through manifest files written to the file system. In Vite 6, we are now building all environments in a single process so the way the plugins pipeline and inter-environment communication can be aligned with dev.
+このため、フレームワークはファイルシステムに書き込まれたマニフェストファイルを通して `client` ビルドと `ssr` ビルドの間で状態を共有することを余儀なくされていました。Vite 6 では、すべての環境を単一のプロセスでビルドするようになったので、プラグインのパイプラインと環境間通信の方法を開発時と合わせることができるようになりました。
 
-In a future major (Vite 7 or 8), we aim to have complete alignment:
+将来のメジャー（Vite 7 または 8）では、完全な整合性を実現することを目指しています:
 
-- **During both dev and build:** plugins are shared, with [per-environment filtering](#per-environment-plugins)
+- **開発時とビルド時:** プラグインは[環境ごとのフィルタリング](#per-environment-plugins)で共有されます
 
-There will also be a single `ResolvedConfig` instance shared during build, allowing for caching at entire app build process level in the same way as we have been doing with `WeakMap<ResolvedConfig, CachedData>` during dev.
+また、ビルド時に共有される `ResolvedConfig` インスタンスは 1 つになり、開発時に `WeakMap<ResolvedConfig, CachedData>` を使っていたのと同じように、アプリのビルドプロセスレベル全体でキャッシュが可能になります。
 
-For Vite 6, we need to do a smaller step to keep backward compatibility. Ecosystem plugins are currently using `config.build` instead of `environment.config.build` to access configuration, so we need to create a new `ResolvedConfig` per environment by default. A project can opt-in into sharing the full config and plugins pipeline setting `builder.sharedConfigBuild` to `true`.
+Vite 6 では、後方互換性を保つために小さなステップを行う必要があります。エコシステムのプラグインは現在、設定へアクセスするために `environment.config.build` ではなく `config.build` を使用しているため、デフォルトでは環境ごとに新しい `ResolvedConfig` を作成する必要があります。プロジェクトは `builder.sharedConfigBuild` を `true` に設定することで、完全な設定とプラグインパイプラインを共有できます。
 
-This option would only work of a small subset of projects at first, so plugin authors can opt-in for a particular plugin to be shared by setting the `sharedDuringBuild` flag to `true`. This allows for easily sharing state both for regular plugins:
+このオプションは、最初のうちは小さなプロジェクトのサブセットでしか機能しないため、プラグインの作者は `sharedDuringBuild` フラグを `true` に設定することで、特定のプラグインを共有するように選択できます。これにより、通常のプラグインでも簡単に状態を共有できるようになります:
 
 ```js
 function myPlugin() {
-  // Share state among all environments in dev and build
+  // 開発環境とビルド環境のすべての環境で状態を共有する
   const sharedState = ...
   return {
     name: 'shared-plugin',
     transform(code, id) { ... },
 
-    // Opt-in into a single instance for all environments
+    // すべての環境で単一のインスタンスにオプトインする
     sharedDuringBuild: true,
   }
 }
 ```
 
-## Backward Compatibility
+## 後方互換性
 
-The current Vite server API are not yet deprecated and are backward compatible with Vite 5. The new Environment API is experimental.
+現在の Vite サーバーAPI はまだ非推奨ではなく、Vite 5 との後方互換性があります。新しい Environment API は実験的なものです。
 
-The `server.moduleGraph` returns a mixed view of the client and ssr module graphs. Backward compatible mixed module nodes will be returned from all its methods. The same scheme is used for the module nodes passed to `handleHotUpdate`.
+`server.moduleGraph` はクライアントと ssr のモジュールグラフの混合ビューを返します。後方互換性のある混合モジュールノードがすべてのメソッドから返されます。同じスキームが `handleHotUpdate` に渡されるモジュールノードにも使用されます。
 
-We don't recommend switching to Environment API yet. We are aiming for a good portion of the user base to adopt Vite 6 before so plugins don't need to maintain two versions. Checkout the future breaking changes section for information on future deprecations and upgrade path:
+現時点では、Environment API への切り替えはまだお勧めしません。私たちは、プラグインが 2 つのバージョンを維持する必要がないように、ユーザーベースのかなりの部分が Vite 6 を採用することを目標としています。今後の廃止予定とアップグレードパスについては、今後の変更点をチェックしてください:
 
-- [`this.environment` in Hooks](/changes/this-environment-in-hooks)
-- [HMR `hotUpdate` Plugin Hook](/changes/hotupdate-hook)
-- [Move to per-environment APIs](/changes/per-environment-apis)
-- [SSR using `ModuleRunner` API](/changes/ssr-using-modulerunner)
-- [Shared plugins during build](/changes/shared-plugins-during-build)
+- [フック内の `this.environment`](/changes/this-environment-in-hooks)
+- [HMR `hotUpdate` プラグインフック](/changes/hotupdate-hook)
+- [環境ごとの API への移行](/changes/per-environment-apis)
+- [`ModuleRunner` API を使った SSR](/changes/ssr-using-modulerunner)
+- [ビルド時の共有プラグイン](/changes/shared-plugins-during-build)
