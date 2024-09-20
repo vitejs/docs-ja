@@ -17,7 +17,7 @@ Vite 6 は環境の概念が形式化され、環境を作成・設定するた�
 
 内部的に大きな変更があり、新しいオプトイン API があったとしても、Vite 5 からの破壊的変更はありません。Vite 6 の最初の目標は、エコシステムをできるだけスムーズに新メジャーに移行させ、プラグインの新バージョンを利用できる十分なユーザーが揃うまで、プラグインの新 API の採用促進を遅らせることです。
 
-## Vite サーバーでの環境の使用
+## Vite サーバーでの環境の使用 {#using-environments-in-the-vite-server}
 
 単一の Vite 開発サーバーを使用して、異なるモジュール実行環境と同時にやり取りできます。ここでは環境という言葉は、ID を解決し、ソースコードをロードし、処理でき、コードが実行されるランタイムに接続されている、構成された Vite 処理パイプラインを指します。変換されたソースコードはモジュールと呼ばれ、各環境で処理されるモジュール間の関係はモジュールグラフに保持されます。これらのモジュールのコードは、実行される各環境に関連付けられたランタイムに送信されます。モジュールが評価されると、ランタイムはインポートされたモジュールを要求し、モジュールグラフのセクションの処理をトリガーします。典型的な Vite アプリでは、環境はクライアントに提供される ES モジュールと SSR を行うサーバープログラムに使用されます。アプリは Node サーバーだけでなく、[Cloudflare の workerd](https://github.com/cloudflare/workerd) のような他の JS ランタイムでも SSR を行うことができます。つまり、ブラウザー環境、Node 環境、workerd 環境など、さまざまなタイプの環境を同じ Vite サーバー上に持つことができるのです。
 
@@ -196,13 +196,13 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## 環境に依存しない SSR
+## 環境に依存しない SSR {#environment-agnostic-ssr}
 
 ::: info
 最も一般的な SSR のユースケースをカバーするために Vite がどのような API を提供すべきかはまだ明確ではありません。私たちはエコシステムがまず共通のパターンを探索できるように、環境に依存しない SSR を行うための公式な方法なしに Environment API をリリースすることを考えています。
 :::
 
-## 独立したモジュールグラフ
+## 独立したモジュールグラフ {#separate-module-graphs}
 
 各環境は独立したモジュールグラフを持ちます。すべてのモジュールグラフは同じシグネチャーを持つので、環境に依存せずにグラフをクロールしたりクエリしたりする汎用的なアルゴリズムを実装できます。`hotUpdate` が良い例です。ファイルが変更されると、各環境のモジュールグラフを使用して、影響を受けるモジュールを検出し、各環境に対して個別に HMR を実行します。
 
@@ -289,7 +289,7 @@ export class EnvironmentModuleGraph {
 }
 ```
 
-## 新しい環境の作成
+## 新しい環境の作成 {#creating-new-environments}
 
 この機能の目的のひとつは、コードを処理し実行するためのカスタマイズ可能な API を提供することです。ユーザーは、公開されているプリミティブを使って新しい環境タイプを作成できます。
 
@@ -324,7 +324,7 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
 const ssrEnvironment = createWorkerdEnvironment('ssr', config)
 ```
 
-## 環境設定
+## 環境設定 {#environment-configuration}
 
 環境は `environments` 設定オプションで明示的に設定します。
 
@@ -384,7 +384,7 @@ interface UserConfig extends EnvironmentOptions {
 
 :::
 
-## カスタム環境インスタンス
+## カスタム環境インスタンス {#custom-environment-instances}
 
 カスタムの開発環境やビルド環境のインスタンスを作成するには、`dev.createEnvironment` または `build.createEnvironment` 関数を使用します。
 
@@ -468,9 +468,9 @@ export default {
 
 この例では、`ssr` 環境がランタイムとして workerd を使用するようにどのように設定できるかが分かります。さらに、workerd ランタイムの別のインスタンスによってサポートされる新しいカスタム RSC 環境も定義されます。
 
-## プラグインと環境
+## プラグインと環境 {#plugins-and-environments}
 
-### フックで現在の環境にアクセスする
+### フックで現在の環境にアクセスする {#accessing-the-current-environment-in-hooks}
 
 Vite サーバーには共有プラグインパイプラインがありますが、モジュールが処理されるときは常に指定された環境のコンテキストで行われます。`environment` インスタンスは `resolveId`、`load`、`transform` のプラグインコンテキストで利用できます。
 
@@ -485,7 +485,7 @@ Vite サーバーには共有プラグインパイプラインがありますが
   }
 ```
 
-### フックを使用して新しい環境を登録する
+### フックを使用して新しい環境を登録する {#registering-new-environments-using-hooks}
 
 プラグインは `config` フックで新しい環境を追加できます:
 
@@ -497,7 +497,7 @@ Vite サーバーには共有プラグインパイプラインがありますが
 
 環境を登録するには空のオブジェクトで十分で、デフォルト値はルートレベルの環境設定から取得されます。
 
-### フックを使用した環境の設定
+### フックを使用した環境の設定 {#configuring-environment-using-hooks}
 
 `config` フックが実行されている間、環境の完全なリストはまだ分かっておらず、環境はルートレベルの環境設定からのデフォルト値、または `config.environments` レコードを通して明示的に影響を受ける可能性があります。
 プラグインは `config` フックを使ってデフォルト値を設定してください。各環境を設定するには、新しい `configEnvironment` フックを使用します。このフックは、最終的なデフォルト値の解決を含む、部分的に解決された設定を持つ各環境に対して呼び出されます。
@@ -508,7 +508,7 @@ Vite サーバーには共有プラグインパイプラインがありますが
       options.resolve.conditions = // ...
 ```
 
-### `hotUpdate` フック
+### `hotUpdate` フック {#the-hotupdate-hook}
 
 - **型:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
 - **参照:** [HMR API](./api-hmr)
@@ -584,7 +584,7 @@ interface HotUpdateContext {
   }
   ```
 
-### 環境ごとのプラグイン
+### 環境ごとのプラグイン {#per-environment-plugins}
 
 プラグインは `applyToEnvironment` 関数で、適用する環境を定義できます。
 
@@ -937,7 +937,7 @@ function onUpdate(callback) {
 
 コールバックはキューに入れられ、次の更新を処理する前に現在の更新が解決されるのを待ちます。ブラウザーの実装とは異なり、モジュールランナーにおける HMR の更新は、モジュールを更新する前に、すべてのリスナー（`vite:beforeUpdate`/`vite:beforeFullReload` など）が終了するまで待機します。
 
-## ビルド中の環境
+## ビルド中の環境 {#environments-during-build}
 
 CLI において、`vite build` と `vite build --ssr` を呼び出すと、後方互換性のためにクライアントのみの環境と ssr のみの環境がビルドされます。
 
@@ -956,12 +956,12 @@ export default {
 }
 ```
 
-### ビルドフックの環境
+### ビルドフックの環境 {#environment-in-build-hooks}
 
 開発時と同じように、プラグインフックもビルド時に環境インスタンスを受け取り、`ssr` ブール値を置き換えます。
 これは `renderChunk` や `generateBundle` などのビルド専用のフックでも動作します。
 
-### ビルド時の共有プラグイン
+### ビルド時の共有プラグイン {#shared-plugins-during-build}
 
 Vite 6 以前は、プラグインパイプラインは開発時とビルド時に異なる方法で動作していました:
 
@@ -994,7 +994,7 @@ function myPlugin() {
 }
 ```
 
-## 後方互換性
+## 後方互換性 {#backward-compatibility}
 
 現在の Vite サーバーAPI はまだ非推奨ではなく、Vite 5 との後方互換性があります。新しい Environment API は実験的なものです。
 
