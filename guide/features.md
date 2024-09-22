@@ -125,7 +125,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 
 または、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加することもできます:
 
-```json
+```json [tsconfig.json]
 {
   "compilerOptions": {
     "types": ["vite/client"]
@@ -176,8 +176,7 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 React や Vue 以外で JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact の場合:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -192,8 +191,7 @@ export default defineConfig({
 
 また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -223,8 +221,7 @@ CSS の圧縮は PostCSS の後に実行され、[`build.cssTarget`](/config/bui
 
 `.module.css` で終わる全ての CSS ファイルは全て [CSS modules file](https://github.com/css-modules/css-modules) とみなされます。このようなファイルをインポートすると、対応するモジュールオブジェクトが返されます:
 
-```css
-/* example.module.css */
+```css [example.module.css]
 .red {
   color: red;
 }

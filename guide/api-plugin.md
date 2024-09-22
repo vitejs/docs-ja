@@ -42,8 +42,7 @@ Vite 専用プラグインの場合
 
 ユーザーはプロジェクトの `devDependencies` にプラグインを追加し、 `plugins` 配列のオプションを使って設定します。
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
@@ -66,8 +65,7 @@ export default function framework(config) {
 }
 ```
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
@@ -519,8 +517,7 @@ Rollup プラグインがビルドフェーズでのみ意味を持つ場合は�
 
 Vite のみのプロパティで既存の Rollup プラグインを拡張することもできます:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import example from 'rollup-plugin-example'
 import { defineConfig } from 'vite'
 
@@ -560,8 +557,7 @@ Vite の 2.9 から、プラグインによりクライアントとの通信に�
 
 プラグイン側からは `server.ws.send` を使うことでクライアントへイベントを配信できます:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -606,8 +602,7 @@ if (import.meta.hot) {
 
 この時、サーバー側では `server.ws.on` を使ってイベントをリッスンします:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -632,8 +627,7 @@ export default defineConfig({
 TypeScript の型宣言ファイルを指定する際は `.d.ts` 拡張子を含めてください。そうしなければ、TypeScript はモジュールがどのファイルを拡張しようとしているのかを認識できない可能性があります。
 :::
 
-```ts
-// events.d.ts
+```ts [events.d.ts]
 import 'vite/types/customEvent.d.ts'
 
 declare module 'vite/types/customEvent.d.ts' {

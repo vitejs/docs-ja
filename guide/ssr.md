@@ -44,7 +44,7 @@ Vite はサーバーサイドレンダリング（SSR）の組み込みサポー
 
 `index.html` は `entry-client.js` を参照し、サーバーサイドでレンダリングされたマークアップを挿入するためにプレースホルダーを含める必要があります。:
 
-```html
+```html [index.html]
 <div id="app"><!--ssr-outlet--></div>
 <script type="module" src="/src/entry-client.js"></script>
 ```
@@ -69,9 +69,7 @@ if (import.meta.env.SSR) {
 
 SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
-**server.js**
-
-```js{15-18} twoslash
+```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -113,7 +111,7 @@ createServer()
 
 次のステップはサーバーサイドでレンダリングされた HTML を提供するための `*` ハンドラーの実装です:
 
-```js twoslash
+```js twoslash [server.js]
 // @noErrors
 import fs from 'node:fs'
 import path from 'node:path'
@@ -166,7 +164,7 @@ app.use('*', async (req, res, next) => {
 
 `package.json` の `dev` スクリプトも代わりにサーバースクリプトを使用するように変更する必要があります:
 
-```diff
+```diff [package.json]
   "scripts": {
 -   "dev": "vite"
 +   "dev": "node server"
@@ -182,7 +180,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 `package.json` は次のようになります:
 
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "node server",
@@ -219,8 +217,7 @@ SSR プロジェクトを本番環境に適用するには次の作業を行う�
 
 `@vitejs/plugin-vue` は自動で使用されたコンポーネントモジュール ID を関連する VueSSR コンテキストに登録することを標準でサポートしています:
 
-```js
-// src/entry-server.js
+```js [src/entry-server.js]
 const ctx = {}
 const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules はレンダリング中にしようされたモジュール ID をセットします。

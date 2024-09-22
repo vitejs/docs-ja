@@ -186,7 +186,7 @@ Vite は複数の `.html` エントリーポイントを持つ[マルチペー�
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリーを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
 <!-- prettier-ignore -->
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "vite", // 開発サーバーを起動。エイリアス: `vite dev`, `vite serve`
