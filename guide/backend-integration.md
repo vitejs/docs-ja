@@ -8,10 +8,9 @@
 
 1. Vite の設定ファイルで、エントリーの指定とマニフェストのビルドの有効化を行ってください:
 
-   ```js twoslash
+   ```js twoslash [vite.config.js]
    import { defineConfig } from 'vite'
    // ---cut---
-   // vite.config.js
    export default defineConfig({
      build: {
        // outDir に .vite/manifest.json を出力
@@ -60,7 +59,7 @@
 
 3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `.vite/manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
 
-   ```json
+   ```json [.vite/manifest.json]
    {
      "_shared-!~{003}~.js": {
        "file": "assets/shared-ChJ_j-JJ.css",

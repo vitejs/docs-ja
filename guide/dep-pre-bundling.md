@@ -37,7 +37,7 @@
 
 ただしこの場合、リンクされた依存関係が ESM としてエクスポートされている必要があります。そうでない場合は、[`optimizeDeps.include`](/config/dep-optimization-options.md#optimizedeps-include) と [`build.commonjsOptions.include`](/config/build-options.md#build-commonjsoptions) に依存関係を追加して、設定することができます。
 
-```js twoslash
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 // ---cut---
 export default defineConfig({

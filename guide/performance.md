@@ -59,8 +59,7 @@ TypeScript を使用している場合は、`tsconfig.json` の `compilerOptions
 
 バレルファイルは同じディレクトリー内の他のファイルの API を再エクスポートするファイルです。例:
 
-```js
-// src/utils/index.js
+```js [src/utils/index.js]
 export * from './color.js'
 export * from './dom.js'
 export * from './slash.js'
@@ -92,7 +91,7 @@ vite:transform 62.95ms /src/components/BigComponent.vue +1ms
 vite:transform 102.54ms /src/utils/big-utils.js +1ms
 ```
 
-```js
+```js [vite.config.js]
 export default defineConfig({
   server: {
     warmup: {

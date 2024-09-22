@@ -6,7 +6,7 @@
 - npm を使用します。Yarn や他のパッケージマネージャーを使用している場合は、同等のコマンドを使用してスクリプトを実行できます。
 - Vite はプロジェクト内のローカルな dev dependency としてインストールされており、以下の npm スクリプトを設定しています。
 
-```json
+```json [package.json]
 {
   "scripts": {
     "build": "vite build",
@@ -43,7 +43,7 @@ $ npm run preview
 
 サーバーのポートを設定するには、引数に `--port` フラグを指定します。
 
-```json
+```json [package.json]
 {
   "scripts": {
     "preview": "vite preview --port 8080"
@@ -127,7 +127,7 @@ $ npm run preview
 
 2. プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます:
 
-   ```yaml
+   ```yaml [.gitlab-ci.yml]
    image: node:16.5.0
    pages:
      stage: deploy
@@ -257,9 +257,7 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
 
 2. プロジェクトルートに `firebase.json` と `.firebaserc` を作成し、以下のように記述してください:
 
-   `firebase.json`:
-
-   ```json
+   ```json [firebase.json]
    {
      "hosting": {
        "public": "dist",
@@ -274,9 +272,7 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
    }
    ```
 
-   `.firebaserc`:
-
-   ```js
+   ```js [.firebaserc]
    {
      "projects": {
        "default": "<YOUR_FIREBASE_ID>"

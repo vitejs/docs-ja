@@ -38,7 +38,7 @@ Vite は、[環境ディレクトリー](/config/shared-options.md#envdir)にあ
 
 環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下の環境変数だと:
 
-```
+```[.env]
 VITE_SOME_KEY=123
 DB_PASSWORD=foobar
 ```
@@ -59,7 +59,7 @@ console.log(import.meta.env.DB_PASSWORD) // undefined
 
 環境値の中で `$` を使用する場合は、`\` でエスケープする必要があることに注意してください。
 
-```
+```[.env]
 KEY=123
 NEW_KEY1=test$foo   # test
 NEW_KEY2=test\$foo  # test$foo
@@ -81,7 +81,7 @@ NEW_KEY3=test$KEY   # test123
 
 この目的を達するには、`src` ディレクトリーに `vite-env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
-```typescript
+```typescript [vite-env.d.ts]
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
@@ -96,7 +96,7 @@ interface ImportMeta {
 
 コードがブラウザー環境の型、例えば [DOM](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) や [WebWorker](https://github.com/microsoft/TypeScript/blob/main/src/lib/webworker.generated.d.ts) に依存している場合は、`tsconfig.json` 内の [lib](https://www.typescriptlang.org/tsconfig#lib) フィールドを更新しましょう。
 
-```json
+```json [tsconfig.json]
 {
   "lib": ["WebWorker"]
 }
