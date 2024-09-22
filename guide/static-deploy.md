@@ -322,7 +322,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 4. プロジェクト名とブランチを指定します。
 
-   - **Build Command**: `npm run build`
+   - **Build Command**: `npm install && npm run build`
    - **Publish Directory**: `dist`
 
 5. **Create Static Site** をクリックします。
