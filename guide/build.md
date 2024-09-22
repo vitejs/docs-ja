@@ -169,7 +169,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 ライブラリーに推奨される `package.json`:
 
-```json [package.sjon]
+```json [package.json]
 {
   "name": "my-lib",
   "type": "module",
