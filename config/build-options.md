@@ -166,7 +166,7 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 - **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
 - **関連:** [ライブラリーモード](/guide/build#library-mode)
 
-ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` で、複数のエントリーを使用する場合は `['es', 'cjs']` です。`fileName` は出力されるパッケージファイルの名前です。デフォルトの `fileName` は package.json の name オプションですが、`format` と `entryAlias` を引数にとる関数として定義することもできます。
+ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` で、複数のエントリーを使用する場合は `['es', 'cjs']` です。`fileName` は出力されるパッケージファイルの名前です。デフォルトの `fileName` は package.json の name オプションですが、`format` と `entryName` を引数にとる関数として定義することもできます。
 
 ## build.manifest
 
