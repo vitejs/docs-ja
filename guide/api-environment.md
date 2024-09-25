@@ -715,6 +715,10 @@ export interface ModuleRunnerOptions {
 ```ts
 export interface ModuleEvaluator {
   /**
+   * 変換後のコードに含まれるプレフィックスの行数。
+   */
+  startOffset?: number
+  /**
    * Vite によって変換されたコードを評価します。
    * @param context 関数コンテキスト
    * @param code 変換されたコード
@@ -733,7 +737,7 @@ export interface ModuleEvaluator {
 }
 ```
 
-Vite はデフォルトでこのインターフェイスを実装した `ESModulesEvaluator` をエクスポートします。コードの評価には `new AsyncFunction` を使用するので、インライン化されたソースマップがある場合は、新しい行が追加されたことを考慮して [2 行分のオフセット](https://tc39.es/ecma262/#sec-createdynamicfunction)を追加する必要があります。これはサーバーノード環境で自動的に行われます。ランナーの実装にこの制約がない場合は、（`vite` からエクスポートされている）`fetchModule` を直接使用する必要があります。
+Vite はデフォルトでこのインターフェイスを実装した `ESModulesEvaluator` をエクスポートします。コードの評価には `new AsyncFunction` を使用するので、インライン化されたソースマップがある場合は、新しい行が追加されたことを考慮して [2 行分のオフセット](https://tc39.es/ecma262/#sec-createdynamicfunction)を追加する必要があります。これは `ESModulesEvaluator` によって自動的に実行されます。カスタムの Evaluator は行を追加しません。
 
 ## RunnerTransport
 
