@@ -644,7 +644,7 @@ export class ModuleRunner {
 
 `ModuleRunner` のモジュール評価機能はコードの実行を担当します。Vite は `ESModulesEvaluator` をエクスポートしており、`new AsyncFunction` を使用してコードを評価します。JavaScript ランタイムが安全でない評価をサポートしていない場合は、独自の実装を提供できます。
 
-モジュールランナーは `import` メソッドを公開します。Vite サーバーが `full-reload` HMR イベントをトリガーすると、影響を受けるすべてのモジュールが再実行されます。このとき、モジュールランナーは `exports` オブジェクトを更新しないことに注意してください（上書きされます）。最新の `exports` オブジェクトが必要であれば、 `import` を実行するか、もう一度 `moduleCache` からモジュールを取得する必要があります。
+モジュールランナーは `import` メソッドを公開します。Vite サーバーが `full-reload` HMR イベントをトリガーすると、影響を受けるすべてのモジュールが再実行されます。このとき、モジュールランナーは `exports` オブジェクトを更新しないことに注意してください（上書きされます）。最新の `exports` オブジェクトが必要であれば、 `import` を実行するか、もう一度 `evaluatedModules` からモジュールを取得する必要があります。
 
 **使用例:**
 
@@ -704,7 +704,7 @@ export interface ModuleRunnerOptions {
   /**
    * カスタムモジュールキャッシュ。指定されていない場合は、モジュールランナーインスタンスごとに個別のモジュールキャッシュが作成されます。
    */
-  moduleCache?: ModuleCacheMap
+  evaluatedModules?: EvaluatedModules
 }
 ```
 
