@@ -914,13 +914,13 @@ export default {
 ```ts
 export interface ModuleRunnerHMRConnection {
   /**
-   * クライアントにメッセージを送信する前にチェックされます。
+   * サーバーにメッセージを送信する前にチェックされます。
    */
   isReady(): boolean
   /**
-   * クライアントにメッセージを送信します。
+   * サーバーにメッセージを送信します。
    */
-  send(message: string): void
+  send(payload: HotPayload): void
   /**
    * この接続が更新をトリガーしたときに HMR がどのように処理されるかを設定します。
    * このメソッドは、接続が HMR 更新のリッスンを開始し、受信時にこのコールバックを呼び出すことを想定しています。
