@@ -107,6 +107,22 @@ interface TransformResult {
 }
 ```
 
+Vite は `ModuleRunner` インスタンスを公開する `DevEnvironment` を拡張した `RunnableDevEnvironment` もサポートしています。`isRunnableDevEnvironment` 関数を使用すると、実行可能な環境をガードできます。
+
+:::warning
+`runner` は初めてアクセスされたときに、優先的に評価されます。Vite は、`process.setSourceMapsEnabled` を呼び出すことによって `runner` が作成されたとき、または、利用できない場合は `Error.prepareStackTrace` をオーバーライドすることによって、ソースマップのサポートを有効にすることに注意してください。
+:::
+
+```ts
+export class RunnableDevEnvironment extends DevEnvironment {
+  public readonly runner: ModuleRunnner
+}
+
+if (isRunnableDevEnvironment(server.environments.ssr)) {
+  await server.environments.ssr.runner.import('/entry-point.js')
+}
+```
+
 Vite サーバーの環境インスタンスでは、`environment.transformRequest(url)` メソッドを使用して URL を処理できます。この関数はプラグインパイプラインを使用して `url` をモジュール `id` に解決し、（ファイルシステムからファイルを読み込むか、仮想モジュールを実装するプラグインを介して）モジュールをロードし、コードを変換します。モジュールを変換している間、インポートやその他のメタデータは、対応するモジュールノードを作成または更新することで、環境モジュールグラフに記録されます。処理が完了すると、変換結果もモジュールに保存されます。
 
 しかし、モジュールが実行されるランタイムが Vite サーバーが実行されているランタイムと異なる可能性があるため、環境インスタンスはコード自体を実行することはできません。これはブラウザー環境の場合です。HTML がブラウザーに読み込まれると、そのスクリプトが実行され、静的モジュールグラフ全体の評価が開始されます。インポートされた各 URL は、モジュールコードを取得するために Vite サーバーへのリクエストを生成します。このリクエストは、`server.environment.client.transformRequest(url)` を呼び出すことによって、変換ミドルウェアによって処理されます。サーバーの環境インスタンスとブラウザーのモジュールランナー間の接続は、この場合 HTTP を通して行われます。
@@ -119,7 +135,7 @@ Vite サーバーの環境インスタンスでは、`environment.transformReque
 最初の提案では、コンシューマが `transport` オプションを使うことでランナー側でインポートを呼び出すことができる `run` メソッドがありました。テスト中に、この API を推奨するほど汎用的なものではないことがわかりました。私たちはフレームワークからのフィードバックに基づいて、リモート SSR 実装のための組み込みレイヤーを実装する予定です。それまでの間、Vite はランナー RPC の複雑さを隠すために [`RunnerTransport` API](#runnertransport) を公開しています。
 :::
 
-デフォルトで Node で動作する `ssr` 環境では、Vite は開発サーバーと同じ JS ランタイムで動作される `new AsyncFunction` を使って評価を実装するモジュールランナーを作成します。このランナーは `ModuleRunner` のインスタンスで、次のように公開します:
+開発モードでは、デフォルトの `ssr` 環境は、開発サーバーと同じ JS ランタイムで実行される `new AsyncFunction` で評価したものを実装するモジュールランナーを備えた `RunnableDevEnvironment` です。このランナーは `ModuleRunner` のインスタンスで、次のように公開します:
 
 ```ts
 class ModuleRunner {
@@ -137,15 +153,10 @@ class ModuleRunner {
 v5.1 のランタイム API では `executeUrl` メソッドと `executeEntryPoint` メソッドがありましたが、現在は単一の `import` メソッドに統合されています。HMR のサポートを停止したい場合は、`hmr: false` フラグを付けてランナーを作成します。
 :::
 
-デフォルトの SSR Node モジュールランナーは公開されていません。`createNodeEnvironment` API と `createServerModuleRunner` を一緒に使うことで、同じスレッドでコードを実行し、HMR をサポートし、SSR の実装と衝突しないランナーを作成できます（設定でオーバーライドされている場合）。[SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。エラー処理は省略します。
+[SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。エラー処理は省略します。
 
 ```js
-import {
-  createServer,
-  createServerHotChannel,
-  createServerModuleRunner,
-  createNodeDevEnvironment,
-} from 'vite'
+import { createServer, createRunnableDevEnvironment } from 'vite'
 
 const server = await createServer({
   server: { middlewareMode: true },
@@ -156,16 +167,16 @@ const server = await createServer({
         // デフォルトの Vite SSR 環境はコンフィグで上書きできるので、
         // リクエストを受け取る前に Node 環境があることを確認してください。
         createEnvironment(name, config) {
-          return createNodeDevEnvironment(name, config, {
-            hot: createServerHotChannel(),
-          })
+          return createRunnableDevEnvironment(name, config)
         },
       },
     },
   },
 })
 
-const runner = createServerModuleRunner(server.environments.node)
+// TypeScript では、これを RunnableDevEnvironment にキャストするか、ランナーへのアクセスを
+// 保護するために "isRunnableDevEnvironment" 関数を使用する必要があるかもしれません
+const environment = server.environments.node
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
@@ -181,7 +192,7 @@ app.use('*', async (req, res, next) => {
   // 3. サーバーエントリをロードします。import(url) は、
   //    ESM ソースコードを Node.js で使用できるように自動的に変換します。
   //    バンドルは不要で、完全な HMR サポートを提供します。
-  const { render } = await runner.import('/src/entry-server.js')
+  const { render } = await environment.runner.import('/src/entry-server.js')
 
   // 4. アプリの HTML をレンダリングします。これは、entry-server.js のエクスポートされた
   //    `render` 関数が適切なフレームワーク SSR API を呼び出すことを前提としています。
@@ -310,7 +321,7 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
       ...context.options,
     },
     hot,
-    runner: {
+    remoteRunner: {
       transport,
     },
   })
@@ -395,7 +406,7 @@ export default {
       dev: {
         createEnvironment(name, config, { watcher }) {
           // 開発時に 'rsc' と解決されたコンフィグで呼び出される
-          return createNodeDevEnvironment(name, config, {
+          return createRunnableDevEnvironment(name, config, {
             hot: customHotChannel(),
             watcher
           })
@@ -786,7 +797,7 @@ function createWorkerEnvironment(name, config, context) {
   const worker = new Worker('./worker.js')
   return new DevEnvironment(name, config, {
     hot: /* custom hot channel */,
-    runner: {
+    remoteRunner: {
       transport: new RemoteEnvironmentTransport({
         send: (data) => worker.postMessage(data),
         onMessage: (listener) => worker.on('message', listener),
