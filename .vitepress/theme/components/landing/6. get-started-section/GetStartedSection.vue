@@ -109,12 +109,12 @@
       </svg>
       <img src="/logo.svg" alt="Vite Logo" class="vite-chip__logo" />
     </div>
-    <h2>Start building with Vite</h2>
+    <h2>さぁ、Vite で作ろう</h2>
     <h3>
-      Prepare for a development environment that can finally keep pace with the
-      speed of your mind.
+      あなたの思考のスピードに追いつくことができる開発環境を用意しましょう。
+
     </h3>
-    <a href="/guide/" class="btn btn--primary">Get started</a>
+    <a href="/guide/" class="btn btn--primary">はじめる</a>
     <div class="glow glow--purple" />
     <div class="glow glow--blue" />
   </div>

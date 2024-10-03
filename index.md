@@ -1,6 +1,6 @@
 ---
 title: Vite
-titleTemplate: Next Generation Frontend Tooling
+titleTemplate: 次世代フロントエンドツール
 pageClass: landing dark
 
 layout: home
@@ -28,13 +28,13 @@ import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/
 
 <div class="VPHome">
   <Hero/>
-  <FeatureSection title="Redefining developer experience" description="Vite makes web development simple again" type="blue">
+  <FeatureSection title="開発者体験の再定義" description="Vite はウェブ開発を再びシンプルにします" type="blue">
     <FeatureInstantServerStart />
     <FeatureHMR />
     <FeatureRichFeatures />
     <FeatureOptimizedBuild />
   </FeatureSection>
-  <FeatureSection title="A shared foundation to build upon" type="pink" class="feature-section--flip">
+  <FeatureSection title="ビルドのための共通基盤" type="pink" class="feature-section--flip">
     <FeatureFlexiblePlugins />
     <FeatureTypedAPI />
     <FeatureSSRSupport />

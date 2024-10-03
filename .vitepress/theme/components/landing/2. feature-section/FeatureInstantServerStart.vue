@@ -182,9 +182,9 @@ onUnmounted(() => {
       <div class="connection-line" :class="{ active: commandTriggered }" />
     </div>
     <div class="feature__meta">
-      <div class="meta__title">Instant server start</div>
+      <div class="meta__title">即時サーバー起動</div>
       <div class="meta__description">
-        On demand file serving over native ESM, no bundling required!
+        ネイティブ ESM でのオンデマンドファイル配信、バンドルは不要！
       </div>
     </div>
   </div>

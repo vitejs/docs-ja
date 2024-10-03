@@ -417,10 +417,10 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </svg>
     </div>
     <div class="feature__meta">
-      <div class="meta__title">First class SSR Support</div>
+      <div class="meta__title">ファーストクラスの SSR サポート</div>
       <div class="meta__description">
-        It's never been easier to setup custom SSR (Server-Side Rendering), or
-        build your own SSR framework.
+        カスタム SSR（サーバーサイドレンダリング）の設定や、独自の SSR フレームワークの構築がかつてないほど簡単になりました。
+
       </div>
     </div>
   </div>

@@ -68,8 +68,8 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">Fully typed API</div>
-      <div class="meta__description">Designed to be built on top of.</div>
+      <div class="meta__title">完全な型付け API</div>
+      <div class="meta__description">を使用して構築するように設計されています。</div>
     </div>
   </div>
 </template>

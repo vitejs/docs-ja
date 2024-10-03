@@ -167,6 +167,7 @@ const startAnimation = () => {
     text-shadow:
       0 0 4px rgba(255, 255, 255, 0.1),
       0 0 14px rgba(130, 168, 236, 0.2);
+    font-weight: 500; /* 日本語版: 太すぎるので調整 */
   }
 
   .feature-section__title {
@@ -233,7 +234,7 @@ const startAnimation = () => {
       .meta__description {
         color: #a3a3a3;
         font-family: Inter, sans-serif;
-        font-size: 16px;
+        font-size: 15px; /* 日本語版: 元は 16px */
         font-style: normal;
         font-weight: 400;
         line-height: 150%;

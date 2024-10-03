@@ -436,9 +436,9 @@ const { startAnimation } = useCardAnimation(
       </svg>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">Optimized build</div>
+      <div class="meta__title">ビルドの最適化</div>
       <div class="meta__description">
-        Pre-configured Rollup build with multi-page and library mode support.
+        複数ページおよびライブラリモードをサポートする事前設定済みの Rollup ビルド。
       </div>
     </div>
   </div>
