@@ -175,7 +175,7 @@ Vite 5 では、esbuild 0.19 を使用し、esbuild 0.18 の互換性レイヤ�
 
 ### `--https` フラグおよび `https: true` の削除
 
-`--https` フラグは、内部で `server.https: true` および `preview.https: true` を設定します。この設定は、[Vite 3 で削除された自動的な https 証明書生成機能](https://v3.vitejs.dev/guide/migration.html#automatic-https-certificate-generation)と一緒に使用されることを意図していました。したがって、この設定は証明書のない Vite の HTTPS サーバーを開始するため、もはや有用ではありません。
+`--https` フラグは、内部で `server.https: true` および `preview.https: true` を設定します。この設定は、[Vite 3 で削除された自動的な https 証明書生成機能](https://v3.vite.dev/guide/migration.html#automatic-https-certificate-generation)と一緒に使用されることを意図していました。したがって、この設定は証明書のない Vite の HTTPS サーバーを開始するため、もはや有用ではありません。
 
 [`@vitejs/plugin-basic-ssl`](https://github.com/vitejs/vite-plugin-basic-ssl) または [`vite-plugin-mkcert`](https://github.com/liuweiGL/vite-plugin-mkcert) を使用している場合、これらはすでに `https` 設定を内部で行っているため、設定から `--https`、`server.https: true`、および `preview.https: true` を削除できます。
 
@@ -243,4 +243,4 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 ## v3 からの移行
 
-Vite v4 ドキュメントの [Migration from v3 Guide](https://v4.vitejs.dev/guide/migration.html) をまず確認し、アプリを Vite v4 に移植するために必要な変更を調べてから、このページの変更点を進めてください。
+Vite v4 ドキュメントの [Migration from v3 Guide](https://v4.vite.dev/guide/migration.html) をまず確認し、アプリを Vite v4 に移植するために必要な変更を調べてから、このページの変更点を進めてください。

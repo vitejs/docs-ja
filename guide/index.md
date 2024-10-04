@@ -217,4 +217,4 @@ pnpm link --global # このステップでは好きなパッケージマネー�
 
 ## コミュニティー
 
-質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。
+質問がある場合やサポートが必要な場合は、[Discord](https://chat.vite.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。

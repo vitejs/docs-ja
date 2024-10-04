@@ -166,7 +166,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバーと�
 デフォルトの設定では、Vite の前のリバースプロキシが WebSocket のプロキシに対応していることが期待されています。Vite の HMR クライアントが WebSocket の接続に失敗した場合、クライアントはリバースプロキシを迂回して直接 Vite の HMR サーバーに接続するようにフォールバックします:
 
 ```
-Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
 ```
 
 フォールバックが発生した際のブラウザーに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
