@@ -15,7 +15,7 @@ import HeroDiagram from './HeroDiagram.vue'
       <h1>The Build Tool<br />for the Web</h1>
       <!-- Tagline -->
       <h3>
-        Vite は、次世代の<wbr /> Web アプリケーションを支える<wbr />超高速フロントエンド<wbr />ビルドツールです。
+        Vite は、次世代の Web アプリケーションを支える<br />超高速フロントエンドビルドツールです。
 
       </h3>
 
@@ -131,7 +131,10 @@ import HeroDiagram from './HeroDiagram.vue'
   }
 }
 
-h3 {
-  white-space: nowrap; /* 日本語版: 改行位置の調整のため */
+/* 日本語版: 改行位置の調整のため */
+@media (max-width: 480px) {
+  h3 > br {
+    display: none;
+  }
 }
 </style>
