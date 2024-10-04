@@ -133,7 +133,7 @@ html:has(.landing) {
     line-height: 150%;
     letter-spacing: -0.4px;
     max-width: 500px;
-    /* text-wrap: balance; 日本語版: 改行位置の調整のため無効化 */
+    text-wrap: balance;
     cursor: default;
     margin-bottom: 25px;
     padding: 0 20px;
