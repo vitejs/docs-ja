@@ -12,4 +12,4 @@ Vite の実装変更に伴い、いくつかの内部 API が削除されまし�
 
 ## v4 からの移行
 
-まず、Vite v5 ドキュメントの[v4 からの移行ガイド](https://v5.vitejs.dev/guide/migration.html)をチェックし、アプリを Vite 5 に移植するために必要な変更を確認してから、このページの変更を進めてください。
+まず、Vite v5 ドキュメントの[v4 からの移行ガイド](https://v5.vite.dev/guide/migration.html)をチェックし、アプリを Vite 5 に移植するために必要な変更を確認してから、このページの変更を進めてください。
