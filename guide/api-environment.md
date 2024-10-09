@@ -645,11 +645,11 @@ export class ModuleRunner {
    * すべてのキャッシュをクリアし、すべての HMR リスナーを削除し、ソースマップのサポートをリセットします。
    * このメソッドは HMR 接続を停止しません。
    */
-  public async destroy(): Promise<void>
+  public async close(): Promise<void>
   /**
-   * ランナーが `destroy()` メソッドを呼び出して破棄された場合は `true` を返します。
+   * `close()` メソッドを呼び出してランナーを終了した場合は `true` を返します。
    */
-  public isDestroyed(): boolean
+  public isClosed(): boolean
 }
 ```
 
