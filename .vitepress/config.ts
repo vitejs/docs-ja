@@ -331,23 +331,23 @@ export default defineConfig({
           text: 'Environment API',
           items: [
             {
-              text: 'Introduction',
+              text: 'はじめに',
               link: '/guide/api-environment',
             },
             {
-              text: 'Environment instances',
+              text: '環境インスタンス',
               link: '/guide/api-environment-instances',
             },
             {
-              text: 'Plugins',
+              text: 'プラグイン',
               link: '/guide/api-environment-plugins',
             },
             {
-              text: 'Frameworks',
+              text: 'フレームワーク',
               link: '/guide/api-environment-frameworks',
             },
             {
-              text: 'Runtimes',
+              text: 'ランタイム',
               link: '/guide/api-environment-runtimes',
             },
           ],
