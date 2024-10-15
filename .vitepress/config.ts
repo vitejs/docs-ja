@@ -322,12 +322,33 @@ export default defineConfig({
               link: '/guide/api-javascript',
             },
             {
-              text: 'Environment API',
+              text: '設定リファレンス',
+              link: '/config/',
+            },
+          ],
+        },
+        {
+          text: 'Environment API',
+          items: [
+            {
+              text: 'はじめに',
               link: '/guide/api-environment',
             },
             {
-              text: '設定リファレンス',
-              link: '/config/',
+              text: '環境インスタンス',
+              link: '/guide/api-environment-instances',
+            },
+            {
+              text: 'プラグイン',
+              link: '/guide/api-environment-plugins',
+            },
+            {
+              text: 'フレームワーク',
+              link: '/guide/api-environment-frameworks',
+            },
+            {
+              text: 'ランタイム',
+              link: '/guide/api-environment-runtimes',
             },
           ],
         },
