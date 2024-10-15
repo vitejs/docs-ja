@@ -55,7 +55,7 @@ console.log(import.meta.env.DB_PASSWORD) // undefined
 上に示したように、`VITE_SOME_KEY` は数値ですが、パースすると文字列が返ります。同じことはブール型の環境変数にも起こります。コード内で使用する場合には、必ず目的の型に変換するようにしてください。
 :::
 
-また、Vite は [dotenv-expand](https://github.com/motdotla/dotenv-expand) を使って、設定不要で変数を展開できます。構文の詳細については、[ドキュメント](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow)を参照してください。
+また、Vite は [dotenv-expand](https://github.com/motdotla/dotenv-expand) を使って、設定不要で env ファイルに書かれた変数を展開できます。構文の詳細については、[ドキュメント](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow)を参照してください。
 
 環境値の中で `$` を使用する場合は、`\` でエスケープする必要があることに注意してください。
 
