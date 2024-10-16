@@ -29,6 +29,16 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ベースパスの高度な制御については、[高度なベースパスの設定](#advanced-base-options)を参照してください。
 
+### 相対的な base
+
+ベースパスが事前にわからない場合は、相対的なベースパスとして `"base": "./"` または `"base": ""` を設定できます。これにより、生成されるすべての URL が各ファイルに対して相対的なものになります。
+
+:::warning 相対的な base を使用する場合の古いブラウザーのサポート
+
+相対的な base には `import.meta` の対応が必要です。[`import.meta` に対応していないブラウザー](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートする必要がある場合、[`legacy` プラグイン](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) が利用できます。
+
+:::
+
 ## ビルドのカスタマイズ
 
 ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/configuration-options/) を `build.rollupOptions` で直接調整することができます:
