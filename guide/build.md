@@ -131,14 +131,15 @@ HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクト�
 
 配布のためにライブラリーをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリーにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
-```js twoslash [vite.config.js]
+::: code-group
+
+```js twoslash [vite.config.js（単一エントリー）]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
     lib: {
-      // 複数のエントリーポイントのディクショナリや配列にもできます
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // 適切な拡張子が追加されます
@@ -160,6 +161,37 @@ export default defineConfig({
 })
 ```
 
+```js twoslash [vite.config.js（複数エントリー）]
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: {
+        'my-lib': resolve(__dirname, 'lib/main.js'),
+        secondary: resolve(__dirname, 'lib/secondary.js'),
+      },
+      name: 'MyLib',
+    },
+    rollupOptions: {
+      // ライブラリーにバンドルされるべきではない依存関係を
+      // 外部化するようにします
+      external: ['vue'],
+      output: {
+        // 外部化された依存関係のために UMD のビルドで使用する
+        // グローバル変数を提供します
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+  },
+})
+```
+
+:::
+
 エントリーファイルには、パッケージのユーザーがインポートできるエクスポートが含まれることになります:
 
 ```js [lib/main.js]
@@ -179,7 +211,9 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 ライブラリーに推奨される `package.json`:
 
-```json [package.json]
+::: code-group
+
+```json [package.json（単一エントリー）]
 {
   "name": "my-lib",
   "type": "module",
@@ -195,9 +229,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-あるいは、複数のエントリーポイントを公開する場合:
-
-```json [package.json]
+```json [package.json（複数エントリー）]
 {
   "name": "my-lib",
   "type": "module",
@@ -216,6 +248,8 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
   }
 }
 ```
+
+:::
 
 ::: tip ファイル拡張子
 `package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。
