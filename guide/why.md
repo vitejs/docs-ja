@@ -51,6 +51,8 @@ Vite では、HMR をネイティブ ESM 上で行います。ファイルが編
 
 ## なぜ esbuild でバンドルしないのか？
 
+Vite は [開発環境で一部の依存関係を事前バンドルする](./dep-pre-bundling.md)ために esbuild を活用していますが、本番ビルドのためのバンドラーとしては esbuild を利用しません。
+
 Vite の現在のプラグイン API は、`esbuild` をバンドラーとして使用することと互換性がありません。`esbuild` の方が速いにもかかわらず、Vite は Rollup の柔軟なプラグイン API とインフラストラクチャーを採用し、エコシステムでの成功に大きく貢献しました。当面は、Rollup の方がパフォーマンスと柔軟性のトレードオフに優れていると考えています。
 
 Rollup はパフォーマンスの向上にも取り組んでおり、[v4 でパーサーを SWC に切り替えました](https://github.com/rollup/rollup/pull/5073)。 そして、Rolldown と呼ばれる Rollup の Rust ポートを構築する取り組みが進行中です。 Rolldown の準備が完了すると、Vite の Rollup と esbuild の両方が置き換えられ、ビルドのパフォーマンスが大幅に向上し、開発とビルドの間の不一致が解消されます。 [詳細については、Evan You の ViteConf 2023 基調講演](https://youtu.be/hrdwQHoAp0M) をご覧ください。
