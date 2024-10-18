@@ -325,7 +325,7 @@ export default defineConfig({
 ## server.fs.deny
 
 - **型:** `string[]`
-- **デフォルト:** `['.env', '.env.*', '*.{crt,pem}']`
+- **デフォルト:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
 Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
 
