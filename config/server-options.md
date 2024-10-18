@@ -184,7 +184,7 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 
 変換するファイルをウォームアップし、結果を事前にキャッシュします。これにより、サーバー起動時の初期ページ読み込みが改善され、変換ウォーターフォールを防げます。
 
-`clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`fast-glob`](https://github.com/mrmlnc/fast-glob) パターンの配列を受け入れます。
+`clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) パターンの配列を受け入れます。
 
 起動時に Vite 開発サーバーに負荷がかからないように、頻繁に使用するファイルのみを追加するようにしてください。
 
