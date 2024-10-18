@@ -113,7 +113,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 ## new URL(url, import.meta.url)
 
-[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクター](https://developer.mozilla.org/en-US/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
+[import.meta.url](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクター](https://developer.mozilla.org/ja/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
 
 ```js
 const imgUrl = new URL('./img.png', import.meta.url).href
