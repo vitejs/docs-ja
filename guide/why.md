@@ -22,7 +22,7 @@ Vite はまず最初にアプリケーションのモジュールを 2 つのカ
 
 - **ソースコード**には変換を必要とするプレーンな JavaScript ではないものが含まれることがよくあり、頻繁に編集されます（例: JSX、CSS や Vue/Svelte コンポーネント）。また、全てのソースコードを同時に読み込む必要はありません（例: ルーティングによるコード分割）。
 
-  Vite は、[ネイティブ ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) を行使してソースコードを提供します。ブラウザーは、実質的にバンドラーの仕事の一部を引き受けます: Vite はブラウザーのリクエストに応じて、ソースコードを変換し提供するのみになります。条件で囲われている動的インポートのコードは、現在の画面で使われる場合のみ処理されます。
+  Vite は、[ネイティブ ESM](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules) を行使してソースコードを提供します。ブラウザーは、実質的にバンドラーの仕事の一部を引き受けます: Vite はブラウザーのリクエストに応じて、ソースコードを変換し提供するのみになります。条件で囲われている動的インポートのコードは、現在の画面で使われる場合のみ処理されます。
 
 <script setup>
 import bundlerSvg from '../images/bundler.svg?raw'
