@@ -2,6 +2,8 @@
 
 - **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
 
+特に記載がない限り、このセクションのオプションは、開発時にだけ使用される依存関係の最適化にのみ適用されます。
+
 ## optimizeDeps.entries
 
 - **型:** `string | string[]`
