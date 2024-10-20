@@ -106,10 +106,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 ディレクトリーのデフォルトは `<root>/public` ですが、 [`publicDir` オプション](/config/shared-options.md#publicdir) で設定することができます。
 
-注意点:
-
-- `public` 内のアセットを絶対パスで参照する際は常に次のように行う必要があります。 - 例えば、 `public/icon.png` はソースコード内では `/icon.png` のように参照されなければなりません。
-- `public` 内のアセットは、 JavaScript からはインポートすることができません。
+`public` アセットは常にルート絶対パスを使用して参照する必要があることに注意してください。たとえば、`public/icon.png` はソースコード内で `/icon.png` として参照する必要があります。
 
 ## new URL(url, import.meta.url)
 
