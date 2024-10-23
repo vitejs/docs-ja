@@ -10,10 +10,7 @@
 
 最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートするブラウザーを対象にします。Vite は `'modules'` を `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']` へ置き換えます。
 
-もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
-
-- [`build.minify`](#build-minify) オプションが `'terser'` で、インストールされている Terser のバージョンが 5.16.0 未満の場合、`'esnext'` は強制的に `'es2021'` に下げられます。
-- それ以外の場合、トランスパイルはまったく行なわれません。
+もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、最小限のトランスパイルのみが実行されます。
 
 変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザー（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
