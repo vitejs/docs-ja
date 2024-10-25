@@ -24,6 +24,8 @@ Vite 6 では、`json.stringify` の新しいデフォルト値として `'auto'
 
 少数のユーザーにのみ影響するその他の重大な変更があります。
 
+- [[#15637] fix!: default `build.cssMinify` to `'esbuild'` for SSR](https://github.com/vitejs/vite/pull/15637)
+  - [`build.cssMinify`](/config/build-options#build-cssminify) は、SSR ビルドの場合でもデフォルトで有効になりました。
 - [[#18209] refactor!: bump minimal terser version to 5.16.0](https://github.com/vitejs/vite/pull/18209)
   - [`build.minify: 'terser'`](/config/build-options#build-minify) でサポートされる最小の terser のバージョンが 5.4.0 から 5.16.0 に引き上げられました。
 - [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
