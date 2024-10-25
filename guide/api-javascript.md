@@ -128,8 +128,8 @@ interface ViteDevServer {
    */
   moduleGraph: ModuleGraph
   /**
-   * Vite が CLI に表示する解決済みの URL。ミドルウェアモードの場合や `server.listen` が
-   * 呼び出される前は null になります。
+   * Vite が CLI に表示する解決済みの URL（URL エンコード済み）。ミドルウェアモードの場合、
+   * またはサーバーがどのポートもリッスンしていない場合は、`null` を返します。
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
@@ -274,8 +274,8 @@ interface PreviewServer {
    */
   httpServer: http.Server
   /**
-   * Vite が CLI に表示する解決済みURL
-   * サーバーがリッスンする前は null
+   * Vite が CLI に表示する解決済みの URL（URL エンコード済み）。
+   * サーバーがどのポートもリッスンしていない場合は、`null` を返します。
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
