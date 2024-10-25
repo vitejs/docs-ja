@@ -1,5 +1,7 @@
 # サーバーオプション
 
+特に記載がない限り、このセクションのオプションは開発にのみ適用されます。
+
 ## server.host
 
 - **型:** `string | boolean`
@@ -18,8 +20,7 @@ Vite ではなく他のサーバーがレスポンスを返す場合がありま
 
 [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定することで、この並び替える動作を無効化できます。そうすると、Vite はアドレスを `localhost` と出力します。
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 import dns from 'note:dns'
 
@@ -37,7 +38,7 @@ export default defineConfig({
 ::: tip LAN から WSL2 上のサーバーにアクセスする
 
 WSL2 上で Vite を動作させる場合、LAN からサーバーにアクセスするために `host: true` を設定するだけでは不十分です。
-詳しくは [WSL のドキュメント](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan)をご覧ください。
+詳しくは [WSL のドキュメント](https://learn.microsoft.com/ja-jp/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan)をご覧ください。
 
 :::
 
@@ -86,7 +87,7 @@ export default defineConfig({
 
 - **型:** `Record<string, string | ProxyOptions>`
 
-開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。リクエストパスがそのキーで始まるすべてのリクエストは、その指定されたターゲットにプロキシされます。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
+開発サーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。リクエストパスがそのキーで始まるすべてのリクエストは、その指定されたターゲットにプロキシされます。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。リクエストが設定したプロキシのルールのいずれかに一致した場合、そのリクエストは Vite によって変換されません。
 
 相対的でない [`base`](/config/shared-options.md#base) を使用する場合、各キーの先頭に `base` を付けなければならないことに注意してください。
 
@@ -167,7 +168,7 @@ HMR 接続の無効化または設定（HMR WebSocket が http サーバーと�
 デフォルトの設定では、Vite の前のリバースプロキシが WebSocket のプロキシに対応していることが期待されています。Vite の HMR クライアントが WebSocket の接続に失敗した場合、クライアントはリバースプロキシを迂回して直接 Vite の HMR サーバーに接続するようにフォールバックします:
 
 ```
-Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
 ```
 
 フォールバックが発生した際のブラウザーに表示されるエラーは無視できます。直接リバースプロキシを迂回してエラーを回避するには、次のいずれかを行えます:
@@ -185,7 +186,7 @@ Direct websocket connection fallback. Check out https://vitejs.dev/config/server
 
 変換するファイルをウォームアップし、結果を事前にキャッシュします。これにより、サーバー起動時の初期ページ読み込みが改善され、変換ウォーターフォールを防げます。
 
-`clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`fast-glob`](https://github.com/mrmlnc/fast-glob) パターンの配列を受け入れます。
+`clientFiles` はクライアントのみで使用されるファイルであり、`ssrFiles` は SSR のみで使用されるファイルです。これらは `root` を基準としたファイルパスや [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) パターンの配列を受け入れます。
 
 起動時に Vite 開発サーバーに負荷がかからないように、頻繁に使用するファイルのみを追加するようにしてください。
 
@@ -324,7 +325,7 @@ export default defineConfig({
 ## server.fs.deny
 
 - **型:** `string[]`
-- **デフォルト:** `['.env', '.env.*', '*.{crt,pem}']`
+- **デフォルト:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
 Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
 

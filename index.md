@@ -1,56 +1,47 @@
 ---
-layout: home
-
 title: Vite
 titleTemplate: 次世代フロントエンドツール
+pageClass: landing dark
 
-hero:
-  name: Vite
-  text: 次世代フロントエンドツール
-  tagline: 最先端をいく開発環境を構築しましょう
-  image:
-    src: /logo-with-shadow.png
-    alt: Vite
-  actions:
-    - theme: brand
-      text: Vite を始める
-      link: /guide/
-    - theme: alt
-      text: Vite を使う理由
-      link: /guide/why
-    - theme: alt
-      text: GitHub で見る
-      link: https://github.com/vitejs/vite
-    - theme: alt
-      text: ⚡ ViteConf 24!
-      link: https://viteconf.org/?utm=vite-homepage
-
-features:
-  - icon: 💡
-    title: 瞬時にスタートするサーバー
-    details: ネイティブ ESM により要求時にファイルが提供されるため、バンドルが不要です！
-  - icon: ⚡️
-    title: 超高速な HMR
-    details: アプリのサイズに関係なく高速を維持する HMR を提供します。
-  - icon: 🛠️
-    title: 豊富な機能
-    details: TypeScript、JSX、CSS などがすぐに使えるようにサポートされています。
-  - icon: 📦
-    title: 最適化されたビルド
-    details: 設定済みの Rollup によるビルドによってマルチページおよびライブラリーモードをサポートします。
-  - icon: 🔩
-    title:  ユニバーサルなプラグイン
-    details: 開発とビルドの間で共有される Rollup と互換性のあるプラグインを提供します。
-  - icon: 🔑
-    title: 完全に型定義がされている API
-    details: 完全な TypeScript の型定義を備えた柔軟なプログラミング志向の API です。
+layout: home
+aside: false
+editLink: false
+markdownStyles: false
 ---
 
-<style>
-.VPButton.alt[href="https://lu.ma/vite"] {
-  background: var(--vp-home-hero-name-background);
-  border: none;
-  padding: 1px 21px;
-  color: #fff !important;
-}
-</style>
+<script setup>
+import Hero from '.vitepress/theme/components/landing/1. hero-section/HeroSection.vue'
+import FeatureSection from './.vitepress/theme/components/landing/2. feature-section/FeatureSection.vue'
+import FrameworksSection from './.vitepress/theme/components/landing/3. frameworks-section/FrameworksSection.vue'
+import CommunitySection from './.vitepress/theme/components/landing/4. community-section/CommunitySection.vue'
+import SponsorSection from './.vitepress/theme/components/landing/5. sponsor-section/SponsorSection.vue'
+import GetStartedSection from '.vitepress/theme/components/landing/6. get-started-section/GetStartedSection.vue'
+import FeatureInstantServerStart from './.vitepress/theme/components/landing/2. feature-section/FeatureInstantServerStart.vue'
+import FeatureHMR from './.vitepress/theme/components/landing/2. feature-section/FeatureHMR.vue'
+import FeatureRichFeatures from './.vitepress/theme/components/landing/2. feature-section/FeatureRichFeatures.vue'
+import FeatureOptimizedBuild from './.vitepress/theme/components/landing/2. feature-section/FeatureOptimizedBuild.vue'
+import FeatureFlexiblePlugins from './.vitepress/theme/components/landing/2. feature-section/FeatureFlexiblePlugins.vue'
+import FeatureTypedAPI from './.vitepress/theme/components/landing/2. feature-section/FeatureTypedAPI.vue'
+import FeatureSSRSupport from './.vitepress/theme/components/landing/2. feature-section/FeatureSSRSupport.vue'
+import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/FeatureCI.vue'
+</script>
+
+<div class="VPHome">
+  <Hero/>
+  <FeatureSection title="開発者体験の再定義" description="Vite はウェブ開発を再びシンプルにします" type="blue">
+    <FeatureInstantServerStart />
+    <FeatureHMR />
+    <FeatureRichFeatures />
+    <FeatureOptimizedBuild />
+  </FeatureSection>
+  <FeatureSection title="ビルドのための共通基盤" type="pink" class="feature-section--flip">
+    <FeatureFlexiblePlugins />
+    <FeatureTypedAPI />
+    <FeatureSSRSupport />
+    <FeatureCI />
+  </FeatureSection>
+  <FrameworksSection />
+  <CommunitySection />
+  <SponsorSection />
+  <GetStartedSection />
+</div>

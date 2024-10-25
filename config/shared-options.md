@@ -1,5 +1,7 @@
 # 共通オプション
 
+特に記載がない限り、このセクションのオプションは開発、ビルド、プレビューのすべてに適用されます。
+
 ## root
 
 - **型:** `string`
@@ -343,12 +345,12 @@ Lightning CSS の設定。すべての変換オプションは [Lightning CSS �
 
 ## json.stringify
 
-- **型:** `boolean`
-- **デフォルト:** `false`
+- **型:** `boolean | 'auto'`
+- **デフォルト:** `'auto'`
 
 `true` に設定すると、インポートされた JSON は `export default JSON.parse("...")` に変換されます。これは特に JSON ファイルが大きい場合、オブジェクトリテラルよりも大幅にパフォーマンスが向上します。
 
-有効にすると、名前付きインポートは無効になります。
+`'auto'` に設定すると、[データが 10kB より大きい](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger) 場合にのみデータが文字列化されます。
 
 ## esbuild
 

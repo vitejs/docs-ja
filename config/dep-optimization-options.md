@@ -2,13 +2,15 @@
 
 - **関連:** [依存関係の事前バンドル](/guide/dep-pre-bundling)
 
+特に記載がない限り、このセクションのオプションは、開発時にだけ使用される依存関係の最適化にのみ適用されます。
+
 ## optimizeDeps.entries
 
 - **型:** `string | string[]`
 
 デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
 
-これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [fast-glob パターン](https://github.com/mrmlnc/fast-glob#basic-syntax) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。`node_modules` と `build.outDir` を無視したくない場合は、代わりに（fast-glob パターンを使用せずに）リテラル文字列を使用してパスを指定できます。
+これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [`tinyglobby` パターン](https://github.com/SuperchupuDev/tinyglobby) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。`node_modules` と `build.outDir` を無視したくない場合は、代わりに（`tinyglobby` パターンを使用せずに）リテラル文字列を使用してパスを指定できます。
 
 ## optimizeDeps.exclude
 
@@ -51,7 +53,7 @@ export default defineConfig({
 
 ## optimizeDeps.esbuildOptions
 <!-- textlint-disable -->
-- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)`,
+- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
 | 'bundle'
 | 'entryPoints'
 | 'external'

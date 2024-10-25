@@ -2,7 +2,7 @@
 
 さらなる情報は[Rollup のトラブルシューティングガイド](https://rollupjs.org/troubleshooting/)もご覧ください。
 
-こちらに提案されているもので動作しなかった場合、[GitHub Discussions](https://github.com/vitejs/vite/discussions) や [Vite Land Discord](https://chat.vitejs.dev) の `#help` チャンネルで質問してみてください。
+こちらに提案されているもので動作しなかった場合、[GitHub Discussions](https://github.com/vitejs/vite/discussions) や [Vite Land Discord](https://chat.vite.dev) の `#help` チャンネルで質問してみてください。
 
 ## CJS
 
@@ -123,7 +123,7 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 サーバー / WebSocket サーバーが大きな HTTP ヘッダーを受信した場合、リクエストが破棄され次のような警告が表示されます。
 
-> Server responded with status code 431. See https://vitejs.dev/guide/troubleshooting.html#_431-request-header-fields-too-large.
+> Server responded with status code 431. See https://vite.dev/guide/troubleshooting.html#_431-request-header-fields-too-large.
 
 これは [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121) を軽減するため Node.js がリクエストヘッダーサイズを制限しているためです。
 

@@ -2,7 +2,7 @@
 
 基本的に、Vite を使用した開発は静的ファイルサーバーを使用した時とそれほど変わりません。しかし、Vite はバンドラーベースのセットアップで一般的な機能をサポートするためにネイティブ ESM をインポートすることで様々な拡張機能を提供します。
 
-## NPM の依存関係の解決と事前バンドル
+## npm の依存関係の解決と事前バンドル
 
 ネイティブ ES のインポートは次のような生のモジュールをサポートしていません:
 
@@ -88,12 +88,12 @@ Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以�
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#target)
 
-Vite はデフォルトでは設定された `target` 値で TypeScript をトランスパイルせず、`esbuild` と同じ動作に従います。
+Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` の値を無視します。
 
-代わりに [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
+開発中に target を指定するには [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
 
 ::: warning `useDefineForClassFields`
-`target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザーでサポートされていない可能性があります。
+`tsconfig.json` 内の `target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザーでサポートされていない可能性があります。
 
 そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
 :::
@@ -125,7 +125,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 
 または、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加することもできます:
 
-```json
+```json [tsconfig.json]
 {
   "compilerOptions": {
     "types": ["vite/client"]
@@ -176,8 +176,7 @@ Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github
 
 React や Vue 以外で JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact の場合:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -192,8 +191,7 @@ export default defineConfig({
 
 また、`jsxInject`（Vite のみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -223,8 +221,7 @@ CSS の圧縮は PostCSS の後に実行され、[`build.cssTarget`](/config/bui
 
 `.module.css` で終わる全ての CSS ファイルは全て [CSS modules file](https://github.com/css-modules/css-modules) とみなされます。このようなファイルをインポートすると、対応するモジュールオブジェクトが返されます:
 
-```css
-/* example.module.css */
+```css [example.module.css]
 .red {
   color: red;
 }
@@ -502,7 +499,7 @@ const modules = {
 
 #### カスタムクエリー
 
-また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vitejs.dev/guide/assets.html#importing-asset-as-string)または [url として](https://vitejs.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
+また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vite.dev/guide/assets.html#importing-asset-as-string)または [url として](https://vite.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
 
 ```ts twoslash
 import 'vite/client'
@@ -545,7 +542,7 @@ const modules = import.meta.glob('./dir/*.js', {
 
 - これは Vite のみの機能で、Web または ES の標準ではありません。
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./` で始まる）か絶対パス（`/` で始まり、プロジェクトルートに対して相対的に解決される）、またはエイリアスのパス（[`resolve.alias` オプション](/config/shared-options.md#resolve-alias) 参照）のいずれかでなければなりません。
-- Glob のマッチングは [`fast-glob`](https://github.com/mrmlnc/fast-glob) を介して行われます。[サポートされている Glob パターン](https://github.com/mrmlnc/fast-glob#pattern-syntax)については、ドキュメントを確認してください。
+- Glob のマッチングは [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) を介して行われます。
 - また、`import.meta.glob` の引数はすべて**リテラル構文として渡さなければならない**ことに注意が必要です。変数や式は使えません。
 
 ## Dynamic Import

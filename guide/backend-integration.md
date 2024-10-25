@@ -8,10 +8,9 @@
 
 1. Vite の設定ファイルで、エントリーの指定とマニフェストのビルドの有効化を行ってください:
 
-   ```js twoslash
+   ```js twoslash [vite.config.js]
    import { defineConfig } from 'vite'
    // ---cut---
-   // vite.config.js
    export default defineConfig({
      build: {
        // outDir に .vite/manifest.json を出力
@@ -60,7 +59,7 @@
 
 3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `.vite/manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
 
-   ```json
+   ```json [.vite/manifest.json]
    {
      "_shared-!~{003}~.js": {
        "file": "assets/shared-ChJ_j-JJ.css",
@@ -152,3 +151,37 @@
    <!-- オプション -->
    <link rel="modulepreload" href="assets/shared-B7PI925R.js" />
    ```
+
+   ::: details `importedChunks` の疑似実装
+   TypeScript での `importedChunks` の疑似実装の例（これは、プログラミング言語とテンプレート言語に合わせて調整する必要があります）:
+
+   ```ts
+   import type { Manifest, ManifestChunk } from 'vite'
+
+   export default function importedChunks(
+     manifest: Manifest,
+     name: string,
+   ): ManifestChunk[] {
+     const seen = new Set<string>()
+
+     function getImportedChunks(chunk: ManifestChunk): ManifestChunk[] {
+       const chunks: ManifestChunk[] = []
+       for (const file of chunk.imports ?? []) {
+         const importee = manifest[file]
+         if (seen.has(file)) {
+           continue
+         }
+         seen.add(file)
+
+         chunks.push(...getImportedChunks(importee))
+         chunks.push(importee)
+       }
+
+       return chunks
+     }
+
+     return getImportedChunks(manifest[name])
+   }
+   ```
+
+   :::

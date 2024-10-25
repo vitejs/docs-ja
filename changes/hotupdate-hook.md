@@ -1,20 +1,20 @@
-# HMR `hotUpdate` Plugin Hook
+# HMR `hotUpdate` プラグインフック
 
-::: tip Feedback
-Give us feedback at [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)
+::: tip フィードバック
+[Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-We're planning to deprecate the `handleHotUpdate` plugin hook in favor of [`hotUpdate` hook](/guide/api-environment#the-hotupdate-hook) to be [Environment API](/guide/api-environment.md) aware, and handle additional watch events with `create` and `delete`.
+[Environment API](/guide/api-environment.md)を意識するために、`handleHotUpdate` プラグインフックを非推奨とし、[`hotUpdate` フック](/guide/api-environment#the-hotupdate-hook)を使用し、`create` と `delete` で追加の監視イベントを処理する予定です。
 
-Affected scope: `Vite Plugin Authors`
+影響範囲: `Vite プラグイン作成者`
 
-::: warning Future Deprecation
-`hotUpdate` was first introduced in `v6.0`. The deprecation of `handleHotUpdate` is planned for `v7.0`. We don't yet recommend moving away from `handleHotUpdate` yet. If you want to experiment and give us feedback, you can use the `future.removePluginHookHandleHotUpdate` to `"warn"` in your vite config.
+::: warning 将来の廃止予定
+`hotUpdate` は `v6.0` で初めて導入されました。`handleHotUpdate` の廃止は `v7.0` で予定されています。現時点では、まだ `handleHotUpdate` からの移行は推奨していません。もし実験して私たちにフィードバックをしたいのであれば、vite config で `future.removePluginHookHandleHotUpdate` を `"warn"` に指定してください。
 :::
 
-## Motivation
+## 動機
 
-The [`handleHotUpdate` hook](/guide/api-plugin.md#handlehotupdate) allows to perform custom HMR update handling. A list of modules to be updated is passed in the `HmrContext`
+[`handleHotUpdate` フック](/guide/api-plugin.md#handlehotupdate) はカスタム HMR 更新処理を行うことができます。更新するモジュールのリストは `HmrContext` に渡されます
 
 ```ts
 interface HmrContext {
@@ -26,9 +26,9 @@ interface HmrContext {
 }
 ```
 
-This hook is called once for all environments, and the passed modules have mixed information from the Client and SSR environments only. Once frameworks move to custom environments, a new hook that is called for each of them is needed.
+このフックはすべての環境に対して一度だけ呼び出され、渡されたモジュールはクライアント環境と SSR 環境だけの情報が混在しています。フレームワークがカスタム環境に移行すると、それぞれの環境に対して呼び出される新しいフックが必要になります。
 
-The new `hotUpdate` hook works in the same way as `handleHotUpdate` but it is called for each environment and receives a new `HotUpdateContext` instance:
+新しい `hotUpdate` フックは `handleHotUpdate` と同じように動作しますが、環境ごとに呼び出され、新しい `HotUpdateContext` インスタンスを受け取ります:
 
 ```ts
 interface HotUpdateContext {
@@ -41,31 +41,31 @@ interface HotUpdateContext {
 }
 ```
 
-The current dev environment can be accessed like in other Plugin hooks with `this.environment`. The `modules` list will now be module nodes from the current environment only. Each environment update can define different update strategies.
+現在の開発環境は他のプラグインフックのように `this.environment` でアクセスできます。`modules` のリストには現在の環境のモジュールノードのみが表示されます。各環境の更新は異なる更新ストラテジーを定義できます。
 
-This hook is also now called for additional watch events and not only for `'update'`. Use `type` to differentiate between them.
+このフックは `'update'` だけでなく、追加の監視イベントでも呼び出されるようになりました。これらを区別するには `type` を使用します。
 
-## Migration Guide
+## 移行ガイド
 
-Filter and narrow down the affected module list so that the HMR is more accurate.
+HMR がより正確になるように、影響を受けるモジュールのリストをフィルタリングして絞り込みます。
 
 ```js
 handleHotUpdate({ modules }) {
   return modules.filter(condition)
 }
 
-// Migrate to:
+// 以下に移行:
 
 hotUpdate({ modules }) {
   return modules.filter(condition)
 }
 ```
 
-Return an empty array and perform a full reload:
+空の配列を返して完全なリロードを実行します:
 
 ```js
 handleHotUpdate({ server, modules, timestamp }) {
-  // Invalidate modules manually
+  // モジュールを手動で無効化
   const invalidatedModules = new Set()
   for (const mod of modules) {
     server.moduleGraph.invalidateModule(
@@ -79,10 +79,10 @@ handleHotUpdate({ server, modules, timestamp }) {
   return []
 }
 
-// Migrate to:
+// 以下に移行:
 
 hotUpdate({ modules, timestamp }) {
-  // Invalidate modules manually
+  // モジュールを手動で無効化
   const invalidatedModules = new Set()
   for (const mod of modules) {
     this.environment.moduleGraph.invalidateModule(
@@ -97,7 +97,7 @@ hotUpdate({ modules, timestamp }) {
 }
 ```
 
-Return an empty array and perform complete custom HMR handling by sending custom events to the client:
+空の配列を返し、カスタムイベントをクライアントに送信することで、完全なカスタム HMR 処理を行います:
 
 ```js
 handleHotUpdate({ server }) {
@@ -109,7 +109,7 @@ handleHotUpdate({ server }) {
   return []
 }
 
-// Migrate to...
+// 以下に移行...
 
 hotUpdate() {
   this.environment.hot.send({

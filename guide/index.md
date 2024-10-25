@@ -49,7 +49,7 @@ Vite は [Node.js](https://nodejs.org/en/) 18+ または 20+ のバージョン�
 
 ::: code-group
 
-```bash [NPM]
+```bash [npm]
 $ npm create vite@latest
 ```
 
@@ -57,7 +57,7 @@ $ npm create vite@latest
 $ yarn create vite
 ```
 
-```bash [PNPM]
+```bash [pnpm]
 $ pnpm create vite
 ```
 
@@ -73,7 +73,7 @@ $ bun create vite
 
 ::: code-group
 
-```bash [NPM]
+```bash [npm]
 # npm 7+ は追加で 2 つのダッシュが必要:
 $ npm create vite@latest my-vue-app -- --template vue
 ```
@@ -82,7 +82,7 @@ $ npm create vite@latest my-vue-app -- --template vue
 $ yarn create vite my-vue-app --template vue
 ```
 
-```bash [PNPM]
+```bash [pnpm]
 $ pnpm create vite my-vue-app --template vue
 ```
 
@@ -118,7 +118,7 @@ npm run dev
 
 ::: code-group
 
-```bash [NPM]
+```bash [npm]
 $ npm install -D vite
 ```
 
@@ -126,7 +126,7 @@ $ npm install -D vite
 $ yarn add -D vite
 ```
 
-```bash [PNPM]
+```bash [pnpm]
 $ pnpm add -D vite
 ```
 
@@ -146,7 +146,7 @@ $ bun add -D vite
 
 ::: code-group
 
-```bash [NPM]
+```bash [npm]
 $ npx vite
 ```
 
@@ -154,7 +154,7 @@ $ npx vite
 $ yarn vite
 ```
 
-```bash [PNPM]
+```bash [pnpm]
 $ pnpm vite
 ```
 
@@ -186,7 +186,7 @@ Vite は複数の `.html` エントリーポイントを持つ[マルチペー�
 Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリーを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
 <!-- prettier-ignore -->
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "vite", // 開発サーバーを起動。エイリアス: `vite dev`, `vite serve`
@@ -217,4 +217,4 @@ pnpm link --global # このステップでは好きなパッケージマネー�
 
 ## コミュニティー
 
-質問がある場合やサポートが必要な場合は、[Discord](https://chat.vitejs.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。
+質問がある場合やサポートが必要な場合は、[Discord](https://chat.vite.dev) や [GitHub Discussions](https://github.com/vitejs/vite/discussions) でコミュニティーに連絡してください。

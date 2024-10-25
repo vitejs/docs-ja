@@ -1,22 +1,22 @@
-# Shared Plugins during Build
+# ビルド時の共有プラグイン
 
-::: tip Feedback
-Give us feedback at [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)
+::: tip フィードバック
+[Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-// TODO:
-See [Shared plugins during build](/guide/api-environment.md#shared-plugins-during-build).
+// TODO: <small>（訳注: 原文ママ）</small>
+[ビルド時の共有プラグイン](/guide/api-environment.md#shared-plugins-during-build)を参照してください。
 
-Affect scope: `Vite Plugin Authors`
+影響範囲: `Vite プラグイン作成者`
 
-::: warning Future Default Change
-`builder.sharedConfigBuild` was first introduce in `v6.0`. You can set it true to check how your plugins work with a shared config. We're looking for feedback about changing the default in a future major once the plugin ecosystem is ready.
+::: warning 将来のデフォルト変更
+`builder.sharedConfigBuild` は `v6.0` で初めて導入されました。これを true に設定することで、プラグインが共有コンフィグでどのように動作するかをチェックできます。プラグインエコシステムの準備が整ったら、将来のメジャーバージョンでデフォルトを変更するためのフィードバックを求めています。
 :::
 
-## Motivation
+## 動機
 
-// TODO:
+// TODO: <small>（訳注: 原文ママ）</small>
 
-## Migration Guide
+## 移行ガイド
 
-// TODO:
+// TODO: <small>（訳注: 原文ママ）</small>

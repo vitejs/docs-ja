@@ -29,11 +29,21 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ベースパスの高度な制御については、[高度なベースパスの設定](#advanced-base-options)を参照してください。
 
+### 相対的な base
+
+ベースパスが事前にわからない場合は、相対的なベースパスとして `"base": "./"` または `"base": ""` を設定できます。これにより、生成されるすべての URL が各ファイルに対して相対的なものになります。
+
+:::warning 相対的な base を使用する場合の古いブラウザーのサポート
+
+相対的な base には `import.meta` の対応が必要です。[`import.meta` に対応していないブラウザー](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートする必要がある場合、[`legacy` プラグイン](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) が利用できます。
+
+:::
+
 ## ビルドのカスタマイズ
 
 ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/configuration-options/) を `build.rollupOptions` で直接調整することができます:
 
-```js
+```js [vite.config.js]
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -65,8 +75,7 @@ window.addEventListener('vite:preloadError', (event) => {
 
 `vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   build: {
     watch: {
@@ -96,8 +105,7 @@ export default defineConfig({
 
 ビルド時には、エントリーポイントとして複数の `.html` ファイルを指定するだけです:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
@@ -123,15 +131,15 @@ HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクト�
 
 配布のためにライブラリーをバンドルするときには [`build.lib` 設定オプション](/config/build-options.md#build-lib) を使用します。また、ライブラリーにバンドルしたくない依存関係、例えば `vue` や `react` などは必ず外部化してください:
 
-```js twoslash
-// vite.config.js
+::: code-group
+
+```js twoslash [vite.config.js（単一エントリー）]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
     lib: {
-      // 複数のエントリーポイントのディクショナリや配列にもできます
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // 適切な拡張子が追加されます
@@ -153,10 +161,40 @@ export default defineConfig({
 })
 ```
 
+```js twoslash [vite.config.js（複数エントリー）]
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: {
+        'my-lib': resolve(__dirname, 'lib/main.js'),
+        secondary: resolve(__dirname, 'lib/secondary.js'),
+      },
+      name: 'MyLib',
+    },
+    rollupOptions: {
+      // ライブラリーにバンドルされるべきではない依存関係を
+      // 外部化するようにします
+      external: ['vue'],
+      output: {
+        // 外部化された依存関係のために UMD のビルドで使用する
+        // グローバル変数を提供します
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+  },
+})
+```
+
+:::
+
 エントリーファイルには、パッケージのユーザーがインポートできるエクスポートが含まれることになります:
 
-```js
-// lib/main.js
+```js [lib/main.js]
 import Foo from './Foo.vue'
 import Bar from './Bar.vue'
 export { Foo, Bar }
@@ -173,7 +211,9 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 ライブラリーに推奨される `package.json`:
 
-```json
+::: code-group
+
+```json [package.json（単一エントリー）]
 {
   "name": "my-lib",
   "type": "module",
@@ -189,9 +229,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-あるいは、複数のエントリーポイントを公開する場合:
-
-```json
+```json [package.json（複数エントリー）]
 {
   "name": "my-lib",
   "type": "module",
@@ -210,6 +248,8 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
   }
 }
 ```
+
+:::
 
 ::: tip ファイル拡張子
 `package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。

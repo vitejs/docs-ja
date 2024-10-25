@@ -1,27 +1,27 @@
-# Breaking Changes
+# 破壊的変更
 
-List of breaking changes in Vite including API deprecations, removals, and changes. Most of the changes below can be opt-in using the [`future` option](/config/shared-options.html#future) in your Vite config.
+API の非推奨、削除、変更を含む、Vite の変更点のリストです。以下の変更のほとんどは、Vite の設定にある[`future` オプション](/config/shared-options.html#future)を使ってオプトインできます。
 
-## Planned
+## 計画中
 
-These changes are planned for the next major version of Vite. The deprecation or usage warnings will guide you where possible, and we're reaching out to framework, plugin authors, and users to apply these changes.
+これらの変更は Vite の次のメジャーバージョンで予定されています。非推奨または使用上の警告は、可能な限りガイドし、私たちはこれらの変更を適用するようフレームワーク、プラグイン作者、ユーザーに働きかけています。
 
-- _No planned changes yet_
+- _まだ変更予定はありません_
 
-## Considering
+## 検討中
 
-These changes are being considered and are often experimental APIs that intend to improve upon current usage patterns. As not all changes are listed here, please check out the [Experimental Label in Vite GitHub Discussions](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) for the full list.
+これらの変更は検討中であり、現在の使用パターンを改善するための実験的な API であることが多いです。すべての変更がここに記載されているわけではないので、完全なリストについては [Vite GitHub ディスカッションの experimental ラベル](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) を確認してください。
 
-We don't recommend switching to these APIs yet. They are included in Vite to help us gather feedback. Please check these proposals and let us know how they work in your use case in each's linked GitHub Discussions.
+これらの API に切り替えることはまだお勧めしません。これらの API はフィードバックを集めるために Vite に含まれています。これらの提案を確認し、あなたのユースケースでどのように機能するか、それぞれのリンク先の GitHub Discussions でお知らせください。
 
-- [`this.environment` in Hooks](/changes/this-environment-in-hooks)
-- [HMR `hotUpdate` Plugin Hook](/changes/hotupdate-hook)
-- [Move to per-environment APIs](/changes/per-environment-apis)
-- [SSR using `ModuleRunner` API](/changes/ssr-using-modulerunner)
-- [Shared plugins during build](/changes/shared-plugins-during-build)
+- [フック内の `this.environment`](/changes/this-environment-in-hooks)
+- [HMR `hotUpdate` プラグインフック](/changes/hotupdate-hook)
+- [環境ごとの API への移行](/changes/per-environment-apis)
+- [`ModuleRunner` API を使った SSR](/changes/ssr-using-modulerunner)
+- [ビルド時の共有プラグイン](/changes/shared-plugins-during-build)
 
-## Past
+## 過去
 
-The changes below has been done or reverted. They are no longer relevant in the current major version.
+以下の変更は、すでに終了または差し戻されています。現在のメジャーバージョンではこれらは関係ありません。
 
-- _No past changes yet_
+- _過去の変更はまだありません_

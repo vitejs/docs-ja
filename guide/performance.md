@@ -29,7 +29,7 @@ Vite の内部および公式プラグインは、幅広いエコシステムと
    `vite --debug plugin-transform` または [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) を使用してファイルの変換にかかる時間を調査できます。非同期操作はタイミングが不正確になる傾向があるため、これらの数字はおおよその推定値として扱うべきですが、よりコストのかかる操作を明らかにするのには十分です。
 
 ::: tip プロファイリング
-`vite --profile` を実行してサイトにアクセスし、ターミナルで `p + enter` を押して `.cpuprofile` を記録できます。[speedscope](https://www.speedscope.app) のようなツールを使用してプロファイルを検査し、ボトルネックを特定できます。また、[プロファイルを共有](https://chat.vitejs.dev) して Vite チームがパフォーマンスの問題を特定するのに役立てることもできます。
+`vite --profile` を実行してサイトにアクセスし、ターミナルで `p + enter` を押して `.cpuprofile` を記録できます。[speedscope](https://www.speedscope.app) のようなツールを使用してプロファイルを検査し、ボトルネックを特定できます。また、[プロファイルを共有](https://chat.vite.dev) して Vite チームがパフォーマンスの問題を特定するのに役立てることもできます。
 :::
 
 ## 解決操作の削減
@@ -52,15 +52,14 @@ Vite の内部および公式プラグインは、幅広いエコシステムと
 プラグインの作者の場合は上記のチェックの回数を減らすために、必要な時にのみ [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) を呼び出すようにしてください。
 
 ::: tip TypeScript
-TypeScript を使用している場合は、`tsconfig.json` の `compilerOptions` で `"moduleResolution": "bundler"` および `"allowImportingTsExtensions": true` を有効にして、コード内で直接 `.ts` および `.tsx` 拡張子を使用できるようにしてください。
+TypeScript を使用している場合は、`tsconfig.json` の `compilerOptions` で `"moduleResolution": "Bundler"` および `"allowImportingTsExtensions": true` を有効にして、コード内で直接 `.ts` および `.tsx` 拡張子を使用できるようにしてください。
 :::
 
 ## バレルファイルを避ける
 
 バレルファイルは同じディレクトリー内の他のファイルの API を再エクスポートするファイルです。例:
 
-```js
-// src/utils/index.js
+```js [src/utils/index.js]
 export * from './color.js'
 export * from './dom.js'
 export * from './slash.js'
@@ -92,7 +91,7 @@ vite:transform 62.95ms /src/components/BigComponent.vue +1ms
 vite:transform 102.54ms /src/utils/big-utils.js +1ms
 ```
 
-```js
+```js [vite.config.js]
 export default defineConfig({
   server: {
     warmup: {

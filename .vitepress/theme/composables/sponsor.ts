@@ -48,7 +48,7 @@ const viteSponsors: Pick<Sponsors, 'special' | 'gold'> = {
   ],
   gold: [
     // now automated via sponsors.vuejs.org too
-  ]
+  ],
 }
 
 function toggleDarkLogos() {
@@ -99,17 +99,17 @@ export function useSponsor() {
 function mapSponsors(sponsors: Sponsors) {
   return [
     {
-      tier: 'Special Sponsors',
+      tier: 'パートナーシップ',
       size: 'big',
       items: viteSponsors['special'],
     },
     {
-      tier: 'Platinum Sponsors',
+      tier: 'プラチナスポンサー',
       size: 'big',
       items: mapImgPath(sponsors['platinum']),
     },
     {
-      tier: 'Gold Sponsors',
+      tier: 'ゴールドスポンサー',
       size: 'medium',
       items: [...mapImgPath(sponsors['gold']), ...viteSponsors['gold']],
     },
