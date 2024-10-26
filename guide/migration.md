@@ -20,6 +20,14 @@ Vite 6 からは、`json.stringify: true` が設定されていても、`json.na
 
 Vite 6 では、`json.stringify` の新しいデフォルト値として `'auto'` が導入されました。これは、大きな JSON ファイルのみを文字列化します。この動作を無効にするには、`json.stringify: false` を設定します。
 
+### Sass はデフォルトでモダン API を使用するようになりました
+
+Vite 5 では、Sass にはデフォルトでレガシーAPI が使用されていました。Vite 5.4 では、モダン API のサポートが追加されました。
+
+Vite 6 以降では、モダン API がデフォルトで Sass に使用されます。レガシー API を引き続き使用したい場合は、[`css.preprocessorOptions.sass.api: 'legacy'` / `css.preprocessorOptions.scss.api: 'legacy'`](/config/shared-options#css-preprocessoroptions) を設定します。ただし、レガシー API のサポートは Vite 7 で削除される予定であることにご注意ください。
+
+モダン API に移行するには、[Sass のドキュメント](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/)を参照してください。
+
 ## 高度な内容
 
 少数のユーザーにのみ影響するその他の重大な変更があります。
