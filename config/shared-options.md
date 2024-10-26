@@ -217,7 +217,7 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 
 インラインの PostCSS の設定には、`postcss.config.js` と同じ書式を想定してします。しかし、`plugins` のプロパティには、[配列のフォーマット](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)しか使用できません。
 
-検索は [postcss-load-config](https://github.com/postcss/postcss-load-config) を使用し、対応する設定ファイル名のみが読み込まれます。
+検索は [postcss-load-config](https://github.com/postcss/postcss-load-config) を使用し、対応する設定ファイル名のみが読み込まれます。ワークスペースルート（またはワークスペースが見つからない場合は [プロジェクトルート](/guide/#index-html-and-project-root)）以外の設定ファイルは、デフォルトでは検索されません。必要に応じて、特定の設定ファイルを読み込むために、ルート外のカスタムパスを指定できます。
 
 インライン設定が提供された場合、Vite は他の PostCSS 設定ソースを検索しないことに注意してください。
 
