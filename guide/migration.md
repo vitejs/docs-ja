@@ -36,6 +36,8 @@ Vite 6 以降では、モダン API がデフォルトで Sass に使用され�
   - [`build.cssMinify`](/config/build-options#build-cssminify) は、SSR ビルドの場合でもデフォルトで有効になりました。
 - [[#18209] refactor!: bump minimal terser version to 5.16.0](https://github.com/vitejs/vite/pull/18209)
   - [`build.minify: 'terser'`](/config/build-options#build-minify) でサポートされる最小の terser のバージョンが 5.4.0 から 5.16.0 に引き上げられました。
+- [[#18231] chore(deps): update dependency @rollup/plugin-commonjs to v28](https://github.com/vitejs/vite/pull/18231)
+  - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) がデフォルトで `true` になりました（以前は `'auto'`）。
 - [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
   - 範囲指定の角括弧（`{01..03}` ⇒ `['01', '02', '03']`）および増分指定の角括弧（`{2..8..2}` ⇒ `['2', '4', '6', '8']`）は、glob 内でサポートされなくなりました。
 
