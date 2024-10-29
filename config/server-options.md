@@ -205,11 +205,11 @@ export default defineConfig({
 
 - **型:** `object| null`
 
-[chokidar](https://github.com/paulmillr/chokidar#api) に渡すファイルシステムウォッチャーのオプションです。
+[chokidar](https://github.com/paulmillr/chokidar#getting-started) に渡すファイルシステムウォッチャーのオプションです。`ignored` オプションが渡された場合、Vite は文字列を [picomatch のパターン](https://github.com/micromatch/picomatch#globbing-features)として自動的に変換します。
 
 Vite サーバーのウォッチャーはデフォルトで `root` を監視し、`.git/`、`node_modules/`、および Vite の `cacheDir` と `build.outDir` ディレクトリーをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
-`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッターを返しますが、`add` や `unwatch` を呼び出しても何も起こりません。
+`null` に設定すると、ファイルは監視されません。`server.watcher` はいかなるファイルも監視せず、`add` を呼び出しても何も起こりません。
 
 ::: warning `node_modules` 内のファイルの監視
 

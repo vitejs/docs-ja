@@ -110,7 +110,7 @@ interface ViteDevServer {
   httpServer: http.Server | null
   /**
    * chokidar watcher のインスタンス。`config.server.watch` が `null` に
-   * 設定されている場合、何もしないイベントエミッターを返します。
+   * 設定されている場合、いかなるファイルも監視せず、`add` を呼び出しても何も起こりません。
    * https://github.com/paulmillr/chokidar#api
    */
   watcher: FSWatcher
