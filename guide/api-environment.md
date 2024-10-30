@@ -13,62 +13,77 @@
 
 ## 環境の形式化 {#formalizing-environments}
 
-Vite 6 では、環境の概念が正式化されました。Vite 5 までは、暗黙的な環境が 2 つ（`client` と `ssr`）が存在していました。新しい Environment API を使用すると、ユーザーは必要な数の環境を作成して、アプリが本番環境でどのように動作するかをマッピングできます。この新しい機能には大規模な内部リファクタリングが必要でしたが、後方互換性にも多大な努力が払われました。Vite 6 の当初の目標は、エコシステムをできるだけスムーズに新しいメジャーに移行することであり、十分な数のユーザーが移行し、フレームワークとプラグインの作成者が新しい設計を検証するまで、これらの新しい実験的な API の採用を遅らせます。
+Vite 6 では、環境の概念が正式化されました。Vite 5 までは、暗黙的な環境が 2 つ（`client` と省略可能な `ssr`）が存在していました。新しい Environment API を使用すると、ユーザーは必要な数の環境を作成して、アプリが本番環境でどのように動作するかをマッピングできます。この新しい機能には大規模な内部リファクタリングが必要でしたが、後方互換性にも多大な努力が払われました。Vite 6 の当初の目標は、エコシステムをできるだけスムーズに新しいメジャーに移行することであり、十分な数のユーザーが移行し、フレームワークとプラグインの作成者が新しい設計を検証するまで、これらの新しい実験的な API の採用を遅らせます。
 
 ## ビルドと開発中のギャップを埋める {#closing-the-gap-between-build-and-dev}
 
-シンプルな SPA の場合、環境は 1 つだけです。アプリはユーザーのブラウザーで実行されます。開発中は、Vite が最新のブラウザーを必要とする場合を除き、環境はプロダクションのランタイムとほぼ一致します。Vite 6 では、ユーザーが環境について知らなくても Vite を使用できます。この場合、通常の vite 構成はデフォルトのクライアント環境で機能します。
+シンプルな SPA/MPA の場合、環境に関する新しい API は config に公開されません。内部的には、Vite はオプションを `client` 環境に適用しますが、Vite の設定時にこの概念を知っておく必要はありません。Vite 5 の設定と動作は、ここでもシームレスに機能するはずです。
 
-典型的なサーバーサイドレンダリングの Vite アプリには、2 つの環境があります。クライアント環境はブラウザーでアプリを実行し、Node 環境では SSR を行なうサーバーを実行します。Vite を開発モードで実行すると、サーバーのコードは Vite 開発サーバーと同じ Node プロセスで実行され、プロダクション環境に近い状態になります。ただし、アプリは [Cloudflare の workerd](https://github.com/cloudflare/workerd) のような他の JS ランタイムでサーバーを実行することもできます。また、最新のアプリでは 2 つ以上の環境を持つことも一般的です（たとえば、アプリはブラウザー、Node サーバー、エッジサーバーで実行される可能性があります）。Vite 5 では、これらのケースを適切に表現できませんでした。
+典型的なサーバーサイドレンダリング（SSR）アプリに移行すると、2 つの環境が存在することになります:
 
-Vite 6 では、ビルドと開発中にアプリの設定を行ない、すべての環境をマッピングできます。開発中は単一の Vite 開発サーバーを使用して、複数の異なる環境で同時にコードを実行できるようになりました。アプリのソースコードは、引き続き Vite 開発サーバーによって変換されます。共有 HTTP サーバー、ミドルウェア、解決された設定、プラグインパイプラインに加えて、Vite サーバーには独立した開発環境のセットが用意されています。各環境は、プロダクションにできるだけ近い形で構成され、コードが実行される開発ランタイムに接続されています（workerd の場合、サーバーコードはローカルで miniflare で実行できるようになりました）。クライアントでは、ブラウザーがコードをインポートして実行します。他の環境では、モジュールランナーが変換されたコードを取得して評価します。
+- `client`: ブラウザー内でアプリを実行します。
+- `server`: Node（または他のサーバーランタイム）内でアプリを実行し、ブラウザーに送信する前にページをレンダリングします。
+
+開発環境では、Vite は Vite 開発サーバーと同じ Node プロセスでサーバーコードを実行し、プロダクション環境に近い環境を実現します。しかし、サーバーを他の JS ランタイムで実行することも可能であり、例えば [Cloudflare の workerd](https://github.com/cloudflare/workerd) など、制約が異なるものもあります。最近のアプリケーションは、ブラウザー、Node サーバー、Edge サーバーなど、2 つ以上の環境で実行されることもあります。 Vite 5 では、これらの環境を適切に表現できませんでした。
+
+Vite 6 では、ビルドと開発中にアプリの設定を行ない、すべての環境をマッピングできます。開発中は単一の Vite 開発サーバーを使用して、複数の異なる環境で同時にコードを実行できるようになりました。アプリのソースコードは、引き続き Vite 開発サーバーによって変換されます。共有 HTTP サーバー、ミドルウェア、解決された設定、プラグインパイプラインに加えて、Vite 開発サーバーには独立した開発環境のセットが用意されています。各環境は、プロダクションにできるだけ近い形で構成され、コードが実行される開発ランタイムに接続されています（workerd の場合、サーバーコードはローカルで miniflare で実行できるようになりました）。クライアントでは、ブラウザーがコードをインポートして実行します。他の環境では、モジュールランナーが変換されたコードを取得して評価します。
 
 ![Vite Environments](../images/vite-environments.svg)
 
-## 環境設定 {#environment-configuration}
+## 環境設定 {#environments-configuration}
 
-環境は `environments` 設定オプションで明示的に設定します。
+SPA/MPA の場合、構成は Vite 5 と似たものになります。内部では、これらのオプションは `client` 環境の構成に使用されます。
+
+```js
+export default defineConfig({
+  build: {
+    sourcemap: false,
+  },
+  optimizeDeps: {
+    include: ['lib'],
+  },
+})
+```
+
+これは、Vite を使いやすい状態に保ち、必要になるまで新しい概念を公開しないようにしたいため重要です。
+
+アプリが複数の環境で構成されている場合、これらの環境は、`environments` 設定オプションで明示的に設定することができます。
 
 ```js
 export default {
+  build: {
+    sourcemap: false,
+  },
+  optimizeDeps: {
+    include: ['lib'],
+  },
   environments: {
-    client: {
+    server: {},
+    edge: {
       resolve: {
-        conditions: [], // クライアント環境を設定する
-      },
-    },
-    ssr: {
-      optimizeDeps: {}, // SSR 環境を設定する
-    },
-    rsc: {
-      resolve: {
-        noExternal: true, // カスタム環境を設定する
+        noExternal: true,
       },
     },
   },
 }
 ```
 
-すべての環境設定はユーザーのルート設定から拡張され、ユーザーはルートレベルですべての環境のデフォルトを追加できます。これは、Vite クライアントのみのアプリを設定するような一般的なユースケースで、`environments.client` を経由せずに設定できるため、非常に便利です。
+明示的にドキュメント化されていない場合、環境は設定されたトップレベルのコンフィグオプションを継承します（例えば、新しい `server` および `edge` 環境は `build.sourcemap: false` オプションを継承します）。`optimizeDeps` などの少数のトップレベルオプションは、サーバー環境にデフォルトで適用するとうまく動作しないため、`client` 環境のみに適用されます。 `client` 環境は `environments.client` を通して明示的に設定することもできますが、新しい環境を追加した際にクライアントの設定が変更されないように、トップレベルオプションを使用することをお勧めします。
 
-```js
-export default {
-  resolve: {
-    conditions: [], // すべての環境のデフォルトを設定する
-  },
-}
-```
-
-`EnvironmentOptions` インターフェースは環境ごとのオプションをすべて公開します。`resolve` のように、`build` と `dev` の両方に適用される `SharedEnvironmentOptions` があります。また、開発環境やビルド環境固有のオプション（`optimizeDeps` や `build.outDir` など）については、`DevEnvironmentOptions` と `BuildEnvironmentOptions` があります。
+`EnvironmentOptions` インターフェースは環境ごとのオプションをすべて公開します。`resolve` のように、`build` と `dev` の両方に適用される環境オプションもあります。また、`dev` と `build` に固有のオプション（`dev.warmup` や `build.outDir` など）には、`DevEnvironmentOptions` と `BuildEnvironmentOptions` があります。`optimizeDeps` のように、`dev` にのみ適用されるオプションもありますが、後方互換性を保つため、`dev` のネストではなくトップレベルとして維持されています。
 
 ```ts
-interface EnvironmentOptions extends SharedEnvironmentOptions {
+interface EnvironmentOptions {
+  define?: Record<string, any>
+  resolve?: EnvironmentResolveOptions
+  optimizeDeps: DepOptimizationOptions
+  consumer?: 'client' | 'server'
   dev: DevOptions
   build: BuildOptions
 }
 ```
 
-説明したように、ユーザー設定のルートレベルで定義された環境固有のオプションは、デフォルトのクライアント環境に使用されます（`UserConfig` インターフェースは `EnvironmentOptions` インターフェースを継承しています）。また、環境は `environments` レコードを使用して明示的に設定できます。たとえ `environments` に空のオブジェクトが設定されていたとしても、開発中は `client` と `ssr` の環境は常に存在します。これは `server.ssrLoadModule(url)` と `server.moduleGraph` との後方互換性を保つためです。ビルド時には `client` 環境が常に存在し、`ssr` 環境は明示的に設定された場合（`environments.ssr` または後方互換性のために `build.ssr` を使用します）のみ存在します。
+`UserConfig` インターフェースは `EnvironmentOptions` インターフェースを継承しており、`environments` オプションで設定されたクライアントと他の環境のデフォルトを設定することができます。`client` 環境と `ssr` という名前のサーバー環境は、開発時には常に存在します。これにより、`server.ssrLoadModule(url)` および `server.moduleGraph` との後方互換性が確保されます。ビルド時には、`client` 環境は常に存在し、`ssr` 環境は明示的に設定（`environments.ssr` または後方互換性のために `build.ssr` を使用）されている場合のみ存在します。アプリは SSR 環境に `ssr` という名前を使用する必要はなく、例えば `server` と名付けることもできます。
 
 ```ts
 interface UserConfig extends EnvironmentOptions {
@@ -77,27 +92,21 @@ interface UserConfig extends EnvironmentOptions {
 }
 ```
 
-::: info
-
-トップレベルプロパティの `ssr` には `EnvironmentOptions` と共通する多くのオプションがあります。このオプションは `environments` と同じユースケースのために作成されましたが、設定できるオプションは限られていました。環境設定を統一的に定義するために、このオプションは非推奨とします。
-
-:::
+Environment API が安定したら、トップレベルプロパティ `ssr` が廃止予定になることに注意してください。このオプションは `environments` と同じ役割を持ちますが、デフォルトの `ssr` 環境に対してのみ、限られたオプションの設定のみが可能です。
 
 ## カスタム環境インスタンス {#custom-environment-instances}
 
-低レベルの設定 API が利用できるので、ランタイムプロバイダーはそれぞれのランタイム用の環境を提供できます。
+低レベルの設定 API が利用できるので、ランタイムプロバイダーはそれぞれのランタイムに適切なデフォルト設定の環境を提供することができます。これらの環境では、プロダクション環境に近いランタイムで開発中にモジュールを実行するために、他のプロセスやスレッドを生成することもできます。
 
 ```js
-import { createCustomEnvironment } from 'vite-environment-provider'
+import { customEnvironment } from 'vite-environment-provider'
 
 export default {
+  build: {
+    outDir: '/dist/client',
+  },
   environments: {
-    client: {
-      build: {
-        outDir: '/dist/client',
-      },
-    }
-    ssr: createCustomEnvironment({
+    ssr: customEnvironment({
       build: {
         outDir: '/dist/ssr',
       },
