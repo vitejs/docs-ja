@@ -162,10 +162,28 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 ## build.lib
 
-- **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
+- **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **関連:** [ライブラリーモード](/guide/build#library-mode)
 
-ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。デフォルトの `formats` は `['es', 'umd']` で、複数のエントリーを使用する場合は `['es', 'cjs']` です。`fileName` は出力されるパッケージファイルの名前です。デフォルトの `fileName` は package.json の name オプションですが、`format` と `entryName` を引数にとる関数として定義することもできます。
+ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。
+
+`fileName` はパッケージファイルの出力名で、デフォルトでは `package.json` の `"name"` となります。 また、`format` と `entryName` を引数として受け取り、ファイル名を返す関数として定義することもできます。
+
+パッケージが CSS をインポートしている場合、`cssFileName` を使用して出力される CSS ファイルの名前を指定できます。文字列が設定されている場合は、デフォルトで `fileName` と同じ値になります。それ以外の場合、`package.json` の `"name"` にフォールバックします。
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: ['src/main.js'],
+      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
+      cssFileName: 'my-lib-style',
+    },
+  },
+})
+```
 
 ## build.manifest
 

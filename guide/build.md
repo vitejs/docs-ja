@@ -200,7 +200,12 @@ import Bar from './Bar.vue'
 export { Foo, Bar }
 ```
 
-この設定で `vite build` を実行するとライブラリーの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます。`es` と `umd`（`build.lib` で設定可能）:
+この設定で `vite build` を実行するとライブラリーの出荷を目的とした Rollup プリセットが使用され 2 つのバンドルフォーマットが生成されます:
+
+- `es` と `umd`（単一のエントリー用）
+- `es` と `cjs`（複数のエントリー用）
+
+フォーマットは [`build.lib.formats`](/config/build-options.md#build-lib) オプションで設定できます。
 
 ```
 $ vite build
@@ -250,6 +255,29 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ```
 
 :::
+
+### CSS サポート
+
+ライブラリーが CSS をインポートしている場合、ビルドされた JS ファイルとは別に、単一の CSS ファイルとしてバンドルされます（例えば、`dist/my-lib.css` など）。デフォルトのファイル名は `build.lib.fileName` ですが、[`build.lib.cssFileName`](/config/build-options.md#build-lib) で変更することもできます。
+
+ユーザーがインポートできるように、`package.json` で CSS ファイルをエクスポートできます:
+
+```json {12}
+{
+  "name": "my-lib",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    },
+    "./style.css": "./dist/my-lib.css"
+  }
+}
+```
 
 ::: tip ファイル拡張子
 `package.json` が `"type": "module"` を含まない場合、Vite は Node.js の互換性のため異なるファイル拡張子を生成します。`.js` は `.mjs` に、`.cjs` は `.js` になります。
