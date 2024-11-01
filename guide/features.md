@@ -93,6 +93,7 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 開発中に target を指定するには [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
 
 ::: warning `useDefineForClassFields`
+
 `tsconfig.json` 内の `target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザーでサポートされていない可能性があります。
 
 そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
@@ -158,6 +159,35 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
   ```
 
 :::
+
+## HTML
+
+HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and-project-root)に位置し、アプリケーションのエントリーポイントとして機能し、シングルページアプリケーションおよび[マルチページアプリケーション](/guide/build.html#multi-page-app)の構築をシンプルにします。
+
+プロジェクトルート内の HTML ファイルは、それぞれのディレクトリパスで直接アクセスできます:
+
+- `<root>/index.html` -> `http://localhost:5173/`
+- `<root>/about.html` -> `http://localhost:5173/about.html`
+- `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
+
+デフォルトでは、`<script type="module">` や `<link href>` タグなどの HTML 要素が処理され、リンクされたファイルで Vite の機能を使用できるようになります。また、`<img src>`、`<video src>`、`<source src>` などの一般的なアセット要素もリベースされ、最適化され、正しいパスにリンクされるようになります。
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <img src="/src/images/logo.svg" alt="logo" />
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+特定の要素の HTML 処理をオプトアウトするには、その要素に `vite-ignore` 属性を追加します。これは、外部アセットや CDN を参照する際に便利です。
 
 ## Vue
 
