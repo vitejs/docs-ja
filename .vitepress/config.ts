@@ -297,7 +297,7 @@ export default defineConfig({
               link: '/guide/philosophy',
             },
             {
-              text: 'v4 からの移行',
+              text: 'v5 からの移行',
               link: '/guide/migration',
             },
             {
