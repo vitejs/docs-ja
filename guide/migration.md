@@ -38,6 +38,8 @@ Vite 6 以降では、モダン API がデフォルトで Sass に使用され�
 
 - [[#15637] fix!: default `build.cssMinify` to `'esbuild'` for SSR](https://github.com/vitejs/vite/pull/15637)
   - [`build.cssMinify`](/config/build-options#build-cssminify) は、SSR ビルドの場合でもデフォルトで有効になりました。
+- [[#18070] feat!: proxy bypass with WebSocket](https://github.com/vitejs/vite/pull/18070)
+  - WebSocket のアップグレードリクエストに対しては、`server.proxy[path].bypass` が呼び出されるようになりました。その場合、`res` パラメーターは `undefined` となります。
 - [[#18209] refactor!: bump minimal terser version to 5.16.0](https://github.com/vitejs/vite/pull/18209)
   - [`build.minify: 'terser'`](/config/build-options#build-minify) でサポートされる最小の terser のバージョンが 5.4.0 から 5.16.0 に引き上げられました。
 - [[#18231] chore(deps): update dependency @rollup/plugin-commonjs to v28](https://github.com/vitejs/vite/pull/18231)
