@@ -32,6 +32,26 @@ Vite 6 以降では、モダン API がデフォルトで Sass に使用され�
 
 モダン API に移行するには、[Sass のドキュメント](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/)を参照してください。
 
+### ライブラリーモードでの CSS 出力ファイル名のカスタマイズ
+
+Vite 5 では、ライブラリーモードでの CSS 出力ファイル名は常に　`style.css`　であり、Vite の設定ファイルから簡単に変更することはできませんでした。
+
+Vite 6 からは、デフォルトのファイル名は JS 出力ファイルと同様に `package.json` の `"name"` を使用するようになりました。[`build.lib.fileName`](/config/build-options.md#build-lib) が文字列で設定されている場合、その値は CSS 出力ファイル名にも使用されます。別の CSS ファイル名を明示的に設定するには、新しい [`build.lib.cssFileName`](/config/build-options.md#build-lib) を使用して設定できます。
+
+移行するには、`style.css` ファイル名に依存していた場合は、そのファイル名への参照をパッケージ名に基づく新しい名前に更新する必要があります。例:
+
+```json [package.json]
+{
+  "name": "my-lib",
+  "exports": {
+    "./style.css": "./dist/style.css" // [!code --]
+    "./style.css": "./dist/my-lib.css" // [!code ++]
+  }
+}
+```
+
+Vite 5 のように `style.css` を使い続けたい場合は、代わりに `build.lib.cssFileName: 'style'` を設定できます。
+
 ## 高度な内容
 
 少数のユーザーにのみ影響するその他の重大な変更があります。
