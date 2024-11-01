@@ -4,7 +4,6 @@
 [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-// TODO: <small>（訳注: 原文ママ）</small>
 [ビルド時の共有プラグイン](/guide/api-environment.md#shared-plugins-during-build)を参照してください。
 
 影響範囲: `Vite プラグイン作成者`
@@ -15,8 +14,68 @@
 
 ## 動機
 
-// TODO: <small>（訳注: 原文ママ）</small>
+開発とビルドのプラグインパイプラインを調整します。
 
 ## 移行ガイド
 
-// TODO: <small>（訳注: 原文ママ）</small>
+環境をまたいでプラグインを共有できるようにするには、プラグインの状態を現在の環境でキー付けする必要があります。以下の形式のプラグインは、すべての環境における変換されたモジュールの数を数えます。
+
+```js
+function CountTransformedModulesPlugin() {
+  let transformedModules
+  return {
+    name: 'count-transformed-modules',
+    buildStart() {
+      transformedModules = 0
+    },
+    transform(id) {
+      transformedModules++
+    },
+    buildEnd() {
+      console.log(transformedModules)
+    },
+  }
+}
+```
+
+代わりに、各環境で変換されたモジュールの数を数えたい場合は、マップを保持する必要があります。
+
+```js
+function PerEnvironmentCountTransformedModulesPlugin() {
+  const state = new Map<Environment, { count: number }>()
+  return {
+    name: 'count-transformed-modules',
+    perEnvironmentStartEndDuringDev: true,
+    buildStart() {
+      state.set(this.environment, { count: 0 })
+    }
+    transform(id) {
+      state.get(this.environment).count++
+    },
+    buildEnd() {
+      console.log(this.environment.name, state.get(this.environment).count)
+    }
+  }
+}
+```
+
+このパターンを簡素化するために、Vite の内部では、`usePerEnvironmentState` ヘルパーを使用しています:
+
+```js
+function PerEnvironmentCountTransformedModulesPlugin() {
+  const state = usePerEnvironmentState<{ count: number }>(() => ({ count: 0 }))
+  return {
+    name: 'count-transformed-modules',
+    perEnvironmentStartEndDuringDev: true,
+    buildStart() {
+      state(this).count = 0
+    }
+    transform(id) {
+      state(this).count++
+    },
+    buildEnd() {
+      console.log(this.environment.name, state(this).count)
+    }
+  }
+}
+```
