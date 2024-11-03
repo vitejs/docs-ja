@@ -66,6 +66,8 @@ Vite 5 のように `style.css` を使い続けたい場合は、代わりに `b
   - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) がデフォルトで `true` になりました（以前は `'auto'`）。
 - [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
   - 範囲指定の角括弧（`{01..03}` ⇒ `['01', '02', '03']`）および増分指定の角括弧（`{2..8..2}` ⇒ `['2', '4', '6', '8']`）は、glob 内でサポートされなくなりました。
+- [[#18493] refactor!: remove fs.cachedChecks option](https://github.com/vitejs/vite/pull/18493)
+  - キャッシュフォルダにファイルを書き込んですぐにインポートするといったエッジケースのために、このオプトイン最適化は削除されました。
 
 ## v4 からの移行
 

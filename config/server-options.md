@@ -329,14 +329,6 @@ export default defineConfig({
 
 Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
 
-## server.fs.cachedChecks
-
-- **型:** `boolean`
-- **デフォルト:** `false`
-- **実験的機能**
-
-繰り返しのファイルシステム操作を避けるため、アクセスされたディレクトリーのファイル名をキャッシュします。特に Windows では、これにより性能が向上する可能性があります。キャッシュされたフォルダーにファイルを書き込んですぐにインポートするというエッジケースがあるため、デフォルトでは無効になっています。
-
 ## server.origin
 
 - **型:** `string`
