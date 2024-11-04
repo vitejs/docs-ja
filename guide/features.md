@@ -170,7 +170,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - `<root>/about.html` -> `http://localhost:5173/about.html`
 - `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
 
-Files referenced by HTML elements such as `<script type="module">` and `<link href>` are processed and bundled as part of the app. General asset elements can also reference assets to be optimized by default, including:
+`<script type="module" src>` や `<link href>` などの HTML 要素によって参照されるアセットは、アプリの一部として処理され、バンドルされます。サポートされている要素の完全なリストは次のとおりです:
 
 - `<audio src>`
 - `<embed src>`
@@ -179,6 +179,7 @@ Files referenced by HTML elements such as `<script type="module">` and `<link hr
 - `<input src>`
 - `<link href>` と `<link imagesrcet>`
 - `<object data>`
+- `<script type="module" src>`
 - `<source src>` と `<source srcset>`
 - `<track src>`
 - `<use href>` と `<use xlink:href>`
