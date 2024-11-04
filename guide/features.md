@@ -170,9 +170,25 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - `<root>/about.html` -> `http://localhost:5173/about.html`
 - `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
 
-デフォルトでは、`<script type="module">` や `<link href>` タグなどの HTML 要素が処理され、リンクされたファイルで Vite の機能を使用できるようになります。また、`<img src>`、`<video src>`、`<source src>` などの一般的なアセット要素もリベースされ、最適化され、正しいパスにリンクされるようになります。
+`<script type="module" src>` や `<link href>` などの HTML 要素によって参照されるアセットは、アプリの一部として処理され、バンドルされます。サポートされている要素の完全なリストは次のとおりです:
 
-```html
+- `<audio src>`
+- `<embed src>`
+- `<img src>` と `<img srcset>`
+- `<image src>`
+- `<input src>`
+- `<link href>` と `<link imagesrcet>`
+- `<object data>`
+- `<script type="module" src>`
+- `<source src>` と `<source srcset>`
+- `<track src>`
+- `<use href>` と `<use xlink:href>`
+- `<video src>` と `<video poster>`
+- `<meta content>`
+  - `name` 属性が `msapplication-tileimage`、`msapplication-square70x70logo`、`msapplication-square150x150logo`、`msapplication-wide310x150logo`、`msapplication-square310x310logo`、`msapplication-config`、`twitter:image` に一致する場合のみ
+  - または、`property` 属性が `og:image`、`og:image:url`、`og:image:secure_url`、`og:audio`、`og:audio:secure_url`、`og:video`、`og:video:secure_url` に一致する場合のみ
+
+```html {4-5,8-9}
 <!doctype html>
 <html>
   <head>
@@ -180,7 +196,6 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <div id="app"></div>
     <img src="/src/images/logo.svg" alt="logo" />
     <script type="module" src="/src/main.js"></script>
   </body>

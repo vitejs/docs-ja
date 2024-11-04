@@ -20,6 +20,14 @@ Vite 6 からは、`json.stringify: true` が設定されていても、`json.na
 
 Vite 6 では、`json.stringify` の新しいデフォルト値として `'auto'` が導入されました。これは、大きな JSON ファイルのみを文字列化します。この動作を無効にするには、`json.stringify: false` を設定します。
 
+### HTML 要素におけるアセット参照の拡張サポート
+
+Vite 5 では、サポートされている HTML 要素のうち、Vite によって処理およびバンドルされるアセットを参照できるものは、`<link href>`、`<img src>` など、ごく一部に限られていました。
+
+Vite 6 では、さらに多くの HTML 要素がサポート対象に追加されています。 完全なリストは、[HTML 機能](/guide/features.html#html)のドキュメントでご覧いただけます。
+
+特定の要素の HTML 処理をオプトアウトするには、その要素に `vite-ignore` 属性を追加します。
+
 ### postcss-load-config
 
 [`postcss-load-config`](https://npmjs.com/package/postcss-load-config) が v4 から v6 に更新されました。TypeScript の postcss 設定ファイルを読み込むために、[`ts-node`](https://www.npmjs.com/package/ts-node) の代わりに [`tsx`](https://www.npmjs.com/package/tsx) か [`jiti`](https://www.npmjs.com/package/jiti) が必要になりました。また、YAML の postcss 設定ファイルを読み込むために [`yaml`](https://www.npmjs.com/package/yaml) が必要になりました。
