@@ -101,15 +101,21 @@ export default defineConfig({
 export default defineConfig({
   server: {
     proxy: {
-      // 文字列のショートハンド: http://localhost:5173/foo -> http://localhost:4567/foo
+      // 文字列のショートハンド:
+      // http://localhost:5173/foo
+      //   -> http://localhost:4567/foo
       '/foo': 'http://localhost:4567',
-      // オプションを使用: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
+      // オプションを使用:
+      // http://localhost:5173/api/bar
+      //   -> http://jsonplaceholder.typicode.com/bar
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-      // 正規表現を使用: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
+      // 正規表現を使用:
+      // http://localhost:5173/fallback/
+      //   -> http://jsonplaceholder.typicode.com/
       '^/fallback/.*': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
@@ -123,8 +129,11 @@ export default defineConfig({
           // プロキシは 'http-proxy' のインスタンスになります
         },
       },
-      // Web ソケット か socket.io をプロキシ化: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
-      // `rewriteWsOrigin` を使用すると、プロキシが CSRF 攻撃に無防備なままになる可能性があるため、使用には注意してください。
+      // Web ソケット か socket.io をプロキシ化:
+      // ws://localhost:5173/socket.io
+      //   -> ws://localhost:5174/socket.io
+      // `rewriteWsOrigin` を使用すると、プロキシが CSRF 攻撃に無防備になる
+      // 可能性があるため、使用には注意してください。
       '/socket.io': {
         target: 'ws://localhost:5174',
         ws: true,
@@ -251,16 +260,17 @@ async function createServer() {
   // ミドルウェアモードで Vite サーバーを作成
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    appType: 'custom', // ViteのデフォルトのHTMLを処理するミドルウェアを含めない
+    // Viteのデフォルトの HTML を処理するミドルウェアを含めない
+    appType: 'custom',
   })
   // vite の接続インスタンスをミドルウェアとして使用
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
     // `appType` が `'custom'` なので、ここでレスポンスを返すべきです。
-    // 注: `appType` が `'spa'` または `'mpa'` の際は、Vite に HTML リクエスト と 404 になる
-    // リクエストを処理するミドルウェアが含まれます。したがって、ユーザーのミドルウェアが
-    // 動作するためにはViteのミドルウェアよりも前に追加されるべきです。
+    // 注: `appType` が `'spa'` または `'mpa'` の際は、Vite に HTML リクエスト と
+    // 404 を処理するミドルウェアが含まれるため、ユーザーのミドルウェアが
+    // 動作するためには Vite のミドルウェアよりも前に追加されるべきです。
   })
 }
 

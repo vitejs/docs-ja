@@ -135,14 +135,15 @@ const UnoCssPlugin = () => {
   // 共有グローバル状態
   return {
     buildStart() {
-      // WeakMap<Environment,Data>, this.environment を使って環境ごとの状態を初期化
+      // WeakMap<Environment,Data>, this.environment を使って
+      // 環境ごとの状態を初期化
     },
     configureServer() {
       // グローバルフックを通常どおり使用
     },
     applyToEnvironment(environment) {
       // このプラグインがこの環境でアクティブになる必要がある場合は true を返します
-      // この関数が提供されていない場合、プラグインはすべての環境でアクティブになります
+      // フックが使用されていない場合、プラグインはすべての環境でアクティブになります
     },
     resolveId(id, importer) {
       // このプラグインが適用される環境に対してのみ呼び出されます

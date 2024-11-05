@@ -84,7 +84,11 @@ Vite モジュールランナーは、最初に Vite プラグインで処理す
 ```ts
 import { DevEnvironment, RemoteEnvironmentTransport } from 'vite'
 
-function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, context: DevEnvironmentContext) {
+function createWorkerdDevEnvironment(
+  name: string,
+  config: ResolvedConfig,
+  context: DevEnvironmentContext
+) {
   const hot = /* ... */
   const connection = /* ... */
   const transport = new RemoteEnvironmentTransport({
@@ -120,7 +124,8 @@ export class ModuleRunner {
     private debug?: ModuleRunnerDebugger,
   ) {}
   /**
-   * 実行するURL。ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
+   * 実行するURL。
+   * ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
    */
   public async import<T = any>(url: string): Promise<T>
   /**
@@ -128,12 +133,12 @@ export class ModuleRunner {
    */
   public clearCache(): void
   /**
-   * すべてのキャッシュをクリアし、すべての HMR リスナーを削除し、ソースマップのサポートをリセットします。
+   * 全キャッシュをクリア、全 HMR リスナーを削除、ソースマップサポートをリセットします。
    * このメソッドは HMR 接続を停止しません。
    */
   public async close(): Promise<void>
   /**
-   * `close()` メソッドを呼び出してランナーを終了した場合は `true` を返します。
+   * `close()` を呼び出してランナーを終了した場合は `true` を返します。
    */
   public isClosed(): boolean
 }
@@ -174,9 +179,12 @@ export interface ModuleRunnerOptions {
    */
   transport: RunnerTransport
   /**
-   * ソースマップの解決方法を設定します。`process.setSourceMapsEnabled` が使用可能な場合は `node` を優先します。
-   * それ以外の場合は、デフォルトで `prepareStackTrace` を使用し、`Error.prepareStackTrace` メソッドをオーバーライドします。
-   * Vite によって処理されなかったファイルのファイル内容とソースマップの解決方法を設定するオブジェクトを提供できます。
+   * ソースマップの解決方法を設定します。
+   * `process.setSourceMapsEnabled` が使用可能な場合は `node` を優先します。
+   * それ以外の場合は、デフォルトで `prepareStackTrace` を使用し、
+   * `Error.prepareStackTrace` メソッドをオーバーライドします。
+   * Vite によって処理されなかったファイルのファイル内容とソースマップの解決方法を設定する
+   * オブジェクトを提供できます。
    */
   sourcemapInterceptor?:
     | false
@@ -199,7 +207,8 @@ export interface ModuleRunnerOptions {
         logger?: false | HMRLogger
       }
   /**
-   * カスタムモジュールキャッシュ。指定されていない場合は、モジュールランナーインスタンスごとに個別のモジュールキャッシュが作成されます。
+   * カスタムモジュールキャッシュ。指定されていない場合は、モジュールランナーの
+   * インスタンスごとに個別のモジュールキャッシュが作成されます。
    */
   evaluatedModules?: EvaluatedModules
 }
@@ -344,7 +353,8 @@ export interface ModuleRunnerHMRConnection {
   send(payload: HotPayload): void
   /**
    * この接続が更新をトリガーしたときに HMR がどのように処理されるかを設定します。
-   * このメソッドは、接続が HMR 更新のリッスンを開始し、受信時にこのコールバックを呼び出すことを想定しています。
+   * このメソッドは、接続が HMR 更新のリッスンを開始し、受信時にこのコールバックを
+   * 呼び出すことを想定しています。
    */
   onUpdate(callback: (payload: HotPayload) => void): void
 }
