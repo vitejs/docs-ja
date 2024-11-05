@@ -22,7 +22,8 @@ export class RunnableDevEnvironment extends DevEnvironment {
 
 class ModuleRunner {
   /**
-   * 実行するURL。ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
+   * 実行するURL。
+   * ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
    * インスタンス化されたモジュールを返します (ssrLoadModule と同じ)
    */
   public async import(url: string): Promise<Record<string, any>>
@@ -52,20 +53,21 @@ const server = await createServer({
   appType: 'custom',
   environments: {
     server: {
-      // デフォルトでは、開発中はモジュールは vite 開発サーバーと同じプロセスで実行されます
+      // デフォルトでは、モジュールは vite サーバーと同じプロセスで実行されます
     },
   },
 })
 
-// TypeScript では、これを RunnableDevEnvironment にキャストするか、ランナーへのアクセスを
-// 保護するために "isRunnableDevEnvironment" 関数を使用する必要があるかもしれません
+// TypeScript でこれを RunnableDevEnvironment にキャストするか、ランナーへのアクセスを
+// 保護するために isRunnableDevEnvironment を使用する必要があるかもしれません
 const environment = server.environments.node
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
   // 1. index.html を読み込む
-  let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
+  const indexHtmlPath = path.resolve(__dirname, 'index.html')
+  let template = fs.readFileSync(indexHtmlPath, 'utf-8')
 
   // 2. Vite HTML 変換を適用します。これにより、Vite HMR クライアントが挿入され、
   //    Vite プラグインからの HTML 変換も適用されます。
@@ -112,7 +114,7 @@ const server = createServer()
 const ssrEnvironment = server.environment.ssr
 const input = {}
 
-const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
+const { createHandler } = await ssrEnvironment.runner.import('./entry.js')
 const handler = createHandler(input)
 const response = handler(new Request('/'))
 
@@ -186,10 +188,10 @@ function vitePluginVirtualIndexHtml(): Plugin {
         let html: string
         if (server) {
           this.addWatchFile('index.html')
-          html = await fs.promises.readFile('index.html', 'utf-8')
+          html = fs.readFileSync('index.html', 'utf-8')
           html = await server.transformIndexHtml('/', html)
         } else {
-          html = await fs.promises.readFile('dist/client/index.html', 'utf-8')
+          html = fs.readFileSync('dist/client/index.html', 'utf-8')
         }
         return `export default ${JSON.stringify(html)}`
       }
