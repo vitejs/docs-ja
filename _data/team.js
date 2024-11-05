@@ -49,8 +49,8 @@ export const core = [
     title: 'Open Source Developer',
     desc: 'Astro core residency. Svelte and Vite core team member.',
     links: [
-      { icon: 'x', link: 'https://x.com/bluwy' },
-      { icon: 'twitter', link: 'https://twitter.com/bluwyoo' },
+      { icon: 'github', link: 'https://github.com/bluwy' },
+      { icon: 'x', link: 'https://x.com/bluwyoo' },
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@bluwy' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/bluwy.me' },
     ],
