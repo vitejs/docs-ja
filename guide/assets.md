@@ -55,6 +55,17 @@ import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
+### 明示的なインライン処理
+
+アセットは、`?inline` または `?no-inline` 接尾辞を使用することで、それぞれインラインまたは非インラインで明示的にインポートできます。
+
+```js twoslash
+import 'vite/client'
+// ---cut---
+import imgUrl1 from './img.svg?no-inline'
+import imgUrl2 from './img.png?inline'
+```
+
 ### アセットを文字列としてインポートする {#importing-asset-as-string}
 
 アセットは末尾に `?raw` を付与することで文字列としてインポートすることができます。
