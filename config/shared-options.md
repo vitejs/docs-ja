@@ -134,7 +134,8 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 }
 ```
 
-Vite には「許可された条件」のリストがあり、許可されたリストにある最初の条件と一致します。 デフォルトで許可される条件は、`import`、`module`、`browser`、`default` と、現在のモードに基づく `production/development` です。`resolve.conditions` 設定オプションを使用すると、追加の許可条件を指定できます。
+ここで、`import` と `require` は「条件」です。条件はネストさせることができ、最も具体的なものから最も具体的でないものまで指定する必要があります。
+
 `development|production` は、`process.env.NODE_ENV` の値に応じて `production` または `development` に置換される特殊な値です。`process.env.NODE_ENV === 'production'` の場合には `production` に置換され、それ以外の場合は `development` に置換されます。
 
 要件が満たされている場合は、`import`、`require`、`default` の条件が常に適用されることに注意してください。
