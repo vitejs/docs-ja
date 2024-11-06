@@ -135,6 +135,7 @@ document.getElementById('hero-img').src = imgUrl
 
 ```js
 function getImageUrl(name) {
+  // サブディレクトリー内のファイルは含まれないことに注意してください
   return new URL(`./dir/${name}.png`, import.meta.url).href
 }
 ```
@@ -145,6 +146,25 @@ function getImageUrl(name) {
 // Vite はこれを変換しません
 const imgUrl = new URL(imagePath, import.meta.url).href
 ```
+
+::: details 動作の仕組み
+
+Vite は `getImageUrl` 関数を次のように変換します:
+
+```js
+import __img0png from './dir/img0.png'
+import __img1png from './dir/img1.png'
+
+function getImageUrl(name) {
+  const modules = {
+    './dir/img0.png': __img0png,
+    './dir/img1.png': __img1png,
+  }
+  return new URL(modules[`./dir/${name}.png`], import.meta.url).href
+}
+```
+
+:::
 
 ::: warning SSR では動作しません
 ブラウザーと Node.js で `import.meta.url` のセマンティクスが異なるため、 このパターンは Vite をサーバーサイドレンダリングで使用している場合には動作しません。サーバーバンドルは事前にクライアントホストの URL を決定することもできません。
