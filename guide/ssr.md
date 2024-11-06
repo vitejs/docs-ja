@@ -67,7 +67,7 @@ if (import.meta.env.SSR) {
 
 ## 開発サーバーのセットアップ {#setting-up-the-dev-server}
 
-SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
+SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/)（v4）での例です:
 
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
