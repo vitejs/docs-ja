@@ -103,7 +103,7 @@ Vite はデフォルトでは `.env` ファイルをロードしないことに�
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   // `mode` に基づいて現在の作業ディレクトリーにある env ファイルをロードする。
   // `VITE_` プレフィックスに関係なく全ての環境変数をロードするには、
   // 第 3 引数に '' を設定します
