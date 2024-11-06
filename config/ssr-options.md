@@ -34,15 +34,14 @@ SSR サーバーのビルドターゲット。
 ## ssr.resolve.conditions
 
 - **型:** `string[]`
+- **デフォルト:** `['module', 'node', 'development|production']`（`ssr.target === 'webworker'` の場合は `['module', 'browser', 'development|production']`）
 - **関連:** [Resolve Conditions](./shared-options.md#resolve-conditions)
-
-デフォルトはルートの [`resolve.conditions`](./shared-options.md#resolve-conditions) です。
 
 これらの条件はプラグインパイプラインで使用され、SSR ビルド時に外部化されていない依存関係にのみ影響します。外部化されたインポートに影響を与えるには `ssr.resolve.externalConditions` を使用してください。
 
 ## ssr.resolve.externalConditions
 
 - **型:** `string[]`
-- **デフォルト:** `[]`
+- **デフォルト:** `['node']`
 
 外部化された依存関係の SSR インポート（`ssrLoadModule` を含む）の際に使用される条件。
