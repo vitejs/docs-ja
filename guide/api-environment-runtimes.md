@@ -16,7 +16,7 @@
 環境ファクトリーは、エンドユーザーではなく、Cloudflare などの環境プロバイダーによって実装されることを目的としています。環境ファクトリーは、開発環境とビルド環境の両方でターゲットランタイムを使用する最も一般的なケースで、`EnvironmentOptions` を返します。デフォルトの環境オプションも設定できるため、ユーザーが設定する必要はありません。
 
 ```ts
-function createWorkedEnvironment(
+function createWorkerdEnvironment(
   userConfig: EnvironmentOptions,
 ): EnvironmentOptions {
   return mergeConfig(
