@@ -41,7 +41,7 @@ class DevEnvironment {
    * ターゲットランタイム内の関連モジュールランナーから
    * メッセージを送受信するための通信チャネル。
    */
-  hot: HotChannel | null
+  hot: NormalizedHotChannel
   /**
    * 処理されたモジュールと処理されたコードのキャッシュ結果との間の
    * インポートされた関係を示すモジュールノードのグラフ。
