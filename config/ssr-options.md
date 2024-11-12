@@ -44,4 +44,13 @@ SSR サーバーのビルドターゲット。
 - **型:** `string[]`
 - **デフォルト:** `['node']`
 
-外部化された依存関係の SSR インポート（`ssrLoadModule` を含む）の際に使用される条件。
+外部化された直接の依存関係（Vite にインポートされた外部の依存関係）の SSR インポート（`ssrLoadModule` を含む）の際に使用される条件。
+
+:::tip
+
+このオプションを使用する場合、一貫性のある動作のために、開発時とビルド時の両方で同じ値を使用して [`--conditions` フラグ](https://nodejs.org/docs/latest/api/cli.html#-c-condition---conditionscondition) 付きで Node を実行してください。
+
+たとえば、`['node', 'custom']` と設定した場合には、開発時には `NODE_OPTIONS='--conditions custom' vite`、ビルド後には `NODE_OPTIONS="--conditions custom" node ./dist/server.js` を実行する必要があります。
+
+:::
+
