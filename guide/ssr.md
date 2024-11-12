@@ -149,7 +149,7 @@ app.use('*', async (req, res, next) => {
     const appHtml = await render(url)
 
     // 5. アプリケーションのレンダリングされた HTML をテンプレートに挿入します。
-    const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+    const html = template.replace(`<!--ssr-outlet-->`, () => appHtml)
 
     // 6. レンダリングされた HTML をクライアントに送ります。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
