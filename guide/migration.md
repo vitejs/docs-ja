@@ -93,6 +93,8 @@ Vite 5 のように `style.css` を使い続けたい場合は、代わりに `b
     - CommonJS ファイルをエントリーポイントとして指定する場合は、追加の手順が必要になる場合があります。詳細は、[commonjs プラグインのドキュメント](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#using-commonjs-files-as-entry-points)を参照してください。
 - [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
   - 範囲指定の角括弧（`{01..03}` ⇒ `['01', '02', '03']`）および増分指定の角括弧（`{2..8..2}` ⇒ `['2', '4', '6', '8']`）は、glob 内でサポートされなくなりました。
+- [[#18395] feat(resolve)!: allow removing conditions](https://github.com/vitejs/vite/pull/18395)
+  - この PR では、上述の「`resolve.conditions` のデフォルト値」という破壊的変更が導入されているだけでなく、SSR における外部化されていない依存関係に対して `resolve.mainFields` を使用しないようにしています。もし `resolve.mainFields` を使用しており、SSR の外部化されていない依存関係に適用したい場合は、[`ssr.resolve.mainFields`](/config/ssr-options#ssr-resolve-mainfields) を使用できます。
 - [[#18493] refactor!: remove fs.cachedChecks option](https://github.com/vitejs/vite/pull/18493)
   - キャッシュフォルダにファイルを書き込んですぐにインポートするといったエッジケースのために、このオプトイン最適化は削除されました。
 
