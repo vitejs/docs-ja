@@ -142,7 +142,8 @@ const UnoCssPlugin = () => {
       // グローバルフックを通常どおり使用
     },
     applyToEnvironment(environment) {
-      // このプラグインがこの環境でアクティブになる必要がある場合は true を返します
+      // このプラグインがこの環境でアクティブになる必要がある場合は true を返し、
+      // そうでない場合は、それを置き換える新しいプラグインを返します。
       // フックが使用されていない場合、プラグインはすべての環境でアクティブになります
     },
     resolveId(id, importer) {
@@ -150,6 +151,37 @@ const UnoCssPlugin = () => {
     },
   }
 }
+```
+
+プラグインが環境を認識せず、現在の環境に基づかない状態を持っている場合、`applyToEnvironment` フックを利用することで、簡単に環境別に対応するものに変えられます。
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+
+export default defineConfig({
+  plugins: [
+    {
+      name: 'per-environment-plugin',
+      applyToEnvironment(environment) {
+        return nonShareablePlugin({ outputName: environment.name })
+      },
+    },
+  ],
+})
+```
+
+以下のような他のフックが不要なケースを簡略化するために、Vite は `perEnvironmentPlugin` ヘルパーをエクスポートしています:
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+
+export default defineConfig({
+  plugins: [
+    perEnvironmentPlugin('per-environment-plugin', (environment) =>
+      nonShareablePlugin({ outputName: environment.name }),
+    ),
+  ],
+})
 ```
 
 ## ビルドフックの環境 {#environment-in-build-hooks}
