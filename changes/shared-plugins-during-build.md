@@ -59,11 +59,11 @@ function PerEnvironmentCountTransformedModulesPlugin() {
 }
 ```
 
-このパターンを簡素化するために、Vite の内部では、`usePerEnvironmentState` ヘルパーを使用しています:
+このパターンを簡素化するために、Vite は `perEnvironmentState` ヘルパーをエクスポートしています:
 
 ```js
 function PerEnvironmentCountTransformedModulesPlugin() {
-  const state = usePerEnvironmentState<{ count: number }>(() => ({ count: 0 }))
+  const state = perEnvironmentState<{ count: number }>(() => ({ count: 0 }))
   return {
     name: 'count-transformed-modules',
     perEnvironmentStartEndDuringDev: true,
