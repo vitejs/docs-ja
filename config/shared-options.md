@@ -117,7 +117,7 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 ## resolve.conditions
 
 - **型:** `string[]`
-- **デフォルト:** `['module', 'browser', 'development|production']`
+- **デフォルト:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
 
 パッケージからの[条件付きエクスポート](https://nodejs.org/api/packages.html#packages_conditional_exports)解決する際に許可される追加の条件。
 
@@ -147,7 +147,7 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 ## resolve.mainFields
 
 - **型:** `string[]`
-- **デフォルト:** `['browser', 'module', 'jsnext:main', 'jsnext']`
+- **デフォルト:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
 
 パッケージのエントリーポイントを解決するときに試行する `package.json` のフィールドのリスト。これは `exports` フィールドから解決された条件付きエクスポートよりも優先順位が低いことに注意してください: エントリーポイントが `exports` からの解決に成功した場合、main フィールドは無視されます。
 
