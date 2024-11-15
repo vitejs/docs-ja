@@ -214,11 +214,11 @@ export default defineConfig({
 
 - **型:** `object| null`
 
-[chokidar](https://github.com/paulmillr/chokidar#getting-started) に渡すファイルシステムウォッチャーのオプションです。`ignored` オプションが渡された場合、Vite は文字列を [picomatch のパターン](https://github.com/micromatch/picomatch#globbing-features)として自動的に変換します。
+[chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api) に渡すファイルシステムウォッチャーのオプションです。
 
 Vite サーバーのウォッチャーはデフォルトで `root` を監視し、`.git/`、`node_modules/`、および Vite の `cacheDir` と `build.outDir` ディレクトリーをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
-`null` に設定すると、ファイルは監視されません。`server.watcher` はいかなるファイルも監視せず、`add` を呼び出しても何も起こりません。
+`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッターを提供しますが、`add` または `unwatch` を呼び出しても効果はありません。
 
 ::: warning `node_modules` 内のファイルの監視
 
@@ -235,7 +235,7 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 - **推奨**: ファイルを編集するのに WSL2 アプリケーションを使用します。
   - プロジェクトフォルダーを Windows ファイルシステムの外へ移動させることも推奨されます。WSL2 から Windows ファイルシステムへアクセスするのは遅いです。このオーバーヘッドを取り除くことでパフォーマンスが向上します。
 - `{ usePolling: true }` を設定する。
-  - [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar#performance)に注意してください。
+  - [`usePolling` は CPU 使用率が高くなること](https://github.com/paulmillr/chokidar/tree/3.6.0#performance)に注意してください。
 
 :::
 
