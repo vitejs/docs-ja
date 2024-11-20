@@ -28,10 +28,10 @@ interface HmrContext {
 
 このフックはすべての環境に対して一度だけ呼び出され、渡されたモジュールはクライアント環境と SSR 環境だけの情報が混在しています。フレームワークがカスタム環境に移行すると、それぞれの環境に対して呼び出される新しいフックが必要になります。
 
-新しい `hotUpdate` フックは `handleHotUpdate` と同じように動作しますが、環境ごとに呼び出され、新しい `HotUpdateContext` インスタンスを受け取ります:
+新しい `hotUpdate` フックは `handleHotUpdate` と同じように動作しますが、環境ごとに呼び出され、新しい `HotUpdateOptions` インスタンスを受け取ります:
 
 ```ts
-interface HotUpdateContext {
+interface HotUpdateOptions {
   type: 'create' | 'update' | 'delete'
   file: string
   timestamp: number
