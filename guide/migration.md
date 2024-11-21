@@ -99,6 +99,8 @@ Vite 5 のように `style.css` を使い続けたい場合は、代わりに `b
   - この PR では、上述の「`resolve.conditions` のデフォルト値」という破壊的変更が導入されているだけでなく、SSR における外部化されていない依存関係に対して `resolve.mainFields` を使用しないようにしています。もし `resolve.mainFields` を使用しており、SSR の外部化されていない依存関係に適用したい場合は、[`ssr.resolve.mainFields`](/config/ssr-options#ssr-resolve-mainfields) を使用できます。
 - [[#18493] refactor!: remove fs.cachedChecks option](https://github.com/vitejs/vite/pull/18493)
   - キャッシュフォルダにファイルを書き込んですぐにインポートするといったエッジケースのために、このオプトイン最適化は削除されました。
+- [[#18697] fix(deps)!: update dependency dotenv-expand to v12](https://github.com/vitejs/vite/pull/18697)
+  - 補間に使用される変数は、補間の実行前に宣言する必要があるようになりました。詳しくは、[`dotenv-expand` の changelog](https://github.com/motdotla/dotenv-expand/blob/v12.0.1/CHANGELOG.md#1200-2024-11-16) を参照してください。
 
 ## v4 からの移行
 
