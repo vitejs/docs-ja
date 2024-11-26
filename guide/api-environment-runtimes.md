@@ -203,15 +203,10 @@ interface ModuleRunnerOptions {
     | InterceptorOptions
   /**
    * HMR を無効にするか、HMR オプションを設定します。
+   *
+   * @default true
    */
-  hmr?:
-    | false
-    | {
-        /**
-         * HMR ロガーを設定します。
-         */
-        logger?: false | HMRLogger
-      }
+  hmr?: boolean | ModuleRunnerHmr
   /**
    * カスタムモジュールキャッシュ。指定されていない場合は、モジュールランナーの
    * インスタンスごとに個別のモジュールキャッシュが作成されます。
@@ -379,6 +374,7 @@ export const runner = new ModuleRunner(
         return response.json()
       },
     },
+    hmr: false, // HMR は transport.connect を必要とするため HMR を無効にする
   },
   new ESModulesEvaluator(),
 )
