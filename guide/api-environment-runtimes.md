@@ -175,7 +175,7 @@ import type { Debug } from '@type-challenges/utils'
 
 type InterceptorOptions = Debug<InterceptorOptionsRaw>
 type ModuleRunnerHmr = Debug<ModuleRunnerHmrRaw>
-/** see below */
+/** 下記参照 */
 type ModuleRunnerTransport = unknown
 
 // ---cut---
