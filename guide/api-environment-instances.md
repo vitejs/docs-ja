@@ -64,13 +64,17 @@ class DevEnvironment {
    */
   config: ResolvedConfig & ResolvedDevEnvironmentOptions
 
-  constructor(name, config, { hot, options }: DevEnvironmentSetup)
+  constructor(
+    name: string,
+    config: ResolvedConfig,
+    context: DevEnvironmentContext,
+  )
 
   /**
    * URL を id に解決してロードし、プラグインパイプラインを使ってコードを処理する。
    * モジュールグラフも更新されます。
    */
-  async transformRequest(url: string): TransformResult
+  async transformRequest(url: string): Promise<TransformResult | null>
 
   /**
    * 低い優先度で処理されるリクエストを登録します。ウォーターフォールを回避するのに
@@ -78,11 +82,25 @@ class DevEnvironment {
    * 情報を持っているため、モジュールがリクエストされたときにすでに処理されているよう、
    * モジュールグラフをウォームアップできます。
    */
-  async warmupRequest(url: string): void
+  async warmupRequest(url: string): Promise<void>
 }
 ```
 
-`TransformResult` は次のようになります:
+`DevEnvironmentContext` は次のようになります:
+
+```ts
+interface DevEnvironmentContext {
+  hot: boolean
+  transport?: HotChannel | WebSocketServer
+  options?: EnvironmentOptions
+  remoteRunner?: {
+    inlineSourceMap?: boolean
+  }
+  depsOptimizer?: DepsOptimizer
+}
+```
+
+そして `TransformResult` は:
 
 ```ts
 interface TransformResult {
@@ -156,9 +174,13 @@ export class EnvironmentModuleGraph {
     rawUrl: string,
   ): Promise<EnvironmentModuleNode | undefined>
 
+  getModuleById(id: string): EnvironmentModuleNode | undefined
+
   getModulesByFile(file: string): Set<EnvironmentModuleNode> | undefined
 
   onFileChange(file: string): void
+
+  onFileDelete(file: string): void
 
   invalidateModule(
     mod: EnvironmentModuleNode,
