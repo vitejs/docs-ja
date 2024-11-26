@@ -118,7 +118,7 @@ function createWorkerdDevEnvironment(
 export class ModuleRunner {
   constructor(
     public options: ModuleRunnerOptions,
-    public evaluator: ModuleEvaluator,
+    public evaluator: ModuleEvaluator = new ESModulesEvaluator(),
     private debug?: ModuleRunnerDebugger,
   ) {}
   /**
@@ -165,8 +165,21 @@ await moduleRunner.import('/src/entry-point.js')
 
 ## `ModuleRunnerOptions`
 
-```ts
-export interface ModuleRunnerOptions {
+```ts twoslash
+import type {
+  InterceptorOptions as InterceptorOptionsRaw,
+  ModuleRunnerHmr as ModuleRunnerHmrRaw,
+  EvaluatedModules,
+} from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type InterceptorOptions = Debug<InterceptorOptionsRaw>
+type ModuleRunnerHmr = Debug<ModuleRunnerHmrRaw>
+/** 下記参照 */
+type ModuleRunnerTransport = unknown
+
+// ---cut---
+interface ModuleRunnerOptions {
   /**
    * プロジェクトのルート
    */
@@ -206,7 +219,13 @@ export interface ModuleRunnerOptions {
 
 **型シグネチャー:**
 
-```ts
+```ts twoslash
+import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type ModuleRunnerContext = Debug<ModuleRunnerContextRaw>
+
+// ---cut---
 export interface ModuleEvaluator {
   /**
    * 変換後のコードに含まれるプレフィックスの行数。
@@ -237,7 +256,11 @@ Vite はデフォルトでこのインターフェイスを実装した `ESModul
 
 **型シグネチャー:**
 
-```ts
+```ts twoslash
+import type { ModuleRunnerTransportHandlers } from 'vite/module-runner'
+/** オブジェクト */
+type HotPayload = unknown
+// ---cut---
 interface ModuleRunnerTransport {
   connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
   disconnect?(): Promise<void> | void
