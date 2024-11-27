@@ -52,7 +52,7 @@ Vite の内部および公式プラグインは、幅広いエコシステムと
 プラグインの作者の場合は上記のチェックの回数を減らすために、必要な時にのみ [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) を呼び出すようにしてください。
 
 ::: tip TypeScript
-TypeScript を使用している場合は、`tsconfig.json` の `compilerOptions` で `"moduleResolution": "Bundler"` および `"allowImportingTsExtensions": true` を有効にして、コード内で直接 `.ts` および `.tsx` 拡張子を使用できるようにしてください。
+TypeScript を使用している場合は、`tsconfig.json` の `compilerOptions` で `"moduleResolution": "bundler"` および `"allowImportingTsExtensions": true` を有効にして、コード内で直接 `.ts` および `.tsx` 拡張子を使用できるようにしてください。
 :::
 
 ## バレルファイルを避ける
