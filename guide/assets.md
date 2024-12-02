@@ -14,7 +14,7 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-例えば、 `imgUrl` は、開発中は `/img.png` となり、本番用ビルドでは `/assets/img.2d8efhg.png` となります。
+例えば、 `imgUrl` は、開発中は `/src/img.png` となり、本番用ビルドでは `/assets/img.2d8efhg.png` となります。
 
 振る舞いは webpack の `file-loader` に似ています。異なるのは、絶対的なパブリックパス（開発中のプロジェクトのルートに基づく）または、相対パスを使用することができるという点です。
 
