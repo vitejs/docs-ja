@@ -30,7 +30,7 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-- 開発中は Babel を SWC に置き換えます。ビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
+- 開発中は Babel を SWC に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
