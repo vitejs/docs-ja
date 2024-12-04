@@ -1,14 +1,14 @@
 # ランタイム向けの Environment API
 
 :::warning 実験的機能
-この API の初期研究は、Vite 5.1 で「Vite ランタイム API」という名前で導入されました。このガイドでは、Environment API と改名された改訂版 API について説明します。この API は Vite 6 で実験的機能としてリリースされる予定です。すでに最新の `vite@6.0.0-beta.x` バージョンでテストできます。
+Environment API は実験的なものです。Vite 6 では API を安定させ、エコシステムが実験し、Environment API 上に構築できるようにします。Vite 7 では、潜在的に破壊的な変更を伴ってこれらの新しい API を安定させる予定です。
 
 リソース:
 
 - 新しい API に関するフィードバックを収集する [Feedback discussion](https://github.com/vitejs/vite/discussions/16358)
 - 新しい API が実装され、レビューされる [Environment API PR](https://github.com/vitejs/vite/pull/16471)
 
-この提案をテストする際には、ぜひフィードバックをお寄せください。
+ぜひフィードバックをお寄せください。
 :::
 
 ## 環境ファクトリー {#environment-factories}
