@@ -1,7 +1,7 @@
 {
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
@@ -20,9 +20,9 @@
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
-    "vite": "^6.0.2",
+    "vite": "^6.0.3",
     "vitepress": "1.5.0",
-    "vitepress-plugin-group-icons": "^1.3.0",
+    "vitepress-plugin-group-icons": "^1.3.1",
     "vue": "^3.5.13",
     "yorkie": "^2.0.0"
   },
