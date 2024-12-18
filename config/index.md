@@ -8,8 +8,7 @@ title: Vite の設定
 
 最も基本的な設定ファイルは次のようになります:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default {
   // 設定オプション
 }
