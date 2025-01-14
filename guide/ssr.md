@@ -12,10 +12,6 @@ SSR は特に、Node.js で同じアプリケーションを実行し、HTML を
 現在、Vite は [Environment API](https://github.com/vitejs/vite/discussions/16358) を使用して SSR API の改良に取り組んでいます。詳しくはリンクをチェックしてください。
 :::
 
-:::tip ヘルプ
-質問がある場合は、[Vite Discord の #ssr チャンネル](https://discord.gg/PkbxgzPhJv)でコミュニティーがいつでも助けてくれます。
-:::
-
 ## プロジェクトの例
 
 Vite はサーバーサイドレンダリング（SSR）の組み込みサポートを提供します。[`create-vite-extra`](https://github.com/bluwy/create-vite-extra) には、このガイドのリファレンスとして使用できる SSR セットアップの例が含まれています:
