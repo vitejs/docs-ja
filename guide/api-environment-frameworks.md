@@ -46,8 +46,12 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 [SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。エラー処理は省略します。
 
 ```js
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const server = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
