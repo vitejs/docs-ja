@@ -19,6 +19,15 @@ Vite ではなく他のサーバーがレスポンスを返す場合がありま
 
 :::
 
+## preview.allowedHosts
+
+- **型:** `string | true`
+- **デフォルト:** [`server.allowedHosts`](./server-options#server-allowedhosts)
+
+Vite が応答することを許可するホスト名。
+
+詳細は [`server.allowedHosts`](./server-options#server-allowedhosts) を参照してください。
+
 ## preview.port
 
 - **型:** `number`
