@@ -12,6 +12,12 @@
    import { defineConfig } from 'vite'
    // ---cut---
    export default defineConfig({
+     server: {
+       cors: {
+         // ブラウザ経由でアクセスするオリジン
+         origin: 'http://my-backend.example.com',
+       },
+     },
      build: {
        // outDir に .vite/manifest.json を出力
        manifest: true,

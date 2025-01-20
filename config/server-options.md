@@ -147,8 +147,15 @@ export default defineConfig({
 ## server.cors
 
 - **型:** `boolean | CorsOptions`
+- **デフォルト:** `false`
 
-開発サーバーの CORS を設定します。これはデフォルトで有効になっており、どんなオリジンも許可します。[オプションオブジェクト](https://github.com/expressjs/cors#configuration-options)を渡して微調整するか、`false` で無効にします。
+開発サーバーの CORS を設定します。[オプションオブジェクト](https://github.com/expressjs/cors#configuration-options)を渡して微調整するか、`true` で有効にします。
+
+:::warning
+
+信頼できないオリジンにソースコードを公開するのを避けるため、`true` ではなく特定の値をすることを推奨します。
+:::
+
 
 ## server.headers
 
