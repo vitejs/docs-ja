@@ -4,14 +4,19 @@
 
 ## ブラウザーの互換性 {#browser-compatibility}
 
-本番バンドルではモダンな JavaScript のサポートを前提としています。Vite はデフォルトでは [ネイティブ ES モジュール](https://caniuse.com/es6-module)、 [ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、 [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) をサポートするブラウザーを対象としています:
+デフォルトでは、プロダクションバンドルでは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) といったモダンな JavaScript のサポートを前提としています。デフォルトのブラウザーサポート範囲は次のとおりです:
 
 - Chrome >=87
 - Firefox >=78
 - Safari >=14
 - Edge >=88
 
-[`build.target` 設定オプション](/config/build-options.md#build-target) を介してカスタムターゲットを指定することができます。最も低いターゲットは `es2015` です。
+[`build.target` 設定オプション](/config/build-options.md#build-target)を介してカスタムターゲットを指定でき、最も低いターゲットは `es2015` です。より低いターゲットが設定された場合、Vite は[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)と [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) に依存するため、以下の最小ブラウザサポート範囲が必要です:
+
+- Chrome >=64
+- Firefox >=67
+- Safari >=11.1
+- Edge >=79
 
 Vite はデフォルトでは構文変換のみを扱い **Polyfill をカバーしていない** ことに注意してください。ユーザーのブラウザーの UserAgent 文字列に基づいて Polyfill バンドルを自動生成する https://cdnjs.cloudflare.com/polyfill/ をチェックしてみてください。
 
