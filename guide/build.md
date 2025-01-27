@@ -4,7 +4,9 @@
 
 ## ブラウザーの互換性 {#browser-compatibility}
 
-デフォルトでは、プロダクションバンドルでは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) といったモダンな JavaScript のサポートを前提としています。デフォルトのブラウザーサポート範囲は次のとおりです:
+デフォルトでは、プロダクションバンドルでは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)、[Null 合体演算子](https://caniuse.com/mdn-javascript_operators_nullish_coalescing)、[BigInt](https://caniuse.com/bigint) といったモダンな JavaScript のサポートを前提としています。デフォルトのブラウザーサポート範囲は次のとおりです:
+
+<!-- Search for the `ESBUILD_MODULES_TARGET` constant for more information -->
 
 - Chrome >=87
 - Firefox >=78
@@ -12,6 +14,8 @@
 - Edge >=88
 
 [`build.target` 設定オプション](/config/build-options.md#build-target)を介してカスタムターゲットを指定でき、最も低いターゲットは `es2015` です。より低いターゲットが設定された場合、Vite は[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)と [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) に依存するため、以下の最小ブラウザサポート範囲が必要です:
+
+<!-- Search for the `defaultEsbuildSupported` constant for more information -->
 
 - Chrome >=64
 - Firefox >=67
