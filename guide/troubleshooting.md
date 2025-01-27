@@ -130,6 +130,14 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 これを回避するためには、リクエストヘッダーサイズを減らすことを試みてください。例えば、クッキーが長い場合、削除します。あるいは、[`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) を利用して最大ヘッダーサイズを変更できます。
 
+### Dev Container / VS Code のポートフォワーディング
+
+Dev Container や VS Code のポートフォワーディング機能を使用している場合、正しく動作するように [`server.host`](/config/server-options.md#server-host) オプションを `127.0.0.1` に設定する必要があるかもしれません。
+
+これは、[VS Code のポートフォワーディング機能が IPv6 をサポートしていない](https://github.com/microsoft/vscode-remote-release/issues/7029)ためです。
+
+より詳しくは、[#16522](https://github.com/vitejs/vite/issues/16522)を参照してください。
+
 ## HMR
 
 ### Vite がファイルの変更を検知しているのに HMR が動作しない
