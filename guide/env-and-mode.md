@@ -77,6 +77,23 @@ NEW_KEY3=test$KEY   # test123
 - Vite のソースコードに公開される変数は最終的にクライアントバンドルに入るので、`VITE_*` 変数はセンシティブな情報を*含まない*ようにすべきです。
   :::
 
+::: details 変数の逆順展開
+
+Vite は変数を逆順で展開することをサポートしています。
+たとえば、以下の `.env` は `VITE_FOO=foobar`、`VITE_BAR=bar` として評価されます。
+
+```[.env]
+VITE_FOO=foo${VITE_BAR}
+VITE_BAR=bar
+```
+
+これはシェルスクリプトや `docker-compose` のような他のツールでは動作しません。
+とはいえ、この挙動は `dotenv-expand` によって長い間サポートされてきたものであり、JavaScript エコシステム内の他のツールでは、この挙動をサポートする古いバージョンが使用されているため、Vite はこの挙動をサポートしています。
+
+相互運用性の問題を回避するため、この挙動に依存しないことをお勧めします。Vite は将来的にこの挙動に対して警告を発するようになる可能性があります。
+
+:::
+
 ### TypeScript 用の自動補完
 
 デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
