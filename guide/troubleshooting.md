@@ -64,6 +64,15 @@ ESM ファイルは [`--experimental-require-module`](https://nodejs.org/docs/la
 - 一番近い `package.json` に `"type": "module"` を追加する
 - `vite.config.js` / `vite.config.ts` を `vite.config.mjs` / `vite.config.mts` にファイル名を変更する
 
+### `failed to load config from '/path/to/config*/vite.config.js'`
+
+> failed to load config from '/path/to/config\*/vite.config.js'
+> error when starting dev server:
+> Error: Build failed with 1 error:
+> error: Must use "outdir" when there are multiple input files
+
+上記のエラーは、プロジェクトフォルダーへのパスに `*` が含まれている場合に発生することがあります。 esbuild は `*` を glob として扱います。ディレクトリー名を変更して `*` を削除する必要があります。
+
 ## 開発サーバー
 
 ### リクエストがいつまでも終わらない
