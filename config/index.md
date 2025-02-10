@@ -61,7 +61,7 @@ export default {
 
 ## 条件付き設定
 
-設定がコマンド（`serve` や `build`）、使用されている[モード](/guide/env-and-mode)、SSR ビルドかどうか（`isSsrBuild`）、ビルドのプレビューかどうか（`isPreview`）に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
+設定がコマンド（`serve` や `build`）、使用されている[モード](/guide/env-and-mode#modes)、SSR ビルドかどうか（`isSsrBuild`）、ビルドのプレビューかどうか（`isPreview`）に基づいて条件付きで設定のオプションを決定する必要がある場合は、代わりに関数をエクスポートできます:
 
 ```js twoslash
 import { defineConfig } from 'vite'

@@ -137,7 +137,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 これにより次のことが提供されます:
 
 - アセットのインポート（例: `.svg` ファイルのインポート）
-- `import.meta.env` に Vite が挿入した[環境変数](./env-and-mode#env-variables)の型
+- `import.meta.env` に Vite が挿入した[定数](./env-and-mode#env-variables)の型
 - `import.meta.hot` の [HMR API](./api-hmr) の型
 
 ::: tip
