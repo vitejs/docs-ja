@@ -46,7 +46,7 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 ### 明示的な URL のインポート {#explicit-url-imports}
 
-内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートすることができます。これは、例えば [Houdini Paint Worklets](https://houdini.how/usage) をインポートするときに便利です。
+内部リストや `assetsInclude` に含まれていないアセットは URL の末尾に `?url` を付与することで明示的にインポートできます。これは、例えば [Houdini Paint Worklets](https://developer.mozilla.org/ja/docs/Web/API/CSS/paintWorklet_static) をインポートするときに便利です。
 
 ```js twoslash
 import 'vite/client'
