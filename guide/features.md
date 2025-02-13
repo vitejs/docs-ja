@@ -71,7 +71,7 @@ export type { T }
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-TypeScript ターゲットが `ES2022` 以降（`ESNext` を含む）の場合、デフォルト値は `true` になります。これは [TypeScript 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
+TypeScript ターゲットが `ES2022` 以降（`ESNext` を含む）の場合、デフォルト値は `true` になります。これは [TypeScript 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。
 他の TypeScript ターゲットはデフォルトで `false` になります。
 
 `true` は ECMAScript の標準的なランタイムの動作です。
