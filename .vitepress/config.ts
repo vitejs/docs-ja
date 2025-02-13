@@ -239,7 +239,7 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: 'はじめに',
+          text: 'イントロダクション',
           items: [
             {
               text: 'はじめに',
