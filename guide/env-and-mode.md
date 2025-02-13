@@ -1,8 +1,10 @@
 # 環境変数とモード
 
-## 環境変数 {#env-variables}
+Vite は特定の定数を特別な `import.meta.env` オブジェクトの下で公開します。この定数は開発中はグローバル変数として定義され、ビルド時にはツリーシェイキングを効果的に行うために静的に置き換えられます。
 
-Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公開しており、これはビルド時に静的に置き換えられます。いくつかのビルトイン変数は全てのケースで利用可能です:
+## ビルトイン定数
+
+いくつかのビルトイン定数は全てのケースで利用可能です:
 
 - **`import.meta.env.MODE`**: {string} アプリが動作している[モード](#modes)。
 
@@ -14,7 +16,31 @@ Vite は環境変数を特別な **`import.meta.env`** オブジェクトに公�
 
 - **`import.meta.env.SSR`**: {boolean} アプリが[サーバー](./ssr.md#conditional-logic)で動作しているかどうか
 
-## `.env` ファイル {#env-files}
+## 環境変数 {#env-variables}
+
+Vite は環境変数を `import.meta.env` オブジェクトの下で自動的に文字列として公開します。
+
+環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下の環境変数だと:
+
+```[.env]
+VITE_SOME_KEY=123
+DB_PASSWORD=foobar
+```
+
+`VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
+
+```js
+console.log(import.meta.env.VITE_SOME_KEY) // "123"
+console.log(import.meta.env.DB_PASSWORD) // undefined
+```
+
+環境変数のプレフィックスをカスタマイズしたい場合は、[envPrefix](/config/shared-options.html#envprefix) オプションを参照してください。
+
+:::tip env のパース
+上に示したように、`VITE_SOME_KEY` は数値ですが、パースすると文字列が返ります。同じことはブール型の環境変数にも起こります。コード内で使用する場合には、必ず目的の型に変換するようにしてください。
+:::
+
+### `.env` ファイル {#env-files}
 
 Vite は、[環境ディレクトリー](/config/shared-options.md#envdir)にある以下のファイルから追加の環境変数を読み込むために [dotenv](https://github.com/motdotla/dotenv) を利用します。
 
@@ -34,27 +60,7 @@ Vite は特定のモードの `.env.[mode]` ファイルに加えて、常に `.
 また、Vite の実行時に既に存在している環境変数は最も優先度が高く、`.env` ファイルによって上書きされることはありません。例えば、`VITE_SOME_KEY=123 vite build` を実行する場合。
 
 `.env` は Vite 起動時に読み込まれます。変更した後はサーバーを再起動してください。
-:::
 
-読み込まれた環境変数は、`import.meta.env` を経由してクライアントソースコードにも文字列として公開されます。
-
-環境変数が誤ってクライアントに漏れてしまうことを防ぐために、`VITE_` から始まる変数のみが Vite で処理されたコードに公開されます。例えば、以下の環境変数だと:
-
-```[.env]
-VITE_SOME_KEY=123
-DB_PASSWORD=foobar
-```
-
-`VITE_SOME_KEY` だけが `import.meta.env.VITE_SOME_KEY` としてクライアントソースコードに公開され、`DB_PASSWORD` は公開されません。
-
-```js
-console.log(import.meta.env.VITE_SOME_KEY) // "123"
-console.log(import.meta.env.DB_PASSWORD) // undefined
-```
-
-:::tip env のパース
-
-上に示したように、`VITE_SOME_KEY` は数値ですが、パースすると文字列が返ります。同じことはブール型の環境変数にも起こります。コード内で使用する場合には、必ず目的の型に変換するようにしてください。
 :::
 
 また、Vite は [dotenv-expand](https://github.com/motdotla/dotenv-expand) を使って、設定不要で env ファイルに書かれた変数を展開できます。構文の詳細については、[ドキュメント](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow)を参照してください。
@@ -68,14 +74,13 @@ NEW_KEY2=test\$foo  # test$foo
 NEW_KEY3=test$KEY   # test123
 ```
 
-環境変数のプレフィックスをカスタマイズしたい場合は、[envPrefix](/config/shared-options.html#envprefix) オプションを参照してください。
-
 :::warning SECURITY NOTES
 
 - `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることができます。git にチェックインされるのを防ぐために、`.gitignore` に `*.local` を追加すべきです。
 
 - Vite のソースコードに公開される変数は最終的にクライアントバンドルに入るので、`VITE_*` 変数はセンシティブな情報を*含まない*ようにすべきです。
-  :::
+
+:::
 
 ::: details 変数の逆順展開
 
@@ -94,7 +99,7 @@ VITE_BAR=bar
 
 :::
 
-### TypeScript 用の自動補完
+## TypeScript 用の自動補完
 
 デフォルトで Vite は [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript の自動補完が欲しくなるかもしれません。
 
@@ -124,11 +129,12 @@ interface ImportMeta {
 :::warning import は型拡張を破壊する
 
 `ImportMetaEnv` の拡張が上手く動かない場合、`import` ステートメントが `vite-env.d.ts` 内に存在しないことを確認してください。詳しい情報については、[TypeScript のドキュメント](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) を参照してください。
+
 :::
 
-## HTML での置換
+## HTML での定数の置換
 
-Vite は HTML ファイルでの環境変数の置換もサポートしています。`import.meta.env` にあるプロパティは、特別な `%ENV_NAME%` 構文使用して HTML ファイルで使用できます:
+Vite は HTML ファイルでの定数の置換もサポートしています。`import.meta.env` にあるプロパティは、特別な `%CONST_NAME%` 構文を使用して HTML ファイルで使用できます:
 
 ```html
 <h1>Vite is running in %MODE%</h1>
@@ -145,8 +151,7 @@ Vite は多くのフレームワークで使用されているため、条件分
 
 つまり、 `vite build` の動作中は、もし `.env.production` があれば、環境変数をそこから読み込むということです:
 
-```
-# .env.production
+```[.env.production]
 VITE_APP_TITLE=My App
 ```
 
@@ -160,19 +165,17 @@ vite build --mode staging
 
 また、`.env.staging` ファイルを作成します:
 
-```
-# .env.staging
+```[.env.staging]
 VITE_APP_TITLE=My App (staging)
 ```
 
 `vite build` はデフォルトで本番環境のビルドを実行しますが、別のモードと `.env` ファイルの設定を変更することで、開発環境のビルドを実行することもできます:
 
-```
-# .env.testing
+```[.env.testing]
 NODE_ENV=development
 ```
 
-## NODE_ENV とモード
+### NODE_ENV とモード
 
 `NODE_ENV`（`process.env.NODE_ENV`）とモードは異なる概念であると意識するのが重要です。それぞれのコマンドが `NODE_ENV` とモードにどのように影響するかを以下に示します:
 
