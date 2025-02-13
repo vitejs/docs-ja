@@ -57,7 +57,7 @@ Vite の現在のプラグイン API は、`esbuild` をバンドラーとして
 
 Rollup はパフォーマンスの向上にも取り組んでおり、[v4 でパーサーを SWC に切り替えました](https://github.com/rollup/rollup/pull/5073)。 そして、Rolldown と呼ばれる Rollup の Rust ポートを構築する取り組みが進行中です。 Rolldown の準備が完了すると、Vite の Rollup と esbuild の両方が置き換えられ、ビルドのパフォーマンスが大幅に向上し、開発とビルドの間の不一致が解消されます。 [詳細については、Evan You の ViteConf 2023 基調講演](https://youtu.be/hrdwQHoAp0M) をご覧ください。
 
-## Vite は他の非バンドルのビルドツールとどう違いますか？
+## Vite は他の非バンドルのビルドツールとどう違いますか？ {#how-vite-relates-to-other-unbundled-build-tools}
 
 Preact チームが開発した [WMR](https://github.com/preactjs/wmr) も似たような機能群を提供しようとしていました。Vite の開発用およびビルド用のユニバーサルな Rollup プラグインの API は、これに影響を受けました。 WMR はもうメンテナンスされていません。Preact チームは現在、[@preactjs/preset-vite](https://github.com/preactjs/preset-vite) とともに Vite を使用することを推奨しています。
 
