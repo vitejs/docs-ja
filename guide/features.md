@@ -71,18 +71,13 @@ export type { T }
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-Vite 2.5.0 からは、TypeScript ターゲットが `ESNext` か `ES2022` 以上の場合、デフォルト値は `true` になります。これは [`tsc` 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。また、これは ECMAScript の標準的なランタイムの動作でもあります。
-
+TypeScript ターゲットが `ES2022` 以降（`ESNext` を含む）の場合、デフォルト値は `true` になります。これは [TypeScript 4.3.2 以降の動作](https://github.com/microsoft/TypeScript/pull/42663)と一致しています。
 他の TypeScript ターゲットはデフォルトで `false` になります。
 
-しかし、他のプログラミング言語や古いバージョンの TypeScript を使用している人にとっては直感的に理解できないかもしれません。
-移行の詳細については、[TypeScript 3.7 リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)を参照してください。
+`true` は ECMAScript の標準的なランタイムの動作です。
 
 クラスフィールドに大きく依存しているライブラリーを使用している場合は、そのライブラリーが意図している使い方に注意してください。
-
-[MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties) などのほとんどのライブラリーは `"useDefineForClassFields": true` を想定しています。
-
-しかし、[`lit-element`](https://github.com/lit/lit-element/issues/1030) など、まだこの新しいデフォルトに移行していないライブラリーもあります。これらの場合は、明示的に `useDefineForClassFields` を `false` に設定してください。
+ほとんどのライブラリーは `"useDefineForClassFields": true` を想定していますが、ライブラリーがサポートしていない場合は、明示的に `useDefineForClassFields` を `false` に設定できます。
 
 #### `target`
 
@@ -124,6 +119,8 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 /// <reference types="vite/client" />
 ```
 
+::: details `compilerOptions.types` の使用
+
 または、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加することもできます:
 
 ```json [tsconfig.json]
@@ -134,9 +131,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 }
 ```
 
-::: warning
-
-[`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) が指定された場合、グローバルスコープには（見つかるすべての "@types" パッケージの代わりに）これらのパッケージのみが含まれるようになります。
+[`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) が指定された場合、グローバルスコープには（見つかるすべての "@types" パッケージの代わりに）これらのパッケージのみが含まれるようになることに注意してください。
 
 :::
 
@@ -216,8 +211,6 @@ Vite は Vue に対して最高のサポートをします:
 
 - Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Vue 2.7 SFC はこちら [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Vue 2.7 JSX はこちら [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
 
 ## JSX
 
