@@ -239,16 +239,25 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: 'ガイド',
+          text: 'イントロダクション',
           items: [
-            {
-              text: 'Vite を使う理由',
-              link: '/guide/why',
-            },
             {
               text: 'はじめに',
               link: '/guide/',
             },
+            {
+              text: '理念',
+              link: '/guide/philosophy',
+            },
+            {
+              text: 'Vite を使う理由',
+              link: '/guide/why',
+            },
+          ],
+        },
+        {
+          text: 'ガイド',
+          items: [
             {
               text: '特徴',
               link: '/guide/features',
@@ -296,10 +305,6 @@ export default defineConfig({
             {
               text: 'パフォーマンス',
               link: '/guide/performance',
-            },
-            {
-              text: '理念',
-              link: '/guide/philosophy',
             },
             {
               text: 'v5 からの移行',
