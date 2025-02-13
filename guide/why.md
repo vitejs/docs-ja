@@ -57,6 +57,10 @@ Vite の現在のプラグイン API は、`esbuild` をバンドラーとして
 
 Rollup はパフォーマンスの向上にも取り組んでおり、[v4 でパーサーを SWC に切り替えました](https://github.com/rollup/rollup/pull/5073)。 そして、Rolldown と呼ばれる Rollup の Rust ポートを構築する取り組みが進行中です。 Rolldown の準備が完了すると、Vite の Rollup と esbuild の両方が置き換えられ、ビルドのパフォーマンスが大幅に向上し、開発とビルドの間の不一致が解消されます。 [詳細については、Evan You の ViteConf 2023 基調講演](https://youtu.be/hrdwQHoAp0M) をご覧ください。
 
-## Vite とその他 X はどう違いますか？
+## Vite は他の非バンドルのビルドツールとどう違いますか？
 
-Vite がその他の類似ツールとどう違うのか、より詳細な違いは、[比較](./comparisons.md) セクションで確認してください。
+Preact チームが開発した [WMR](https://github.com/preactjs/wmr) も似たような機能群を提供しようとしていました。Vite の開発用およびビルド用のユニバーサルな Rollup プラグインの API は、これに影響を受けました。 WMR はもうメンテナンスされていません。Preact チームは現在、[@preactjs/preset-vite](https://github.com/preactjs/preset-vite) とともに Vite を使用することを推奨しています。
+
+[Snowpack](https://www.snowpack.dev/) も no-bundle ネイティブな ESM の開発サーバーで、Vite と非常に近い目的を持っていました。Vite の依存関係の事前ビルドの機能は、Snowpack v1（現在の[`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）にも影響を受けています。Snowpack は今ではメンテナンスされていません。現在、Snowpack チームは Vite を利用した静的サイトビルダーである [Astro](https://astro.build/) の開発に取り組んでいます。
+                                
+[@web/dev-server](https://modern-web.dev/docs/dev-server/overview/)（旧称 `es-dev-server`）は素晴らしいプロジェクトです。Vite 1.0 の Koa ベースのサーバーのセットアップはこのプロジェクトに影響を受けたものです。`@web` アンブレラプロジェクトは活発にメンテナンスされており、Vite ユーザーにも役に立つ他の多くの優れたツールが含まれています。

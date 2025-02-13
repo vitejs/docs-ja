@@ -290,10 +290,6 @@ export default defineConfig({
               link: '/guide/backend-integration',
             },
             {
-              text: '他のツールとの比較',
-              link: '/guide/comparisons',
-            },
-            {
               text: 'トラブルシューティング',
               link: '/guide/troubleshooting',
             },
