@@ -214,7 +214,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - React のサポート: [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 - SWC を利用している React のサポート: [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-詳しくは[プラグインガイド](https://vite.dev/plugins)を確認してください。
+詳しくは[プラグインガイド](/plugins)を確認してください。
 
 ## JSX
 
