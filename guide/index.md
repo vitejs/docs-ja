@@ -202,7 +202,31 @@ Vite がインストールされているプロジェクトでは npm スクリ�
 
 ## 未リリースのコミットの使用
 
-最新機能を試すために新しいリリースを待つことができない場合は、ローカルマシンに [vite repo](https://github.com/vitejs/vite) をクローンしてから自分でビルドとリンクをする必要があります（[pnpm](https://pnpm.io/) が必要）:
+最新機能を試すために新しいリリースが待ちきれない場合は、https://pkg.pr.new を利用すると特定のコミットの Vite をインストールできます:
+
+::: code-group
+
+```bash [npm]
+$ npm install -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [Yarn]
+$ yarn add -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [pnpm]
+$ pnpm add -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [Bun]
+$ bun add -D https://pkg.pr.new/vite@SHA
+```
+
+:::
+
+`SHA` を任意の [Vite の commit SHA](https://github.com/vitejs/vite/commits/main/) に置き換えてください。古いコミットのリリースは削除されるため、利用できるのは 1 か月以内のコミットだけであることに注意してください。
+
+代わりに、ローカルマシンに [vite repo](https://github.com/vitejs/vite) をクローンしてから自分でビルドとリンクをすることもできます（[pnpm](https://pnpm.io/) が必要）。
 
 ```bash
 git clone https://github.com/vitejs/vite.git
@@ -214,6 +238,10 @@ pnpm link --global # このステップでは好きなパッケージマネー�
 ```
 
 その後 Vite ベースのプロジェクトに移動し、`pnpm link --global vite`（または、`vite` をグローバルにリンクするために使用したパッケージマネージャー）を実行してください。そして開発サーバーを再起動して最先端の技術に乗っていきましょう！
+
+::: tip Vite を利用している依存関係
+依存関係が遷移的に利用している Vite のバージョンを置換するには、[npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) や [pnpm overrides](https://pnpm.io/package_json#pnpmoverrides) を使用する必要があります。
+:::
 
 ## コミュニティー
 
