@@ -205,20 +205,24 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 
 特定の要素の HTML 処理をオプトアウトするには、その要素に `vite-ignore` 属性を追加します。これは、外部アセットや CDN を参照する際に便利です。
 
-## Vue
+## フレームワーク
 
-Vite は Vue に対して最高のサポートをします:
+すべてのモダンなフレームワークは Vite とのインテグレーションをメンテナンスしています。ほとんどのフレームワークのプラグインは各フレームワークのチームがメンテナンスしていますが、公式の Vue と React の Vite プラグインは例外として Vite の organization によりメンテナンスされています。
 
-- Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- Vue のサポート: [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Vue JSX のサポート: [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- React のサポート: [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
+- SWC を利用している React のサポート: [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+詳しくは[プラグインガイド](../plugins/)を確認してください。
 
 ## JSX
 
 `.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [esbuild](https://esbuild.github.io) を介して行われます。
 
-Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
+選択したフレームワークでは、すでに最初から JSX が設定されているはずです（たとえば、Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します）。
 
-React や Vue 以外で JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact の場合:
+自分自身のフレームワークで JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact プラグインは以下のような設定を利用します:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
