@@ -222,7 +222,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 
 選択したフレームワークでは、すでに最初から JSX が設定されているはずです（たとえば、Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します）。
 
-自分自身のフーレムワークで JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact プラグインは以下のような設定を利用します:
+自分自身のフレームワークで JSX を使用している場合は、[`esbuild` オプション](/config/shared-options.md#esbuild) を使用してカスタムの `jsxFactory` および `jsxFragment` を設定できます。例えば、Preact プラグインは以下のような設定を利用します:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
