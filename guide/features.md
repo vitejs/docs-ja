@@ -565,12 +565,12 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```ts
 // vite によって生成されるコード:
 const moduleStrings = {
-  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
-  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?raw').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?raw').then((m) => m['default']),
 }
 const moduleUrls = {
-  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
-  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?url').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?url').then((m) => m['default']),
 }
 ```
 
