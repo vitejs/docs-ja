@@ -111,6 +111,9 @@ Ubuntu Linux では、systemd 設定ファイルを更新する代わりに、`/
 
 これらの設定は持続しますが、**再起動が必要**なことに注意してください。
 
+あるいは、サーバーが VS Code 内で起動している場合、リクエストがストールしたように見える場合があります。この問題を修正するには
+[Dev Container / VS Code のポートフォワーディング](#dev-containers-vs-code-port-forwarding) を参照してください。
+
 ### ネットワークリクエストの読み込みが止まる
  
 自己署名 SSL 証明書を使用する場合、Chrome はすべてのキャッシュディレクティブを無視し、コンテンツを再読み込みします。Vite は、これらのキャッシュディレクティブに依存しています。
@@ -139,7 +142,7 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 これを回避するためには、リクエストヘッダーサイズを減らすことを試みてください。例えば、クッキーが長い場合、削除します。あるいは、[`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) を利用して最大ヘッダーサイズを変更できます。
 
-### Dev Container / VS Code のポートフォワーディング
+### Dev Container / VS Code のポートフォワーディング {#dev-containers-vs-code-port-forwarding}
 
 Dev Container や VS Code のポートフォワーディング機能を使用している場合、正しく動作するように [`server.host`](/config/server-options.md#server-host) オプションを `127.0.0.1` に設定する必要があるかもしれません。
 
