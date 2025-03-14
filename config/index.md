@@ -121,3 +121,19 @@ export default defineConfig(({ mode }) => {
   }
 })
 ```
+
+## VS Code で設定ファイルをデバッグする
+
+デフォルトの `--configLoader bundle` の動作では、Vite は生成された一時的な設定ファイルを `node_modules/.vite-temp` フォルダーに書き込むため、Vite の設定ファイル内でブレークポイントデバッグを設定するときにファイルが見つからないというエラーが発生します。この問題を修正するには、`.vscode/settings.json` に以下の設定を追加してください:
+
+```json
+{
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "!**/node_modules/**",
+      "**/node_modules/.vite-temp/**"
+    ]
+  }
+}
+```
