@@ -31,5 +31,10 @@
   },
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
