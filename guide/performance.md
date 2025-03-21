@@ -122,5 +122,6 @@ export default defineConfig({
 
 ネイティブツールを使用すると、インストールサイズが大きくなることが多いため、新しい Vite プロジェクトを開始する際のデフォルトではありません。しかし、大規模なアプリケーションではコストをかける価値があるかもしれません。
 
+- より高速なビルドと開発/ビルド間の一貫した体験のために、[Rollup と esbuild の代わりに Rolldown](./rolldown) を使用する。
 - [LightningCSS](https://github.com/vitejs/vite/discussions/13835) の実験的サポートを試す。
 - `vitejs/plugin-react` の代わりに [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) を使用する。
