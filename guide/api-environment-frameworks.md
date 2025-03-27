@@ -38,7 +38,48 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 ```
 
 :::warning
-`runner` は、初めてアクセスされたときに即座に評価されます。Vite は、`process.setSourceMapsEnabled` を呼び出して `runner` が作成されたとき、またはそれが利用できない場合は `Error.prepareStackTrace` をオーバーライドすることによって、ソースマップのサポートを有効にすることに注意してください。
+`runner` は、初めてアクセスされたときにのみ遅延評価されます。Vite は、`process.setSourceMapsEnabled` を呼び出して `runner` が作成されたとき、またはそれが利用できない場合は `Error.prepareStackTrace` をオーバーライドすることによって、ソースマップのサポートを有効にすることに注意してください。
+:::
+
+`Fetch API`（[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)）を介してランタイムと通信するフレームワークは、`handleRequest` メソッドを通じてリクエストを標準化された方法で処理する `FetchableDevEnvironment` を利用できます:
+
+```ts
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from 'vite'
+
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // リクエストを処理し、レスポンスを返します
+            },
+          })
+        },
+      },
+    },
+  },
+})
+
+// Environment API のどの利用者からも `dispatchFetch` を呼び出せるようになりました
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle'),
+  )
+}
+```
+
+:::warning
+Vite は、`dispatchFetch` メソッドの入力と出力を検証します。リクエストはグローバル `Request` クラスのインスタンスである必要があり、レスポンスはグローバル `Response` クラスのインスタンスである必要があります。そうでない場合、Vite は `TypeError` をスローします。
+
+`FetchableDevEnvironment` はクラスとして実装されていますが、Vite チームからは実装の詳細と見なされており、いつでも変更される可能性があることに注意してください。
 :::
 
 ## Default `RunnableDevEnvironment`
@@ -52,6 +93,7 @@ import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 const server = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
