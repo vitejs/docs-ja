@@ -348,11 +348,7 @@ CSS Modules を設定するには、[`css.modules`](../config/shared-options.md#
 
 デフォルトでは、Vite は CSS の圧縮に esbuild を使用します。[`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify) を使用することで、Lightning CSS を CSS の圧縮に使用できます。
 
-::: tip NOTE
-Lightning CSS 使用時は、[CSS プリプロセッサー](#css-pre-processors)はサポートされていません。
-:::
-
-## 静的なアセット
+## 静的アセット
 
 静的アセットをインポートすると、提供時に解決されたパブリック URL が返されます:
 
