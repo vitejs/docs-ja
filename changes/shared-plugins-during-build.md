@@ -4,7 +4,7 @@
 [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-[ビルド時の共有プラグイン](/guide/api-environment.md#shared-plugins-during-build)を参照してください。
+[ビルド時の共有プラグイン](/guide/api-environment-plugins.md#shared-plugins-during-build)を参照してください。
 
 影響範囲: `Vite プラグイン作成者`
 
