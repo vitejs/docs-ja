@@ -91,3 +91,104 @@ Rolldown は Rollup の代替として機能することを目指しています
 `rolldown-vite` パッケージは、フィードバックを収集し Rolldown 統合を安定させるための一時的な解決策です。将来的には、この機能はメインの Vite リポジトリーにマージされる予定です。
 
 `rolldown-vite` を試して、フィードバックや問題報告を通じてその開発に貢献することをお勧めします。
+
+## プラグイン / フレームワーク作者向けガイド
+
+### 主な変更点
+
+- ビルドに Rolldown が使用されます（以前は Rollup が使用されていました）
+- オプティマイザーに Rolldown が使用されます（以前は esbuild が使用されていました）
+- CommonJS のサポートは Rolldown によって処理されます（以前は @rollup/plugin-commonjs が使用されていました）
+- 構文の低レベル変換に Oxc が使用されます（以前は esbuild が使用されていました）
+- CSS の圧縮にはデフォルトで Lightning CSS が使用されます（以前は esbuild が使用されていました）
+- JS の圧縮にはデフォルトで Oxc minifier が使用されます（以前は esbuild が使用されていました）
+- 設定のバンドルに Rolldown が使用されます（以前は esbuild が使用されていました）
+
+### rolldown-vite の検出方法
+
+以下のいずれかの方法で検出できます:
+
+- `this.meta.rolldownVersion` の存在を確認する
+
+```js
+const plugin = {
+  resolveId() {
+    if (this.meta.rolldownVersion) {
+      // rolldown-vite 向けのロジック
+    } else {
+      // rollup-vite 向けのロジック
+    }
+  },
+}
+```
+
+- `rolldownversion` エクスポートの存在を確認します
+
+```js
+import * as vite from 'vite'
+
+if (vite.rolldownVersion) {
+  // rolldown-vite 向けのロジック
+} else {
+  // rollup-vite 向けのロジック
+}
+```
+
+依存関係（peer dependency ではない）として `vite` がある場合、`rolldownVersion` エクスポートは、コードのどこからでも使用できるため有用です。
+
+### Rolldown のオプション検証を無視するには
+
+Rolldown は、不明または無効なオプションが渡されるとエラーをスローします。Rollup で利用可能ないくつかのオプションは Rolldown でサポートされていないため、エラーに遭遇する可能性があります。以下に、このようなエラーメッセージの例を見つけることができます:
+
+> Error: Failed validate input options.
+>
+> - For the "preserveEntrySignatures". Invalid key: Expected never but received "preserveEntrySignatures".
+
+これは、上記のように `rolldown-vite` で実行されているかどうかを確認することでオプションを条件的に渡すことで修正できます。
+
+今のところこのエラーを抑制したい場合は、 `rolldown_options_validation = loose` 環境変数を設定できます。ただし、最終的には Rolldown でサポートされていないオプションを渡すのをやめる必要があることに留意してください。
+
+### `transformwithesbuild` は `esbuild` を個別にインストールする必要があります
+
+`esbuild` の代わりに Oxc を使用する `transformWithOxc` と呼ばれる同様の関数は、`rolldown-vite` からエクスポートされます。
+
+### `esbuild` オプションの互換性レイヤー
+
+Rolldown-Vite には、`esbuild` のオプションをそれぞれの Oxc または `rolldown` のオプションに変換する互換性レイヤーがあります。[Ecosystem-Ci](https://github.com/vitejs/vite-ecosystem-ci/blob/rolldown-vite/README-temp.md)でテストされているように、これは多くの場合、単純な `esbuild` プラグインを含めて動作します。
+とはいえ、**将来的には `esbuild` オプションのサポートを削除する予定**なので、対応する Oxc または `rolldown` オプションを試すことをお勧めします。
+`configResolved` フックから互換性レイヤーによって設定されたオプションを取得できます。
+
+```js
+const plugin = {
+  name: 'log-config',
+  configResolved(config) {
+    console.log('options', config.optimizeDeps, config.oxc)
+  },
+},
+```
+
+### フックフィルター機能
+
+Rolldown は[フックフィルター機能](https://rolldown.rs/guide/plugin-development#plugin-hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信を縮小しました。この機能を使用することで、プラグインのパフォーマンスを向上させることができます。
+これは、Rollup 4.38.0+ および Vite 6.3.0+ によってサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でフィルターを実行してください。
+
+### `load` または `transform` フックでコンテンツを JavaScript に変換する
+
+`load` または `Transform` フックでコンテンツを他のタイプから JavaScript に変換する場合、`moduleType: 'js'` を返された値に追加する必要がある場合があります。
+
+```js
+const plugin = {
+  name: 'txt-loader',
+  load(id) {
+    if (id.endsWith('.txt')) {
+      const content = fs.readFile(id, 'utf-8')
+      return {
+        code: `export default ${JSON.stringify(content)}`,
+        moduleType: 'js', // [!code ++]
+      }
+    }
+  },
+}
+```
+
+これは、[Rolldown は JavaScript 以外のモジュールもサポート](https://rolldown.rs/guide/in-depth/module-types)しており、指定がない限り拡張子からモジュールタイプを拡張するためです。`rolldown-vite` は開発時にはモジュールタイプをサポートしていないことに注意してください。
