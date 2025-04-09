@@ -140,10 +140,6 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 
 要件が満たされている場合は、`import`、`require`、`default` の条件が常に適用されることに注意してください。
 
-:::warning サブパスのエクスポートの解決
-エクスポートのキーが "/" で終わるのは Node では非推奨で、うまく動作しない可能性があります。代わりに [`*` サブパスパターン](https://nodejs.org/api/packages.html#package-entry-points) を使用するよう、パッケージ作者に連絡してください。
-:::
-
 ## resolve.mainFields
 
 - **型:** `string[]`
