@@ -99,7 +99,7 @@ $ npm run preview
          - name: Set up Node
            uses: actions/setup-node@v4
            with:
-             node-version: 20
+             node-version: lts/*
              cache: 'npm'
          - name: Install dependencies
            run: npm ci
@@ -128,7 +128,7 @@ $ npm run preview
 2. プロジェクトルートに、`.gitlab-ci.yml` という名前でファイルを作成し、以下のように記述してください。これで、コンテンツを変更するたびにサイトのビルドとデプロイが行われます:
 
    ```yaml [.gitlab-ci.yml]
-   image: node:16.5.0
+   image: node:lts
    pages:
      stage: deploy
      cache:
