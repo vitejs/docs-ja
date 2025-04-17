@@ -2,6 +2,8 @@
 
 Vite は、ビルドのパフォーマンスと機能を向上させるために、Rust で実装された JavaScript バンドラーの [Rolldown](https://rolldown.rs) を統合する計画を進めています。
 
+<YouTubeVideo videoId="RRjfm8cMveQ" />
+
 ## Rolldown とは
 
 Rolldown は Rust で書かれたモダンで高性能な JavaScript バンドラーです。Rollup の代替として設計されており、既存のエコシステムとの互換性を維持しながら、大幅なパフォーマンスの向上を目指しています。
