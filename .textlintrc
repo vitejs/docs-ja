@@ -12,7 +12,8 @@
     "allowlist": {
       "allow": [
         "->",
-        ">="
+        ">=",
+        "<<<"
       ]
     },
     "comments": true
