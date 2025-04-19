@@ -32,7 +32,17 @@ Rolldown の背景にある動機についての詳細は、[Rolldown が構築�
 
 ## Rolldown を試す方法
 
-Rolldown を搭載した Vite のバージョンは現在、`rolldown-vite` という別のパッケージとして利用可能です。`package.json` にパッケージオーバーライドを追加することで試すことができます:
+Rolldown を搭載した Vite のバージョンは現在、`rolldown-vite` という別のパッケージとして利用可能です。`vite` を直接の依存関係として持っている場合、プロジェクトで `vite` パッケージを `rolldown-vite` にエイリアスすることで、ドロップイン置換として機能するはずです。
+
+```json
+{
+  "dependencies": {
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
+```
+
+Vitepress や Vite をピア依存関係として持つメタフレームワークを使用している場合は、パッケージマネージャーで `vite` の依存関係をオーバーライドする必要があります:
 
 :::code-group
 
