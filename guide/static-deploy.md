@@ -63,59 +63,7 @@ $ npm run preview
 
 2. リポジトリー設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
 
-   ```yml
-   # 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
-   name: Deploy static content to Pages
-
-   on:
-     # デフォルトブランチを対象としたプッシュ時にで実行されます
-     push:
-       branches: ['main']
-
-     # Actions タブから手動でワークフローを実行できるようにします
-     workflow_dispatch:
-
-   # GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-
-   # 1 つの同時デプロイメントを可能にする
-   concurrency:
-     group: 'pages'
-     cancel-in-progress: true
-
-   jobs:
-     # デプロイするだけなので、単一のデプロイジョブ
-     deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       steps:
-         - name: Checkout
-           uses: actions/checkout@v4
-         - name: Set up Node
-           uses: actions/setup-node@v4
-           with:
-             node-version: lts/*
-             cache: 'npm'
-         - name: Install dependencies
-           run: npm ci
-         - name: Build
-           run: npm run build
-         - name: Setup Pages
-           uses: actions/configure-pages@v4
-         - name: Upload artifact
-           uses: actions/upload-pages-artifact@v3
-           with:
-             # dist フォルダーのアップロード
-             path: './dist'
-         - name: Deploy to GitHub Pages
-           id: deployment
-           uses: actions/deploy-pages@v4
-   ```
+   <<< ./static-deploy-github-pages.yaml#content
 
 ## GitLab Pages と GitLab CI
 
