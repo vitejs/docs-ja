@@ -98,11 +98,38 @@ Rolldown は不明または無効なオプションが渡されるとエラー�
 
 このオプションを自身で設定していない場合は、使用しているフレームワークで修正される可能性があります。それまでの間、`ROLLDOWN_OPTIONS_VALIDATION=loose` 環境変数を設定することでこのエラーを抑制できます。
 
-## ネイティブプラグインの有効化
+## パフォーマンス
+
+`rolldown-vite` は既存のエコシステムとの互換性を確保することに重点を置いており、デフォルトはスムーズな移行を目的としています。より高速な Rust ベースの内部プラグインやその他のカスタマイズに切り替えることで、さらなるパフォーマンス向上を得ることができます。
+
+### ネイティブプラグインの有効化
 
 Rolldown と Oxc のおかげで、エイリアスや resolve プラグインなどの Vite の内部プラグインが Rust に変換されました。執筆時点では、これらのプラグインの動作が JavaScript 版とは異なる可能性があるため、デフォルトでは有効になっていません。
 
 これらをテストするには、Vite の設定で `experimental.enableNativePlugin` オプションを `true` に設定できます。
+
+### `withFilter` ラッパー
+
+プラグイン作者は、Rust と JavaScript のランタイム間の通信オーバーヘッドを削減するために、[フックフィルター機能](#hook-filter-feature)を使用するオプションがあります。
+しかし、使用されているプラグインの一部がまだこの機能を使用していない場合でも、その恩恵を受けたい場合は、`withFilter` ラッパーを使用してプラグインを自分でフィルターでラップできます。
+
+```js
+// vite.config.ts 内
+import { withFilter, defineConfig } from 'vite'
+import svgr from 'vite-plugin-svgr'
+
+export default defineConfig({
+  plugins: [
+    // `.svg?react` で終わるファイルに対してのみ `svgr` プラグインをロードする
+    withFilter(
+      svgr({
+        /*...*/
+      }),
+      { load: { id: /\.svg?react$/ } },
+    ),
+  ],
+})
+```
 
 ## 問題の報告
 
@@ -231,7 +258,7 @@ const plugin = {
 },
 ```
 
-### フックフィルター機能
+### フックフィルター機能 {#hook-filter-feature}
 
 Rolldown は[フックフィルター機能](https://rolldown.rs/guide/plugin-development#plugin-hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信を縮小しました。この機能を使用することで、プラグインのパフォーマンスを向上させることができます。
 これは、Rollup 4.38.0+ および Vite 6.3.0+ によってサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でフィルターを実行してください。
