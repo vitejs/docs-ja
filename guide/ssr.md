@@ -63,7 +63,7 @@ if (import.meta.env.SSR) {
 
 ## 開発サーバーのセットアップ {#setting-up-the-dev-server}
 
-SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/)（v4）での例です:
+SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
@@ -93,7 +93,7 @@ async function createServer() {
   // 次のコードは再起動後でも有効です。
   app.use(vite.middlewares)
 
-  app.use('*', async (req, res) => {
+  app.use('*all', async (req, res) => {
     // index.html を提供します - 次にこれに取り組みます。
   })
 
@@ -119,7 +119,7 @@ var app
 var vite
 
 // ---cut---
-app.use('*', async (req, res, next) => {
+app.use('*all', async (req, res, next) => {
   const url = req.originalUrl
 
   try {
