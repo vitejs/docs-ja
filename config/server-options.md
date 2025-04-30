@@ -42,8 +42,8 @@ WSL2 上で Vite を動作させる場合、LAN からサーバーにアクセ�
 
 :::
 
-
 ## server.allowedHosts
+
 - **型:** `string[] | true`
 - **デフォルト:** `[]`
 
@@ -185,8 +185,8 @@ export default defineConfig({
 :::danger
 
 `server.cors` を `true` に設定すると、任意のウェブサイトから開発サーバーにリクエストを送信し、ソースコードやコンテンツをダウンロードできるようになります。許可するオリジンを明示的に常に指定することを推奨します。
-:::
 
+:::
 
 ## server.headers
 
@@ -376,6 +376,12 @@ export default defineConfig({
 - **デフォルト:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
 Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
+
+::: tip 注意
+
+このブロックリストは[public ディレクトリー](/guide/assets.md#the-public-directory)には適用されません。public ディレクトリー内のすべてのファイルは、ビルド中に出力ディレクトリーに直接コピーされるため、フィルタリングされずに提供されます。
+
+:::
 
 ## server.origin
 
