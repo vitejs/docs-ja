@@ -18,7 +18,7 @@ Vite 6 以前は `client` と `ssr` という 2 つの環境しか利用でき�
 
 ## 移行ガイド
 
-既存のプラグインを素早くマイグレーションするには、`resolveId`、`load`、`transform` フックの `options.ssr` 引数を `this.environment.name !== 'client'` に置き換えてください:
+既存のプラグインを素早くマイグレーションするには、`resolveId`、`load`、`transform` フックの `options.ssr` 引数を `this.environment.config.consumer === 'server'` に置き換えてください:
 
 ```ts
 import { Plugin } from 'vite'
@@ -28,7 +28,7 @@ export function myPlugin(): Plugin {
     name: 'my-plugin',
     resolveId(id, importer, options) {
       const isSSR = options.ssr // [!code --]
-      const isSSR = this.environment.name !== 'client' // [!code ++]
+      const isSSR = this.environment.config.consumer === 'server' // [!code ++]
 
       if (isSSR) {
         // SSR 固有のロジック
