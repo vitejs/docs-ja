@@ -329,6 +329,8 @@ export default {
 }
 ```
 
+プラグインは `buildApp` フックを定義することもできます。order が `'pre'` および `null'` のフックは、設定された `builder.buildApp` の前に実行され、`'post'` のフックはその後で実行されます。`environment.isBuilt` を使用して、環境がすでにビルドされているかどうかを確認できます。
+
 ## 環境に依存しないコード {#environment-agnostic-code}
 
 ほとんどの場合、現在の `environment` インスタンスは実行中のコードのコンテキストの一部として利用できるため、`server.environments` を介してアクセスする必要はほとんどありません。たとえば、プラグインフック内では、環境は `PluginContext` の一部として公開されるため、`this.environment` を使用してアクセスできます。環境対応プラグインの構築方法については、[プラグイン向けの Environment API](./api-environment-plugins.md) を参照してください。
