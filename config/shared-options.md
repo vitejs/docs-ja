@@ -227,9 +227,8 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 CSS プリプロセッサーに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサーでサポートされているオプションは、それぞれのドキュメントで確認できます:
 
 - `sass`/`scss`:
-  - 使用する sass の API を `api: "modern-compiler" | "modern" | "legacy"` で選択します（`sass-embedded` がインストールされている場合はデフォルトで `"modern-compiler"`、そうでない場合は `"modern"`）。最高のパフォーマンスを得るには、`sass-embedded` パッケージで `api: "modern-compiler"` を使用することをお勧めします。`"legacy"` API は非推奨であり、Vite 7 で削除される予定です。
-  - [オプション（modern）](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
-  - [オプション（legacy）](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions)
+  - 使用する sass の API を `api: "modern-compiler" | "modern"` で選択します（`sass-embedded` がインストールされている場合はデフォルトで `"modern-compiler"`、そうでない場合は `"modern"`）。最高のパフォーマンスを得るには、`sass-embedded` パッケージで `api: "modern-compiler"` を使用することをお勧めします。
+  - [オプション](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [オプション](https://lesscss.org/usage/#less-options)。
 - `styl`/`stylus`: オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
 
@@ -248,7 +247,7 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern-compiler', // または "modern", "legacy"
+        api: 'modern-compiler', // または "modern"
         importers: [
           // ...
         ],
