@@ -466,7 +466,7 @@ Vite が特定のメッセージをログに出力する際、ターミナル画
 - **型:** `string | string[]`
 - **デフォルト:** `VITE_`
 
-`envPrefix` で始まる環境変数は、import.meta.env でクライアントのソースコードに公開されます。
+`envPrefix` で始まる環境変数は、`import.meta.env` でクライアントのソースコードに公開されます。
 
 :::warning SECURITY NOTES
 `envPrefix` に `''` を設定してはいけません。全ての env 変数を公開してしまい、予期せぬ機密情報の漏洩を引き起こします。Vite は `''` を検出するとエラーをスローします。
