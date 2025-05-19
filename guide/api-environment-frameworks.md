@@ -329,7 +329,7 @@ export default {
 }
 ```
 
-プラグインは `buildApp` フックを定義することもできます。order が `'pre'` および `null'` のフックは、設定された `builder.buildApp` の前に実行され、`'post'` のフックはその後で実行されます。`environment.isBuilt` を使用して、環境がすでにビルドされているかどうかを確認できます。
+プラグインは `buildApp` フックを定義することもできます。order が `'pre'` および `null` のフックは、設定された `builder.buildApp` の前に実行され、`'post'` のフックはその後で実行されます。`environment.isBuilt` を使用して、環境がすでにビルドされているかどうかを確認できます。
 
 ## 環境に依存しないコード {#environment-agnostic-code}
 
