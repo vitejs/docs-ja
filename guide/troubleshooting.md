@@ -4,37 +4,6 @@
 
 こちらに提案されているもので動作しなかった場合、[GitHub Discussions](https://github.com/vitejs/vite/discussions) や [Vite Land Discord](https://chat.vite.dev) の `#help` チャンネルで質問してみてください。
 
-## CJS
-
-### Vite の CJS Node API は非推奨に
-
-Vite の Node API の CJS ビルドは非推奨となり、Vite 6 で削除される予定です。詳細は [GitHub ディスカッション](https://github.com/vitejs/vite/discussions/13928)を参照してください。Vite の ESM ビルドをインポートするにはファイルやフレームワークを更新する必要があります。
-
-基本的な Vite プロジェクトでは、以下を確認してください:
-
-1. `vite.config.js` ファイルの内容が ESM 構文を使っていること
-2. 最も近い `package.json` ファイルが `"type": "module"` を含むか、`.mjs`/`.mts` 拡張子を利用すること（例：`vite.config.mjs` か `vite.config.mts`）
-
-その他のプロジェクトについては、いくつかの一般的なアプローチがあります:
-
-- **ESM をデフォルトとして設定し、必要であれば CJS にオプトインする:** プロジェクトの `package.json` に `"type": "module"` を追加します。すべての `*.js` ファイルは ESM として解釈されるようになり、ESM 構文を使用する必要があります。ファイルの拡張子を `.cjs` にリネームすることで、CJS を使用し続けることができます。
-- **CJS をデフォルトのままにして、必要であれば ESM にオプトインする:** プロジェクトの `package.json` に `"type": "module"` がない場合、すべての `*.js` ファイルは CJS として解釈されます。ファイルの拡張子を `.mjs` にリネームすることで、ESM を使用できます。
-- **Vite を動的にインポートする:** CJS を使用し続ける必要がある場合は、代わりに `import('vite')` を使用して Vite を動的にインポートできます。これにはコードを `async` のコンテキストで記述する必要がありますが、Vite の API はほとんどが非同期であるため何とかなるでしょう。
-
-警告の出所がわからない場合は、`VITE_CJS_TRACE=true` フラグを指定してスクリプトを実行し、スタックトレースを記録できます:
-
-```bash
-VITE_CJS_TRACE=true vite dev
-```
-
-警告を一時的に無視したい場合は、`VITE_CJS_IGNORE_WARNING=true` フラグを指定してスクリプトを実行できます:
-
-```bash
-VITE_CJS_IGNORE_WARNING=true vite dev
-```
-
-なお、postcss の設定ファイルは ESM + TypeScript（`"type": "module"` の `.mts` や `.ts`）にはまだ対応していないので注意してください。もし、postcss の設定ファイルが `.ts` で、package.json に `"type"： "module"` を追加した場合、postcss の設定ファイル名を `.cts` に変更する必要があります。
-
 ## CLI
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'`
@@ -245,3 +214,18 @@ Windows でプロジェクトにクロスドライブリンクがある場合、
 - `mklink` コマンドによる別ドライブへのシンボリックリンク/ジャンクション（例：Yarn のグローバルキャッシュ）
 
 関連 issue: [#10802](https://github.com/vitejs/vite/issues/10802)
+
+<script setup lang="ts">
+// redirect old links with hash to old version docs
+if (typeof window !== "undefined") {
+  const hashForOldVersion = {
+    'vite-cjs-node-api-deprecated': 6
+  }
+
+  const version = hashForOldVersion[location.hash.slice(1)]
+  if (version) {
+    // update the scheme and the port as well so that it works in local preview (it is http and 4173 locally)
+    location.href = `https://v${version}.vite.dev` + location.pathname + location.search + location.hash
+  }
+}
+</script>
