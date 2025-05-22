@@ -5,10 +5,10 @@
 ## build.target
 
 - **型:** `string | string[]`
-- **デフォルト:** `'modules'`
+- **デフォルト:** `'baseline-widely-available'`
 - **関連:** [ブラウザーの互換性](/guide/build#browser-compatibility)
 
-最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブ ES モジュール](https://caniuse.com/es6-module)、[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)をサポートするブラウザーを対象にします。Vite は `'modules'` を `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']` へ置き換えます。
+最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'baseline-widely-available'` で、これは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available on 2025-05-01 に含まれるブラウザーを対象にします。具体的には `['chrome107', 'edge107', 'firefox104', 'safari16']` です。
 
 もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、最小限のトランスパイルのみが実行されます。
 
