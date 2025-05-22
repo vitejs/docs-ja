@@ -176,7 +176,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - `<audio src>`
 - `<embed src>`
 - `<img src>` と `<img srcset>`
-- `<image src>`
+- `<image href>` と `<image xlink:href>`
 - `<input src>`
 - `<link href>` と `<link imagesrcset>`
 - `<object data>`
