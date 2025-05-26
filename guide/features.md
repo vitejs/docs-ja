@@ -364,7 +364,7 @@ document.getElementById('hero-img').src = imgUrl
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// アセットを URL として明示的にロードする
+// アセットを URL として明示的にロードする（ファイルサイズに応じて自動的にインライン化されます）
 import assetAsURL from './asset.js?url'
 ```
 
