@@ -227,7 +227,7 @@ CSS モジュールの動作を設定します。オプションは [postcss-mod
 CSS プリプロセッサーに渡すオプションを指定します。オプションのキーとしてファイルの拡張子を使用します。各プリプロセッサーでサポートされているオプションは、それぞれのドキュメントで確認できます:
 
 - `sass`/`scss`:
-  - 使用する sass の API を `api: "modern-compiler" | "modern"` で選択します（`sass-embedded` がインストールされている場合はデフォルトで `"modern-compiler"`、そうでない場合は `"modern"`）。最高のパフォーマンスを得るには、`sass-embedded` パッケージで `api: "modern-compiler"` を使用することをお勧めします。
+  - `sass-embedded` がインストールされている場合はそれを使用し、そうでない場合は `sass` を使用します。最高のパフォーマンスを得るには、`sass-embedded` パッケージをインストールすることをお勧めします。
   - [オプション](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [オプション](https://lesscss.org/usage/#less-options)。
 - `styl`/`stylus`: オブジェクトとして渡せる [`define`](https://stylus-lang.com/docs/js.html#define-name-node) のみサポートされています。
@@ -247,7 +247,6 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern-compiler', // または "modern"
         importers: [
           // ...
         ],
