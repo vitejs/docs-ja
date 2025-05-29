@@ -78,6 +78,13 @@ export default defineConfig({
 
 `true` に設定すると、前にキャッシュされた最適化された依存関係を無視して、依存関係の事前バンドルをするよう強制します。
 
+## optimizeDeps.noDiscovery
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+`true` に設定すると、自動的な依存関係の発見が無効化され、`optimizeDeps.include` に指定された依存関係だけが最適化されます。CJS のみの依存関係は、開発中に `optimizeDeps.include` に存在している必要があります。
+
 ## optimizeDeps.holdUntilCrawlEnd
 
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/15834)
