@@ -10,7 +10,7 @@
 
 デフォルトでは、Vite はすべての `.html` ファイルをクロールして、事前にバンドルする必要のある依存関係を検出します（`node_modules`, `build.outDir`, `__tests__` および `coverage` は無視します）。`build.rollupOptions.input` が指定されている場合、Vite は代わりにそれらのエントリーポイントをクロールします。
 
-これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [`tinyglobby` パターン](https://github.com/SuperchupuDev/tinyglobby) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。`node_modules` と `build.outDir` を無視したくない場合は、代わりに（`tinyglobby` パターンを使用せずに）リテラル文字列を使用してパスを指定できます。
+これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [`tinyglobby` パターン](https://github.com/SuperchupuDev/tinyglobby) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。`node_modules` を明示的に含むパターンに対しては、`node_modules` は無視されません。
 
 ## optimizeDeps.exclude
 
