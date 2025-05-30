@@ -20,7 +20,7 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 ## ブラウザー対応
 
-開発中、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これは、最新のブラウザーが使用され、最新の JavaScript および CSS 機能がすべてサポートされていることが前提となっているためです。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。
+開発中、Vite はモダンブラウザーが使用され、最新の JavaScript および CSS 機能のほとんどをサポートしていることを前提としています。そのため、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。Vite は開発サーバーを動作させるためにいくつかのランタイムコードを注入します。これらのコードは、各メジャーリリース時点の [Baseline](https://web-platform-dx.github.io/web-features/) Newly Available に含まれる機能を使用します (このメジャーリリースでは 2025-05-01)。
 
 本番ビルドの場合、Vite はデフォルトで [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available ブラウザーをターゲットとします。これらは少なくとも 2.5 年以上前にリリースされたブラウザーです。ターゲットは設定によって下げることができます。さらに、レガシーブラウザーは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を通じてサポートできます。詳細については、[本番環境用のビルド](./build)セクションを参照してください。
 
