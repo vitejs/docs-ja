@@ -153,7 +153,7 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
     export default content
   }
   ```
-- `vite/client` への参照を含むファイル:
+- `vite/client` への参照を含むファイル（通常は `vite-env.d.ts`）:
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />
