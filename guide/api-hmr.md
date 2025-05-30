@@ -62,9 +62,9 @@ if (import.meta.hot) {
 
 ## TypeScript の IntelliSense
 
-Vite は `import.meta.hot` の型定義を [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で提供しています。`src` ディレクトリーに `env.d.ts` を作成することで、TypeScript が型定義を読み込むようになります:
+Vite は `import.meta.hot` の型定義を [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts) で提供しています。`src` ディレクトリーに `vite-env.d.ts` を作成することで、TypeScript が型定義を読み込むようになります:
 
-```ts
+```ts [vite-env.d.ts]
 /// <reference types="vite/client" />
 ```
 
