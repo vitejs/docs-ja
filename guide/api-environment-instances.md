@@ -19,8 +19,8 @@ Environment API は実験的なものです。Vite 6 では API を安定させ�
 // サーバーを作成するか、configureServer フックから取得する
 const server = await createServer(/* オプション */)
 
-const environment = server.environments.client
-environment.transformRequest(url)
+const clientEnvironment = server.environments.client
+clientEnvironment.transformRequest(url)
 console.log(server.environments.ssr.moduleGraph)
 ```
 

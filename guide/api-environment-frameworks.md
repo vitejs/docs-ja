@@ -84,7 +84,7 @@ Vite は、`dispatchFetch` メソッドの入力と出力を検証します。�
 
 ## Default `RunnableDevEnvironment`
 
-[SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。エラー処理は省略します。
+[SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。これは `ssr` と呼ばれる必要はないので、この例では `server` と名付けます。エラー処理は省略します。
 
 ```js
 import fs from 'node:fs'
@@ -94,7 +94,7 @@ import { createServer } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const server = await createServer({
+const viteServer = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
   environments: {
@@ -106,7 +106,7 @@ const server = await createServer({
 
 // TypeScript でこれを RunnableDevEnvironment にキャストするか、ランナーへのアクセスを
 // 保護するために isRunnableDevEnvironment を使用する必要があるかもしれません
-const environment = server.environments.node
+const serverEnvironment = viteServer.environments.server
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
@@ -118,12 +118,14 @@ app.use('*', async (req, res, next) => {
   // 2. Vite HTML 変換を適用します。これにより、Vite HMR クライアントが挿入され、
   //    Vite プラグインからの HTML 変換も適用されます。
   //    例: global preambles from @vitejs/plugin-react
-  template = await server.transformIndexHtml(url, template)
+  template = await viteServer.transformIndexHtml(url, template)
 
   // 3. サーバーエントリをロードします。import(url) は、
   //    ESM ソースコードを Node.js で使用できるように自動的に変換します。
   //    バンドルは不要で、完全な HMR サポートを提供します。
-  const { render } = await environment.runner.import('/src/entry-server.js')
+  const { render } = await serverEnvironment.runner.import(
+    '/src/entry-server.js',
+  )
 
   // 4. アプリの HTML をレンダリングします。これは、entry-server.js のエクスポートされた
   //    `render` 関数が適切なフレームワーク SSR API を呼び出すことを前提としています。
