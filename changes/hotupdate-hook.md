@@ -9,7 +9,7 @@
 影響範囲: `Vite プラグイン作成者`
 
 ::: warning 将来の廃止予定
-`hotUpdate` は `v6.0` で初めて導入されました。`handleHotUpdate` の廃止は `v7.0` で予定されています。現時点では、まだ `handleHotUpdate` からの移行は推奨していません。もし実験して私たちにフィードバックをしたいのであれば、vite config で `future.removePluginHookHandleHotUpdate` を `"warn"` に指定してください。
+`hotUpdate` は `v6.0` で初めて導入されました。`handleHotUpdate` の廃止は将来のメジャーバージョンで予定されています。現時点では、まだ `handleHotUpdate` からの移行は推奨していません。もし実験して私たちにフィードバックをしたいのであれば、vite config で `future.removePluginHookHandleHotUpdate` を `"warn"` に指定してください。
 :::
 
 ## 動機

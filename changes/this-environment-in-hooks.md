@@ -9,7 +9,7 @@ Vite 6 以前は `client` と `ssr` という 2 つの環境しか利用でき�
 影響範囲: `Vite プラグイン作成者`
 
 ::: warning 将来の廃止予定
-`this.environment` は `v6.0` で導入されました。`options.ssr` の廃止は `v7.0` で予定されています。その時点で、新しい API を使うようにプラグインを移行することを推奨します。使用状況を明確にするために、vite の設定で `future.removePluginHookSsrArgument` を `"warn"` に設定してください。
+`this.environment` は `v6.0` で導入されました。`options.ssr` の廃止は将来のメジャーバージョンで予定されています。その時点で、新しい API を使うようにプラグインを移行することを推奨します。使用状況を明確にするために、vite の設定で `future.removePluginHookSsrArgument` を `"warn"` に設定してください。
 :::
 
 ## 動機
