@@ -184,6 +184,8 @@ export default defineConfig({
 })
 ```
 
+`applyToEnvironment` フックは設定時に呼び出されます。エコシステム内のプロジェクトがプラグインを変更しているため、現在は `configResolved` の後に呼び出されています。環境プラグインの解決は、将来的には `configResolved` の前に移動される可能性があります。
+
 ## ビルドフックの環境 {#environment-in-build-hooks}
 
 開発時と同じように、プラグインフックもビルド時に環境インスタンスを受け取り、`ssr` ブール値を置き換えます。
