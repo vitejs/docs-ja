@@ -109,6 +109,12 @@ Rolldown と Oxc のおかげで、エイリアスや resolve プラグインな
 
 これらをテストするには、Vite の設定で `experimental.enableNativePlugin` オプションを `true` に設定できます。
 
+### `@vitejs/plugin-react-oxc`
+
+`@vitejs/plugin-react` または `@vitejs/plugin-react-swc` を使用している場合、React の高速リフレッシュに Babel や SWC の代わりに Oxc を使用する `@vitejs/plugin-react-oxc` プラグインに切り替えることができます。これはドロップイン置換として設計されており、ビルドパフォーマンスを向上させ、`rolldown-vite` の基盤となるアーキテクチャと連携します。
+
+Babel または SWC プラグイン（React コンパイラーを含む）を使用していない場合、または SWC オプションを変更していない場合にのみ、`@vitejs/plugin-react-oxc` に切り替えられることに注意してください。
+
 ### `withFilter` ラッパー
 
 プラグイン作者は、Rust と JavaScript のランタイム間の通信オーバーヘッドを削減するために、[フックフィルター機能](#hook-filter-feature)を使用するオプションがあります。
