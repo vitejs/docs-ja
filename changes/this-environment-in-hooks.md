@@ -40,4 +40,4 @@ export function myPlugin(): Plugin {
 }
 ```
 
-より堅牢で長期的な実装のために、プラグインフックは環境名に依存するのではなく、きめ細かい環境オプションを使って[複数の環境](/guide/api-environment.html#accessing-the-current-environment-in-hooks)を扱うべきです。
+より堅牢で長期的な実装のために、プラグインフックは環境名に依存するのではなく、きめ細かい環境オプションを使って[複数の環境](/guide/api-environment-plugins.html#accessing-the-current-environment-in-hooks)を扱うべきです。
