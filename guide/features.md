@@ -212,7 +212,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - Vue のサポート: [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Vue JSX のサポート: [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - React のサポート: [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- SWC を利用している React のサポート: [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- SWC を利用している React のサポート: [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
 詳しくは[プラグインガイド](../plugins/)を確認してください。
 
