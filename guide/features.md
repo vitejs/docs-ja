@@ -580,6 +580,32 @@ const modules = import.meta.glob('./dir/*.js', {
 })
 ```
 
+#### ベースパス
+
+`base` オプションを使用して、インポートのベースパスを指定することもできます:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+const modulesWithBase = import.meta.glob('./**/*.js', {
+  base: './base',
+})
+```
+
+```ts
+// vite によって生成されたコード:
+const modulesWithBase = {
+  './dir/foo.js': () => import('./base/dir/foo.js'),
+  './dir/bar.js': () => import('./base/dir/bar.js'),
+}
+```
+
+`base` オプションは、インポートするファイルからの相対ディレクトリパス、またはプロジェクトルートからの絶対パスのみ指定できます。エイリアスや仮想モジュールはサポートされていません。
+
+相対パスであるグロブのみが、解決されたベースからの相対パスとして解釈されます。
+
+結果として得られるすべてのモジュールキーは、ベースが指定されている場合にそこからの相対パスになるように変更されます。
+
 ### Glob インポートの注意事項
 
 注意点:
