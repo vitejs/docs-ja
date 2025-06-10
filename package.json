@@ -19,7 +19,7 @@
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
-    "vite": "^6.3.5",
+    "vite": "7.0.0-beta.1",
     "vitepress": "1.6.3",
     "vitepress-plugin-group-icons": "^1.6.0",
     "vitepress-plugin-llms": "^1.3.4",
