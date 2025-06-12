@@ -89,15 +89,15 @@ Vitepress や Vite をピア依存関係として持つメタフレームワー�
 
 Rolldown は Rollup の代替として機能することを目指していますが、まだ実装中の機能や意図的な動作の違いがあります。包括的なリストについては、定期的に更新される[この GitHub PR](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667) を参照してください。
 
-### オプション検証エラー {#option-validation-errors}
+### オプション検証警告 {#option-validation-errors}
 
-Rolldown は不明または無効なオプションが渡されるとエラーをスローします。Rollup で利用可能な一部のオプションは Rolldown ではサポートされていないため、使用しているメタフレームワークや自身が設定したオプションに応じてエラーが発生する可能性があります。以下に、このようなエラーメッセージの例を示します:
+Rolldown は不明または無効なオプションが渡されると警告を出力します。Rollup で利用可能な一部のオプションは Rolldown ではサポートされていないため、使用しているメタフレームワークや自身が設定したオプションに応じて警告が発生する可能性があります。以下に、このような警告メッセージの例を示します:
 
-> Error: Failed validate input options.
+> Warning validate output options.
 >
-> - For the "preserveEntrySignatures". Invalid key: Expected never but received "preserveEntrySignatures".
+> - For the "generatedCode". Invalid key: Expected never but received "generatedCode".
 
-このオプションを自身で設定していない場合は、使用しているフレームワークで修正される可能性があります。それまでの間、`ROLLDOWN_OPTIONS_VALIDATION=loose` 環境変数を設定することでこのエラーを抑制できます。
+このオプションを自身で設定していない場合は、使用しているフレームワークで修正される必要があります。
 
 ### API の違い
 
@@ -257,6 +257,12 @@ const plugin = {
 }
 ```
 
+::: tip
+
+Vite 7.0.0 以降、`this.meta` はすべてのフックで利用可能です。以前のバージョンでは、`this.meta` は `config` フックのような Vite 固有のフックでは利用できませんでした。
+
+:::
+
 <br>
 
 `rolldownversion` エクスポートの存在を確認する:
@@ -275,16 +281,15 @@ if (vite.rolldownVersion) {
 
 ### Rolldown のオプション検証を無視するには
 
-[上記で述べたように](#option-validation-errors)、Rolldown は不明または無効なオプションが渡されるとエラーをスローします。
+[上記で述べたように](#option-validation-errors)、Rolldown は不明または無効なオプションが渡されると警告を出力します。
 
 これは[上記のように](#detecting-rolldown-vite)、`rolldown-vite` で実行されているかどうかを確認することでオプションを条件的に渡すことで修正できます。
 
-この場合、`ROLLDOWN_OPTIONS_VALIDATION=loose` 環境変数を設定してエラーを抑制することもできます。
-ただし、**最終的には Rolldown でサポートされていないオプションを渡さないようにする必要がある** ことに注意してください。
-
 ### `transformwithesbuild` は `esbuild` を個別にインストールする必要があります
 
-`esbuild` の代わりに Oxc を使用する `transformWithOxc` と呼ばれる同様の関数は、`rolldown-vite` からエクスポートされます。
+Vite 自体はもう `esbuild` を使用しないため、`esbuild` はオプションのピア依存関係になりました。プラグインが `transformWithEsbuild` を使用する場合、プラグインは `esbuild` を依存関係に追加するか、ユーザーが手動でインストールする必要があります。
+
+推奨される移行方法は、新しくエクスポートされた `transformWithOxc` 関数を使用することです。これは `esbuild` の代わりに Oxc を利用します。
 
 ### `esbuild` オプションの互換性レイヤー
 
@@ -306,6 +311,12 @@ const plugin = {
 Rolldown は[フックフィルター機能](https://rolldown.rs/guide/plugin-development#plugin-hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信を縮小しました。この機能を使用することで、プラグインのパフォーマンスを向上させることができます。
 これは、Rollup 4.38.0+ および Vite 6.3.0+ によってサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でフィルターを実行してください。
 
+::: tip
+
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。
+
+:::
+
 ### `load` または `transform` フックでコンテンツを JavaScript に変換する
 
 `load` または `Transform` フックでコンテンツを他のタイプから JavaScript に変換する場合、`moduleType: 'js'` を返された値に追加する必要がある場合があります。
@@ -325,4 +336,4 @@ const plugin = {
 }
 ```
 
-これは、[Rolldown は JavaScript 以外のモジュールもサポート](https://rolldown.rs/guide/in-depth/module-types)しており、指定がない限り拡張子からモジュールタイプを拡張するためです。`rolldown-vite` は開発時にはモジュールタイプをサポートしていないことに注意してください。
+これは、[Rolldown は JavaScript 以外のモジュールもサポート](https://rolldown.rs/guide/in-depth/module-types)しており、指定がない限り拡張子からモジュールタイプを拡張するためです。
