@@ -54,7 +54,7 @@ SSR サーバーのビルドターゲット。
 
 :::
 
-### ssr.resolve.mainFields
+## ssr.resolve.mainFields
 
 - **型:** `string[]`
 - **デフォルト:** `['module', 'jsnext:main', 'jsnext']`
