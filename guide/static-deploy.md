@@ -265,7 +265,6 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 3. GitHub/GitLab アカウントを連携するかパブリックリポジトリーを利用します。
 
 4. プロジェクト名とブランチを指定します。
-
    - **Build Command**: `npm install && npm run build`
    - **Publish Directory**: `dist`
 
