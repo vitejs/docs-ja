@@ -39,6 +39,10 @@ const additionalTitle = ((): string => {
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
+      text: 'Vite 6 ドキュメント',
+      link: 'https://v6.vite.dev',
+    },
+    {
       text: 'Vite 5 ドキュメント',
       link: 'https://v5.vite.dev',
     },
@@ -61,7 +65,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Vite 6 ドキュメント（リリース）',
+          text: 'Vite 7 ドキュメント（リリース）',
           link: 'https://vite.dev',
         },
         ...oldVersions,
