@@ -13,9 +13,13 @@ Environment API は一般的にリリース候補段階にあります。エコ�
 ぜひフィードバックをお寄せください。
 :::
 
-## 環境とフレームワーク {#environments-and-frameworks}
+## DevEnvironment の通信レベル {#devenvironment-communication-levels}
 
-暗黙的な `ssr` 環境とその他の非クライアント環境では、開発中にデフォルトで `RunnableDevEnvironment` が使用されます。これには、Vite サーバーが実行しているのと同じランタイムが必要ですが、`ssrLoadModule` と同様に動作し、フレームワークが SSR 開発ストーリーの HMR を移行して有効にできるようにします。`isRunnableDevEnvironment` 関数を使用して、実行可能な環境をすべて保護できます。
+環境は異なるランタイムで実行される可能性があるため、環境との通信にはランタイムに応じて制約がある場合があります。フレームワークがランタイムに依存しないコードを簡単に記述できるように、Environment API は 3 種類の通信レベルを提供します。
+
+### `RunnableDevEnvironment`
+
+`RunnableDevEnvironment` は、任意の値を通信できる環境です。暗黙的な `ssr` 環境とその他の非クライアント環境では、開発中にデフォルトで `RunnableDevEnvironment` が使用されます。これには、Vite サーバーが実行しているのと同じランタイムが必要ですが、`ssrLoadModule` と同様に動作し、フレームワークが SSR 開発ストーリーの HMR を移行して有効にできるようにします。`isRunnableDevEnvironment` 関数を使用して、実行可能な環境をすべて保護できます。
 
 ```ts
 export class RunnableDevEnvironment extends DevEnvironment {
@@ -42,49 +46,6 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 :::warning
 `runner` は、初めてアクセスされたときにのみ遅延評価されます。Vite は、`process.setSourceMapsEnabled` を呼び出して `runner` が作成されたとき、またはそれが利用できない場合は `Error.prepareStackTrace` をオーバーライドすることによって、ソースマップのサポートを有効にすることに注意してください。
 :::
-
-`Fetch API`（[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)）を介してランタイムと通信するフレームワークは、`handleRequest` メソッドを通じてリクエストを標準化された方法で処理する `FetchableDevEnvironment` を利用できます:
-
-```ts
-import {
-  createServer,
-  createFetchableDevEnvironment,
-  isFetchableDevEnvironment,
-} from 'vite'
-
-const server = await createServer({
-  server: { middlewareMode: true },
-  appType: 'custom',
-  environments: {
-    custom: {
-      dev: {
-        createEnvironment(name, config) {
-          return createFetchableDevEnvironment(name, config, {
-            handleRequest(request: Request): Promise<Response> | Response {
-              // リクエストを処理し、レスポンスを返します
-            },
-          })
-        },
-      },
-    },
-  },
-})
-
-// Environment API のどの利用者からも `dispatchFetch` を呼び出せるようになりました
-if (isFetchableDevEnvironment(server.environments.custom)) {
-  const response: Response = await server.environments.custom.dispatchFetch(
-    new Request('/request-to-handle'),
-  )
-}
-```
-
-:::warning
-Vite は、`dispatchFetch` メソッドの入力と出力を検証します。リクエストはグローバル `Request` クラスのインスタンスである必要があり、レスポンスはグローバル `Response` クラスのインスタンスである必要があります。そうでない場合、Vite は `TypeError` をスローします。
-
-`FetchableDevEnvironment` はクラスとして実装されていますが、Vite チームからは実装の詳細と見なされており、いつでも変更される可能性があることに注意してください。
-:::
-
-## Default `RunnableDevEnvironment`
 
 [SSR セットアップガイド](/guide/ssr#setting-up-the-dev-server)で説明されているように、ミドルウェアモードに設定された Vite サーバーがあるとして、Environment API を使って SSR ミドルウェアを実装してみましょう。これは `ssr` と呼ばれる必要はないので、この例では `server` と名付けます。エラー処理は省略します。
 
@@ -142,40 +103,60 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## ランタイムに依存しない SSR {#runtime-agnostic-ssr}
+### `FetchableDevEnvironment`
 
-`RunnableDevEnvironment` は Vite サーバーと同じランタイムでコードを実行する目的のみで使用できるため、Vite サーバーを実行できるランタイム（Node.js と互換性のあるランタイム）が必要です。つまり、ランタイムに依存しないようにするには、生の `DevEnvironment` を使用する必要があります。
+:::info
 
-:::info `FetchableDevEnvironment` プロポーザル
-
-当初の提案では、`DevEnvironment` クラスに `run` メソッドがあり、利用者は `transport` オプションを使用してランナー側でインポートを呼び出すことができました。テスト中に、この API は推奨するには汎用性が足りないことがわかりました。現在、[`FetchableDevEnvironment` プロポーザル](https://github.com/vitejs/vite/discussions/18191)に関するフィードバックを募集しています。
+[`FetchableDevEnvironment` プロポーザル](https://github.com/vitejs/vite/discussions/18191)に関するフィードバックを募集しています。
 
 :::
 
-`RunnableDevEnvironment` には、モジュールの値を返す `runner.import` 関数があります。ただし、この関数は生の `DevEnvironment` では使用できず、Vite の API を使用するコードとユーザーモジュールを分離する必要があります。
+`FetchableDevEnvironment` は、[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) インターフェースを介してランタイムと通信できる環境です。`RunnableDevEnvironment` は限られたランタイムでしか実装できないため、`RunnableDevEnvironment` の代わりに `FetchableDevEnvironment` を使用することをお勧めします。
 
-たとえば、次の例では、Vite の API を使用するコードからユーザーモジュールの値を使用しています:
+この環境は、`handleRequest` メソッドを介してリクエストを処理する標準化された方法を提供します。
 
 ```ts
-// Vite の API を使用するコード
-import { createServer } from 'vite'
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from 'vite'
 
-const server = createServer()
-const ssrEnvironment = server.environment.ssr
-const input = {}
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // リクエストを処理し、レスポンスを返します
+            },
+          })
+        },
+      },
+    },
+  },
+})
 
-const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
-const handler = createHandler(input)
-const response = handler(new Request('/'))
-
-// -------------------------------------
-// ./entrypoint.js
-export function createHandler(input) {
-  return function handler(req) {
-    return new Response('hello')
-  }
+// Environment API のどの利用者からも `dispatchFetch` を呼び出せるようになりました
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle'),
+  )
 }
 ```
+
+:::warning
+Vite は、`dispatchFetch` メソッドの入力と出力を検証します。リクエストはグローバル `Request` クラスのインスタンスである必要があり、レスポンスはグローバル `Response` クラスのインスタンスである必要があります。そうでない場合、Vite は `TypeError` をスローします。
+
+`FetchableDevEnvironment` はクラスとして実装されていますが、Vite チームからは実装の詳細と見なされており、いつでも変更される可能性があることに注意してください。
+:::
+
+### 未加工の `DevEnvironment`
+
+環境が `RunnableDevEnvironment` または `FetchableDevEnvironment` インターフェースを実装していない場合は、手動で通信を設定する必要があります。
 
 ユーザーモジュールと同じランタイムでコードを実行できる場合（つまり、Node.js 固有の API に依存しない場合）、仮想モジュールを使用できます。このアプローチにより、Vite の API を使用してコードから値にアクセスする必要がなくなります。
 
@@ -197,9 +178,7 @@ const input = {}
 
 // コードを実行する各環境ファクトリーによって公開されている関数を使用します
 // 各環境ファクトリーについて、それらが提供するものをチェックします
-if (ssrEnvironment instanceof RunnableDevEnvironment) {
-  ssrEnvironment.runner.import('virtual:entrypoint')
-} else if (ssrEnvironment instanceof CustomDevEnvironment) {
+if (ssrEnvironment instanceof CustomDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(`Unsupported runtime for ${ssrEnvironment.name}`)
