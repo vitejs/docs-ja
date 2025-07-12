@@ -110,6 +110,8 @@ function createWorkerdDevEnvironment(
 }
 ```
 
+`DevEnvironment` には [複数の通信レベル](/guide/api-environment-frameworks#devenvironment-communication-levels) があります。フレームワークがランタイムに依存しないコードを簡単に記述できるように、可能な限り柔軟な通信レベルを実装することをお勧めします。
+
 ## `ModuleRunner`
 
 モジュールランナーはターゲットランタイムでインスタンス化されます。次のセクションの全ての API は、特に断りのない限り `vite/module-runner` からインポートされます。このエクスポート・エントリーポイントは可能な限り軽量に保たれており、モジュールランナーを作成するために必要な最小限のものだけがエクスポートされます。
