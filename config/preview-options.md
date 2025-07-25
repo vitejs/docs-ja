@@ -80,7 +80,7 @@ TLS + HTTP/2 を有効にします。
 
 プレビューサーバーのカスタムプロキシのルールを設定します。`{ key: options }` のペアのオブジェクトが必要です。キーが `^` で始まる場合は `RegExp` として解釈されます。プロキシのインスタンスにアクセスするには `configure` オプションを使用します。
 
-[`http-proxy`](https://github.com/http-party/node-http-proxy) を使用します。全オプションは[こちら](https://github.com/http-party/node-http-proxy#options)。
+[`http-proxy-3`](https://github.com/sagemathinc/http-proxy-3) を使用します。全オプションは[こちら](https://github.com/sagemathinc/http-proxy-3#options)。
 
 ## preview.cors
 
