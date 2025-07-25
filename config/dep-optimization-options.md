@@ -4,7 +4,7 @@
 
 特に記載がない限り、このセクションのオプションは、開発時にだけ使用される依存関係の最適化にのみ適用されます。
 
-## optimizeDeps.entries
+## optimizeDeps.entries <NonInheritBadge />
 
 - **型:** `string | string[]`
 
@@ -12,7 +12,7 @@
 
 これらのいずれもニーズに合わない場合、このオプションを使ってカスタムエントリーを指定することができます。値は Vite プロジェクトルートからの相対的な [`tinyglobby` パターン](https://github.com/SuperchupuDev/tinyglobby) か、パターンの配列でなければいけません。これによりデフォルトのエントリーの推論が上書きされます。`optimizeDeps.entries` が明示的に定義されている場合、デフォルトでは `node_modules` と `build.outDir` フォルダーのみが無視されます。他のフォルダーを無視したい場合は、最初の `!` でマークした無視パターンをエントリーリストの一部として使用できます。`node_modules` を明示的に含むパターンに対しては、`node_modules` は無視されません。
 
-## optimizeDeps.exclude
+## optimizeDeps.exclude <NonInheritBadge />
 
 - **型:** `string[]`
 
@@ -33,7 +33,7 @@ export default defineConfig({
 
 :::
 
-## optimizeDeps.include
+## optimizeDeps.include <NonInheritBadge />
 
 - **型:** `string[]`
 
@@ -51,7 +51,7 @@ export default defineConfig({
 });
 ```
 
-## optimizeDeps.esbuildOptions
+## optimizeDeps.esbuildOptions <NonInheritBadge />
 <!-- textlint-disable -->
 - **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
 | 'bundle'
@@ -72,20 +72,20 @@ export default defineConfig({
 - `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
 - `plugins` は Vite の依存関係プラグインとマージされます
 
-## optimizeDeps.force
+## optimizeDeps.force <NonInheritBadge />
 
 - **型:** `boolean`
 
 `true` に設定すると、前にキャッシュされた最適化された依存関係を無視して、依存関係の事前バンドルをするよう強制します。
 
-## optimizeDeps.noDiscovery
+## optimizeDeps.noDiscovery <NonInheritBadge />
 
 - **型:** `boolean`
 - **デフォルト:** `false`
 
 `true` に設定すると、自動的な依存関係の発見が無効化され、`optimizeDeps.include` に指定された依存関係だけが最適化されます。CJS のみの依存関係は、開発中に `optimizeDeps.include` に存在している必要があります。
 
-## optimizeDeps.holdUntilCrawlEnd
+## optimizeDeps.holdUntilCrawlEnd <NonInheritBadge />
 
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/15834)
 - **型:** `boolean`
@@ -93,7 +93,7 @@ export default defineConfig({
 
 有効化すると、コールドスタート時にすべての静的インポートがクロールされるまで、最初に最適化された依存関係の結果を保持します。これにより、新しい依存関係が発見されて、それが新しい共通チャンクの生成をトリガーしたときに、ページ全体をリロードする必要がなくなります。もしすべての依存関係が `include` で明示的に定義されていて、それらがすべてスキャナーで検出された場合は、このオプションを無効化して、ブラウザープロセスがより多くのリクエストを並列に処理できるようにすることをおすすめします。
 
-## optimizeDeps.disabled
+## optimizeDeps.disabled <NonInheritBadge />
 
 - **非推奨**
 - **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13839)
@@ -108,7 +108,7 @@ export default defineConfig({
 ビルド時の依存関係の最適化は**実験的な**機能でした。この戦略を試したプロジェクトでは、`build.commonjsOptions: { include: [] }` を使用して `@rollup/plugin-commonjs` も削除しました。もし削除していた場合、バンドル中に CJS のみのパッケージをサポートするために、再び有効にするよう警告が表示されます。
 :::
 
-## optimizeDeps.needsInterop
+## optimizeDeps.needsInterop <NonInheritBadge />
 
 - **実験的機能**
 - **型:** `string[]`
