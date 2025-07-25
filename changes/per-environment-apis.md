@@ -15,6 +15,7 @@
 future: {
   removeServerModuleGraph: 'warn',
   removeServerPluginContainer: 'warn',
+  removeServerHot: 'warn',
   removeServerTransformRequest: 'warn',
   removeServerWarmupRequest: 'warn',
 }
@@ -34,3 +35,4 @@ Vite v6 では、任意の数のカスタム環境（`client`、`ssr`、`edge` �
 - `server.pluginContainer` -> `environment.pluginContainer`
 - `server.transformRequest(url, ssr)` -> `environment.transformRequest(url)`
 - `server.warmupRequest(url, ssr)` -> `environment.warmupRequest(url)`
+- `server.hot` -> `server.client.environment.hot`
