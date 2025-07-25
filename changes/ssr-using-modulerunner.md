@@ -19,3 +19,5 @@
 ## 移行ガイド
 
 [Environment API フレームワークガイド](../guide/api-environment-frameworks.md)をご覧ください。
+
+`server.ssrFixStacktrace` と `server.ssrRewriteStacktrace` は Module Runner API を使用する際に呼び出す必要がありません。`sourcemapInterceptor` が `false` に設定されない限り、スタックトレースは更新されます。
