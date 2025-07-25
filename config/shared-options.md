@@ -114,7 +114,7 @@ declare const __APP_VERSION__: string
 SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビルド出力に対して重複排除が機能しません。これを回避するには、ESM のモジュール読み込みのためのプラグインのサポートが改善されるまで、CJS ビルド出力を使用する必要があります。
 :::
 
-## resolve.conditions
+## resolve.conditions <NonInheritBadge />
 
 - **型:** `string[]`
 - **デフォルト:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
@@ -140,7 +140,7 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 
 要件が満たされている場合は、`import`、`require`、`default` の条件が常に適用されることに注意してください。
 
-## resolve.mainFields
+## resolve.mainFields <NonInheritBadge />
 
 - **型:** `string[]`
 - **デフォルト:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
