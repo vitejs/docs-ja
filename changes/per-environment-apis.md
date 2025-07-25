@@ -15,6 +15,7 @@
 future: {
   removeServerModuleGraph: 'warn',
   removeServerTransformRequest: 'warn',
+  removeServerWarmupRequest: 'warn',
 }
 ```
 
