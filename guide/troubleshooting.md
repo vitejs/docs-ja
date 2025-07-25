@@ -150,7 +150,7 @@ HMR が処理されているものの、それが循環依存関係の中にあ�
 
 ### ローカルパッケージにリンクする際、事前バンドルした依存関係が古くなる
 
-最適化された依存関係を無効にするために使用されるハッシュキーは、パッケージロックの内容、依存関係に適用されるパッチ、およびノードモジュールのバンドルに影響を与える Vite 設定ファイルのオプションに依存します。つまり、Vite は [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) のような機能を使って依存関係が上書きされたことを検出し、次のサーバー起動時に依存関係を再バンドルします。[npm link](https://docs.npmjs.com/cli/v9/commands/npm-link) のような機能を使っても、Vite は依存関係を無効化することはありません。依存関係をリンクまたはリンク解除した場合、次のサーバー起動時に `vite --force` を使って強制的に再最適化する必要があります。代わりにオーバーライドを使うことをお勧めします。オーバーライドは現在すべてのパッケージマネージャーでサポートされています（[pnpm overrides](https://pnpm.io/package_json#pnpmoverrides) および [yarn resolutions](https://yarnpkg.com/configuration/manifest/#resolutions) も参照してください）。
+最適化された依存関係を無効にするために使用されるハッシュキーは、パッケージロックの内容、依存関係に適用されるパッチ、およびノードモジュールのバンドルに影響を与える Vite 設定ファイルのオプションに依存します。つまり、Vite は [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) のような機能を使って依存関係が上書きされたことを検出し、次のサーバー起動時に依存関係を再バンドルします。[npm link](https://docs.npmjs.com/cli/v9/commands/npm-link) のような機能を使っても、Vite は依存関係を無効化することはありません。依存関係をリンクまたはリンク解除した場合、次のサーバー起動時に `vite --force` を使って強制的に再最適化する必要があります。代わりにオーバーライドを使うことをお勧めします。オーバーライドは現在すべてのパッケージマネージャーでサポートされています（[pnpm overrides](https://pnpm.io/9.x/package_json#pnpmoverrides) および [yarn resolutions](https://yarnpkg.com/configuration/manifest/#resolutions) も参照してください）。
 
 ## パフォーマンスのボトルネック {#performance-bottlenecks}
 
