@@ -9,6 +9,7 @@ import {
 } from 'vitepress-plugin-group-icons'
 
 
+import markdownItImageSize from 'markdown-it-image-size'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = '次世代フロントエンドツール'
@@ -489,6 +490,9 @@ export default defineConfig({
     codeTransformers: [transformerTwoslash()],
     config(md) {
       md.use(groupIconMdPlugin)
+      md.use(markdownItImageSize, {
+        publicDir: path.resolve(import.meta.dirname, '../public'),
+      })
     },
   },
   vite: {
