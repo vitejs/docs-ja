@@ -9,7 +9,7 @@ import {
 } from 'vitepress-plugin-group-icons'
 
 
-import markdownItImageSize from 'markdown-it-image-size'
+import { markdownItImageSize } from 'markdown-it-image-size'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = '次世代フロントエンドツール'
