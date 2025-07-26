@@ -15,6 +15,7 @@
     "feed": "^5.1.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.1.2",
+    "markdown-it-image-size": "^14.7.0",
     "textlint": "^13.4.1",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
