@@ -20,11 +20,11 @@
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
-    "vite": "7.0.5",
-    "vitepress": "^2.0.0-alpha.8",
+    "vite": "7.0.6",
+    "vitepress": "^2.0.0-alpha.9",
     "vitepress-plugin-group-icons": "^1.6.1",
     "vitepress-plugin-llms": "^1.7.1",
-    "vue": "^3.5.17",
+    "vue": "^3.5.18",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
