@@ -43,10 +43,6 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 ## 最初の Vite プロジェクトを生成する
 
-::: tip 互換性について
-Vite は [Node.js](https://nodejs.org/en/) 20.19+, 22.12+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャーが警告を出した場合はアップグレードしてください。
-:::
-
 ::: code-group
 
 ```bash [npm]
@@ -72,6 +68,12 @@ $ deno init --npm vite
 :::
 
 あとは画面表示に従ってください！
+
+::: tip 互換性について
+Vite は [Node.js](https://nodejs.org/en/) 20.19+, 22.12+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャーが警告を出した場合はアップグレードしてください。
+:::
+
+:::: details create vite をコマンドラインオプションと一緒に使用する
 
 プロジェクト名や使用するテンプレートは、追加のコマンドラインオプションによって直接指定することもできます。例えば Vite + Vue のプロジェクトを生成するには以下のコマンドを実行します:
 
@@ -103,6 +105,8 @@ $ deno init --npm vite my-vue-app --template vue
 サポートされている各テンプレートの詳細は [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) を参照してください: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 現在のディレクトリーに生成するには、プロジェクト名に `.` を使用します。
+
+::::
 
 ## コミュニティーのテンプレート
 
