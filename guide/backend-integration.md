@@ -75,6 +75,10 @@
        "file": "assets/shared-ChJ_j-JJ.css",
        "src": "_shared-ChJ_j-JJ.css"
      },
+     "logo.svg": {
+       "file": "assets/logo-BuPIv-2h.svg",
+       "src": "logo.svg"
+     },
      "baz.js": {
        "file": "assets/baz-B2H3sXNv.js",
        "name": "baz",
@@ -100,11 +104,31 @@
    }
    ```
 
-   - マニフェストは `Record<name, chunk>` 構造になっています。
-   - エントリーまたはダイナミックエントリーのチャンクの場合、プロジェクトルートからの相対パスがキーとなります。
-   - エントリー以外のチャンクでは、生成されたファイル名の前に `_` を付けたものがキーとなります。
-   - [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) が `false` のときに生成された CSS ファイルの場合、キーは `style.css` です。
-   - チャンクには、静的インポートと動的インポートの情報（どちらもマニフェスト内の対応するチャンクをマップするキー）と、それらと対応する CSS とアセットファイルが含まれます（あれば）。
+   マニフェストは `Record<name, chunk>` 構造になっており、各チャンクは `ManifestChunk` インターフェースに従います:
+
+   ```ts
+   interface ManifestChunk {
+     src?: string
+     file: string
+     css?: string[]
+     assets?: string[]
+     isEntry?: boolean
+     name?: string
+     names?: string[]
+     isDynamicEntry?: boolean
+     imports?: string[]
+     dynamicImports?: string[]
+   }
+   ```
+
+   マニフェスト内の各エントリーは、以下のいずれかを表します:
+   - **エントリーチャンク**: [`build.rollupOptions.input`](https://rollupjs.org/configuration-options/#input) で指定されたファイルから生成されます。これらのチャンクには `isEntry: true` があり、キーはプロジェクトルートからの相対パスです。
+   - **ダイナミックエントリーチャンク**: 動的インポートから生成されます。これらのチャンクには `isDynamicEntry: true` があり、キーはプロジェクトルートからの相対パスです。
+   - **非エントリーチャンク**: キーは生成されたファイル名の前に `_` を付けたものです。
+   - **アセットチャンク**: 画像やフォントなどのインポートされたアセットから生成されます。キーはプロジェクトルートからの相対パスです。
+   - **CSS ファイル**: [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) が `false` の場合、キー `style.css` で単一の CSS ファイルが生成されます。`build.cssCodeSplit` が `false` でない場合、キーは JS チャンクと同様に生成されます（つまり、エントリーチャンクは `_` プレフィックスなし、非エントリーチャンクは `_` プレフィックスあり）。
+
+   チャンクには、静的インポートと動的インポートの情報（どちらもマニフェスト内の対応するチャンクをマップするキー）と、それらと対応する CSS とアセットファイルが含まれます（あれば）。
 
 4. このファイルを使用してハッシュを付加されたファイル名でリンクや preload directives をレンダリングすることができます。
 
@@ -128,15 +152,14 @@
    <link rel="modulepreload" href="/{{ chunk.file }}" />
    ```
 
-   具体的には、マニフェストファイルとエントリーポイントが指定された場合、HTML を生成するバックエンドは以下のタグを含める必要があります。
+   具体的には、マニフェストファイルとエントリーポイントが指定された場合、HTML を生成するバックエンドは以下のタグを含める必要があります。最適なパフォーマンスのために、この順序に従うことが推奨されます:
 
-   - エントリーポイントのチャンクの `css` リストのファイルごとに `<link rel="stylesheet">` タグ
-   - エントリーポイントの `imports` リスト内のすべてのチャンクを再帰的にたどり、インポートされた各チャンクの CSS ファイルごとに
-     `<link rel="stylesheet">` タグを含める。
-   - エントリーポイントのチャンクの `file` キーに対するタグ（JavaScript に対する `<script type="module">`
-     または CSS に対する `<link rel="stylesheet">`）
-   - オプションとして、インポートされた JavaScript ごとの `file` に対する `<link rel="modulepreload">` タグ。
-     再度、エントリーポイントのチャンクから imports を再帰的にたどる。
+   1. エントリーポイントのチャンクの `css` リストのファイルごとに `<link rel="stylesheet">` タグ（存在する場合）
+   2. エントリーポイントの `imports` リスト内のすべてのチャンクを再帰的にたどり、インポートされた各チャンクの `css` リストのファイルごとに
+      `<link rel="stylesheet">` タグを含める（存在する場合）。
+   3. エントリーポイントのチャンクの `file` キーに対するタグ。これは JavaScript に対する `<script type="module">`、CSS に対する `<link rel="stylesheet">` になります。
+   4. オプションとして、インポートされた JavaScript チャンクごとの `file` に対する `<link rel="modulepreload">` タグを追加し、エントリーポイントのチャンクから imports を再帰的にたどる。
+
 
    上記のマニフェスト例に従うと、本番環境では、エントリーポイント `views/foo.js` に対して以下のタグが含まれるはずです。
 
