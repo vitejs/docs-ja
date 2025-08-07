@@ -145,11 +145,17 @@ Rolldown と Oxc のおかげで、エイリアスや resolve プラグインな
 
 これらをテストするには、Vite の設定で `experimental.enableNativePlugin` オプションを `true` に設定できます。
 
-### `@vitejs/plugin-react-oxc`
+### Oxc の React refresh transform を活用
 
-`@vitejs/plugin-react` または `@vitejs/plugin-react-swc` を使用している場合、React の高速リフレッシュに Babel や SWC の代わりに Oxc を使用する `@vitejs/plugin-react-oxc` プラグインに切り替えることができます。これはドロップイン置換として設計されており、ビルドパフォーマンスを向上させ、`rolldown-vite` の基盤となるアーキテクチャと連携します。
+`@vitejs/plugin-react` v5.0.0+ では、Oxc の React refresh transform を使用します。Babel プラグイン（React コンパイラーを含む）を一切使用していない場合、完全な変換は Oxc によって実行されるため、`@vitejs/plugin-react` を更新するだけでビルドパフォーマンスが向上します。
 
-Babel または SWC プラグイン（React コンパイラーを含む）を使用していない場合、または SWC オプションを変更していない場合にのみ、`@vitejs/plugin-react-oxc` に切り替えられることに注意してください。
+SWC プラグインとカスタム SWC オプションなしで `@vitejs/plugin-react-swc` を使用している場合は、`@vitejs/plugin-react` プラグインに切り替えて Oxc を利用できます。
+
+::: details `@vitejs/plugin-react-oxc` プラグインは非推奨に
+
+以前は、Oxc の React refresh transform を利用するために `@vitejs/plugin-react-oxc` の使用を推奨していました。しかし、`rolldown-vite` への切り替えを容易にするため、実装を `@vitejs/plugin-react` に統合しました。`@vitejs/plugin-react-oxc` は非推奨となり、今後は更新されません。
+
+:::
 
 ### `withFilter` ラッパー
 
