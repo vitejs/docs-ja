@@ -1,5 +1,5 @@
 <svg viewBox="0 0 1896 1071" fill="none" xmlns="http://www.w3.org/2000/svg">
-<text fill="#FFAA3E" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="45" y="129.344">ネイティブ ESM ベースの開発サーバー</tspan></text>
+<text fill="#FFAA3E" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="45" y="129.344">Native ESM based dev server</tspan></text>
 <rect x="632" y="526" width="273" height="106" rx="10" fill="#C3E88C"/>
 <text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="724.5" y="591.988">entry</tspan></text>
 <rect x="1106" y="699" width="274" height="114" rx="10" fill="#666665"/>
@@ -34,8 +34,8 @@
 <text fill="white" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="154.707" y="570.988">Server&#10;</tspan><tspan x="162.76" y="615.988">ready</tspan></text>
 <line x1="507.615" y1="459.201" x2="506.232" y2="569.859" stroke="#C892E9" stroke-width="4" stroke-dasharray="8 8"/>
 <line x1="1038.78" y1="733.073" x2="1037.37" y2="883.845" stroke="#E06666" stroke-width="4" stroke-dasharray="8 8"/>
-<text fill="#E06666" xml:space="preserve" style="white-space: pre" font-size="38" letter-spacing="0em"><tspan x="918" y="938.988">動的インポート&#10;</tspan><tspan x="918" y="983.988">（コード分割点）</tspan></text>
-<text fill="#C892E9" xml:space="preserve" style="white-space: pre" font-size="38" letter-spacing="0em"><tspan x="399" y="431.488">HTTP リクエスト</tspan></text>
+<text fill="#E06666" xml:space="preserve" style="white-space: pre" font-size="38" letter-spacing="0em"><tspan x="918" y="938.988">Dynamic import&#10;</tspan><tspan x="918" y="983.988">(code split point)</tspan></text>
+<text fill="#C892E9" xml:space="preserve" style="white-space: pre" font-size="38" letter-spacing="0em"><tspan x="399" y="431.488">HTTP request</tspan></text>
 <defs>
 <filter id="filter0_d_5_61" x="1212.15" y="752.766" width="60.9863" height="13.2324" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
