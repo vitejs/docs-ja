@@ -2,6 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "typecheck": "vue-tsc",
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
     "serve-docs": "vitepress serve",
@@ -20,11 +21,13 @@
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
+    "typescript": "~5.9.2",
     "vite": "7.0.6",
     "vitepress": "^2.0.0-alpha.9",
     "vitepress-plugin-group-icons": "^1.6.1",
     "vitepress-plugin-llms": "^1.7.2",
     "vue": "^3.5.18",
+    "vue-tsc": "^3.0.5",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
