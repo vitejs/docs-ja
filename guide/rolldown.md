@@ -141,9 +141,9 @@ export default {
 
 ### ネイティブプラグインの有効化
 
-Rolldown と Oxc のおかげで、エイリアスや resolve プラグインなどの Vite の内部プラグインが Rust に変換されました。執筆時点では、これらのプラグインの動作が JavaScript 版とは異なる可能性があるため、デフォルトでは有効になっていません。
+Rolldown と Oxc のおかげで、エイリアスや resolve プラグインなどの Vite の内部プラグインが Rust に変換されました。ネイティブプラグインはデフォルトで有効になり、デフォルト値を `'v1'` に設定されています。
 
-これらをテストするには、Vite の設定で `experimental.enableNativePlugin` オプションを `true` に設定できます。
+問題が発生した場合は、回避策として Vite の設定で `experimental.enableNativePlugin` オプションを `'resolver'` または `false` に変更できます。このオプションは将来的に削除される予定であることに注意してください。
 
 ### Oxc の React refresh transform を活用
 
