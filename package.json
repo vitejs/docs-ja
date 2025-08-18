@@ -6,7 +6,7 @@
     "docs": "vitepress dev",
     "build-docs": "vitepress build",
     "serve-docs": "vitepress serve",
-    "lint": "textlint --format pretty-error **/*.md"
+    "lint": "textlint --format pretty-error \"**/*.md\""
   },
   "devDependencies": {
     "@shikijs/vitepress-twoslash": "^3.9.2",
