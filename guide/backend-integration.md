@@ -62,7 +62,7 @@
    </script>
    ```
 
-3. 本番環境向け: `vite build` を実行後、他のアセットファイルと共に `.vite/manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
+3. 本番環境向けには、`vite build` を実行後、他のアセットファイルと共に `.vite/manifest.json` ファイルが生成されます。マニフェストファイルの内容は以下のようになります:
 
    ```json [.vite/manifest.json]
    {
