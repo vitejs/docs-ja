@@ -6,7 +6,7 @@ Vite プラグインは、Rollup の優れた設計のプラグインインタ�
 
 ## プラグインの作成
 
-Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](https://vite.dev/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティープラグインを確認してください。
+Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティープラグインを確認してください。
 
 プラグインを作成する際には、`vite.config.js` にインラインで記述できます。そのために新しいパッケージを作成する必要はありません。あるプラグインが自分のプロジェクトで役に立ったことがわかったら、[エコシステムにいる](https://chat.vite.dev)他の人を助けるために共有することを検討してください。
 

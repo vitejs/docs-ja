@@ -214,7 +214,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 - React のサポート: [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 - SWC を利用している React のサポート: [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-詳しくは[プラグインガイド](../plugins/)を確認してください。
+詳しくは[プラグインガイド](/plugins/)を確認してください。
 
 ## JSX
 
@@ -543,7 +543,7 @@ const modules = {
 
 #### カスタムクエリー
 
-また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](https://vite.dev/guide/assets.html#importing-asset-as-string)または [url として](https://vite.dev/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
+また、`query` オプションを使用すると、クエリーをインポートに指定することもできます。たとえば、アセットを[文字列として](/guide/assets.html#importing-asset-as-string)または [url として](/guide/assets.html#importing-asset-as-url)インポートするには、次のように書きます:
 
 ```ts twoslash
 import 'vite/client'
