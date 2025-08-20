@@ -10,31 +10,23 @@ Vite は、一般的な Web 開発パターンをすぐに使えるようにサ�
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
-- Vue 3 の単一ファイルコンポーネントのサポートを提供します。
+Vue 3 の単一ファイルコンポーネントのサポートを提供します。
 
 ### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 
-- Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/jsx-next) を介して）のサポートを提供します。
-
-### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-
-- Vue 2.7 の単一ファイルコンポーネントのサポートを提供します。
-
-### [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
-
-- Vue 2.7 の JSX（[専用の Babel transform ](https://github.com/vuejs/jsx-vue2/)を介して）のサポートを提供します。
+Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/babel-plugin-jsx) を介して）のサポートを提供します。
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-- esbuild と Babel を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。Babel プラグインを追加しない場合、ビルド時には esbuild のみが使用されます。
+esbuild と Babel を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。Babel プラグインを追加しない場合、ビルド時には esbuild のみが使用されます。
 
-### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-- 開発中は Babel を SWC に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
+開発中は Babel を SWC に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
-- 本番環境向けにレガシーブラウザーのサポートを提供します。
+本番環境向けにレガシーブラウザーのサポートを提供します。
 
 ## コミュニティープラグイン
 
