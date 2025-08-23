@@ -28,7 +28,7 @@ export class RunnableDevEnvironment extends DevEnvironment {
 
 class ModuleRunner {
   /**
-   * 実行するURL。
+   * 実行する URL。
    * ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
    * インスタンス化されたモジュールを返します (ssrLoadModule と同じ)
    */

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: チーム紹介
-description: Viteの開発は、国際的なチームによって進められています。
+description: Vite の開発は、国際的なチームによって進められています。
 ---
 
 <script setup>
@@ -18,7 +18,7 @@ import { core, emeriti } from './_data/team'
   <VPTeamPageTitle>
     <template #title>チーム紹介</template>
     <template #lead>
-      Viteの開発は、国際的なチームによって進められており、
+      Vite の開発は、国際的なチームによって進められており、
       以下にその一部を紹介します。
     </template>
   </VPTeamPageTitle>

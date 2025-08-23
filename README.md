@@ -11,7 +11,7 @@
 本ドキュメントは [VitePress](https://vitepress.vuejs.org/) で作られています。ローカル環境で作業を行う場合は、以下のステップを踏んでください。
 
 ```bash
-# NPMパッケージをインストール
+# NPM パッケージをインストール
 $ pnpm install
 
 # ローカル Web サーバーを起動

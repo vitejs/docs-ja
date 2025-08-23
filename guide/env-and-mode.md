@@ -46,9 +46,9 @@ Vite は、[環境ディレクトリー](/config/shared-options.md#envdir)にあ
 
 ```
 .env                # 全ての場合に読み込まれる
-.env.local          # 全ての場合に読み込まれ、gitには無視される
+.env.local          # 全ての場合に読み込まれ、git には無視される
 .env.[mode]         # 指定されたモードでのみ読み込まれる
-.env.[mode].local   # 指定されたモードでのみ読み込まれ、gitには無視される
+.env.[mode].local   # 指定されたモードでのみ読み込まれ、git には無視される
 ```
 
 :::tip env 読み込みの優先度

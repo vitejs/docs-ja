@@ -126,7 +126,7 @@ export class ModuleRunner {
     private debug?: ModuleRunnerDebugger,
   ) {}
   /**
-   * 実行するURL。
+   * 実行する URL。
    * ルートからの相対的なファイルパス、サーバーパス、ID を受け付けます。
    */
   public async import<T = any>(url: string): Promise<T>

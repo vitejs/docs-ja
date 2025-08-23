@@ -71,7 +71,7 @@ function dismiss() {
         · 初の<span style="font-weight: 900">対面開催</span></span
       >
       <span class="vt-place"> · Amsterdam</span>
-      <span class="vt-date"> · 10月09-10日</span>
+      <span class="vt-date"> · 10 月 09-10 日</span>
       <a
         target="_blank"
         class="vt-primary-action"
