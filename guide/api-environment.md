@@ -119,7 +119,7 @@ export default {
 
 ## 後方互換性 {#backward-compatibility}
 
-現在の Vite サーバーAPI はまだ非推奨ではなく、Vite 5 との後方互換性があります。
+現在の Vite サーバー API はまだ非推奨ではなく、Vite 5 との後方互換性があります。
 
 `server.moduleGraph` はクライアントと ssr のモジュールグラフの混合ビューを返します。後方互換性のある混合モジュールノードがすべてのメソッドから返されます。同じスキームが `handleHotUpdate` に渡されるモジュールノードにも使用されます。
 

@@ -34,7 +34,7 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 
 ## 翻訳スタイル
 
-- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) - 基本的な翻訳スタイル。
+- [JTF 日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) - 基本的な翻訳スタイル。
 - [Microsoft ローカリゼーション スタイル ガイド](https://www.microsoft.com/ja-jp/language/styleguides) - 技術文書におけるスタイル。
 - [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) - JTF 日本語標準スタイルガイド（翻訳用）の textlint のルールセット。
 - [textlint-rule-preset-vuejs-jp](https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp) - Vue.js 日本ユーザーグループで一部カスタマイズした textlint のルールセット。

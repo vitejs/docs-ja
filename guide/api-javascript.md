@@ -170,7 +170,7 @@ interface ViteDevServer {
   /**
    * サーバーを再起動します。
    *
-   * @param forceOptimize - オプティマイザーに再バンドルを強制する。--force cliフラグと同じ
+   * @param forceOptimize - オプティマイザーに再バンドルを強制する。--force cli フラグと同じ
    */
   restart(forceOptimize?: boolean): Promise<void>
   /**
