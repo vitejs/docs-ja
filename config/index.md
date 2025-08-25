@@ -101,9 +101,11 @@ export default defineConfig(async ({ command, mode }) => {
 
 ## 環境変数を設定に使用する
 
-通常通り、環境変数は `process.env` から取得することができます。
+設定自体が評価されている間に利用可能な環境変数は、現在のプロセス環境（`process.env`）に既に存在するもののみです。Vite は意図的に `.env*` ファイルの読み込みをユーザー設定が解決される**後**まで遅らせています。これは、読み込むファイルのセットが [`root`](/guide/#index-html-and-project-root) や [`envDir`](/config/shared-options.md#envdir) などの設定オプション、そして最終的な `mode` に依存するためです。
 
-Vite はデフォルトでは `.env` ファイルをロードしないことに注意してください。ロードするファイルは Vite の設定を評価した後に決定されるからです。例えば、 `root` と `envDir` オプションはロードの動作に影響します。しかし必要に応じて、エクスポートされた `loadEnv` ヘルパーを使用して、特定の `.env` ファイルをロードすることができます。
+つまり、`.env`、`.env.local`、`.env.[mode]`、`.env.[mode].local` で定義された変数は、`vite.config.*` の実行中に `process.env` に自動的に注入されることは**ありません**。これは[環境変数とモード](/guide/env-and-mode.html)で説明されているとおり、これらの変数は後で自動的に読み込まれ、（デフォルトの `VITE_` プレフィックスフィルターを使用して）`import.meta.env` を通じてアプリケーションコードに公開されます。したがって、`.env*` ファイルからアプリに値を渡すだけであれば、設定内で何かを呼び出す必要はありません。
+
+しかし、`.env*` ファイルの値が設定自体に影響を与える必要がある場合（例えば `server.port` の設定、プラグインの条件付き有効化、`define` 置換の計算など）、エクスポートされた [`loadEnv`](/guide/api-javascript.html#loadenv) ヘルパーを使用して手動で読み込めます。
 
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
@@ -114,9 +116,13 @@ export default defineConfig(({ mode }) => {
   // 第 3 引数に '' を設定します
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    // vite の設定
     define: {
+      // 環境変数から派生した明示的なアプリレベル定数を提供します。
       __APP_ENV__: JSON.stringify(env.APP_ENV),
+    },
+    // 例：環境変数を使用して開発サーバーのポートを条件付きで設定します。
+    server: {
+      port: env.APP_PORT ? Number(env.APP_PORT) : 5173,
     },
   }
 })
