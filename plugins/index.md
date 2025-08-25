@@ -24,6 +24,16 @@ esbuild と Babel を使用し、小さなパッケージフットプリント�
 
 開発中は Babel を SWC に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
+### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
+
+Vite はこのプラグインを通して [React サーバーコンポーネント（RSC）](https://react.dev/reference/rsc/server-components)をサポートしています。このプラグインは、React フレームワークが RSC 機能を統合するために使用できる低レベルのプリミティブを提供する [Environment API](/guide/api-environment) を利用しています。以下を実行してミニマルなスタンドアロン RSC アプリケーションを試すことができます:
+
+```bash
+npm create vite@latest -- --template rsc
+```
+
+詳しくは [プラグインドキュメント](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc) をお読みください。
+
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
 本番環境向けにレガシーブラウザーのサポートを提供します。

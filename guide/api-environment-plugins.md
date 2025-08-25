@@ -31,11 +31,19 @@ Vite サーバーには共有プラグインパイプラインがありますが
 
 ## フックを使用して新しい環境を登録する {#registering-new-environments-using-hooks}
 
-プラグインは、`config` フックに新しい環境を追加できます（たとえば、[RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) 用の個別のモジュールグラフを作成する場合など）:
+プラグインは、`config` フックに新しい環境を追加できます。例えば、[RSC サポート](/plugins/#vitejs-plugin-rsc) では、`react-server` 条件を含む個別のモジュールグラフを持つために追加の環境を使用します:
 
 ```ts
   config(config: UserConfig) {
-    config.environments.rsc ??= {}
+    return {
+      environments: {
+        rsc: {
+          resolve: {
+            conditions: ['react-server', ...defaultServerConditions],
+          },
+        },
+      },
+    }
   }
 ```
 
@@ -48,8 +56,16 @@ Vite サーバーには共有プラグインパイプラインがありますが
 
 ```ts
   configEnvironment(name: string, options: EnvironmentOptions) {
+    // rsc 環境に "workerd" 条件を追加
     if (name === 'rsc') {
-      options.resolve.conditions = // ...
+      return {
+        resolve: {
+          conditions: ['workerd'],
+        },
+      }
+    }
+  }
+```
 ```
 
 ## `hotUpdate` フック {#the-hotupdate-hook}
