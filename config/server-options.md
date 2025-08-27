@@ -256,7 +256,7 @@ export default defineConfig({
 
 Vite サーバーのウォッチャーはデフォルトで `root` を監視し、`.git/`、`node_modules/`、test-results/`、および Vite の `cacheDir` と `build.outDir` ディレクトリーをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
-`null` に設定すると、ファイルは監視されません。`server.watcher` は互換性のあるイベントエミッターを提供しますが、`add` または `unwatch` を呼び出しても効果はありません。
+`null` に設定すると、ファイルは監視されません。[`server.watcher`](/guide/api-javascript.html#vitedevserver) は互換性のあるイベントエミッターを提供しますが、`add` または `unwatch` を呼び出しても効果はありません。
 
 ::: warning `node_modules` 内のファイルの監視
 
