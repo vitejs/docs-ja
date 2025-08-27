@@ -21,7 +21,7 @@ Vite ではなく他のサーバーがレスポンスを返す場合がありま
 
 ## preview.allowedHosts
 
-- **型:** `string | true`
+- **型:** `string[] | true`
 - **デフォルト:** [`server.allowedHosts`](./server-options#server-allowedhosts)
 
 Vite が応答することを許可するホスト名。
