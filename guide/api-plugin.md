@@ -403,6 +403,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 ### `handleHotUpdate`
 
 - **型:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
+- **種類:** `async`、`sequential`
 - **参照:** [HMR API](./api-hmr)
 
   カスタム HMR 更新処理を実行します。このフックは以下のシグネチャーのコンテキストオブジェクトを受け取ります:
