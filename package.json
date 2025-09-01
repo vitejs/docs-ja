@@ -9,10 +9,10 @@
     "lint": "textlint --format pretty-error \"**/*.md\""
   },
   "devDependencies": {
-    "@shikijs/vitepress-twoslash": "^3.11.0",
+    "@shikijs/vitepress-twoslash": "^3.12.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.3",
-    "@types/node": "^22.17.2",
+    "@types/node": "^22.18.0",
     "feed": "^5.1.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.1.5",
@@ -26,7 +26,7 @@
     "vitepress": "^2.0.0-alpha.12",
     "vitepress-plugin-group-icons": "^1.6.3",
     "vitepress-plugin-llms": "^1.7.3",
-    "vue": "^3.5.19",
+    "vue": "^3.5.20",
     "vue-tsc": "^3.0.6",
     "yorkie": "^2.0.0"
   },
