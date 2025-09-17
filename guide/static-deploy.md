@@ -301,3 +301,11 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 ## xmit 静的サイトホスティング
 
 [xmit](https://xmit.co) を使用して静的サイトをデプロイする場合はこの[ガイド](https://xmit.dev/posts/vite-quickstart/)に従ってください。
+
+## Zephyr Cloud
+
+[Zephyr Cloud](https://zephyr-cloud.io) は、ビルドプロセスに直接統合され、モジュールフェデレーションおよびその他の種類のアプリケーションにグローバルエッジ配信を提供するデプロイメントプラットフォームです。
+
+Zephyr は他のクラウドプロバイダーとは異なるアプローチを取っています。Vite のビルドプロセスに直接統合されるため、アプリケーションをビルドまたは開発サーバーを実行するたびに、Zephyr Cloud で自動的にデプロイされます。
+
+開始するには、[Vite デプロイガイド](https://docs.zephyr-cloud.io/recipes/react-vite)の手順に従ってください。
