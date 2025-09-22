@@ -9,10 +9,10 @@
     "lint": "textlint --format pretty-error \"**/*.md\""
   },
   "devDependencies": {
-    "@shikijs/vitepress-twoslash": "^3.12.2",
+    "@shikijs/vitepress-twoslash": "^3.13.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.3",
-    "@types/node": "^22.18.3",
+    "@types/node": "^22.18.6",
     "feed": "^5.1.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.1.6",
@@ -36,7 +36,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.16.1",
+  "packageManager": "pnpm@10.17.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
