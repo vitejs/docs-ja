@@ -117,8 +117,6 @@ VITE_BAR=bar
 この目的を達するには、`src` ディレクトリーに `vite-env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
 ```typescript [vite-env.d.ts]
-/// <reference types="vite/client" />
-
 interface ViteTypeOptions {
   // この行を追加することで ImportMetaEnv の型を厳密にし、不明なキーを許可しないように
   // できます。

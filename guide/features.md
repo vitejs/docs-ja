@@ -113,15 +113,7 @@ Vite のスターターテンプレートでは依存関係の型チェックを
 
 ### クライアントでの型 {#client-types}
 
-Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `d.ts` の定義ファイルを追加します:
-
-```typescript
-/// <reference types="vite/client" />
-```
-
-::: details `compilerOptions.types` の使用
-
-または、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加することもできます:
+Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには、`tsconfig.json` 内の `compilerOptions.types` に `vite/client` を追加できます:
 
 ```json [tsconfig.json]
 {
@@ -131,7 +123,15 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
 }
 ```
 
-[`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) が指定された場合、グローバルスコープには（見つかるすべての "@types" パッケージの代わりに）これらのパッケージのみが含まれるようになることに注意してください。
+[`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) が指定された場合、グローバルスコープには（見つかるすべての "@types" パッケージの代わりに）これらのパッケージのみが含まれるようになることに注意してください。これは TS 5.9 以降で推奨されています。
+
+::: details triple-slash directive の使用
+
+または、`d.ts` の定義ファイルを追加することもできます:
+
+```typescript [vite-env.d.ts]
+/// <reference types="vite/client" />
+```
 
 :::
 
@@ -153,7 +153,13 @@ Vite はデフォルトでは Node.js の API を提供します。Vite でク�
     export default content
   }
   ```
-- `vite/client` への参照を含むファイル（通常は `vite-env.d.ts`）:
+- `compilerOptions.types` を使用している場合は、ファイルが `tsconfig.json` に含まれるようにします:
+  ```json [tsconfig.json]
+  {
+    "include": ["src", "./vite-env-override.d.ts"]
+  }
+  ```
+- triple-slash directive を使用している場合は、`vite/client` への参照を含むファイル（通常は `vite-env.d.ts`）を更新します:
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />
