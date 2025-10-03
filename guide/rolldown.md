@@ -322,14 +322,9 @@ const plugin = {
 
 ### フックフィルター機能 {#hook-filter-feature}
 
-Rolldown は[フックフィルター機能](https://rolldown.rs/plugins/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信を縮小しました。この機能を使用することで、プラグインのパフォーマンスを向上させることができます。
-これは、Rollup 4.38.0+ および Vite 6.3.0+ によってサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でフィルターを実行してください。
+Rolldown は[フックフィルター機能](https://rolldown.rs/plugins/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
 
-::: tip
-
-[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。
-
-:::
+詳細は [フックフィルターガイド](/guide/api-plugin#hook-filters) を参照してください。
 
 ### `load` または `transform` フックでコンテンツを JavaScript に変換する
 

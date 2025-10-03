@@ -548,6 +548,41 @@ normalizePath('foo/bar') // 'foo/bar'
 
 Vite は [`@rollup/pluginutils` の `createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) 関数を公開し、Vite 固有のプラグインやインテグレーションが標準の include/exclude フィルタリングのパターンを使用できるようにします。これは Vite コア自体でも使用されています。
 
+### フックフィルター {#hook-filters}
+
+Rolldown は[フックフィルター機能](https://rolldown.rs/plugins/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
+
+これは Rollup 4.38.0+ および Vite 6.3.0+ でもサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でもフィルターを実行するようにしてください。
+
+```js
+export default function myPlugin() {
+  const jsFileRegex = /\.js$/
+
+  return {
+    name: 'my-plugin',
+    // 例: .js ファイルに対してのみ transform を呼び出す
+    transform: {
+      filter: {
+        id: jsFileRegex,
+      },
+      handler(code, id) {
+        // 後方互換性のための追加チェック
+        if (!jsFileRegex.test(id)) return null
+
+        return {
+          code: transformCode(code),
+          map: null,
+        }
+      },
+    },
+  }
+}
+```
+
+::: tip
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。
+:::
+
 ## クライアントサーバーとの通信 {#client-server-communication}
 
 Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。
