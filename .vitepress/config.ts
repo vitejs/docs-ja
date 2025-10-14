@@ -211,6 +211,10 @@ export default defineConfig({
           { text: 'ブログ', link: '/blog' },
           { text: 'リリース', link: '/releases' },
           {
+            text: 'The Documentary',
+            link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
+          },
+          {
             items: [
               {
                 text: 'Bluesky',
