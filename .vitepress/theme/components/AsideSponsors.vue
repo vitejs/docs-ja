@@ -21,7 +21,7 @@ const sponsors = computed(() => {
 <template>
   <a
       class="viteconf"
-      href="https://viteconf.org/?utm=vite-sidebar"
+      href="https://www.youtube.com/playlist?list=PLqGQbXn_GDmkJaoykvHCUmXUPjhgH2bVr"
       target="_blank"
   >
     <img
@@ -33,7 +33,7 @@ const sponsors = computed(() => {
     <span>
       <p class="extra-info">Building Together</p>
       <p class="heading">ViteConf 2025</p>
-      <p class="extra-info">初めて対面で開催！</p>
+      <p class="extra-info">リプレイを視聴する</p>
     </span>
   </a>
   <VPDocAsideSponsors v-if="data" :data="sponsors" />
