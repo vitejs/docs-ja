@@ -22,7 +22,7 @@ Rolldown は以下の 3 つの重要な原則に焦点を当てています:
 
 3. **追加機能**: Rolldown は、高度なチャンク分割制御、ビルトインの HMR、モジュールフェデレーションなど、Rollup や esbuild では利用できない機能が導入されています。
 
-Rolldown の背景にある動機についての詳細は、[Rolldown が構築される理由](https://rolldown.rs/guide/#why-rolldown)を参照してください。
+Rolldown の背景にある動機についての詳細は、[Rolldown が構築される理由](https://rolldown.rs/guide/introduction#why-rolldown)を参照してください。
 
 ## `rolldown-vite` を試す利点
 
@@ -322,7 +322,7 @@ const plugin = {
 
 ### フックフィルター機能 {#hook-filter-feature}
 
-Rolldown は[フックフィルター機能](https://rolldown.rs/plugins/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
+Rolldown は[フックフィルター機能](https://rolldown.rs/apis/plugin-hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
 
 詳細は [フックフィルターガイド](/guide/api-plugin#hook-filters) を参照してください。
 
