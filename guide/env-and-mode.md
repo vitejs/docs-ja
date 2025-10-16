@@ -74,6 +74,12 @@ Vite は特定のモードの `.env.[mode]` ファイルに加えて、常に `.
 
 :::
 
+:::warning Bun ユーザー
+
+[Bun](https://bun.sh) を使用する際、Bun はスクリプトの実行前に `.env` ファイルを自動的に読み込むことに注意してください。この組み込み動作により、環境変数が直接 `process.env` に読み込まれ、既存の `process.env` の値を尊重する Vite の機能に干渉する可能性があります。回避策については [oven-sh/bun#5515](https://github.com/oven-sh/bun/issues/5515) を参照してください。
+
+:::
+
 また、Vite は [dotenv-expand](https://github.com/motdotla/dotenv-expand) を使って、設定不要で env ファイルに書かれた変数を展開できます。構文の詳細については、[ドキュメント](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow)を参照してください。
 
 環境値の中で `$` を使用する場合は、`\` でエスケープする必要があることに注意してください。
