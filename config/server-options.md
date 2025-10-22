@@ -92,8 +92,6 @@ HTTPS を使用する場合は、このチェックはスキップされます�
 
 TLS + HTTP/2 を有効にします。この値は `https.createServer()` に渡される[オプションオブジェクト](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)です。
 
-TLS にダウングレードされるのは、[`server.proxy` オプション](#server-proxy)も使用している場合のみであることに注意してください。
-
 有効な証明書が必要です。基本的なセットアップでは、自己署名証明書を自動的に作成しキャッシュする [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) をプロジェクトのプラグインに追加することもできます。しかし、独自の証明書を作成することを推奨します。
 
 ## server.open
