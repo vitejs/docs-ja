@@ -185,6 +185,71 @@ export default defineConfig({
 })
 ```
 
+## build.license
+
+- **型:** `boolean | { fileName?: string }`
+- **デフォルト:** `false`
+
+`true` に設定すると、ビルドによってバンドルされたすべての依存関係のライセンスを含む `.vite/license.md` ファイルが生成されます。これをホストして、アプリで使用されている依存関係を表示および承認できます。`fileName` を渡すと、`outDir` からの相対パスでライセンスファイル名として使用されます。出力例は次のようになります:
+
+```md
+# Licenses
+
+The app bundles dependencies which contain the following licenses:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+MIT License
+
+...
+```
+
+`fileName` が `.json` で終わる場合、代わりに生の JSON メタデータが生成され、さらなる処理に使用できます。たとえば:
+
+```json
+[
+  {
+    "name": "dep-1",
+    "version": "1.2.3",
+    "identifier": "CC0-1.0",
+    "text": "CC0 1.0 Universal\n\n..."
+  },
+  {
+    "name": "dep-2",
+    "version": "4.5.6",
+    "identifier": "MIT",
+    "text": "MIT License\n\n..."
+  }
+]
+```
+
+::: tip
+ビルドされたコード内でライセンスファイルを参照したい場合は、`build.rollupOptions.output.banner` を使用してファイルの先頭にコメントを挿入できます。たとえば:
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rollupOptions: {
+      output: {
+        banner:
+          '/* See licenses of bundled dependencies at https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **型:** `boolean | string`
