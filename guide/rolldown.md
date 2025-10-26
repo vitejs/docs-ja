@@ -345,4 +345,4 @@ const plugin = {
 }
 ```
 
-これは、[Rolldown は JavaScript 以外のモジュールもサポート](https://rolldown.rs/guide/in-depth/module-types)しており、指定がない限り拡張子からモジュールタイプを拡張するためです。
+これは、[Rolldown は JavaScript 以外のモジュールもサポート](https://rolldown.rs/in-depth/module-types)しており、指定がない限り拡張子からモジュールタイプを拡張するためです。
