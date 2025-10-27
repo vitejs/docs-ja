@@ -63,7 +63,7 @@ $ npm run preview
 
 2. リポジトリー設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
 
-   <<< ./static-deploy-github-pages.yaml#content
+   <<< ./static-deploy-github-pages.yaml#content[.github/workflows/deploy.yml]
 
 ## GitLab Pages と GitLab CI
 
