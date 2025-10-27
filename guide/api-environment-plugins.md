@@ -228,6 +228,43 @@ export default defineConfig({
 
 `applyToEnvironment` フックは設定時に呼び出されます。エコシステム内のプロジェクトがプラグインを変更しているため、現在は `configResolved` の後に呼び出されています。環境プラグインの解決は、将来的には `configResolved` の前に移動される可能性があります。
 
+## アプリケーション・プラグイン通信 {#application-plugin-communication}
+
+`environment.hot` により、プラグインは指定された環境のアプリケーション側のコードと通信できます。これは[クライアント・サーバー通信機能](/guide/api-plugin#client-server-communication)と同等ですが、クライアント環境以外の環境もサポートします。
+
+:::warning 注意
+
+この機能は、HMR をサポートする環境でのみ使用可能です。
+
+:::
+
+### アプリケーションインスタンスの管理 {#managing-the-application-instances}
+
+同じ環境で複数のアプリケーションインスタンスが実行されている可能性があることに注意してください。たとえば、ブラウザーで複数のタブを開いている場合、各タブは個別のアプリケーションインスタンスであり、サーバーへの個別の接続を持ちます。
+
+新しい接続が確立されると、環境の `hot` インスタンスで `vite:client:connect` イベントが発生します。接続が閉じられると、`vite:client:disconnect` イベントが発生します。
+
+各イベントハンドラーは、2 番目の引数として `NormalizedHotChannelClient` を受け取ります。クライアントは、特定のアプリケーションインスタンスにメッセージを送信するために使用できる `send` メソッドを持つオブジェクトです。クライアント参照は、同じ接続に対して常に同じであるため、接続を追跡するために保持できます。
+
+### 使用例 {#example-usage}
+
+プラグイン側:
+
+```js
+configureServer(server) {
+  server.environments.ssr.hot.on('my:greetings', (data, client) => {
+    // データで何かを行い、
+    // 必要に応じてそのアプリケーションインスタンスにレスポンスを送信
+    client.send('my:foo:reply', `Hello from server! You said: ${data}`)
+  })
+
+  // すべてのアプリケーションインスタンスにメッセージをブロードキャスト
+  server.environments.ssr.hot.send('my:foo', 'Hello from server!')
+}
+```
+
+アプリケーション側は、クライアント・サーバー通信機能と同じです。`import.meta.hot` オブジェクトを使用して、プラグインにメッセージを送信できます。
+
 ## ビルドフックの環境 {#environment-in-build-hooks}
 
 開発時と同じように、プラグインフックもビルド時に環境インスタンスを受け取り、`ssr` ブール値を置き換えます。
