@@ -147,7 +147,7 @@ interface HotUpdateOptions {
 
 ## プラグインにおける環境ごとの状態 {#per-environment-state-in-plugins}
 
-同じプラグインインスタンスが異なる環境で使用されるため、プラグインの状態は `this.environment` をキーとして管理する必要があります。これは、エコシステムがクライアントモジュールと SSR モジュールの状態が混ざるのを避けるために、`ssr` ブール値をキーとしてモジュールの状態を保持するために既に使用しているパターンと同じです。`Map<Environment, State>` を使用して、各環境の状態を個別に保持できます。後方互換性のため、`buildStart` および `buildEnd` は、`perEnvironmentStartEndDuringDev: true` フラグがない場合、クライアント環境に対してのみ呼び出されることに注意してください。
+同じプラグインインスタンスが異なる環境で使用されるため、プラグインの状態は `this.environment` をキーとして管理する必要があります。これは、エコシステムがクライアントモジュールと SSR モジュールの状態が混ざるのを避けるために、`ssr` ブール値をキーとしてモジュールの状態を保持するために既に使用しているパターンと同じです。`Map<Environment, State>` を使用して、各環境の状態を個別に保持できます。後方互換性のため、`buildStart` および `buildEnd` は、`perEnvironmentStartEndDuringDev: true` フラグがない場合、クライアント環境に対してのみ呼び出されることに注意してください。`watchChange` と `perEnvironmentWatchChangeDuringDev: true` フラグについても同様です。
 
 ```js
 function PerEnvironmentCountTransformedModulesPlugin() {
