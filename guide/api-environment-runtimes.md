@@ -316,19 +316,28 @@ import { createServer, RemoteEnvironmentTransport, DevEnvironment } from 'vite'
 function createWorkerEnvironment(name, config, context) {
   const worker = new Worker('./worker.js')
   const handlerToWorkerListener = new WeakMap()
+  const client = {
+    send(payload: HotPayload) {
+      worker.postMessage(payload)
+    },
+  }
 
   const workerHotChannel = {
     send: (data) => worker.postMessage(data),
     on: (event, handler) => {
-      if (event === 'connection') return
+      // クライアントはすでに接続されています
+      if (event === 'vite:client:connect') return
+      if (event === 'vite:client:disconnect') {
+        const listener = () => {
+          handler(undefined, client)
+        }
+        handlerToWorkerListener.set(handler, listener)
+        worker.on('exit', listener)
+        return
+      }
 
       const listener = (value) => {
         if (value.type === 'custom' && value.event === event) {
-          const client = {
-            send(payload) {
-              worker.postMessage(payload)
-            },
-          }
           handler(value.data, client)
         }
       }
@@ -336,7 +345,16 @@ function createWorkerEnvironment(name, config, context) {
       worker.on('message', listener)
     },
     off: (event, handler) => {
-      if (event === 'connection') return
+      if (event === 'vite:client:connect') return
+      if (event === 'vite:client:disconnect') {
+        const listener = handlerToWorkerListener.get(handler)
+        if (listener) {
+          worker.off('exit', listener)
+          handlerToWorkerListener.delete(handler)
+        }
+        return
+      }
+
       const listener = handlerToWorkerListener.get(handler)
       if (listener) {
         worker.off('message', listener)
@@ -362,6 +380,8 @@ await createServer({
 ```
 
 :::
+
+`on` / `off` メソッドが存在する場合は、それらのメソッドで `vite:client:connect` / `vite:client:disconnect` イベントを実装してください。`vite:client:connect` イベントは接続が確立されたときに発生し、`vite:client:disconnect` イベントは接続が閉じられたときに発生する必要があります。イベントハンドラーに渡される `HotChannelClient` オブジェクトは、同じ接続に対して同じ参照を持つ必要があります。
 
 HTTP リクエストを使用してランナーとサーバー間で通信する別の例:
 
