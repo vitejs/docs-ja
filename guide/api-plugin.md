@@ -387,6 +387,9 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
   interface HtmlTagDescriptor {
     tag: string
+    /**
+     * 属性の値は必要に応じて自動的にエスケープされます
+     */
     attrs?: Record<string, string | boolean>
     children?: string | HtmlTagDescriptor[]
     /**
