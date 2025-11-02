@@ -13,7 +13,7 @@ Environment API は一般的にリリース候補段階にあります。エコ�
 ぜひフィードバックをお寄せください。
 :::
 
-## フック内で現在の環境にアクセスする　{}
+## フック内で現在の環境にアクセスする　{#accessing-the-current-environment-in-hooks}
 
 Vite 6 までは環境が 2 つ (`client` と `ssr`) しかなかったため、Vite API の現在の環境を識別するのは `ssr` ブール値で十分でした。プラグインフックは最後のオプションパラメーターで `ssr` ブール値を受け取り、いくつかの API はモジュールを正しい環境に適切に関連付けるためにオプションの最後の `ssr` パラメーターを必要としていました (たとえば、`server.moduleGraph.getModuleByUrl(url, { ssr })`)。
 
