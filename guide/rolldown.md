@@ -111,7 +111,7 @@ Rolldown は不明または無効なオプションが渡されると警告を�
 
 #### `manualChunks` から `advancedChunks` へ
 
-Rolldown は Rollup でも公開されている `manualChunks` オプションをサポートしていますが、非推奨とマークされています。代わりに、webpack の `splitChunk` に似た、よりきめ細かい設定を [`advancedChunks` オプション](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks) を通じて提供します:
+Rolldown は Rollup でも公開されている `manualChunks` オプションをサポートしていますが、非推奨とマークされています。代わりに、webpack の `splitChunk` に似た、よりきめ細かい設定を [`advancedChunks` オプション](https://rolldown.rs/in-depth/advanced-chunks) を通じて提供します:
 
 ```js
 // 以前の設定 (Rollup)
