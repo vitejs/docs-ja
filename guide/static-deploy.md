@@ -296,7 +296,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 ## Kinsta 静的サイトホスティング
 
-[Kinsta](https://kinsta.com/static-site-hosting/) を使用して静的サイトをデプロイする場合はこの[案内](https://kinsta.com/docs/react-vite-example/)に従ってください。
+[Kinsta](https://kinsta.com/static-site-hosting/) を使用して静的サイトをデプロイする場合はこの[案内](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite)に従ってください。
 
 ## xmit 静的サイトホスティング
 
@@ -308,4 +308,4 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 Zephyr は他のクラウドプロバイダーとは異なるアプローチを取っています。Vite のビルドプロセスに直接統合されるため、アプリケーションをビルドまたは開発サーバーを実行するたびに、Zephyr Cloud で自動的にデプロイされます。
 
-開始するには、[Vite デプロイガイド](https://docs.zephyr-cloud.io/recipes/react-vite)の手順に従ってください。
+開始するには、[Vite デプロイガイド](https://docs.zephyr-cloud.io/bundlers/vite)の手順に従ってください。
