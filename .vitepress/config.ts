@@ -10,7 +10,11 @@ import {
 
 
 import { markdownItImageSize } from 'markdown-it-image-size'
+import packageJson from '../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
+
+const viteVersion = packageJson.devDependencies.vite.replace(/^\^/, '')
+const viteMajorVersion = +viteVersion.split('.')[0]
 
 const ogDescription = '次世代フロントエンドツール'
 const ogImage = 'https://vite.dev/og-image.jpg'
@@ -42,42 +46,31 @@ const additionalTitle = ((): string => {
   }
 })()
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
-  const oldVersions: DefaultTheme.NavItemWithLink[] = [
-    {
-      text: 'Vite 6 ドキュメント',
-      link: 'https://v6.vite.dev',
-    },
-    {
-      text: 'Vite 5 ドキュメント',
-      link: 'https://v5.vite.dev',
-    },
-    {
-      text: 'Vite 4 ドキュメント',
-      link: 'https://v4.vite.dev',
-    },
-    {
-      text: 'Vite 3 ドキュメント',
-      link: 'https://v3.vite.dev',
-    },
-    {
-      text: 'Vite 2 ドキュメント',
-      link: 'https://v2.vite.dev',
-    },
-  ]
+  const links: DefaultTheme.NavItemWithLink[] = []
 
-  switch (deployType) {
-    // case 'main':
-    case 'local':
-      return [
-        {
-          text: 'Vite 7 ドキュメント（リリース）',
-          link: 'https://vite.dev',
-        },
-        ...oldVersions,
-      ]
-    case 'release':
-      return oldVersions
+  if (deployType !== 'main') {
+    links.push({
+      text: '未リリースドキュメント',
+      link: 'https://main.vite.dev',
+    })
   }
+
+  if (deployType === 'main' || deployType === 'local') {
+    links.push({
+      text: `Vite ${viteMajorVersion} ドキュメント（リリース）`,
+      link: 'https://vite.dev',
+    })
+  }
+
+  // v2 以降のバージョンリンクを作成
+  for (let i = viteMajorVersion - 1; i >= 2; i--) {
+    links.push({
+      text: `Vite ${i} ドキュメント`,
+      link: `https://v${i}.vite.dev`,
+    })
+  }
+
+  return links
 })()
 
 function inlineScript(file: string): HeadConfig {
@@ -244,21 +237,25 @@ export default defineConfig({
                 text: 'DEV Community',
                 link: 'https://dev.to/t/vite',
               },
-              {
-                text: '変更履歴',
-                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
-              },
-              {
-                text: '貢献ガイド',
-                link: 'https://github.com/vitejs/docs-ja/blob/main/CONTRIBUTING.md',
-              },
             ],
           },
         ],
       },
       {
-        text: 'バージョン',
-        items: versionLinks,
+        text: `v${viteVersion}`,
+        items: [
+          {
+            text: '変更履歴',
+            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+          },
+          {
+            text: '貢献ガイド',
+                link: 'https://github.com/vitejs/docs-ja/blob/main/CONTRIBUTING.md',
+          },
+          {
+            items: versionLinks,
+          },
+        ],
       },
     ],
 
@@ -337,7 +334,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'v6 からの移行',
+              text: `v${viteMajorVersion - 1} からの移行`,
               link: '/guide/migration',
             },
             {
