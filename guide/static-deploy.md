@@ -55,13 +55,25 @@ $ npm run preview
 
 ## GitHub Pages
 
-1. `vite.config.js` で `base` を正しく設定してください。
+1. **Vite の設定を更新**
+
+   `vite.config.js` で `base` を正しく設定してください。
 
    `https://<USERNAME>.github.io/` や、GitHub Pages 経由のカスタムドメイン（例 `www.example.com`）にデプロイする場合、`base` を `'/'` に設定します。デフォルトは `'/'` なので、設定から `base` を削除することもできます。
 
    `https://<USERNAME>.github.io/<REPO>/` にデプロイする場合（例: リポジトリーは `https://github.com/<USERNAME>/<REPO>`）、`base` を `'/<REPO>/'` と設定してください。
 
-2. リポジトリー設定ページにある GitHub Pages の設定から、デプロイ元を "GitHub Actions" にすることで、プロジェクトをビルドしてデプロイするワークフローを作成できます。npm を使用して依存関係をインストールし、ビルドするサンプルワークフローが提供されています:
+2. **GitHub Pages を有効化**
+
+   リポジトリーで **Settings → Pages** に移動します。**Build and deployment** の下にある **Source** ドロップダウンを開き、**GitHub Actions** を選択します。
+
+   Vite はデプロイにビルドステップが必要なため、GitHub は GitHub Actions の [ワークフロー](https://docs.github.com/ja/actions/about-github-actions/understanding-github-actions)を使用してサイトをデプロイするようになります。
+
+3. **ワークフローを作成**
+
+   リポジトリーの `.github/workflows/deploy.yml` に新しいファイルを作成します。前のステップから **"create your own"** をクリックすることもでき、その場合はスターターワークフローファイルが生成されます。
+
+   以下は、npm で依存関係をインストールし、サイトをビルドして、`main` ブランチに変更をプッシュするたびにデプロイするサンプルワークフローです:
 
    <<< ./static-deploy-github-pages.yaml#content[.github/workflows/deploy.yml]
 
