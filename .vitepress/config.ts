@@ -87,6 +87,7 @@ function inlineScript(file: string): HeadConfig {
 export default defineConfig({
   title: `Vite${additionalTitle}`,
   description: '次世代フロントエンドツール',
+  cleanUrls: true,
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
