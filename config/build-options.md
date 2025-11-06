@@ -189,28 +189,11 @@ export default defineConfig({
 
 - **型:** `boolean | { fileName?: string }`
 - **デフォルト:** `false`
+- **関連:** [License](/guide/features#license)
 
-`true` に設定すると、ビルドによってバンドルされたすべての依存関係のライセンスを含む `.vite/license.md` ファイルが生成されます。これをホストして、アプリで使用されている依存関係を表示および承認できます。`fileName` を渡すと、`outDir` からの相対パスでライセンスファイル名として使用されます。出力例は次のようになります:
+`true` に設定すると、ビルドによってバンドルされたすべての依存関係のライセンスを含む `.vite/license.md` ファイルが生成されます。
 
-```md
-# Licenses
-
-The app bundles dependencies which contain the following licenses:
-
-## dep-1 - 1.2.3 (CC0-1.0)
-
-CC0 1.0 Universal
-
-...
-
-## dep-2 - 4.5.6 (MIT)
-
-MIT License
-
-...
-```
-
-`fileName` が `.json` で終わる場合、代わりに生の JSON メタデータが生成され、さらなる処理に使用できます。たとえば:
+`fileName` を渡すと、`outDir` からの相対パスでライセンスファイル名として使用されます。これが `.json` で終わる場合、代わりに生の JSON メタデータが生成され、さらなる処理に使用できます。たとえば:
 
 ```json
 [
