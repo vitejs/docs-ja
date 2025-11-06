@@ -789,6 +789,42 @@ CSP をデプロイするには、Vite 内部の理由により、特定のデ�
 [`script-src`](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) に対して `data:` を許可してはいけません。任意のスクリプトのインジェクションを許してしまうことになります。
 :::
 
+## License
+
+Vite は [`build.license`](/config/build-options.md#build-license) オプションを使用して、ビルドで使用されるすべての依存関係のライセンスのファイルを生成できます。これをホストして、アプリで使用されている依存関係を表示および承認できます。
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+  },
+})
+```
+
+これにより、次のような出力の `.vite/license.md` ファイルが生成されます:
+
+```md
+# Licenses
+
+The app bundles dependencies which contain the following licenses:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+MIT License
+
+...
+```
+
+異なるパスでファイルを提供するには、たとえば `{ fileName: 'license.md' }` を渡すことで、`https://example.com/license.md` で提供されるようになります。詳細については、[`build.license`](/config/build-options.md#build-license) ドキュメントを参照してください。
+
 ## ビルドの最適化 {#build-optimizations}
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。
