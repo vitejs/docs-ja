@@ -212,27 +212,6 @@ export default defineConfig({
 ]
 ```
 
-::: tip
-ビルドされたコード内でライセンスファイルを参照したい場合は、`build.rollupOptions.output.banner` を使用してファイルの先頭にコメントを挿入できます。たとえば:
-
-```js twoslash [vite.config.js]
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  build: {
-    license: true,
-    rollupOptions: {
-      output: {
-        banner:
-          '/* See licenses of bundled dependencies at https://example.com/license.md */',
-      },
-    },
-  },
-})
-```
-
-:::
-
 ## build.manifest
 
 - **型:** `boolean | string`
