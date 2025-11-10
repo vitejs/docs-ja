@@ -9,10 +9,10 @@
     "lint": "textlint --format pretty-error \"**/*.md\""
   },
   "devDependencies": {
-    "@shikijs/vitepress-twoslash": "^3.14.0",
+    "@shikijs/vitepress-twoslash": "^3.15.0",
     "@type-challenges/utils": "^0.1.1",
-    "@types/express": "^5.0.4",
-    "@types/node": "^22.18.12",
+    "@types/express": "^5.0.5",
+    "@types/node": "^22.19.0",
     "feed": "^5.1.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.2.6",
@@ -25,9 +25,9 @@
     "vite": "^7.1.5",
     "vitepress": "^2.0.0-alpha.12",
     "vitepress-plugin-group-icons": "^1.6.5",
-    "vitepress-plugin-llms": "^1.8.1",
-    "vue": "^3.5.22",
-    "vue-tsc": "^3.1.2",
+    "vitepress-plugin-llms": "^1.9.1",
+    "vue": "^3.5.24",
+    "vue-tsc": "^3.1.3",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
@@ -36,7 +36,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.21.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
