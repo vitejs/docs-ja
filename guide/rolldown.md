@@ -36,7 +36,7 @@ Rolldown を搭載した Vite のバージョンは現在、`rolldown-vite` と�
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "vite": "^7.0.0", // [!code --]
     "vite": "npm:rolldown-vite@latest" // [!code ++]
   }
