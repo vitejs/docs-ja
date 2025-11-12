@@ -66,7 +66,6 @@ Vite サーバーには共有プラグインパイプラインがありますが
     }
   }
 ```
-```
 
 ## `hotUpdate` フック {#the-hotupdate-hook}
 
