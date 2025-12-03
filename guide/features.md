@@ -123,7 +123,6 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 - [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 ::: tip `skipLibCheck`
 Vite のスターターテンプレートでは依存関係の型チェックを避けるため、デフォルトで `"skipLibCheck": "true"` となっています。これは TypeScript の特定のバージョンや設定のみをサポートするように選択できるようにするためです。詳しくは [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688) を参照してください。
