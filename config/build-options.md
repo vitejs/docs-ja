@@ -8,7 +8,7 @@
 - **デフォルト:** `'baseline-widely-available'`
 - **関連:** [ブラウザーの互換性](/guide/build#browser-compatibility)
 
-最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'baseline-widely-available'` で、これは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available on 2025-05-01 に含まれるブラウザーを対象にします。具体的には `['chrome107', 'edge107', 'firefox104', 'safari16']` です。
+最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'baseline-widely-available'` で、これは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available on 2026-01-01 に含まれるブラウザーを対象にします。具体的には `['chrome111', 'edge111', 'firefox114', 'safari16.4']` です。
 
 もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、最小限のトランスパイルのみが実行されます。
 
