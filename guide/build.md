@@ -8,10 +8,10 @@
 
 <!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
-- Chrome >=107
-- Edge >=107
-- Firefox >=104
-- Safari >=16
+- Chrome >=111
+- Edge >=111
+- Firefox >=114
+- Safari >=16.4
 
 [`build.target` 設定オプション](/config/build-options.md#build-target)を介してカスタムターゲットを指定でき、最も低いターゲットは `es2015` です。より低いターゲットが設定された場合、Vite は[ネイティブ ESM の動的インポート](https://caniuse.com/es6-module-dynamic-import)と [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) に依存するため、以下の最小ブラウザサポート範囲が必要です:
 
