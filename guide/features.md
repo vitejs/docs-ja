@@ -98,6 +98,12 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
 :::
 
+#### `emitDecoratorMetadata`
+
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
+
+このオプションは部分的にのみサポートされています。完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators)を参照してください。
+
 #### `paths`
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig/#paths)
