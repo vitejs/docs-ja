@@ -1,25 +1,5 @@
 # v7 からの移行
 
-## 新機能
-
-::: tip 一時的なセクション
-
-このセクションは安定版リリース前にリリース記事に移動されます。
-
-:::
-
-### 組み込み tsconfig `paths` サポート
-
-Vite 8 は、[Oxc Resolver](https://oxc.rs/docs/guide/usage/resolver) をベースに、TypeScript の `paths` オプションの組み込みサポートを実装しました。この機能にはわずかなパフォーマンスコストがあり、[TypeScript チームからは推奨されていません](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.)ので、デフォルトでは有効になっていません。`resolve.tsconfigPaths` を `true` に設定することで有効にできます。
-
-最も近い親ディレクトリーにある `tsconfig.json` が使用されます。`tsconfig.json` の解決に関する詳細は、[機能ページ](/guide/features#typescript-compiler-options)を参照してください。
-
-### `emitDecoratorMetadata` サポート
-
-Vite 8 は、[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) をベースに、TypeScript の [`emitDecoratorMetadata` オプション](https://www.typescriptlang.org/tsconfig/#emitDecoratorMetadata)の組み込みサポートを実装しました。この機能は、`tsconfig.json` で `emitDecoratorMetadata` が `true` に設定されている場合、自動的に有効になります。
-
-この変換にはいくつかの制限があります。デコレーターメタデータの完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators)を参照してください。
-
 ## デフォルトブラウザーターゲットの変更
 
 `build.target` と `'baseline-widely-available'` のデフォルトブラウザー値がより新しいブラウザーバージョンに更新されました:
