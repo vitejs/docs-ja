@@ -1,58 +1,397 @@
-# v6 からの移行
+# v7 からの移行
 
-## Node.js サポート
+## 新機能
 
-Vite は End of Life を迎えた Node.js 18 をサポートしなくなりました。Node.js 20.19+ / 22.12+ が必要です。
+::: tip 一時的なセクション
+
+このセクションは安定版リリース前にリリース記事に移動されます。
+
+:::
+
+### 組み込み tsconfig `paths` サポート
+
+Vite 8 は、[Oxc Resolver](https://oxc.rs/docs/guide/usage/resolver) をベースに、TypeScript の `paths` オプションの組み込みサポートを実装しました。この機能にはわずかなパフォーマンスコストがあり、[TypeScript チームからは推奨されていません](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.)ので、デフォルトでは有効になっていません。`resolve.tsconfigPaths` を `true` に設定することで有効にできます。
+
+最も近い親ディレクトリーにある `tsconfig.json` が使用されます。`tsconfig.json` の解決に関する詳細は、[機能ページ](/guide/features#typescript-compiler-options)を参照してください。
+
+### `emitDecoratorMetadata` サポート
+
+Vite 8 は、[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) をベースに、TypeScript の [`emitDecoratorMetadata` オプション](https://www.typescriptlang.org/tsconfig/#emitDecoratorMetadata)の組み込みサポートを実装しました。この機能は、`tsconfig.json` で `emitDecoratorMetadata` が `true` に設定されている場合、自動的に有効になります。
+
+この変換にはいくつかの制限があります。デコレーターメタデータの完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators)を参照してください。
 
 ## デフォルトブラウザーターゲットの変更
 
-`build.target` のデフォルトブラウザー値がより新しいブラウザーに更新されました。
+`build.target` と `'baseline-widely-available'` のデフォルトブラウザー値がより新しいブラウザーバージョンに更新されました:
 
-- Chrome 87 → 107
-- Edge 88 → 107
-- Firefox 78 → 104
-- Safari 14.0 → 16.0
+- Chrome 107 → 111
+- Edge 107 → 111
+- Firefox 104 → 114
+- Safari 16.0 → 16.4
 
-これらのブラウザーバージョンは、2025 年 5 月 1 日時点の [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available 機能セットに準拠します。つまり、これらはすべて 2022 年 11 月 1 日より前にリリースされたものです。
+これらのブラウザーバージョンは、2026 年 1 月 1 日時点の [Baseline Widely Available](https://web-platform-dx.github.io/web-features/) 機能セットに準拠します。つまり、これらはすべて約 2 年半前にリリースされたものです。
 
-Vite 5 では、デフォルトターゲットは `'modules'` という名前でしたが、これは利用できなくなりました。代わりに、新しいデフォルトターゲット `'baseline-widely-available'` が導入されました。
+## Rolldown
+
+Vite 8 は、esbuild と Rollup の代わりに Rolldown と Oxc ベースのツールを使用します。
+
+### 段階的移行
+
+`rolldown-vite` パッケージは、他の Vite 8 の変更を含まない、Rolldown を使った Vite 7 を実装しています。これは Vite 8 への移行の中間ステップとして使用できます。Vite 7 から `rolldown-vite` への切り替えについては、Vite 7 ドキュメントの [Rolldown 統合ガイド](https://v7.vite.dev/guide/rolldown)を参照してください。
+
+`rolldown-vite` から Vite 8 に移行する場合は、`package.json` の依存関係の変更を元に戻し、Vite 8 に更新してください:
+
+```json
+{
+  "dependencies": {
+    "vite": "npm:rolldown-vite@7.2.2" // [!code --]
+    "vite": "^8.0.0" // [!code ++]
+  }
+}
+```
+
+### 依存関係オプティマイザーが Rolldown を使用するように
+
+esbuild の代わりに Rolldown が依存関係の最適化に使用されるようになりました。Vite は後方互換性のために [`optimizeDeps.esbuildOptions`](/config/dep-optimization-options#optimizedeps-esbuildoptions) を引き続きサポートし、自動的に [`optimizeDeps.rolldownOptions`](/config/dep-optimization-options#optimizedeps-rolldownoptions) に変換します。`optimizeDeps.esbuildOptions` は非推奨となり、将来削除される予定です。`optimizeDeps.rolldownOptions` への移行を推奨します。
+
+以下のオプションが自動的に変換されます:
+
+- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> `rolldownOptions.output.minify`
+- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> `rolldownOptions.treeshake`
+- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> `rolldownOptions.transform.define`
+- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> `rolldownOptions.moduleTypes`
+- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> `!rolldownOptions.resolve.symlinks`
+- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> `rolldownOptions.resolve.extensions`
+- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> `rolldownOptions.resolve.mainFields`
+- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> `rolldownOptions.resolve.conditionNames`
+- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> `rolldownOptions.output.keepNames`
+- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> `rolldownOptions.platform`
+- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> `rolldownOptions.plugins`（部分的サポート）
+
+<!-- TODO: add link to rolldownOptions.* -->
+
+互換性レイヤーによって設定されたオプションは `configResolved` フックから取得できます:
+
+```js
+const plugin = {
+  name: 'log-config',
+  configResolved(config) {
+    console.log('options', config.optimizeDeps.rolldownOptions)
+  },
+},
+```
+
+### Oxc による JavaScript 変換
+
+esbuild の代わりに Oxc が JavaScript 変換に使用されるようになりました。Vite は後方互換性のために [`esbuild`](/config/shared-options#esbuild) オプションを引き続きサポートし、自動的に [`oxc`](/config/shared-options#oxc) に変換します。`esbuild` は非推奨となり、将来削除される予定です。`oxc` への移行を推奨します。
+
+以下のオプションが自動的に変換されます:
+
+- `esbuild.jsxInject` -> `oxc.jsxInject`
+- `esbuild.include` -> `oxc.include`
+- `esbuild.exclude` -> `oxc.exclude`
+- [`esbuild.jsx`](https://esbuild.github.io/api/#jsx) -> [`oxc.jsx`](https://oxc.rs/docs/guide/usage/transformer/jsx)
+  - `esbuild.jsx: 'preserve'` -> `oxc.jsx: 'preserve'`
+  - `esbuild.jsx: 'automatic'` -> `oxc.jsx: { runtime: 'automatic' }`
+    - [`esbuild.jsxImportSource`](https://esbuild.github.io/api/#jsx-import-source) -> `oxc.jsx.importSource`
+  - `esbuild.jsx: 'transform'` -> `oxc.jsx: { runtime: 'classic' }`
+    - [`esbuild.jsxFactory`](https://esbuild.github.io/api/#jsx-factory) -> `oxc.jsx.pragma`
+    - [`esbuild.jsxFragment`](https://esbuild.github.io/api/#jsx-fragment) -> `oxc.jsx.pragmaFrag`
+  - [`esbuild.jsxDev`](https://esbuild.github.io/api/#jsx-dev) -> `oxc.jsx.development`
+  - [`esbuild.jsxSideEffects`](https://esbuild.github.io/api/#jsx-side-effects) -> `oxc.jsx.pure`
+- [`esbuild.define`](https://esbuild.github.io/api/#define) -> [`oxc.define`](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)
+- [`esbuild.banner`](https://esbuild.github.io/api/#banner) -> transform フックを使用したカスタムプラグイン
+- [`esbuild.footer`](https://esbuild.github.io/api/#footer) -> transform フックを使用したカスタムプラグイン
+
+[`esbuild.supported`](https://esbuild.github.io/api/#supported) オプションは Oxc でサポートされていません。このオプションが必要な場合は、[oxc-project/oxc#15373](https://github.com/oxc-project/oxc/issues/15373) を参照してください。
+
+互換性レイヤーによって設定されたオプションは `configResolved` フックから取得できます:
+
+```js
+const plugin = {
+  name: 'log-config',
+  configResolved(config) {
+    console.log('options', config.oxc)
+  },
+},
+```
+
+<!-- TODO: add link to rolldownOptions.output.minify -->
+
+現在、Oxc トランスフォーマーはネイティブデコレーターの低レベル化をサポートしていません。これは仕様の進展を待っているためです（[oxc-project/oxc#9170](https://github.com/oxc-project/oxc/issues/9170) を参照）。
+
+:::: details ネイティブデコレーターを低レベル化する回避策
+
+当面の間、[Babel](https://babeljs.io/) または [SWC](https://swc.rs/) を使用してネイティブデコレーターを低レベル化できます。SWC は Babel より高速ですが、esbuild がサポートする**最新のデコレーター仕様をサポートしていません**。
+
+デコレーター仕様は stage 3 に到達して以来、複数回更新されています。各ツールがサポートしているバージョンは以下の通りです:
+
+- `"2023-11"`（esbuild、TypeScript 5.4+ および Babel がこのバージョンをサポート）
+- `"2023-05"`（TypeScript 5.2+ がこのバージョンをサポート）
+- `"2023-01"`（TypeScript 5.0+ がこのバージョンをサポート）
+- `"2022-03"`（SWC がこのバージョンをサポート）
+
+各バージョン間の違いについては、[Babel デコレーターバージョンガイド](https://babeljs.io/docs/babel-plugin-proposal-decorators#version)を参照してください。
+
+**Babel を使用する場合:**
+
+::: code-group
+
+```bash [npm]
+$ npm install -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+```
+
+```bash [Yarn]
+$ yarn add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+```
+
+```bash [pnpm]
+$ pnpm add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+```
+
+```bash [Bun]
+$ bun add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+```
+
+```bash [Deno]
+$ deno add -D npm:@rollup/plugin-babel npm:@babel/plugin-proposal-decorators
+```
+
+:::
+
+```ts [vite.config.ts]
+import { defineConfig, withFilter } from 'vite'
+import { babel } from '@rollup/plugin-babel'
+
+export default defineConfig({
+  plugins: [
+    withFilter(
+      babel({
+        configFile: false,
+        plugins: [
+          ['@babel/plugin-proposal-decorators', { version: '2023-11' }],
+        ],
+      }),
+      // ファイルにデコレーターが含まれている場合のみこの変換を実行する
+      { transform: { code: '@' } },
+    ),
+  ],
+})
+```
+
+**SWC を使用する場合:**
+
+::: code-group
+
+```bash [npm]
+$ npm install -D @rollup/plugin-swc @swc/core
+```
+
+```bash [Yarn]
+$ yarn add -D @rollup/plugin-swc @swc/core
+```
+
+```bash [pnpm]
+$ pnpm add -D @rollup/plugin-swc @swc/core
+```
+
+```bash [Bun]
+$ bun add -D @rollup/plugin-swc @swc/core
+```
+
+```bash [Deno]
+$ deno add -D npm:@rollup/plugin-swc npm:@swc/core
+```
+
+:::
+
+```js
+import { defineConfig, withFilter } from 'vite'
+
+export default defineConfig({
+  // ...
+  plugins: [
+    withFilter(
+      swc({
+        swc: {
+          jsc: {
+            parser: { decorators: true, decoratorsBeforeExport: true },
+            // 注意: SWC はまだ '2023-11' バージョンをサポートしていません
+            transform: { decoratorVersion: '2022-03' },
+          },
+        },
+      }),
+      // ファイルにデコレーターが含まれている場合のみこの変換を実行する
+      { transform: { code: '@' } },
+    ),
+  ],
+})
+```
+
+::::
+
+#### esbuild フォールバック
+
+`esbuild` は Vite で直接使用されなくなり、オプションの依存関係となりました。`transformWithEsbuild` 関数を使用するプラグインを使用している場合、`esbuild` を `devDependency` としてインストールする必要があります。`transformWithEsbuild` 関数は非推奨となり、将来削除される予定です。代わりに新しい `transformWithOxc` 関数への移行を推奨します。
+
+### Oxc による JavaScript ミニファイ
+
+esbuild の代わりに Oxc Minifier が JavaScript のミニファイに使用されるようになりました。非推奨の [`build.minify: 'esbuild'`](/config/build-options#minify) オプションを使用して esbuild に戻すことができます。この設定オプションは将来削除される予定で、Vite は esbuild に直接依存しなくなったため、`esbuild` を `devDependency` としてインストールする必要があります。
+
+ミニファイの動作を制御するために `esbuild.minify*` オプションを使用していた場合、代わりに `build.rolldownOptions.output.minify` を使用できます。`esbuild.drop` オプションを使用していた場合、代わりに [`build.rolldownOptions.output.minify.compress.drop*` オプション](https://oxc.rs/docs/guide/usage/minifier/dead-code-elimination)を使用できます。
+
+プロパティマングリングおよび関連オプション（[`mangleProps`、`reserveProps`、`mangleQuoted`、`mangleCache`](https://esbuild.github.io/api/#mangle-props)）は Oxc でサポートされていません。これらのオプションが必要な場合は、[oxc-project/oxc#15375](https://github.com/oxc-project/oxc/issues/15375) を参照してください。
+
+esbuild と Oxc Minifier はソースコードについてわずかに異なる仮定をします。ミニファイアがコードの破損を引き起こしていると思われる場合、これらの仮定をここで比較できます:
+
+- [esbuild ミニファイの仮定](https://esbuild.github.io/api/#minify-considerations)
+- [Oxc Minifier の仮定](https://oxc.rs/docs/guide/usage/minifier.html#assumptions)
+
+JavaScript アプリでミニファイに関連する問題を見つけた場合は、報告してください。
+
+### Lightning CSS による CSS ミニファイ
+
+[Lightning CSS](https://lightningcss.dev/) がデフォルトで CSS のミニファイに使用されるようになりました。[`build.cssMinify: 'esbuild'`](/config/build-options#cssminify) オプションを使用して esbuild に戻すことができます。ただし、`esbuild` を `devDependency` としてインストールする必要があります。
+
+Lightning CSS はより優れた構文の低レベル化をサポートしており、CSS バンドルサイズがわずかに増加する可能性があります。
+
+### 一貫した CommonJS 相互運用
+
+CommonJS (CJS) モジュールからの `default` インポートが一貫した方法で処理されるようになりました。
+
+以下の条件のいずれかに一致する場合、`default` インポートはインポート先 CJS モジュールの `module.exports` 値になります。それ以外の場合、`default` インポートはインポート先 CJS モジュールの `module.exports.default` 値になります:
+
+- インポーターが `.mjs` または `.mts` です。
+- インポーターの最も近い `package.json` の `type` フィールドが `module` に設定されています。
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+
+::: details 以前の動作
+
+開発時、以下の条件のいずれかに一致する場合、`default` インポートはインポート先 CJS モジュールの `module.exports` 値になります。それ以外の場合、`default` インポートはインポート先 CJS モジュールの `module.exports.default` 値になります:
+
+- _インポーターが依存関係の最適化に含まれている_かつ `.mjs` または `.mts` です。
+- _インポーターが依存関係の最適化に含まれている_かつインポーターの最も近い `package.json` の `type` フィールドが `module` に設定されています。
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+
+ビルド時の条件は以下の通りでした:
+
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+- _`module.exports` の `default` プロパティが存在しない_。
+
+（[`build.commonjsOptions.defaultIsModuleExports`](https://github.com/rollup/plugins/tree/master/packages/commonjs#defaultismoduleexports) がデフォルトの `'auto'` から変更されていないと仮定）
+
+:::
+
+この問題の詳細については、Rolldown のドキュメントを参照してください: [Ambiguous `default` import from CJS modules - Bundling CJS | Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules)。
+
+この変更により、CJS モジュールをインポートする既存のコードが破損する可能性があります。非推奨の `legacy.inconsistentCjsInterop: true` オプションを使用して、一時的に以前の動作を復元できます。この変更の影響を受けるパッケージを見つけた場合は、パッケージ作成者に報告するか、プルリクエストを送信してください。作成者が文脈を理解できるように、上記の Rolldown ドキュメントへのリンクを必ず含めてください。
+
+### フォーマット推測を使用したモジュール解決の削除
+
+`package.json` に `browser` と `module` フィールドの両方が存在する場合、Vite はファイルの内容に基づいてフィールドを解決し、ブラウザー用の ESM ファイルを選択していました。これは、一部のパッケージが Node.js 用の ESM ファイルを指すために `module` フィールドを使用し、他の一部のパッケージがブラウザー用の UMD ファイルを指すために `browser` フィールドを使用していたために導入されました。現代的な `exports` フィールドがこの問題を解決し、多くのパッケージで採用されているため、Vite はこのヒューリスティックを使用せず、常に [`resolve.mainFields`](/config/shared-options#resolve-mainfields) オプションの順序を尊重するようになりました。この動作に依存していた場合は、[`resolve.alias`](/config/shared-options#resolve-alias) オプションを使用してフィールドを目的のファイルにマッピングするか、パッケージマネージャーでパッチを適用できます（例: `patch-package`、`pnpm patch`）。
+
+### 外部化されたモジュールの Require 呼び出し
+
+外部化されたモジュールの `require` 呼び出しは、`import` ステートメントに変換されず、`require` 呼び出しとして保持されるようになりました。これは `require` 呼び出しのセマンティクスを保持するためです。それらを `import` ステートメントに変換したい場合は、`vite` から再エクスポートされている Rolldown の組み込み `esmExternalRequirePlugin` を使用できます。
+
+```js
+import { defineConfig, esmExternalRequirePlugin } from 'vite'
+
+export default defineConfig({
+  // ...
+  plugins: [
+    esmExternalRequirePlugin({
+      external: ['react', 'vue', /^node:/],
+    }),
+  ],
+})
+```
+
+詳細については、Rolldown のドキュメントを参照してください: [`require` external modules - Bundling CJS | Rolldown](https://rolldown.rs/in-depth/bundling-cjs#require-external-modules)。
+
+### UMD / IIFE での `import.meta.url`
+
+`import.meta.url` は UMD / IIFE 出力フォーマットでポリフィルされなくなりました。デフォルトで `undefined` に置き換えられます。以前の動作を希望する場合は、`build.rolldownOptions.output.intro` オプションとともに `define` オプションを使用できます。詳細については、Rolldown のドキュメントを参照してください: [Well-known `import.meta` properties - Non ESM Output Formats | Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties)。
+
+### `build.rollupOptions.watch.chokidar` オプションの削除
+
+`build.rollupOptions.watch.chokidar` オプションが削除されました。`build.rolldownOptions.watch.notify` オプションに移行してください。
+
+<!-- TODO: add link to rolldownOptions.watch.notify -->
+
+### `build.rollupOptions.output.manualChunks` の非推奨化
+
+`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な `advancedChunks` オプションがあります。`advancedChunks` の詳細については、Rolldown のドキュメントを参照してください: [Advanced Chunks - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
+
+<!-- TODO: add link to rolldownOptions.output.advancedChunks -->
+
+### モジュールタイプのサポートと自動検出
+
+_この変更はプラグイン作成者にのみ影響します。_
+
+Rolldown は、[esbuild の `loader` オプション](https://esbuild.github.io/api/#loader)と同様に、[モジュールタイプ](https://rolldown.rs/guide/notable-features#module-types)の実験的サポートを持っています。このため、Rolldown は解決された ID の拡張子に基づいてモジュールタイプを自動的に設定します。`load` または `transform` フックで他のモジュールタイプから JavaScript にコンテンツを変換する場合、返される値に `moduleType: 'js'` を追加する必要があるかもしれません:
+
+```js
+const plugin = {
+  name: 'txt-loader',
+  load(id) {
+    if (id.endsWith('.txt')) {
+      const content = fs.readFile(id, 'utf-8')
+      return {
+        code: `export default ${JSON.stringify(content)}`,
+        moduleType: 'js', // [!code ++]
+      }
+    }
+  },
+}
+```
+
+### その他の関連する非推奨化
+
+以下のオプションは非推奨となり、将来削除される予定です:
+
+- `build.rollupOptions`: `build.rolldownOptions` に名前変更
+- `worker.rollupOptions`: `worker.rolldownOptions` に名前変更
+- `build.commonjsOptions`: 現在は no-op
 
 ## 全般的な変更
 
-### Sass レガシー API サポートの削除
-
-予定どおり、Sass レガシー API のサポートが削除されました。Vite はモダン API のみをサポートします。`css.preprocessorOptions.sass.api` / `css.preprocessorOptions.scss.api` オプションを削除できます。
-
 ## 非推奨機能の削除
 
-- `splitVendorChunkPlugin`（v5.2.7 で非推奨化）
-  - このプラグインは、Vite v2.9 への移行を容易にするために元々提供されていました。
-  - 必要に応じて、`build.rollupOptions.output.manualChunks` オプションを使用してチャンクの動作を制御できます。
-- `transformIndexHtml` のフック レベル `enforce` / `transform`（v4.0.0 で非推奨化）
-  - これは、インターフェイスを [Rollup のオブジェクトフック](https://rollupjs.org/plugin-development/#build-hooks:~:text=Instead%20of%20a%20function%2C%20hooks%20can%20also%20be%20objects.)に合わせるために変更されました。
-  - `enforce` の代わりに `order` を使用し、`transform` の代わりに `handler` を使用してください。
+**_TODO: この変更はまだ実装されていませんが、安定版リリース前に実装されます。_**
 
 ## 高度な内容
 
-少数のユーザーにのみ影響するその他の重大な変更があります。
+これらの重大な変更は、少数のユースケースにのみ影響すると予想されます:
 
-- [[#19979] chore: declare version range for peer dependencies](https://github.com/vitejs/vite/pull/19979)
-  - CSS プリプロセッサーのピア依存関係のバージョン範囲を指定しました。
-- [[#20013] refactor: remove no-op `legacy.proxySsrExternalModules`](https://github.com/vitejs/vite/pull/20013)
-  - `legacy.proxySsrExternalModules` プロパティは Vite 6 以降効果がありませんでした。削除されました。
-- [[#19985] refactor!: remove deprecated no-op type only properties](https://github.com/vitejs/vite/pull/19985)
-  - 次の未使用プロパティが削除されました：`ModuleRunnerOptions.root`、`ViteDevServer._importGlobMap`、`ResolvePluginOptions.isFromTsImporter`、`ResolvePluginOptions.getDepsOptimizer`、`ResolvePluginOptions.shouldExternalize`、`ResolvePluginOptions.ssrConfig`
-- [[#19986] refactor: remove deprecated env api properties](https://github.com/vitejs/vite/pull/19986)
-  - これらのプロパティは最初から非推奨でした。削除されました。
-- [[#19987] refactor!: remove deprecated `HotBroadcaster` related types](https://github.com/vitejs/vite/pull/19987)
-  - これらの型は、現在非推奨となっている Runtime API の一部として導入されました。削除されました：`HMRBroadcaster`、`HMRBroadcasterClient`、`ServerHMRChannel`、`HMRChannel`
-- [[#19996] fix(ssr)!: don't access `Object` variable in ssr transformed code](https://github.com/vitejs/vite/pull/19996)
-  - `__vite_ssr_exportName__` がモジュールランナーランタイムコンテキストに必要になりました。
-- [[#20045] fix: treat all `optimizeDeps.entries` values as globs](https://github.com/vitejs/vite/pull/20045)
-  - `optimizeDeps.entries` は、リテラル文字列パスを受け取らなくなりました。代わりに、常に glob を受け取ります。
-- [[#20222] feat: apply some middlewares before `configureServer` hook](https://github.com/vitejs/vite/pull/20222)、[[#20224] feat: apply some middlewares before `configurePreviewServer` hook](https://github.com/vitejs/vite/pull/20224)
-  - 一部のミドルウェアが `configureServer` / `configurePreviewServer` フックの前に適用されるようになりました。特定のルートに [`server.cors`](/config/server-options.md#server-cors) / [`preview.cors`](/config/preview-options.md#preview-cors) オプションが適用されることを期待しない場合、レスポンスから関連するヘッダーを削除してください。
+- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/5726（nuxt、qwik に影響）
+- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/3403（sveltekit に影響）
+- **[TODO: これは安定版リリース前に修正されます]** 事前ビルドチャンク出力機能の欠如により、レガシーチャンクがチャンクファイルではなくアセットファイルとして出力されます（[rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)）。これは、チャンク関連のオプションがレガシーチャンクに適用されず、マニフェストファイルにレガシーチャンクがチャンクファイルとして含まれないことを意味します。
+- **[TODO: これは安定版リリース前に修正されます]** リゾルバーキャッシュが Vitest のマイナーケースを破壊します（[rolldown-vite#466](https://github.com/vitejs/rolldown-vite/issues/466)、[vitest#8754](https://github.com/vitest-dev/vitest/issues/8754#issuecomment-3441115032)）
+- **[TODO: これは安定版リリース前に修正されます]** リゾルバーが yarn pnp で動作しません（[rolldown-vite#324](https://github.com/vitejs/rolldown-vite/issues/324)、[rolldown-vite#392](https://github.com/vitejs/rolldown-vite/issues/392)）
+- **[TODO: これは安定版リリース前に修正されます]** ネイティブプラグインの順序の問題（[rolldown-vite#373](https://github.com/vitejs/rolldown-vite/issues/373)）
+- **[TODO: これは安定版リリース前に修正されます]** `@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
+- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/3403
+- [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) はまだサポートされていません（[rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365)）
+- `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
+- `bundle` オブジェクトの変更（`bundle` は `generateBundle` / `writeBundle` フックで渡されるオブジェクトで、`build` 関数によって返されます）:
+  - `bundle[foo]` への代入はサポートされていません。これは Rollup でも推奨されていません。代わりに `this.emitFile()` を使用してください。
+  - フック間で参照が共有されません（[rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410)）
+  - `structuredClone(bundle)` が `DataCloneError: #<Object> could not be cloned` でエラーになります。これはサポートされなくなりました。代わりに `structuredClone({ ...bundle })` でクローンしてください。（[rolldown-vite#128](https://github.com/vitejs/rolldown-vite/issues/128)）
+- Rollup のすべての並列フックは順次フックとして動作します。詳細は [Rolldown のドキュメント](https://rolldown.rs/apis/plugin-api#sequential-hook-execution)を参照してください。
+- `"use strict";` が時々注入されません。詳細は [Rolldown のドキュメント](https://rolldown.rs/in-depth/directives)を参照してください。
+- plugin-legacy で ES5 より低いレベルへの変換はサポートされていません（[rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452)）
+- `build.target` オプションに同じブラウザーの複数のバージョンを渡すとエラーになります: esbuild は最新バージョンを選択しますが、これはおそらく意図したものではありません。
+- Rolldown によるサポートの欠如: 以下の機能は Rolldown でサポートされておらず、Vite でもサポートされなくなりました。
+  - `build.rollupOptions.output.format: 'system'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)）
+  - `build.rollupOptions.output.format: 'amd'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2528)）
+  - TypeScript レガシー名前空間の完全サポート（[oxc-project/oxc#14227](https://github.com/oxc-project/oxc/issues/14227)）
+  - `shouldTransformCachedModule` フック（[rolldown#4389](https://github.com/rolldown/rolldown/issues/4389)）
+  - `resolveImportMeta` フック（[rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)）
+  - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
+  - `resolveFileUrl` フック
+- `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parse` / `parseAsync` 関数に置き換えられ、非推奨となりました。
 
-## v5 からの移行
+## v6 からの移行
 
-まず、Vite v6 ドキュメントの[v5 からの移行ガイド](https://v6.vite.dev/guide/migration.html)をチェックし、アプリを Vite 6 に移植するために必要な変更を確認してから、このページの変更を進めてください。
+まず、Vite v7 ドキュメントの [v6 からの移行ガイド](https://v7.vite.dev/guide/migration)をチェックし、アプリを Vite 7 に移植するために必要な変更を確認してから、このページの変更を進めてください。

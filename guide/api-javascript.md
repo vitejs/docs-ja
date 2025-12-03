@@ -389,6 +389,21 @@ function normalizePath(id: string): string
 
 Vite プラグイン間で相互運用するためにパスを正規化します。
 
+## `transformWithOxc`
+
+**型シグネチャー:**
+
+```ts
+async function transformWithOxc(
+  code: string,
+  filename: string,
+  options?: OxcTransformOptions,
+  inMap?: object,
+): Promise<Omit<OxcTransformResult, 'errors'> & { warnings: string[] }>
+```
+
+[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) で JavaScript か TypeScript を変換します。Vite の内部での Oxc Transformer の変換に合わせたいプラグインにとって有用です。
+
 ## `transformWithEsbuild`
 
 **型シグネチャー:**
@@ -401,6 +416,8 @@ async function transformWithEsbuild(
   inMap?: object,
 ): Promise<ESBuildTransformResult>
 ```
+
+**非推奨:** 代わりに `transformWithOxc` を使用してください。
 
 esbuild で JavaScript か TypeScript を変換します。Vite の内部での esbuild の変換に合わせたいプラグインにとって有用です。
 

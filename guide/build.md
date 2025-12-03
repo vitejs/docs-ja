@@ -50,23 +50,25 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ## ビルドのカスタマイズ
 
-ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rollup options](https://rollupjs.org/configuration-options/) を `build.rollupOptions` で直接調整することができます:
+ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rolldown options](https://rollupjs.org/configuration-options/) を `build.rolldownOptions` で直接調整することができます:
+
+<!-- TODO: update the link above and below to Rolldown's documentation -->
 
 ```js [vite.config.js]
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       // https://rollupjs.org/configuration-options/
     },
   },
 })
 ```
 
-例えば、ビルド時にのみ適用されるプラグインを使って複数の Rollup 出力を指定することができます。
+例えば、ビルド時にのみ適用されるプラグインを使って複数の Rolldown 出力を指定することができます。
 
 ## チャンク戦略
 
-チャンクの分割方法は `build.rollupOptions.output.manualChunks` で設定できます（[Rollup ドキュメント](https://rollupjs.org/configuration-options/#output-manualchunks)参照）。フレームワークを使用する場合は、チャンクの分割方法の構成についてそのフレームワークのドキュメントを参照してください。
+チャンクの分割方法は `build.rolldownOptions.output.advancedChunks` で設定できます（[Rolldown ドキュメント](https://rolldown.rs/in-depth/advanced-chunks)参照）。フレームワークを使用する場合は、チャンクの分割方法の構成についてそのフレームワークのドキュメントを参照してください。
 
 ## 読み込みエラーのハンドリング
 
@@ -83,6 +85,8 @@ window.addEventListener('vite:preloadError', (event) => {
 ## ファイル変更時のリビルド
 
 `vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
+
+<!-- TODO: update the link above to Rolldown's documentation -->
 
 ```js [vite.config.js]
 export default defineConfig({
@@ -123,7 +127,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         nested: resolve(__dirname, 'nested/index.html'),
@@ -135,7 +139,7 @@ export default defineConfig({
 
 別のルートを指定した場合でも、入力パスを解決する際には `__dirname` が vite.config.js ファイルのフォルダーになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリーを追加する必要があります。
 
-HTML ファイルの場合、Vite は `rollupOptions.input` オブジェクトのエントリーに指定された名前を無視し、代わりに dist フォルダーに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
+HTML ファイルの場合、Vite は `rolldownOptions.input` オブジェクトのエントリーに指定された名前を無視し、代わりに dist フォルダーに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
 
 ## ライブラリーモード {#library-mode}
 
@@ -160,7 +164,7 @@ export default defineConfig({
       // 適切な拡張子が追加されます
       fileName: 'my-lib'
     },
-    rollupOptions: {
+    rolldownOptions: {
       // ライブラリーにバンドルされるべきではない依存関係を
       // 外部化するようにします
       external: ['vue'],
@@ -306,7 +310,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 :::
 
 ::: warning 高度な使い方
-ライブラリーモードには、ブラウザー向けのライブラリーや JS フレームワークライブラリーのためのシンプルで opinionated な設定が含まれています。非ブラウザーライブラリーをビルドする場合、または高度なビルドフローを必要とする場合は、[Rollup](https://rollupjs.org) または [esbuild](https://esbuild.github.io) を直接使用できます。
+ライブラリーモードには、ブラウザー向けのライブラリーや JS フレームワークライブラリーのためのシンプルで opinionated な設定が含まれています。非ブラウザーライブラリーをビルドする場合、または高度なビルドフローを必要とする場合は、[tsdown](https://tsdown.dev/) または [Rolldown](https://rolldown.rs/) を直接使用できます。
 :::
 
 ## 高度なベースパスの設定 {#advanced-base-options}
