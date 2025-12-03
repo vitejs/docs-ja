@@ -22,12 +22,12 @@
 事前に `lodash-es` を単一のモジュールにバンドルすることにより HTTP リクエストは 1 つだけで済むようになりました。
 
 ::: tip 注意
-依存関係の事前バンドルは開発モードでのみ適用され、依存関係を ESM に変換するために `esbuild` を使用します。本番ビルドでは、代わりに `@rollup/plugin-commonjs` が使用されます。
+依存関係の事前バンドルは開発モードでのみ適用されます。
 :::
 
 ## 依存関係の自動検出
 
-既存のキャッシュが見つからない場合、Vite はソースコードをクロールし、依存関係のインポート（すなわち、`node_modules` から解決されることを期待されている "bare imports"）を自動的に検出します。そして、検出されたインポートを事前バンドルのエントリーポイントとして使用します。事前バンドルは `esbuild` で実行されるので、例のごとく非常に高速です。
+既存のキャッシュが見つからない場合、Vite はソースコードをクロールし、依存関係のインポート（すなわち、`node_modules` から解決されることを期待されている "bare imports"）を自動的に検出します。そして、検出されたインポートを事前バンドルのエントリーポイントとして使用します。事前バンドルは [Rolldown](https://rolldown.rs/) で実行されるので、例のごとく非常に高速です。
 
 サーバーを起動したあと、キャッシュにない新しい依存関係のインポートに遭遇した場合は、Vite は依存関係の事前バンドルを再実行し、必要に応じてページをリロードします。
 
@@ -35,7 +35,7 @@
 
 モノレポの設定では、依存関係は同じリポジトリーからのリンクされたパッケージの可能性があります。Vite は `node_modules` から解決されない依存関係を自動的に検出し、リンクされた依存関係をソースコードとして扱います。リンクされた依存関係をバンドルしようとはせず、代わりにリンクされた依存関係のリストを分析します。
 
-ただしこの場合、リンクされた依存関係が ESM としてエクスポートされている必要があります。そうでない場合は、[`optimizeDeps.include`](/config/dep-optimization-options.md#optimizedeps-include) と [`build.commonjsOptions.include`](/config/build-options.md#build-commonjsoptions) に依存関係を追加して、設定することができます。
+ただしこの場合、リンクされた依存関係が ESM としてエクスポートされている必要があります。そうでない場合は、[`optimizeDeps.include`](/config/dep-optimization-options.md#optimizedeps-include) に依存関係を追加して、設定することができます。
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -43,11 +43,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   optimizeDeps: {
     include: ['linked-dep'],
-  },
-  build: {
-    commonjsOptions: {
-      include: [/linked-dep/, /node_modules/],
-    },
   },
 })
 ```
@@ -62,7 +57,9 @@ export default defineConfig({
 
 これには、`include` と `exclude` の両方が使用できます。依存関係が大きい（多くの内部モジュールがある）場合や、CommonJS の場合には、それを含める必要があります。依存関係が小さく、すでに有効な ESM の場合には、それを除外し、ブラウザーに直接読み込ませることができます。
 
-esbuild も [`optimizeDeps.esbuildOptions` オプション](/config/dep-optimization-options.md#optimizedeps-esbuildoptions)でさらにカスタマイズできます。例えば、esbuild のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにするか、[build `target`](https://esbuild.github.io/api/#target) を変更します。
+[`optimizeDeps.rolldownOptions` オプション](/config/dep-optimization-options.md#optimizedeps-rolldownoptions)でさらにカスタマイズすることもできます。例えば、Rolldown のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにするか、[build `target`](https://esbuild.github.io/api/#target) を変更します。
+
+<!-- TODO: 上記のリンクを Rolldown のドキュメントに更新 -->
 
 ## キャッシュ
 

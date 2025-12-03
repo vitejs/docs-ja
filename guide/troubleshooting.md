@@ -187,7 +187,7 @@ HMR が処理されているものの、それが循環依存関係の中にあ�
 
 ブラウザー拡張（広告ブロッカーなど）がそのリクエストをブロックしている場合にもエラーが発生することがあります。
 
-これらの拡張機能はファイル名に基づいてリクエストをブロックすることが多いため（例: `ad`、`track` を含む名前）、[`build.rollupOptions.output.chunkFileNames`](../config/build-options.md#build-rollupoptions)で異なるチャンク名を選択することで回避できる可能性があります。
+これらの拡張機能はファイル名に基づいてリクエストをブロックすることが多いため（例: `ad`、`track` を含む名前）、[`build.rolldownOptions.output.chunkFileNames`](../config/build-options.md#build-rolldownoptions)で異なるチャンク名を選択することで回避できる可能性があります。
 
 ## 最適化された依存関係
 

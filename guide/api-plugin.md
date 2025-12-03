@@ -4,6 +4,8 @@ Vite プラグインは、Rollup の優れた設計のプラグインインタ�
 
 **以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/plugin-development/)を読むことをお勧めします。**
 
+<!-- TODO: update the link above to Rolldown's documentation -->
+
 ## プラグインの作成
 
 Vite は、確立されたパターンをすぐに提供できるように努めているため、新しいプラグインを作成する前に、[機能ガイド](/guide/features)をチェックして、ニーズが満たされているかどうかを確認してください。また、[互換性のある Rollup プラグイン](https://github.com/rollup/awesome)と [Vite 固有のプラグイン](https://github.com/vitejs/awesome-vite#plugins)の両方の形式で、利用可能なコミュニティープラグインを確認してください。

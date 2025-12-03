@@ -51,6 +51,23 @@ export default defineConfig({
 });
 ```
 
+## optimizeDeps.rolldownOptions <NonInheritBadge />
+
+- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<``RolldownOptions`, `'input' | 'logLevel' | 'output'> & {
+  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
+    `RolldownOutputOptions`,
+    `'format' | 'sourcemap' | 'dir' | 'banner'>`
+`}`
+
+<!-- TODO: add link to RolldownOptions -->
+<!-- TODO: add link to RolldownOutputOptions -->
+
+依存関係のスキャンと最適化の際、Rolldown に渡すオプション。
+
+いくつかのオプションは、変更すると Vite の依存関係の最適化と互換性がなくなるため、省略されています。
+
+- `plugins` は Vite の依存関係プラグインとマージされます
+
 ## optimizeDeps.esbuildOptions <NonInheritBadge />
 <!-- textlint-disable -->
 - **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
@@ -64,13 +81,9 @@ export default defineConfig({
 | 'outbase'
 | 'outExtension'
 | 'metafile'>`
+- **非推奨**
 <!-- textlint-enable -->
-依存関係のスキャンと最適化の際、 esbuild に渡すオプション。
-
-いくつかのオプションは、変更すると Vite の依存関係の最適化と互換性がなくなるため、省略されています。
-
-- `external` も省略されています。Vite の `optimizeDeps.exclude` オプションを使用してください
-- `plugins` は Vite の依存関係プラグインとマージされます
+このオプションは内部的に `optimizeDeps.rolldownOptions` に変換されます。代わりに `optimizeDeps.rolldownOptions` を使用してください。
 
 ## optimizeDeps.force <NonInheritBadge />
 
