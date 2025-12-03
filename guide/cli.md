@@ -14,25 +14,25 @@ vite [root]
 
 #### オプション
 
-| オプション                     |                                                                                                       |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--host [host]`           | ホスト名を指定する（`string`）                                                                                   |
-| `--port <port>`           | ポートを指定する（`number`）                                                                                    |
-| `--open [path]`           | 起動時にブラウザーを起動する（`boolean \| string`）                                                                   |
-| `--cors`                  | CORS を有効化する（`boolean`）                                                                                |
-| `--strictPort`            | 指定されたポートが既に使用されている場合は終了する（`boolean`）                                                                  |
-| `--force`                 | オプティマイザーにキャッシュを無視して再バンドルさせる（`boolean`）                                                                |
-| `-c, --config <file>`     | 指定された設定ファイルを使用する（`string`）                                                                            |
-| `--base <path>`           | public のベースパス（デフォルト: `/`）（`string`）                                                                   |
-| `-l, --logLevel <level>`  | info \| warn \| error \| silent （`string`）                                                            |
-| `--clearScreen`           | ログを表示する際に画面をクリアするかどうか（`boolean`）                                                                      |
-| `--configLoader <loader>` | `bundle`: esbuild を使用して設定をバンドルする。`runner`（実験的機能）: その場で処理する。`native`（実験的機能）: ネイティブランタイムを使用して読み込む（デフォルト: `bundle`）                         |
-| `--profile`               | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください） |
-| `-d, --debug [feat]`      | デバッグログを表示する（`string \| boolean`）                                                                      |
-| `-f, --filter <filter>`   | デバッグログをフィルタリングする（`string`）                                                                            |
-| `-m, --mode <mode>`       | env モードを設定する（`string`）                                                                                |
-| `-h, --help`              | 利用可能な CLI オプションを表示する                                                                                  |
-| `-v, --version`           | バージョン番号を表示する                                                                                          |
+| オプション                     |                                                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--host [host]`           | ホスト名を指定する（`string`）                                                                                    |
+| `--port <port>`           | ポートを指定する（`number`）                                                                                     |
+| `--open [path]`           | 起動時にブラウザーを起動する（`boolean \| string`）                                                                    |
+| `--cors`                  | CORS を有効化する（`boolean`）                                                                                 |
+| `--strictPort`            | 指定されたポートが既に使用されている場合は終了する（`boolean`）                                                                   |
+| `--force`                 | オプティマイザーにキャッシュを無視して再バンドルさせる（`boolean`）                                                                 |
+| `-c, --config <file>`     | 指定された設定ファイルを使用する（`string`）                                                                             |
+| `--base <path>`           | public のベースパス（デフォルト: `/`）（`string`）                                                                    |
+| `-l, --logLevel <level>`  | info \| warn \| error \| silent （`string`）                                                             |
+| `--clearScreen`           | ログを表示する際に画面をクリアするかどうか（`boolean`）                                                                       |
+| `--configLoader <loader>` | `bundle`: Rolldown を使用して設定をバンドルする。`runner`（実験的機能）: その場で処理する。`native`（実験的機能）: ネイティブランタイムを使用して読み込む（デフォルト: `bundle`） |
+| `--profile`               | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）  |
+| `-d, --debug [feat]`      | デバッグログを表示する（`string \| boolean`）                                                                       |
+| `-f, --filter <filter>`   | デバッグログをフィルタリングする（`string`）                                                                             |
+| `-m, --mode <mode>`       | env モードを設定する（`string`）                                                                                 |
+| `-h, --help`              | 利用可能な CLI オプションを表示する                                                                                   |
+| `-v, --version`           | バージョン番号を表示する                                                                                           |
 
 ## ビルド
 
@@ -65,6 +65,7 @@ vite build [root]
 | `--base <path>`                | public のベースパス（デフォルト: `/`）（`string`）                                                                         |
 | `-l, --logLevel <level>`       | Info \| warn \| error \| silent （`string`）                                                                          |
 | `--clearScreen`                | ログを表示する際に画面をクリアするかどうか（`boolean`）                                                                |
+| `--configLoader <loader>`      | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）     |
 | `--profile`                    | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）|
 | `-d, --debug [feat]`           | デバッグログを表示する（`string \| boolean`）                                                                              |
 | `-f, --filter <filter>`        | デバッグログをフィルタリングする（`string`）                                                                                       |
@@ -95,6 +96,7 @@ vite optimize [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）                    |
 | `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`）         |
+| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）                     |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする（`string`）                      |
 | `-m, --mode <mode>`      | env モードを設定する（`string`）                                   |
@@ -125,6 +127,7 @@ vite preview [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）          |
 | `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）           |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`） |
+| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）               |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする（`string`）                        |
 | `-m, --mode <mode>`      | env モードを設定する（`string`）                             |

@@ -98,6 +98,20 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
 :::
 
+#### `emitDecoratorMetadata`
+
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
+
+このオプションは部分的にのみサポートされています。完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators)を参照してください。
+
+#### `paths`
+
+- [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig/#paths)
+
+`resolve.tsconfigPaths: true` を指定すると、`tsconfig.json` 内の `paths` オプションを使用してインポートを解決するように Vite に指示できます。
+
+この機能にはパフォーマンスコストがあり、[TypeScript チームはこのオプションを外部ツールの動作を変えるために使用することを推奨していない](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.)ことに注意してください。
+
 ### ビルド結果に影響するその他のコンパイラーオプション
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
@@ -109,7 +123,6 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 - [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 ::: tip `skipLibCheck`
 Vite のスターターテンプレートでは依存関係の型チェックを避けるため、デフォルトで `"skipLibCheck": "true"` となっています。これは TypeScript の特定のバージョンや設定のみをサポートするように選択できるようにするためです。詳しくは [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688) を参照してください。

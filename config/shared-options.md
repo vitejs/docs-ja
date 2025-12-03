@@ -40,7 +40,7 @@ config でこれを指定すると、**serve と build 両方**のデフォル�
 
 グローバル定数の置換を定義します。エントリーは開発時にグローバルで定義され、ビルド時に静的に置き換えられます。
 
-Vite は [esbuild の define](https://esbuild.github.io/api/#define) を使って置換を行うので、値の式は JSON でシリアライズ可能な値（null、boolean、数値、文字列、配列、オブジェクト）または単一の識別子を含む文字列でなければなりません。文字列以外の値の場合、Vite は自動的に `JSON.stringify` で文字列に変換します。
+Vite は [Oxc の define 機能](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) を使って置換を行うので、値の式は JSON でシリアライズ可能な値（null、boolean、数値、文字列、配列、オブジェクト）または単一の識別子を含む文字列でなければなりません。文字列以外の値の場合、Vite は自動的に `JSON.stringify` で文字列に変換します。
 
 **例:**
 
@@ -95,6 +95,8 @@ declare const __APP_VERSION__: string
 `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
 [エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement, customResolver }` の配列か、オブジェクトを指定します。
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
 
 ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
@@ -163,6 +165,13 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 
 - **関連:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+
+## resolve.tsconfigPaths
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+tsconfig パス解決機能を有効にします。`tsconfig.json` の `paths` オプションがインポートの解決に使用されます。詳細は [特徴](/guide/features.md#paths) を参照してください。
 
 ## html.cspNonce
 
@@ -353,36 +362,44 @@ Lightning CSS の設定。すべての変換オプションは [Lightning CSS �
 
 `'auto'` に設定すると、[データが 10kB より大きい](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger) 場合にのみデータが文字列化されます。
 
-## esbuild
+## oxc
 
-- **型:** `ESBuildOptions | false`
+- **型:** `OxcOptions | false`
 
-`ESBuildOptions` は [esbuild 自身の変換オプション](https://esbuild.github.io/api/#transform)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
+`OxcOptions` は [Oxc Transformer のオプション](https://oxc.rs/docs/guide/usage/transformer)を拡張します。最も一般的な使用例は、JSX のカスタマイズです:
 
 ```js
 export default defineConfig({
-  esbuild: {
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment',
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+    },
   },
 })
 ```
 
-デフォルトでは esbuild は `ts`, `jsx`, `tsx` ファイルに適用されます。`esbuild.include` と `esbuild.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
+デフォルトでは Oxc による変換は `ts`, `jsx`, `tsx` ファイルに適用されます。`oxc.include` と `oxc.exclude` でカスタマイズでき、正規表現か [picomatch](https://github.com/micromatch/picomatch#globbing-features) パターン、もしくはそれらの配列を指定します。
 
-また、`esbuild.jsxInject` を使用すると、esbuild で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
+また、`oxc.jsxInject` を使用すると、Oxc で変換されたすべてのファイルに対して JSX ヘルパーの import を自動的に注入できます:
 
 ```js
 export default defineConfig({
-  esbuild: {
+  oxc: {
     jsxInject: `import React from 'react'`,
   },
 })
 ```
 
-[`build.minify`](./build-options.md#build-minify) が `true` のとき、全てのミニファイ最適化はデフォルトで適用されます。[特定の側面](https://esbuild.github.io/api/#minify)を無効化するためには、`esbuild.minifyIdentifiers` 、`esbuild.minifySyntax` 、`esbuild.minifyWhitespace` のいずれかを `false` に設定してください。`build.minify` を上書きするために `esbuild.minify` を利用できないことに注意してください。
+Oxc による変換を無効にするには `false` を設定します。
 
-esbuild の変換を無効にするには `false` を設定します。
+## esbuild
+
+- **型:** `ESBuildOptions | false`
+- **非推奨**
+
+このオプションは内部的に `oxc` オプションに変換されます。代わりに `oxc` オプションを使用してください。
 
 ## assetsInclude
 

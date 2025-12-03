@@ -16,8 +16,17 @@
 ワーカーバンドルに適用される Vite プラグイン。[config.plugins](./shared-options#plugins) は開発時のワーカーのみに適用されるため、ビルドの場合はここで設定する必要があることに注意してください。
 この関数は、rollup ワーカーを並行してビルドする際に使用される新しいプラグインインスタンスを返す必要があります。そのため、 `config` フックの `config.worker` オプションの変更は無視されます。
 
+## worker.rolldownOptions
+
+<!-- TODO: update the link below to Rolldown's documentation -->
+
+- **型:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+
+ワーカーバンドルをビルドするための Rolldown オプション。
+
 ## worker.rollupOptions
 
-- **型:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **型:** `RolldownOptions`
+- **非推奨**
 
-ワーカーバンドルをビルドするための Rollup オプション。
+このオプションは `worker.rolldownOptions` オプションのエイリアスです。代わりに `build.rolldownOptions` オプションを使用してください。

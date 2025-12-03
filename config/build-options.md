@@ -8,13 +8,13 @@
 - **デフォルト:** `'baseline-widely-available'`
 - **関連:** [ブラウザーの互換性](/guide/build#browser-compatibility)
 
-最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'baseline-widely-available'` で、これは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available on 2025-05-01 に含まれるブラウザーを対象にします。具体的には `['chrome107', 'edge107', 'firefox104', 'safari16']` です。
+最終的なバンドルのブラウザー互換性のターゲット。デフォルトは Vite の特別な値 `'baseline-widely-available'` で、これは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available on 2026-01-01 に含まれるブラウザーを対象にします。具体的には `['chrome111', 'edge111', 'firefox114', 'safari16.4']` です。
 
 もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、最小限のトランスパイルのみが実行されます。
 
-変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザー（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
+変換は Oxc Transformer で実行され、この値は有効な [Oxc Transformer の target オプション](https://oxc.rs/docs/guide/usage/transformer/lowering#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザー（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
-esbuild で安全にトランスパイルできない機能がコードに含まれていると、ビルドが失敗するので注意してください。詳細は [esbuild のドキュメント](https://esbuild.github.io/content-types/#javascript)を参照してください。
+Oxc で安全にトランスパイルできない機能がコードに含まれていると、ビルドは警告を出力するので注意してください。詳細は [Oxc のドキュメント](https://oxc.rs/docs/guide/usage/transformer/lowering#warnings)を参照してください。
 
 ## build.modulePreload
 
@@ -129,10 +129,16 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 ## build.cssMinify
 
-- **型:** `boolean | 'esbuild' | 'lightningcss'`
-- **デフォルト:** クライアントは [`build.minify`](#build-minify) と同じで、SSR は `'esbuild'`
+- **型:** `boolean | 'lightningcss' | 'esbuild'`
+- **デフォルト:** クライアントは [`build.minify`](#build-minify) と同じで、SSR は `'lightningcss'`
 
-このオプションによって、デフォルトの `build.minify` を使うのではなく、CSS ミニファイを具体的に上書きすることで、JS と CSS のミニファイを別々に設定できるようになります。Vite はデフォルトでは `esbuild` を使用して CSS をミニファイしています。`'lightningcss'` を指定すると代わりに [Lightning CSS](https://lightningcss.dev/minification.html) を使用します。指定した場合は、 [`css.lightningcss`](./shared-options.md#css-lightningcss) を使用して設定ができます。
+このオプションによって、デフォルトの `build.minify` を使うのではなく、CSS ミニファイを具体的に上書きすることで、JS と CSS のミニファイを別々に設定できるようになります。Vite はデフォルトでは [Lightning CSS](https://lightningcss.dev/minification.html) を使用して CSS をミニファイしています。[`css.lightningcss`](./shared-options.md#css-lightningcss) を使用して設定ができます。`'esbuild'` を指定すると代わりに esbuild を使用します。
+
+`'esbuild'` に設定する場合は esbuild のインストールが必要です。
+
+```sh
+npm add -D esbuild
+```
 
 ## build.sourcemap
 
@@ -141,17 +147,20 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 本番用のソースマップを作成します。`true` の場合、ソースマップファイルは別に作られます。`inline` の場合、ソースマップは出力結果ファイルにデータ URI として追加されます。`hidden` は `true` と同様に動作しますが、バンドルファイル内のソースマップを指し示すコメントは記述されません。
 
+## build.rolldownOptions
+
+- **型:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+
+<!-- TODO: update the link above and below to Rolldown's documentation -->
+
+基礎となる Rolldown バンドルを直接カスタマイズします。これは、Rolldown 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rolldown オプションにマージされます。詳細は [Rolldown options docs](https://rollupjs.org/configuration-options/) を参照してください。
+
 ## build.rollupOptions
 
-- **型:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **型:** `RolldownOptions`
+- **非推奨**
 
-基礎となる Rollup バンドルを直接カスタマイズします。これは、Rollup 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rollup オプションにマージされます。詳細は [Rollup options docs](https://rollupjs.org/configuration-options/) を参照してください。
-
-## build.commonjsOptions
-
-- **型:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
-
-[@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) に渡すオプションです。
+このオプションは `build.rolldownOptions` オプションのエイリアスです。代わりに `build.rolldownOptions` オプションを使用してください。
 
 ## build.dynamicImportVarsOptions
 
@@ -159,6 +168,8 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 - **関連:** [Dynamic Import](/guide/features#dynamic-import)
 
 [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) に渡すオプションです。
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
 
 ## build.lib
 
@@ -256,16 +267,19 @@ SSR ビルドの間、静的アセットはクライアントビルドの一部�
 
 ## build.minify
 
-- **型:** `boolean | 'terser' | 'esbuild'`
-- **デフォルト:** クライアントビルドは `'esbuild'`、SSR ビルドでは `false`
+- **型:** `boolean | 'oxc' | 'terser' | 'esbuild'`
+- **デフォルト:** クライアントビルドは `'oxc'`、SSR ビルドでは `false`
 
-ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [esbuild](https://github.com/evanw/esbuild) で、これは terser に比べて 20～40 倍速く、圧縮率は 1～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
+ミニファイを無効にするには `false` を設定するか、使用するミニファイツールを指定します。デフォルトは [Oxc Minifier](https://oxc.rs/docs/guide/usage/minifier) で、これは terser に比べて 30～90 倍速く、圧縮率は 0.5～2％だけ低下します。[ベンチマーク](https://github.com/privatenumber/minification-benchmarks)
+
+`build.minify: 'esbuild'` は非推奨であり、将来削除される予定です。
 
 pure アノテーションを取り除きツリーシェイクをできなくするため、ライブラリーモードで `'es'` フォーマットを使用する場合、`build.minify` オプションは空白文字をミニファイしないので注意してください。
 
-`'terser'` を設定したときには、terser のインストールが必要です。
+`'esbuild'` または `'terser'` を設定したときには、それぞれ esbuild または Terser のインストールが必要です。
 
 ```sh
+npm add -D esbuild
 npm add -D terser
 ```
 
@@ -313,6 +327,8 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 チャンクサイズ警告の制限値（kB 単位）。[JavaScript のサイズ自体が実行時間に関係する](https://v8.dev/blog/cost-of-javascript-2019)ため、非圧縮のチャンクサイズと比較されます。
 
 ## build.watch
+
+<!-- TODO: update the link below to Rolldown's documentation -->
 
 - **型:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
 - **デフォルト:** `null`

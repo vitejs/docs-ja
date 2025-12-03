@@ -18,11 +18,11 @@ Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/babel-plugi
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-esbuild と Babel を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。Babel プラグインを追加しない場合、ビルド時には esbuild のみが使用されます。
+[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) と [Babel](https://babeljs.io/) を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。Babel プラグインを追加しない場合は、Oxc Transformer のみが使用されます。
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-開発中は Babel を SWC に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+esbuild、それ以外は esbuild を使用します。非標準の React 拡張を必要としない大きなプロジェクトでは、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
+開発中は Babel を [SWC](https://swc.rs/) に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+Oxc Transformer、それ以外は Oxc Transformer のみを使用します。カスタムプラグインが必要な大きなプロジェクトでは、そのプラグインが SWC でも利用可能な場合、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
@@ -41,6 +41,12 @@ npm create vite@latest -- --template rsc
 ## コミュニティープラグイン
 
 [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) を確認してみてください - あなたのプラグインを掲載するために PR を出すこともできます。
+
+## Rolldown 組み込みプラグイン
+
+Vite は内部で [Rolldown](https://rolldown.rs/) を使用しており、一般的なユースケースのために組み込みプラグインをいくつか提供しています。
+
+詳細については [Rolldown 組み込みプラグインのセクション](https://rolldown.rs/builtin-plugins/)をお読みください。
 
 ## Rollup プラグイン
 
