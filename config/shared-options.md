@@ -166,6 +166,13 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 - **関連:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
+## resolve.tsconfigPaths
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+
+tsconfig パス解決機能を有効にします。`tsconfig.json` の `paths` オプションがインポートの解決に使用されます。詳細は [特徴](/guide/features.md#paths) を参照してください。
+
 ## html.cspNonce
 
 - **型:** `string`
