@@ -91,13 +91,6 @@ Vite は `esbuild` と同じ動作に従い、`tsconfig.json` 内の `target` �
 
 開発中に target を指定するには [`esbuild.target`](/config/shared-options.html#esbuild) オプションを使用することができ、トランスパイルを最小限に抑えるためにデフォルトで `esnext` に設定されます。ビルドでは、[`build.target`](/config/build-options.html#build-target) オプションが優先され、必要に応じて設定することができます。
 
-::: warning `useDefineForClassFields`
-
-`tsconfig.json` 内の `target` が `ESNext` または `ES2022` 以降でない場合、または `tsconfig.json` ファイルがない場合、`useDefineForClassFields` のデフォルトは `false` になり、`esbuild.target` のデフォルト値が `esnext` の場合に問題が発生する可能性があります。これは[静的初期化ブロック](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility)にトランスパイルされる可能性があり、ブラウザーでサポートされていない可能性があります。
-
-そのため、`tsconfig.json` を設定する際には、`target` を `ESNext` または `ES2022` 以降に設定するか、`useDefineForClassFields` を明示的に `true` に設定することをおすすめします。
-:::
-
 #### `emitDecoratorMetadata`
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
