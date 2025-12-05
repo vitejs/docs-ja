@@ -29,4 +29,4 @@
 - **型:** `RolldownOptions`
 - **非推奨**
 
-このオプションは `worker.rolldownOptions` オプションのエイリアスです。代わりに `build.rolldownOptions` オプションを使用してください。
+このオプションは `worker.rolldownOptions` オプションのエイリアスです。代わりに `worker.rolldownOptions` オプションを使用してください。
