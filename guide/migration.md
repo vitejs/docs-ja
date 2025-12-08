@@ -23,7 +23,7 @@ Vite 8 は、esbuild と Rollup の代わりに Rolldown と Oxc ベースのツ
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "vite": "npm:rolldown-vite@7.2.2" // [!code --]
     "vite": "^8.0.0" // [!code ++]
   }
