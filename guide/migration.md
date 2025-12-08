@@ -216,7 +216,7 @@ export default defineConfig({
 
 ### Oxc による JavaScript ミニファイ
 
-esbuild の代わりに Oxc Minifier が JavaScript のミニファイに使用されるようになりました。非推奨の [`build.minify: 'esbuild'`](/config/build-options#minify) オプションを使用して esbuild に戻すことができます。この設定オプションは将来削除される予定で、Vite は esbuild に直接依存しなくなったため、`esbuild` を `devDependency` としてインストールする必要があります。
+esbuild の代わりに Oxc Minifier が JavaScript のミニファイに使用されるようになりました。非推奨の [`build.minify: 'esbuild'`](/config/build-options#build-minify) オプションを使用して esbuild に戻すことができます。この設定オプションは将来削除される予定で、Vite は esbuild に直接依存しなくなったため、`esbuild` を `devDependency` としてインストールする必要があります。
 
 ミニファイの動作を制御するために `esbuild.minify*` オプションを使用していた場合、代わりに `build.rolldownOptions.output.minify` を使用できます。`esbuild.drop` オプションを使用していた場合、代わりに [`build.rolldownOptions.output.minify.compress.drop*` オプション](https://oxc.rs/docs/guide/usage/minifier/dead-code-elimination)を使用できます。
 
@@ -231,7 +231,7 @@ JavaScript アプリでミニファイに関連する問題を見つけた場合
 
 ### Lightning CSS による CSS ミニファイ
 
-[Lightning CSS](https://lightningcss.dev/) がデフォルトで CSS のミニファイに使用されるようになりました。[`build.cssMinify: 'esbuild'`](/config/build-options#cssminify) オプションを使用して esbuild に戻すことができます。ただし、`esbuild` を `devDependency` としてインストールする必要があります。
+[Lightning CSS](https://lightningcss.dev/) がデフォルトで CSS のミニファイに使用されるようになりました。[`build.cssMinify: 'esbuild'`](/config/build-options#build-cssminify) オプションを使用して esbuild に戻すことができます。ただし、`esbuild` を `devDependency` としてインストールする必要があります。
 
 Lightning CSS はより優れた構文の低レベル化をサポートしており、CSS バンドルサイズがわずかに増加する可能性があります。
 
