@@ -1,6 +1,8 @@
 # v7 からの移行
 
-## デフォルトブラウザーターゲットの変更
+v6 および v7 の Vite に統合された Rolldown のテクニカルプレビューリリースである `rolldown-vite` から移行する場合は、タイトルに <Badge text="NRV" type="warning" /> が付いているセクションのみが該当します。
+
+## デフォルトブラウザーターゲットの変更 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 `build.target` と `'baseline-widely-available'` のデフォルトブラウザー値がより新しいブラウザーバージョンに更新されました:
 
@@ -334,9 +336,9 @@ const plugin = {
 - `worker.rollupOptions`: `worker.rolldownOptions` に名前変更
 - `build.commonjsOptions`: 現在は no-op
 
-## 全般的な変更
+## 全般的な変更 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
-## 非推奨機能の削除
+## 非推奨機能の削除 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 **_TODO: この変更はまだ実装されていませんが、安定版リリース前に実装されます。_**
 
