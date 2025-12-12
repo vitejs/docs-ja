@@ -321,3 +321,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 Zephyr は他のクラウドプロバイダーとは異なるアプローチを取っています。Vite のビルドプロセスに直接統合されるため、アプリケーションをビルドまたは開発サーバーを実行するたびに、Zephyr Cloud で自動的にデプロイされます。
 
 開始するには、[Vite デプロイガイド](https://docs.zephyr-cloud.io/bundlers/vite)の手順に従ってください。
+
+## EdgeOne Pages
+
+[EdgeOne Pages](https://edgeone.ai/products/pages) を使用して静的サイトをデプロイする場合はこの[手順](https://pages.edgeone.ai/document/vite)に従ってください。
