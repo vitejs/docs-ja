@@ -250,7 +250,7 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
 
 3. `surge dist` とタイプし、surge にデプロイしてください。
 
-`surge dist yourdomain.com` とすることで、[カスタムドメイン](http://surge.sh/help/adding-a-custom-domain)にデプロイすることもできます。
+`surge dist yourdomain.com` とすることで、[カスタムドメイン](https://surge.sh/help/adding-a-custom-domain)にデプロイすることもできます。
 
 ## Azure Static Web Apps
 
