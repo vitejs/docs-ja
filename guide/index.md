@@ -116,10 +116,10 @@ create-vite はよく使われているフレームワークの基本的なテ�
 
 例えば `https://github.com/user/project` にあるテンプレートについては、`https://github.stackblitz.com/user/project`（プロジェクトの URL の `github` の後に `.stackblitz` を追加）を使ってオンラインで試すことができます。
 
-また、[degit](https://github.com/Rich-Harris/degit) のようなツールを使って、これらのテンプレートからプロジェクトを生成することもできます。プロジェクトが GitHub 上にあり、デフォルトのブランチとして `main` を使用していると仮定すると、次のようにしてローカルコピーを作成できます:
+また、[tiged](https://github.com/tiged/tiged) のようなツールを使って、これらのテンプレートからプロジェクトを生成することもできます。プロジェクトが GitHub 上にあり、デフォルトのブランチとして `main` を使用していると仮定すると、次のようにしてローカルコピーを作成できます:
 
 ```bash
-npx degit user/project#main my-project
+npx tiged user/project my-project
 cd my-project
 
 npm install
