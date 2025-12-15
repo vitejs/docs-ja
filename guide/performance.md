@@ -114,13 +114,12 @@ export default defineConfig({
 
 作業量を減らす例:
 
-- 可能な限り、Sass/Less/Stylus の代わりに CSS を使用する（ネストは PostCSS で処理できます）。
+- 可能な限り、Sass/Less/Stylus の代わりに CSS を使用する（ネストは PostCSS / Lightning CSS で処理できます）。
 - SVG を UI フレームワークのコンポーネント（React、Vue など）に変換しないでください。代わりに文字列または URL としてインポートしてください。
-- `vitejs/plugin-react` を使用する場合は Babel オプションの設定を避けると、ビルド時の変換をスキップします（esbuild のみが使用されます）。
+- `vitejs/plugin-react` を使用する場合は Babel オプションの設定を避けると、ビルド時の変換をスキップします（Oxc のみが使用されます）。
 
 ネイティブツールの使用例:
 
-ネイティブツールを使用すると、インストールサイズが大きくなることが多いため、新しい Vite プロジェクトを開始する際のデフォルトではありません。しかし、大規模なアプリケーションではコストをかける価値があるかもしれません。
+Vite のコアはネイティブツールに基づいていますが、一部の機能は互換性と機能性を高めるために、デフォルトで非ネイティブツールを使用しています。しかし、大規模なアプリケーションではコストをかける価値があるかもしれません。
 
 - [LightningCSS](https://github.com/vitejs/vite/discussions/13835) の実験的サポートを試す。
-- `vitejs/plugin-react` の代わりに [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) を使用する。
