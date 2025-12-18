@@ -235,7 +235,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     license: true,
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         postBanner:
           '/* バンドルされた依存関係のライセンスは https://example.com/license.md を参照 */',
