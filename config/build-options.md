@@ -223,6 +223,30 @@ export default defineConfig({
 ]
 ```
 
+::: tip
+
+ビルドされたコード内でライセンスファイルを参照したい場合は、`build.rolldownOptions.output.postBanner` を使用してファイルの先頭にコメントを挿入できます。例:
+
+<!-- TODO: add a link for output.postBanner above to Rolldown's documentation -->
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rollupOptions: {
+      output: {
+        postBanner:
+          '/* バンドルされた依存関係のライセンスは https://example.com/license.md を参照 */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **型:** `boolean | string`
