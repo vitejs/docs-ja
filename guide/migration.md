@@ -372,7 +372,7 @@ const plugin = {
   - `resolveImportMeta` フック（[rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)）
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
   - `resolveFileUrl` フック
-- `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parse` / `parseAsync` 関数に置き換えられ、非推奨となりました。
+- `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parseSync` / `parse` 関数に置き換えられ、非推奨となりました。
 
 ## v6 からの移行
 
