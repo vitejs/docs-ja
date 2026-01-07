@@ -347,13 +347,8 @@ const plugin = {
 これらの重大な変更は、少数のユースケースにのみ影響すると予想されます:
 
 - **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/5726（nuxt、qwik に影響）
-- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/3403（sveltekit に影響）
 - **[TODO: これは安定版リリース前に修正されます]** 事前ビルドチャンク出力機能の欠如により、レガシーチャンクがチャンクファイルではなくアセットファイルとして出力されます（[rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)）。これは、チャンク関連のオプションがレガシーチャンクに適用されず、マニフェストファイルにレガシーチャンクがチャンクファイルとして含まれないことを意味します。
-- **[TODO: これは安定版リリース前に修正されます]** リゾルバーキャッシュが Vitest のマイナーケースを破壊します（[rolldown-vite#466](https://github.com/vitejs/rolldown-vite/issues/466)、[vitest#8754](https://github.com/vitest-dev/vitest/issues/8754#issuecomment-3441115032)）
-- **[TODO: これは安定版リリース前に修正されます]** リゾルバーが yarn pnp で動作しません（[rolldown-vite#324](https://github.com/vitejs/rolldown-vite/issues/324)、[rolldown-vite#392](https://github.com/vitejs/rolldown-vite/issues/392)）
-- **[TODO: これは安定版リリース前に修正されます]** ネイティブプラグインの順序の問題（[rolldown-vite#373](https://github.com/vitejs/rolldown-vite/issues/373)）
 - **[TODO: これは安定版リリース前に修正されます]** `@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
-- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/3403
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) はまだサポートされていません（[rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365)）
 - `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
 - `bundle` オブジェクトの変更（`bundle` は `generateBundle` / `writeBundle` フックで渡されるオブジェクトで、`build` 関数によって返されます）:
