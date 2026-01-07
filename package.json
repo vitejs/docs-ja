@@ -26,9 +26,9 @@
     "vite": "^8.0.0-beta.5",
     "vitepress": "^2.0.0-alpha.15",
     "vitepress-plugin-group-icons": "^1.6.5",
-    "vitepress-plugin-llms": "^1.9.3",
-    "vue": "^3.5.25",
-    "vue-tsc": "^3.1.8",
+    "vitepress-plugin-llms": "^1.10.0",
+    "vue": "^3.5.26",
+    "vue-tsc": "^3.2.2",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
@@ -37,7 +37,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.25.0",
+  "packageManager": "pnpm@10.27.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
