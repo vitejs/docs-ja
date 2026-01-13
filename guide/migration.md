@@ -340,6 +340,8 @@ const plugin = {
 
 ## 非推奨機能の削除 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
+- `import.meta.hot.accept` に URL を渡すことはサポートされなくなりました。代わりに id を渡してください。([#21382](https://github.com/vitejs/vite/pull/21382))
+
 **_TODO: この変更はまだ実装されていませんが、安定版リリース前に実装されます。_**
 
 ## 高度な内容
