@@ -50,12 +50,11 @@ const installTabs = [
           The Build Tool for the Web
         </h1>
         <p class="text-white/70 md:text-lg max-w-[27rem] text-pretty">
-          Vite is a blazing fast frontend build tool powering the next
-          generation of web applications.
+          Vite は次世代のウェブアプリケーションを支える、超高速フロントエンドビルドツールです。
         </p>
         <div class="flex items-center gap-5 mt-8">
           <a href="/guide/" class="button button--primary inline-block w-fit">
-            Get Started
+            はじめる
           </a>
           <a
             href="https://github.com/vitejs/vite"
@@ -63,7 +62,7 @@ const installTabs = [
             rel="noopener noreferrer"
             class="button inline-block w-fit"
           >
-            View on GitHub
+            GitHub で見る
           </a>
         </div>
       </div>

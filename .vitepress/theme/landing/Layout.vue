@@ -21,21 +21,26 @@ const { data: sponsors } = useSponsor()
     :logos="['openai', 'shopify', 'stripe', 'linear', 'clickup', 'wiz']"
   />
   <HeadingSection
-    heading="Redefining developer experience"
-    subheading="Vite makes web development enjoyable again"
+    heading="開発者体験の革新"
+    subheading="Vite はウェブ開発を再び楽しくします"
   />
   <ViteFeatureGrid1 />
-  <HeadingSection heading="A shared foundation to build upon" />
+  <HeadingSection heading="ビルドのための共通基盤" />
   <ViteFeatureGrid2 />
-  <HeadingSection heading="Powering your favorite frameworks and tools" />
+  <HeadingSection heading="あなたのお気に入りのツールやフレームワークを支えています" />
   <ViteFrameworks />
   <ViteCommunity />
-  <Sponsors :sponsors="sponsors" />
+  <Sponsors
+    :sponsors="sponsors"
+    heading="無料でオープンソース"
+    description="Vite は MIT ライセンスで、今後もずっと無料でオープンソースです。これはコントリビューターと以下の企業によって実現されています:"
+    sponsorLinkText="スポンサーになる"
+   />
   <Spacer />
   <Footer
-    heading="Start building with Vite"
-    subheading="Prepare for a development environment that can finally keep pace with the speed of your mind."
-    button-text="Get Started"
+    heading="さぁ、Vite で作ろう"
+    subheading="あなたの思考スピードについていける開発環境を手に入れよう。"
+    button-text="はじめる"
     button-link="/guide/"
   />
 </template>

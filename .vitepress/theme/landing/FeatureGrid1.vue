@@ -10,11 +10,10 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     <div class="flex flex-col gap-3 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
         <h5 class="text-balance sm:text-pretty text-white">
-          Instant Server Start
+          瞬時のサーバー起動
         </h5>
         <p class="sm:max-w-[28rem] text-pretty">
-          On demand source file serving over native ESM, with blazing fast
-          dependency pre-bundling.
+          ネイティブ ESM によるオンデマンドのソースファイル提供と、超高速な依存関係の事前バンドル。
         </p>
       </div>
       <div class="relative p-10 sm:p-15 flex justify-center bg-[#370a7f]">
@@ -39,9 +38,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
 
     <div class="flex flex-col gap-3 justify-between border-r-0">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">Lightning Fast HMR</h5>
+        <h5 class="text-white">超高速 HMR</h5>
         <p class="max-w-[26rem] text-pretty">
-          Instantly reflect changes as you save, no matter how big your app is.
+          アプリの規模に関わらず、保存した変更を即座に反映。
         </p>
       </div>
       <div class="flex justify-end">
@@ -58,10 +57,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     </div>
 
     <div class="p-5 sm:p-10 pb-0 sm:pb-0 flex flex-col gap-3 lg:border-b-0">
-      <h5 class="text-white">Rich Features Out of the Box</h5>
+      <h5 class="text-white">豊富な組み込み機能</h5>
       <p class="sm:max-w-[28rem] text-pretty">
-        TypeScript, JSX, CSS, Workers, Web Assembly... and more with just a
-        plugin away.
+        TypeScript、JSX、CSS、Workers、WebAssembly... そしてプラグイン追加で更なる機能を。
       </p>
       <RiveAnimation
         :desktop-src="viteAnimation"
@@ -76,10 +74,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
 
     <div class="flex flex-col gap-3 justify-between border-r-0 border-b-0">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">Optimized Build</h5>
+        <h5 class="text-white">最適化されたビルド</h5>
         <p class="max-w-[25rem] text-pretty">
-          Advanced tree-shaking, built-in minification, fine-grained chunking
-          control powered by Rolldown.
+          Rolldown による高度なツリーシェイキング、組み込みの圧縮、きめ細かなチャンク制御。
         </p>
       </div>
       <div class="relative p-10 sm:p-15 flex justify-center bg-[#370a7f]">

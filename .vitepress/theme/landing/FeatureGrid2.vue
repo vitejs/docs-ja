@@ -9,11 +9,10 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
   >
     <div class="p-5 sm:p-10 flex flex-col gap-3">
       <h5 class="text-balance sm:text-pretty text-white">
-        Flexible Plugin System
+        柔軟なプラグインシステム
       </h5>
       <p class="sm:max-w-[28rem] text-pretty">
-        Vite plugins extends Rollup's well-designed plugin interface with a few
-        extra Vite-specific options.
+        Vite のプラグインは、Rollup の洗練されたプラグインインターフェースを Vite 固有のオプションで拡張。
       </p>
       <RiveAnimation
         :desktop-src="flexiblePluginAnimation"
@@ -25,8 +24,8 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
 
     <div class="flex flex-col gap-3 border-r-0 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">Fully Typed API</h5>
-        <p class="max-w-[26rem] text-pretty">Designed to be built on top of.</p>
+        <h5 class="text-white">完全に型付けされた API</h5>
+        <p class="max-w-[26rem] text-pretty">強固な型をベースに構築できるよう設計。</p>
       </div>
       <div class="relative p-5 sm:p-10 flex justify-center bg-[#370a7f]">
         <img
@@ -49,10 +48,9 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
     </div>
 
     <div class="p-5 sm:p-10 flex flex-col gap-3 lg:border-b-0">
-      <h5 class="text-white">First class SSR Support</h5>
+      <h5 class="text-white">ファーストクラスの SSR サポート</h5>
       <p class="sm:max-w-[28rem] text-pretty mb-12 sm:mb-16">
-        It's never been easier to setup custom SSR (Server-Side Rendering), or
-        build your own SSR framework.
+        カスタム SSR（サーバーサイドレンダリング）のセットアップや、独自の SSR フレームワークの構築がこれまで以上に簡単に。
       </p>
       <img
         src="@assets/vite/vite-ssr-support.png"
@@ -66,10 +64,9 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
 
     <div class="flex flex-col gap-3 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">Continuous ecosystem integration</h5>
+        <h5 class="text-white">継続的なエコシステム統合</h5>
         <p class="max-w-[25rem] text-pretty">
-          Our CI continuously tests Vite changes against downstream projects,
-          allowing us to improve Vite with stability and confidence.
+          CI で下流プロジェクトに対して Vite の変更内容を継続的にテストしており、安定性と信頼性を持って Vite の改善を可能にしています。
         </p>
       </div>
       <div class="px-5 sm:px-10 flex justify-center">
