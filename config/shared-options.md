@@ -285,6 +285,10 @@ export default defineConfig({
 })
 ```
 
+::: tip ファイルのインポート
+異なるディレクトリのファイルに同じコードが追加されるため、相対パスは正しく解決されません。代わりに絶対パスまたは[エイリアス](#resolve-alias)を使用してください。
+:::
+
 ## css.preprocessorMaxWorkers
 
 - **型:** `number | true`
