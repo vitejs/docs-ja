@@ -149,11 +149,9 @@ npm add -D esbuild
 
 ## build.rolldownOptions
 
-- **型:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+- **型:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-<!-- TODO: update the link above and below to Rolldown's documentation -->
-
-基礎となる Rolldown バンドルを直接カスタマイズします。これは、Rolldown 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rolldown オプションにマージされます。詳細は [Rolldown options docs](https://rollupjs.org/configuration-options/) を参照してください。
+基礎となる Rolldown バンドルを直接カスタマイズします。これは、Rolldown 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rolldown オプションにマージされます。詳細は [Rolldown options docs](https://rolldown.rs/reference/) を参照してください。
 
 ## build.rollupOptions
 
@@ -352,9 +350,7 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 
 ## build.watch
 
-<!-- TODO: update the link below to Rolldown's documentation -->
-
-- **型:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
+- **型:** [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)`| null`
 - **デフォルト:** `null`
 
 Rollup ウォッチャーを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。

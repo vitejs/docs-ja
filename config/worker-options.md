@@ -18,9 +18,7 @@
 
 ## worker.rolldownOptions
 
-<!-- TODO: update the link below to Rolldown's documentation -->
-
-- **型:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+- **型:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
 ワーカーバンドルをビルドするための Rolldown オプション。
 
