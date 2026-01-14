@@ -50,7 +50,7 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ## ビルドのカスタマイズ
 
-ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rolldown options](https://rollupjs.org/configuration-options/) を `build.rolldownOptions` で直接調整することができます:
+ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rolldown options](https://rolldown.rs/reference/) を `build.rolldownOptions` で直接調整することができます:
 
 <!-- TODO: update the link above and below to Rolldown's documentation -->
 
@@ -58,7 +58,7 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 export default defineConfig({
   build: {
     rolldownOptions: {
-      // https://rollupjs.org/configuration-options/
+      // https://rolldown.rs/reference/
     },
   },
 })
@@ -84,7 +84,7 @@ window.addEventListener('vite:preloadError', (event) => {
 
 ## ファイル変更時のリビルド
 
-`vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) を直接調整することもできます:
+`vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) を直接調整することもできます:
 
 <!-- TODO: update the link above to Rolldown's documentation -->
 
@@ -92,7 +92,7 @@ window.addEventListener('vite:preloadError', (event) => {
 export default defineConfig({
   build: {
     watch: {
-      // https://rollupjs.org/configuration-options/#watch
+      // https://rolldown.rs/reference/InputOptions.watch
     },
   },
 })
