@@ -6,7 +6,6 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
-  localIconLoader,
 } from 'vitepress-plugin-group-icons'
 import { markdownItImageSize } from 'markdown-it-image-size'
 import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
@@ -563,10 +562,6 @@ const config = defineConfig({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
-          'vite.config': localIconLoader(
-            import.meta.url,
-            '../public/logo-without-border.svg',
-          ),
         },
       }),
     ],
