@@ -113,27 +113,11 @@ $ npm run preview
 
 ### Netlify CLI
 
-1. [Netlify CLI](https://cli.netlify.com/) をインストールします。
-2. `ntl init` で新しいサイトを作成します。
-3. `ntl deploy` でデプロイします。
+1. `npm install -g netlify-cli` で [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/) をインストールします。
+2. `netlify init` で新しいサイトを作成します。
+3. `netlify deploy` でデプロイします。
 
-```bash
-# Netlify CLI をインストール
-$ npm install -g netlify-cli
-
-# Netlify に新しいサイトを作成
-$ ntl init
-
-# ユニークなプレビュー URL にデプロイ
-$ ntl deploy
-```
-
-Netlify CLI は検査のためにプレビュー URL を共有します。本番環境への準備ができたら `prod` フラグを使用してください:
-
-```bash
-# サイトを本番環境へデプロイ
-$ ntl deploy --prod
-```
+Netlify CLI は検査のためにプレビュー URL を共有します。本番環境への準備ができたら `prod` フラグを使用してください: `netlify deploy --prod`
 
 ### Netlify with Git
 
@@ -149,19 +133,11 @@ $ ntl deploy --prod
 
 ### Vercel CLI
 
-1. [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
+1. `npm i -g vercel` で [Vercel CLI](https://vercel.com/cli) をインストールし、`vercel` を実行してデプロイします。
 2. Vercel はあなたが Vite を使用していることを検出し、あなたのデプロイメントのための正しい設定を有効にします。
 3. アプリケーションがデプロイされます！（例: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/)）
 
-```bash
-$ npm i -g vercel
-$ vercel init vite
-Vercel CLI
-> Success! Initialized "vite" example in ~/your-folder.
-- To deploy, `cd vite` and run `vercel`.
-```
-
-### Vercel for Git
+### Vercel with Git
 
 1. コードを Git リポジトリー（GitHub, GitLab, Bitbucket）にプッシュします。
 2. Vercel に [Vite プロジェクトをインポート](https://vercel.com/new)します。
@@ -213,9 +189,11 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
 
 ## Google Firebase
 
-1. [firebase-tools](https://www.npmjs.com/package/firebase-tools) をインストールしていることを確認してください。
+1. `npm i -g firebase-tools` で [firebase-tools](https://www.npmjs.com/package/firebase-tools) をインストールします。
 
-2. プロジェクトルートに `firebase.json` と `.firebaserc` を作成し、以下のように記述してください:
+2. プロジェクトのルートに以下のファイルを作成します:
+
+   ::: code-group
 
    ```json [firebase.json]
    {
@@ -240,15 +218,15 @@ Pages ではカスタムドメインの追加やカスタムビルドの設定�
    }
    ```
 
+   :::
+
 3. `npm run build` を実行した後、`firebase deploy` コマンドでデプロイしてください。
 
 ## Surge
 
-1. まだインストールしていなければ、[surge](https://www.npmjs.com/package/surge) をインストールしてください。
-
-2. `npm run build` を実行してください。
-
-3. `surge dist` とタイプし、surge にデプロイしてください。
+1. `npm i -g surge` で [surge](https://www.npmjs.com/package/surge) をインストールします。
+2. `npm run build` を実行します。
+3. `surge dist` とタイプし、surge にデプロイします。
 
 `surge dist yourdomain.com` とすることで、[カスタムドメイン](https://surge.sh/help/adding-a-custom-domain)にデプロイすることもできます。
 
@@ -280,9 +258,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
    - **Build Command**: `npm install && npm run build`
    - **Publish Directory**: `dist`
 
-5. **Create Static Site** をクリックします。
-
-   アプリが `https://<PROJECTNAME>.onrender.com/` にデプロイされるはずです。
+5. **Create Static Site** をクリックします。アプリは `https://<PROJECTNAME>.onrender.com/` にデプロイされるはずです。
 
 デフォルトでは、指定したブランチへコミットがプッシュされると自動的に新しいデプロイを開始します。[Auto-Deploy](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) はプロジェクト設定で変更できます。
 
