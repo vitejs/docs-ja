@@ -335,6 +335,7 @@ const plugin = {
 - `build.rollupOptions`: `build.rolldownOptions` に名前変更
 - `worker.rollupOptions`: `worker.rolldownOptions` に名前変更
 - `build.commonjsOptions`: 現在は no-op
+- `build.dynamicImportVarsOptions.warnOnError`: 現在は no-op
 
 ## 全般的な変更 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
