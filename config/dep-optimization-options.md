@@ -53,14 +53,11 @@ export default defineConfig({
 
 ## optimizeDeps.rolldownOptions <NonInheritBadge />
 
-- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<``RolldownOptions`, `'input' | 'logLevel' | 'output'> & {
+- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`RolldownOptions`](https://rolldown.rs/reference/), `'input' | 'logLevel' | 'output'> & {
   output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
-    `RolldownOutputOptions`,
+    [`RolldownOutputOptions`](https://rolldown.rs/reference/),
     `'format' | 'sourcemap' | 'dir' | 'banner'>`
 `}`
-
-<!-- TODO: add link to RolldownOptions -->
-<!-- TODO: add link to RolldownOutputOptions -->
 
 依存関係のスキャンと最適化の際、Rolldown に渡すオプション。
 

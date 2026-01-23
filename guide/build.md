@@ -52,8 +52,6 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rolldown options](https://rolldown.rs/reference/) を `build.rolldownOptions` で直接調整することができます:
 
-<!-- TODO: update the link above and below to Rolldown's documentation -->
-
 ```js [vite.config.js]
 export default defineConfig({
   build: {
@@ -85,8 +83,6 @@ window.addEventListener('vite:preloadError', (event) => {
 ## ファイル変更時のリビルド
 
 `vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) を直接調整することもできます:
-
-<!-- TODO: update the link above to Rolldown's documentation -->
 
 ```js [vite.config.js]
 export default defineConfig({

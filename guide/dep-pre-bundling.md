@@ -57,9 +57,7 @@ export default defineConfig({
 
 これには、`include` と `exclude` の両方が使用できます。依存関係が大きい（多くの内部モジュールがある）場合や、CommonJS の場合には、それを含める必要があります。依存関係が小さく、すでに有効な ESM の場合には、それを除外し、ブラウザーに直接読み込ませることができます。
 
-[`optimizeDeps.rolldownOptions` オプション](/config/dep-optimization-options.md#optimizedeps-rolldownoptions)でさらにカスタマイズすることもできます。例えば、Rolldown のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにするか、[build `target`](https://esbuild.github.io/api/#target) を変更します。
-
-<!-- TODO: 上記のリンクを Rolldown のドキュメントに更新 -->
+[`optimizeDeps.rolldownOptions` オプション](/config/dep-optimization-options.md#optimizedeps-rolldownoptions)でさらに Rolldown をカスタマイズすることもできます。例えば、Rolldown のプラグインを追加して、依存関係にある特殊なファイルを扱えるようにするか、[build `target`](https://rolldown.rs/reference/InputOptions.transform#target) を変更します。
 
 ## キャッシュ
 
