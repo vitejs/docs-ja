@@ -162,12 +162,10 @@ npm add -D esbuild
 
 ## build.dynamicImportVarsOptions
 
-- **型:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
+- **型:** `{ include?: string | RegExp | (string | RegExp)[], exclude?: string | RegExp | (string | RegExp)[] }`
 - **関連:** [Dynamic Import](/guide/features#dynamic-import)
 
-[@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) に渡すオプションです。
-
-<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
+変数を使用した動的インポートを変換するかどうか。
 
 ## build.lib
 
