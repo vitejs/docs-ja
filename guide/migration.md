@@ -38,19 +38,17 @@ esbuild の代わりに Rolldown が依存関係の最適化に使用される�
 
 以下のオプションが自動的に変換されます:
 
-- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> `rolldownOptions.output.minify`
-- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> `rolldownOptions.treeshake`
-- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> `rolldownOptions.transform.define`
-- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> `rolldownOptions.moduleTypes`
-- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> `!rolldownOptions.resolve.symlinks`
-- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> `rolldownOptions.resolve.extensions`
-- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> `rolldownOptions.resolve.mainFields`
-- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> `rolldownOptions.resolve.conditionNames`
-- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> `rolldownOptions.output.keepNames`
-- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> `rolldownOptions.platform`
-- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> `rolldownOptions.plugins`（部分的サポート）
-
-<!-- TODO: add link to rolldownOptions.* -->
+- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> [`rolldownOptions.output.minify`](https://rolldown.rs/reference/OutputOptions.minify)
+- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> [`rolldownOptions.treeshake`](https://rolldown.rs/reference/InputOptions.treeshake)
+- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> [`rolldownOptions.transform.define`](https://rolldown.rs/reference/InputOptions.transform#define)
+- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> [`rolldownOptions.moduleTypes`](https://rolldown.rs/reference/InputOptions.moduleTypes)
+- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> [`!rolldownOptions.resolve.symlinks`](https://rolldown.rs/reference/InputOptions.resolve#symlinks)
+- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> [`rolldownOptions.resolve.extensions`](https://rolldown.rs/reference/InputOptions.resolve#extensions)
+- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> [`rolldownOptions.resolve.mainFields`](https://rolldown.rs/reference/InputOptions.resolve#mainfields)
+- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> [`rolldownOptions.resolve.conditionNames`](https://rolldown.rs/reference/InputOptions.resolve#conditionnames)
+- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> [`rolldownOptions.output.keepNames`](https://rolldown.rs/reference/OutputOptions.keepNames)
+- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> [`rolldownOptions.platform`](https://rolldown.rs/reference/InputOptions.platform)
+- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> [`rolldownOptions.plugins`](https://rolldown.rs/reference/InputOptions.plugins)（部分的サポート）
 
 互換性レイヤーによって設定されたオプションは `configResolved` フックから取得できます:
 
@@ -97,8 +95,6 @@ const plugin = {
   },
 },
 ```
-
-<!-- TODO: add link to rolldownOptions.output.minify -->
 
 現在、Oxc トランスフォーマーはネイティブデコレーターの低レベル化をサポートしていません。これは仕様の進展を待っているためです（[oxc-project/oxc#9170](https://github.com/oxc-project/oxc/issues/9170) を参照）。
 
@@ -293,19 +289,15 @@ export default defineConfig({
 
 ### UMD / IIFE での `import.meta.url`
 
-`import.meta.url` は UMD / IIFE 出力フォーマットでポリフィルされなくなりました。デフォルトで `undefined` に置き換えられます。以前の動作を希望する場合は、`build.rolldownOptions.output.intro` オプションとともに `define` オプションを使用できます。詳細については、Rolldown のドキュメントを参照してください: [Well-known `import.meta` properties - Non ESM Output Formats | Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties)。
+`import.meta.url` は UMD / IIFE 出力フォーマットでポリフィルされなくなりました。デフォルトで `undefined` に置き換えられます。以前の動作を希望する場合は、[`define`](/config/shared-options#define) オプションとともに [`build.rolldownOptions.output.intro`](https://rolldown.rs/reference/OutputOptions.intro) オプションを使用できます。詳細については、Rolldown のドキュメントを参照してください: [Well-known `import.meta` properties - Non ESM Output Formats | Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties)。
 
 ### `build.rollupOptions.watch.chokidar` オプションの削除
 
-`build.rollupOptions.watch.chokidar` オプションが削除されました。`build.rolldownOptions.watch.notify` オプションに移行してください。
-
-<!-- TODO: add link to rolldownOptions.watch.notify -->
+`build.rollupOptions.watch.chokidar` オプションが削除されました。[`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify) オプションに移行してください。
 
 ### `build.rollupOptions.output.manualChunks` の非推奨化
 
-`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な `advancedChunks` オプションがあります。`advancedChunks` の詳細については、Rolldown のドキュメントを参照してください: [Advanced Chunks - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
-
-<!-- TODO: add link to rolldownOptions.output.advancedChunks -->
+`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な [`advancedChunks`](https://rolldown.rs/reference/OutputOptions.advancedChunks) オプションがあります。`advancedChunks` の詳細については、Rolldown のドキュメントを参照してください: [Advanced Chunks - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
 
 ### モジュールタイプのサポートと自動検出
 

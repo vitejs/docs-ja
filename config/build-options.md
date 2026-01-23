@@ -221,9 +221,7 @@ export default defineConfig({
 
 ::: tip
 
-ビルドされたコード内でライセンスファイルを参照したい場合は、`build.rolldownOptions.output.postBanner` を使用してファイルの先頭にコメントを挿入できます。例:
-
-<!-- TODO: add a link for output.postBanner above to Rolldown's documentation -->
+ビルドされたコード内でライセンスファイルを参照したい場合は、[`build.rolldownOptions.output.postBanner`](https://rolldown.rs/reference/OutputOptions.postBanner#postbanner) を使用してファイルの先頭にコメントを挿入できます。例:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
