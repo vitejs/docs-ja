@@ -94,9 +94,9 @@ declare const __APP_VERSION__: string
 - **型:**
 `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
-[エントリーオプション](https://github.com/rollup/plugins/tree/master/packages/alias#entries)として `@rollup/plugin-alias` に渡されます。`{ find, replacement, customResolver }` の配列か、オブジェクトを指定します。
+`import` や `require` 文の値を置換するために使用するエイリアスを定義します。これは [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias) と同様に動作します。
 
-<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
+エントリーの順序は重要で、最初に定義されたルールが最初に適用されます。
 
 ファイルシステムのパスにエイリアスを設定する場合は、必ず絶対パスを使用してください。相対的なエイリアス値はそのまま使用され、ファイルシステムのパスには解決されません。
 
@@ -105,6 +105,40 @@ declare const __APP_VERSION__: string
 :::warning エイリアスの操作
 [SSR の外部化された依存関係](/guide/ssr#ssr-externals)のエイリアスを設定した場合は、実際の `node_modules` パッケージのエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.io/aliases/) の両方で `npm:` のエイリアスをサポートします。
 :::
+
+### オブジェクト形式（`Record<string, string>`）
+
+オブジェクト形式では、エイリアスをキーとして指定し、対応する値を実際のインポート値として指定できます。例えば:
+
+```js
+resolve: {
+  alias: {
+    utils: '../../../utils',
+    'batman-1.0.0': './joker-1.5.0'
+  }
+}
+```
+
+### 配列形式（`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`）
+
+配列形式では、エイリアスをオブジェクトとして指定できます。これは複雑なキー/値のペアに便利です。
+
+```js
+resolve: {
+  alias: [
+    { find: 'utils', replacement: '../../../utils' },
+    { find: 'batman-1.0.0', replacement: './joker-1.5.0' },
+  ]
+}
+```
+
+`find` が正規表現の場合、`replacement` で `$1` などの[置換パターン](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/replace#%E7%BD%AE%E6%8F%9B%E6%96%87%E5%AD%97%E5%88%97%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%8C%87%E5%AE%9A)を使用できます。例えば、拡張子を別の拡張子に置換するには、次のようなパターンを使用します:
+
+```js
+{ find:/^(.*)\.js$/, replacement: '$1.alias' }
+```
+
+`customResolver` オプションを使用すると、個々のエイリアスに対して別のモジュール解決を提供できます。
 
 ## resolve.dedupe
 
