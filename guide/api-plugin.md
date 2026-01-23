@@ -1,10 +1,8 @@
 # プラグイン API
 
-Vite プラグインは、Rollup の優れた設計のプラグインインターフェイスを Vite 特有のオプションで拡張しています。その結果、Vite プラグインを一度作成すれば、開発とビルドの両方で動作させることができます。
+Vite プラグインは、Rolldown のプラグインインターフェイスを Vite 特有のオプションで拡張しています。その結果、Vite プラグインを一度作成すれば、開発とビルドの両方で動作させることができます。
 
-**以下のセクションを読む前に、まず [Rollup のプラグインドキュメント](https://rollupjs.org/plugin-development/)を読むことをお勧めします。**
-
-<!-- TODO: update the link above to Rolldown's documentation -->
+**以下のセクションを読む前に、まず [Rolldown のプラグインドキュメント](https://rolldown.rs/apis/plugin-api)を読むことをお勧めします。**
 
 ## プラグインの作成
 
@@ -19,17 +17,17 @@ Vite は、確立されたパターンをすぐに提供できるように努め
 
 ## 規約
 
-プラグインが Vite 特有のフックを使用せず、[Rollup 互換のプラグイン](#rollup-plugin-compatibility)として実装できる場合は、[Rollup プラグインの命名規則](https://rollupjs.org/plugin-development/#conventions)を使用することをお勧めします。
+プラグインが Vite 特有のフックを使用せず、[Rolldown 互換のプラグイン](#rolldown-plugin-compatibility)として実装できる場合は、[Rolldown プラグインの命名規則](https://rolldown.rs/apis/plugin-api#conventions)を使用することをお勧めします。
 
-- Rollup プラグインは、`rollup-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
-- package.json に `rollup-plugin` および `vite-plugin` キーワードを含めます。
+- Rolldown プラグインは、`rolldown-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
+- package.json の `keywords` フィールドに `rolldown-plugin` および `vite-plugin` キーワードを含めます。
 
-これにより、プラグインが公開され、純粋な Rollup または WMR ベースのプロジェクトでも使用できるようになります。
+これにより、プラグインが公開され、純粋な Rolldown または Rollup ベースのプロジェクトでも使用できるようになります。
 
 Vite 専用プラグインの場合
 
 - Vite プラグインは、`vite-plugin-` のプレフィックスが付いた明確な名前を持つ必要があります。
-- package.json に `vite-plugin` キーワードを含めます。
+- package.json の `keywords` フィールドに `vite-plugin` キーワードを含めます。
 - プラグインのドキュメントに、Vite 専用プラグインになっている理由を詳しく説明するセクションを含める（例えば、Vite 特有のプラグインフックを使用するなど）。
 
 プラグインが特定のフレームワークでしか動作しない場合は、その名前をプレフィックスの一部として含めるべきです。
@@ -79,7 +77,7 @@ export default defineConfig({
 ## シンプルな例
 
 :::tip
-Vite/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリー関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
+Vite/Rolldown/Rollup プラグインは、実際のプラグインオブジェクトを返すファクトリー関数として作成するのが一般的です。この関数はユーザーがプラグインの動作をカスタマイズするためのオプションを受け付けます。
 :::
 
 ### カスタムファイルタイプの変換
@@ -140,24 +138,24 @@ import { msg } from 'virtual:my-module'
 console.log(msg)
 ```
 
-Vite（および Rollup）の仮想モジュールは慣例により、ユーザー向けのパスの先頭に `virtual:` を付けます。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。内部的には、Rollup エコシステムの慣例として、仮想モジュールを使用するプラグインは、ID を解決する際にモジュール ID の前に `\0` を付ける必要があります。これにより、他のプラグインが ID を処理しようとするのを防ぎ（ノード解決など）、ソースマップなどのコア機能がこの情報を使用して、仮想モジュールと通常のファイルを区別できます。`\0` はインポート URL で許可されていない文字なので、インポート分析中に置き換える必要があります。`\0{id}` の仮想 ID は、ブラウザーでの開発中に `/@id/__x00__{id}` としてエンコードされてしまいます。ID はプラグインパイプラインに入る前にデコードされて戻ってくるので、これはプラグインフックコードには表示されません。
+Vite（および Rolldown / Rollup）の仮想モジュールは慣例により、ユーザー向けのパスの先頭に `virtual:` を付けます。エコシステム内の他のプラグインとの衝突を避けるために、可能であればプラグイン名を名前空間として使用すべきです。例えば、`vite-plugin-posts` は、ビルド時間の情報を得るために `virtual:posts` や `virtual:posts/helpers` といった仮想モジュールをインポートするようユーザーに求めることができます。内部的には、Rollup エコシステムの慣例として、仮想モジュールを使用するプラグインは、ID を解決する際にモジュール ID の前に `\0` を付ける必要があります。これにより、他のプラグインが ID を処理しようとするのを防ぎ（ノード解決など）、ソースマップなどのコア機能がこの情報を使用して、仮想モジュールと通常のファイルを区別できます。`\0` はインポート URL で許可されていない文字なので、インポート分析中に置き換える必要があります。`\0{id}` の仮想 ID は、ブラウザーでの開発中に `/@id/__x00__{id}` としてエンコードされてしまいます。ID はプラグインパイプラインに入る前にデコードされて戻ってくるので、これはプラグインフックコードには表示されません。
 
 なお、単一ファイルコンポーネント（.vue や .svelte など。SFC）のスクリプトモジュールのように、実際のファイルから直接派生したモジュールは、この規約に従う必要はありません。SFC では通常、処理時に一連のサブモジュールが生成されますが、これらのコードはファイルシステムにマップして戻せます。これらのサブモジュールに `\0` を使用すると、ソースマップが正しく機能しなくなります。
 
 ## 共通のフック
 
-開発中、Vite 開発サーバーは、Rollup が行うのと同じ方法で [Rollup ビルドフック](https://rollupjs.org/plugin-development/#build-hooks)を呼び出すプラグインコンテナーを作成します。
+開発中、Vite 開発サーバーは、Rolldown が行うのと同じ方法で [Rolldown ビルドフック](https://rolldown.rs/apis/plugin-api#build-hooks)を呼び出すプラグインコンテナーを作成します。
 
 以下のフックはサーバー起動時に一度だけ呼び出されます:
 
-- [`options`](https://rollupjs.org/plugin-development/#options)
-- [`buildStart`](https://rollupjs.org/plugin-development/#buildstart)
+- [`options`](https://rolldown.rs/reference/interface.plugin#options)
+- [`buildStart`](https://rolldown.rs/reference/Interface.Plugin#buildstart)
 
 以下のフックはモジュールのリクエストが来るたびに呼び出されます:
 
-- [`resolveId`](https://rollupjs.org/plugin-development/#resolveid)
-- [`load`](https://rollupjs.org/plugin-development/#load)
-- [`transform`](https://rollupjs.org/plugin-development/#transform)
+- [`resolveId`](https://rolldown.rs/reference/Interface.Plugin#resolveid)
+- [`load`](https://rolldown.rs/reference/Interface.Plugin#load)
+- [`transform`](https://rolldown.rs/reference/Interface.Plugin#transform)
 
 また、これらのフックは Vite 固有のプロパティを追加した拡張 `options` パラメーターを持ちます。詳しくは [SSR ドキュメント](/guide/ssr#ssr-specific-plugin-logic)に書かれています。
 
@@ -165,12 +163,12 @@ Vite によるバンドルされていない開発サーバーパターンによ
 
 以下のフックはサーバーが閉じられる時に呼び出されます:
 
-- [`buildEnd`](https://rollupjs.org/plugin-development/#buildend)
-- [`closeBundle`](https://rollupjs.org/plugin-development/#closebundle)
+- [`buildEnd`](https://rolldown.rs/reference/Interface.Plugin#buildend)
+- [`closeBundle`](https://rolldown.rs/reference/Interface.Plugin#closebundle)
 
-Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
+Vite はパフォーマンスを向上させるために完全な AST のパースを避けるので、[`moduleParsed`](https://rolldown.rs/reference/Interface.Plugin#moduleparsed) フックは開発中には**呼び出されない**ことに注意してください。
 
-[出力生成フック](https://rollupjs.org/plugin-development/#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。Vite の開発サーバーは `bundle.generate()` を呼び出さず、`rollup.rollup()` だけを呼び出していると考えることができます。
+[出力生成フック](https://rolldown.rs/apis/plugin-api#output-generation-hooks)（`closeBundle` を除く）は開発中には**呼び出されません**。
 
 ## Vite 特有のフック
 
@@ -484,7 +482,7 @@ Vite プラグインは、さらに（webpack loader と同様の）`enforce` �
 - `enforce: 'post'` を指定したユーザープラグイン
 - Vite ポストビルドプラグイン（minify, manifest, reporting）
 
-これはフックの並び順とは別のものであることに注意してください。フックの並び順は [Rollup フックと同様](https://rollupjs.org/plugin-development/#build-hooks)、`order` 属性に従います。
+これはフックの並び順とは別のものであることに注意してください。フックの並び順は Rolldown フックと同様、[`order` 属性](https://rolldown.rs/reference/TypeAlias.ObjectHook#order)に従います。
 
 ## 条件付きの適用
 
@@ -508,21 +506,22 @@ apply(config, { command }) {
 }
 ```
 
-## Rollup プラグインの互換性 {#rollup-plugin-compatibility}
+## Rolldown プラグインの互換性 {#rolldown-plugin-compatibility}
 
-かなりの数の Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバーのコンテキストでは意味をなさないためです。
+かなりの数の Rolldown / Rollup プラグインが Vite プラグインとして直接動作します（例: `@rollup/plugin-alias` や `@rollup/plugin-json` など）が、すべてではありません。一部のプラグインフックは、バンドルされていない開発サーバーのコンテキストでは意味をなさないためです。
 
-一般的に、Rollup プラグインが以下の基準に適合する限り、Vite プラグインとして動作するでしょう:
+一般的に、Rolldown / Rollup プラグインが以下の基準に適合する限り、Vite プラグインとして動作するでしょう:
 
-- [`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed) フックを使用していない。
+- [`moduleParsed`](https://rolldown.rs/reference/Interface.Plugin#moduleparsed) フックを使用していない。
+- [`transform.inject`](https://rolldown.rs/reference/InputOptions.transform#inject) などの Rolldown 固有のオプションに依存していない。
 - bundle-phase フックと output-phase フックの間に強い結合がない。
 
-Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rollupOptions.plugins` で指定できます。これは `enforce: 'post'` と `apply: 'build'` を設定した Vite プラグインと同じように動作します。
+Rolldown / Rollup プラグインがビルドフェーズでのみ意味を持つ場合は、代わりに `build.rolldownOptions.plugins` で指定できます。これは `enforce: 'post'` と `apply: 'build'` を設定した Vite プラグインと同じように動作します。
 
-Vite のみのプロパティで既存の Rollup プラグインを拡張することもできます:
+Vite のみのプロパティで既存の Rolldown / Rollup プラグインを拡張することもできます:
 
 ```js [vite.config.js]
-import example from 'rollup-plugin-example'
+import example from 'rolldown-plugin-example'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -555,7 +554,7 @@ Vite は [`@rollup/pluginutils` の `createFilter`](https://github.com/rollup/pl
 
 ### フックフィルター {#hook-filters}
 
-Rolldown は[フックフィルター機能](https://rolldown.rs/plugins/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
+Rolldown は[フックフィルター機能](https://rolldown.rs/apis/plugin-api/hook-filters)を導入して、Rust と JavaScript のランタイムの間の通信オーバーヘッドを削減しました。この機能により、プラグインはフックを呼び出すタイミングを決定するパターンを指定でき、不要なフック呼び出しを回避することでパフォーマンスを向上させます。
 
 これは Rollup 4.38.0+ および Vite 6.3.0+ でもサポートされています。プラグインを古いバージョンとの後方互換性を持たせるには、フックハンドラー内でもフィルターを実行するようにしてください。
 
