@@ -66,7 +66,7 @@ export default defineConfig({
 
 ## チャンク戦略
 
-チャンクの分割方法は `build.rolldownOptions.output.advancedChunks` で設定できます（[Rolldown ドキュメント](https://rolldown.rs/in-depth/advanced-chunks)参照）。フレームワークを使用する場合は、チャンクの分割方法の構成についてそのフレームワークのドキュメントを参照してください。
+チャンクの分割方法は [`build.rolldownOptions.output.codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) で設定できます（[Rolldown ドキュメント](https://rolldown.rs/in-depth/manual-code-splitting)参照）。フレームワークを使用する場合は、チャンクの分割方法の構成についてそのフレームワークのドキュメントを参照してください。
 
 ## 読み込みエラーのハンドリング
 

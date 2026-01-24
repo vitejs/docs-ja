@@ -297,7 +297,7 @@ export default defineConfig({
 
 ### `build.rollupOptions.output.manualChunks` の非推奨化
 
-`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な [`advancedChunks`](https://rolldown.rs/reference/OutputOptions.advancedChunks) オプションがあります。`advancedChunks` の詳細については、Rolldown のドキュメントを参照してください: [Advanced Chunks - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
+`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) オプションがあります。`codeSplitting` の詳細については、Rolldown のドキュメントを参照してください: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)。
 
 ### モジュールタイプのサポートと自動検出
 
