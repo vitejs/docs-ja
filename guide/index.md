@@ -18,6 +18,8 @@ Vite は完全な型サポートのある [Plugin API](./api-plugin) と [JavaSc
 
 プロジェクトの背景にある基本原理について、[Vite を使う理由](./why) セクションで詳しく知ることができます。
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq?via=vite" title="Free Vite Course on Scrimba">Scrimba でインタラクティブなチュートリアルを使って Vite を学ぶ</ScrimbaLink>
+
 ## ブラウザー対応
 
 開発中、Vite はモダンブラウザーが使用され、最新の JavaScript および CSS 機能のほとんどをサポートしていることを前提としています。そのため、Vite は [`esnext` を変換ターゲットとして](https://esbuild.github.io/api/#target)設定します。これによりシンタックスの低下を防ぎ、Vite が元のソースコードにできるだけ近いモジュールを提供できるようになります。Vite は開発サーバーを動作させるためにいくつかのランタイムコードを注入します。これらのコードは、各メジャーリリース時点の [Baseline](https://web-platform-dx.github.io/web-features/) Newly Available に含まれる機能を使用します (このメジャーリリースでは 2026-01-01)。
@@ -68,6 +70,8 @@ $ deno init --npm vite
 :::
 
 あとは画面表示に従ってください！
+
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~0yhj?via=vite" title="Scaffolding Your First Vite Project">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
 
 ::: tip 互換性について
 Vite は [Node.js](https://nodejs.org/en/) 20.19+, 22.12+ のバージョンが必要です。ただし、一部のテンプレートではそれ以上のバージョンの Node.js を必要としますので、パッケージマネージャーが警告を出した場合はアップグレードしてください。

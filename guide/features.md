@@ -367,6 +367,8 @@ CSS Modules を設定するには、[`css.modules`](../config/shared-options.md#
 
 ## 静的アセット
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05pq?via=vite" title="Static Assets in Vite">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
+
 静的アセットをインポートすると、提供時に解決されたパブリック URL が返されます:
 
 ```js twoslash

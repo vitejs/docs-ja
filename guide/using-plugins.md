@@ -2,6 +2,8 @@
 
 Vite はプラグインを使っての拡張が可能で、Rollup の優れた設計のプラグインインターフェイスに基づいて、 Vite 固有のオプションがいくつか追加されています。つまり、 Vite ユーザーは Rollup プラグインの成熟したエコシステムを利用しながら、必要に応じて開発サーバーや SSR 機能を拡張することができます。
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~0y4g?via=vite" title="Using Plugins in Vite">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
+
 ## プラグインの追加
 
 プラグインを使うには、プロジェクトの `devDependencies` に追加し、 `vite.config.js` 設定ファイルの `plugins` 配列に含める必要があります。例えば、レガシーブラウザーのサポートを提供するには、公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) が使えます:
