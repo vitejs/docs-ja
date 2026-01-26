@@ -22,6 +22,8 @@ export default {
 vite --config my-config.js
 ```
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05jg?via=vite" title="Configuring Vite">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
+
 ::: tip 設定の読み込み
 デフォルトでは、Vite は [Rolldown](https://rolldown.rs/) を使用して設定を一時ファイルにバンドルし、読み込みます。これはモノレポ内で TypeScript をインポートする際に問題を引き起こす可能性があります。このアプローチで問題が起きた場合は、代わりに [module runner](/guide/api-environment-runtimes.html#modulerunner) を使用するように `--configLoader runner` を指定できます。これにより、一時的な設定が作成されなくなり、すべてのファイルがその場で変換されるようになります。モジュールランナーは設定ファイル内では CJS をサポートしていませんが、外部の CJS パッケージは通常通りに機能するはずです。
 

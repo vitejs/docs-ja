@@ -2,6 +2,8 @@
 
 作成したアプリケーションを本番環境にデプロイするには、`vite build` コマンドを実行するだけです。デフォルトでは、ビルドのエントリーポイントとして `<root>/index.html` を使用し、静的ホスティングサービスで提供するのに適したアプリケーションバンドルを生成します。一般的なサービスについてのガイドは [静的サイトのデプロイ](./static-deploy) をご覧ください。
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~037q?via=vite" title="Building for Production">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
+
 ## ブラウザーの互換性 {#browser-compatibility}
 
 デフォルトでは、プロダクションバンドルは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available ターゲットに含まれるモダンなブラウザーを前提としています。デフォルトのブラウザーサポート範囲は次のとおりです:
