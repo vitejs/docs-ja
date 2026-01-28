@@ -88,6 +88,7 @@ function inlineScript(file: string): HeadConfig {
 const config = defineConfig({
   title: `Vite${additionalTitle}`,
   description: '次世代フロントエンドツール',
+  lang: 'ja-JP',
   cleanUrls: true,
   sitemap: {
     hostname: 'https://ja.vite.dev',
