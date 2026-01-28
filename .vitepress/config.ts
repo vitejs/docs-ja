@@ -102,6 +102,10 @@ const config = defineConfig({
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    //#region 日本語版独自: Google Fonts から IBM Plex Sans JP を追加
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap' }],
+    //#endregion
     inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
