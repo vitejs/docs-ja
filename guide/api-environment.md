@@ -100,6 +100,8 @@ Environment API が安定したら、トップレベルプロパティ `ssr` が
 
 低レベルの設定 API が利用できるので、ランタイムプロバイダーはそれぞれのランタイムに適切なデフォルト設定の環境を提供することができます。これらの環境では、プロダクション環境に近いランタイムで開発中にモジュールを実行するために、他のプロセスやスレッドを生成することもできます。
 
+たとえば、[Cloudflare Vite プラグイン](https://developers.cloudflare.com/workers/vite-plugin/)は、Environment API を使用して、開発中に Cloudflare Workers ランタイム（`workerd`）でコードを実行します。
+
 ```js
 import { customEnvironment } from 'vite-environment-provider'
 
@@ -139,4 +141,4 @@ export default {
 
 フレームワークは、さまざまなレベルで環境を公開することを決定できます。フレームワーク作者の場合は、[Environment API フレームワークガイド](./api-environment-frameworks)を読み進め、Environment API のプログラム的な側面について学習してください。
 
-ランタイムプロバイダーの場合、[Environment API ランタイムガイド](./api-environment-runtimes.md)で、フレームワークとユーザーが使用するカスタム環境を提供する方法について説明します。
+ランタイムプロバイダーの場合、[Environment API ランタイムガイド](./api-environment-runtimes.md)で、フレームワークとユーザーが使用するカスタム環境を提供する方法について説明しています。

@@ -148,44 +148,54 @@ Netlify CLI は検査のためにプレビュー URL を共有します。本番
 
 詳細は Vercel の [Git 統合](https://vercel.com/docs/concepts/git)をご覧ください。
 
-## Cloudflare Pages
+## Cloudflare
 
-### Cloudflare Pages via Wrangler
+### Cloudflare Workers
 
-1. [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/) をインストールします。
-2. `wrangler login` を使って、Cloudflare アカウントで Wrangler を認証します。
-3. ビルドコマンドを実行します。
-4. `npx wrangler pages deploy dist` を使ってデプロイします。
+[Cloudflare Vite プラグイン](https://developers.cloudflare.com/workers/vite-plugin/)は Cloudflare Workers との統合を提供し、Vite の Environment API を使用して開発中に Cloudflare Workers ランタイムでサーバーサイドコードを実行します。
+
+既存の Vite プロジェクトに Cloudflare Workers を追加するには、プラグインをインストールして設定に追加します:
 
 ```bash
-# Wrangler CLI をインストール
-$ npm install -g wrangler
-
-# CLI から Cloudflare アカウントへログイン
-$ wrangler login
-
-# ビルドコマンドの実行
-$ npm run build
-
-# 新しいデプロイの作成
-$ npx wrangler pages deploy dist
+$ npm install --save-dev @cloudflare/vite-plugin
 ```
 
-生成物のアップロード後、Wrangler はサイトの確認のためのプレビュー URL を表示します。Cloudflare Pages ダッシュボートにログインすると、新しいプロジェクトが表示されます。
+```js [vite.config.js]
+import { defineConfig } from 'vite'
+import { cloudflare } from '@cloudflare/vite-plugin'
 
-### Cloudflare Pages with Git
+export default defineConfig({
+  plugins: [cloudflare()],
+})
+```
+
+```jsonc [wrangler.jsonc]
+{
+  "name": "my-vite-app",
+}
+```
+
+`npm run build` を実行した後、`npx wrangler deploy` でアプリケーションをデプロイできます。
+
+また、Vite アプリケーションにバックエンド API を簡単に追加して、Cloudflare リソースと安全に通信することもできます。これは開発中に Workers ランタイムで実行され、フロントエンドと一緒にデプロイされます。完全なウォークスルーについては、[Cloudflare Vite プラグインのチュートリアル](https://developers.cloudflare.com/workers/vite-plugin/tutorial/)を参照してください。
+
+### Cloudflare Pages
+
+#### Cloudflare Pages with Git
+
+Cloudflare Pages を使用すると、Wrangler ファイルを管理することなく、Cloudflare に直接デプロイできます。
 
 1. git リポジトリー（GitHub、GitLab）にコードをプッシュします。
-2. Cloudflare ダッシュボードにログインし、**Account Home** &gt; **Pages** でアカウントを選択します。
-3. **Create a new Project** と **Connect Git** オプションを選択します。
+2. Cloudflare ダッシュボードにログインし、**Account Home** → **Workers & Pages** でアカウントを選択します。
+3. **Create a new Project** と **Pages** オプションを選択し、Git を選択します。
 4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
-5. 選択した Vite のフレームワークに基づいて、ビルド設定の対応するフレームワークプリセットを選択します。
+5. 選択した Vite のフレームワークに基づいて、ビルド設定の対応するフレームワークプリセットを選択します。それ以外の場合は、プロジェクトのビルドコマンドと期待される出力ディレクトリーを入力します。
 6. セーブしてデプロイします！
 7. アプリケーションがデプロイされます！（例: `https://<PROJECTNAME>.pages.dev/`）
 
 プロジェクトのインポートとデプロイ後、以降のブランチへのプッシュは [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) で停止しない限り[プレビューデプロイ](https://developers.cloudflare.com/pages/platform/preview-deployments/)を生成します。本番ブランチ（一般的には「main」）への全ての変更は本番へデプロイされます。
 
-Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは  [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) をご覧ください。
+Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) をご覧ください。
 
 ## Google Firebase
 
