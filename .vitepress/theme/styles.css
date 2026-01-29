@@ -16,3 +16,12 @@
 :root[data-theme='light'][data-variant='vite'] {
   --color-brand: #6b1eb9;
 }
+
+/*
+ * 日本語用フォントを追加してテーマのフォントをオーバーライド。
+ * 本体のフォント指定が変更された場合は、ここも合わせて修正する。
+ */
+:root {
+  --font-heading: "APK Protocol", "IBM Plex Sans JP", sans-serif;
+  --font-sans: Inter, "IBM Plex Sans JP", sans-serif;
+}
