@@ -186,7 +186,7 @@ export default defineConfig({
 Cloudflare Pages を使用すると、Wrangler ファイルを管理することなく、Cloudflare に直接デプロイできます。
 
 1. git リポジトリー（GitHub、GitLab）にコードをプッシュします。
-2. Cloudflare ダッシュボードにログインし、**Account Home** > **Workers & Pages** でアカウントを選択します。
+2. Cloudflare ダッシュボードにログインし、**Account Home** → **Workers & Pages** でアカウントを選択します。
 3. **Create a new Project** と **Pages** オプションを選択し、Git を選択します。
 4. デプロイしたい git プロジェクトを選択し、**Begin setup** をクリックします。
 5. 選択した Vite のフレームワークに基づいて、ビルド設定の対応するフレームワークプリセットを選択します。それ以外の場合は、プロジェクトのビルドコマンドと期待される出力ディレクトリーを入力します。
