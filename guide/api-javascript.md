@@ -13,15 +13,12 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 **使用例:**
 
 ```ts twoslash
-import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const server = await createServer({
   // 有効なユーザー設定オプションに `mode` と `configFile` を追加
   configFile: false,
-  root: __dirname,
+  root: import.meta.dirname,
   server: {
     port: 1337,
   },
@@ -210,13 +207,10 @@ async function build(
 
 ```js twoslash [vite.config.js]
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-
 await build({
-  root: path.resolve(__dirname, './project'),
+  root: path.resolve(import.meta.dirname, './project'),
   base: '/foo/',
   build: {
     rollupOptions: {
