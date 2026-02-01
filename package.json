@@ -16,7 +16,7 @@
     "feed": "^5.2.0",
     "lint-staged": "^16.2.7",
     "markdown-it-image-size": "^15.0.1",
-    "oxc-minify": "^0.110.0",
+    "oxc-minify": "^0.111.0",
     "textlint": "^13.4.1",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
