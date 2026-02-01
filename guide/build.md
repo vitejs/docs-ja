@@ -118,24 +118,21 @@ export default defineConfig({
 
 ```js twoslash [vite.config.js]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     rolldownOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'nested/index.html'),
+        main: resolve(import.meta.dirname, 'index.html'),
+        nested: resolve(import.meta.dirname, 'nested/index.html'),
       },
     },
   },
 })
 ```
 
-別のルートを指定した場合でも、入力パスを解決する際には `__dirname` が `vite.config.js` ファイルのフォルダーになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリーを追加する必要があります。
+別のルートを指定した場合でも、入力パスを解決する際には `import.meta.dirname` が `vite.config.js` ファイルのフォルダーになることに注意してください。そのため、`resolve` の引数に自分の `root` エントリーを追加する必要があります。
 
 HTML ファイルの場合、Vite は `rolldownOptions.input` オブジェクトのエントリーに指定された名前を無視し、代わりに dist フォルダーに HTML アセットを生成する際にファイルの解決済み ID を尊重することに注意してください。これにより、開発サーバーの動作方法と一貫した構造が保証されます。
 
@@ -149,15 +146,12 @@ HTML ファイルの場合、Vite は `rolldownOptions.input` オブジェクト
 
 ```js twoslash [vite.config.js（単一エントリー）]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.js'),
+      entry: resolve(import.meta.dirname, 'lib/main.js'),
       name: 'MyLib',
       // 適切な拡張子が追加されます
       fileName: 'my-lib'
@@ -180,17 +174,14 @@ export default defineConfig({
 
 ```js twoslash [vite.config.js（複数エントリー）]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     lib: {
       entry: {
-        'my-lib': resolve(__dirname, 'lib/main.js'),
-        secondary: resolve(__dirname, 'lib/secondary.js'),
+        'my-lib': resolve(import.meta.dirname, 'lib/main.js'),
+        secondary: resolve(import.meta.dirname, 'lib/secondary.js'),
       },
       name: 'MyLib',
     },
