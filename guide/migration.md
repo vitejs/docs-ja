@@ -295,9 +295,9 @@ export default defineConfig({
 
 `build.rollupOptions.watch.chokidar` オプションが削除されました。[`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify) オプションに移行してください。
 
-### `build.rollupOptions.output.manualChunks` の非推奨化
+### `build.rollupOptions.output.manualChunks` のオブジェクト形式の削除と関数形式の非推奨化
 
-`output.manualChunks` オプションは非推奨です。Rolldown にはより柔軟な [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) オプションがあります。`codeSplitting` の詳細については、Rolldown のドキュメントを参照してください: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)。
+オブジェクト形式の `output.manualChunks` オプションはサポートされなくなりました。関数形式の `output.manualChunks` は非推奨です。Rolldown にはより柔軟な [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) オプションがあります。`codeSplitting` の詳細については、Rolldown のドキュメントを参照してください: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)。
 
 ### モジュールタイプのサポートと自動検出
 
@@ -335,8 +335,6 @@ const plugin = {
 
 - `import.meta.hot.accept` に URL を渡すことはサポートされなくなりました。代わりに id を渡してください。([#21382](https://github.com/vitejs/vite/pull/21382))
 
-**_TODO: この変更はまだ実装されていませんが、安定版リリース前に実装されます。_**
-
 ## 高度な内容
 
 これらの重大な変更は、少数のユースケースにのみ影響すると予想されます:
@@ -344,7 +342,8 @@ const plugin = {
 - **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/5726（nuxt、qwik に影響）
 - **[TODO: これは安定版リリース前に修正されます]** `@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) はまだサポートされていません（[rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365)）
-- `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
+- TypeScript レガシー名前空間は部分的にのみサポートされています。詳細は [Oxc Transformer の関連ドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support)を参照してください。
+- `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer の関連ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
 - `bundle` オブジェクトの変更（`bundle` は `generateBundle` / `writeBundle` フックで渡されるオブジェクトで、`build` 関数によって返されます）:
   - `bundle[foo]` への代入はサポートされていません。これは Rollup でも推奨されていません。代わりに `this.emitFile()` を使用してください。
   - フック間で参照が共有されません（[rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410)）
@@ -356,7 +355,6 @@ const plugin = {
 - Rolldown によるサポートの欠如: 以下の機能は Rolldown でサポートされておらず、Vite でもサポートされなくなりました。
   - `build.rollupOptions.output.format: 'system'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)）
   - `build.rollupOptions.output.format: 'amd'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2528)）
-  - TypeScript レガシー名前空間の完全サポート（[oxc-project/oxc#14227](https://github.com/oxc-project/oxc/issues/14227)）
   - `shouldTransformCachedModule` フック（[rolldown#4389](https://github.com/rolldown/rolldown/issues/4389)）
   - `resolveImportMeta` フック（[rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)）
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
