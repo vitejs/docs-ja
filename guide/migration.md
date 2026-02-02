@@ -342,7 +342,6 @@ const plugin = {
 これらの重大な変更は、少数のユースケースにのみ影響すると予想されます:
 
 - **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/5726（nuxt、qwik に影響）
-- **[TODO: これは安定版リリース前に修正されます]** 事前ビルドチャンク出力機能の欠如により、レガシーチャンクがチャンクファイルではなくアセットファイルとして出力されます（[rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)）。これは、チャンク関連のオプションがレガシーチャンクに適用されず、マニフェストファイルにレガシーチャンクがチャンクファイルとして含まれないことを意味します。
 - **[TODO: これは安定版リリース前に修正されます]** `@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) はまだサポートされていません（[rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365)）
 - `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
