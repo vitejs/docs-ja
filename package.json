@@ -8,11 +8,11 @@
     "lint": "textlint --format pretty-error \"**/*.md\""
   },
   "devDependencies": {
-    "@shikijs/vitepress-twoslash": "^3.21.0",
+    "@shikijs/vitepress-twoslash": "^3.22.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.6",
     "@types/node": "^22.19.7",
-    "@voidzero-dev/vitepress-theme": "^4.3.0",
+    "@voidzero-dev/vitepress-theme": "^4.4.1",
     "feed": "^5.2.0",
     "lint-staged": "^16.2.7",
     "markdown-it-image-size": "^15.0.1",
@@ -22,7 +22,7 @@
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
     "typescript": "~5.9.2",
-    "vite": "^8.0.0-beta.10",
+    "vite": "^8.0.0-beta.11",
     "vitepress": "^2.0.0-alpha.15",
     "vitepress-plugin-group-icons": "^1.7.1",
     "vitepress-plugin-llms": "^1.10.0",
@@ -36,7 +36,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.28.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
