@@ -549,6 +549,17 @@ define: {
 
 詳細は Vite の [SSR ガイド](/guide/ssr#vite-cli) 参照してください。関連: [`server.middlewareMode`](./server-options#server-middlewaremode)。
 
+## devtools
+
+- **実験的機能:** [フィードバックを送る](https://github.com/vitejs/devtools/discussions)
+- **型:** `boolean` | `DevToolsConfig`
+- **デフォルト:** `false`
+
+内部状態の可視化やビルド分析のための devtools 統合を有効にします。
+`@vitejs/devtools` が依存関係としてインストールされていることを確認してください。この機能は現在ビルドモードでのみサポートされています。
+
+詳細は [Vite DevTools](https://github.com/vitejs/devtools) を参照してください。
+
 ## future
 
 - **型:** `Record<string, 'warn' | undefined>`
