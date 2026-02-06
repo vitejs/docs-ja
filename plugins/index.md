@@ -40,7 +40,7 @@ npm create vite@latest -- --template rsc
 
 ## コミュニティープラグイン
 
-[awesome-vite](https://github.com/vitejs/awesome-vite#plugins) を確認してみてください - あなたのプラグインを掲載するために PR を出すこともできます。
+npm に公開されているプラグインの一覧は [Vite Plugin Registry](https://registry.vite.dev/plugins) を確認してみてください。
 
 ## Rolldown 組み込みプラグイン
 
@@ -48,6 +48,6 @@ Vite は内部で [Rolldown](https://rolldown.rs/) を使用しており、一�
 
 詳細については [Rolldown 組み込みプラグインのセクション](https://rolldown.rs/builtin-plugins/)をお読みください。
 
-## Rollup プラグイン
+## Rolldown / Rollup プラグイン
 
-[Vite プラグイン](../guide/api-plugin) は、Rollup プラグインのインターフェイスを拡張したものです。 [Rollup プラグインとの互換性セクション](../guide/api-plugin#rollup-plugin-compatibility) に詳しい情報があります。
+[Vite プラグイン](../guide/api-plugin)は、Rollup プラグインのインターフェイスを拡張したものです。[Rollup プラグインとの互換性セクション](../guide/api-plugin#rolldown-plugin-compatibility)に詳しい情報があります。
