@@ -92,7 +92,7 @@ declare const __APP_VERSION__: string
 ## resolve.alias
 
 - **型:**
-`Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
+`Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
 `import` や `require` 文の値を置換するために使用するエイリアスを定義します。これは [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias) と同様に動作します。
 
@@ -119,7 +119,7 @@ resolve: {
 }
 ```
 
-### 配列形式（`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`）
+### 配列形式（`Array<{ find: string | RegExp, replacement: string }>`）
 
 配列形式では、エイリアスをオブジェクトとして指定できます。これは複雑なキー/値のペアに便利です。
 
@@ -137,8 +137,6 @@ resolve: {
 ```js
 { find:/^(.*)\.js$/, replacement: '$1.alias' }
 ```
-
-`customResolver` オプションを使用すると、個々のエイリアスに対して別のモジュール解決を提供できます。
 
 ## resolve.dedupe
 
