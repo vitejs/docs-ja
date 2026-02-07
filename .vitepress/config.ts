@@ -230,6 +230,7 @@ const config = defineConfig({
           { text: 'チーム', link: '/team' },
           { text: 'ブログ', link: '/blog' },
           { text: 'リリース', link: '/releases' },
+          { text: '謝辞', link: '/acknowledgements' },
           {
             text: 'The Documentary',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
