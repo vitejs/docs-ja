@@ -328,7 +328,7 @@ const plugin = {
 - `worker.rollupOptions`: `worker.rolldownOptions` に名前変更
 - `build.commonjsOptions`: 現在は no-op
 - `build.dynamicImportVarsOptions.warnOnError`: 現在は no-op
-- `resolve.alias[].customResolver`: 代わりに `resolveId` フックを持つカスタムプラグインを使用してください
+- `resolve.alias[].customResolver`: 代わりに `resolveId` フックと `enforce: 'pre'` を持つカスタムプラグインを使用してください
 
 ## 非推奨機能の削除 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
