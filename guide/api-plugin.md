@@ -584,7 +584,7 @@ export default function myPlugin() {
 ```
 
 ::: tip
-[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。これらは利便性のため `rolldown/filter` からも再エクスポートされています。
 :::
 
 ## クライアントサーバーとの通信 {#client-server-communication}
