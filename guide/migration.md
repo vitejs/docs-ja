@@ -15,7 +15,7 @@ v6 および v7 の Vite に統合された Rolldown のテクニカルプレビ
 
 ## Rolldown
 
-Vite 8 は、esbuild と Rollup の代わりに Rolldown と Oxc ベースのツールを使用します。
+Vite 8 は、[esbuild](https://esbuild.github.io/) と [Rollup](https://rollupjs.org/) の代わりに [Rolldown](https://rolldown.rs/) と [Oxc](https://oxc.rs/) ベースのツールを使用します。
 
 ### 段階的移行
 
@@ -270,7 +270,7 @@ CommonJS (CJS) モジュールからの `default` インポートが一貫した
 
 ### 外部化されたモジュールの Require 呼び出し
 
-外部化されたモジュールの `require` 呼び出しは、`import` ステートメントに変換されず、`require` 呼び出しとして保持されるようになりました。これは `require` 呼び出しのセマンティクスを保持するためです。それらを `import` ステートメントに変換したい場合は、`vite` から再エクスポートされている Rolldown の組み込み `esmExternalRequirePlugin` を使用できます。
+外部化されたモジュールの `require` 呼び出しは、`import` ステートメントに変換されず、`require` 呼び出しとして保持されるようになりました。これは `require` 呼び出しのセマンティクスを保持するためです。それらを `import` ステートメントに変換したい場合は、`vite` から再エクスポートされている [Rolldown の組み込み `esmExternalRequirePlugin`](https://rolldown.rs/builtin-plugins/esm-external-require) を使用できます。
 
 ```js
 import { defineConfig, esmExternalRequirePlugin } from 'vite'
@@ -330,8 +330,6 @@ const plugin = {
 - `build.dynamicImportVarsOptions.warnOnError`: 現在は no-op
 - `resolve.alias[].customResolver`: 代わりに `resolveId` フックを持つカスタムプラグインを使用してください
 
-## 全般的な変更 [<Badge text="NRV" type="warning" />](#migration-from-v7)
-
 ## 非推奨機能の削除 [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 - `import.meta.hot.accept` に URL を渡すことはサポートされなくなりました。代わりに id を渡してください。([#21382](https://github.com/vitejs/vite/pull/21382))
@@ -340,8 +338,6 @@ const plugin = {
 
 これらの重大な変更は、少数のユースケースにのみ影響すると予想されます:
 
-- **[TODO: これは安定版リリース前に修正されます]** https://github.com/rolldown/rolldown/issues/5726（nuxt、qwik に影響）
-- **[TODO: これは安定版リリース前に修正されます]** `@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) はまだサポートされていません（[rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365)）
 - TypeScript レガシー名前空間は部分的にのみサポートされています。詳細は [Oxc Transformer の関連ドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support)を参照してください。
 - `define` はオブジェクトの参照を共有しません: オブジェクトを `define` の値として渡すと、各変数はオブジェクトの個別のコピーを持ちます。詳細は [Oxc Transformer の関連ドキュメント](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)を参照してください。
@@ -361,6 +357,7 @@ const plugin = {
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
   - `resolveFileUrl` フック
 - `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parseSync` / `parse` 関数に置き換えられ、非推奨となりました。
+- （バグ）`@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
 
 ## v6 からの移行
 
