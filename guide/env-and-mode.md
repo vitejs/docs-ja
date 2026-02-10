@@ -13,8 +13,6 @@ if (import.meta.env.DEV) {
 
 :::
 
-<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05an?via=vite" title="Env Variables in Vite">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
-
 ## ビルトイン定数
 
 いくつかのビルトイン定数は全てのケースで利用可能です:
