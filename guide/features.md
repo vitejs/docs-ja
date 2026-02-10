@@ -691,6 +691,12 @@ init({
 [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティーのプラグインを使用して対処してください。
 :::
 
+::: warning SSR ビルドでは、Node.js 互換のランタイムのみサポートされています
+
+ファイルを読み込む汎用的な方法がないため、`.wasm?init` の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこの機能は Node.js 互換のランタイムでのみ動作することを意味します。
+
+:::
+
 ### WebAssembly モジュールへのアクセス
 
 もし `Module` オブジェクトにアクセスする必要がある場合、例えば複数回インスタンス化する場合は、[明示的な URL のインポート](./assets#explicit-url-imports)を使用してアセットを解決してから、インスタンス化を実行してください:
@@ -704,31 +710,6 @@ const main = async () => {
   const responsePromise = fetch(wasmUrl)
   const { module, instance } =
     await WebAssembly.instantiateStreaming(responsePromise)
-  /* ... */
-}
-
-main()
-```
-
-### Node.js でモジュールをフェッチする
-
-SSR では、`?init` インポートの一部として発生する `fetch()` は `TypeError: Invalid URL` で失敗する可能性があります。
-[SSR での wasm のサポート](https://github.com/vitejs/vite/issues/8882)の issue を参照してください。
-
-プロジェクトのベースが現在のディレクトリーであると仮定した場合の代替案を以下に示します:
-
-```js twoslash
-import 'vite/client'
-// ---cut---
-import wasmUrl from 'foo.wasm?url'
-import { readFile } from 'node:fs/promises'
-
-const main = async () => {
-  const resolvedUrl = (await import('./test/boot.test.wasm?url')).default
-  const buffer = await readFile('.' + resolvedUrl)
-  const { instance } = await WebAssembly.instantiate(buffer, {
-    /* ... */
-  })
   /* ... */
 }
 
