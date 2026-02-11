@@ -11,7 +11,7 @@
     "@shikijs/vitepress-twoslash": "^3.22.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.6",
-    "@types/node": "^22.19.7",
+    "@types/node": "^22.19.10",
     "@voidzero-dev/vitepress-theme": "^4.5.0",
     "feed": "^5.2.0",
     "lint-staged": "^16.2.7",
@@ -25,8 +25,8 @@
     "vite": "^8.0.0-beta.11",
     "vitepress": "^2.0.0-alpha.16",
     "vitepress-plugin-group-icons": "^1.7.1",
-    "vitepress-plugin-llms": "^1.10.0",
-    "vue": "^3.5.27",
+    "vitepress-plugin-llms": "^1.11.0",
+    "vue": "^3.5.28",
     "vue-tsc": "^3.2.4",
     "yorkie": "^2.0.0"
   },
@@ -36,7 +36,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
