@@ -174,6 +174,8 @@ SSR ビルドの場合、`build.rollupOptions.output` で設定された ESM ビ
 
 要件が満たされている場合は、`import`、`require`、`default` の条件が常に適用されることに注意してください。
 
+さらに、スタイルのインポート（例: `@import 'my-library'`）を解決する際には `style` 条件が適用されます。一部の CSS プリプロセッサーでは、対応する条件も適用されます。具体的には、Sass の場合は `sass`、Less の場合は `less` です。
+
 ## resolve.mainFields <NonInheritBadge />
 
 - **型:** `string[]`
