@@ -127,7 +127,7 @@ Netlify CLI は検査のためにプレビュー URL を共有します。本番
 4. **Deploy** をクリックします。
 5. アプリケーションがデプロイされます！
 
-プロジェクトがインポートされてデプロイされた後は、プルリクエストを伴ったプロダクションブランチ以外のブランチへのプッシュはすべて[プレビューデプロイメント](https://docs.netlify.com/site-deploys/deploy-previews/)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://docs.netlify.com/site-deploys/overview/#definitions)を生成することになります。
+プロジェクトがインポートされてデプロイされた後は、プルリクエストを伴ったプロダクションブランチ以外のブランチへのプッシュはすべて[プレビューデプロイメント](https://docs.netlify.com/deploy/deploy-types/deploy-previews/)を生成し、プロダクションブランチ（一般には main）に加えられたすべての変更は[プロダクションデプロイメント](https://docs.netlify.com/deploy/deploy-overview/#definitions)を生成することになります。
 
 ## Vercel
 
