@@ -119,6 +119,12 @@ import InlineWorker from './shader.js?worker&inline'
 
 `public` アセットは常にルート絶対パスを使用して参照する必要があることに注意してください。たとえば、`public/icon.png` はソースコード内で `/icon.png` として参照する必要があります。
 
+::: tip インポートと `public` ディレクトリーの選択
+
+一般的に、`public` ディレクトリーが提供する保証が特に必要な場合を除き、**アセットのインポート**を推奨します。
+
+:::
+
 ## new URL(url, import.meta.url)
 
 [import.meta.url](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import.meta) は現在のモジュールの URL を公開するネイティブ ESM の機能です。ネイティブの [URL コンストラクター](https://developer.mozilla.org/ja/docs/Web/API/URL)と組み合わせることで、JavaScript モジュールからの相対パスを使用して静的アセットの完全に解決された URL を取得できます:
