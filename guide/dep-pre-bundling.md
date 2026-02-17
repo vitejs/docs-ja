@@ -8,7 +8,7 @@
 
 このプロセスには 2 つの目的があります:
 
-1. **CommonJS と UMD の互換性:** 開発中の Vite のコードは ECMAScript モジュールとして提供しています。そのため、Vite は、CommonJS または、UMD を ESM に変換する必要があります。CommonJS の依存関係を変換する場合、Vite はインポート文をスマート分析を実行してエクスポートが動的に割り当てられていても、CommonJS モジュールは期待通りに動作します。（例 React）:
+1. **CommonJS と UMD の互換性:** 開発中、Vite はすべてのコードをネイティブ ESM として提供します。そのため、Vite は、CommonJS または、UMD を ESM に変換する必要があります。CommonJS の依存関係を変換する場合、Vite はインポート文をスマート分析を実行してエクスポートが動的に割り当てられていても、CommonJS モジュールは期待通りに動作します。（例 React）:
 
 ```js
    // works as expected
