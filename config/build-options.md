@@ -251,6 +251,8 @@ export default defineConfig({
 
 値が文字列の場合は、その値をマニフェストファイルの `build.outDir` からの相対パスとして使用します。`true` に設定すると、パスは `.vite/manifest.json` になります。
 
+プラグインを書いていて、ビルド中に各出力チャンクやアセットの関連する CSS や静的アセットを検査する必要がある場合は、[`viteMetadata` 出力バンドルメタデータ API](/guide/api-plugin#output-bundle-metadata) を使用することもできます。
+
 ## build.ssrManifest
 
 - **型:** `boolean | string`

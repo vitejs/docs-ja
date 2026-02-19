@@ -470,6 +470,44 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     }
     ```
 
+## 出力バンドルメタデータ {#output-bundle-metadata}
+
+ビルド中、Vite は Rolldown のビルド出力オブジェクトに Vite 固有の `viteMetadata` フィールドを追加します。
+
+これは以下を通じて利用できます：
+
+- `RenderedChunk`（例：`renderChunk` や `augmentChunkHash` において）
+- `OutputChunk` と `OutputAsset`（例：`generateBundle` や `writeBundle` において）
+
+`viteMetadata` が提供するもの：
+
+- `viteMetadata.importedCss: Set<string>`
+- `viteMetadata.importedAssets: Set<string>`
+
+これは、[`build.manifest`](/config/build-options#build-manifest) に依存することなく、出力された CSS や静的アセットを検査する必要があるプラグインを書く際に便利です。
+
+例：
+
+```ts [vite.config.ts]
+function outputMetadataPlugin(): Plugin {
+  return {
+    name: 'output-metadata-plugin',
+    generateBundle(_, bundle) {
+      for (const output of Object.values(bundle)) {
+        const css = output.viteMetadata?.importedCss
+        const assets = output.viteMetadata?.importedAssets
+        if (!css?.size && !assets?.size) continue
+
+        console.log(output.fileName, {
+          css: css ? [...css] : [],
+          assets: assets ? [...assets] : [],
+        })
+      }
+    },
+  }
+}
+```
+
 ## プラグインの順序 {#plugin-ordering}
 
 Vite プラグインは、さらに（webpack loader と同様の）`enforce` プロパティを指定して、適用の順序を調整できます。`enforce` の値は `"pre"` か `"post"` のいずれかです。解決されたプラグインは、以下の順序になります:
