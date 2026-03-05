@@ -224,6 +224,44 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 
 :::
 
+## server.forwardConsole
+
+- **型:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
+- **デフォルト:** 自動 ([`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent) により AI コーディングエージェントが検出された場合は `true`、それ以外の場合は `false`)
+
+開発中にブラウザーランタイムイベントを Vite サーバーコンソールにフォワーディングします。
+
+- `true`: 未処理のエラーと `console.error` / `console.warn` ログのフォワーディングを有効にします。
+- `unhandledErrors`: catch されていない例外と未処理の promise rejection のフォワーディングを制御します。
+- `logLevels`: どの `console.*` 呼び出しをフォワーディングするかを制御します。
+
+例:
+
+```js
+export default defineConfig({
+  server: {
+    forwardConsole: {
+      unhandledErrors: true,
+      logLevels: ['warn', 'error'],
+    },
+  },
+})
+```
+
+未処理のエラーがフォワードされた場合、サーバーのターミナルに拡張フォーマットでログが出力されます。例:
+
+```log
+1:18:38 AM [vite] (client) [Unhandled error] Error: this is test error
+ > testError src/main.ts:20:8
+     18|
+     19| function testError() {
+     20|   throw new Error('this is test error')
+       |        ^
+     21| }
+     22|
+ > HTMLButtonElement.<anonymous> src/main.ts:6:2
+```
+
 ## server.warmup
 
 - **型:** `{ clientFiles?: string[], ssrFiles?: string[] }`
