@@ -232,7 +232,7 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 開発中にブラウザーランタイムイベントを Vite サーバーコンソールにフォワーディングします。
 
 - `true`: 未処理のエラーと `console.error` / `console.warn` ログのフォワーディングを有効にします。
-- `unhandledErrors`: 未ハンドルの例外と promise rejection のフォワーディングを制御します。
+- `unhandledErrors`: catch されていない例外と未処理の promise rejection のフォワーディングを制御します。
 - `logLevels`: どの `console.*` 呼び出しをフォワーディングするかを制御します。
 
 例:
