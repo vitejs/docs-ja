@@ -248,7 +248,7 @@ export default defineConfig({
 })
 ```
 
-未ハンドルのエラーがフォワードされた場合、サーバーのターミナルに拡張フォーマットでログが出力されます。例:
+未処理のエラーがフォワードされた場合、サーバーのターミナルに拡張フォーマットでログが出力されます。例:
 
 ```log
 1:18:38 AM [vite] (client) [Unhandled error] Error: this is test error
