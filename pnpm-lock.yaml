@@ -56,6 +56,9 @@ importers:
       vitepress:
         specifier: ^2.0.0-alpha.16
         version: 2.0.0-alpha.16(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1)
+      vitepress-plugin-graphviz:
+        specifier: ^0.0.1
+        version: 0.0.1(vitepress@2.0.0-alpha.16(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1))
       vitepress-plugin-group-icons:
         specifier: ^1.7.1
         version: 1.7.1(vite@8.0.0-beta.13(@types/node@22.19.11)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.1))
@@ -306,6 +309,9 @@ packages:
 
   '@floating-ui/vue@1.1.9':
     resolution: {integrity: sha512-BfNqNW6KA83Nexspgb9DZuz578R7HT8MZw1CfK9I6Ah4QReNWEJsXWHN+SdmOVLNGmTPDi+fDT535Df5PzMLbQ==}
+
+  '@hpcc-js/wasm-graphviz@1.21.1':
+    resolution: {integrity: sha512-PHwgQEbfSPblh/cV422FRNU1mD3ISErOmGP8knX+TNWeUCfrbSV4dvPJnN36D+Cg6Dm4vjtnhlt3J8cUkbAS3Q==}
 
   '@iconify-json/logos@1.2.10':
     resolution: {integrity: sha512-qxaXKJ6fu8jzTMPQdHtNxlfx6tBQ0jXRbHZIYy5Ilh8Lx9US9FsAdzZWUR8MXV8PnWTKGDFO4ZZee9VwerCyMA==}
@@ -3311,6 +3317,11 @@ packages:
       yaml:
         optional: true
 
+  vitepress-plugin-graphviz@0.0.1:
+    resolution: {integrity: sha512-WEbW1674RKHmoeKG2q9dTqemZEAhGnt2pKtuhCNsJx9mJrqoyiZCpmYt7imR0+gnEcS0APsCkwzlzkfDosqubg==}
+    peerDependencies:
+      vitepress: ^1.0.0
+
   vitepress-plugin-group-icons@1.7.1:
     resolution: {integrity: sha512-3ZPcIqwHNBg1btrOOSecOqv8yJxHdu3W2ugxE5LusclDF005LAm60URMEmBQrkgl4JvM32AqJirqghK6lGIk8g==}
     peerDependencies:
@@ -3623,6 +3634,8 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@hpcc-js/wasm-graphviz@1.21.1': {}
 
   '@iconify-json/logos@1.2.10':
     dependencies:
@@ -7046,6 +7059,11 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.6.1
       yaml: 2.8.1
+
+  vitepress-plugin-graphviz@0.0.1(vitepress@2.0.0-alpha.16(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1)):
+    dependencies:
+      '@hpcc-js/wasm-graphviz': 1.21.1
+      vitepress: 2.0.0-alpha.16(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1)
 
   vitepress-plugin-group-icons@1.7.1(vite@8.0.0-beta.13(@types/node@22.19.11)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
