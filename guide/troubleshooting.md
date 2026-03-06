@@ -74,6 +74,31 @@ Ubuntu Linux では、systemd 設定ファイルを更新する代わりに、`/
 あるいは、サーバーが VS Code devcontainer 内で起動している場合、リクエストが停止したように見える場合があります。この問題を修正するには
 [Dev Container / VS Code のポートフォワーディング](#dev-containers-vs-code-port-forwarding) を参照してください。
 
+### ENOSPC エラーで Vite がクラッシュする
+
+Linux で次のようなエラーが表示された場合:
+
+> Error: ENOSPC: System limit for number of file watchers reached
+
+これは、プロジェクトディレクトリーに多数のファイル（多数の画像やアセットなど）があり、システムのファイルウォッチャー制限を超えた場合に発生します。Linux のデフォルトの制限は約 8,192〜10,000 のファイルウォッチャーです。
+
+これを解決するには、以下の方法があります:
+
+- システムのファイルウォッチャー制限を引き上げる:
+
+  ```shell
+  # 現在の制限を確認
+  $ cat /proc/sys/fs/inotify/max_user_watches
+  # 制限を引き上げる（一時的）
+  $ sudo sysctl fs.inotify.max_user_watches=524288
+  # 恒久的に設定する - /etc/sysctl.conf に追記（または既存の設定を編集）
+  $ echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+  $ sudo sysctl -p
+  ```
+
+- [`server.watch.ignored`](/config/server-options#server-watch) を使ってファイルの多いディレクトリをファイルウォッチングの対象から除外する
+- [`server.watch.usePolling`](/config/server-options#server-watch) を使ってファイルシステムイベントの代わりにポーリングを使用する。ポーリングはより多くの CPU リソースを使用することに注意してください
+
 ### ネットワークリクエストの読み込みが止まる
  
 自己署名 SSL 証明書を使用する場合、Chrome はすべてのキャッシュディレクティブを無視し、コンテンツを再読み込みします。Vite は、これらのキャッシュディレクティブに依存しています。
