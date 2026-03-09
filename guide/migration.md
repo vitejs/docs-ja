@@ -296,7 +296,7 @@ export default defineConfig({
 
 ### `build.rollupOptions.watch.chokidar` オプションの削除
 
-`build.rollupOptions.watch.chokidar` オプションが削除されました。[`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify) オプションに移行してください。
+`build.rollupOptions.watch.chokidar` オプションが削除されました。[`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher) オプションに移行してください。
 
 ### `build.rollupOptions.output.manualChunks` のオブジェクト形式の削除と関数形式の非推奨化
 
@@ -350,7 +350,7 @@ const plugin = {
   - `structuredClone(bundle)` が `DataCloneError: #<Object> could not be cloned` でエラーになります。これはサポートされなくなりました。代わりに `structuredClone({ ...bundle })` でクローンしてください。（[rolldown-vite#128](https://github.com/vitejs/rolldown-vite/issues/128)）
 - Rollup のすべての並列フックは順次フックとして動作します。詳細は [Rolldown のドキュメント](https://rolldown.rs/apis/plugin-api#sequential-hook-execution)を参照してください。
 - `"use strict";` が時々注入されません。詳細は [Rolldown のドキュメント](https://rolldown.rs/in-depth/directives)を参照してください。
-- plugin-legacy で ES5 より低いレベルへの変換はサポートされていません（[rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452)）
+- plugin-legacy での ES5 以下への変換はサポートされていません（[rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452)）
 - `build.target` オプションに同じブラウザーの複数のバージョンを渡すとエラーになります: esbuild は最新バージョンを選択しますが、これはおそらく意図したものではありません。
 - Rolldown によるサポートの欠如: 以下の機能は Rolldown でサポートされておらず、Vite でもサポートされなくなりました。
   - `build.rollupOptions.output.format: 'system'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)）
@@ -360,7 +360,6 @@ const plugin = {
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
   - `resolveFileUrl` フック
 - `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parseSync` / `parse` 関数に置き換えられ、非推奨となりました。
-- （バグ）`@vite-ignore` コメントのエッジケース（[rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)）
 
 ## v6 からの移行
 
