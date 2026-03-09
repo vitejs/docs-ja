@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@iconify/vue':
+        specifier: ^5.0.0
+        version: 5.0.0(vue@3.5.29(typescript@5.9.2))
       '@shikijs/vitepress-twoslash':
         specifier: ^4.0.0
         version: 4.0.1(typescript@5.9.2)
@@ -21,8 +24,8 @@ importers:
         specifier: ^24.11.0
         version: 24.11.0
       '@voidzero-dev/vitepress-theme':
-        specifier: 4.5.1
-        version: 4.5.1(focus-trap@7.8.0)(typescript@5.9.2)(vite@8.0.0-beta.13(@types/node@24.11.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.2))
+        specifier: ^4.8.1
+        version: 4.8.1(focus-trap@7.8.0)(typescript@5.9.2)(vite@8.0.0-beta.13(@types/node@24.11.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.2))
       feed:
         specifier: ^5.2.0
         version: 5.2.0
@@ -327,6 +330,11 @@ packages:
 
   '@iconify/utils@3.1.0':
     resolution: {integrity: sha512-Zlzem1ZXhI1iHeeERabLNzBHdOa4VhQbqAcOQaMKuTuyZCpwKbC2R4Dd0Zo3g9EAc+Y4fiarO8HIHRAth7+skw==}
+
+  '@iconify/vue@5.0.0':
+    resolution: {integrity: sha512-C+KuEWIF5nSBrobFJhT//JS87OZ++QDORB6f2q2Wm6fl2mueSTpFBeBsveK0KW9hWiZ4mNiPjsh6Zs4jjdROSg==}
+    peerDependencies:
+      vue: '>=3'
 
   '@internationalized/date@3.10.1':
     resolution: {integrity: sha512-oJrXtQiAXLvT9clCf1K4kxp3eKsQhIaZqxEyowkBcsvZDdZkbWrVmnGknxs5flTD0VGsxrxKgBCZty1EzoiMzA==}
@@ -1031,8 +1039,8 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
-  '@voidzero-dev/vitepress-theme@4.5.1':
-    resolution: {integrity: sha512-v7Yof3fHo14YRglJlU3XyyuCac5hWZcBvS08inNB2SVUhEeaaS78GqU245/5kzI2MjeKGbpTPt21RKFNCzxAbw==}
+  '@voidzero-dev/vitepress-theme@4.8.1':
+    resolution: {integrity: sha512-DNPf52thTslz/1LjrnVocVXZQgQIZjG1wWYiRVBu2RFVXkzO0RkIc/mVnsVs71yu9vh4Mx0wCg0G/Am58pLFoQ==}
     peerDependencies:
       vitepress: ^2.0.0-alpha.16
       vue: ^3.5.0
@@ -3569,6 +3577,11 @@ snapshots:
       '@iconify/types': 2.0.0
       mlly: 1.8.0
 
+  '@iconify/vue@5.0.0(vue@3.5.29(typescript@5.9.2))':
+    dependencies:
+      '@iconify/types': 2.0.0
+      vue: 3.5.29(typescript@5.9.2)
+
   '@internationalized/date@3.10.1':
     dependencies:
       '@swc/helpers': 0.5.18
@@ -4223,11 +4236,12 @@ snapshots:
       vite: 7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2)
       vue: 3.5.29(typescript@5.9.2)
 
-  '@voidzero-dev/vitepress-theme@4.5.1(focus-trap@7.8.0)(typescript@5.9.2)(vite@8.0.0-beta.13(@types/node@24.11.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.2))':
+  '@voidzero-dev/vitepress-theme@4.8.1(focus-trap@7.8.0)(typescript@5.9.2)(vite@8.0.0-beta.13(@types/node@24.11.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.115.0)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.2))':
     dependencies:
       '@docsearch/css': 4.5.4
       '@docsearch/js': 4.5.4
       '@docsearch/sidepanel-js': 4.5.4
+      '@iconify/vue': 5.0.0(vue@3.5.29(typescript@5.9.2))
       '@rive-app/canvas-lite': 2.34.0
       '@tailwindcss/typography': 0.5.19(tailwindcss@4.1.18)
       '@tailwindcss/vite': 4.1.18(vite@8.0.0-beta.13(@types/node@24.11.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.2))
@@ -4335,7 +4349,7 @@ snapshots:
     dependencies:
       '@volar/language-core': 2.4.28
       '@vue/compiler-dom': 3.5.28
-      '@vue/shared': 3.5.28
+      '@vue/shared': 3.5.29
       alien-signals: 3.0.0
       muggle-string: 0.4.1
       path-browserify: 1.0.1
