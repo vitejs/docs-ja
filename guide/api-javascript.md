@@ -461,3 +461,27 @@ interface PreprocessCSSResult {
 使用するプリプロセッサーは、`filename` の拡張子から推定されます。`filename` の最後が `.module.{ext}` で終わる場合、[CSS module](https://github.com/css-modules/css-modules) として推定され、返される結果には、元のクラス名を変換後のクラス名にマッピングする `modules` オブジェクトが含まれます。
 
 プリプロセスは、`url()` や `image-set()` 内の URL を解決しないことに注意してください。
+
+## `version`
+
+**型:** `string`
+
+現在の Vite のバージョンを文字列で返します（例：`"8.0.0"`）。
+
+## `rolldownVersion`
+
+**型:** `string`
+
+Vite が使用する Rolldown のバージョンを文字列で返します（例：`"1.0.0"`）。`rolldown` の [`VERSION`](https://rolldown.rs/reference/Variable.VERSION) の再エクスポートです。
+
+## `esbuildVersion`
+
+**型:** `string`
+
+後方互換性のためにのみ保持されています。
+
+## `rollupVersion`
+
+**型:** `string`
+
+後方互換性のためにのみ保持されています。

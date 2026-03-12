@@ -477,6 +477,33 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
     }
     ```
 
+## プラグインコンテキストメタ {#plugin-context-meta}
+
+プラグインコンテキストにアクセスできるプラグインフックでは、Vite は `this.meta` に追加のプロパティを公開します：
+
+- `this.meta.viteVersion`: 現在の Vite バージョンの文字列（例：`"8.0.0"`）。
+
+::: tip Rolldown ベースの Vite の検出
+
+[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) は Rolldown ベースの Vite（つまり Vite 8+）でのみ利用できます。これを使用して、現在の Vite インスタンスが Rolldown ベースかどうかを検出できます：
+
+```ts
+function versionCheckPlugin(): Plugin {
+  return {
+    name: 'version-check',
+    buildStart() {
+      if (this.meta.rolldownVersion) {
+        // Rolldown ベースの Vite で実行されている場合のみ何かを行う
+      } else {
+        // Rollup ベースの Vite で実行されている場合は別のことを行う
+      }
+    },
+  }
+}
+```
+
+:::
+
 ## 出力バンドルメタデータ {#output-bundle-metadata}
 
 ビルド中、Vite は Rolldown のビルド出力オブジェクトに Vite 固有の `viteMetadata` フィールドを追加します。
