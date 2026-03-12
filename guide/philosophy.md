@@ -2,7 +2,7 @@
 
 ## 無駄のない拡張可能なコア
 
-Vite は、すべてのユーザーのすべてのユースケースをカバーするつもりはありません。Vite は、Web アプリケーションを構築するための最も一般的なパターンをすぐにサポートすることを目指していますが、プロジェクトの長期的な保守性を維持するために、[Vite のコア](https://github.com/vitejs/vite)は小さな API サーフェスで無駄のない状態を維持しなければなりません。この目標は、Rollup のプラグイン API のスーパーセットをベースにした [Vite のプラグインシステム](./api-plugin.md)のおかげで可能になりました。外部プラグインとして実装できる機能は、一般的に Vite コアには追加されません。[vite-plugin-pwa](https://vite-pwa-org.netlify.app/) は Vite コアで実現できることの素晴らしい例であり、あなたのニーズをカバーする[よく整備されたプラグイン](https://github.com/vitejs/awesome-vite#plugins)がたくさんあります。Vite のバンドラーである [Rolldown](https://rolldown.rs/) は Rollup のプラグインインターフェースとの互換性を維持しているため、プラグインは Vite プロジェクトとプレーンな Rollup の両方のプロジェクトで使用できることが多いです。
+Vite は、Web アプリケーションを構築するための最も一般的なパターンをすぐにサポートすることを目指す一方で、[Vite のコア](https://github.com/vitejs/vite)を無駄なく長期的に保守可能な状態に保っています。多様なユースケースをサポートする最善の方法は、プラグインが構築できる強力なプリミティブと API を提供することだと考えており、Vite をより拡張可能にするためにコアを積極的に拡張しています。[Vite のプラグインシステム](./api-plugin.md)は Rollup のプラグイン API のスーパーセットをベースにしており、[vite-plugin-pwa](https://vite-pwa-org.netlify.app/) のようなプラグインや、あなたのニーズをカバーする多くの[よく整備されたプラグイン](https://registry.vite.dev/plugins)を利用可能にします。Vite のバンドラーである [Rolldown](https://rolldown.rs/) は Rollup のプラグインインターフェースとの互換性を維持しているため、プラグインは Vite プロジェクトとプレーンな Rollup の両方のプロジェクトで使用できることが多いです。
 
 ## モダン Web を推し進める
 
