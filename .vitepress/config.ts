@@ -236,6 +236,10 @@ const config = defineConfig({
           { text: 'リリース', link: '/releases' },
           { text: '謝辞', link: '/acknowledgements' },
           {
+            text: 'プラグインレジストリ',
+            link: 'https://registry.vite.dev/plugins',
+          },
+          {
             text: 'The Documentary',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
           },
