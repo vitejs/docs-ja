@@ -302,6 +302,24 @@ export default defineConfig({
 
 オブジェクト形式の `output.manualChunks` オプションはサポートされなくなりました。関数形式の `output.manualChunks` は非推奨です。Rolldown にはより柔軟な [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) オプションがあります。`codeSplitting` の詳細については、Rolldown のドキュメントを参照してください: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)。
 
+### `build()` が `BundleError` をスロー
+
+_この変更は JS API ユーザーにのみ影響します。_
+
+`build()` は、プラグインでスローされた生のエラーの代わりに [`BundleError`](https://rolldown.rs/reference/TypeAlias.BundleError) をスローするようになりました。`BundleError` は `Error & { errors?: RolldownError[] }` として型付けされており、個々のエラーを `errors` 配列にラップします。個々のエラーが必要な場合は、`.errors` にアクセスする必要があります:
+
+```js
+try {
+  await build()
+} catch (e) {
+  if (e.errors) {
+    for (const error of e.errors) {
+      console.log(error.code) // エラーコード
+    }
+  }
+}
+```
+
 ### モジュールタイプのサポートと自動検出
 
 _この変更はプラグイン作成者にのみ影響します。_
