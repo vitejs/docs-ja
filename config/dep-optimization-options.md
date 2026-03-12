@@ -53,11 +53,7 @@ export default defineConfig({
 
 ## optimizeDeps.rolldownOptions <NonInheritBadge />
 
-- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`RolldownOptions`](https://rolldown.rs/reference/), `'input' | 'logLevel' | 'output'> & {
-  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
-    [`RolldownOutputOptions`](https://rolldown.rs/reference/),
-    `'format' | 'sourcemap' | 'dir' | 'banner'>`
-`}`
+- **型:** <code>Omit<<a href="https://rolldown.rs/reference/Interface.RolldownOptions">RolldownOptions</a>, 'input' | 'logLevel' | 'output'> & { output?: Omit<<a href="https://rolldown.rs/reference/#:~:text=Output%20Options">RolldownOutputOptions</a>, 'format' | 'sourcemap' | 'dir' | 'banner'> }</code>
 
 依存関係のスキャンと最適化の際、Rolldown に渡すオプション。
 
@@ -66,20 +62,10 @@ export default defineConfig({
 - `plugins` は Vite の依存関係プラグインとマージされます
 
 ## optimizeDeps.esbuildOptions <NonInheritBadge />
-<!-- textlint-disable -->
-- **型:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
-| 'bundle'
-| 'entryPoints'
-| 'external'
-| 'write'
-| 'watch'
-| 'outdir'
-| 'outfile'
-| 'outbase'
-| 'outExtension'
-| 'metafile'>`
+
+- **型:** <code>Omit<<a href="https://esbuild.github.io/api/#general-options">EsbuildBuildOptions</a>, 'bundle' | 'entryPoints' | 'external' | 'write' | 'watch' | 'outdir' | 'outfile' | 'outbase' | 'outExtension' | 'metafile'></code>
 - **非推奨**
-<!-- textlint-enable -->
+
 このオプションは内部的に `optimizeDeps.rolldownOptions` に変換されます。代わりに `optimizeDeps.rolldownOptions` を使用してください。
 
 ## optimizeDeps.force <NonInheritBadge />
