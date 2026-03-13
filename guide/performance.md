@@ -116,7 +116,6 @@ export default defineConfig({
 
 - 可能な限り、Sass/Less/Stylus の代わりに CSS を使用する（ネストは PostCSS / Lightning CSS で処理できます）。
 - SVG を UI フレームワークのコンポーネント（React、Vue など）に変換しないでください。代わりに文字列または URL としてインポートしてください。
-- `vitejs/plugin-react` を使用する場合は Babel オプションの設定を避けると、ビルド時の変換をスキップします（Oxc のみが使用されます）。
 
 ネイティブツールの使用例:
 

@@ -18,11 +18,11 @@ Vue 3 の JSX（[専用の Babel transform](https://github.com/vuejs/babel-plugi
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) と [Babel](https://babeljs.io/) を使用し、小さなパッケージフットプリントで高速な HMR や、Babel 変換パイプラインを使用できる柔軟性を実現します。Babel プラグインを追加しない場合は、Oxc Transformer のみが使用されます。
+[Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) を介して React Fast Refresh サポートを提供します。
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-開発中は Babel を [SWC](https://swc.rs/) に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+Oxc Transformer、それ以外は Oxc Transformer のみを使用します。カスタムプラグインが必要な大きなプロジェクトでは、そのプラグインが SWC でも利用可能な場合、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
+SWC プラグインを使用するために、開発中は Oxc を [SWC](https://swc.rs/) に置き換えます。プロダクションビルド時には、プラグインを使用する場合は SWC+Oxc Transformer を使用します。カスタムプラグインが必要な大きなプロジェクトでは、そのプラグインが SWC でも利用可能な場合、コールドスタートやホットモジュールリプレースメント（HMR）が大幅に高速化されます。
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
