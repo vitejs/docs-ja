@@ -18,6 +18,7 @@ const previousMajorLatestMinors: Record<string, string> = {
   '4': '4.5',
   '5': '5.4',
   '6': '6.4',
+  '7': '7.3',
 }
 
 // 現在の最新 Vite バージョンとサポート情報
