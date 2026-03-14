@@ -10,7 +10,7 @@ Vite（フランス語で「素早い」という意味の単語で `/viːt/`<bu
 
 - 非常に高速な [Hot Module Replacement (HMR)](./features#hot-module-replacement) など、[ネイティブ ES モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules)を利用した[豊富な機能拡張](./features)を提供する開発サーバー。
 
-- [Rollup](https://rollupjs.org) でコードをバンドルするビルドコマンド。プロダクション用に高度に最適化された静的アセットを出力するように事前に設定されています。
+- [Rolldown](https://rolldown.rs) でコードをバンドルするビルドコマンド。プロダクション用に高度に最適化された静的アセットを出力するように事前に設定されています。
 
 Vite はすぐに使える実用的なデフォルトが付属しています。[特徴ガイド](./features)で何ができるかをお読みください。フレームワークや他のツールとの統合は[プラグイン](./using-plugins)を通じて可能です。[設定セクション](../config/)では、必要に応じて Vite をプロジェクトに適合させる方法について説明します。
 
