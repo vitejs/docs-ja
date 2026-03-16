@@ -13,9 +13,9 @@
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.6",
     "@types/node": "^24.11.0",
-    "@voidzero-dev/vitepress-theme": "^4.8.1",
+    "@voidzero-dev/vitepress-theme": "^4.8.3",
     "feed": "^5.2.0",
-    "lint-staged": "^16.3.2",
+    "lint-staged": "^16.4.0",
     "markdown-it-image-size": "^15.0.1",
     "oxc-minify": "^0.115.0",
     "textlint": "^13.4.1",
@@ -38,7 +38,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.31.0",
+  "packageManager": "pnpm@10.32.1",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
