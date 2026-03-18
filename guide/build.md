@@ -185,7 +185,7 @@ export default defineConfig({
       },
       name: 'MyLib',
     },
-    rollupOptions: {
+    rolldownOptions: {
       // ライブラリーにバンドルされるべきではない依存関係を
       // 外部化するようにします
       external: ['vue'],
