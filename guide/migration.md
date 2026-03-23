@@ -100,16 +100,7 @@ const plugin = {
 
 :::: details ネイティブデコレーターを低レベル化する回避策
 
-当面の間、[Babel](https://babeljs.io/) または [SWC](https://swc.rs/) を使用してネイティブデコレーターを低レベル化できます。SWC は Babel より高速ですが、esbuild がサポートする**最新のデコレーター仕様をサポートしていません**。
-
-デコレーター仕様は stage 3 に到達して以来、複数回更新されています。各ツールがサポートしているバージョンは以下の通りです:
-
-- `"2023-11"`（esbuild、TypeScript 5.4+ および Babel がこのバージョンをサポート）
-- `"2023-05"`（TypeScript 5.2+ がこのバージョンをサポート）
-- `"2023-01"`（TypeScript 5.0+ がこのバージョンをサポート）
-- `"2022-03"`（SWC がこのバージョンをサポート）
-
-各バージョン間の違いについては、[Babel デコレーターバージョンガイド](https://babeljs.io/docs/babel-plugin-proposal-decorators#version)を参照してください。
+当面の間、[Babel](https://babeljs.io/) または [SWC](https://swc.rs/) を使用してネイティブデコレーターを低レベル化できます。
 
 **Babel を使用する場合:**
 
@@ -197,8 +188,7 @@ export default defineConfig({
         swc: {
           jsc: {
             parser: { decorators: true, decoratorsBeforeExport: true },
-            // 注意: SWC はまだ '2023-11' バージョンをサポートしていません
-            transform: { decoratorVersion: '2022-03' },
+            transform: { decoratorVersion: '2023-11' },
           },
         },
       }),
