@@ -539,7 +539,14 @@ const config = defineConfig({
     // languages used for twoslash and jsdocs in twoslash
     languages: ['ts', 'js', 'json'],
     codeTransformers: [
-      transformerTwoslash(),
+      transformerTwoslash({
+        twoslashOptions: {
+          compilerOptions: {
+            moduleResolution: 100, // bundler
+            ignoreDeprecations: '6.0', // twoslash が `baseUrl` を設定しなくなった際にこのオプションを完全に削除する
+          },
+        },
+      }),
       // style:* サポートを追加
       {
         root(hast) {
