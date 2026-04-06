@@ -85,6 +85,18 @@ class DevEnvironment {
    * モジュールグラフをウォームアップできます。
    */
   async warmupRequest(url: string): Promise<void>
+
+  /**
+   * モジュールランナーが指定されたモジュールの情報を取得するために呼び出されます。
+   * 内部的には `transformRequest` を呼び出し、その結果をモジュールランナーが
+   * 理解できる形式でラップします。
+   * このメソッドは手動で呼び出すことを意図していません。
+   */
+  async fetchModule(
+    id: string,
+    importer?: string,
+    options?: FetchFunctionOptions,
+  ): Promise<FetchResult>
 }
 ```
 
@@ -208,5 +220,71 @@ export class EnvironmentModuleGraph {
   ): void
 
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined
+}
+```
+
+## `FetchResult`
+
+`environment.fetchModule` メソッドはモジュールランナーが利用するための `FetchResult` を返します。`FetchResult` は `CachedFetchResult`、`ExternalFetchResult`、`ViteFetchResult` のユニオン型です。
+
+`CachedFetchResult` は HTTP ステータスコードの `304`（Not Modified）に類似しています。
+
+```ts
+export interface CachedFetchResult {
+  /**
+   * モジュールがランナーにキャッシュされている場合、
+   * サーバー側で無効化されていないことを確認します。
+   */
+  cache: true
+}
+```
+
+`ExternalFetchResult` はモジュールランナーに対して、[`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator) の `runExternalModule` メソッドを使用してモジュールをインポートするよう指示します。この場合、デフォルトのモジュール評価器は Vite でファイルを処理する代わりに、ランタイムのネイティブ `import` を使用します。
+
+```ts
+export interface ExternalFetchResult {
+  /**
+   * file:// で始まる外部化されたモジュールへのパス。
+   * デフォルトでは、Vite によって変換されて Vite ランナーで
+   * 読み込まれる代わりに、動的な "import" でインポートされます。
+   */
+  externalize: string
+  /**
+   * モジュールの種別。import 文が正しいかどうかを判断するために使用されます。
+   * たとえば、変数が実際にエクスポートされていない場合に Vite がエラーをスローするかどうかを判断します。
+   */
+  type: 'module' | 'commonjs' | 'builtin' | 'network'
+}
+```
+
+`ViteFetchResult` は実行する `code` やモジュールの `id`、`file`、`url` など、現在のモジュールに関する情報を返します。
+
+`invalidate` フィールドは、キャッシュから提供するのではなく、再実行前にモジュールを無効化するようモジュールランナーに指示します。これは通常、HMR 更新がトリガーされたときに `true` になります。
+
+```ts
+export interface ViteFetchResult {
+  /**
+   * Vite ランナーによって評価されるコード。
+   * デフォルトでは非同期関数でラップされます。
+   */
+  code: string
+  /**
+   * ディスク上のモジュールのファイルパス。
+   * import.meta.url/filename として解決されます。
+   * 仮想モジュールの場合は `null` になります。
+   */
+  file: string | null
+  /**
+   * サーバーモジュールグラフ内のモジュール ID。
+   */
+  id: string
+  /**
+   * import で使用されるモジュール URL。
+   */
+  url: string
+  /**
+   * クライアント側でモジュールを無効化します。
+   */
+  invalidate: boolean
 }
 ```
