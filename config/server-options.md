@@ -16,20 +16,7 @@
 
 Vite ではなく他のサーバーがレスポンスを返す場合があります。
 
-1 つ目の場合は `localhost` が利用されたときです。Node.js v17 未満はデフォルトでは DNS によって解決された結果のアドレスを並び替えます。`localhost` へアクセスするとき、ブラウザーは DNS を利用してアドレスを解決し、そのアドレスは Vite がリッスンしているアドレスと異なる場合があります。アドレスが異なっている場合は Vite は解決したアドレスを表示します。
-
-[`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) を設定することで、この並び替える動作を無効化できます。そうすると、Vite はアドレスを `localhost` と出力します。
-
-```js twoslash [vite.config.js]
-import { defineConfig } from 'vite'
-import dns from 'note:dns'
-
-dns.setDefaultResultOrder('verbatim')
-
-export default defineConfig({
-  // 省略
-})
-```
+1 つ目の場合は `localhost` が利用されたときです。Node.js の [`dns.setDefaultResultOrder`](https://nodejs.org/docs/latest-v24.x/api/dns.html#dnssetdefaultresultorderorder) は DNS で解決されたアドレスの順序を変更し、ブラウザーが Vite のリッスンしているアドレスとは異なるアドレスを使用する場合があります。アドレスが異なっている場合は Vite は解決したアドレスを表示します。
 
 2 つ目の場合はワイルドカードホスト（例: `0.0.0.0`）が利用されたときです。これは、ワイルドカードでないホストにリッスンしているサーバーが、ワイルドカードをリッスンしているサーバーよりも優先されるためです。
 
