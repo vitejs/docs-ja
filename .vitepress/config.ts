@@ -165,15 +165,18 @@ const config = defineConfig({
     ],
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: '7H67QR5P0A',
-        apiKey: '208bb9c14574939326032b937431014b',
-        indexName: 'vitejs',
-        searchParameters: {
-          facetFilters: ['tags:en'],
+        miniSearch: {
+          searchOptions: {
+            boostDocument(page) {
+              if (page.startsWith('/guide/')) return 2 // ガイドページを優先
+              if (page.startsWith('/config/')) return 1.5 // 次に設定ページ
+              if (page.startsWith('/blog/')) return 0 // ブログ記事はインデックスしない
+              return 1
+            },
+          },
         },
-        insights: true,
       },
     },
 
