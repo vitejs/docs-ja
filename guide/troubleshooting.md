@@ -287,6 +287,18 @@ Windows でプロジェクトにクロスドライブリンクがある場合、
 
 関連 issue: [#10802](https://github.com/vitejs/vite/issues/10802)
 
+### デフォルトインポートが予期せずオブジェクトを返す
+
+CJS モジュールのデフォルトインポートは `module.exports` オブジェクトを返しますが、`module.exports.default` の値が返ってくることを期待している場合があります。
+
+これにより次のようなエラーが発生する場合があります:
+
+> Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+> foo is not a function
+
+この問題の詳細については、Rolldown のドキュメントを参照してください: [Ambiguous `default` import from CJS modules - Bundling CJS | Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules).
+
 <script setup lang="ts">
 // redirect old links with hash to old version docs
 if (typeof window !== "undefined") {
