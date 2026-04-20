@@ -368,6 +368,8 @@ const plugin = {
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
   - `resolveFileUrl` フック
 - `parseAst` / `parseAstAsync` 関数は、より多くの機能を持つ `parseSync` / `parse` 関数に置き換えられ、非推奨となりました。
+- コメントは `renderChunk` フックの後ではなく、前に削除されるようになりました
+- [こちら](https://rolldown.rs/reference/OutputOptions.comments)に記載されているもの以外のコメントは移動されます。一方 Rollup は、隣接するコードが削除された場合にのみコメントを削除します
 
 ## v6 からの移行
 
