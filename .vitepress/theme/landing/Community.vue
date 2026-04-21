@@ -105,7 +105,7 @@ const testimonials: Testimonial[] = [
       >
         <!-- GitHub Stars -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">75k+</h2>
+          <h2 class="text-white">80k+</h2>
           <p class="text-grey flex items-center gap-2">
             <Icon icon="simple-icons:github" width="20px" height="20px" />
             GitHub スター
@@ -114,7 +114,7 @@ const testimonials: Testimonial[] = [
 
         <!-- NPM Downloads -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">40m+</h2>
+          <h2 class="text-white">80m+</h2>
           <p class="text-grey">週間 NPM ダウンロード数</p>
         </div>
       </div>
