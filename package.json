@@ -28,7 +28,7 @@
     "vitepress-plugin-graphviz": "^0.1.0",
     "vitepress-plugin-group-icons": "^1.7.5",
     "vitepress-plugin-llms": "^1.12.1",
-    "vue": "^3.5.32",
+    "vue": "^3.5.33",
     "vue-tsc": "^3.2.7",
     "yorkie": "^2.0.0"
   },
@@ -38,7 +38,7 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.33.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
