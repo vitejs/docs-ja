@@ -65,7 +65,7 @@ vite build [root]
 | `--base <path>`                | public のベースパス（デフォルト: `/`）（`string`）                                                                         |
 | `-l, --logLevel <level>`       | Info \| warn \| error \| silent （`string`）                                                                          |
 | `--clearScreen`                | ログを表示する際に画面をクリアするかどうか（`boolean`）                                                                |
-| `--configLoader <loader>`      | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）     |
+| `--configLoader <loader>`      | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）     |
 | `--profile`                    | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）|
 | `-d, --debug [feat]`           | デバッグログを表示する（`string \| boolean`）                                                                              |
 | `-f, --filter <filter>`        | デバッグログをフィルタリングする（`string`）                                                                                       |
@@ -96,7 +96,7 @@ vite optimize [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）                    |
 | `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`）         |
-| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）|
+| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）                     |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする（`string`）                      |
 | `-m, --mode <mode>`      | env モードを設定する（`string`）                                   |
@@ -127,7 +127,7 @@ vite preview [root]
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）          |
 | `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）           |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`） |
-| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか指定する（デフォルト: `bundle`）|
+| `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）               |
 | `-f, --filter <filter>`  | デバッグログをフィルタリングする（`string`）                        |
 | `-m, --mode <mode>`      | env モードを設定する（`string`）                             |
