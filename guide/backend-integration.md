@@ -21,7 +21,7 @@
      build: {
        // outDir に .vite/manifest.json を出力
        manifest: true,
-       rollupOptions: {
+       rolldownOptions: {
          // デフォルトの .html エントリーを上書き
          input: '/path/to/main.js',
        },
@@ -179,7 +179,7 @@
    ```
 
    マニフェスト内の各エントリーは、以下のいずれかを表します:
-   - **エントリーチャンク**: [`build.rollupOptions.input`](https://rollupjs.org/configuration-options/#input) で指定されたファイルから生成されます。これらのチャンクには `isEntry: true` があり、キーはプロジェクトルートからの相対パスです。
+   - **エントリーチャンク**: [`build.rolldownOptions.input`](https://rollupjs.org/configuration-options/#input) で指定されたファイルから生成されます。これらのチャンクには `isEntry: true` があり、キーはプロジェクトルートからの相対パスです。
    - **ダイナミックエントリーチャンク**: 動的インポートから生成されます。これらのチャンクには `isDynamicEntry: true` があり、キーはプロジェクトルートからの相対パスです。
    - **非エントリーチャンク**: キーは生成されたファイル名の前に `_` を付けたものです。
    - **アセットチャンク**: 画像やフォントなどのインポートされたアセットから生成されます。キーはプロジェクトルートからの相対パスです。
