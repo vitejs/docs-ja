@@ -9,7 +9,7 @@ jobs:
     name: Ryu Cho
     runs-on: ubuntu-latest
     steps:
-      - uses: vuejs-translations/ryu-cho@v1
+      - uses: vuejs-translations/ryu-cho@0a768f926097fce17a38358243c50003721627fb # v1
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           username: kiaking
