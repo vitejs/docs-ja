@@ -18,6 +18,6 @@ jobs:
           upstream-repo-branch: main
           head-repo: https://github.com/vitejs/vite
           head-repo-branch: main
-          track-from: 8fa75b5f9ff3730270d0793e860019b9aa4577de
+          track-from: b413bcee941b2436205397a67729c9475b0e32f8
           path-starts-with: docs/
           workflow-name: ryu-cho
