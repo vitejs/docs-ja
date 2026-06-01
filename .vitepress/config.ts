@@ -239,6 +239,10 @@ const config = defineConfig({
           { text: 'リリース', link: '/releases' },
           { text: '謝辞', link: '/acknowledgements' },
           {
+            text: '行動規範',
+            link: 'https://github.com/vitejs/.github/blob/main/CODE_OF_CONDUCT.md',
+          },
+          {
             text: 'プラグインレジストリ',
             link: 'https://registry.vite.dev/plugins',
           },
