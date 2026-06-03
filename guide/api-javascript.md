@@ -371,7 +371,7 @@ function loadEnv(
 
 **関連:** [`.env` ファイル](./env-and-mode.md#env-files)
 
-`envDir` 内の `.env` ファイルを読み込みます。デフォルトでは `prefixes` が変更されない限り、`VITE_` のプレフィックスのある環境変数のみが読み込まれます。
+`envDir` 内の `.env` ファイルを読み込み、`process.env` に既に存在する一致する変数とマージします。デフォルトでは `prefixes` が変更されない限り、`VITE_` のプレフィックスのある環境変数のみが読み込まれます。
 
 ## `normalizePath`
 
