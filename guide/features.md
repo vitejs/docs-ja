@@ -95,7 +95,7 @@ Vite は [esbuild](https://esbuild.github.io/) と同じ動作に従い、`tscon
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
 
-このオプションは部分的にのみサポートされています。完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators)を参照してください。
+このオプションは部分的にのみサポートされています。完全なサポートには TypeScript コンパイラーによる型推論が必要ですが、これはサポートされていません。詳細は [Oxc Transformer のドキュメント](https://oxc.rs/docs/guide/usage/transformer/typescript.html#decorators)を参照してください。
 
 #### `paths`
 
@@ -235,7 +235,7 @@ HTML ファイルは、Vite プロジェクトの[中心](/guide/#index-html-and
 
 ## JSX
 
-`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/) を介して行われます。
+`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer.html) を介して行われます。
 
 選択したフレームワークでは、すでに最初から JSX が設定されているはずです（たとえば、Vue を使用している人は公式の [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) プラグインを使用するべきです。これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します）。
 
