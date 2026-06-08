@@ -42,7 +42,7 @@ SSR サーバーのビルドターゲット。
 ## ssr.resolve.externalConditions
 
 - **型:** `string[]`
-- **デフォルト:** `['node']`
+- **デフォルト:** `['node', 'module-sync']`
 
 外部化された直接の依存関係（Vite にインポートされた外部の依存関係）の SSR インポート（`ssrLoadModule` を含む）の際に使用される条件。
 
