@@ -649,8 +649,25 @@ const module = await import(`./dir/${file}.js`)
 
 ## WebAssembly
 
-`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます。
-デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
+Vite はプリコンパイルされた `.wasm` ファイルをインポートする 2 つの方法をサポートしています: モジュールのエクスポートだけが必要な場合は [ES モジュール](#esm-integration)として直接インポートするか、インスタンス化を明示的に制御する必要がある場合は [`?init`](#manual-initialization) を使用します。
+
+### ESM 統合 {#esm-integration}
+
+`.wasm` ファイルを直接インポートできます。Vite はバイナリーからモジュールのインポートとエクスポートを読み取り、インスタンス化して、そのエクスポートを名前付き ES モジュールエクスポートとして再公開します:
+
+```js
+import { add } from './add.wasm'
+
+console.log(add(1, 2)) // 3
+```
+
+WebAssembly モジュール自体がインポートを宣言している場合、Vite は JavaScript モジュールからそれらを解決します。各インポートのモジュール名はインポート指定子として扱われ（`.wasm` ファイルからの相対パスで解決）、要求されたメンバーは自動的にインスタンスに接続されます。
+
+これは [WebAssembly/ES Module Integration の提案](https://github.com/WebAssembly/esm-integration)に従っています。WebAssembly モジュールは非同期にインスタンス化されるため、直接インポートされた `.wasm` ファイルは非同期モジュールとして振る舞い、トップレベルの `await` サポートが必要です。
+
+### 手動での初期化 {#manual-initialization}
+
+モジュールをいつ、どのようにインスタンス化するかを制御する必要がある場合は、`?init` を使ってインポートします。デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
 
 ```js twoslash
 import 'vite/client'
@@ -681,14 +698,9 @@ init({
 
 本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、[静的アセット](./assets.md)として扱われ、オンデマンドでフェッチされます。
 
-::: tip 注意
-[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
-[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティーのプラグインを使用して対処してください。
-:::
-
 ::: warning SSR ビルドでは、Node.js 互換のランタイムのみサポートされています
 
-ファイルを読み込む汎用的な方法がないため、`.wasm?init` の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこの機能は Node.js 互換のランタイムでのみ動作することを意味します。
+ファイルを読み込む汎用的な方法がないため、`.wasm` の直接インポートと `.wasm?init` の両方の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこれらの機能は Node.js 互換のランタイムでのみ動作することを意味します。
 
 :::
 
