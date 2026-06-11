@@ -620,6 +620,20 @@ const modulesWithBase = {
 
 結果として得られるすべてのモジュールキーは、ベースが指定されている場合にそこからの相対パスになるように変更されます。
 
+#### 大文字・小文字を区別するマッチング
+
+デフォルトでは、glob パターンのマッチングは大文字・小文字を区別します。`caseSensitive` オプションを使ってこの挙動を変更できます:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+const modules = import.meta.glob('./dir/module*.js', {
+  caseSensitive: false,
+})
+```
+
+`caseSensitive: false` を指定すると、glob はファイルの大文字・小文字に関係なくマッチします（例：`module*.js` は `Module.js`、`module.js`、`MODULE.js` のすべてにマッチします）。
+
 ### Glob インポートの注意事項
 
 注意点:
