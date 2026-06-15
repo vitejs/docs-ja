@@ -660,6 +660,44 @@ export default function myPlugin() {
 [`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) は、`exactRegex` や `prefixRegex` のようなフックフィルター用のいくつかのユーティリティーをエクスポートしています。これらは利便性のため `rolldown/filter` からも再エクスポートされています。
 :::
 
+## チャンクインポートマップ情報 {#chunk-import-map-information}
+
+:::info 実験的機能
+
+この機能は実験的であり、将来変更される可能性があります。
+
+:::
+
+[`build.chunkImportMap`](/config/build-options#build-chunkimportmap) オプションが有効になっている場合、生成されたチャンク内のインポート文は、ファイルパスの代わりに各チャンクのユニーク ID を使用します。
+
+チャンク ID からファイルパスへのマッピングを取得するには、`generateBundle` フックや `writeBundle` フック内でバンドルに出力されたインポートマップにアクセスできます。インポートマップには [`build.rolldownOptions.experimental.chunkImportMap.fileName`](https://rolldown.rs/reference/InputOptions.experimental#chunkimportmap) で指定された名前（デフォルトは `importmap.json`）が付きます。
+
+```ts
+function accessImportMap() {
+  let config: ResolvedConfig
+  return {
+    name: 'access-import-map',
+    configResolved(resolvedConfig) {
+      config = resolvedConfig
+    },
+    generateBundle(options, bundle) {
+      const chunkImportMap =
+        config.build.rolldownOptions.experimental?.chunkImportMap
+      if (chunkImportMap) {
+        const importMapFilename =
+          typeof chunkImportMap === 'object' && chunkImportMap.fileName
+            ? chunkImportMap.fileName
+            : 'importmap.json'
+        const importMap = bundle[importMapFilename]! as OutputAsset
+        const mapping = JSON.parse(importMap.source).imports
+        console.log(mapping)
+        // { "./entry.hash1.js": "./entry.hash2.js" }
+      }
+    },
+  }
+}
+```
+
 ## クライアントサーバーとの通信 {#client-server-communication}
 
 Vite の 2.9 から、プラグインによりクライアントとの通信に役立つ機能をいくつか提供しています。

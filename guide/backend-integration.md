@@ -270,3 +270,10 @@
    ```
 
    :::
+
+   :::info チャンクインポートマップのサポート（実験的）
+
+   実験的な [`build.chunkImportMap`](/config/build-options#build-chunkimportmap) オプションを使用している場合、インポートマップも HTML に注入する必要があります。
+
+   インポートマップは出力ディレクトリーの `importmap.json` に出力されます。`<script type="importmap">` タグを、`<script type="module">` タグや `<link rel="modulepreload">` タグよりも前に注入してください。
+   :::

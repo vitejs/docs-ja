@@ -147,6 +147,17 @@ npm add -D esbuild
 
 本番用のソースマップを作成します。`true` の場合、ソースマップファイルは別に作られます。`inline` の場合、ソースマップは出力結果ファイルにデータ URI として追加されます。`hidden` は `true` と同様に動作しますが、バンドルファイル内のソースマップを指し示すコメントは記述されません。
 
+## build.chunkImportMap
+
+- **型:** `boolean`
+- **デフォルト:** `false`
+- **実験的**
+- **関連:** [チャンクインポートマップの最適化](/guide/features#chunk-import-map-optimization)
+
+チャンクのキャッシュ効率を最適化するためにインポートマップ機能を使用するかどうか。
+
+このオプションには [`import.meta.resolve` のサポート](https://caniuse.com/mdn-javascript_operators_import_meta_resolve) が必要です。古いブラウザーをサポートする必要がある場合は、[`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を確認してください。
+
 ## build.rolldownOptions
 
 - **型:** [`RolldownOptions`](https://rolldown.rs/reference/)
