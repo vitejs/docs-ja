@@ -663,8 +663,25 @@ const module = await import(`./dir/${file}.js`)
 
 ## WebAssembly
 
-`?init` を使うことでプリコンパイルされた `.wasm` ファイルをインポートできます。
-デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
+Vite はプリコンパイルされた `.wasm` ファイルをインポートする 2 つの方法をサポートしています: モジュールのエクスポートだけが必要な場合は [ES モジュール](#esm-integration)として直接インポートするか、インスタンス化を明示的に制御する必要がある場合は [`?init`](#manual-initialization) を使用します。
+
+### ESM 統合 {#esm-integration}
+
+`.wasm` ファイルを直接インポートできます。Vite はバイナリーからモジュールのインポートとエクスポートを読み取り、インスタンス化して、そのエクスポートを名前付き ES モジュールエクスポートとして再公開します:
+
+```js
+import { add } from './add.wasm'
+
+console.log(add(1, 2)) // 3
+```
+
+WebAssembly モジュール自体がインポートを宣言している場合、Vite は JavaScript モジュールからそれらを解決します。各インポートのモジュール名はインポート指定子として扱われ（`.wasm` ファイルからの相対パスで解決）、要求されたメンバーは自動的にインスタンスに接続されます。
+
+これは [WebAssembly/ES Module Integration の提案](https://github.com/WebAssembly/esm-integration)に従っています。WebAssembly モジュールは非同期にインスタンス化されるため、直接インポートされた `.wasm` ファイルは非同期モジュールとして振る舞い、トップレベルの `await` サポートが必要です。
+
+### 手動での初期化 {#manual-initialization}
+
+モジュールをいつ、どのようにインスタンス化するかを制御する必要がある場合は、`?init` を使ってインポートします。デフォルトのエクスポートは、[`WebAssembly.Instance`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Instance) の Promise を返す初期化関数になります:
 
 ```js twoslash
 import 'vite/client'
@@ -695,14 +712,9 @@ init({
 
 本番ビルドでは、`assetInlineLimit` よりも小さい `.wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、[静的アセット](./assets.md)として扱われ、オンデマンドでフェッチされます。
 
-::: tip 注意
-[WebAssembly の ES モジュール統合の提案](https://github.com/WebAssembly/esm-integration)は現時点ではサポートしていません。
-[`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) か、もしくは他のコミュニティーのプラグインを使用して対処してください。
-:::
-
 ::: warning SSR ビルドでは、Node.js 互換のランタイムのみサポートされています
 
-ファイルを読み込む汎用的な方法がないため、`.wasm?init` の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこの機能は Node.js 互換のランタイムでのみ動作することを意味します。
+ファイルを読み込む汎用的な方法がないため、`.wasm` の直接インポートと `.wasm?init` の両方の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこれらの機能は Node.js 互換のランタイムでのみ動作することを意味します。
 
 :::
 
@@ -837,7 +849,7 @@ MIT License
 
 ## ビルドの最適化 {#build-optimizations}
 
-> 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。
+> 以下にリストされている機能は（実験的なチャンクインポートマップ機能を除き）、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に設定する必要はありません。
 
 ### CSS のコード分割
 
@@ -871,3 +883,21 @@ Entry ---> (A + C)
 ```
 
 これは `C` がさらにインポートする可能性があり、最適化されていないシナリオではさらに多くのラウンドトリップが発生します。Vite の最適化は、すべての直接インポートをトレースして、インポートの深さに関係なく、ラウンドトリップを完全に排除します。
+
+### チャンクインポートマップの最適化 {#chunk-import-map-optimization}
+
+チャンクのキャッシュヒット率を向上させるために、Vite はチャンクのインポートマップを作成できます。これにより、ES Modules で問題となるカスケード式のキャッシュ無効化を防ぎます。
+
+例えば、次のシナリオを考えてみましょう。
+
+```
+Entry --> A ---> C
+```
+
+`C` が更新された場合、本来無効化が必要なチャンクは `C` のみです。しかし、`A` が通常の URL を使ったスタティックインポートで `C` を参照している場合（つまり `C` のハッシュが URL に含まれている場合）、`A` の内容が変わるため `A` も無効化が必要となります。同じことが `Entry` にも当てはまります。
+
+インポートマップ機能を活用することで、この問題を回避できます。この最適化が有効になっていると、Vite は各チャンクの ID と URL を対応させるインポートマップを作成し、URL の代わりにチャンク ID をインポート文に使用します。これにより、チャンクが更新された場合、更新されたチャンクのみが無効化され、そのチャンクを参照するチャンクは無効化されません。
+
+この最適化は現在、CSS とアセットには適用されません。アセットを更新すると、それを参照するチャンクが無効化されます。ただし、無効化はカスケードしないため、無効化されたチャンクをインポートしているチャンクまでは無効化されません。
+
+この機能を有効にするには、[`build.chunkImportMap`](/config/build-options.md#build-chunkimportmap) を `true` に設定してください。
