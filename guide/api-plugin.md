@@ -183,7 +183,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 ### `config`
 
-- **型:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
+- **型:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **種類:** `async`, `sequential`
 
   Vite の設定を解決される前に変更します。このフックは生のユーザー設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
@@ -376,8 +376,9 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       path: string
       filename: string
       server?: ViteDevServer
-      bundle?: import('rollup').OutputBundle
-      chunk?: import('rollup').OutputChunk
+      bundle?: import('rolldown').OutputBundle
+      chunk?: import('rolldown').OutputChunk
+      originalUrl?: string
     },
   ) =>
     | IndexHtmlTransformResult
