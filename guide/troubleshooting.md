@@ -105,7 +105,7 @@ Linux で次のようなエラーが表示された場合:
 
 この問題を解決するには、信頼できる SSL 証明書を使用してください。
 
-参照: [キャッシュの問題](https://helpx.adobe.com/mt/experience-manager/kb/cache-problems-on-chrome-with-SSL-certificate-errors.html)、[Chrome の問題](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
+参照: [Chrome の問題](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
 
 #### macOS
 
