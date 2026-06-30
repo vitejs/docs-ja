@@ -101,7 +101,7 @@ Vite は [esbuild](https://esbuild.github.io/) と同じ動作に従い、`tscon
 
 - [TypeScript ドキュメント](https://www.typescriptlang.org/tsconfig/#paths)
 
-`resolve.tsconfigPaths: true` を指定すると、`tsconfig.json` 内の `paths` オプションを使用してインポートを解決するように Vite に指示できます。
+[`resolve.tsconfigPaths: true`](/config/shared-options.md#resolve-tsconfigpaths) を指定すると、`tsconfig.json` 内の `paths` オプションを使用してインポートを解決するように Vite に指示できます。
 
 この機能にはパフォーマンスコストがあり、[TypeScript チームはこのオプションを外部ツールの動作を変えるために使用することを推奨していない](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.)ことに注意してください。
 
