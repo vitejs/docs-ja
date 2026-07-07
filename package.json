@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@iconify/vue": "^5.0.1",
-    "@shikijs/vitepress-twoslash": "^4.3.0",
+    "@shikijs/vitepress-twoslash": "^4.3.1",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.6",
     "@types/node": "^24.13.2",
@@ -23,13 +23,13 @@
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-vuejs-jp": "git+https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp.git",
     "typescript": "~6.0.2",
-    "vite": "8.1.0",
+    "vite": "8.1.3",
     "vitepress": "^2.0.0-alpha.17",
     "vitepress-plugin-graphviz": "^0.1.0",
     "vitepress-plugin-group-icons": "^1.7.5",
     "vitepress-plugin-llms": "^1.13.2",
     "vue": "^3.5.39",
-    "vue-tsc": "^3.3.5",
+    "vue-tsc": "^3.3.6",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
