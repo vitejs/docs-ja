@@ -302,7 +302,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 ## xmit 静的サイトホスティング
 
-[xmit](https://xmit.co) を使用して静的サイトをデプロイする場合はこの[ガイド](https://xmit.dev/posts/vite-quickstart/)に従ってください。
+[xmit](https://xmit.co) を使用して静的サイトをデプロイする場合はこの[ガイド](https://xmit.dev/guides/vite-quickstart/)に従ってください。
 
 ## Zephyr Cloud
 
