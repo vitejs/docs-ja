@@ -142,7 +142,7 @@ export default defineConfig({
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         configure: (proxy, options) => {
-          // プロキシは 'http-proxy' のインスタンスになります
+          // プロキシは 'http-proxy-3' のインスタンスになります
         },
       },
       // Web ソケット か socket.io をプロキシ化:
