@@ -375,9 +375,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
       originalUrl?: string
     },
   ) =>
-    | IndexHtmlTransformResult
-    | void
-    | Promise<IndexHtmlTransformResult | void>
+    IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
 
   type IndexHtmlTransformResult =
     | string
