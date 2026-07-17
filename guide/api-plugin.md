@@ -143,9 +143,11 @@ console.log(msg)
 
 Vite では、`\0` はインポート URL で許可されていない文字なので、`\0{id}` の仮想 ID は、ブラウザーでの開発中に `/@id/__x00__{id}` としてエンコードされます。ID はプラグインパイプラインに入る前にデコードされて戻るので、これはプラグインフックコードには表示されません。
 
-## 共通のフック
+## Rolldown フック {#rolldown-hooks}
 
 開発中、Vite 開発サーバーは、Rolldown が行うのと同じ方法で [Rolldown ビルドフック](https://rolldown.rs/apis/plugin-api#build-hooks)を呼び出すプラグインコンテナーを作成します。
+
+すべての Rolldown フックは[環境ごとのフック](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)です。
 
 以下のフックはサーバー起動時に一度だけ呼び出されます:
 
@@ -179,6 +181,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 - **型:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **種類:** `async`, `sequential`
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   Vite の設定を解決される前に変更します。このフックは生のユーザー設定（CLI オプションが設定ファイルにマージされたもの）と使用されている `mode` と `command` を公開する現在の設定環境を受け取ります。既存の設定に深くマージされる部分的な設定オブジェクトを返したり、設定を直接変更できます（デフォルトのマージで目的の結果が得られない場合）。
 
@@ -216,6 +219,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 - **型:** `(config: ResolvedConfig) => void | Promise<void>`
 - **種類:** `async`, `parallel`
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   Vite プラグインが解決された後に呼び出されます。このフックを使って、最終的に解決された設定を読み取って保存します。このフックはプラグインがコマンドの実行に基づいて何か別のことをする必要がある場合にも便利です。
 
@@ -252,6 +256,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 - **型:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
 - **種類:** `async`, `sequential`
 - **参照:** [ViteDevServer](./api-javascript#vitedevserver)
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   開発サーバーを設定するためのフック。内部の [connect](https://github.com/senchalabs/connect) アプリにカスタムミドルウェアを追加するのが最も一般的な使用例です:
 
@@ -313,6 +318,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 - **型:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
 - **種類:** `async`, `sequential`
 - **参照:** [PreviewServer](./api-javascript#previewserver)
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   [`configureServer`](/guide/api-plugin.html#configureserver) と同じですがプレビューサーバー用です。`configureServer` と同様に、`configurePreviewServer` フックは他のミドルウェアがインストールされる前に呼び出されます。他のミドルウェアをインストールした**後に**ミドルウェアをインジェクトしたい場合は、`configurePreviewServer` から関数を返すことで、内部のミドルウェアがインストールされた後に呼び出されるようにすることができます:
 
@@ -335,6 +341,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 
 - **型:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
 - **種類:** `async`, `sequential`
+- **スコープ:** [環境ごと](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   `index.html` などの HTML エントリーポイントファイルを変換するための専用フック。このフックは現在の HTML 文字列と変換コンテキストを受け取ります。コンテキストは開発時には [`ViteDevServer`](./api-javascript#vitedevserver) を公開し、ビルド時には Rollup の出力バンドルを公開します。
 
@@ -408,6 +415,7 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
 - **型:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
 - **種類:** `async`、`sequential`
 - **参照:** [HMR API](./api-hmr)
+- **スコープ:** [環境ごと](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   カスタム HMR 更新処理を実行します。このフックは以下のシグネチャーのコンテキストオブジェクトを受け取ります:
 
