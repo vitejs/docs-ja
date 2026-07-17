@@ -12,6 +12,8 @@
    import { defineConfig } from 'vite'
    // ---cut---
    export default defineConfig({
+     // デフォルトの .html エントリーを上書き
+     input: '/path/to/main.js',
      server: {
        cors: {
          // ブラウザ経由でアクセスするオリジン
@@ -21,10 +23,6 @@
      build: {
        // outDir に .vite/manifest.json を出力
        manifest: true,
-       rolldownOptions: {
-         // デフォルトの .html エントリーを上書き
-         input: '/path/to/main.js',
-       },
      },
    })
    ```
