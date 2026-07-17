@@ -336,6 +336,10 @@ export default defineConfig({
 
 ### `buildApp` プラグインフック
 
+- **型:** `(this: MinimalPluginContextWithoutEnvironment, builder: ViteBuilder) => Promise<void>`
+- **種類:** `async`, `sequential`
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
 `builder.buildApp` 設定オプションに加えて、プラグインは `buildApp` フックを定義してアプリのビルドに参加できます。設定オプションとプラグインフックは定義された順序で実行されます。order が `'pre'` または `null` のフックが最初に実行され、次に設定された `builder.buildApp`、その後 order が `'post'` のフックが実行されます。フック内では、`environment.isBuilt` で環境がすでにビルドされているかどうかを確認でき、プラグインが同じ環境を二重にビルドするのを防げます。
 
 ### `createBuilder` でプログラム的にビルドする
