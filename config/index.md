@@ -14,7 +14,7 @@ export default {
 }
 ```
 
-`package.json` に `"type": "module"` などでプロジェクトがネイティブな Node ESM を使用していない場合でも、Vite は設定ファイルで ES モジュール構文の使用をサポートしています。この場合、設定ファイルはロードの前に自動的に前処理されます。
+設定ファイルで ES モジュール構文を使用するには、そのファイルが Node.js によって ESM として検出される必要があることに注意してください。たとえば `.mjs` 拡張子を使うか、直近の `package.json` に `"type": "module"` が設定された `.js` ファイルにする必要があります。
 
 また、CLI の `--config` オプションで、使用するコンフィグファイルを明示的に指定することもできます（`cwd` からの相対的な解決）:
 
@@ -25,9 +25,7 @@ vite --config my-config.js
 <ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05jg?via=vite" title="Configuring Vite">Scrimba でインタラクティブなレッスンを見る</ScrimbaLink>
 
 ::: tip 設定の読み込み
-デフォルトでは、Vite は [Rolldown](https://rolldown.rs/) を使用して設定を一時ファイルにバンドルし、読み込みます。これはモノレポ内で TypeScript をインポートする際に問題を引き起こす可能性があります。このアプローチで問題が起きた場合は、代わりに [module runner](/guide/api-environment-runtimes.html#modulerunner) を使用するように `--configLoader runner` を指定できます。これにより、一時的な設定が作成されなくなり、すべてのファイルがその場で変換されるようになります。モジュールランナーは設定ファイル内では CJS をサポートしていませんが、外部の CJS パッケージは通常通りに機能するはずです。
-
-あるいは、TypeScript をサポートする環境（例：`node --experimental-strip-types`）を使用している場合、またはプレーンな JavaScript のみを記述している場合は、`--configLoader native` を指定して、環境のネイティブランタイムを使用して設定ファイルを読み込むことができます。設定ファイルによってインポートされたモジュールの更新は検出されないため、Vite サーバーは自動的に再起動されないことに注意してください。
+デフォルトでは、Vite は [Rolldown](https://rolldown.rs/) を使用して設定を一時ファイルにバンドルし、読み込みます。TypeScript をサポートする環境（例：Node 22.18 以降）を使用している場合、またはプレーンな JavaScript のみを記述している場合は、`--configLoader native` を指定して、環境のネイティブランタイムを使用して設定ファイルを読み込むことができます。`configLoader: 'native'` は将来のメジャーバージョンでデフォルトになる予定です。
 :::
 
 ## 設定の自動補完
