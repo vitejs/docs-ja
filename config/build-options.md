@@ -164,6 +164,8 @@ npm add -D esbuild
 
 基礎となる Rolldown バンドルを直接カスタマイズします。これは、Rolldown 設定ファイルからエクスポートされるオプションと同じで、Vite 内部の Rolldown オプションにマージされます。詳細は [Rolldown options docs](https://rolldown.rs/reference/) を参照してください。
 
+`build.rolldownOptions.input` の代わりに、トップレベルの [`input`](/config/shared-options#input) オプションを設定することをおすすめします。これは開発時にも使用されるためです。`build.rolldownOptions.input` が設定されている場合、ビルド時のみトップレベルの `input` オプションを上書きします。
+
 ## build.rollupOptions
 
 - **型:** `RolldownOptions`
@@ -180,10 +182,10 @@ npm add -D esbuild
 
 ## build.lib
 
-- **型:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
+- **型:** `{ entry?: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **関連:** [ライブラリーモード](/guide/build#library-mode)
 
-ライブラリーとしてビルドします。ライブラリーではエントリーとして HTML を使用できないため、`entry` が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。
+ライブラリーとしてビルドします。`entry` はデフォルトでトップレベルの [`input`](/config/shared-options#input) オプションになり、ライブラリーではエントリーとして HTML を使用できないため、どちらか一方が必要です。`name` は公開されているグローバル変数で、`formats` に `'umd'` や `'iife'` が含まれている場合に必要です。
 
 `fileName` はパッケージファイルの出力名で、デフォルトでは `package.json` の `"name"` となります。 また、`format` と `entryName` を引数として受け取り、ファイル名を返す関数として定義することもできます。
 
@@ -280,7 +282,7 @@ export default defineConfig({
 - **デフォルト:** `false`
 - **関連:** [サーバーサイドレンダリング](/guide/ssr)
 
-SSR 向けのビルドを生成します。この値は、SSR エントリーを直接指定する文字列か、`true` にして `rolldownOptions.input` で SSR エントリーを指定する必要があります。
+SSR 向けのビルドを生成します。この値は、SSR エントリーを直接指定する文字列か、`true` にして [`input`](/config/shared-options#input) または `build.rolldownOptions.input` で SSR エントリーを指定する必要があります。
 
 ## build.emitAssets
 
