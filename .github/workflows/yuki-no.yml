@@ -15,7 +15,7 @@ jobs:
     name: Yuki-no
     runs-on: ubuntu-latest
     steps:
-      - uses: Gumball12/yuki-no@v1
+      - uses: Gumball12/yuki-no@6379b1eeb16492952331d3cea3f7dd4685768eb4 # v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           head-repo: https://github.com/vitejs/vite
