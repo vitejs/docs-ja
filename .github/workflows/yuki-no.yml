@@ -1,0 +1,25 @@
+name: yuki-no
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  actions: read
+
+jobs:
+  yuki-no:
+    name: Yuki-no
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Gumball12/yuki-no@v1
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          head-repo: https://github.com/vitejs/vite
+          head-repo-branch: main
+          track-from: be9631658f5191ee5c5665e780239d42a330280a
+          include: |
+            docs/**
