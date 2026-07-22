@@ -213,7 +213,7 @@ Cloudflare Pages を使用すると、Wrangler ファイルを管理すること
 
 プロジェクトのインポートとデプロイ後、以降のブランチへのプッシュは [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) で停止しない限り[プレビューデプロイ](https://developers.cloudflare.com/pages/platform/preview-deployments/)を生成します。本番ブランチ（一般的には「main」）への全ての変更は本番へデプロイされます。
 
-Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) をご覧ください。
+Pages ではカスタムドメインの追加やカスタムビルドの設定が行えます。詳しくは [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/configuration/git-integration/) をご覧ください。
 
 ## Google Firebase
 
@@ -288,7 +288,7 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 5. **Create Static Site** をクリックします。アプリは `https://<PROJECTNAME>.onrender.com/` にデプロイされるはずです。
 
-デフォルトでは、指定したブランチへコミットがプッシュされると自動的に新しいデプロイを開始します。[Auto-Deploy](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) はプロジェクト設定で変更できます。
+デフォルトでは、指定したブランチへコミットがプッシュされると自動的に新しいデプロイを開始します。[Auto-Deploy](https://render.com/docs/deploys#configuring-auto-deploys) はプロジェクト設定で変更できます。
 
 プロジェクトに [custom domain](https://render.com/docs/custom-domains) も追加できます。
 
