@@ -18,7 +18,7 @@ Vite の内部および公式プラグインは、幅広いエコシステムと
 
 ただし、コミュニティープラグインのパフォーマンスは Vite のコントロール範囲外であり、これが開発者体験に影響を与える可能性があります。追加の Vite プラグインを使用する際に注意すべきポイントがいくつかあります。
 
-1. 特定のケースでのみ使用される大きな依存関係は、Node.js の起動時間を短縮するために動的にインポートする必要があります。リファクタリングの例: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) および [vite-plugin-pwa#224](https://github.com/vite-pwa/vite-plugin-pwa/pull/244)。
+1. 特定のケースでのみ使用される大きな依存関係は、Node.js の起動時間を短縮するために動的にインポートする必要があります。リファクタリングの例: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) および [vite-plugin-pwa#244](https://github.com/vite-pwa/vite-plugin-pwa/pull/244)。
 
 2. `buildStart`、`config`、`configResolved` フックは、長時間かかるような大規模な操作をすべきではありません。これらのフックは開発サーバーの起動中に待機されるので、ブラウザーでサイトにアクセスできるまでに時間がかかります。
 
