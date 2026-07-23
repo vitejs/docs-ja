@@ -117,7 +117,7 @@ export default defineConfig({
 ビルド時には、エントリーポイントとして複数の `.html` ファイルを指定するだけです:
 
 ```js twoslash [vite.config.js]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -141,7 +141,7 @@ HTML ファイルの場合、Vite は `rolldownOptions.input` オブジェクト
 ::: code-group
 
 ```js twoslash [vite.config.js（単一エントリー）]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -169,7 +169,7 @@ export default defineConfig({
 ```
 
 ```js twoslash [vite.config.js（複数エントリー）]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
