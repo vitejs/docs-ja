@@ -234,7 +234,7 @@ CommonJS (CJS) モジュールからの `default` インポートが一貫した
 
 - インポーターが `.mjs` または `.mts` です。
 - インポーターの最も近い `package.json` の `type` フィールドが `module` に設定されています。
-- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が `true` に設定されていない。
 
 ::: details 以前の動作
 
@@ -242,11 +242,11 @@ CommonJS (CJS) モジュールからの `default` インポートが一貫した
 
 - _インポーターが依存関係の最適化に含まれている_かつ `.mjs` または `.mts` です。
 - _インポーターが依存関係の最適化に含まれている_かつインポーターの最も近い `package.json` の `type` フィールドが `module` に設定されています。
-- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が `true` に設定されていない。
 
 ビルド時の条件は以下の通りでした:
 
-- インポート先 CJS モジュールの `module.exports.__esModule` 値が true に設定されていない。
+- インポート先 CJS モジュールの `module.exports.__esModule` 値が `true` に設定されていない。
 - _`module.exports` の `default` プロパティが存在しない_。
 
 （[`build.commonjsOptions.defaultIsModuleExports`](https://github.com/rollup/plugins/tree/master/packages/commonjs#defaultismoduleexports) がデフォルトの `'auto'` から変更されていないと仮定）
@@ -362,7 +362,7 @@ const plugin = {
 - `build.target` オプションに同じブラウザーの複数のバージョンを渡すとエラーになります: esbuild は最新バージョンを選択しますが、これはおそらく意図したものではありません。
 - Rolldown によるサポートの欠如: 以下の機能は Rolldown でサポートされておらず、Vite でもサポートされなくなりました。
   - `build.rollupOptions.output.format: 'system'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)）
-  - `build.rollupOptions.output.format: 'amd'`（[rolldown#2387](https://github.com/rolldown/rolldown/issues/2528)）
+  - `build.rollupOptions.output.format: 'amd'`（[rolldown#2528](https://github.com/rolldown/rolldown/issues/2528)）
   - `shouldTransformCachedModule` フック（[rolldown#4389](https://github.com/rolldown/rolldown/issues/4389)）
   - `resolveImportMeta` フック（[rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)）
   - `renderDynamicImport` フック（[rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)）
