@@ -130,7 +130,15 @@ export default defineConfig(({ mode }) => {
 
 ## VS Code で設定ファイルをデバッグする
 
-デフォルトの `--configLoader bundle` の動作では、Vite は生成された一時的な設定ファイルを `node_modules/.vite-temp` フォルダーに書き込むため、Vite の設定ファイル内でブレークポイントデバッグを設定するときにファイルが見つからないというエラーが発生します。この問題を修正するには、`.vscode/settings.json` に以下の設定を追加してください:
+最も信頼性の高いデバッグ体験を得るには、Vite を起動する際にネイティブの設定ローダーを使用してください:
+
+```bash
+vite --configLoader native
+```
+
+ネイティブローダーは元の設定ファイルを直接実行するため、設定ファイルや `transform` などのプラグインフック内のブレークポイントが元のソースにマップされます。これには、設定ファイルで使用されている構文をサポートするランタイム（TypeScript ファイルの場合は Node.js 22.18 以降など）が必要です。
+
+`--configLoader bundle`（現在のデフォルトですが、将来のメジャーバージョンでは `native` がデフォルトになる予定です）を使用する場合、Vite は生成されたインラインソースマップとともにバンドルされた設定ファイルを `node_modules/.vite-temp` に書き込んでからそれを読み込みます。バンドルローダーを使用する必要がある場合は、JavaScript Debug Terminal 用に一時ディレクトリーを `.vscode/settings.json` に追加してください:
 
 ```json
 {
@@ -141,5 +149,29 @@ export default defineConfig(({ mode }) => {
       "**/node_modules/.vite-temp/**"
     ]
   }
+}
+```
+
+この設定は JavaScript Debug Terminal にのみ適用され、Run and Debug ビューから起動する起動構成には影響しません。Run and Debug ビューでこれをサポートするには、`.vscode/launch.json` に一時ディレクトリーを追加してください:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["exec", "vite", "--configLoader", "bundle"],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+        "**/node_modules/.vite-temp/**"
+      ]
+    }
+  ]
 }
 ```
