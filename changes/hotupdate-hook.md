@@ -4,7 +4,7 @@
 [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-[Environment API](/guide/api-environment.md)を意識するために、`handleHotUpdate` プラグインフックを非推奨とし、[`hotUpdate` フック](/guide/api-environment#the-hotupdate-hook)を使用し、`create` と `delete` で追加の監視イベントを処理する予定です。
+[Environment API](/guide/api-environment.md)を意識するために、`handleHotUpdate` プラグインフックを非推奨とし、[`hotUpdate` フック](/guide/api-environment-plugins#the-hotupdate-hook)を使用し、`create` と `delete` で追加の監視イベントを処理する予定です。
 
 影響範囲: `Vite プラグイン作成者`
 
