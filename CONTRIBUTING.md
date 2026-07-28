@@ -6,9 +6,9 @@
 ## 貢献方法
 
 ### GitHub Issues にある本家ドキュメントの差分更新
-英語版ドキュメントが更新されると、自動的に本リポジトリーにも issue が生成されるようになっています（説明文が `New updates on head repo.` となっているもの）。
+英語版ドキュメントが更新されると、自動的に本リポジトリーにも issue が生成されるようになっています（`sync` ラベルが付いているもの）。
 
-1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) から、[このクエリー](https://github.com/vitejs/docs-ja/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc+New+updates+on+head+repo.) でソート & フィルターして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
+1. [GitHub Issues](https://github.com/vitejs/docs-ja/issues) から、[このクエリー](https://github.com/vitejs/docs-ja/issues?q=is%3Aissue+is%3Aopen+label%3Async+sort%3Acreated-asc) でソート & フィルターして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
 2. 選択した issue で、「対応します！」などのコメントで宣言します（`vitejs/docs-ja` のメンテナーの方々は、GitHub の assign 機能で self assign で OK です）
 3. このリポジトリー `vitejs/docs-ja` のメンテナーから同 issue でリアクションされたら、自分が選んだ issue の担当者として正式にアサインされたことになります
 4. このリポジトリーをフォークします！
