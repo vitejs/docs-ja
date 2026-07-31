@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import VersionsList from './VersionsList.vue'
 
 declare const __VITE_VERSION__: string
 
@@ -86,15 +87,6 @@ function computeSupportInfo(
   }
 }
 
-function versionsToText(versions: string[]) {
-  versions = versions.map((v) => `<code>vite@${v}</code>`)
-  if (versions.length === 0) return ''
-  if (versions.length === 1) return versions[0]
-  return (
-    versions.slice(0, -1).join('、') + ' および ' + versions[versions.length - 1]
-  )
-}
-
 function isValidViteVersion(version: string) {
   if (version.length === 1) version += '.'
   // Vite 0.x は記載すべきではなく、Vite 1.x はリリースされなかった
@@ -107,15 +99,15 @@ function isValidViteVersion(version: string) {
   <div>
     <ul>
       <li v-if="supportInfo.regularPatches.length">
-        定期的なパッチは <span v-html="versionsToText(supportInfo.regularPatches)"></span> にリリースされます。
+        定期的なパッチは <VersionsList :versions="supportInfo.regularPatches" /> にリリースされます。
 
       </li>
       <li v-if="supportInfo.importantFixes.length">
-        重要な修正とセキュリティパッチは <span v-html="versionsToText(supportInfo.importantFixes)"></span> にバックポートされます。
+        重要な修正とセキュリティパッチは <VersionsList :versions="supportInfo.importantFixes" /> にバックポートされます。
 
       </li>
       <li v-if="supportInfo.securityPatches.length">
-        セキュリティパッチは <span v-html="versionsToText(supportInfo.securityPatches)"></span> にもバックポートされます。
+        セキュリティパッチは <VersionsList :versions="supportInfo.securityPatches" /> にもバックポートされます。
 
       </li>
       <li>
