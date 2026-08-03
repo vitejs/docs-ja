@@ -296,10 +296,6 @@ VS Code に拡張機能をインストールし、アプリのルートに移動
 
 [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) を使用して静的サイトをデプロイする場合はこの[案内](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite)に従ってください。
 
-## Kinsta 静的サイトホスティング
-
-[Kinsta](https://kinsta.com/static-site-hosting/) を使用して静的サイトをデプロイする場合はこの[案内](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite)に従ってください。
-
 ## xmit 静的サイトホスティング
 
 [xmit](https://xmit.co) を使用して静的サイトをデプロイする場合はこの[ガイド](https://xmit.dev/guides/vite-quickstart/)に従ってください。
