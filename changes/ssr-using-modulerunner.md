@@ -4,7 +4,7 @@
 [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)でフィードバックをお寄せください。
 :::
 
-`server.ssrLoadModule` は [Module Runner](/guide/api-environment#modulerunner) からのインポートに置き換えられました。
+`server.ssrLoadModule` は [Module Runner](/guide/api-environment-runtimes#modulerunner) からのインポートに置き換えられました。
 
 影響範囲: `Vite プラグイン作成者`
 
