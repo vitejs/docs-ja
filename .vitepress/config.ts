@@ -122,9 +122,9 @@ const config = defineConfig({
   themeConfig: {
     variant: 'vite',
     banner: {
-      id: 'vuefes2026-volunteer-staff',
-      text: 'Vue Fes Japan 2026 ボランティアスタッフ募集!!',
-      url: 'https://note.com/moe6811/n/n883644700208',
+      id: 'vuefes2026-ticket',
+      text: 'Vue Fes Japan 2026 チケット販売中！',
+      url: 'https://vuefes.jp/2026/ticket',
     },
 
     editLink: {
