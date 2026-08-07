@@ -11,7 +11,7 @@ v6 および v7 の Vite に統合された Rolldown のテクニカルプレビ
 - Firefox 104 → 114
 - Safari 16.0 → 16.4
 
-これらのブラウザーバージョンは、2026 年 1 月 1 日時点の [Baseline Widely Available](https://web-platform-dx.github.io/web-features/) 機能セットに準拠します。つまり、これらはすべて約 2 年半前にリリースされたものです。
+これらのブラウザーバージョンは、2026 年 1 月 1 日時点の [Baseline Widely Available](https://web-platform-dx.github.io/baseline/) 機能セットに準拠します。つまり、これらはすべて約 2 年半前にリリースされたものです。
 
 ## Rolldown
 

@@ -6,7 +6,7 @@
 
 ## ブラウザーの互換性 {#browser-compatibility}
 
-デフォルトでは、プロダクションバンドルは [Baseline](https://web-platform-dx.github.io/web-features/) Widely Available ターゲットに含まれるモダンなブラウザーを前提としています。デフォルトのブラウザーサポート範囲は次のとおりです:
+デフォルトでは、プロダクションバンドルはメジャーリリースごとに固定された日付時点の [Baseline](https://web-platform-dx.github.io/baseline/) Widely Available と互換性のある最小のブラウザーバージョンをターゲットにします。このメジャーにおけるデフォルトのブラウザーサポート範囲は次のとおりです:
 
 <!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
