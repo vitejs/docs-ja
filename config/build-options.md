@@ -364,7 +364,7 @@ gzip 圧縮されたサイズレポートを有効/無効にします。大き�
 - **型:** [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)`| null`
 - **デフォルト:** `null`
 
-Rollup ウォッチャーを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
+Rolldown ウォッチャーを有効にするには、`{}` に設定します。これは主に、ビルドのみのプラグインや統合プロセスを伴うケースで使用されます。
 
 ::: warning Windows Subsystem for Linux (WSL) 2 上での Vite の実行
 

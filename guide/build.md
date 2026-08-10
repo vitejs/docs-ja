@@ -84,7 +84,7 @@ window.addEventListener('vite:preloadError', (event) => {
 
 ## ファイル変更時のリビルド
 
-`vite build --watch` で rollup のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) を直接調整することもできます:
+`vite build --watch` で Rolldown のウォッチャーを有効にすることができます。 また、`build.watch` を介して基礎となる [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) を直接調整することもできます:
 
 ```js [vite.config.js]
 export default defineConfig({
