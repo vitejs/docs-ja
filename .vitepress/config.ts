@@ -123,7 +123,7 @@ const config = defineConfig({
     variant: 'vite',
     banner: {
       id: 'vuefes2026-ticket',
-      text: 'Vue Fes Japan 2026 チケット販売中！',
+      text: 'Vue Fes Japan 2026 チケット販売中！ 早割は 8/31 まで',
       url: 'https://vuefes.jp/2026/ticket',
     },
 
