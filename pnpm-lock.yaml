@@ -25,7 +25,7 @@ importers:
         version: 24.13.3
       '@voidzero-dev/vitepress-theme':
         specifier: ^5.0.4
-        version: 5.0.4(focus-trap@8.2.2)(typescript@6.0.2)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0))(vitepress@2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.2))
+        version: 5.0.4(focus-trap@8.2.2)(typescript@6.0.2)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0))(vitepress@2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.2))
       feed:
         specifier: ^6.0.0
         version: 6.0.0
@@ -57,11 +57,11 @@ importers:
         specifier: 8.2.0
         version: 8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0)
       vitepress:
-        specifier: ^2.0.0-alpha.19
-        version: 2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
+        specifier: 2.0.0-alpha.18
+        version: 2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
       vitepress-plugin-graphviz:
         specifier: ^0.1.0
-        version: 0.1.0(vitepress@2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))
+        version: 0.1.0(vitepress@2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))
       vitepress-plugin-group-icons:
         specifier: ^1.7.6
         version: 1.7.6(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0))
@@ -507,6 +507,12 @@ packages:
 
   '@rive-app/canvas-lite@2.34.0':
     resolution: {integrity: sha512-ZM7wmvOwka37o1woG4E9QOLLUAeuVI8QDPdzqI/rik89dqNCSnMUbfP3DvG9lWofmmujbHCIExmXCyWqXqDHTw==}
+
+  '@rolldown/binding-android-arm64@1.2.2':
+    resolution: {integrity: sha512-l7x215OGvo1s52JWmR8U/DAVzEDWBCIbTm28aeJV/WDTSHgcKXaZTuBT0hJMs5NggilfJTW3clZVvd24yfKJxA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [android]
 
   '@rolldown/binding-darwin-arm64@1.2.2':
     resolution: {integrity: sha512-9u9Xv6c1AJZT0FfwH5vrMG5Jjcwhc1MlyrPu0XfTqkzsmqfks2M6W/o5XwAJgVVN/jHpqqngC1WevHKKTIUtIA==}
@@ -3008,8 +3014,8 @@ packages:
     resolution: {integrity: sha512-3/L1ceexjpJirWWGlfvqx2hmaDTFGSkSHrn3y2C7RZm6lNa/vmvU49Ayr4GxLYQfOFfo9CP6rsWdD+6rEbnIxA==}
     engines: {node: '>=18'}
 
-  vitepress@2.0.0-alpha.19:
-    resolution: {integrity: sha512-WnBsb0Bwr43kXKyiis+lld/7ri3hnMbthS8N3hpFtjjwsdLO4IRmiAE08D7aud4q6oMDf9uwRowxzNqRFe/amw==}
+  vitepress@2.0.0-alpha.18:
+    resolution: {integrity: sha512-Lk1G2/QqSf+MwNLICl9fmzWOtoCEwjZoWgaQy41QvWTfcGpLE9XwJDbcCyES/9rj6R2g1zFqFvLVkYKLLDALFw==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -3433,6 +3439,9 @@ snapshots:
   '@oxc-project/types@0.142.0': {}
 
   '@rive-app/canvas-lite@2.34.0': {}
+
+  '@rolldown/binding-android-arm64@1.2.2':
+    optional: true
 
   '@rolldown/binding-darwin-arm64@1.2.2':
     optional: true
@@ -3881,7 +3890,7 @@ snapshots:
       vite: 8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0)
       vue: 3.5.40(typescript@6.0.2)
 
-  '@voidzero-dev/vitepress-theme@5.0.4(focus-trap@8.2.2)(typescript@6.0.2)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0))(vitepress@2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.2))':
+  '@voidzero-dev/vitepress-theme@5.0.4(focus-trap@8.2.2)(typescript@6.0.2)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0))(vitepress@2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.2))':
     dependencies:
       '@docsearch/css': 4.6.3
       '@docsearch/js': 4.6.3
@@ -3898,7 +3907,7 @@ snapshots:
       minisearch: 7.2.0
       reka-ui: 2.7.0(typescript@6.0.2)(vue@3.5.40(typescript@6.0.2))
       tailwindcss: 4.1.18
-      vitepress: 2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
+      vitepress: 2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
       vue: 3.5.40(typescript@6.0.2)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -5799,6 +5808,7 @@ snapshots:
       '@oxc-project/types': 0.142.0
       '@rolldown/pluginutils': 1.0.1
     optionalDependencies:
+      '@rolldown/binding-android-arm64': 1.2.2
       '@rolldown/binding-darwin-arm64': 1.2.2
       '@rolldown/binding-darwin-x64': 1.2.2
       '@rolldown/binding-freebsd-x64': 1.2.2
@@ -6397,10 +6407,10 @@ snapshots:
       jiti: 2.6.1
       yaml: 2.9.0
 
-  vitepress-plugin-graphviz@0.1.0(vitepress@2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)):
+  vitepress-plugin-graphviz@0.1.0(vitepress@2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)):
     dependencies:
       '@hpcc-js/wasm-graphviz': 1.21.2
-      vitepress: 2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
+      vitepress: 2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0)
 
   vitepress-plugin-group-icons@1.7.6(vite@8.2.0(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.9.0)):
     dependencies:
@@ -6429,7 +6439,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress@2.0.0-alpha.19(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0):
+  vitepress@2.0.0-alpha.18(@types/node@24.13.3)(esbuild@0.27.3)(jiti@2.6.1)(postcss@8.5.25)(typescript@6.0.2)(yaml@2.9.0):
     dependencies:
       '@docsearch/css': 4.7.0
       '@docsearch/js': 4.7.0
