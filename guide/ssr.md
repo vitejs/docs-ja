@@ -65,7 +65,7 @@ if (import.meta.env.SSR) {
 
 SSR をビルドする際、メインサーバーを完全に制御し、Vite を本番環境から切り離したいと思うでしょう。したがってミドルウェアモードで Vite を使用することをお勧めします。これは [express](https://expressjs.com/) での例です:
 
-```js{15-18} twoslash [server.js]
+```js{12-15} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
 import express from 'express'
