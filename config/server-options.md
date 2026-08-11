@@ -330,10 +330,12 @@ Vite を WSL2 で実行している際、ファイルシステム監視はファ
 
 ## server.middlewareMode
 
-- **型:** `boolean`
+- **型:** `boolean | { server: http.Server }`
 - **デフォルト:** `false`
 
 ミドルウェアモードで Vite サーバーを作成します。
+
+WebSocket 用に [proxy](./server-options#server-proxy) が設定されている場合、プロキシを正しくバインドするために `server` を渡す必要があります。
 
 - **関連:** [appType](./shared-options#apptype), [SSR - 開発サーバーのセットアップ](/guide/ssr#setting-up-the-dev-server)
 
