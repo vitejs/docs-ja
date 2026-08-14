@@ -123,6 +123,8 @@ CSS コード分割を有効/無効にします。有効にすると、非同期
 
 このオプションを使用すると、CSS ミニファイのブラウザーターゲットを、JavaScript の変換に使用されるものと違う設定にできます。
 
+`build.cssMinify` が（デフォルトの）`'lightningcss'` の場合、このオプションはミニファイの処理において [`css.lightningcss.targets`](./shared-options.md#css-lightningcss) よりも優先されます。
+
 これは主流でないブラウザーをターゲットにしている場合にのみ使用してください。
 例えば Android の WeChat WebView は、ほとんどのモダンな JavaScript の機能をサポートしていますが、[CSS の `#RGBA` 16 進表記](https://developer.mozilla.org/ja/docs/Web/CSS/color_value#rgb_色)はサポートしていません。
 この場合、Vite が `rgba()` の色を `#RGBA` の 16 進表記に変換するのを防ぐために、`build.cssTarget` を `chrome61` に設定する必要があります。
