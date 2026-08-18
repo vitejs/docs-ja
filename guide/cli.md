@@ -22,6 +22,7 @@ vite [root]
 | `--cors`                  | CORS を有効化する（`boolean`）                                                                                 |
 | `--strictPort`            | 指定されたポートが既に使用されている場合は終了する（`boolean`）                                                                   |
 | `--force`                 | オプティマイザーにキャッシュを無視して再バンドルさせる（`boolean`）                                                                 |
+| `--experimentalBundle`    | 実験的なフルバンドルモードを使用する（非常に実験的な機能です）（`boolean`）                                                              |
 | `-c, --config <file>`     | 指定された設定ファイルを使用する（`string`）                                                                             |
 | `--base <path>`           | public のベースパス（デフォルト: `/`）（`string`）                                                                    |
 | `-l, --logLevel <level>`  | info \| warn \| error \| silent （`string`）                                                             |
