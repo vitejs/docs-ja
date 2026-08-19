@@ -64,7 +64,7 @@ vite build [root]
 | `-w, --watch`                  | ディスク上のモジュールが変更されたときに再ビルドする（`boolean`）                                                             |
 | `-c, --config <file>`          | 指定された設定ファイルを使用する（`string`）                                                                               |
 | `--base <path>`                | public のベースパス（デフォルト: `/`）（`string`）                                                                         |
-| `-l, --logLevel <level>`       | Info \| warn \| error \| silent （`string`）                                                                          |
+| `-l, --logLevel <level>`       | info \| warn \| error \| silent （`string`）                                                                          |
 | `--clearScreen`                | ログを表示する際に画面をクリアするかどうか（`boolean`）                                                                |
 | `--configLoader <loader>`      | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）     |
 | `--profile`                    | 組み込みの Node.js インスペクターを起動する（[パフォーマンスのボトルネック](/guide/troubleshooting#performance-bottlenecks)を確認してください）|
@@ -95,7 +95,7 @@ vite optimize [root]
 | `--force`                | オプティマイザーにキャッシュを無視して再バンドルさせる（`boolean`）|
 | `-c, --config <file>`    | 指定された設定ファイルを使用する（`string`）                      |
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）                    |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）                        |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent （`string`）                        |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`）         |
 | `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）                     |
@@ -126,7 +126,7 @@ vite preview [root]
 | `--outDir <dir>`         | 出力ディレクトリー（デフォルト: `dist`）（`string`）        |
 | `-c, --config <file>`    | 指定された設定ファイルを使用する（`string`）                |
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）          |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent （`string`）           |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent （`string`）           |
 | `--clearScreen`          | ログを表示する際に画面をクリアするかどうか（`boolean`） |
 | `--configLoader <loader>` | `bundle` で Rolldown を使用して設定をバンドルするか、`runner`（実験的）でその場で処理するか、`native`（実験的）でネイティブランタイムを使用して読み込むか指定する（デフォルト: `bundle`）|
 | `-d, --debug [feat]`     | デバッグログを表示する（`string \| boolean`）               |
