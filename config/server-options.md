@@ -160,6 +160,12 @@ export default defineConfig({
 })
 ```
 
+::: warning WebSocket のオリジンチェックについて
+
+Vite はプロキシ処理を行う前に WebSocket リクエストのオリジンをチェックしません。プロキシ先で `Origin` ヘッダーなどのチェックを行うことが期待されています。`rewriteWsOrigin` オプションを使用するとオリジンがターゲットのオリジンに書き換えられ、オリジンチェックがバイパスされてしまうことに注意してください。
+
+:::
+
 ## server.cors
 
 - **型:** `boolean | CorsOptions`
