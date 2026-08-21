@@ -311,6 +311,8 @@ export default defineConfig({
 
 [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api) に渡すファイルシステムウォッチャーのオプションです。
 
+bundled-dev モードが有効な場合、[Rolldown のウォッチオプション](https://rolldown.rs/reference/InputOptions.watch)（`usePolling`、`pollInterval`、`useDebounce`、`debounceDuration`、`include`、`exclude` など）も受け付けます。chokidar 専用のオプションは、引き続き chokidar ウォッチャーで使用され、設定ファイルの依存関係や env ファイルなど、モジュールグラフの外にあるファイルの監視を続けます。
+
 Vite サーバーのウォッチャーはデフォルトで `root` を監視し、`.git/`、`node_modules/`、test-results/`、および Vite の `cacheDir` と `build.outDir` ディレクトリーをスキップします。監視されているファイルを更新すると Vite は HMR を適用し、必要な場合にのみページを更新します。
 
 `null` に設定すると、ファイルは監視されません。[`server.watcher`](/guide/api-javascript.html#vitedevserver) は互換性のあるイベントエミッターを提供しますが、`add` または `unwatch` を呼び出しても効果はありません。
