@@ -240,7 +240,7 @@ vite build --profile
 アプリケーションをブラウザーで開いたら、読み込みが終わるのを待ち、ターミナルに戻って `p` キーを押し（Node.js インスペクターを停止します）、次に `q` キーを押して開発サーバーを停止します。
 :::
 
-Node.js インスペクターはルートフォルダーに `vite-profile-0.cpuprofile` を生成し、https://www.speedscope.app/ に遷移、`BROWSE` ボタンを使って CPU プロファイルをアップロードし、結果を検証します。
+Node.js インスペクターはルートフォルダーに `vite-profile-0.cpuprofile` を生成します。代わりに `<name>.cpuprofile` を書き込むには `--profile <name>`（または `--profile=<name>`）を渡します。https://www.speedscope.app/ に遷移、`BROWSE` ボタンを使って CPU プロファイルをアップロードし、結果を検証します。
 
 [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) をインストールすると、Vite プラグインの中間状態を検査でき、アプリケーションのボトルネックとなっているプラグインやミドルウェアを特定するのに役立ちます。このプラグインは開発モードとビルドモードの両方で使用できます。詳しくは readme ファイルをご覧ください。
 
