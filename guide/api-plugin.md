@@ -337,6 +337,58 @@ Vite プラグインは Vite 特有の目的を果たすフックを提供する
   })
   ```
 
+### `closeServer`
+
+- **型:** `(context: { reason: 'restart' | 'close' }) => void | Promise<void>`
+- **種類:** `async`, `parallel`
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
+  開発サーバーが再起動または終了されたとき、サーバーが破棄された後に呼び出されます。通常、[`configureServer`](/guide/api-plugin.html#configureserver) で作成したリソースを破棄するために使用します。
+
+  `context.reason` は次の 2 つのケースを区別します:
+  - `'restart'`: サーバーが再起動中である（設定ファイルの変更や `server.restart()` の呼び出しなど）。
+  - `'close'`: サーバーが終了中である（`q` ショートカットや `server.close()` の呼び出しなど）。
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-server',
+      configureServer(server) {
+        resource = createResource()
+      },
+      async closeServer({ reason }) {
+        if (reason === 'close') {
+          await resource.dispose()
+        }
+      },
+    }
+  }
+  ```
+
+### `closePreviewServer`
+
+- **型:** `() => void | Promise<void>`
+- **種類:** `async`, `parallel`
+- **スコープ:** [グローバル](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
+  [`closeServer`](/guide/api-plugin.html#closeserver) と同じですがプレビューサーバー用です。プレビューサーバーは再起動されることがないため、`reason` はありません。
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-preview-server',
+      configurePreviewServer(server) {
+        resource = createResource()
+      },
+      async closePreviewServer() {
+        await resource.dispose()
+      },
+    }
+  }
+  ```
+
 ### `transformIndexHtml`
 
 - **型:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
