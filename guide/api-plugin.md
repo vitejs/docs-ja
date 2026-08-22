@@ -596,6 +596,33 @@ function outputMetadataPlugin(): Plugin {
 }
 ```
 
+## 出力されたアセットの参照
+
+プラグインからアセットを出力するには、[`this.emitFile({ type: 'asset', ... })`](https://rolldown.rs/reference/Interface.PluginContext#in-depth-type-asset) を呼び出します。これは `referenceId` を返します。アセットの最終的なファイル名はバンドルが生成されるまでわからないため、この `referenceId` を使ってアセットの URL を生成できます。
+
+### JavaScript の場合
+
+`import.meta.ROLLDOWN_FILE_URL_<referenceId>` を使用します:
+
+```js
+const referenceId = this.emitFile({
+  type: 'asset',
+  name: 'icon.png',
+  source: fileContent,
+})
+
+// これは JavaScript の式なので、クエリやハッシュを追加する場合は文字列連結で行う
+return `export default import.meta.ROLLDOWN_FILE_URL_${referenceId} + '#frag'`
+```
+
+### CSS または HTML の場合
+
+`import.meta.ROLLDOWN_FILE_URL_<referenceId>` は JavaScript の式の位置でのみ機能します。CSS や HTML では、代わりに `__VITE_ASSET__<referenceId>__` というトークンを使用し、クエリやハッシュはその直後に追加します:
+
+```css
+background: url(__VITE_ASSET__<referenceId>__#frag);
+```
+
 ## プラグインの順序 {#plugin-ordering}
 
 Vite プラグインは、さらに（webpack loader と同様の）`enforce` プロパティを指定して、適用の順序を調整できます。`enforce` の値は `"pre"` か `"post"` のいずれかです。解決されたプラグインは、以下の順序になります:
