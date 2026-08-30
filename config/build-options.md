@@ -86,7 +86,7 @@ modulePreload: {
 - **型:** `string`
 - **デフォルト:** `assets`
 
-生成されたアセットをネストするディレクトリーを指定します（`build.outDir` からの相対パス。[ライブラリーモード](/guide/build#library-mode)では使用しません）。
+生成されたアセットをネストするディレクトリーを指定します（`build.outDir` からの相対パス）。[ライブラリーモード](/guide/build#library-mode)では使用しません。
 
 ## build.assetsInlineLimit
 
