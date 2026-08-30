@@ -30,7 +30,7 @@ vite --config my-config.js
 
 ## 設定の自動補完
 
-Vite には TypeScript の型が同梱されているので、jsdoc のタイプヒントを使って IDE の自動補完を活用できます:
+Vite には TypeScript の型が同梱されているので、JSDoc のタイプヒントを使って IDE の自動補完を活用できます:
 
 ```js
 /** @type {import('vite').UserConfig} */
@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-あるいは、jsdoc のアノテーションがなくても自動補完を提供する `defineConfig` ヘルパーを使用することもできます:
+あるいは、JSDoc のアノテーションがなくても自動補完を提供する `defineConfig` ヘルパーを使用することもできます:
 
 ```js
 import { defineConfig } from 'vite'
