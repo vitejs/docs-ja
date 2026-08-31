@@ -120,8 +120,8 @@ const config = defineConfig({
   themeConfig: {
     variant: 'vite',
     banner: {
-      id: 'vuefes2026-ticket',
-      text: 'Vue Fes Japan 2026 チケット販売中！ 早割は 8/31 まで',
+      id: 'vuefes2026-ticket2',
+      text: 'Vue Fes Japan 2026 チケット販売中！ 購入はお早めに',
       url: 'https://vuefes.jp/2026/ticket',
     },
 
