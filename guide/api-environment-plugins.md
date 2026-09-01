@@ -242,6 +242,8 @@ export default defineConfig({
 })
 ```
 
+`applyToEnvironment` や `perEnvironmentPlugin` から返されるプラグインは、Vite 固有のフックを使用すべきではないことに注意してください。
+
 `applyToEnvironment` フックは設定時に呼び出されます。エコシステム内のプロジェクトがプラグインを変更しているため、現在は `configResolved` の後に呼び出されています。環境プラグインの解決は、将来的には `configResolved` の前に移動される可能性があります。
 
 ## アプリケーション・プラグイン通信 {#application-plugin-communication}
