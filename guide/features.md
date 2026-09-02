@@ -53,7 +53,7 @@ export type { T }
 
 ### TypeScript コンパイラーオプション
 
-Vite は `tsconfig.json` のいくつかのオプションを尊重し、対応する Oxc Transformer のオプションを設定します。各ファイルに対して、Vite はそのファイルにマッチする最も近い親の `tsconfig.json`、またはその [`references`](https://www.typescriptlang.org/tsconfig/#references) フィールドで参照されファイルにマッチする設定を使用します。Vite は、ファイルが設定の [`files`](https://www.typescriptlang.org/tsconfig/#files)、[`include`](https://www.typescriptlang.org/tsconfig/#include)、[`exclude`](https://www.typescriptlang.org/tsconfig/#exclude) フィールドを満たす場合に、その設定がファイルにマッチすると判断します。
+Vite は `tsconfig.json` のいくつかのオプションを尊重し、対応する Oxc Transformer のオプションを設定します。デフォルトでは、Vite は各ファイルにマッチする最も近い親の `tsconfig.json` を使用します。その設定の [`references`](https://www.typescriptlang.org/tsconfig/#references) フィールドで参照される設定がファイルにマッチする場合は、そちらが使用されます。Vite は、ファイルが設定の [`files`](https://www.typescriptlang.org/tsconfig/#files)、[`include`](https://www.typescriptlang.org/tsconfig/#include)、[`exclude`](https://www.typescriptlang.org/tsconfig/#exclude) フィールドを満たす場合に、その設定がファイルにマッチすると判断します。
 
 オプションが Vite の設定と `tsconfig.json` の両方に設定されている場合、Vite の設定の値が優先されます。
 
