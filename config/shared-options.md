@@ -629,6 +629,20 @@ define: {
 
 詳細は [Vite DevTools](https://github.com/vitejs/devtools) を参照してください。
 
+## tsconfig
+
+- **型:** `string`
+
+Vite が使用する TypeScript 設定ファイルへのパス。相対パスはプロジェクトの [`root`](#root) から解決されます。
+
+このオプションが設定されていない場合、Vite はファイルごとに最も近い `tsconfig.json` を探します。詳細は [TypeScript コンパイラーオプション](/guide/features#typescript-compiler-options) を参照してください。
+
+::: warning 自動検出を優先してください
+このオプションの設定は推奨されません。TypeScript の言語サーバーと連携している Vite のファイルごとの tsconfig 自動検出を上書きしてしまうためです。複数プロジェクト構成では、設定対象のファイルの近くに `tsconfig.json` を配置し、TypeScript の [`references`](https://www.typescriptlang.org/tsconfig/#references) を使用することを優先してください。
+
+インポートをリマップすることが目的の場合は、[`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig/#paths) のためだけに tsconfig を選択するのではなく、[`resolve.alias`](#resolve-alias) や `package.json` の `imports`、`exports` フィールドを優先してください。このオプションは、自動検出で意図した設定を特定できない場合にのみ使用してください。
+:::
+
 ## future
 
 - **型:** `Record<string, 'warn' | undefined>`
