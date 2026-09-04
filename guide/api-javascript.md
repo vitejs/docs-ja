@@ -205,7 +205,7 @@ async function build(
 
 **使用例:**
 
-```js twoslash [vite.config.js]
+```js twoslash
 import path from 'node:path'
 import { build } from 'vite'
 
