@@ -624,8 +624,22 @@ define: {
 - **型:** `boolean` | `DevToolsConfig`
 - **デフォルト:** `false`
 
-内部状態の可視化やビルド分析のための devtools 統合を有効にします。
-`@vitejs/devtools` が依存関係としてインストールされていることを確認してください。この機能は現在ビルドモードでのみサポートされています。
+dev サーバーの検査とビルド分析のための devtools 統合を有効にします。
+`@vitejs/devtools` が依存関係としてインストールされていることを確認してください。Vite dev サーバーを検査するには `@vitejs/devtools-vite` を、ビルド分析を有効にするには `@vitejs/devtools-rolldown` をインストールしてください。DevTools はデフォルトで `serve` と `build` の両方で実行されます。いずれかのコマンドに限定するには `apply` を使用してください。
+
+プラグインの `config` フックでは `devtools` オプションを変更できません。代わりにユーザー設定で設定してください。
+
+インストールされている場合、`@vitejs/devtools` はこのオプションの型定義を提供します:
+
+```ts
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  devtools: {
+    apply: 'serve',
+  },
+})
+```
 
 詳細は [Vite DevTools](https://github.com/vitejs/devtools) を参照してください。
 
