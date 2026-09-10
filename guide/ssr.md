@@ -102,6 +102,52 @@ createServer()
 
 ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
 
+::: tip SSR 専用モジュールの更新
+デフォルトでは、SSR 環境からのみインポートされているモジュールを更新しても、ブラウザー側のページはリロードされません。フレームワークとのインテグレーションでは、通常これが処理されます。低レベルなカスタム SSR セットアップの場合、SSR 専用モジュールが変更されたときにブラウザーをリロードするプラグインを追加できます:
+
+```ts twoslash
+import type { EnvironmentModuleNode, Plugin } from 'vite'
+
+export function ssrReload(): Plugin {
+  return {
+    name: 'ssr-reload',
+    enforce: 'post',
+    hotUpdate: {
+      order: 'post',
+      handler({ modules, server, timestamp }) {
+        if (this.environment.name !== 'ssr') return
+
+        const invalidatedModules = new Set<EnvironmentModuleNode>()
+        let hasSsrOnlyModules = false
+
+        for (const mod of modules) {
+          if (mod.file == null) continue
+          const clientModules =
+            server.environments.client.moduleGraph.getModulesByFile(mod.file)
+          if (clientModules != null) continue
+
+          this.environment.moduleGraph.invalidateModule(
+            mod,
+            invalidatedModules,
+            timestamp,
+            true,
+          )
+          hasSsrOnlyModules = true
+        }
+
+        if (hasSsrOnlyModules) {
+          server.environments.client.hot.send({ type: 'full-reload' })
+          return []
+        }
+      },
+    },
+  }
+}
+```
+
+上記の例で `createViteServer` に渡される `plugins` 配列に `ssrReload()` を追加してください。詳細は [`hotUpdate` フック](./api-environment-plugins#the-hotupdate-hook) を参照してください。
+:::
+
 次のステップはサーバーサイドでレンダリングされた HTML を提供するための `*` ハンドラーの実装です:
 
 ```js twoslash [server.js]
