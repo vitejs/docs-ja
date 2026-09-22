@@ -467,21 +467,21 @@ export default defineConfig({
 ## server.sourcemapIgnoreList
 
 - **型:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
-- **デフォルト:** `(sourcePath) => sourcePath.includes('node_modules')`
+- **デフォルト:** `(sourcePath) => /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)`
 
 サーバーのソースマップにあるソースファイルを無視するかどうか。[`x_google_ignoreList` ソースマップ拡張](https://developer.chrome.com/articles/x-google-ignore-list/)を設定するため使用されます。
 
 `server.sourcemapIgnoreList` は、開発サーバーの [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rolldown.rs/reference/OutputOptions.sourcemapIgnoreList) に相当します。2 つの設定オプションの違いは、Rolldown の関数が `sourcePath` の相対パスで呼び出されるのに対して、`server.sourcemapIgnoreList` は絶対パスで呼び出されることです。開発中、ほとんどのモジュールはマップとソースが同じフォルダーにあるため、`sourcePath` の相対パスはファイル名そのものになります。このような場合、代わりに絶対パスを使用するのが便利です。
 
-デフォルトでは `node_modules` を含むすべてのパスを除外します。この動作を無効にするには `false` を渡します。もしくは、完全に制御するには、ソースパスとソースマップパスを受け取り、ソースパスを無視するかどうかを返す関数を指定します。
+デフォルトでは、パスセグメントとして `node_modules` を含むすべてのパスを除外します。この動作を無効にするには `false` を渡します。もしくは、完全に制御するには、ソースパスとソースマップパスを受け取り、ソースパスを無視するかどうかを返す関数を指定します。
 
 ```js
 export default defineConfig({
   server: {
-    // これはデフォルトの値であり、パスに node_modules を含むすべての
-    // ファイルを無視リストに追加します。
+    // これはデフォルトの値であり、パスセグメントとして
+    // node_modules を含むすべてのファイルを無視リストに追加します。
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
-      return sourcePath.includes('node_modules')
+      return /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)
     },
   },
 })
