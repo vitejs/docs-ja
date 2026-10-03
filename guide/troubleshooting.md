@@ -135,6 +135,20 @@ Dev Container や VS Code のポートフォワーディング機能を使用し
 
 より詳しくは、[#16522](https://github.com/vitejs/vite/issues/16522)を参照してください。
 
+### ファイルを監視する際の不正な操作エラー
+
+ファイルやディレクトリがファイルシステムイベントをサポートしていないファイルシステム上にある場合、Vite はそれを監視できないことがあります。
+
+発生する可能性のあるエラーの例:
+
+```
+Error: EISDIR: illegal operation on a directory, watch 'C:/Users/me/project/vite.config.js'
+```
+
+例えば、これは VirtualBox の共有フォルダーで発生することがあります。
+
+これを解決するには、[`server.watch.usePolling`](/config/server-options#server-watch) を有効にしてください。なお、[`usePolling` は CPU 使用率が高くなる](https://github.com/paulmillr/chokidar/tree/3.6.0#performance)ことに注意してください。
+
 ## HMR
 
 ### Vite がファイルの変更を検知しているのに HMR が動作しない
