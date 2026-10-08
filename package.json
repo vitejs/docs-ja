@@ -36,11 +36,5 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@12.9.1",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "yorkie"
-    ]
-  }
+  "packageManager": "pnpm@12.9.1"
 }
