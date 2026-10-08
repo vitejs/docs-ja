@@ -222,12 +222,12 @@ await moduleRunner.import('/src/entry-point.js')
 ## `ModuleRunnerOptions`
 
 ```ts twoslash
+import type { Debug } from '@type-challenges/utils'
 import type {
   InterceptorOptions as InterceptorOptionsRaw,
   ModuleRunnerHmr as ModuleRunnerHmrRaw,
   EvaluatedModules,
 } from 'vite/module-runner'
-import type { Debug } from '@type-challenges/utils'
 
 type InterceptorOptions = Debug<InterceptorOptionsRaw>
 type ModuleRunnerHmr = Debug<ModuleRunnerHmrRaw>
@@ -249,7 +249,10 @@ interface ModuleRunnerOptions {
    * オブジェクトを提供できます。
    */
   sourcemapInterceptor?:
-    false | 'node' | 'prepareStackTrace' | InterceptorOptions
+    | false
+    | 'node'
+    | 'prepareStackTrace'
+    | InterceptorOptions
   /**
    * HMR を無効にするか、HMR オプションを設定します。
    *
@@ -269,8 +272,8 @@ interface ModuleRunnerOptions {
 **型シグネチャー:**
 
 ```ts twoslash
-import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
 import type { Debug } from '@type-challenges/utils'
+import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
 
 type ModuleRunnerContext = Debug<ModuleRunnerContextRaw>
 
@@ -326,8 +329,8 @@ RPC 経由または関数を直接呼び出して環境と通信するトラン�
 ::: code-group
 
 ```js [worker.js]
-import { parentPort } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
+import { parentPort } from 'node:worker_threads'
 import {
   ESModulesEvaluator,
   ModuleRunner,
