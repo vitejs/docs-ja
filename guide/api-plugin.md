@@ -56,8 +56,7 @@ export default defineConfig({
 また `plugins` は、複数のプラグインを含むプリセットを 1 つの要素として受け入れることもできます。これは、複数のプラグインを使って実装した複雑な機能（フレームワークの統合など）に便利です。配列は内部的にフラット化されます。
 
 ```js
-// framework-plugin
-import frameworkDevtools from 'vite-plugin-framework-devtools'
+import frameworkDevTools from 'vite-plugin-framework-devtools'
 import frameworkRefresh from 'vite-plugin-framework-refresh'
 
 export default function framework(config) {
