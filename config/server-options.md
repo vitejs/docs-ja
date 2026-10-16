@@ -248,7 +248,7 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 ## server.forwardConsole
 
 - **型:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
-- **デフォルト:** 自動 ([`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent) により AI コーディングエージェントが検出された場合は `true`、それ以外の場合は `false`)
+- **デフォルト:** 自動 ([`std-env`](https://www.npmjs.com/package/std-env) により AI コーディングエージェントが検出された場合は `true`、それ以外の場合は `false`)
 
 開発中にブラウザーランタイムイベントを Vite サーバーコンソールにフォワーディングします。
 
