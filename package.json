@@ -24,9 +24,9 @@
     "vite": "8.3.4",
     "vitepress": "^2.0.0-alpha.20",
     "vitepress-plugin-graphviz": "^0.1.0",
-    "vitepress-plugin-group-icons": "^1.7.7",
+    "vitepress-plugin-group-icons": "^1.8.1",
     "vitepress-plugin-llms": "^1.14.0",
-    "vue": "^3.5.43",
+    "vue": "^3.5.44",
     "vue-tsc": "^3.3.13",
     "yorkie": "^2.0.0"
   },
@@ -36,5 +36,5 @@
   "lint-staged": {
     "*.md": "textlint --format pretty-error"
   },
-  "packageManager": "pnpm@12.11.2"
+  "packageManager": "pnpm@12.14.0"
 }
