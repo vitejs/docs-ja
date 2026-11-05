@@ -438,6 +438,8 @@ export default defineConfig({
 
 Vite 開発サーバーでの配信が制限されている機密ファイルのブロックリスト。これは [`server.fs.allow`](#server-fs-allow) よりも優先度が高くなります。[picomatch パターン](https://github.com/micromatch/picomatch#globbing-features)がサポートされています。
 
+このオプションを設定すると、デフォルトのリストは完全に置き換えられます。デフォルトのパターンを維持したい場合は、カスタムリストに含めてください。
+
 ::: tip 注意
 
 このブロックリストは[public ディレクトリー](/guide/assets.md#the-public-directory)には適用されません。public ディレクトリー内のすべてのファイルは、ビルド中に出力ディレクトリーに直接コピーされるため、フィルタリングされずに提供されます。
