@@ -320,7 +320,8 @@ Vite は最新のブラウザーのみを対象としているため、CSSWG ド
 
 ```bash
 # .scss and .sass
-npm add -D sass-embedded # または sass
+npm add -D sass-embedded # パフォーマンスのため推奨
+npm add -D sass # プラットフォームがサポートされていない場合
 
 # .less
 npm add -D less
