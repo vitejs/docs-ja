@@ -37,6 +37,35 @@ Vite サーバーには共有プラグインパイプラインがありますが
   }
 ```
 
+## 安全なモジュールの登録 {#registering-safe-modules}
+
+開発時、プラグインは `this.environment.addSafeModule(id)` を呼び出すことで、解決済みのモジュール ID を [`server.fs.allow`](/config/server-options#server-fs-allow) の外でも読み込めるようにできます。
+
+ファイルシステム上のモジュールの場合は、正規化された絶対パスを渡します（クエリーを付けることもできます）。ファイルシステムのパスを正規化するには、Vite の `normalizePath` ユーティリティーを使用してください。このメソッドは、完全な ID と、クエリーとハッシュを取り除いたパスの両方を登録します。その他のクエリーのバリエーションは個別に登録する必要があります。
+
+Vite がインポート解析で検出できない参照をプラグインが追加する場合は、同じ `transform` フック内で参照先の ID を登録してください。これにより、参照先のモジュールが後でリクエストされたときにアクセスチェックを通過できるようになります。
+
+```ts
+import type { Plugin } from 'vite'
+
+// runtimeId は正規化された絶対パスです（クエリーを付けることもできます）。
+// runtimeUrl は変換後のコードに挿入する URL です。
+function runtimePlugin(runtimeId: string, runtimeUrl: string): Plugin {
+  return {
+    name: 'plugin-runtime',
+    transform: {
+      filter: { code: '__RUNTIME_URL__' },
+      handler(code) {
+        if (this.environment.mode === 'dev') {
+          this.environment.addSafeModule(runtimeId)
+        }
+        return code.replaceAll('__RUNTIME_URL__', JSON.stringify(runtimeUrl))
+      },
+    },
+  }
+}
+```
+
 ## フックを使用して新しい環境を登録する {#registering-new-environments-using-hooks}
 
 プラグインは、`config` フックに新しい環境を追加できます。例えば、[RSC サポート](/plugins/#vitejs-plugin-rsc) では、`react-server` 条件を含む個別のモジュールグラフを持つために追加の環境を使用します:

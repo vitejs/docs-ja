@@ -87,6 +87,13 @@ class DevEnvironment {
   async warmupRequest(url: string): Promise<void>
 
   /**
+   * 解決済みのモジュール ID を、server.fs.allow の外であっても、この環境で
+   * 読み込んでも安全なものとして登録します。server.fs.deny は引き続き適用されます。
+   * プラグインの transform フックでモジュールへの参照を追加する際に呼び出してください。
+   */
+  addSafeModule(id: string): void
+
+  /**
    * モジュールランナーが指定されたモジュールの情報を取得するために呼び出されます。
    * 内部的には `transformRequest` を呼び出し、その結果をモジュールランナーが
    * 理解できる形式でラップします。
