@@ -402,13 +402,15 @@ CSS プリプロセッサーが使用できるスレッドの最大数を指定�
 
 プリプロセッサのオプションによっては、このオプションを `0` に設定しなかったとしても、Vite はプリプロセッサをメインスレッドで実行する場合があります。
 
-## css.devSourcemap
+## dev.sourcemap
 
-- **実験的機能:** [フィードバックをしてください](https://github.com/vitejs/vite/discussions/13845)
-- **型:** `boolean`
-- **デフォルト:** `false`
+- **実験的機能:** [`dev.sourcemap.css` についてフィードバックをしてください](https://github.com/vitejs/vite/discussions/13845)
+- **型:** `boolean | { js?: boolean; css?: boolean }`
+- **デフォルト:** `{ js: true, css: false }`
 
-  開発時にソースマップを有効にするかどうか。
+開発時にソースマップを有効にするかどうか。
+
+`dev.sourcemap` に `boolean` を設定すると、JS と CSS の両方に適用されます。
 
 ## css.transformer
 
