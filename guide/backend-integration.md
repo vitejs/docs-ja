@@ -162,6 +162,14 @@
       */
      isDynamicEntry?: boolean
      /**
+      * このチャンクが Web Worker のバンドルに属するかどうか
+      */
+     isWorker?: boolean
+     /**
+      * このチャンクが Web Worker のバンドルのエントリーポイントかどうか
+      */
+     isWorkerEntry?: boolean
+     /**
       * このチャンクによって静的にインポートされるチャンクのリスト
       *
       * 値はマニフェストのキーです。このフィールドは JS チャンクにのみ存在します。
@@ -180,6 +188,7 @@
    - **エントリーチャンク**: [`build.rolldownOptions.input`](https://rolldown.rs/reference/InputOptions.input#input) で指定されたファイルから生成されます。これらのチャンクには `isEntry: true` があり、キーはプロジェクトルートからの相対パスです。
    - **ダイナミックエントリーチャンク**: 動的インポートから生成されます。これらのチャンクには `isDynamicEntry: true` があり、キーはプロジェクトルートからの相対パスです。
    - **非エントリーチャンク**: キーは生成されたファイル名の前に `_` を付けたものです。
+   - **Worker チャンク**: インポートされた Web Worker から生成されます。これらのチャンクには `isWorker: true` があります。Worker のエントリーには `isWorkerEntry: true` もあります。キーは生成されたファイル名の前に `_worker_` を付けたものです。
    - **アセットチャンク**: 画像やフォントなどのインポートされたアセットから生成されます。キーはプロジェクトルートからの相対パスです。
    - **CSS ファイル**: [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) が `false` の場合、キー `style.css` で単一の CSS ファイルが生成されます。`build.cssCodeSplit` が `false` でない場合、キーは JS チャンクと同様に生成されます（つまり、エントリーチャンクは `_` プレフィックスなし、非エントリーチャンクは `_` プレフィックスあり）。
 
