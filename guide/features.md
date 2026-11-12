@@ -680,12 +680,50 @@ WebAssembly モジュール自体がインポートを宣言している場合�
 
 これは [WebAssembly/ES Module Integration の提案](https://github.com/WebAssembly/esm-integration)に従っています。WebAssembly モジュールは非同期にインスタンス化されるため、直接インポートされた `.wasm` ファイルは非同期モジュールとして振る舞い、トップレベルの `await` サポートが必要です。
 
+モジュールは、WebAssembly/ES Module Integration のローダーと同様に、[JS String Builtins](https://github.com/WebAssembly/js-string-builtins) と [Imported String Constants](https://github.com/WebAssembly/js-string-builtins) の提案を有効にしてコンパイルされます。
+
 ::: tip TypeScript のサポート
 
 `.wasm` ファイルの型は不明なため、TypeScript は `Module '"*.wasm"' has no exported member 'add'` のようなエラーを報告します。これを解決するには、`tsconfig.json` で [`allowArbitraryExtensions`](https://www.typescriptlang.org/tsconfig/#allowArbitraryExtensions) を有効にし、`.wasm` ファイルの隣に宣言ファイルを作成します。`allowArbitraryExtensions` を有効にすると、TypeScript は `.wasm` のインポートを解決する際に `{filename}.d.wasm.ts` という名前の宣言ファイルを探します。例えば `add.wasm` の場合は `add.d.wasm.ts` を作成します:
 
 ```ts [add.d.wasm.ts]
 export function add(a: number, b: number): number
+```
+
+:::
+
+::: details Source Phase Imports のサポート
+
+#### Source Phase Imports
+
+ESM Integration の提案では、`.wasm` ファイルに対する [source phase imports](https://github.com/tc39/proposal-source-phase-imports) も定義されています。これを使うと、インスタンス化せずにコンパイル済みの [`WebAssembly.Module`](https://developer.mozilla.org/ja/docs/WebAssembly/JavaScript_interface/Module) を取得でき、インスタンス化は完全に自分で行えます。これはインスタンス化を制御するための標準的な方法であり、[TypeScript 7.1](https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/#source-phase-imports) が安定版としてリリースされた後は、[`?init`](#manual-initialization) の推奨される代替手段となります:
+
+```js
+import source mod from './example.wasm'
+
+// `mod` は `WebAssembly.Module` です。好きなタイミングで好きな方法でインスタンス化できます
+const instance = await WebAssembly.instantiate(mod)
+instance.exports.test()
+```
+
+`WebAssembly.Instance` を自分で管理するため、モジュール自身のインポートを満たしたり、必要な回数だけインスタンス化したりできます:
+
+```js
+import source mod from './example.wasm'
+
+const instance = await WebAssembly.instantiate(mod, {
+  './imports.js': {
+    someFunc: () => {
+      /* ... */
+    },
+  },
+})
+```
+
+動的な形式でも `WebAssembly.Module` に解決されます:
+
+```js
+const mod = await import.source('./example.wasm')
 ```
 
 :::
@@ -725,7 +763,7 @@ init({
 
 ::: warning SSR ビルドでは、Node.js 互換のランタイムのみサポートされています
 
-ファイルを読み込む汎用的な方法がないため、`.wasm` の直接インポートと `.wasm?init` の両方の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこれらの機能は Node.js 互換のランタイムでのみ動作することを意味します。
+ファイルを読み込む汎用的な方法がないため、`.wasm` の直接インポート、source phase imports、`.wasm?init` の内部実装は `node:fs` モジュールに依存しています。これは、SSR ビルドにおいてこれらの機能は Node.js 互換のランタイムでのみ動作することを意味します。
 
 :::
 
