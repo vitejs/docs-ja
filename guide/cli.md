@@ -1,5 +1,9 @@
 # コマンドラインインターフェイス
 
+## プロセスロック {#process-locks}
+
+`vite`、`vite build`、`vite preview` コマンドは、[`cacheDir`](/config/shared-options#cachedir) の `lock` サブディレクトリーにロックファイルを作成します。ロックが、同じコマンド・プロジェクトルート・設定ファイル・モードで実行中の別のプロセスのものである場合、Vite は終了します。別のインスタンスを実行するには、`--bypass-lock` を指定してください。
+
 ## 開発サーバー
 
 ### `vite`
@@ -23,6 +27,7 @@ vite [root]
 | `--strictPort`            | 指定されたポートが既に使用されている場合は終了する（`boolean`）                                                                   |
 | `--force`                 | オプティマイザーにキャッシュを無視して再バンドルさせる（`boolean`）                                                                 |
 | `--experimentalBundle`    | 実験的なフルバンドルモードを使用する（非常に実験的な機能です）（`boolean`）                                                              |
+| `--bypass-lock`           | このプロジェクトの別の Vite プロセスと並行して実行できるようにする（`boolean`）                                         |
 | `-c, --config <file>`     | 指定された設定ファイルを使用する（`string`）                                                                             |
 | `--base <path>`           | public のベースパス（デフォルト: `/`）（`string`）                                                                    |
 | `-l, --logLevel <level>`  | info \| warn \| error \| silent （`string`）                                                             |
@@ -62,6 +67,7 @@ vite build [root]
 | `--ssrManifest [name]`         | SSR マニフェスト JSON を出力する（`boolean \| string`）                                                                 |
 | `--emptyOutDir`                | root の外部に outDir がある場合、outDir を強制的に空にする（`boolean`）                                                           |
 | `-w, --watch`                  | ディスク上のモジュールが変更されたときに再ビルドする（`boolean`）                                                             |
+| `--bypass-lock`                | このプロジェクトの別の Vite プロセスと並行して実行できるようにする（`boolean`）                                    |
 | `-c, --config <file>`          | 指定された設定ファイルを使用する（`string`）                                                                               |
 | `--base <path>`                | public のベースパス（デフォルト: `/`）（`string`）                                                                         |
 | `-l, --logLevel <level>`       | info \| warn \| error \| silent （`string`）                                                                          |
@@ -124,6 +130,7 @@ vite preview [root]
 | `--strictPort`           | 指定されたポートが既に使用されている場合は終了する（`boolean`）|
 | `--open [path]`          | 起動時にブラウザーを起動する（`boolean \| string`）       |
 | `--outDir <dir>`         | 出力ディレクトリー（デフォルト: `dist`）（`string`）        |
+| `--bypass-lock`          | このプロジェクトの別の Vite プロセスと並行して実行できるようにする（`boolean`） |
 | `-c, --config <file>`    | 指定された設定ファイルを使用する（`string`）                |
 | `--base <path>`          | public のベースパス（デフォルト: `/`）（`string`）          |
 | `-l, --logLevel <level>` | info \| warn \| error \| silent （`string`）           |
