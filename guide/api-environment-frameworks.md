@@ -340,6 +340,31 @@ export default defineConfig({
 
 `builder.buildApp` 設定オプションに加えて、プラグインは `buildApp` フックを定義してアプリのビルドに参加できます。設定オプションとプラグインフックは定義された順序で実行されます。order が `'pre'` または `null` のフックが最初に実行され、次に設定された `builder.buildApp`、その後 order が `'post'` のフックが実行されます。フック内では、`environment.isBuilt` で環境がすでにビルドされているかどうかを確認でき、プラグインが同じ環境を二重にビルドするのを防げます。
 
+### `environment.manifest` でビルドマニフェストにアクセスする
+
+環境がビルドされると、その[ビルドマニフェスト](/config/build-options#build-manifest)を `environment.manifest` で参照できます。これにより、プラグインはファイルシステムへの書き込みや読み込みを行うことなく、`buildApp` フック内ですでにビルドされた環境のマニフェストを直接読み取ることができます。たとえば、マニフェストを使用してサーバー環境で出力されたアセットをクライアントバンドルに移動するのは、よくあるパターンです。
+
+マニフェストは [`build.manifest`](/config/build-options#build-manifest) オプションに関係なく生成されます。このオプションは、マニフェストファイルをディスクに書き込むかどうかのみを制御します。各環境はそれぞれ独自のマニフェストを持ちます。
+
+```js [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    {
+      name: 'read-manifest',
+      async buildApp(builder) {
+        const client = builder.environments.client
+        if (!client.isBuilt) {
+          await builder.build(client)
+        }
+        console.log('client manifest', client.manifest)
+      },
+    },
+  ],
+})
+```
+
 ### `createBuilder` でプログラム的にビルドする
 
 自分のコードからアプリのビルドをトリガーするには、スタンドアロンの `build` 関数の代わりに `createBuilder` を使用してください。`createBuilder` はビルド時の `createServer` に相当します。設定を解決して `ViteBuilder` を返し、その `buildApp` メソッドがすべての設定された環境をビルドします。`builder.build(environment)` を使用して単一の環境をビルドすることもできます。
