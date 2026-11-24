@@ -50,6 +50,8 @@ JS でインポートされたアセット URL、CSS の `url()` 参照、`.html
 
 :::
 
+IIFE や UMD などのフォーマットを使用するブラウザー向けビルドでは、Vite は相対的なアセット URL を解決する際のフォールバックの base として `document.baseURI` を使用することがあります。そのため、HTML の `<base href>` がそれらの URL の解決先に影響を与える可能性があります。ドキュメントの base は必ずアプリケーションの管理下に置いてください。
+
 ## ビルドのカスタマイズ
 
 ビルドは様々な [build 設定オプション](/config/build-options.md) でカスタマイズできます。特に、基礎となる [Rolldown options](https://rolldown.rs/reference/) を `build.rolldownOptions` で直接調整することができます:
