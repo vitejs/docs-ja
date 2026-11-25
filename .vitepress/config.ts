@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
@@ -119,12 +118,6 @@ const config = defineConfig({
 
   themeConfig: {
     variant: 'vite',
-    banner: {
-      id: 'vuefes2026-ticket2',
-      text: 'Vue Fes Japan 2026 チケット販売中！ 購入はお早めに',
-      url: 'https://vuefes.jp/2026/ticket',
-    },
-
     editLink: {
       pattern: 'https://github.com/vitejs/docs-ja/edit/main/:path',
       text: 'このページへの変更を提案する',
@@ -557,14 +550,6 @@ const config = defineConfig({
     },
   },
   vite: {
-    resolve: {
-      alias: {
-        '@components/oss/TopBanner.vue': path.resolve(
-          import.meta.dirname,
-          'theme/components/TopBanner.vue',
-        ),
-      },
-    },
     plugins: [
       groupIconVitePlugin({
         customIcon: {
